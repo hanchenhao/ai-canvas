@@ -74,7 +74,7 @@ jobs:
       # tree that workflow already installed instead of running `npm ci`.
       - name: Cache mobile node_modules
         id: mobile-node-modules
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: mobile/node_modules
           key: ${{ runner.os }}-mobile-node-modules-${{ hashFiles('mobile/package-lock.json') }}
