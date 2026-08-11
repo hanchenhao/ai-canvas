@@ -37,6 +37,7 @@ import {
   useNodeResultValue
 } from "../../hooks/nodes/useNodeExecState";
 import type { ChainNode, InputSource } from "./chainTypes";
+import { useTranslatedNodeMetadata } from "../../hooks/useTranslatedNodeMetadata";
 
 interface ChainNodeCardProps {
   node: ChainNode;
@@ -114,7 +115,9 @@ export const ChainNodeCard: React.FC<ChainNodeCardProps> = memo(function ChainNo
   onRemove, onDuplicate, onMoveUp, onMoveDown,
 }) {
   const theme = useTheme();
-  const nsColor = getNsColor(node.metadata.namespace);
+  const translatedMetadata = useTranslatedNodeMetadata(node.nodeType);
+  const metadata = translatedMetadata ?? node.metadata;
+  const nsColor = getNsColor(metadata.namespace);
 
   const { progress, result, isRunning, isCompleted, isError } =
     useNodeExecState(workflowId, node.id);
@@ -164,7 +167,7 @@ export const ChainNodeCard: React.FC<ChainNodeCardProps> = memo(function ChainNo
         role="button"
         tabIndex={0}
         aria-expanded={node.expanded}
-        aria-label={node.metadata.title}
+        aria-label={metadata.title}
         sx={{ cursor: "pointer", "&:hover": { backgroundColor: theme.vars.palette.action.hover } }}
       >
         <Box
@@ -179,9 +182,9 @@ export const ChainNodeCard: React.FC<ChainNodeCardProps> = memo(function ChainNo
         </Box>
 
         <FlexColumn gap={0.5} sx={{ flex: 1, minWidth: 0 }}>
-          <Text size="small" weight={600} truncate>{node.metadata.title}</Text>
+          <Text size="small" weight={600} truncate>{metadata.title}</Text>
           {node.expanded && (
-            <Text size="smaller" weight={600} sx={{ color: nsColor }}>{formatNs(node.metadata.namespace)}</Text>
+            <Text size="smaller" weight={600} sx={{ color: nsColor }}>{formatNs(metadata.namespace)}</Text>
           )}
         </FlexColumn>
 
@@ -217,16 +220,16 @@ export const ChainNodeCard: React.FC<ChainNodeCardProps> = memo(function ChainNo
 
       <Collapse in={node.expanded} unmountOnExit>
         <FlexColumn gap={1.5} sx={{ px: 2, pb: 2 }}>
-          {node.metadata.description && (
+          {metadata.description && (
             <Text size="smaller" color="secondary" lineClamp={3}>
-              {node.metadata.description}
+              {metadata.description}
             </Text>
           )}
 
           <ChainNodeProperties
             nodeId={node.id}
             nodeType={node.nodeType}
-            properties={node.metadata.properties}
+            properties={metadata.properties}
             values={node.properties}
             inputMappings={node.inputMappings}
             previousNodes={previousNodes}
@@ -234,10 +237,10 @@ export const ChainNodeCard: React.FC<ChainNodeCardProps> = memo(function ChainNo
             onSetInputMapping={onSetInputMapping}
           />
 
-          {node.metadata.outputs.length > 1 && (
+          {metadata.outputs.length > 1 && (
             <Box sx={{ pt: 1 }}>
               <OutputSelector
-                outputs={node.metadata.outputs}
+                outputs={metadata.outputs}
                 selectedOutput={node.selectedOutput}
                 onSelect={onSetOutput}
               />

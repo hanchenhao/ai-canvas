@@ -37,6 +37,7 @@ import { getComponentForProperty } from "../node/PropertyInput.resolver";
 import type { Property, TypeMetadata } from "../../stores/ApiTypes";
 import type { ChainNode, InputMappings, InputSource } from "./chainTypes";
 import { areTypesCompatible } from "./chainTypes";
+import { useAllTranslatedMetadata } from "../../hooks/useTranslatedNodeMetadata";
 
 interface ChainNodePropertiesProps {
   nodeId: string;
@@ -129,6 +130,21 @@ export const ChainNodeProperties: React.FC<ChainNodePropertiesProps> = ({
   const theme = useTheme();
   const store = useMemo(() => getEmptyStore(), []);
   const cssStyles = useMemo(() => chainPropertyStyles(theme), [theme]);
+
+  // Per-node-type translated titles for previous-step references in the
+  // picker. Outputs are not translated, only the display title.
+  const allTranslatedMetadata = useAllTranslatedMetadata();
+  const translatedTitleByType = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const meta of allTranslatedMetadata) {
+      map.set(meta.node_type, meta.title);
+    }
+    return map;
+  }, [allTranslatedMetadata]);
+  const getDisplayTitle = useCallback(
+    (n: ChainNode) => translatedTitleByType.get(n.nodeType) ?? n.metadata.title,
+    [translatedTitleByType]
+  );
 
   const [activeInput, setActiveInput] = useState<string | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -258,7 +274,7 @@ export const ChainNodeProperties: React.FC<ChainNodePropertiesProps> = ({
                         sx={{ color: secondary }}
                       >
                         {sourceNode
-                          ? `${sourceIndex + 1} · ${sourceNode.metadata.title}`
+                          ? `${sourceIndex + 1} · ${getDisplayTitle(sourceNode)}`
                           : "Missing source"}
                         {mapping.sourceOutput &&
                         sourceNode &&
@@ -391,7 +407,7 @@ export const ChainNodeProperties: React.FC<ChainNodePropertiesProps> = ({
                 }
               >
                 <ListItemText
-                  primary={`${step} · ${node.metadata.title}`}
+                  primary={`${step} · ${getDisplayTitle(node)}`}
                   secondary={
                     node.metadata.outputs.length > 1
                       ? `${output.name} — ${formatType(output.type)}`
@@ -419,7 +435,7 @@ export const ChainNodeProperties: React.FC<ChainNodePropertiesProps> = ({
           {incompatibleOptions.map(({ node, step, output }) => (
             <EditorMenuItem key={`${node.id}-${output.name}`} disabled>
               <ListItemText
-                primary={`${step} · ${node.metadata.title}`}
+                primary={`${step} · ${getDisplayTitle(node)}`}
                 secondary={
                   node.metadata.outputs.length > 1
                     ? `${output.name} — ${formatType(output.type)}`
