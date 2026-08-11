@@ -18,6 +18,7 @@ export {
   unwrapPrimitive,
   type WrappedPrimitive
 } from "./wrap-primitives.js";
+export * from "./errors.js";
 export * from "./toolSchemas.js";
 export * from "./creative.js";
 export * from "./builtin-packs.js";

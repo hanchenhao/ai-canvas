@@ -1,1 +1,12 @@
-{}
+{
+  "workflow_run_failed": "Workflow run failed",
+  "node_invocation_error": "Node '{{nodeType}}' failed",
+  "asset_not_found": "Asset not found",
+  "provider_unauthorized": "Provider authentication failed ({{provider}})",
+  "provider_rate_limited": "Provider {{provider}} rate limited; try again later",
+  "model_not_found": "Model '{{model}}' not registered",
+  "validation_failed": "Validation failed: {{detail}}",
+  "workflow_not_found": "Workflow not found",
+  "permission_denied": "Permission denied",
+  "internal_error": "Internal error"
+}
