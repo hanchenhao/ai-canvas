@@ -10,11 +10,17 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ThemeProvider } from "@mui/material/styles";
+import i18n from "../../../i18n";
 
 import PanelLeft from "../PanelLeft";
 import mockTheme from "../../../__mocks__/themeMock";
 import { usePanelStore } from "../../../stores/PanelStore";
 import { LEFT_PANEL_TOP_LEVEL } from "../../../config/quickAccessCategories";
+
+// Resolve the sidebar label for a top-level view through i18n so the test
+// matches what the component renders (the rail translates every label).
+const sidebarLabel = (view: string): string =>
+  i18n.t(`common:sidebar.${view}`);
 
 jest.mock("@mui/material/useMediaQuery", () => () => true);
 
@@ -123,11 +129,13 @@ it("offers every non-workflow-edit top-level view as a tab", () => {
   renderPanel();
 
   for (const category of LEFT_PANEL_TOP_LEVEL) {
-    const tab = screen.queryByLabelText(category.label);
+    // The mobile sheet renders each top-level view as a tab button (the
+    // categories the sheet omits have no tab button in the DOM).
+    const tabs = screen.queryAllByLabelText(sidebarLabel(category.id));
     if (WORKFLOW_EDIT_ONLY.includes(category.id)) {
-      expect(tab).not.toBeInTheDocument();
+      expect(tabs).toHaveLength(0);
     } else {
-      expect(tab).toBeInTheDocument();
+      expect(tabs.length).toBeGreaterThanOrEqual(1);
     }
   }
 });
@@ -136,11 +144,11 @@ it("switches the sheet to the view whose tab was tapped", async () => {
   const user = userEvent.setup();
   renderPanel();
 
-  await user.click(screen.getByLabelText("Chats"));
+  await user.click(screen.getByLabelText(sidebarLabel("chats")));
   expect(usePanelStore.getState().panel.activeView).toBe("chats");
   expect(screen.getByTestId("chat-list")).toBeInTheDocument();
 
-  await user.click(screen.getByLabelText("Apps"));
+  await user.click(screen.getByLabelText(sidebarLabel("apps")));
   expect(usePanelStore.getState().panel.activeView).toBe("apps");
   expect(screen.getByTestId("application-list")).toBeInTheDocument();
 });
@@ -151,9 +159,9 @@ it("shows the create action for the active list view", async () => {
 
   expect(screen.getByTestId("create-workflow")).toBeInTheDocument();
 
-  await user.click(screen.getByLabelText("Storyboards"));
+  await user.click(screen.getByLabelText(sidebarLabel("storyboards")));
   expect(screen.getByTestId("create-storyboard")).toBeInTheDocument();
 
-  await user.click(screen.getByLabelText("Assets"));
+  await user.click(screen.getByLabelText(sidebarLabel("assets")));
   expect(screen.queryByTestId("create-storyboard")).not.toBeInTheDocument();
 });

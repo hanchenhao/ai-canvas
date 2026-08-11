@@ -4,6 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
@@ -82,6 +83,7 @@ export interface RailAppMenuProps {
 const RailAppMenu: React.FC<RailAppMenuProps> = ({ onAction }) => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const { t } = useTranslation(["common"]);
   const anchorRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
 
@@ -120,12 +122,12 @@ const RailAppMenu: React.FC<RailAppMenuProps> = ({ onAction }) => {
         type: "page",
         ref: key,
         mode: "view",
-        title: PAGE_TAB_TITLES[key]
+        title: t(PAGE_TAB_TITLES[key])
       });
       navigate("/workspace");
       finish();
     },
-    [openTab, navigate, finish]
+    [openTab, navigate, finish, t]
   );
 
   const goDashboard = useCallback(() => {
@@ -174,13 +176,13 @@ const RailAppMenu: React.FC<RailAppMenuProps> = ({ onAction }) => {
 
   return (
     <>
-      <Tooltip title="Menu" placement="right-start">
+      <Tooltip title={t("common:menu.menu")} placement="right-start">
         <button
           ref={anchorRef}
           type="button"
           css={logoButtonStyles(theme)}
           className="rail-app-logo"
-          aria-label="Open app menu"
+          aria-label={t("common:menu.menu")}
           aria-haspopup="menu"
           aria-expanded={open}
           onClick={() => setOpen((value) => !value)}
@@ -203,74 +205,74 @@ const RailAppMenu: React.FC<RailAppMenuProps> = ({ onAction }) => {
       >
         <div css={menuStyles()} role="menu">
           <MenuItemPrimitive
-            label="Dashboard"
+            label={t("common:menu.dashboard")}
             icon={<SpaceDashboardOutlinedIcon />}
             onClick={goDashboard}
           />
           <MenuItemPrimitive
-            label="Tutorials"
+            label={t("common:menu.tutorials")}
             icon={<SchoolOutlinedIcon />}
             onClick={goTutorials}
           />
           <MenuItemPrimitive
-            label="Examples"
+            label={t("common:menu.examples")}
             icon={<AutoAwesomeOutlinedIcon />}
             onClick={goExamples}
           />
           <MenuItemPrimitive
-            label="Costs"
+            label={t("common:menu.costs")}
             icon={<PaidOutlinedIcon />}
             onClick={goCosts}
             dividerAfter
           />
           <MenuItemPrimitive
-            label="Model Manager"
+            label={t("common:menu.modelManager")}
             icon={<ViewInArOutlinedIcon />}
             onClick={goModels}
           />
           {!isProduction && (
             <MenuItemPrimitive
-              label="Package Manager"
+              label={t("common:menu.packageManager")}
               icon={<Inventory2OutlinedIcon />}
               onClick={goPackages}
             />
           )}
           <MenuItemPrimitive
-            label="Assets"
+            label={t("common:menu.assets")}
             icon={<PermMediaOutlinedIcon />}
             onClick={goAssets}
           />
           <MenuItemPrimitive
-            label="Collections"
+            label={t("common:menu.collections")}
             icon={<LibraryBooksOutlinedIcon />}
             onClick={goCollections}
           />
           <MenuItemPrimitive
-            label="Entities"
+            label={t("common:menu.entities")}
             icon={<PersonOutlineOutlinedIcon />}
             onClick={goEntities}
             dividerAfter={!workspacesEnabled}
           />
           {workspacesEnabled && (
             <MenuItemPrimitive
-              label="Workspaces"
+              label={t("common:menu.workspaces")}
               icon={<FolderSpecialOutlinedIcon />}
               onClick={goWorkspaces}
               dividerAfter
             />
           )}
           <MenuItemPrimitive
-            label="Settings"
+            label={t("common:menu.settings")}
             icon={<SettingsIcon />}
             onClick={goSettings}
           />
           <MenuItemPrimitive
-            label="Help"
+            label={t("common:menu.help")}
             icon={<HelpOutlineIcon />}
             onClick={openHelp}
           />
           <MenuItemPrimitive
-            label="Downloads"
+            label={t("common:menu.downloads")}
             icon={<DownloadIcon />}
             onClick={openDownloads}
             secondary={

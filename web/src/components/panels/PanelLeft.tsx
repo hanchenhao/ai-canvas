@@ -10,6 +10,7 @@ import { useResizePanel } from "../../hooks/handlers/useResizePanel";
 import { BORDER_RADIUS } from "../ui_primitives";
 import isEqual from "../../utils/isEqual";
 import { memo, useCallback, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
 import AssetGrid from "../assets/AssetGrid";
 import {
@@ -228,6 +229,7 @@ const VerticalToolbar = memo(function VerticalToolbar({
         null
       : null
   );
+  const { t } = useTranslation(["common"]);
 
   // Sidebar shows the view as "active" only when the panel is open and
   // that view is selected.
@@ -237,8 +239,8 @@ const VerticalToolbar = memo(function VerticalToolbar({
       : "";
 
   const labelOverrides = useMemo(
-    () => (currentWorkflow ? { assets: "Workflow Output" } : undefined),
-    [currentWorkflow]
+    () => (currentWorkflow ? { assets: t("common:sidebar.workflowOutput") } : undefined),
+    [currentWorkflow, t]
   );
 
   return (
@@ -258,10 +260,10 @@ const VerticalToolbar = memo(function VerticalToolbar({
       <div style={{ flexGrow: 1 }} />
       <div className="toolbar-divider" aria-hidden />
       <ThemeToggle />
-      <Tooltip title="Toggle Panel" placement="right-start">
+      <Tooltip title={t("common:sidebar.togglePanel")} placement="right-start">
         <ToolbarIconButton
           tabIndex={-1}
-          ariaLabel="Toggle panel"
+          ariaLabel={t("common:sidebar.togglePanel")}
           onClick={handlePanelToggle}
           icon={<CodeIcon />}
         />
@@ -291,6 +293,7 @@ const PanelContent = memo(function PanelContent({
         null
       : null
   );
+  const { t } = useTranslation(["common"]);
   const setVisibility = usePanelStore((state) => state.setVisibility);
   const closePanel = useCallback(() => setVisibility(false), [setVisibility]);
 
@@ -302,11 +305,11 @@ const PanelContent = memo(function PanelContent({
       type: "page",
       ref: "assets",
       mode: "view",
-      title: PAGE_TAB_TITLES.assets
+      title: t(PAGE_TAB_TITLES.assets)
     });
     navigate("/workspace");
     handlePanelToggle("assets");
-  }, [openTab, navigate, handlePanelToggle]);
+  }, [openTab, navigate, handlePanelToggle, t]);
 
   if (activeView === "nodes") {
     return (
@@ -329,7 +332,7 @@ const PanelContent = memo(function PanelContent({
             overflow: "hidden"
           }}
         >
-          {!isMobile && <PanelHeadline title="History" docsTopic="nodes" />}
+          {!isMobile && <PanelHeadline title={t("common:sidebar.history")} docsTopic="nodes" />}
           <HistoryTilesPanel />
         </FlexColumn>
       )}
@@ -342,7 +345,7 @@ const PanelContent = memo(function PanelContent({
             overflow: "hidden"
           }}
         >
-          {!isMobile && <PanelHeadline title="Favorites" docsTopic="nodes" />}
+          {!isMobile && <PanelHeadline title={t("common:sidebar.favorites")} docsTopic="nodes" />}
           <ScrollArea fullHeight>
             <FavoritesTiles showEmpty hideHeader />
           </ScrollArea>
@@ -359,11 +362,11 @@ const PanelContent = memo(function PanelContent({
         >
           {!isMobile && (
             <PanelHeadline
-              title={currentWorkflow ? "Workflow Output" : "Assets"}
+              title={currentWorkflow ? t("common:sidebar.workflowOutput") : t("common:sidebar.assets")}
               docsTopic="assets"
               actions={
                 <Tooltip
-                  title="Open the global asset library"
+                  title={t("common:toolbar.openGlobalLibrary")}
                   placement="right-start"
                 >
                   <ToolbarIconButton
@@ -371,7 +374,7 @@ const PanelContent = memo(function PanelContent({
                     onClick={handleFullscreenClick}
                     tabIndex={-1}
                     icon={<Fullscreen />}
-                    ariaLabel="Open the global asset library"
+                    ariaLabel={t("common:toolbar.openGlobalLibrary")}
                   />
                 </Tooltip>
               }
@@ -393,16 +396,16 @@ const PanelContent = memo(function PanelContent({
         >
           {!isMobile && (
             <PanelHeadline
-              title="Library"
+              title={t("common:sidebar.libraryPage")}
               docsTopic="assets"
               actions={
-                <Tooltip title="Open in full page" placement="right-start">
+                <Tooltip title={t("common:toolbar.openLibraryFull")} placement="right-start">
                   <ToolbarIconButton
                     className={`${path === "/assets" ? "active" : ""}`}
                     onClick={handleFullscreenClick}
                     tabIndex={-1}
                     icon={<Fullscreen />}
-                    ariaLabel="Open library in full page"
+                    ariaLabel={t("common:toolbar.openLibraryFull")}
                   />
                 </Tooltip>
               }
@@ -424,7 +427,7 @@ const PanelContent = memo(function PanelContent({
         >
           {!isMobile && (
             <PanelHeadline
-              title="Workflows"
+              title={t("common:sidebar.workflows")}
               docsTopic="workflows"
               actions={<CreateWorkflowButton />}
             />
@@ -445,7 +448,7 @@ const PanelContent = memo(function PanelContent({
         >
           {!isMobile && (
             <PanelHeadline
-              title="Chats"
+              title={t("common:sidebar.chats")}
               docsTopic="chat"
               actions={<CreateChatButton />}
             />
@@ -464,7 +467,7 @@ const PanelContent = memo(function PanelContent({
         >
           {!isMobile && (
             <PanelHeadline
-              title="Sketches"
+              title={t("common:sidebar.sketches")}
               docsTopic="sketches"
               actions={<CreateSketchButton />}
             />
@@ -483,7 +486,7 @@ const PanelContent = memo(function PanelContent({
         >
           {!isMobile && (
             <PanelHeadline
-              title="Timelines"
+              title={t("common:sidebar.timelines")}
               docsTopic="timelines"
               actions={<CreateTimelineButton />}
             />
@@ -502,7 +505,7 @@ const PanelContent = memo(function PanelContent({
         >
           {!isMobile && (
             <PanelHeadline
-              title="Storyboards"
+              title={t("common:sidebar.storyboards")}
               docsTopic="storyboards"
               actions={<CreateStoryboardButton />}
             />
@@ -521,7 +524,7 @@ const PanelContent = memo(function PanelContent({
         >
           {!isMobile && (
             <PanelHeadline
-              title="Scripts"
+              title={t("common:sidebar.scripts")}
               docsTopic="scripts"
               actions={<CreateScriptButton />}
             />
@@ -540,7 +543,7 @@ const PanelContent = memo(function PanelContent({
         >
           {!isMobile && (
             <PanelHeadline
-              title="Apps"
+              title={t("common:sidebar.apps")}
               docsTopic="apps"
               actions={
                 <>
@@ -562,7 +565,7 @@ const PanelContent = memo(function PanelContent({
             overflow: "hidden"
           }}
         >
-          {!isMobile && <PanelHeadline title="Settings" docsTopic="workflows" />}
+          {!isMobile && <PanelHeadline title={t("common:sidebar.settings")} docsTopic="workflows" />}
           <ScrollArea fullHeight>
             <WorkflowForm workflow={currentWorkflow} onClose={closePanel} />
           </ScrollArea>
@@ -661,6 +664,26 @@ const MOBILE_CREATE_ACTIONS: Partial<Record<LeftPanelView, React.FC>> = {
   apps: CreateApplicationButton
 };
 
+// Maps a top-level sidebar view id to its i18n key. Used by the mobile sheet's
+// launcher title and the tab icon tooltips, which read from
+// `LEFT_PANEL_TOP_LEVEL` (config module) rather than going through the
+// PanelContent switch above.
+const SIDEBAR_VIEW_LABEL_KEY: Record<LeftPanelView, string> = {
+  nodes: "common:sidebar.nodes",
+  workflows: "common:sidebar.workflows",
+  chats: "common:sidebar.chats",
+  sketches: "common:sidebar.sketches",
+  timelines: "common:sidebar.timelines",
+  storyboards: "common:sidebar.storyboards",
+  scripts: "common:sidebar.scripts",
+  apps: "common:sidebar.apps",
+  settings: "common:sidebar.settings",
+  history: "common:sidebar.history",
+  favorites: "common:sidebar.favorites",
+  assets: "common:sidebar.assets",
+  library: "common:sidebar.library"
+};
+
 const MobilePanelLeft: React.FC<{
   activeView: LeftPanelView;
   activeNodeCategory: NodeCategoryId;
@@ -692,6 +715,7 @@ const MobilePanelLeft: React.FC<{
   hideLauncher = false
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["common"]);
 
   const handleSheetViewChange = useCallback(
     (view: LeftPanelView) => {
@@ -707,8 +731,10 @@ const MobilePanelLeft: React.FC<{
 
   const CreateAction = MOBILE_CREATE_ACTIONS[activeView];
 
-  const launcherTitle =
-    getTopLevelCategory(activeView)?.label ?? "Workflows";
+  const activeCategory = getTopLevelCategory(activeView);
+  const launcherTitle = activeCategory
+    ? t(SIDEBAR_VIEW_LABEL_KEY[activeCategory.id])
+    : t("common:sidebar.workflows");
 
   return (
     <>
@@ -718,7 +744,7 @@ const MobilePanelLeft: React.FC<{
             className={`panel-left-mobile-launcher ${isVisible ? "active" : ""}`}
             css={mobileLauncherStyles(theme)}
             onClick={isVisible ? onClose : onOpen}
-            ariaLabel={isVisible ? "Close panel" : "Open left panel"}
+            ariaLabel={isVisible ? t("common:button.close") : t("common:sidebar.togglePanel")}
             aria-expanded={isVisible}
             tabIndex={-1}
             icon={<MenuIcon />}
@@ -730,20 +756,20 @@ const MobilePanelLeft: React.FC<{
         open={isVisible}
         onClose={onClose}
         title={launcherTitle}
-        ariaLabel="Workflows, sketches, timelines, and assets panel"
+        ariaLabel={t("common:sidebar.workflows")}
         headerExtras={
           <div css={mobileHeaderExtrasStyles(theme)}>
             {categories.map((cat) => (
               <Tooltip
                 key={cat.id}
-                title={cat.label}
+                title={t(SIDEBAR_VIEW_LABEL_KEY[cat.id])}
                 placement="bottom"
                 delay={TOOLTIP_ENTER_DELAY}
               >
                 <ToolbarIconButton
                   className={`tab-button ${activeView === cat.id ? "active" : ""}`}
                   onClick={() => handleSheetViewChange(cat.id)}
-                  ariaLabel={cat.label}
+                  ariaLabel={t(SIDEBAR_VIEW_LABEL_KEY[cat.id])}
                   tabIndex={-1}
                   icon={cat.icon}
                 />

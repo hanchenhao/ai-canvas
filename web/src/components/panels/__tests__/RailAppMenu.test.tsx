@@ -11,6 +11,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ThemeProvider } from "@mui/material/styles";
+import i18n from "../../../i18n";
 
 import RailAppMenu from "../RailAppMenu";
 import mockTheme from "../../../__mocks__/themeMock";
@@ -58,8 +59,8 @@ it("opens Settings as a page tab and focuses the workspace", async () => {
   const user = userEvent.setup();
   renderMenu();
 
-  await user.click(screen.getByRole("button", { name: /open app menu/i }));
-  await user.click(screen.getByRole("menuitem", { name: /settings/i }));
+  await user.click(screen.getByRole("button", { name: i18n.t("common:menu.menu") }));
+  await user.click(screen.getByRole("menuitem", { name: i18n.t("common:menu.settings") }));
 
   const { tabs, activeTabId } = useWorkspaceTabsStore.getState();
   const expectedId = tabId("page", "settings");
@@ -69,7 +70,7 @@ it("opens Settings as a page tab and focuses the workspace", async () => {
       type: "page",
       ref: "settings",
       mode: "view",
-      title: "Settings"
+      title: i18n.t("common:page.settings")
     })
   ]);
   expect(activeTabId).toBe(expectedId);
@@ -80,8 +81,8 @@ it("keeps Dashboard on its route (not a tab)", async () => {
   const user = userEvent.setup();
   renderMenu();
 
-  await user.click(screen.getByRole("button", { name: /open app menu/i }));
-  await user.click(screen.getByRole("menuitem", { name: /dashboard/i }));
+  await user.click(screen.getByRole("button", { name: i18n.t("common:menu.menu") }));
+  await user.click(screen.getByRole("menuitem", { name: i18n.t("common:menu.dashboard") }));
 
   expect(useWorkspaceTabsStore.getState().tabs).toHaveLength(0);
   expect(mockNavigate).toHaveBeenCalledWith("/dashboard");
@@ -92,8 +93,8 @@ it("reports the pick to its host so the mobile sheet can dismiss", async () => {
   const onAction = jest.fn();
   renderMenu(onAction);
 
-  await user.click(screen.getByRole("button", { name: /open app menu/i }));
-  await user.click(screen.getByRole("menuitem", { name: /settings/i }));
+  await user.click(screen.getByRole("button", { name: i18n.t("common:menu.menu") }));
+  await user.click(screen.getByRole("menuitem", { name: i18n.t("common:menu.settings") }));
 
   expect(onAction).toHaveBeenCalledTimes(1);
 });
@@ -103,7 +104,7 @@ it("does not report a dismissed menu as a pick", async () => {
   const onAction = jest.fn();
   renderMenu(onAction);
 
-  await user.click(screen.getByRole("button", { name: /open app menu/i }));
+  await user.click(screen.getByRole("button", { name: i18n.t("common:menu.menu") }));
   await user.keyboard("{Escape}");
 
   expect(onAction).not.toHaveBeenCalled();

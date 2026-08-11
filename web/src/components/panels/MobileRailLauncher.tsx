@@ -4,6 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import React, { useCallback } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useTranslation } from "react-i18next";
 
 import { usePanelStore } from "../../stores/PanelStore";
 import {
@@ -64,6 +65,7 @@ const MobileRailLauncher: React.FC<MobileRailLauncherProps> = ({
   showAppMenu = false
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["common"]);
   const isVisible = usePanelStore((state) => state.panel.isVisible);
   const setVisibility = usePanelStore((state) => state.setVisibility);
 
@@ -79,7 +81,7 @@ const MobileRailLauncher: React.FC<MobileRailLauncherProps> = ({
       <ToolbarIconButton
         className={`panel-left-mobile-launcher ${isVisible ? "active" : ""}`}
         onClick={toggle}
-        ariaLabel={isVisible ? "Close panel" : "Open left panel"}
+        ariaLabel={isVisible ? t("common:button.close") : t("common:sidebar.togglePanel")}
         aria-expanded={isVisible}
         tabIndex={-1}
         icon={<MenuIcon />}

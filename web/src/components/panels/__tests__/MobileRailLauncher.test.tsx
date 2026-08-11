@@ -10,6 +10,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ThemeProvider } from "@mui/material/styles";
+import i18n from "../../../i18n";
 
 import MobileRailLauncher from "../MobileRailLauncher";
 import mockTheme from "../../../__mocks__/themeMock";
@@ -53,24 +54,24 @@ beforeEach(() => {
 it("renders the app menu next to the panel toggle", () => {
   renderLauncher();
 
-  expect(screen.getByLabelText("Open app menu")).toBeInTheDocument();
-  expect(screen.getByLabelText("Open left panel")).toBeInTheDocument();
+  expect(screen.getByLabelText(i18n.t("common:menu.menu"))).toBeInTheDocument();
+  expect(screen.getByLabelText(i18n.t("common:sidebar.togglePanel"))).toBeInTheDocument();
 });
 
 it("omits the app menu when showAppMenu is false", () => {
   renderLauncher(false);
 
-  expect(screen.queryByLabelText("Open app menu")).not.toBeInTheDocument();
-  expect(screen.getByLabelText("Open left panel")).toBeInTheDocument();
+  expect(screen.queryByLabelText(i18n.t("common:menu.menu"))).not.toBeInTheDocument();
+  expect(screen.getByLabelText(i18n.t("common:sidebar.togglePanel"))).toBeInTheDocument();
 });
 
 it("toggles panel visibility", async () => {
   const user = userEvent.setup();
   renderLauncher();
 
-  await user.click(screen.getByLabelText("Open left panel"));
+  await user.click(screen.getByLabelText(i18n.t("common:sidebar.togglePanel")));
   expect(usePanelStore.getState().panel.isVisible).toBe(true);
 
-  await user.click(screen.getByLabelText("Close panel"));
+  await user.click(screen.getByLabelText(i18n.t("common:button.close")));
   expect(usePanelStore.getState().panel.isVisible).toBe(false);
 });
