@@ -1,18 +1,21 @@
 import i18n from "../i18n";
+import type { ApiErrorCode } from "@nodetool-ai/protocol/api-schemas";
 
 /**
- * Translate a user-facing error code into a localized message.
+ * Translate a user-facing ApiErrorCode into a localized message.
  *
- * Looks up `errors:<code>` in the current i18n language. If the code is
- * unknown (i18n returns the key unchanged), returns the caller-provided
- * `fallback` message instead of surfacing the raw key.
+ * Backend throws ApiErrorCode via `throwApiError` (see
+ * `packages/websocket/src/trpc/error-formatter.ts`); tRPC's error formatter
+ * surfaces it on `err.data.apiCode`. This helper looks up
+ * `errors:<code>` in the current i18n language and falls back to the
+ * caller-provided message if the code has no translation.
  *
- * @param code     Stable error code (see `USER_FACING_ERROR_CODES`).
+ * @param code     Stable ApiErrorCode (see `@nodetool-ai/protocol/api-schemas`).
  * @param fallback Message shown when the code has no translation.
  * @param params   Optional interpolation values for the message template.
  */
 export function translateError(
-  code: string,
+  code: ApiErrorCode | string,
   fallback: string,
   params?: Record<string, string | number>
 ): string {

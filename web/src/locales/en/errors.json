@@ -1,12 +1,18 @@
 {
-  "workflow_run_failed": "Workflow run failed",
-  "node_invocation_error": "Node '{{nodeType}}' failed",
-  "asset_not_found": "Asset not found",
-  "provider_unauthorized": "Provider authentication failed ({{provider}})",
-  "provider_rate_limited": "Provider {{provider}} rate limited; try again later",
-  "model_not_found": "Model '{{model}}' not registered",
-  "validation_failed": "Validation failed: {{detail}}",
-  "workflow_not_found": "Workflow not found",
-  "permission_denied": "Permission denied",
-  "internal_error": "Internal error"
+  "NOT_FOUND": "Not found",
+  "ALREADY_EXISTS": "Already exists",
+  "INVALID_INPUT": "Invalid input",
+  "MISSING_REQUIRED_FIELD": "Missing required field",
+  "UNAUTHORIZED": "Unauthorized",
+  "FORBIDDEN": "Permission denied",
+  "INTERNAL_ERROR": "Internal error",
+  "SERVICE_UNAVAILABLE": "Service unavailable",
+  "WORKFLOW_NOT_FOUND": "Workflow not found",
+  "WORKFLOW_EXECUTION_FAILED": "Workflow run failed",
+  "ASSET_NOT_FOUND": "Asset not found",
+  "ASSET_UPLOAD_FAILED": "Asset upload failed",
+  "PYTHON_BRIDGE_UNAVAILABLE": "Python bridge unavailable",
+  "TIMELINE_NO_MEDIA_OUTPUT": "Timeline produced no media output",
+  "SKETCH_NO_IMAGE_OUTPUT": "Sketch produced no image output",
+  "BUDGET_EXCEEDED": "Budget exceeded ({{detail}})"
 }

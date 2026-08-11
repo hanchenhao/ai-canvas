@@ -1,12 +1,18 @@
 {
-  "workflow_run_failed": "工作流运行失败",
-  "node_invocation_error": "节点 {{nodeType}} 执行失败",
-  "asset_not_found": "找不到资产",
-  "provider_unauthorized": "服务商 {{provider}} 鉴权失败",
-  "provider_rate_limited": "服务商 {{provider}} 已限流，请稍后重试",
-  "model_not_found": "模型 {{model}} 未注册",
-  "validation_failed": "校验失败：{{detail}}",
-  "workflow_not_found": "找不到工作流",
-  "permission_denied": "没有权限",
-  "internal_error": "内部错误"
+  "NOT_FOUND": "找不到资源",
+  "ALREADY_EXISTS": "已存在",
+  "INVALID_INPUT": "输入不合法",
+  "MISSING_REQUIRED_FIELD": "缺少必填字段",
+  "UNAUTHORIZED": "未登录或登录已失效",
+  "FORBIDDEN": "没有权限",
+  "INTERNAL_ERROR": "内部错误",
+  "SERVICE_UNAVAILABLE": "服务暂不可用",
+  "WORKFLOW_NOT_FOUND": "找不到工作流",
+  "WORKFLOW_EXECUTION_FAILED": "工作流运行失败",
+  "ASSET_NOT_FOUND": "找不到资产",
+  "ASSET_UPLOAD_FAILED": "资产上传失败",
+  "PYTHON_BRIDGE_UNAVAILABLE": "Python 桥接不可用",
+  "TIMELINE_NO_MEDIA_OUTPUT": "时间线未生成任何媒体输出",
+  "SKETCH_NO_IMAGE_OUTPUT": "草图未生成图像",
+  "BUDGET_EXCEEDED": "预算超限（{{detail}}）"
 }
