@@ -65,6 +65,11 @@ export interface Settings {
    * load. Applies to live patches (Audio Out node).
    */
   audioBufferMs: number;
+  /**
+   * UI display language. 'auto' follows navigator.language:
+   * zh-* → 简体中文, everything else → English.
+   */
+  language: "auto" | "en" | "zh-CN";
   autosave: AutosaveSettings;
 }
 
@@ -113,6 +118,7 @@ export const defaultSettings: Settings = {
   confirmLargeRun: true,
   largeRunThreshold: 5,
   audioBufferMs: 100,
+  language: "auto",
   autosave: { ...defaultAutosaveSettings }
 };
 

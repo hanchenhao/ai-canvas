@@ -1,0 +1,18 @@
+{
+  "button": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "ok": "OK",
+    "close": "Close",
+    "reset": "Reset",
+    "apply": "Apply"
+  },
+  "language": {
+    "label": "Language",
+    "auto": "Follow system",
+    "zh-CN": "简体中文",
+    "en": "English"
+  }
+}
