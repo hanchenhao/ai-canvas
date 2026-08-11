@@ -1,5 +1,6 @@
 import { FC, useCallback } from "react";
 import { useShallow } from "zustand/react/shallow";
+import { useTranslation } from "react-i18next";
 import ConfirmDialog from "../dialogs/ConfirmDialog";
 import { WorkflowAttributes } from "../../stores/ApiTypes";
 import { useQueryClient } from "@tanstack/react-query";
@@ -17,6 +18,7 @@ const WorkflowDeleteDialog: FC<WorkflowDeleteDialogProps> = ({
   onClose,
   workflowsToDelete
 }) => {
+  const { t } = useTranslation(["common"]);
   const { removeWorkflow, openWorkflows } = useWorkflowManager(
     useShallow((state) => ({
       removeWorkflow: state.removeWorkflow,
@@ -73,14 +75,14 @@ const WorkflowDeleteDialog: FC<WorkflowDeleteDialogProps> = ({
       open={open}
       onClose={onClose}
       onConfirm={handleDelete}
-      confirmText="Delete"
-      cancelText="Cancel"
-      title="Delete Workflows"
-      notificationMessage="Workflows deleted"
+      confirmText={t("common:button.delete")}
+      cancelText={t("common:button.cancel")}
+      title={t("common:dialog.deleteWorkflowTitle")}
+      notificationMessage={t("common:dialog.deleteWorkflowNotification")}
       notificationType="success"
       content={
         <>
-          <p>Are you sure you want to delete the following workflows?</p>
+          <p>{t("common:dialog.deleteWorkflowConfirm")}</p>
           <ul className="asset-names">
             {workflowsToDelete.map((workflow) => (
               <li key={workflow.id}>{workflow.name}</li>

@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 import React, { useState, useCallback, useEffect } from "react";
 import InsertDriveFile from "@mui/icons-material/InsertDriveFile";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { useAssetGridStore } from "../../stores/AssetGridStore";
 import { useAssetDeletion } from "../../serverState/useAssetDeletion";
 import { useAssets } from "../../serverState/useAssets";
@@ -51,6 +52,7 @@ const AssetDeleteConfirmation: React.FC<AssetDeleteConfirmationProps> = ({
   const selectedAssets = useAssetGridStore((state) => state.selectedAssets);
   const user = useAuth((state) => state.user);
   const queryClient = useQueryClient();
+  const { t } = useTranslation(["common"]);
   const addNotification = useNotificationStore(
     (state) => state.addNotification
   );
@@ -132,15 +134,15 @@ const AssetDeleteConfirmation: React.FC<AssetDeleteConfirmationProps> = ({
       addNotification({
         type: "success",
         alert: true,
-        content: `Deleted ${parts.join(" and ") || "selection"}`
+        content: t("common:dialog.deleteSuccess", { items: parts.join(" and ") || "selection" })
       });
     } catch (error) {
       addNotification({
         type: "error",
         alert: true,
-        content: `Could not delete: ${
-          error instanceof Error ? error.message : "unknown error"
-        }`
+        content: t("common:dialog.deleteFailed", {
+          error: error instanceof Error ? error.message : "unknown error"
+        })
       });
     } finally {
       setIsLoading(false);
@@ -153,26 +155,29 @@ const AssetDeleteConfirmation: React.FC<AssetDeleteConfirmationProps> = ({
     queryClient,
     addNotification,
     folderCount,
-    fileCount
+    fileCount,
+    t
   ]);
 
   const getDialogTitle = () => {
     if (isAssetTreeLoading && folderCount > 0) {
-      return "Preparing to delete...";
+      return t("common:dialog.deleteAssetPreparing");
     } else if (showRootFolderWarning) {
-      return "Warning: The root folder cannot be deleted.";
+      return t("common:dialog.deleteAssetRootWarning");
     } else if (folderCount === 1 && fileCount === 0) {
-      return `Delete folder containing ${totalAssets - 1} file${
-        totalAssets - 1 !== 1 ? "s" : ""
-      }?`;
+      return t("common:dialog.deleteFolderOne", {
+        count: totalAssets - 1
+      });
     } else if (folderCount > 0) {
-      return `Delete ${folderCount} folder${
-        folderCount !== 1 ? "s" : ""
-      } and ${fileCount} file${
-        fileCount !== 1 ? "s" : ""
-      } containing ${totalAssets} item${totalAssets !== 1 ? "s" : ""}?`;
+      return t("common:dialog.deleteFoldersFiles", {
+        folderCount,
+        fileCount,
+        total: totalAssets
+      });
     } else {
-      return `Delete ${fileCount} file${fileCount !== 1 ? "s" : ""}?`;
+      return t("common:dialog.deleteFiles", {
+        count: fileCount
+      });
     }
   };
 
@@ -190,7 +195,7 @@ const AssetDeleteConfirmation: React.FC<AssetDeleteConfirmationProps> = ({
           color="secondary"
           style={{ marginBottom: "1em" }}
         >
-          You can right click selected assets and download them before deleting.
+          {t("common:dialog.deleteAssetHint")}
         </Text>
         {isPreparingDelete ? (
           <LoadingSpinner size="small" />
@@ -226,8 +231,8 @@ const AssetDeleteConfirmation: React.FC<AssetDeleteConfirmationProps> = ({
       <DialogActionButtons
         onConfirm={executeDeletion}
         onCancel={handleClose}
-        confirmText="Delete"
-        cancelText="Cancel"
+        confirmText={t("common:button.delete")}
+        cancelText={t("common:button.cancel")}
         isLoading={isLoading}
         confirmDisabled={isAssetTreeLoading || showRootFolderWarning}
         destructive={true}
