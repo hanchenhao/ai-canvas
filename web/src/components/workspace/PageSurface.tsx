@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import { useTranslation } from "react-i18next";
 
 import { LoadingSpinner } from "../ui_primitives";
 import { PAGE_TAB_TITLES, type PageTabKey } from "./pageTabs";
@@ -52,9 +53,10 @@ interface PageSurfaceProps {
  * lazily loaded so it only costs bundle weight once its tab is opened.
  */
 const PageSurface = ({ pageKey }: PageSurfaceProps) => {
+  const { t } = useTranslation(["common"]);
   const Component = PAGE_COMPONENTS[pageKey];
   return (
-    <div style={surfaceStyle} aria-label={PAGE_TAB_TITLES[pageKey]}>
+    <div style={surfaceStyle} aria-label={t(PAGE_TAB_TITLES[pageKey])}>
       <Suspense fallback={<LoadingSpinner />}>
         <Component />
       </Suspense>

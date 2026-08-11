@@ -6,6 +6,7 @@
  */
 
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
@@ -43,6 +44,7 @@ const StudioShell = ({
 }: StudioShellProps) => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const { t } = useTranslation(["common"]);
   useStudioAssistantModel();
   return (
     <StudioProvider>
@@ -63,7 +65,7 @@ const StudioShell = ({
               startIcon={<ArrowBackRoundedIcon fontSize="small" />}
               onClick={() => navigate("/studio")}
             >
-              创作首页
+              {t("common:studio.home")}
             </EditorButton>
           )}
           {!showBack && (
@@ -89,19 +91,19 @@ const StudioShell = ({
               startIcon={<MovieFilterRoundedIcon fontSize="small" />}
               onClick={() => navigate("/studio")}
             >
-              创作首页
+              {t("common:studio.homeNav")}
             </EditorButton>
             <EditorButton
               startIcon={<AccountTreeRoundedIcon fontSize="small" />}
               onClick={() => navigate("/workspace")}
             >
-              无限画布
+              {t("common:studio.canvas")}
             </EditorButton>
             <EditorButton
               startIcon={<CollectionsRoundedIcon fontSize="small" />}
               onClick={() => navigate("/assets")}
             >
-              素材库
+              {t("common:studio.assets")}
             </EditorButton>
           </FlexRow>
           {actions}
@@ -109,7 +111,7 @@ const StudioShell = ({
             startIcon={<SettingsRoundedIcon fontSize="small" />}
             onClick={() => navigate("/settings")}
           >
-            模型设置
+            {t("common:studio.modelSettings")}
           </EditorButton>
           <ThemeToggleButton />
         </FlexRow>

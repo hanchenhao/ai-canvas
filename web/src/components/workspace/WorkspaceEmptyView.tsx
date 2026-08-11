@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import { memo, useCallback, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
 
 import useGlobalChatStore from "../../stores/GlobalChatStore";
@@ -94,6 +95,7 @@ const SAMPLE_PROMPTS = [
  */
 const WorkspaceEmptyView = () => {
   const theme = useTheme();
+  const { t } = useTranslation(["common"]);
   const emptyStyles = useMemo(() => styles(theme), [theme]);
 
   const openTab = useWorkspaceTabsStore((state) => state.openTab);
@@ -163,9 +165,9 @@ const WorkspaceEmptyView = () => {
       type: "page",
       ref: "examples",
       mode: "view",
-      title: PAGE_TAB_TITLES.examples
+      title: t(PAGE_TAB_TITLES.examples)
     });
-  }, [openTab]);
+  }, [openTab, t]);
 
   const handleCreateWorkflow = useCallback(async () => {
     useOnboardingStore.getState().markStep("create-workflow");
