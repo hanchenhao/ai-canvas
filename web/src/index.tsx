@@ -54,13 +54,12 @@ import { loadRuntimeConfig, isAuthRequired } from "./lib/runtimeConfig";
 import { initAnalytics } from "./lib/analytics";
 import { initSupabaseFromConfig } from "./lib/supabaseClient";
 import { initKeyListeners } from "./stores/KeyPressedStore";
-import useOnboardingStore, { startRouteFor } from "./stores/OnboardingStore";
-import { useSettingsStore } from "./stores/SettingsStore";
 import useRemoteSettingsStore from "./stores/RemoteSettingStore";
 import { loadMetadata, prefetchMetadata } from "./serverState/useMetadata";
 import { WorkflowManagerProvider } from "./contexts/WorkflowManagerContext";
 import KeyboardProvider from "./components/KeyboardProvider";
 import { MenuProvider } from "./providers/MenuProvider";
+import { I18nProvider } from "./i18n/I18nProvider";
 const DownloadManagerDialog = React.lazy(
   () => import("./components/hugging_face/DownloadManagerDialog")
 );
@@ -166,8 +165,14 @@ const registerFrontendTools = () => {
 };
 import { useModelDownloadStore } from "./stores/ModelDownloadStore";
 
-import { BORDER_RADIUS, SPACING, getSpacingPx } from "./components/ui_primitives";
+import {
+  BORDER_RADIUS,
+  SPACING,
+  getSpacingPx
+} from "./components/ui_primitives";
+import { PRODUCT_NAME } from "./studio/productConfig";
 installIpcLogBridge();
+document.title = PRODUCT_NAME;
 
 if (isLocalhost) {
   useRemoteSettingsStore
@@ -180,24 +185,14 @@ const NavigateToStart = () => {
   const state = useAuth((auth) => auth.state);
   const navigate = useNavigate();
 
-  // The tabbed workspace is the app entry point for returning users;
-  // previously-open workflows are restored as tabs from localStorage by the
-  // WorkspaceTabsStore. Users who still have getting-started steps open land on
-  // the dashboard instead, where the welcome hero, templates and tutorials are.
+  // This fork is creator-first: the product home is the default entry point.
+  // The full NodeTool workspace remains available as the advanced canvas.
   useEffect(() => {
     if (state === "init") {
       return;
     }
     if (!isAuthRequired() || state === "logged_in") {
-      // Both stores persist to sync localStorage, so their state is already
-      // rehydrated by the time this effect runs — reading it non-reactively
-      // here decides the entry route once, with no post-hydration redirect.
-      const { completedSteps, dismissed } = useOnboardingStore.getState();
-      const { showWelcomeOnStartup } = useSettingsStore.getState().settings;
-      navigate(
-        startRouteFor({ completedSteps, dismissed }, showWelcomeOnStartup),
-        { replace: true }
-      );
+      navigate("/studio", { replace: true });
     } else if (state === "logged_out" || state === "error") {
       navigate("/login", { replace: true });
     }
@@ -621,6 +616,7 @@ const AppWrapper = ({ configReady }: { configReady: Promise<unknown> }) => {
         <InitColorSchemeScript attribute="class" defaultMode="dark" />
         <ThemeProvider theme={ThemeNodetool} defaultMode="dark">
           <CssBaseline />
+          <I18nProvider>
           <MobileClassProvider>
             <MenuProvider>
               <MenuNavigationBridge />
@@ -729,6 +725,7 @@ const AppWrapper = ({ configReady }: { configReady: Promise<unknown> }) => {
               </WorkflowManagerProvider>
             </MenuProvider>
           </MobileClassProvider>
+          </I18nProvider>
         </ThemeProvider>
       </TRPCProvider>
     </React.StrictMode>
