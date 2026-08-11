@@ -1,1 +1,372 @@
-{}
+{
+  "nodetool.constant.String": {
+    "title": "字符串常量",
+    "description": "在工作流中表示一段字符串常量。\n关键词：文本、字符串、字符\n\n常见用途：\n- 提供固定的文本输入\n- 定义标签、标识符或名称\n- 设置默认的文本配置值",
+    "properties": {
+      "value": {
+        "title": "值"
+      }
+    }
+  },
+  "nodetool.constant.Integer": {
+    "title": "整数常量",
+    "description": "在工作流中表示一个整数常量。\n关键词：数字、整数\n\n常见用途：\n- 为计算设置数值参数\n- 定义计数、索引或大小\n- 提供固定的数值输入",
+    "properties": {
+      "value": {
+        "title": "值"
+      }
+    }
+  },
+  "nodetool.constant.Float": {
+    "title": "浮点数常量",
+    "description": "在工作流中表示一个浮点数常量。\n关键词：数字、小数、浮点\n\n常见用途：\n- 为计算设置数值参数\n- 定义阈值或上限\n- 提供固定的数值输入",
+    "properties": {
+      "value": {
+        "title": "值"
+      }
+    }
+  },
+  "nodetool.constant.Bool": {
+    "title": "布尔常量",
+    "description": "在工作流中表示一个布尔常量。\n关键词：布尔、逻辑、标志\n\n常见用途：\n- 在条件节点中控制流程走向\n- 开启或关闭工作流中的功能与行为\n- 设置默认的布尔配置值",
+    "properties": {
+      "value": {
+        "title": "值"
+      }
+    }
+  },
+  "nodetool.text.Concat": {
+    "title": "文本拼接",
+    "description": "将多段文本输入拼接成一段输出。可以通过“添加文本输入”按钮动态增加输入，也可以把一个字符串列表接入单个输入。\n关键词：相加、文本、合并、拼接、追加",
+    "properties": {}
+  },
+  "nodetool.text.Template": {
+    "title": "模板",
+    "description": "使用模板语法以变量格式化字符串，支持 {{ variable }} 与 {variable} 两种占位符写法。\n关键词：文本、模板、格式化、变量、替换\n\n常见用途：\n- 生成个性化消息\n- 构造带参数的查询\n- 以变量输入格式化文本",
+    "properties": {
+      "string": {
+        "title": "字符串",
+        "description": "包含 {{ variable }} 或 {variable} 占位符的模板字符串。"
+      }
+    }
+  },
+  "nodetool.text.Join": {
+    "title": "文本连接",
+    "description": "使用指定的分隔符将一个字符串列表连接成一段字符串。\n关键词：文本、连接、合并、列表",
+    "properties": {
+      "separator": {
+        "title": "分隔符",
+        "description": "每项之间插入的分隔字符。"
+      },
+      "strings": {
+        "title": "字符串列表",
+        "description": "要连接的字符串列表。"
+      }
+    }
+  },
+  "nodetool.text.Prompt": {
+    "title": "提示词",
+    "description": "以命名变量组合出一段提示词字符串。通过“添加变量”按钮新增变量；在提示词里用 {{ variable }}（或 {variable}）引用变量。支持的过滤器：{{ var|upper }}、{{ var|lower }}、{{ var|capitalize }}、{{ var|title }}、{{ var|trim }}、{{ var|truncate(n) }}、{{ var|default(val) }}。\n关键词：提示词、文本、模板、变量、LLM、智能体",
+    "properties": {
+      "prompt": {
+        "title": "提示词",
+        "description": "提示词正文，用 {{ name }} 或 {name} 引用变量。"
+      }
+    }
+  },
+  "nodetool.image.SaveImage": {
+    "title": "保存图像资产",
+    "description": "把图像保存到指定的资产文件夹，文件名格式可自定义。\n关键词：保存、图像、文件夹、命名",
+    "properties": {
+      "folder": {
+        "title": "文件夹",
+        "description": "保存该图像的资产文件夹。"
+      },
+      "image": {
+        "title": "图像",
+        "description": "要保存的图像。"
+      },
+      "name": {
+        "title": "名称",
+        "description": "\n        输出文件的名称。\n        可使用日期时间变量生成唯一名称：\n        %Y - 年\n        %m - 月\n        %d - 日\n        %H - 时\n        %M - 分\n        %S - 秒\n        "
+      }
+    }
+  },
+  "nodetool.image.LoadImageFile": {
+    "title": "加载图像文件",
+    "description": "从磁盘读取一个图像文件。\n关键词：图像、输入、加载、文件",
+    "properties": {
+      "path": {
+        "title": "路径",
+        "description": "要读取的图像文件路径。"
+      }
+    }
+  },
+  "nodetool.image.TextToImage": {
+    "title": "文生图",
+    "description": "使用任意受支持的图像服务商，根据文本提示词生成图像。会自动路由到对应的后端（HuggingFace、FAL、MLX）。\n关键词：图像、生成、AI、文生图、t2i",
+    "properties": {
+      "aspect_ratio": {
+        "title": "宽高比",
+        "description": "生成图像的宽高比。"
+      },
+      "entities": {
+        "title": "实体",
+        "description": "一致性实体（角色、风格、场景），其描述会注入到提示词中。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "要使用的图像生成模型。"
+      },
+      "negative_prompt": {
+        "title": "反向提示词",
+        "description": "描述图像中要避免出现的内容。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "描述期望图像的文本提示。"
+      },
+      "resolution": {
+        "title": "分辨率",
+        "description": "输出分辨率（短边像素值）。"
+      }
+    }
+  },
+  "nodetool.video.SaveVideo": {
+    "title": "保存视频资产",
+    "description": "把视频保存到一个资产文件夹。\n关键词：视频、保存、文件、输出",
+    "properties": {
+      "folder": {
+        "title": "文件夹",
+        "description": "保存该视频的资产文件夹。"
+      },
+      "name": {
+        "title": "名称",
+        "description": "\n        输出视频的名称。\n        可使用日期时间变量生成唯一名称：\n        %Y - 年\n        %m - 月\n        %d - 日\n        %H - 时\n        %M - 分\n        %S - 秒\n        "
+      },
+      "video": {
+        "title": "视频",
+        "description": "要保存的视频。"
+      }
+    }
+  },
+  "nodetool.video.TextToVideo": {
+    "title": "文生视频",
+    "description": "使用任意受支持的视频服务商，根据文本提示词生成视频。会自动路由到对应的后端（Gemini Veo、HuggingFace）。\n关键词：视频、生成、AI、文生视频、t2v",
+    "properties": {
+      "aspect_ratio": {
+        "title": "宽高比",
+        "description": "视频的宽高比。"
+      },
+      "duration": {
+        "title": "时长",
+        "description": "视频时长，单位为秒。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "要使用的视频生成模型。"
+      },
+      "negative_prompt": {
+        "title": "反向提示词",
+        "description": "描述视频中要避免出现的内容。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "描述期望视频的文本提示。"
+      },
+      "resolution": {
+        "title": "分辨率",
+        "description": "视频分辨率。"
+      },
+      "timeout_seconds": {
+        "title": "超时秒数",
+        "description": "API 调用的超时时间，单位为秒（0 = 使用服务商默认值）。"
+      }
+    }
+  },
+  "nodetool.audio.SaveAudio": {
+    "title": "保存音频资产",
+    "description": "把音频文件保存到指定的资产文件夹。\n关键词：音频、文件夹、名称",
+    "properties": {
+      "audio": {
+        "title": "音频"
+      },
+      "folder": {
+        "title": "文件夹",
+        "description": "保存该音频文件的资产文件夹。"
+      },
+      "name": {
+        "title": "名称",
+        "description": "\n        音频文件的名称。\n        可使用日期时间变量生成唯一名称：\n        %Y - 年\n        %m - 月\n        %d - 日\n        %H - 时\n        %M - 分\n        %S - 秒\n        "
+      }
+    }
+  },
+  "nodetool.audio.TextToSpeech": {
+    "title": "文本转语音",
+    "description": "使用任意受支持的 TTS 服务商，根据文本生成语音音频。会自动路由到对应的后端（OpenAI、HuggingFace、MLX）。\n关键词：音频、生成、AI、文本转语音、TTS、配音",
+    "properties": {
+      "model": {
+        "title": "模型",
+        "description": "要使用的文本转语音模型。"
+      },
+      "speed": {
+        "title": "语速",
+        "description": "语速倍率（0.25 到 4.0）。"
+      },
+      "text": {
+        "title": "文本",
+        "description": "要转换为语音的文本。"
+      }
+    }
+  },
+  "nodetool.code.Code": {
+    "title": "代码",
+    "description": "在沙箱环境中执行原生 JavaScript。可用 API：fetch()、workspace.read/write/list/readBytes/writeBytes/stat/mkdir/remove/copy/move/root()、getSecret()、sleep()、progress()、crypto.digest/hmac/randomUUID/getRandomValues、format.number/date/relativeTime/list、toBase64/fromBase64/toHex/fromHex、parallelMap，以及由服务端平台工具支撑的 `nodetool` 对象模型（workflows、assets、jobs 等）——调用 nodetool.capabilities() 可查看当前生效的能力。基于工具的调用会消耗费用（媒体生成、工作流运行）并访问网络；每个工具会独立执行权限校验。动态输入通过 `inputs` 对象传入；返回一个对象来定义输出。\n关键词：代码、JavaScript、函数、脚本、动态",
+    "properties": {
+      "allow_host_filesystem": {
+        "title": "允许访问宿主文件系统",
+        "description": "允许 workspace.* 访问进程可读的任意路径（会展开 ~），而不仅限于工作区。默认关闭——宿主模式下可能读取到凭据文件。仅当节点确需在工作区之外操作时才开启。"
+      },
+      "allow_local_network": {
+        "title": "允许访问本地网络",
+        "description": "允许 fetch() 访问 localhost 与私有 IP 段。默认关闭——沙箱代码不受信任，默认启用 SSRF 防护。仅当节点确需访问本机或本网络的服务时才开启。"
+      },
+      "code": {
+        "title": "代码",
+        "description": "要执行的 JavaScript 代码。动态输入通过 `inputs` 对象传入。可用 API：fetch(url, options)、workspace.read/write/list/readBytes/writeBytes/stat/mkdir/remove/copy/move/root，workspace.stat(path) 返回 {exists, size, isDirectory, isFile, isSymlink, modifiedMs, createdMs, accessedMs}，nodetool.secrets.get(name)（未设置时抛错；设置了 `secrets` 时仅限其中列出的名称）、getSecret(name)、sleep(ms)、progress(percent, message)、crypto.randomUUID/getRandomValues/digest/hmac、format.number/date/relativeTime/list、toBase64/fromBase64/toHex/fromHex。各类库——CSV、HTML、XML、XLSX、YAML、zip、日期、diff——以沙箱包形式提供：在 `packages` 中声明后，在顶部 `import` 即可。fetch、sleep、workspace、getSecret、format、已导入包的调用，以及 crypto.digest/hmac 需 await；其余同步执行。并发调用会并行运行：用 Promise.all 或 parallelMap(items, fn, concurrency) 来并发 fetch。`nodetool` 对象模型在宿主支持时暴露平台工具（nodetool.workflows、nodetool.assets 等）——nodetool.capabilities() 返回当前生效的命名空间；其余环境下调用其方法会抛错并指出缺少的工具。`state` 对象可在流式调用之间持久保存。返回一个对象——其键会成为输出句柄。"
+      },
+      "max_response_mb": {
+        "title": "响应大小上限",
+        "description": "单个 fetch() 允许读取的响应体大小上限（MB），超出即中止。"
+      },
+      "packages": {
+        "title": "包",
+        "description": "本段代码允许导入的沙箱包，以说明符或 {specifier, resolvedPackVersion, contentDigest} 对象形式给出，例如 [\"@acme/geo\"]。沙箱只会解析此处列出的内容；其他 `import` 一律失败，动态 `import()`/`require()` 不可用。"
+      },
+      "secrets": {
+        "title": "密钥",
+        "description": "本段代码允许读取的密钥名称，例如 [\"NOTION_API_KEY\"]。nodetool.secrets.get(name) 与 getSecret(name) 会拒绝读取任何其他名称，使访问单一服务的节点无法读取其他服务的凭据。留空表示不限定范围——可读取整个密钥库，与该属性引入之前的旧节点行为一致。"
+      },
+      "timeout": {
+        "title": "超时",
+        "description": "执行中止前的最长秒数（0 = 不限制）。"
+      }
+    }
+  },
+  "nodetool.control.If": {
+    "title": "条件分支",
+    "description": "根据条件选择执行两个分支之一。\n关键词：控制、流程、条件、逻辑、else、true、false、开关、分支\n\n常见用途：\n- 根据条件为工作流分流\n- 在数据处理中处理不同分支\n- 实现决策逻辑",
+    "properties": {
+      "condition": {
+        "title": "条件",
+        "description": "要判断的条件。"
+      },
+      "value": {
+        "title": "值",
+        "description": "要传递给下一个节点的值。"
+      }
+    }
+  },
+  "minimax.TextToImage": {
+    "title": "MiniMax 文生图",
+    "description": "使用 MiniMax image-01 根据文本提示词生成图像。\n关键词：图像、生成、文生图、t2i、minimax\n\n常见用途：\n- 创作插画与概念图\n- 生成营销视觉素材\n- 按指定宽高比产出图像",
+    "properties": {
+      "aspect_ratio": {
+        "title": "宽高比",
+        "description": "生成图像的宽高比。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "要使用的 MiniMax 图像模型。"
+      },
+      "negative_prompt": {
+        "title": "反向提示词",
+        "description": "描述图像中要避免出现的内容。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "描述期望图像的文本提示。"
+      },
+      "prompt_optimizer": {
+        "title": "提示词优化器",
+        "description": "由 MiniMax 在生成前自动优化提示词。"
+      }
+    }
+  },
+  "minimax.TextToVideo": {
+    "title": "MiniMax 文生视频",
+    "description": "使用 MiniMax Hailuo 与 Director 系列模型，根据文本提示词生成视频。\n关键词：视频、生成、文生视频、t2v、Hailuo、minimax\n\n常见用途：\n- 根据一段描述生成短片电影感画面\n- 快速验证动态创意\n- 生成 B-roll 与社媒内容",
+    "properties": {
+      "duration": {
+        "title": "时长",
+        "description": "视频时长，单位为秒。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "要使用的 MiniMax 视频模型。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "描述视频内容的文本提示。Director 系列模型支持镜头运动指令，如 [Push in]、[Pan left]、[Truck left]。"
+      },
+      "resolution": {
+        "title": "分辨率",
+        "description": "输出分辨率。"
+      }
+    }
+  },
+  "kie.video.BytedanceSeedance2": {
+    "title": "Bytedance Seedance 2",
+    "description": "通过 Kie.ai 调用 bytedance-seedance-2。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
+    "properties": {
+      "aspect_ratio": {
+        "title": "宽高比",
+        "description": "视频宽高比配置，必填项。"
+      },
+      "duration": {
+        "title": "时长",
+        "description": "视频时长为 4 到 15 秒。"
+      },
+      "first_frame": {
+        "title": "首帧",
+        "description": "首帧图片 URL 或 asset://{assetId}（例如：asset://asset-20260404242101-76djj）。"
+      },
+      "generate_audio": {
+        "title": "生成音频",
+        "description": "是否为视频生成音频。- true：生成带音频的视频 - false：生成不带音频的视频"
+      },
+      "last_frame": {
+        "title": "尾帧",
+        "description": "尾帧图片 URL 或 asset://{assetId}（例如：asset://asset-20260404242101-76djj）。"
+      },
+      "nsfw_checker": {
+        "title": "NSFW 校验",
+        "description": "默认为 false。可按需设置为 false。设为 false 时内容过滤将关闭，所有结果由模型本身直接返回。注意：无法保证过滤所有内容；若结果不满足需求，需自行处理。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "用于生成视频的文本提示，必填项（长度 3 至 20000 字符）。"
+      },
+      "reference_audios": {
+        "title": "参考音频",
+        "description": "输入一组音频 URL 或 asset://{assetId}（例如：asset://asset-20260404242101-76djj）。单条音频要求：格式 wav、mp3；时长 2 到 15 秒，最多 3 条参考音频，所有音频总时长不超过 15 秒；大小不超过 15 MB。"
+      },
+      "reference_images": {
+        "title": "参考图像",
+        "description": "输入一组图片 URL 或 asset://{assetId}（例如：asset://asset-20260404242101-76djj）。单张图片要求：格式 jpeg、png、webp、bmp、tiff、gif；宽高比（宽/高）：(0.4, 2.5)；宽高像素：[300, 6000]；大小不超过 30 MB。文件数量上限：首尾帧之和不超过 9 张。"
+      },
+      "reference_videos": {
+        "title": "参考视频",
+        "description": "输入一组视频 URL 或 asset://{assetId}（例如：asset://asset-20260404242101-76djj）。单条视频要求：格式 mp4、mov；分辨率 480p、720p；时长 2 到 15 秒，最多 3 条参考视频，所有视频总时长不超过 15 秒；尺寸：宽高比（宽/高）[0.4, 2.5]，宽高像素 [300, 6000]，总像素 [640×640=409600, 834×1112=927408]，即宽高之积须落在 [409600, 927408] 区间；大小不超过 50 MB；帧率（FPS）：[24, 60]。"
+      },
+      "resolution": {
+        "title": "分辨率",
+        "description": "视频分辨率——480p 生成更快，720p 较为均衡，1080p 为高质量视频，4K 超高清呈现更丰富的视觉细节。"
+      },
+      "web_search": {
+        "title": "联网搜索",
+        "description": "是否启用联网搜索。"
+      }
+    }
+  }
+}
