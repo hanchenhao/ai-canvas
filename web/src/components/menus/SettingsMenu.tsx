@@ -45,6 +45,7 @@ import DefaultModelsMenu from "./DefaultModelsMenu";
 import MCPSettingsMenu from "./MCPSettingsMenu";
 import BrowserExtensionSettingsMenu from "./BrowserExtensionSettingsMenu";
 import VaultsSettings from "./VaultsSettings";
+import { LanguageSelector } from "./LanguageSelector";
 import { useNotificationStore } from "../../stores/NotificationStore";
 import { useState, useCallback, useEffect, useRef } from "react";
 import SettingsSidebar from "./SettingsSidebar";
@@ -466,6 +467,7 @@ function SettingsPage() {
       category: "Workspace",
       items: [
         { id: "editor", label: "Editor" },
+        { id: "language", label: "Language" },
         ...(isElectron ? [{ id: "updates", label: "Updates" }] : []),
         ...(isElectron ? [{ id: "vaults", label: "Vaults" }] : [])
       ]
@@ -728,6 +730,14 @@ function SettingsPage() {
                           </Text>
                         </SearchItem>
                       )}
+
+                      <SearchItem
+                        search={generalSearch}
+                        id="language"
+                        keywords="language locale i18n 中文 zhongwen english"
+                      >
+                        <LanguageSelector />
+                      </SearchItem>
                     </div>
 
                     {isElectron && <VaultsSettings />}
