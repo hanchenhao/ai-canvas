@@ -10,6 +10,10 @@
  * Output is sorted by node_type, then each node's properties are sorted by
  * property name, so repeated runs produce a stable diff (idempotent).
  *
+ * The pure transformation lives in
+ * `web/src/i18n/extractNodeStrings.ts` and is unit-tested there. This script
+ * handles registry boot + file I/O only.
+ *
  * NOTE: `bootstrapNodeRegistry` is loaded with a dynamic import() inside main()
  * rather than a top-level static import. A static import pulls
  * `@nodetool-ai/node-sdk` into tsx's esbuild bundle pass, and the dist build
@@ -22,10 +26,8 @@
 import { writeFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { extractNodeStrings } from "../web/src/i18n/extractNodeStrings.ts";
 
-// Minimal local shape of the metadata we read. We avoid importing the real
-// `NodeMetadata` type from node-sdk at the top level for the same reason we
-// avoid `bootstrapNodeRegistry` — it pulls the dist chain into tsx's bundle.
 type NodeMetadata = {
   node_type: string;
   title: string;
@@ -52,43 +54,6 @@ const OUTPUT_PATH = resolve(
   "nodes.json"
 );
 
-type PropertyStrings = {
-  title?: string | null;
-  description?: string | null;
-};
-
-type NodeStrings = {
-  title: string;
-  description: string;
-  properties: Record<string, PropertyStrings>;
-};
-
-type NodeStringsCatalog = Record<string, NodeStrings>;
-
-function extract(metadata: readonly NodeMetadata[]): NodeStringsCatalog {
-  const catalog: NodeStringsCatalog = {};
-  for (const meta of metadata) {
-    const props: Record<string, PropertyStrings> = {};
-    const propNames = (meta.properties ?? [])
-      .map((p) => p.name)
-      .filter((n): n is string => Boolean(n))
-      .sort();
-    for (const name of propNames) {
-      const p = meta.properties!.find((prop) => prop.name === name)!;
-      props[name] = {
-        title: p.title ?? undefined,
-        description: p.description ?? undefined
-      };
-    }
-    catalog[meta.node_type] = {
-      title: meta.title,
-      description: meta.description,
-      properties: props
-    };
-  }
-  return catalog;
-}
-
 async function main(): Promise<void> {
   // Dynamic import keeps node-sdk's dist chain on Node's native ESM loader
   // (top-level await safe) instead of tsx's esbuild bundler (which is not).
@@ -97,13 +62,7 @@ async function main(): Promise<void> {
   );
   const registry: NodeRegistryLike = await websocketSetup.bootstrapNodeRegistry();
   const all = registry.listMetadata();
-  const extracted = extract(all);
-
-  // Sort top-level keys for a stable diff.
-  const sorted: NodeStringsCatalog = {};
-  for (const key of Object.keys(extracted).sort()) {
-    sorted[key] = extracted[key];
-  }
+  const sorted = extractNodeStrings(all);
 
   writeFileSync(OUTPUT_PATH, JSON.stringify(sorted, null, 2) + "\n", "utf8");
   console.log(`Wrote ${Object.keys(sorted).length} nodes to ${OUTPUT_PATH}`);
