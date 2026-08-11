@@ -1,1 +1,30 @@
-{}
+{
+  "title": "Settings",
+  "sidebar": {
+    "category": {
+      "workspace": "Workspace",
+      "execution": "Execution",
+      "canvas": "Canvas",
+      "ai": "AI",
+      "history": "History"
+    },
+    "item": {
+      "editor": "Editor",
+      "language": "Language",
+      "updates": "Updates",
+      "vaults": "Vaults",
+      "execution": "Execution",
+      "canvasNavigation": "Canvas & Navigation",
+      "defaultModels": "Default Models",
+      "autosave": "Autosave",
+      "appearance": "Appearance"
+    }
+  },
+  "section": {
+    "editor": "Editor",
+    "execution": "Execution",
+    "canvasNavigation": "Canvas & Navigation",
+    "autosave": "Autosave & Version History",
+    "appearance": "Appearance"
+  }
+}

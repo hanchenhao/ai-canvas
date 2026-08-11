@@ -1,1 +1,30 @@
-{}
+{
+  "title": "设置",
+  "sidebar": {
+    "category": {
+      "workspace": "工作区",
+      "execution": "执行",
+      "canvas": "画布",
+      "ai": "AI",
+      "history": "历史"
+    },
+    "item": {
+      "editor": "编辑器",
+      "language": "语言",
+      "updates": "更新",
+      "vaults": "文件库",
+      "execution": "执行",
+      "canvasNavigation": "画布与导航",
+      "defaultModels": "默认模型",
+      "autosave": "自动保存",
+      "appearance": "外观"
+    }
+  },
+  "section": {
+    "editor": "编辑器",
+    "execution": "执行",
+    "canvasNavigation": "画布与导航",
+    "autosave": "自动保存与版本历史",
+    "appearance": "外观"
+  }
+}

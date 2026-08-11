@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 // Full-page settings (formerly a Dialog).
 import React, { memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import {
   useMediaQuery
@@ -165,6 +166,7 @@ const SearchItem = React.memo(function SearchItem({
 function SettingsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const session = useAuth((state) => state.session);
+  const { t } = useTranslation(["settings", "common"]);
 
   const tabSubtitle = (tab: number): string => {
     switch (tab) {
@@ -464,31 +466,44 @@ function SettingsPage() {
   // Tab 0: General sidebar folders — every section listed, in page order.
   const generalSidebarSections = [
     {
-      category: "Workspace",
+      category: t("settings:sidebar.category.workspace"),
       items: [
-        { id: "editor", label: "Editor" },
-        { id: "language", label: "Language" },
-        ...(isElectron ? [{ id: "updates", label: "Updates" }] : []),
-        ...(isElectron ? [{ id: "vaults", label: "Vaults" }] : [])
+        { id: "editor", label: t("settings:sidebar.item.editor") },
+        { id: "language", label: t("settings:sidebar.item.language") },
+        ...(isElectron
+          ? [{ id: "updates", label: t("settings:sidebar.item.updates") }]
+          : []),
+        ...(isElectron
+          ? [{ id: "vaults", label: t("settings:sidebar.item.vaults") }]
+          : [])
       ]
     },
     {
-      category: "Execution",
-      items: [{ id: "execution", label: "Execution" }]
-    },
-    {
-      category: "Canvas",
-      items: [{ id: "canvas-navigation", label: "Canvas & Navigation" }]
-    },
-    {
-      category: "AI",
-      items: [{ id: "default-models", label: "Default Models" }]
-    },
-    {
-      category: "History",
+      category: t("settings:sidebar.category.execution"),
       items: [
-        { id: "autosave", label: "Autosave" },
-        { id: "appearance", label: "Appearance" }
+        { id: "execution", label: t("settings:sidebar.item.execution") }
+      ]
+    },
+    {
+      category: t("settings:sidebar.category.canvas"),
+      items: [
+        {
+          id: "canvas-navigation",
+          label: t("settings:sidebar.item.canvasNavigation")
+        }
+      ]
+    },
+    {
+      category: t("settings:sidebar.category.ai"),
+      items: [
+        { id: "default-models", label: t("settings:sidebar.item.defaultModels") }
+      ]
+    },
+    {
+      category: t("settings:sidebar.category.history"),
+      items: [
+        { id: "autosave", label: t("settings:sidebar.item.autosave") },
+        { id: "appearance", label: t("settings:sidebar.item.appearance") }
       ]
     }
   ];
@@ -554,7 +569,9 @@ function SettingsPage() {
         <header className="settings-page-header">
           <div className="settings-page-header__titles">
             <div className="settings-page-header__heading">
-              <h1 className="settings-page-header__title">Settings</h1>
+              <h1 className="settings-page-header__title">
+                {t("settings:title")}
+              </h1>
               <DocsHelpLink
                 topic={settingsDocsTopic(settingsTab)}
                 label={settingsDocsLabel(settingsTab)}
@@ -624,7 +641,7 @@ function SettingsPage() {
                   <div className="general-settings">
                     <div className="settings-section">
                       <Text size="big" id="editor" className="settings-heading">
-                        Editor
+                        {t("settings:section.editor")}
                       </Text>
                       <SearchItem
                         search={generalSearch}
@@ -748,7 +765,7 @@ function SettingsPage() {
                         id="execution"
                         className="settings-heading"
                       >
-                        Execution
+                        {t("settings:section.execution")}
                       </Text>
                       <SearchItem
                         search={generalSearch}
@@ -858,7 +875,7 @@ function SettingsPage() {
                         id="canvas-navigation"
                         className="settings-heading"
                       >
-                        Canvas & Navigation
+                        {t("settings:section.canvasNavigation")}
                       </Text>
                       <SearchItem
                         search={generalSearch}
@@ -955,7 +972,7 @@ function SettingsPage() {
                         id="autosave"
                         className="settings-heading"
                       >
-                        Autosave & Version History
+                        {t("settings:section.autosave")}
                       </Text>
                       <SearchItem
                         search={generalSearch}
@@ -1047,7 +1064,7 @@ function SettingsPage() {
                         id="appearance"
                         className="settings-heading"
                       >
-                        Appearance
+                        {t("settings:section.appearance")}
                       </Text>
                       <SearchItem
                         search={generalSearch}
