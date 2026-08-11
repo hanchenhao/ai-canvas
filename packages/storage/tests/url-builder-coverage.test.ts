@@ -86,6 +86,21 @@ describe("createAssetUrlBuilder (s3)", () => {
       forcePathStyle: true
     });
   });
+
+  it("allows virtual-hosted addressing for Alibaba OSS", async () => {
+    createAssetUrlBuilder({
+      kind: "s3",
+      bucket: "canvas-assets",
+      region: "cn-hangzhou",
+      endpoint: "https://s3.oss-cn-hangzhou.aliyuncs.com",
+      forcePathStyle: false
+    });
+    expect(s3Ctor).toHaveBeenCalledWith({
+      region: "cn-hangzhou",
+      endpoint: "https://s3.oss-cn-hangzhou.aliyuncs.com",
+      forcePathStyle: false
+    });
+  });
 });
 
 describe("createAssetUrlBuilder (supabase)", () => {

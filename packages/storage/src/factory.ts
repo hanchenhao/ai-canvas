@@ -10,6 +10,7 @@ export type StorageConfig =
       bucket: string;
       region?: string;
       endpoint?: string;
+      forcePathStyle?: boolean;
     }
   | {
       kind: "supabase";
@@ -26,7 +27,8 @@ export function createStorageAdapter(config: StorageConfig): StorageAdapter {
       return new S3StorageAdapter({
         bucket: config.bucket,
         region: config.region,
-        endpoint: config.endpoint
+        endpoint: config.endpoint,
+        forcePathStyle: config.forcePathStyle
       });
     case "supabase":
       return new SupabaseStorageAdapter({

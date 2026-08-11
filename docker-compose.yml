@@ -24,15 +24,21 @@
 # ##  See the NODETOOL_TRUST_LOCAL_NETWORKS warning below.                    ##
 # ############################################################################
 
-name: nodetool
+name: ai-canvas
 
 services:
-  nodetool:
-    # Pin a release with NODETOOL_VERSION (e.g. NODETOOL_VERSION=v1.2.3), or
-    # point NODETOOL_IMAGE at a locally built image (e.g.
-    # NODETOOL_IMAGE=nodetool:dev) to test your own build.
-    image: "${NODETOOL_IMAGE:-ghcr.io/nodetool-ai/nodetool:${NODETOOL_VERSION:-latest}}"
-    container_name: nodetool
+  ai-canvas:
+    # Build this fork, not the upstream NodeTool image. CI can publish the same
+    # Dockerfile and deployments can override AI_CANVAS_IMAGE with that tag.
+    image: "${AI_CANVAS_IMAGE:-ai-canvas:local}"
+    build:
+      context: .
+      args:
+        VITE_APP_NAME: "${VITE_APP_NAME:-AI Canvas}"
+        VITE_STUDIO_VIDEO_PROVIDER: "${VITE_STUDIO_VIDEO_PROVIDER:-kie}"
+        VITE_STUDIO_VIDEO_MODEL: "${VITE_STUDIO_VIDEO_MODEL:-bytedance/seedance-2}"
+        VITE_STUDIO_VIDEO_MODEL_NAME: "${VITE_STUDIO_VIDEO_MODEL_NAME:-Seedance 2.0}"
+    container_name: ai-canvas
     restart: unless-stopped
     # PID 1 init: forwards signals and reaps zombies from spawned workers
     # (Python bridge, code runners), so `docker stop` shuts down cleanly.
@@ -137,6 +143,24 @@ services:
       GEMINI_API_KEY: "${GEMINI_API_KEY:-}"
       FAL_API_KEY: "${FAL_API_KEY:-}"
       HF_TOKEN: "${HF_TOKEN:-}"
+      MINIMAX_API_KEY: "${MINIMAX_API_KEY:-}"
+      KIE_API_KEY: "${KIE_API_KEY:-}"
+      ATLASCLOUD_API_KEY: "${ATLASCLOUD_API_KEY:-}"
+
+      # Admin membership is enforced by the backend. Use Supabase user IDs in
+      # a public/multi-user deployment. Local mode uses built-in admin user 1.
+      ADMIN_USER_IDS: "${ADMIN_USER_IDS:-}"
+
+      # Alibaba OSS through its S3-compatible API. Leave backend=file for a
+      # local-only install, or set every value below in .env.
+      NODETOOL_STORAGE_BACKEND: "${NODETOOL_STORAGE_BACKEND:-file}"
+      ASSET_BUCKET: "${ASSET_BUCKET:-/workspace/assets}"
+      TEMP_BUCKET: "${TEMP_BUCKET:-/workspace/temp}"
+      S3_ENDPOINT: "${S3_ENDPOINT:-}"
+      S3_REGION: "${S3_REGION:-}"
+      S3_FORCE_PATH_STYLE: "${S3_FORCE_PATH_STYLE:-false}"
+      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID:-}"
+      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY:-}"
 
       # Local inference backends — point these at your own services if you run
       # them (e.g. an Ollama container on the same Docker network).

@@ -1,4 +1,10 @@
-import { defineConfig, loadEnv, type Plugin, type ProxyOptions, type UserConfig } from "vite";
+import {
+  defineConfig,
+  loadEnv,
+  type Plugin,
+  type ProxyOptions,
+  type UserConfig
+} from "vite";
 import type { Plugin as EsbuildPlugin } from "esbuild";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
@@ -18,7 +24,10 @@ const rootNodeModules = resolve(configDir, "../node_modules");
 // fall back gracefully when git is unavailable (e.g. building from a tarball).
 function runGit(command: string): string | null {
   try {
-    return execSync(command, { cwd: configDir, stdio: ["ignore", "pipe", "ignore"] })
+    return execSync(command, {
+      cwd: configDir,
+      stdio: ["ignore", "pipe", "ignore"]
+    })
       .toString()
       .trim();
   } catch {
@@ -27,7 +36,9 @@ function runGit(command: string): string | null {
 }
 
 const GIT_COMMIT_HASH =
-  process.env.GIT_COMMIT_HASH ?? runGit("git rev-parse --short HEAD") ?? "unknown";
+  process.env.GIT_COMMIT_HASH ??
+  runGit("git rev-parse --short HEAD") ??
+  "unknown";
 const BUILD_NUMBER =
   process.env.BUILD_NUMBER ?? runGit("git rev-list --count HEAD") ?? "0";
 
@@ -217,7 +228,8 @@ function suppressBenignDevProxyErrorsPlugin(): Plugin {
       logger.error = (msg, options) => {
         if (
           typeof msg === "string" &&
-          (msg.includes("ws proxy error") || msg.includes("http proxy error")) &&
+          (msg.includes("ws proxy error") ||
+            msg.includes("http proxy error")) &&
           isBenignProxyError(options?.error)
         ) {
           return;
@@ -305,12 +317,12 @@ export default defineConfig(async ({ mode }) => {
         "@trpc/client",
         "@trpc/react-query",
         "@trpc/server",
-        "@tanstack/react-query",
+        "@tanstack/react-query"
       ],
       exclude: [
         "monaco-editor",
         "@monaco-editor/react",
-        "@monaco-editor/loader",
+        "@monaco-editor/loader"
       ],
       rolldownOptions: {
         plugins: [stubNodeBuiltinsEsbuildPlugin()]
@@ -341,8 +353,8 @@ export default defineConfig(async ({ mode }) => {
         "@nodetool/kie-unit-pricing-catalog": resolve(
           configDir,
           "../packages/kie-nodes/src/generated/kie-unit-pricing.json"
-        ),
-      },
+        )
+      }
     },
     // The in-browser runner Web Worker (browserRunner.worker.ts) is bundled as
     // its own self-contained entry. It inherits `resolve` (conditions/alias) but
@@ -369,7 +381,12 @@ export default defineConfig(async ({ mode }) => {
       // Note: `not ios < 14` excludes iOS 11–13. esbuild (via vite 8 / rolldown
       // worker bundling) cannot downlevel certain destructuring patterns in
       // monaco-editor's pre-bundled workers to those ancient targets.
-      target: browserslistToEsbuild([">0.2%", "not dead", "not op_mini all", "not ios < 14"]),
+      target: browserslistToEsbuild([
+        ">0.2%",
+        "not dead",
+        "not op_mini all",
+        "not ios < 14"
+      ]),
       sourcemap: isDebug,
       minify: isDebug ? false : "esbuild",
       ...(isDebug
@@ -377,6 +394,10 @@ export default defineConfig(async ({ mode }) => {
         : {
             rollupOptions: {
               external: ["web-worker"],
+              input: {
+                main: resolve(configDir, "index.html"),
+                admin: resolve(configDir, "admin.html")
+              },
               output: {
                 manualChunks(id) {
                   // Chunk only what the boot path itself needs.

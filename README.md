@@ -1,13 +1,36 @@
-# NodeTool
+# AI Canvas
+
+AI Canvas 是基于 [NodeTool](https://github.com/nodetool-ai/nodetool) 的
+AGPL-3.0 开源改造版，面向中文图片/视频创作。当前产品层默认使用 MiniMax
+生图、Seedance 生视频，素材可存入阿里云 OSS，并提供独立管理后台。
+
+本地开发一条命令启动：
+
+```bash
+nvm use
+./start.sh full
+```
+
+- 创作端：<http://localhost:3000/studio>
+- 管理后台：<http://localhost:3001/admin.html>
+- API 健康检查：<http://localhost:7777/health>
+- 一键检查：`./start.sh health`
+
+生产容器把创作端和管理后台放在同一个服务中：`/studio` 和
+`/admin.html`。部署方法、4 核 8G 配置建议和密钥安全说明见
+[部署指南](docs/DEPLOYMENT.md)；让 Claude Code 接手时先看
+[Claude Code 交接说明](docs/CLAUDE_HANDOFF.md)。上游版本与同步策略见
+[UPSTREAM.md](docs/UPSTREAM.md)。
+
+本项目保留 NodeTool 的版权声明与 AGPL-3.0 许可证。公开部署或分发修改版
+时，必须按许可证向网络用户提供对应源代码。
+
+## Upstream NodeTool
 
 **The open-source, agent-first creative workspace.**
 
 *Every model. Your keys. Your canvas.*
 
-[![Stars](https://img.shields.io/github/stars/nodetool-ai/nodetool?style=social)](https://github.com/nodetool-ai/nodetool/stargazers)
-[![Downloads](https://img.shields.io/github/downloads/nodetool-ai/nodetool/total?color=3fb950)](https://github.com/nodetool-ai/nodetool/releases)
-[![Latest Release](https://img.shields.io/github/v/release/nodetool-ai/nodetool?display_name=tag&sort=semver)](https://github.com/nodetool-ai/nodetool/releases/latest)
-[![Discord](https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white)](https://discord.gg/WmQTWZRcYE)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE.txt)
 
 [![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey)](https://nodetool.ai)

@@ -6,7 +6,13 @@ import { getDefaultAssetsPath } from "./paths.js";
  */
 export type StorageConfig =
   | { kind: "file"; rootDir: string }
-  | { kind: "s3"; bucket: string; region?: string; endpoint?: string }
+  | {
+      kind: "s3";
+      bucket: string;
+      region?: string;
+      endpoint?: string;
+      forcePathStyle?: boolean;
+    }
   | { kind: "supabase"; url: string; apiKey: string; bucket: string };
 
 function requireEnv(key: string, backend: string): string {
@@ -19,6 +25,14 @@ function requireEnv(key: string, backend: string): string {
   return value;
 }
 
+function optionalBooleanEnv(key: string): boolean | undefined {
+  const value = process.env[key]?.trim().toLowerCase();
+  if (!value) return undefined;
+  if (value === "true" || value === "1") return true;
+  if (value === "false" || value === "0") return false;
+  throw new Error(`${key} must be true or false`);
+}
+
 function buildConfig(backend: string, bucketEnv: string): StorageConfig {
   switch (backend) {
     case "file":
@@ -28,7 +42,8 @@ function buildConfig(backend: string, bucketEnv: string): StorageConfig {
         kind: "s3",
         bucket: requireEnv(bucketEnv, "s3"),
         region: process.env.S3_REGION,
-        endpoint: process.env.S3_ENDPOINT ?? process.env.S3_ENDPOINT_URL
+        endpoint: process.env.S3_ENDPOINT ?? process.env.S3_ENDPOINT_URL,
+        forcePathStyle: optionalBooleanEnv("S3_FORCE_PATH_STYLE")
       };
     case "supabase":
       return {
@@ -61,6 +76,7 @@ const backend = (): string =>
  *   SUPABASE_KEY              Supabase API key
  *   S3_REGION                 AWS region (s3)
  *   S3_ENDPOINT               custom S3 endpoint (s3, optional)
+ *   S3_FORCE_PATH_STYLE       true for MinIO, false for Alibaba OSS
  */
 export function loadAssetStorageConfig(): StorageConfig {
   return buildConfig(backend(), "ASSET_BUCKET");

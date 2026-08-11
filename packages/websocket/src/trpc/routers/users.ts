@@ -13,6 +13,7 @@ import { ApiErrorCode } from "../../error-codes.js";
 import { router } from "../index.js";
 import { protectedProcedure } from "../middleware.js";
 import { throwApiError } from "../error-formatter.js";
+import { requireAdmin } from "../admin-auth.js";
 import {
   listOutput,
   createInput,
@@ -22,30 +23,6 @@ import {
   resetTokenInput,
   type UserListItem
 } from "@nodetool-ai/protocol/api-schemas/users.js";
-
-/**
- * Check if a user ID has admin privileges. Mirrors `isAdmin` from the
- * legacy users-api.ts: user "1" is always admin in dev, and
- * `ADMIN_USER_IDS` (comma-separated) grants admin in production.
- */
-function isAdmin(userId: string): boolean {
-  if (userId === "1") return true;
-  const adminIds = process.env.ADMIN_USER_IDS;
-  if (adminIds) {
-    return adminIds
-      .split(",")
-      .map((s) => s.trim())
-      .includes(userId);
-  }
-  return false;
-}
-
-/** Guard: throws FORBIDDEN if caller is not an admin. */
-function requireAdmin(userId: string): void {
-  if (!isAdmin(userId)) {
-    throwApiError(ApiErrorCode.FORBIDDEN, "Admin access required");
-  }
-}
 
 /** Manager singleton — matches legacy behaviour (module-scoped instance). */
 const manager = new FileUserManager();

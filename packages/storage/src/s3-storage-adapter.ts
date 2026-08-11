@@ -14,6 +14,8 @@ export interface S3StorageAdapterOptions {
   bucket: string;
   region?: string;
   endpoint?: string;
+  /** Custom endpoints default to path-style. Alibaba OSS requires false. */
+  forcePathStyle?: boolean;
   prefix?: string;
   /** Optional pre-built client (used by tests). */
   client?: S3Api;
@@ -30,6 +32,7 @@ export class S3StorageAdapter implements StorageAdapter {
   private client: S3Api | null;
   private readonly region: string;
   private readonly endpoint: string | undefined;
+  private readonly forcePathStyle: boolean | undefined;
 
   constructor(opts: S3StorageAdapterOptions) {
     if (!opts.bucket) {
@@ -39,6 +42,7 @@ export class S3StorageAdapter implements StorageAdapter {
     this.prefix = opts.prefix ? normalizeStorageKey(opts.prefix) : null;
     this.region = opts.region ?? "us-east-1";
     this.endpoint = opts.endpoint;
+    this.forcePathStyle = opts.forcePathStyle;
     this.client = opts.client ?? null;
   }
 
@@ -47,7 +51,10 @@ export class S3StorageAdapter implements StorageAdapter {
     this.client = new S3Client({
       region: this.region,
       ...(this.endpoint
-        ? { endpoint: this.endpoint, forcePathStyle: true }
+        ? {
+            endpoint: this.endpoint,
+            forcePathStyle: this.forcePathStyle ?? true
+          }
         : {})
     });
     return this.client;
@@ -149,9 +156,10 @@ export class S3StorageAdapter implements StorageAdapter {
     // Always end the prefix with `/` when hierarchical, so S3 lists children
     // not the directory marker itself.
     const s3Prefix = joinStorageKey(this.prefix ?? undefined, normalizedPrefix);
-    const s3PrefixWithSlash = delimiter && s3Prefix && !s3Prefix.endsWith("/")
-      ? `${s3Prefix}/`
-      : s3Prefix;
+    const s3PrefixWithSlash =
+      delimiter && s3Prefix && !s3Prefix.endsWith("/")
+        ? `${s3Prefix}/`
+        : s3Prefix;
 
     const entries: StorageEntry[] = [];
     const commonPrefixes: string[] = [];

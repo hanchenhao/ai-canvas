@@ -17,15 +17,17 @@ export function createAssetUrlBuilder(
 ): (key: string) => Promise<string> {
   switch (config.kind) {
     case "file": {
-      return async (key: string) =>
-        `/api/storage/${key.replace(/^\/+/, "")}`;
+      return async (key: string) => `/api/storage/${key.replace(/^\/+/, "")}`;
     }
 
     case "s3": {
       const client = new S3Client({
         region: config.region ?? "us-east-1",
         ...(config.endpoint
-          ? { endpoint: config.endpoint, forcePathStyle: true }
+          ? {
+              endpoint: config.endpoint,
+              forcePathStyle: config.forcePathStyle ?? true
+            }
           : {})
       });
       const bucket = config.bucket;

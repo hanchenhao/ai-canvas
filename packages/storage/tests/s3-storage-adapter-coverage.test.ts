@@ -35,7 +35,9 @@ function makeClient(overrides: Partial<S3Api> = {}): S3Api {
 
 describe("S3StorageAdapter constructor", () => {
   it("throws for an empty bucket", () => {
-    expect(() => new S3StorageAdapter({ bucket: "" })).toThrow(/bucket is required/);
+    expect(() => new S3StorageAdapter({ bucket: "" })).toThrow(
+      /bucket is required/
+    );
   });
 
   it("normalizes a supplied prefix", () => {
@@ -52,8 +54,16 @@ describe("S3StorageAdapter constructor", () => {
 describe("S3StorageAdapter store", () => {
   it("uploads under the joined prefix and returns the s3 uri", async () => {
     const client = makeClient();
-    const adapter = new S3StorageAdapter({ bucket: "b", prefix: "runs/r1", client });
-    const uri = await adapter.store("out.bin", new Uint8Array([1, 2]), "image/png");
+    const adapter = new S3StorageAdapter({
+      bucket: "b",
+      prefix: "runs/r1",
+      client
+    });
+    const uri = await adapter.store(
+      "out.bin",
+      new Uint8Array([1, 2]),
+      "image/png"
+    );
     expect(uri).toBe("s3://b/runs/r1/out.bin");
     expect(client.putObject).toHaveBeenCalledWith({
       bucket: "b",
@@ -117,7 +127,9 @@ describe("S3StorageAdapter retrieve", () => {
     const client = makeClient();
     const adapter = new S3StorageAdapter({ bucket: "b", client });
     await adapter.store("k.bin", new Uint8Array([7, 8, 9]));
-    expect(await adapter.retrieve("s3://b/k.bin")).toEqual(new Uint8Array([7, 8, 9]));
+    expect(await adapter.retrieve("s3://b/k.bin")).toEqual(
+      new Uint8Array([7, 8, 9])
+    );
   });
 
   it("returns null on getObject failure", async () => {
@@ -160,7 +172,10 @@ describe("S3StorageAdapter delete", () => {
     const adapter = new S3StorageAdapter({ bucket: "b", client });
     await adapter.store("k.bin", new Uint8Array([1]));
     expect(await adapter.delete("s3://b/k.bin")).toBe(true);
-    expect(client.deleteObject).toHaveBeenCalledWith({ bucket: "b", key: "k.bin" });
+    expect(client.deleteObject).toHaveBeenCalledWith({
+      bucket: "b",
+      key: "k.bin"
+    });
   });
 
   it("returns false when the object does not exist (no delete call)", async () => {
@@ -201,9 +216,16 @@ describe("S3StorageAdapter list", () => {
         isTruncated: false
       }))
     });
-    const adapter = new S3StorageAdapter({ bucket: "b", prefix: "runs/r1", client });
+    const adapter = new S3StorageAdapter({
+      bucket: "b",
+      prefix: "runs/r1",
+      client
+    });
     const result = await adapter.list("files", { delimiter: "/" });
-    expect(result.entries.map((e) => e.key)).toEqual(["files/a.txt", "files/z.txt"]);
+    expect(result.entries.map((e) => e.key)).toEqual([
+      "files/a.txt",
+      "files/z.txt"
+    ]);
     expect(result.entries[0]).toMatchObject({
       key: "files/a.txt",
       uri: "s3://b/runs/r1/files/a.txt",
@@ -306,7 +328,10 @@ describe("S3StorageAdapter list", () => {
     const client = makeClient();
     const adapter = new S3StorageAdapter({ bucket: "b", client });
     await adapter.list("dir");
-    expect(client.listObjectsV2).toHaveBeenCalledWith({ bucket: "b", prefix: "dir" });
+    expect(client.listObjectsV2).toHaveBeenCalledWith({
+      bucket: "b",
+      prefix: "dir"
+    });
   });
 });
 
@@ -319,7 +344,11 @@ describe("S3StorageAdapter stat", () => {
         contentType: "image/png"
       }))
     });
-    const adapter = new S3StorageAdapter({ bucket: "b", prefix: "runs/r1", client });
+    const adapter = new S3StorageAdapter({
+      bucket: "b",
+      prefix: "runs/r1",
+      client
+    });
     const stat = await adapter.stat("s3://b/runs/r1/dir/file.png");
     expect(stat).toEqual({
       key: "dir/file.png",
@@ -376,5 +405,20 @@ describe("S3StorageAdapter lazy client", () => {
     expect(mockFetch).toHaveBeenCalledTimes(1);
     const [url] = mockFetch.mock.calls[0] as [string, RequestInit];
     expect(url).toBe("http://localhost:9000/b/k.bin");
+  });
+
+  it("builds virtual-hosted URLs when forcePathStyle is false", async () => {
+    mockFetch.mockResolvedValue(new Response(null, { status: 200 }));
+    const adapter = new S3StorageAdapter({
+      bucket: "canvas-assets",
+      endpoint: "https://s3.oss-cn-hangzhou.aliyuncs.com",
+      region: "cn-hangzhou",
+      forcePathStyle: false
+    });
+    await adapter.store("images/keyframe.png", new Uint8Array([1]));
+    const [url] = mockFetch.mock.calls[0] as [string, RequestInit];
+    expect(url).toBe(
+      "https://canvas-assets.s3.oss-cn-hangzhou.aliyuncs.com/images/keyframe.png"
+    );
   });
 });

@@ -11,6 +11,7 @@ const STORAGE_ENV_KEYS = [
   "S3_REGION",
   "S3_ENDPOINT",
   "S3_ENDPOINT_URL",
+  "S3_FORCE_PATH_STYLE",
   "SUPABASE_URL",
   "SUPABASE_KEY",
   "ASSET_FOLDER",
@@ -72,8 +73,32 @@ describe("loadAssetStorageConfig", () => {
       kind: "s3",
       bucket: "my-bucket",
       region: "eu-west-1",
-      endpoint: undefined
+      endpoint: undefined,
+      forcePathStyle: undefined
     });
+  });
+
+  it("supports virtual-hosted S3 endpoints such as Alibaba OSS", () => {
+    process.env.NODETOOL_STORAGE_BACKEND = "s3";
+    process.env.ASSET_BUCKET = "canvas-assets";
+    process.env.S3_REGION = "cn-hangzhou";
+    process.env.S3_ENDPOINT = "https://s3.oss-cn-hangzhou.aliyuncs.com";
+    process.env.S3_FORCE_PATH_STYLE = "false";
+
+    expect(loadAssetStorageConfig()).toEqual({
+      kind: "s3",
+      bucket: "canvas-assets",
+      region: "cn-hangzhou",
+      endpoint: "https://s3.oss-cn-hangzhou.aliyuncs.com",
+      forcePathStyle: false
+    });
+  });
+
+  it("rejects an invalid S3_FORCE_PATH_STYLE value", () => {
+    process.env.NODETOOL_STORAGE_BACKEND = "s3";
+    process.env.ASSET_BUCKET = "canvas-assets";
+    process.env.S3_FORCE_PATH_STYLE = "sometimes";
+    expect(() => loadAssetStorageConfig()).toThrow(/true or false/);
   });
 
   it("s3 backend requires ASSET_BUCKET", () => {
@@ -139,7 +164,8 @@ describe("loadTempStorageConfig", () => {
       kind: "s3",
       bucket: "temp-bucket",
       region: undefined,
-      endpoint: undefined
+      endpoint: undefined,
+      forcePathStyle: undefined
     });
   });
 });

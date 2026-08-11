@@ -1,59 +1,29 @@
 /** @jsxImportSource @emotion/react */
 /**
- * The Studio chrome: one thin header (back link, brand, page title, page
- * actions, credit balance) over a full-height body. Deliberately has no tabs,
- * panels, or node graph — the Studio is the beginner shell around the existing
- * storyboard, script, and timeline surfaces.
+ * Product chrome for the creator-facing experience. The advanced NodeTool
+ * workspace remains available, but the primary navigation uses the language
+ * of image and video creation rather than infrastructure and node graphs.
  */
 
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
-import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
+import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import MovieFilterRoundedIcon from "@mui/icons-material/MovieFilterRounded";
+import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
+import CollectionsRoundedIcon from "@mui/icons-material/CollectionsRounded";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import {
-  Chip,
   EditorButton,
   FlexColumn,
   FlexRow,
   SPACING,
   Text,
-  Tooltip
+  ThemeToggleButton
 } from "../components/ui_primitives";
-import { useStudioCredits } from "./useStudioCredits";
 import { useStudioAssistantModel } from "./useStudioAssistantModel";
 import { StudioProvider } from "./StudioContext";
-
-const CreditsChip = () => {
-  const navigate = useNavigate();
-  const { status, remaining, loading, unavailable } = useStudioCredits();
-  const title = unavailable
-    ? "Couldn't load the credit balance. Click to retry from the account page."
-    : status
-      ? `${status.plan.name} plan — ${status.spentCredits} of ${status.grantedCredits} credits used. 1 credit = 1¢ of generation. Click to manage.`
-      : "Plan & credits";
-  const label = loading
-    ? "credits…"
-    : unavailable
-      ? "credits unavailable"
-      : `${remaining} credits`;
-  return (
-    <Tooltip title={title}>
-      <span>
-        <Chip
-          compact
-          clickable
-          onClick={() => navigate("/studio/account")}
-          color={
-            unavailable ? "default" : remaining > 0 ? "primary" : "error"
-          }
-          icon={<BoltRoundedIcon />}
-          label={label}
-        />
-      </span>
-    </Tooltip>
-  );
-};
+import { PRODUCT_NAME } from "./productConfig";
 
 export interface StudioShellProps {
   /** Page title shown next to the brand; omit on the home screen. */
@@ -93,14 +63,14 @@ const StudioShell = ({
               startIcon={<ArrowBackRoundedIcon fontSize="small" />}
               onClick={() => navigate("/studio")}
             >
-              Studio
+              创作首页
             </EditorButton>
           )}
           {!showBack && (
             <FlexRow align="center" gap={SPACING.sm}>
-              <MovieFilterRoundedIcon fontSize="small" />
+              <AutoAwesomeRoundedIcon color="primary" fontSize="small" />
               <Text size="normal" weight={600}>
-                NodeTool Studio
+                {PRODUCT_NAME}
               </Text>
             </FlexRow>
           )}
@@ -110,8 +80,38 @@ const StudioShell = ({
             </Text>
           )}
           <FlexRow sx={{ flex: 1 }} />
+          <FlexRow
+            align="center"
+            gap={SPACING.xs}
+            sx={{ display: { xs: "none", md: "flex" } }}
+          >
+            <EditorButton
+              startIcon={<MovieFilterRoundedIcon fontSize="small" />}
+              onClick={() => navigate("/studio")}
+            >
+              创作首页
+            </EditorButton>
+            <EditorButton
+              startIcon={<AccountTreeRoundedIcon fontSize="small" />}
+              onClick={() => navigate("/workspace")}
+            >
+              无限画布
+            </EditorButton>
+            <EditorButton
+              startIcon={<CollectionsRoundedIcon fontSize="small" />}
+              onClick={() => navigate("/assets")}
+            >
+              素材库
+            </EditorButton>
+          </FlexRow>
           {actions}
-          <CreditsChip />
+          <EditorButton
+            startIcon={<SettingsRoundedIcon fontSize="small" />}
+            onClick={() => navigate("/settings")}
+          >
+            模型设置
+          </EditorButton>
+          <ThemeToggleButton />
         </FlexRow>
         <FlexColumn sx={{ flex: 1, minHeight: 0, width: "100%" }}>
           {children}

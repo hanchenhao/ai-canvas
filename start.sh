@@ -3,9 +3,10 @@
 # One command to get NodeTool running.
 #
 #   ./start.sh            backend API on :7777 (hot-reloads TypeScript source)
-#   ./start.sh full       backend + web UI on :3000
+#   ./start.sh full       backend + creator UI on :3000 + admin UI on :3001
 #   ./start.sh web        web UI only
 #   ./start.sh check      typecheck + lint + tests
+#   ./start.sh health     verify API, creator UI, and admin UI
 #   ./start.sh doctor     report environment state without starting anything
 #
 # Everything it needs — dependencies, native module, package build — is set up
@@ -26,9 +27,13 @@ die()  { echo -e "${R}error${N} $*" >&2; exit 1; }
 
 MODE="${1:-server}"
 case "$MODE" in
-  server|full|web|check|doctor) ;;
-  *) die "Unknown mode '${MODE}'. Use: server | full | web | check | doctor" ;;
+  server|full|web|check|health|doctor) ;;
+  *) die "Unknown mode '${MODE}'. Use: server | full | web | check | health | doctor" ;;
 esac
+
+if [ "$MODE" = "health" ]; then
+  exec node scripts/healthcheck.mjs
+fi
 
 # ── Node version ────────────────────────────────────────────────────────────
 WANT_NODE="$(tr -d '[:space:]' < .nvmrc 2>/dev/null || echo 22)"
@@ -113,8 +118,8 @@ case "$MODE" in
     exec npm run dev:server
     ;;
   full)
-    step "Starting API (:${PORT}) and web UI (http://localhost:3000)"
-    exec npm run dev
+    step "Starting API (:${PORT}), creator UI (:3000), and admin UI (:3001/admin.html)"
+    exec npm run dev:full
     ;;
   web)
     step "Starting web UI on http://localhost:3000"
