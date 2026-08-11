@@ -1,8 +1,16 @@
 import { create } from "zustand";
 import { nodeKey, type NodeKey } from "./nodeKey";
+import { translateError } from "../utils/translateError";
 
 interface ErrorObject {
   message?: string;
+  /**
+   * Optional tRPC apiCode — when the error came from a backend throw via
+   * `throwApiError`, the tRPC error formatter surfaces the code here. If it
+   * matches a translated key in `errors.json`, the display string is the
+   * translated message; otherwise we fall through to the raw message.
+   */
+  apiCode?: string;
   [key: string]: unknown;
 }
 
@@ -72,13 +80,22 @@ export const nodeErrorToDisplayString = (
     "message" in normalized
   ) {
     const message = normalized.message;
-    if (message != null && String(message).trim() !== "") {
-      return String(message);
+    const fallback =
+      message != null && String(message).trim() !== ""
+        ? String(message)
+        : "";
+    // Prefer the translated apiCode when present; falls back to message.
+    if (typeof normalized.apiCode === "string" && normalized.apiCode !== "") {
+      const translated = translateError(normalized.apiCode, fallback);
+      if (translated !== "") return translated;
     }
+    if (fallback !== "") return fallback;
     // A nullish/blank `message` carries no display text — stringifying it yields
     // the literal "null"/"undefined", which reads as a spurious error. If the
     // object holds nothing else, it isn't a displayable error at all.
-    const otherKeys = Object.keys(normalized).filter((k) => k !== "message");
+    const otherKeys = Object.keys(normalized).filter(
+      (k) => k !== "message" && k !== "apiCode"
+    );
     if (otherKeys.length === 0) {
       return "";
     }

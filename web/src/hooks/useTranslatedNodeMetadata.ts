@@ -110,13 +110,28 @@ export function useTranslatedNodeMetadata(
  * Return every node's metadata as an array, each entry a translated shallow
  * copy per the active i18n language. Original English values are kept when a
  * translation is missing.
+ *
+ * Multiple components can call this hook; the translated array is computed
+ * once per (metadata identity, language) pair and shared across callers via
+ * a module-level cache — translating ~3000 nodes per render adds up when
+ * several panels do it independently.
  */
+let cachedAllMetadata: Record<string, NodeMetadata> | null = null;
+let cachedAllLanguage: string | null = null;
+let cachedAllResult: NodeMetadata[] = [];
+
 export function useAllTranslatedMetadata(): NodeMetadata[] {
   const metadata = useMetadataStore((s) => s.metadata);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
 
-  return useMemo(
-    () => Object.values(metadata).map((m) => translateNode(m, t)),
-    [metadata, t]
-  );
+  return useMemo(() => {
+    if (cachedAllMetadata === metadata && cachedAllLanguage === lang) {
+      return cachedAllResult;
+    }
+    cachedAllMetadata = metadata;
+    cachedAllLanguage = lang;
+    cachedAllResult = Object.values(metadata).map((m) => translateNode(m, t));
+    return cachedAllResult;
+  }, [metadata, t, lang]);
 }

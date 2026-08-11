@@ -2,19 +2,46 @@
 
 AI Canvas 是基于 [NodeTool](https://github.com/nodetool-ai/nodetool) 的
 AGPL-3.0 开源改造版，面向中文图片/视频创作。当前产品层默认使用 MiniMax
-生图、Seedance 生视频，素材可存入阿里云 OSS，并提供独立管理后台。
+生图、Seedance 生视频，素材可存入阿里云 OSS，并提供独立管理后台。整个
+Web 界面支持简体中文与英文切换（默认跟随系统语言）。
 
-本地开发一条命令启动：
+## 核心特性
+
+- **中英双语 UI**：设置页 → 通用 → 语言下拉切换；翻译文件在
+  `web/src/locales/{en,zh-CN}/`，节点库通过 `npm run extract:nodes` 自动
+  抽取英文源。详见 [`web/src/i18n/MIGRATION.md`](web/src/i18n/MIGRATION.md)。
+- **创作端默认中文环境**：`/studio` 是默认浏览器路由；MiniMax 默认图像
+  提供商、Seedance（通过 KIE）默认视频提供商；提供商 ID 通过
+  `VITE_STUDIO_*` 环境变量可改，API key 不能走 `VITE_*`（前端会暴露）。
+- **独立管理后台**：`/admin.html` 是独立入口，鉴权由后端
+  (`packages/websocket/src/trpc/admin-auth.ts`) 强制执行，不止前端隐藏。
+- **阿里云 OSS**：通过 S3 兼容 API 接入（`S3_FORCE_PATH_STYLE=false`）。
+- **不引入 Redis / BullMQ**：NodeTool 自己负责工作流执行和任务持久化。
+
+## 快速开始
 
 ```bash
-nvm use
-./start.sh full
+git clone https://github.com/hanchenhao/ai-canvas.git
+cd ai-canvas
+nvm use              # Node.js 22.22.1（项目 .nvmrc 锁定）
+./start.sh full      # 安装依赖 + 构建 + 启动 API (7777) + Web (3000)
 ```
+
+启动后访问：
 
 - 创作端：<http://localhost:3000/studio>
 - 管理后台：<http://localhost:3001/admin.html>
 - API 健康检查：<http://localhost:7777/health>
-- 一键检查：`./start.sh health`
+
+其他模式：
+
+```bash
+./start.sh web       # 只起前端 Vite，不打后端
+./start.sh check     # typecheck + lint + test
+./start.sh health    # 端口与依赖体检
+```
+
+## 部署
 
 生产容器把创作端和管理后台放在同一个服务中：`/studio` 和
 `/admin.html`。部署方法、4 核 8G 配置建议和密钥安全说明见
@@ -22,8 +49,19 @@ nvm use
 [Claude Code 交接说明](docs/CLAUDE_HANDOFF.md)。上游版本与同步策略见
 [UPSTREAM.md](docs/UPSTREAM.md)。
 
+## 与上游的关系
+
 本项目保留 NodeTool 的版权声明与 AGPL-3.0 许可证。公开部署或分发修改版
 时，必须按许可证向网络用户提供对应源代码。
+
+Fork 范围与产品定制详见 [`CLAUDE.md`](CLAUDE.md) 的「AI Canvas Fork
+Scope」段。下列改动是本 fork 的产品层差异，同步上游时需保留：
+
+- `/studio` 中文创作端与默认浏览器路由
+- `/admin.html` 独立管理后台入口（后端强制鉴权）
+- MiniMax 默认图像、Seedance via KIE 默认视频
+- 阿里云 OSS S3 兼容存储
+- Web 界面中英双语
 
 ## Upstream NodeTool
 
