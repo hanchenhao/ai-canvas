@@ -26,6 +26,7 @@ import { useFavoriteNodesStore } from "../../stores/FavoriteNodesStore";
 import { useNotificationStore } from "../../stores/NotificationStore";
 import { FavoriteButton } from "../ui_primitives";
 import { NOTIFICATION_TIMEOUT_SHORT } from "../../config/constants";
+import { useTranslatedNodeMetadata } from "../../hooks/useTranslatedNodeMetadata";
 
 const COMPACT_SVG_PROPS = { width: "14px", height: "14px" } as const;
 const EXPANDED_SVG_PROPS = { width: "16px", height: "16px" } as const;
@@ -235,6 +236,8 @@ const SearchResultItem = memo(function SearchResultItem({
   ref
 }: SearchResultItemProps) {
   const theme = useTheme();
+  const translated = useTranslatedNodeMetadata(node.node_type);
+  const displayNode = translated ?? node;
   const outputType = node.outputs.length > 0 ? node.outputs[0].type.type : "";
   const providerKind = getProviderKindForNamespace(node.namespace);
   const searchTerm = useNodeMenuStore((state) => state.searchTerm);
@@ -262,8 +265,8 @@ const SearchResultItem = memo(function SearchResultItem({
 
   const { description, tags } = useMemo(
     () =>
-      formatNodeDocumentation(node.description, searchTerm, node.searchInfo),
-    [node.description, searchTerm, node.searchInfo]
+      formatNodeDocumentation(displayNode.description, searchTerm, node.searchInfo),
+    [displayNode.description, searchTerm, node.searchInfo]
   );
 
   const matchingTags = useMemo(() => {
@@ -383,7 +386,7 @@ const SearchResultItem = memo(function SearchResultItem({
         />
         <Text className="result-title" component="div" sx={COMPACT_TITLE_SX}>
           <HighlightText
-            text={node.title}
+            text={displayNode.title}
             query={searchTerm}
             matchStyle="primary"
           />
@@ -424,7 +427,7 @@ const SearchResultItem = memo(function SearchResultItem({
             />
             <Text className="result-title" component="div">
               <HighlightText
-                text={node.title}
+                text={displayNode.title}
                 query={searchTerm}
                 matchStyle="primary"
               />

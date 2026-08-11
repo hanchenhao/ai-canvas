@@ -11,6 +11,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { TOOLTIP_ENTER_DELAY, NOTIFICATION_TIMEOUT_MEDIUM, NOTIFICATION_TIMEOUT_SHORT } from "../../config/constants";
 import useNodeMenuStore from "../../stores/NodeMenuStore";
 import useMetadataStore from "../../stores/MetadataStore";
+import { useAllTranslatedMetadata } from "../../hooks/useTranslatedNodeMetadata";
 import { useNotificationStore } from "../../stores/NotificationStore";
 import usePendingNodeCreateStore from "../../stores/PendingNodeCreateStore";
 import { serializeDragData } from "../../lib/dragdrop";
@@ -161,6 +162,14 @@ const FavoritesTiles = memo(function FavoritesTiles({
   const setHoveredNode = useNodeMenuStore((state) => state.setHoveredNode);
 
   const getMetadata = useMetadataStore((state) => state.getMetadata);
+  const allTranslatedMetadata = useAllTranslatedMetadata();
+  const translatedByType = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const meta of allTranslatedMetadata) {
+      map.set(meta.node_type, meta.title);
+    }
+    return map;
+  }, [allTranslatedMetadata]);
   const addNotification = useNotificationStore(
     (state) => state.addNotification
   );
@@ -267,6 +276,8 @@ const FavoritesTiles = memo(function FavoritesTiles({
 
   const getNodeDisplayName = useCallback(
     (nodeType: string) => {
+      const translated = translatedByType.get(nodeType);
+      if (translated) return translated;
       const metadata = getMetadata(nodeType);
       if (metadata) {
         return (
@@ -275,7 +286,7 @@ const FavoritesTiles = memo(function FavoritesTiles({
       }
       return nodeType.split(".").pop() || nodeType;
     },
-    [getMetadata]
+    [translatedByType, getMetadata]
   );
 
   if (favorites.length === 0) {

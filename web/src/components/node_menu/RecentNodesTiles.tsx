@@ -11,6 +11,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { TOOLTIP_ENTER_DELAY, NOTIFICATION_TIMEOUT_MEDIUM } from "../../config/constants";
 import useNodeMenuStore from "../../stores/NodeMenuStore";
 import useMetadataStore from "../../stores/MetadataStore";
+import { useAllTranslatedMetadata } from "../../hooks/useTranslatedNodeMetadata";
 import { useNotificationStore } from "../../stores/NotificationStore";
 import usePendingNodeCreateStore from "../../stores/PendingNodeCreateStore";
 import { serializeDragData } from "../../lib/dragdrop";
@@ -170,6 +171,14 @@ const RecentNodesTiles = memo(function RecentNodesTiles() {
   const setHoveredNode = useNodeMenuStore((state) => state.setHoveredNode);
 
   const getMetadata = useMetadataStore((state) => state.getMetadata);
+  const allTranslatedMetadata = useAllTranslatedMetadata();
+  const translatedByType = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const meta of allTranslatedMetadata) {
+      map.set(meta.node_type, meta.title);
+    }
+    return map;
+  }, [allTranslatedMetadata]);
   const addNotification = useNotificationStore(
     (state) => state.addNotification
   );
@@ -283,6 +292,11 @@ const RecentNodesTiles = memo(function RecentNodesTiles() {
       const names = new Map<string, string>();
       filteredRecentNodes.forEach((recentNode) => {
         const { nodeType } = recentNode;
+        const translated = translatedByType.get(nodeType);
+        if (translated) {
+          names.set(nodeType, translated);
+          return;
+        }
         const metadata = getMetadata(nodeType);
         if (metadata) {
           names.set(
@@ -298,7 +312,7 @@ const RecentNodesTiles = memo(function RecentNodesTiles() {
       });
       return names;
     },
-    [filteredRecentNodes, getMetadata]
+    [filteredRecentNodes, translatedByType, getMetadata]
   );
 
   if (filteredRecentNodes.length === 0) {

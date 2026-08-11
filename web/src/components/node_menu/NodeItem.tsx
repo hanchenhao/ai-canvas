@@ -27,6 +27,7 @@ import {
 } from "../../config/constants";
 import { formatNodeDocumentation } from "../../stores/formatNodeDocumentation";
 import { findSnippetByNodeType } from "../../config/snippetMetadata";
+import { useTranslatedNodeMetadata } from "../../hooks/useTranslatedNodeMetadata";
 
 interface NodeItemProps {
   node: NodeMetadata;
@@ -57,6 +58,8 @@ const NodeItem = memo(function NodeItem({
   ref
 }: NodeItemProps) {
   const theme = useTheme();
+  const translated = useTranslatedNodeMetadata(node.node_type);
+  const displayNode = translated ?? node;
   const outputType = node.outputs.length > 0 ? node.outputs[0].type.type : "";
   const hasRuntimeDeps =
     node.required_runtimes && node.required_runtimes.length > 0;
@@ -78,15 +81,15 @@ const NodeItem = memo(function NodeItem({
   );
 
   const parsedDescription = useMemo(() => {
-    if (!node.description) {
+    if (!displayNode.description) {
       return null;
     }
-    return formatNodeDocumentation(node.description);
-  }, [node.description]);
+    return formatNodeDocumentation(displayNode.description);
+  }, [displayNode.description]);
 
   const tooltipContent = useMemo(() => {
     if (!parsedDescription) {
-      return node.title;
+      return displayNode.title;
     }
     return (
       <Box sx={{ maxWidth: 300 }}>
@@ -143,7 +146,7 @@ const NodeItem = memo(function NodeItem({
         )}
       </Box>
     );
-  }, [parsedDescription, node.title]);
+  }, [parsedDescription, displayNode.title]);
 
   const onMouseEnter = useCallback(() => {
     setHoveredNode(node);
@@ -282,7 +285,7 @@ const NodeItem = memo(function NodeItem({
         }}
       >
         <HighlightText
-          text={node.title}
+          text={displayNode.title}
           query={searchTerm}
           matchStyle="primary"
         />
@@ -424,8 +427,8 @@ const NodeItem = memo(function NodeItem({
             sx={favoriteButtonSx}
             aria-label={
               isFavorite
-                ? `Remove ${node.title} from favorites`
-                : `Add ${node.title} to favorites`
+                ? `Remove ${displayNode.title} from favorites`
+                : `Add ${displayNode.title} to favorites`
             }
           />
         )}

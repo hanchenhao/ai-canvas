@@ -11,6 +11,7 @@ import { colorForType } from "../../config/data_types";
 import { useFavoriteNodesStore } from "../../stores/FavoriteNodesStore";
 import type { NodeMetadata } from "../../stores/ApiTypes";
 import { nodeTypeDisplayName } from "../../constants/nodeTypes";
+import { useTranslatedNodeMetadata } from "../../hooks/useTranslatedNodeMetadata";
 
 const rowStyles = (theme: Theme) =>
   css({
@@ -82,6 +83,8 @@ interface NodeLibraryRowProps {
 const NodeLibraryRow = memo<NodeLibraryRowProps>(
   ({ node, onDragStart, onDragEnd, onClick, onHover }) => {
     const theme = useTheme();
+    const translated = useTranslatedNodeMetadata(node.node_type);
+    const displayNode = translated ?? node;
     const outputType =
       node.outputs.length > 0 ? node.outputs[0].type.type : "";
     const typeColor = outputType ? colorForType(outputType) : null;
@@ -161,8 +164,8 @@ const NodeLibraryRow = memo<NodeLibraryRowProps>(
         onKeyDown={handleKeyDown}
         title={
           node.deprecated
-            ? `${node.title}${replacementTitle ? ` — use ${replacementTitle}` : ""}`
-            : node.title
+            ? `${displayNode.title}${replacementTitle ? ` — use ${replacementTitle}` : ""}`
+            : displayNode.title
         }
       >
         <IconForType
@@ -173,7 +176,7 @@ const NodeLibraryRow = memo<NodeLibraryRowProps>(
           svgProps={NODE_ROW_SVG_PROPS}
         />
         <Text className="nl-row-title" component="div">
-          {node.title}
+          {displayNode.title}
           {node.deprecated && (
             <Caption component="span" sx={{ marginLeft: getSpacingPx(SPACING.sm), color: "warning.main" }}>
               Deprecated

@@ -25,6 +25,7 @@ import {
   isKieVagueBillingSummary,
 } from "../../utils/formatKieUnitPricing";
 import isEqual from "../../utils/isEqual";
+import { useTranslatedNodeMetadata } from "../../hooks/useTranslatedNodeMetadata";
 
 interface NodeInfoProps {
   nodeMetadata: NodeMetadata;
@@ -186,15 +187,17 @@ const NodeInfo: React.FC<NodeInfoProps> = ({
 }) => {
   const searchTerm = useNodeMenuStore((state) => state.searchTerm);
   const setSearchTerm = useNodeMenuStore((state) => state.setSearchTerm);
+  const translated = useTranslatedNodeMetadata(nodeMetadata?.node_type);
+  const displayMetadata = translated ?? nodeMetadata;
 
   const description = useMemo(
     () =>
       formatNodeDocumentation(
-        nodeMetadata?.description || "",
+        displayMetadata?.description || "",
         searchTerm,
         nodeMetadata.searchInfo
       ),
-    [nodeMetadata, searchTerm]
+    [displayMetadata, searchTerm, nodeMetadata.searchInfo]
   );
 
   const handleTagClick = useCallback(
@@ -233,7 +236,7 @@ const NodeInfo: React.FC<NodeInfoProps> = ({
     <div css={nodeInfoStyles(theme)} style={{ width: menuWidth }}>
       <div className="title-container">
         <Text className="node-title">
-          {titleizeString(nodeMetadata.title)}
+          {titleizeString(displayMetadata.title)}
         </Text>
       </div>
       <div className="node-description">
@@ -319,7 +322,7 @@ const NodeInfo: React.FC<NodeInfoProps> = ({
         <div className="inputs-outputs">
           <div className="inputs">
             <Text size="big">Inputs</Text>
-            {nodeMetadata.properties.map((property) => (
+            {displayMetadata.properties.map((property) => (
               <div key={property.name} className="item">
                 <Tooltip
                   delay={TOOLTIP_ENTER_DELAY}
