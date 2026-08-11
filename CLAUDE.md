@@ -2,11 +2,51 @@
 
 Visual AI workflow platform. TypeScript monorepo with React frontend, Electron desktop app, and Node.js backend.
 
+## AI Canvas Fork Scope
+
+This repository is the AI Canvas product fork. Preserve these product changes
+when syncing or implementing features:
+
+- `/studio` is the Chinese creator home and default browser route.
+- `/admin.html` is the separate administrator entry. Admin authorization must
+  be enforced by the backend, not only hidden in the UI.
+- MiniMax is the default image provider. Seedance through KIE is the default
+  video provider. Provider IDs can change through `VITE_STUDIO_*`; API keys
+  must never use a `VITE_*` variable.
+- Alibaba OSS uses the S3-compatible API with
+  `S3_FORCE_PATH_STYLE=false`.
+- Do not reintroduce Redis or BullMQ. NodeTool owns workflow execution and job
+  persistence.
+- Read `docs/CLAUDE_HANDOFF.md` before product work and
+  `docs/UPSTREAM.md` before merging upstream.
+
 > _Last updated: 2026-08-10._ When the architecture, commands, or rules below drift from the codebase, update this file in the same PR.
 
 ## Communication Style
 
 Talk to the user in ASD-STE100 Simplified Technical English.
+
+## Execution Style
+
+Work autonomously end-to-end. When given a multi-step task or implementation plan, execute all of it without checking in between steps, commits, reviews, or major decisions. The user often steps away from the keyboard (e.g., overnight) and a single "should I continue?" prompt can stall hours of progress.
+
+Defaults to apply without asking:
+
+- Pick the recommended path yourself. Do not offer options the user must choose between unless the choice is genuinely subjective or destructive.
+- When the plan, spec, or codebase gives a recommended default, follow it. Do not re-surface the recommendation as a question.
+- When you hit ambiguity, pick the most reasonable interpretation based on the plan/spec/conventions, continue, and note the choice in your final summary. Do not pause to ask.
+- Run code review, fix loops, test failures, and minor debugging yourself, end to end.
+- Surface a single consolidated summary at the end: what is done, what is not done, what follow-ups remain.
+
+Only interrupt the user for:
+
+- Truly blocked work you cannot resolve (rare).
+- Irreversible or destructive operations: force-push, deleting branches with unmerged work, dropping database tables, modifying CI/CD pipelines, sending external messages, deleting user data.
+- Decisions outside the scope of the assigned task (e.g., a new feature request that changes the spec).
+
+Within-session "progress updates" or "I will now do X" confirmations are not interruptions; brief status lines are welcome. The forbidden pattern is asking for permission to proceed when the plan already grants it.
+
+
 
 ## Critical Commands
 
