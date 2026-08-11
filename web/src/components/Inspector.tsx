@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { shallow } from "zustand/shallow";
 import PropertyField from "./node/PropertyField";
 import useMetadataStore from "../stores/MetadataStore";
+import { useTranslatedNodeMetadata } from "../hooks/useTranslatedNodeMetadata";
 import { useNodes } from "../contexts/NodeContext";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -636,9 +637,7 @@ const Inspector: React.FC = () => {
   }, [multiPropertyEntries, handleMultiPropertyChange]);
 
   const selectedNode = selectedNodes[0] || null;
-  const metadata = selectedNode?.type
-    ? getMetadata(selectedNode.type)
-    : null;
+  const metadata = useTranslatedNodeMetadata(selectedNode?.type) ?? null;
 
   const iconType = useMemo(() => {
     return (

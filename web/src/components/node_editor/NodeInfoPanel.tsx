@@ -9,6 +9,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { useReactFlow, useViewport } from "@xyflow/react";
 import useNodeMenuStore from "../../stores/NodeMenuStore";
 import useMetadataStore from "../../stores/MetadataStore";
+import { useTranslatedNodeMetadata } from "../../hooks/useTranslatedNodeMetadata";
 import { TOOLTIP_ENTER_DELAY } from "../../config/constants";
 import { useInspectedNodeStore } from "../../stores/InspectedNodeStore";
 import { useNodes } from "../../contexts/NodeContext";
@@ -281,6 +282,19 @@ const NodeInfoPanelContent: React.FC<{ inspectedNodeId: string }> = memo(
     windowSize
   ]);
 
+  const inspectedNodeType = useNodes(
+    useCallback(
+      (state) => {
+        if (!inspectedNodeId) return undefined;
+        const node = state.findNode(inspectedNodeId);
+        return node?.type;
+      },
+      [inspectedNodeId]
+    )
+  );
+
+  const translatedMetadata = useTranslatedNodeMetadata(inspectedNodeType);
+
   const nodeInfo = useMemo((): NodeInfo | null => {
     if (!inspectedNodeId) {
       return null;
@@ -291,7 +305,7 @@ const NodeInfoPanelContent: React.FC<{ inspectedNodeId: string }> = memo(
     }
 
     const nodeType = node.type || "unknown";
-    const metadata = getMetadata(nodeType);
+    const metadata = translatedMetadata ?? getMetadata(nodeType);
 
     return {
       id: node.id,
@@ -304,7 +318,7 @@ const NodeInfoPanelContent: React.FC<{ inspectedNodeId: string }> = memo(
       errorMessage: node.data.errorMessage as string | undefined,
       executionStatus: node.data.executionStatus as "pending" | "running" | "completed" | "error" | undefined
     };
-  }, [getNode, inspectedNodeId, getMetadata]);
+  }, [getNode, inspectedNodeId, getMetadata, translatedMetadata]);
 
   const parsedDescription = useMemo(() => {
     if (!nodeInfo?.description) {
