@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { useCallback, useEffect, useRef, useState, useMemo, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useKeyPressedStore } from "../../stores/KeyPressedStore";
 import WorkflowToolbar from "./WorkflowToolbar";
 import CategorySearchBar from "../node_menu/CategorySearchBar";
@@ -55,6 +56,7 @@ const loadWorkflows = async (cursor?: string, limit?: number) => {
 
 const WorkflowList = () => {
   const theme = useTheme();
+  const { t } = useTranslation(["common"]);
   const memoizedStyles = useMemo(() => styles(theme), [theme]);
   const queryClient = useQueryClient();
   const [filterValue, setFilterValue] = useState("");
@@ -271,14 +273,14 @@ const WorkflowList = () => {
         addNotification({
           type: "error",
           alert: true,
-          content: `Failed to rename "${workflow.name}".`
+          content: t("common:workflow.renameFailed", { name: workflow.name })
         });
         // Refetch so any optimistically displayed name reverts to the
         // server's value.
         queryClient.invalidateQueries({ queryKey: ["workflows"] });
       }
     },
-    [queryClient, getWorkflow, updateWorkflow, addNotification]
+    [queryClient, getWorkflow, updateWorkflow, addNotification, t]
   );
 
   const handleToggleFavorites = useCallback(() => {
@@ -325,7 +327,7 @@ const WorkflowList = () => {
           ref={searchRef}
           value={filterValue}
           onChange={setFilterValue}
-          placeholder="Search workflows..."
+          placeholder={t("common:workflow.searchPlaceholder")}
         />
         <FlexRow
           className="toolbar-header"
@@ -345,15 +347,15 @@ const WorkflowList = () => {
         </FlexRow>
         {isLoading ? (
           <FlexColumn gap={2} justify="center" align="center" sx={{ flex: 1 }}>
-            <LoadingSpinner size="large" text="Loading workflows" />
+            <LoadingSpinner size="large" text={t("common:workflow.loading")} />
           </FlexColumn>
         ) : isError ? (
           <FlexColumn gap={2} justify="center" align="center" sx={{ flex: 1, px: 2 }}>
             <EmptyState
               variant="error"
-              title="Couldn't load workflows"
-              description="Try again later."
-              actionText="Retry"
+              title={t("common:workflow.loadErrorTitle")}
+              description={t("common:workflow.loadErrorDescription")}
+              actionText={t("common:button.retry")}
               onAction={() => refetch()}
             />
           </FlexColumn>
@@ -361,26 +363,26 @@ const WorkflowList = () => {
           <FlexColumn gap={2} justify="center" align="center" sx={{ flex: 1, px: 2 }}>
             {showFavoritesOnly ? (
               <EmptyState
-                title="No favorite workflows"
-                description="Click the star icon on a workflow to add it to your favorites."
+                title={t("common:workflow.noFavoritesTitle")}
+                description={t("common:workflow.noFavoritesDescription")}
               />
             ) : data?.workflows && data.workflows.length > 0 ? (
               <EmptyState
-                title="No matching workflows"
+                title={t("common:workflow.noMatchTitle")}
                 description={
                   filterValue && selectedTags.length > 0
-                    ? "Try adjusting your search term or tag filters."
+                    ? t("common:workflow.noMatchDescriptionFilters")
                     : filterValue
-                      ? "Try a different search term."
+                      ? t("common:workflow.noMatchDescriptionSearch")
                       : selectedTags.length > 0
-                        ? "Try removing some tag filters."
-                        : "No workflows match the current filters."
+                        ? t("common:workflow.noMatchDescriptionTags")
+                        : t("common:workflow.noMatchDescriptionDefault")
                 }
               />
             ) : (
               <EmptyState
-                title="No workflows yet"
-                description="Create your first workflow with the + button above."
+                title={t("common:workflow.emptyTitle")}
+                description={t("common:workflow.emptyDescription")}
               />
             )}
           </FlexColumn>

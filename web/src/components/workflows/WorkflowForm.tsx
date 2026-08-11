@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 import { Caption, TextInput, SelectField, AutocompleteTagInput, EditorButton, FormField, FormSection, MOTION, BORDER_RADIUS, SPACING, getSpacingPx } from "../ui_primitives";
 import { useCallback, useEffect, useRef, useState, memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { Workflow } from "../../stores/ApiTypes";
@@ -13,12 +14,7 @@ import { isProduction } from "../../lib/env";
 
 const workspacesEnabled = !isProduction;
 
-const RUN_MODE_OPTIONS = [
-  { value: "workflow", label: "Workflow" },
-  { value: "chat", label: "Chat" },
-  { value: "app", label: "App" },
-  { value: "tool", label: "Tool" }
-];
+const RUN_MODE_VALUES = ["workflow", "chat", "app", "tool"] as const;
 
 const DEFAULT_TAG_SUGGESTIONS = [
   "image",
@@ -118,7 +114,17 @@ const WorkflowForm = ({ workflow, onClose, availableTags = [] }: WorkflowFormPro
   const addNotification = useNotificationStore(
     (state) => state.addNotification
   );
+  const { t } = useTranslation(["common"]);
   const theme = useTheme();
+
+  const RUN_MODE_OPTIONS = useMemo(
+    () =>
+      RUN_MODE_VALUES.map((value) => ({
+        value,
+        label: t(`common:workflow.mode${value.charAt(0).toUpperCase()}${value.slice(1)}`)
+      })),
+    [t]
+  );
   // Re-sync local form state only when a *different* workflow is opened — not on
   // every new `workflow` reference. The parent selector builds this prop via
   // `getWorkflow()`, which returns a fresh object on every store update, so
@@ -235,7 +241,7 @@ const WorkflowForm = ({ workflow, onClose, availableTags = [] }: WorkflowFormPro
   return (
     <div css={styles(theme)} className="workflow-form">
       <FormSection className="settings-section">
-        <FormField label="Name">
+        <FormField label={t("common:workflow.formName")}>
           <TextInput
             name="name"
             spellCheck={false}
@@ -246,7 +252,7 @@ const WorkflowForm = ({ workflow, onClose, availableTags = [] }: WorkflowFormPro
           />
         </FormField>
 
-        <FormField label="Description">
+        <FormField label={t("common:workflow.formDescription")}>
           <TextInput
             name="description"
             value={localWorkflow.description}
@@ -260,26 +266,26 @@ const WorkflowForm = ({ workflow, onClose, availableTags = [] }: WorkflowFormPro
         </FormField>
 
         <AutocompleteTagInput
-          label="Tags"
+          label={t("common:workflow.formTags")}
           value={localWorkflow.tags || []}
           onChange={(tags) => {
-            const uniqueTags = Array.from(new Set(tags.map(t => t.trim().toLowerCase()).filter(t => t.length > 0)));
+            const uniqueTags = Array.from(new Set(tags.map(tag => tag.trim().toLowerCase()).filter(tag => tag.length > 0)));
             applyChange({ tags: uniqueTags }, true);
           }}
           suggestions={tagOptions}
-          placeholder="Type or select tags..."
-          description="Select from suggestions or type custom tags (press Enter to add)"
+          placeholder={t("common:workflow.formTagsPlaceholder")}
+          description={t("common:workflow.formTagsHelper")}
         />
       </FormSection>
 
-      <FormSection label="Execution" className="settings-section">
+      <FormSection label={t("common:workflow.formExecution")} className="settings-section">
         <Caption sx={{ display: "block" }}>
-          Configure how this workflow runs and can be triggered
+          {t("common:workflow.formExecutionCaption")}
         </Caption>
 
-        <FormField label="Run Mode">
+        <FormField label={t("common:workflow.formRunMode")}>
           <SelectField
-            label="Run Mode"
+            label={t("common:workflow.formRunMode")}
             value={localWorkflow.run_mode || "workflow"}
             onChange={(value) => applyChange({ run_mode: value }, true)}
             options={RUN_MODE_OPTIONS}
@@ -287,24 +293,24 @@ const WorkflowForm = ({ workflow, onClose, availableTags = [] }: WorkflowFormPro
         </FormField>
       </FormSection>
 
-      <FormSection label="Advanced" className="settings-section">
+      <FormSection label={t("common:workflow.formAdvanced")} className="settings-section">
         <Caption sx={{ display: "block" }}>
           {workspacesEnabled
-            ? "Advanced configuration for workspaces and API/tool usage"
-            : "Advanced configuration for API/tool usage"}
+            ? t("common:workflow.formAdvancedWithWorkspaces")
+            : t("common:workflow.formAdvancedNoWorkspaces")}
         </Caption>
 
         {workspacesEnabled && (
           <WorkspaceSelect
             value={localWorkflow.workspace_id ?? undefined}
             onChange={handleWorkspaceChange}
-            helperText="Associate a workspace folder with this workflow for agent access"
+            helperText={t("common:workflow.formWorkspaceHelper")}
           />
         )}
 
         <FormField
-          label="Tool Name"
-          helperText="Identifier for API/tool usage. Letters, numbers, underscores only."
+          label={t("common:workflow.formToolName")}
+          helperText={t("common:workflow.formToolNameHelper")}
         >
           <TextInput
             name="tool_name"
@@ -320,7 +326,7 @@ const WorkflowForm = ({ workflow, onClose, availableTags = [] }: WorkflowFormPro
 
       <div className="button-container">
         <EditorButton className="cancel-button" onClick={onClose}>
-          Close
+          {t("common:button.close")}
         </EditorButton>
       </div>
     </div>

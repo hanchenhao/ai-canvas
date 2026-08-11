@@ -4,6 +4,7 @@ import { useCallback, memo } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { Tooltip, ToolbarIconButton, MOTION, BORDER_RADIUS } from "../ui_primitives";
@@ -35,6 +36,7 @@ const styles = (theme: Theme) =>
 const CreateWorkflowButton = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const { t } = useTranslation(["common"]);
   const queryClient = useQueryClient();
   const createNewWorkflow = useWorkflowManager((state) => state.createNew);
 
@@ -45,10 +47,10 @@ const CreateWorkflowButton = () => {
   }, [navigate, createNewWorkflow, queryClient]);
 
   return (
-    <Tooltip title="Create new workflow" placement="left">
+    <Tooltip title={t("common:workflow.createNew")} placement="left">
       <ToolbarIconButton
         icon={<AddIcon />}
-        ariaLabel="Create new workflow"
+        ariaLabel={t("common:workflow.createNew")}
         onClick={handleCreate}
         css={styles(theme)}
         nodrag={false}
