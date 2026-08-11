@@ -4,6 +4,10 @@
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
 
+// Initialize i18next so components using `useTranslation` resolve real
+// translations in tests instead of returning the raw key string.
+import "./i18n";
+
 // Mock import.meta for Vite environment variables
 Object.defineProperty(globalThis, "import", {
   value: {
