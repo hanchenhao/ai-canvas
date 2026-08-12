@@ -1,0 +1,49 @@
+{
+  "title": {
+    "packageManager": "包管理器",
+    "subtitle": "在一个地方安装运行时与节点包。"
+  },
+  "tab": {
+    "software": "软件",
+    "nodePacks": "节点包"
+  },
+  "label": {
+    "browse": "浏览",
+    "installLocation": "安装位置",
+    "defaultConda": "默认 conda 环境"
+  },
+  "button": {
+    "change": "更改…",
+    "install": "安装",
+    "installing": "安装中…",
+    "update": "更新",
+    "updateAll": "全部更新（{{count}}）",
+    "updating": "更新中…",
+    "uninstall": "卸载",
+    "working": "处理中…",
+    "showConsole": "显示控制台",
+    "hideConsole": "隐藏控制台",
+    "copy": "复制",
+    "copied": "已复制",
+    "clear": "清除"
+  },
+  "badge": {
+    "alwaysOn": "始终启用",
+    "installed": "已安装",
+    "update": "有可用更新",
+    "notInstalled": "未安装"
+  },
+  "placeholder": {
+    "search": "搜索…（按 /）"
+  },
+  "empty": {
+    "noMatchTitle": "没有匹配的包",
+    "noMatchDesc": "请尝试其他搜索词，或将状态过滤切回「全部」。"
+  },
+  "console": {
+    "empty": "暂无输出。安装时日志会显示在这里。"
+  },
+  "footer": {
+    "restartNotice": "更改需重启 NodeTool 服务后才会生效。"
+  }
+}

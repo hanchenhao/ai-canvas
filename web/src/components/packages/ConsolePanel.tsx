@@ -7,6 +7,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { memo, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   BORDER_RADIUS,
@@ -39,6 +40,7 @@ interface ConsolePanelProps {
 }
 
 const ConsolePanel = ({ lines, onClear, busy = false }: ConsolePanelProps) => {
+  const { t } = useTranslation("packages");
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -76,25 +78,23 @@ const ConsolePanel = ({ lines, onClear, busy = false }: ConsolePanelProps) => {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
         >
-          {open ? "Hide console" : "Show console"}
+          {open ? t("button.hideConsole") : t("button.showConsole")}
           {lines.length > 0 ? ` (${lines.length})` : ""}
         </EditorButton>
         {open && lines.length > 0 && (
           <FlexRow gap={0.5} align="center">
             <EditorButton variant="text" density="compact" onClick={handleCopy}>
-              {copied ? "Copied" : "Copy"}
+              {copied ? t("button.copied") : t("button.copy")}
             </EditorButton>
             <EditorButton variant="text" density="compact" onClick={onClear}>
-              Clear
+              {t("button.clear")}
             </EditorButton>
           </FlexRow>
         )}
       </FlexRow>
       {open && (
         <pre ref={preRef} css={consoleStyles(theme)}>
-          {lines.length > 0
-            ? lines.join("\n")
-            : "No output yet. Logs appear here during install."}
+          {lines.length > 0 ? lines.join("\n") : t("console.empty")}
         </pre>
       )}
     </FlexColumn>

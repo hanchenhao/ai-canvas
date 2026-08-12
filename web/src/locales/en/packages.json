@@ -1,0 +1,49 @@
+{
+  "title": {
+    "packageManager": "Package Manager",
+    "subtitle": "Install runtimes and node packs in one place."
+  },
+  "tab": {
+    "software": "Software",
+    "nodePacks": "Node Packs"
+  },
+  "label": {
+    "browse": "Browse",
+    "installLocation": "Install location",
+    "defaultConda": "Default conda environment"
+  },
+  "button": {
+    "change": "Change…",
+    "install": "Install",
+    "installing": "Installing…",
+    "update": "Update",
+    "updateAll": "Update all ({{count}})",
+    "updating": "Updating…",
+    "uninstall": "Uninstall",
+    "working": "Working…",
+    "showConsole": "Show console",
+    "hideConsole": "Hide console",
+    "copy": "Copy",
+    "copied": "Copied",
+    "clear": "Clear"
+  },
+  "badge": {
+    "alwaysOn": "Always on",
+    "installed": "Installed",
+    "update": "Update available",
+    "notInstalled": "Not installed"
+  },
+  "placeholder": {
+    "search": "Search…  (press /)"
+  },
+  "empty": {
+    "noMatchTitle": "No packs match",
+    "noMatchDesc": "Try a different search term or switch the status filter back to All."
+  },
+  "console": {
+    "empty": "No output yet. Logs appear here during install."
+  },
+  "footer": {
+    "restartNotice": "Changes take effect after the NodeTool server restarts."
+  }
+}

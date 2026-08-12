@@ -7,6 +7,7 @@
  * claude.ai/design `PackageManager.dc.html` template.
  */
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   Box,
@@ -35,8 +36,10 @@ const PackageRail = ({
   categories,
   activeCat,
   onCat
-}: PackageRailProps) => (
-  <FlexColumn
+}: PackageRailProps) => {
+  const { t } = useTranslation("packages");
+  return (
+    <FlexColumn
     gap={0.75}
     sx={(theme) => ({
       // Phone width: the rail sits above the list as a full-width header
@@ -63,9 +66,9 @@ const PackageRail = ({
         if (value) onTab(value as PMTab);
       }}
     >
-      <ToggleOption value="software">Software</ToggleOption>
-      <ToggleOption value="packs">Node Packs</ToggleOption>
-    </ToggleGroup>
+        <ToggleOption value="software">{t("tab.software")}</ToggleOption>
+        <ToggleOption value="packs">{t("tab.nodePacks")}</ToggleOption>
+      </ToggleGroup>
 
     <Text
       size="small"
@@ -80,7 +83,7 @@ const PackageRail = ({
         pb: 0.5
       }}
     >
-      Browse
+      {t("label.browse")}
     </Text>
 
     {/* Column of categories on desktop, one scrollable row on a phone. */}
@@ -183,9 +186,10 @@ const PackageRail = ({
         borderTop: `1px solid ${theme.vars.palette.divider}`
       })}
     >
-      Changes take effect after the NodeTool server restarts.
+      {t("footer.restartNotice")}
     </Text>
-  </FlexColumn>
-);
+    </FlexColumn>
+  );
+};
 
 export default memo(PackageRail);

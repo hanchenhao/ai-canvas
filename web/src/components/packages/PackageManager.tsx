@@ -9,6 +9,7 @@
  * full-screen by {@link PackagesPage} (title/back live in the page hero).
  */
 import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
@@ -73,29 +74,30 @@ const saveLocation = (tab: PMTab, cat: string) => {
  * "Installed"). "Always on" / "Not installed" stay neutral.
  */
 const BadgeChip = ({ badge }: { badge: PMRow["badge"] }) => {
+  const { t } = useTranslation("packages");
   const theme = useTheme();
   if (!badge) return null;
   const styles: Record<
     Exclude<PMRow["badge"], null>,
-    { label: string; bg: string; fg: string }
+    { labelKey: string; bg: string; fg: string }
   > = {
     alwaysOn: {
-      label: "Always on",
+      labelKey: "badge.alwaysOn",
       bg: theme.vars.palette.action.selected,
       fg: theme.vars.palette.text.secondary
     },
     installed: {
-      label: "Installed",
+      labelKey: "badge.installed",
       bg: `rgba(${theme.vars.palette.success.mainChannel} / 0.14)`,
       fg: theme.vars.palette.success.main
     },
     update: {
-      label: "Update available",
+      labelKey: "badge.update",
       bg: `rgba(${theme.vars.palette.warning.mainChannel} / 0.16)`,
       fg: theme.vars.palette.warning.main
     },
     notInstalled: {
-      label: "Not installed",
+      labelKey: "badge.notInstalled",
       bg: theme.vars.palette.action.hover,
       fg: theme.vars.palette.text.secondary
     }
@@ -103,7 +105,7 @@ const BadgeChip = ({ badge }: { badge: PMRow["badge"] }) => {
   const s = styles[badge];
   return (
     <Chip
-      label={s.label}
+      label={t(s.labelKey as `badge.${string}`)}
       compact
       variant="filled"
       sx={{ backgroundColor: s.bg, color: s.fg, fontWeight: 500 }}
@@ -112,6 +114,7 @@ const BadgeChip = ({ badge }: { badge: PMRow["badge"] }) => {
 };
 
 const RowActions = ({ row }: { row: PMRow }) => {
+  const { t } = useTranslation("packages");
   if (row.toggle) {
     return (
       <LabeledSwitch
@@ -134,7 +137,7 @@ const RowActions = ({ row }: { row: PMRow }) => {
           disabled={busy}
           onClick={onUpdate}
         >
-          {busy ? "Working…" : "Update"}
+          {busy ? t("button.working") : t("button.update")}
         </EditorButton>
       )}
       {install && (
@@ -144,7 +147,7 @@ const RowActions = ({ row }: { row: PMRow }) => {
           disabled={busy}
           onClick={onInstall}
         >
-          {busy ? "Installing…" : "Install"}
+          {busy ? t("button.installing") : t("button.install")}
         </EditorButton>
       )}
       {uninstall && (
@@ -154,7 +157,7 @@ const RowActions = ({ row }: { row: PMRow }) => {
           disabled={busy}
           onClick={onUninstall}
         >
-          {busy ? "Working…" : "Uninstall"}
+          {busy ? t("button.working") : t("button.uninstall")}
         </EditorButton>
       )}
     </>
@@ -182,6 +185,7 @@ const PackageRowItem = memo(function PackageRowItem({ row }: { row: PMRow }) {
 });
 
 function PackageManager() {
+  const { t } = useTranslation("packages");
   const [{ tab, cat }, setLocation] = useState(loadLocation);
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState("all");
@@ -269,10 +273,10 @@ function PackageManager() {
                 weight={600}
                 sx={{ textTransform: "uppercase", letterSpacing: "0.09em" }}
               >
-                Install location
+                {t("label.installLocation")}
               </Text>
               <Text size="small" family="secondary" truncate>
-                {model.installLocation || "Default conda environment"}
+                {model.installLocation || t("label.defaultConda")}
               </Text>
               <Box sx={{ ml: "auto" }}>
                 <EditorButton
@@ -280,7 +284,7 @@ function PackageManager() {
                   density="compact"
                   onClick={model.onChangeLocation}
                 >
-                  Change…
+                  {t("button.change")}
                 </EditorButton>
               </Box>
             </FlexRow>
@@ -321,8 +325,8 @@ function PackageManager() {
                     onClick={model.bulkUpdate.onUpdateAll}
                   >
                     {model.bulkUpdate.busy
-                      ? "Updating…"
-                      : `Update all (${model.bulkUpdate.count})`}
+                      ? t("button.updating")
+                      : t("button.updateAll", { count: model.bulkUpdate.count })}
                   </EditorButton>
                 )}
                 <Box sx={{ width: { xs: "100%", sm: 250 } }}>
@@ -330,7 +334,7 @@ function PackageManager() {
                     ref={searchRef}
                     value={q}
                     onChange={setQ}
-                    placeholder="Search…  (press /)"
+                    placeholder={t("placeholder.search")}
                     showClear
                   />
                 </Box>
@@ -405,11 +409,10 @@ function PackageManager() {
                 <SearchOutlinedIcon sx={{ fontSize: 20 }} />
               </Box>
               <Text size="normal" weight={600} color="secondary">
-                No packs match
+                {t("empty.noMatchTitle")}
               </Text>
               <Text size="small" color="secondary" sx={{ maxWidth: "40ch" }}>
-                Try a different search term or switch the status filter back to
-                All.
+                {t("empty.noMatchDesc")}
               </Text>
             </FlexColumn>
           )}
