@@ -9,6 +9,7 @@
  * document today's renderer cannot resolve — degrades to the chip alone.
  */
 import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { parseResourceUri, type ResourceKind } from "@nodetool-ai/protocol";
 
 import {
@@ -52,6 +53,7 @@ const frameSx = {
 
 const SketchPreview: React.FC<{ id: string }> = ({ id }) => {
   const query = trpc.sketch.get.useQuery({ id }, { staleTime: 30_000 });
+  const { t } = useTranslation("chat");
   const document = useMemo(
     () => resolveSketchDocument(query.data),
     [query.data]
@@ -61,11 +63,11 @@ const SketchPreview: React.FC<{ id: string }> = ({ id }) => {
     return (
       <Box sx={frameSx}>
         <React.Suspense
-          fallback={<LoadingSpinner size="small" text="Loading preview" />}
+          fallback={<LoadingSpinner size="small" text={t("chat:message.loadingPreview")} />}
         >
           <LazySketchRenderer
             document={document}
-            ariaLabel="Sketch preview"
+            ariaLabel={t("chat:message.sketchPreview")}
             showDimensions
           />
         </React.Suspense>
@@ -73,16 +75,17 @@ const SketchPreview: React.FC<{ id: string }> = ({ id }) => {
     );
   }
   if (query.isLoading) {
-    return <LoadingSpinner size="small" text="Loading sketch" />;
+    return <LoadingSpinner size="small" text={t("chat:message.loadingSketch")} />;
   }
   if (query.isError) {
-    return <Caption color="secondary">Could not load this sketch.</Caption>;
+    return <Caption color="secondary">{t("chat:message.couldNotLoadSketch")}</Caption>;
   }
   return null;
 };
 
 const TimelinePreview: React.FC<{ id: string }> = ({ id }) => {
   const query = trpc.timeline.get.useQuery({ id }, { staleTime: 30_000 });
+  const { t } = useTranslation("chat");
   const sequence = useMemo(
     () => resolveTimelineSequence(query.data),
     [query.data]
@@ -92,11 +95,11 @@ const TimelinePreview: React.FC<{ id: string }> = ({ id }) => {
     return (
       <Box sx={frameSx}>
         <React.Suspense
-          fallback={<LoadingSpinner size="small" text="Loading preview" />}
+          fallback={<LoadingSpinner size="small" text={t("chat:message.loadingPreview")} />}
         >
           <LazyTimelineRenderer
             sequence={sequence}
-            ariaLabel="Timeline preview"
+            ariaLabel={t("chat:message.timelinePreview")}
             showMetadata
           />
         </React.Suspense>
@@ -104,10 +107,10 @@ const TimelinePreview: React.FC<{ id: string }> = ({ id }) => {
     );
   }
   if (query.isLoading) {
-    return <LoadingSpinner size="small" text="Loading timeline" />;
+    return <LoadingSpinner size="small" text={t("chat:message.loadingTimeline")} />;
   }
   if (query.isError) {
-    return <Caption color="secondary">Could not load this timeline.</Caption>;
+    return <Caption color="secondary">{t("chat:message.couldNotLoadTimeline")}</Caption>;
   }
   return null;
 };

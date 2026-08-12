@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useCallback, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Message,
   MessageContent,
@@ -108,6 +109,7 @@ const ToolCallCard: React.FC<{
   durationMs?: number | null;
 }> = React.memo(({ tc, result, durationMs }) => {
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation("chat");
   const runningToolCallId = useGlobalChatStore(
     (s) => s.currentRunningToolCallId
   );
@@ -185,7 +187,7 @@ const ToolCallCard: React.FC<{
       ? actionTitle || liveMessage || fallbackName
       : liveMessage || fallbackName;
   const showSeparateMessage = isSubtask && !!liveMessage;
-  const headlineLabel = isSubtask ? "Subtask" : null;
+  const headlineLabel = isSubtask ? t("chat:message.subtask") : null;
   const { Icon: ToolIcon, accent } = getToolVisual(tc.name);
 
   return (
@@ -261,7 +263,7 @@ const ToolCallCard: React.FC<{
         <FlexColumn className="tool-call-details" gap={0.5}>
           {isSubtask && subtaskInstructions && (
             <FlexColumn gap={0.5}>
-              <Caption className="tool-section-title">Instructions</Caption>
+              <Caption className="tool-section-title">{t("chat:message.instructions")}</Caption>
               <Text size="small" className="subtask-instructions">
                 {subtaskInstructions}
               </Text>
@@ -269,7 +271,7 @@ const ToolCallCard: React.FC<{
           )}
           {actionCode && (
             <FlexColumn gap={0.5}>
-              <Caption className="tool-section-title">Code</Caption>
+              <Caption className="tool-section-title">{t("chat:message.code")}</Caption>
               <CodeBlock inline={false} className="language-javascript">
                 {actionCode}
               </CodeBlock>
@@ -278,14 +280,14 @@ const ToolCallCard: React.FC<{
           {hasArgs && (
             <FlexColumn gap={0.5}>
               <Caption className="tool-section-title">
-                {isSubtask ? "Other arguments" : "Arguments"}
+                {isSubtask ? t("chat:message.otherArguments") : t("chat:message.arguments")}
               </Caption>
               <PrettyJson value={displayArgs} />
             </FlexColumn>
           )}
           {hasResult && (
             <FlexColumn gap={0.5}>
-              <Caption className="tool-section-title">Result</Caption>
+              <Caption className="tool-section-title">{t("chat:message.result")}</Caption>
               <ToolResult toolName={tc.name} content={resultContent} />
             </FlexColumn>
           )}
@@ -313,6 +315,7 @@ const ToolCallGroup: React.FC<{
   messageCreatedAt?: string | null;
 }> = React.memo(({ toolCalls, toolResultsByCallId, messageCreatedAt }) => {
   const [open, setOpen] = useState(true);
+  const { t } = useTranslation("chat");
   const runningToolCallId = useGlobalChatStore(
     (s) => s.currentRunningToolCallId
   );
@@ -401,9 +404,9 @@ const ToolCallGroup: React.FC<{
           className="tool-call-group-label"
         >
           {isRunning ? (
-            <ShimmerText>Tool execution chain</ShimmerText>
+            <ShimmerText>{t("chat:thread.executionChain")}</ShimmerText>
           ) : (
-            "Tool execution chain"
+            t("chat:thread.executionChain")
           )}
         </Text>
         <span className="tool-call-group-rule" aria-hidden />
@@ -417,7 +420,7 @@ const ToolCallGroup: React.FC<{
           {toolCalls.map(renderCard)}
           <FlexRow className="tool-call-summary" align="center" gap={1.5}>
             <span className="tool-call-summary-count">
-              {completedCount}/{toolCalls.length} completed
+              {t("chat:thread.completed", { done: completedCount, total: toolCalls.length })}
             </span>
             {totalDurationLabel && (
               <>
@@ -468,6 +471,7 @@ export const MessageView: React.FC<
     showMeta = false
   }) => {
     const insertIntoEditor = useEditorInsertion();
+    const { t } = useTranslation("chat");
 
     const copyText = useMemo(() => {
       if (typeof message.content === "string") {
@@ -722,7 +726,7 @@ export const MessageView: React.FC<
               <CopyButton
                 value={copyText}
                 buttonSize="small"
-                tooltip="Copy to clipboard"
+                tooltip={t("chat:message.copyToClipboard")}
               />
             </div>
           )}

@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -228,8 +229,11 @@ const styles = (theme: Theme) =>
     }
   });
 
-function titleFromPrompt(prompt: string | null | undefined): string {
-  if (!prompt) return "Generated";
+function titleFromPrompt(
+  prompt: string | null | undefined,
+  fallback: string
+): string {
+  if (!prompt) return fallback;
   const words = prompt.trim().split(/\s+/).slice(0, 4).join(" ");
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
@@ -245,6 +249,7 @@ const MediaOutputGroup: React.FC<MediaOutputGroupProps> = ({
   isPending = false
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("chat");
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const gen = message.media_generation ?? null;
   const { isCanvasAvailable, addBlocksToCanvas } = useAddMediaToCanvas();
@@ -283,7 +288,7 @@ const MediaOutputGroup: React.FC<MediaOutputGroupProps> = ({
     return null;
   }, [message.content]);
 
-  const title = titleFromPrompt(prompt);
+  const title = titleFromPrompt(prompt, t("chat:message.generatedTitle"));
 
   const pending = useMemo(() => pendingTiles(gen), [gen]);
 
@@ -363,7 +368,7 @@ const MediaOutputGroup: React.FC<MediaOutputGroupProps> = ({
           {!isPending && isCanvasAvailable && mediaContents.length > 1 && (
             <ToolbarIconButton
               className="add-all-button"
-              tooltip="Add all to canvas"
+              tooltip={t("chat:message.addAllToCanvas")}
               size="small"
               onClick={addAll}
             >
@@ -406,7 +411,7 @@ const MediaOutputGroup: React.FC<MediaOutputGroupProps> = ({
                 {isCanvasAvailable && (
                   <ToolbarIconButton
                     className="add-to-canvas-button"
-                    tooltip="Add to canvas"
+                    tooltip={t("chat:message.addToCanvas")}
                     size="small"
                     onClick={() => addOne(c)}
                   >
@@ -430,13 +435,13 @@ const MediaOutputGroup: React.FC<MediaOutputGroupProps> = ({
                   controls
                   preload="metadata"
                   playsInline
-                  aria-label="Generated video"
+                  aria-label={t("chat:message.generatedVideo")}
                   style={VIDEO_STYLE}
                 />
                 {isCanvasAvailable && (
                   <ToolbarIconButton
                     className="add-to-canvas-button"
-                    tooltip="Add to canvas"
+                    tooltip={t("chat:message.addToCanvas")}
                     size="small"
                     onClick={() => addOne(c)}
                   >
@@ -460,13 +465,13 @@ const MediaOutputGroup: React.FC<MediaOutputGroupProps> = ({
                   src={src}
                   controls
                   preload="metadata"
-                  aria-label="Generated audio"
+                  aria-label={t("chat:message.generatedAudio")}
                   style={AUDIO_STYLE}
                 />
                 {isCanvasAvailable && (
                   <ToolbarIconButton
                     className="add-to-canvas-button"
-                    tooltip="Add to canvas"
+                    tooltip={t("chat:message.addToCanvas")}
                     size="small"
                     onClick={() => addOne(c)}
                   >

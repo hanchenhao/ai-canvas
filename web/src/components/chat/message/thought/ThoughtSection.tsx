@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import ChatMarkdown from "../ChatMarkdown";
 import { ReasoningToggle } from "../../../common/ReasoningToggle";
 import { useTheme } from "@mui/material/styles";
@@ -25,6 +26,7 @@ export const ThoughtSection: React.FC<ThoughtSectionProps> = React.memo(({
   // expansion store) and report clicks via `onToggle`. A local useState mirror
   // would desync from an external "expand/collapse all" mutation.
   const theme = useTheme();
+  const { t } = useTranslation("chat");
   const thoughtContentStyles = useMemo(() => css({
     margin: "0 0 1em 00",
     padding: "1em",
@@ -51,8 +53,8 @@ export const ThoughtSection: React.FC<ThoughtSectionProps> = React.memo(({
         <ReasoningToggle
           isOpen={isExpanded}
           onToggle={onToggle}
-          showLabel="Show thought"
-          hideLabel="Hide thought"
+          showLabel={t("chat:message.showThought")}
+          hideLabel={t("chat:message.hideThought")}
         />
         {isExpanded && (
           <div className="thought-section-content" css={thoughtContentStyles}>

@@ -3,6 +3,7 @@ import React, { memo, useCallback, useMemo } from "react";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import { EditorButton } from "../../editor_ui";
 import { Caption, FlexColumn, FlexRow, Text, BORDER_RADIUS } from "../../ui_primitives";
 import { formatToolName } from "../../../utils/formatUtils";
@@ -58,6 +59,7 @@ const ToolApprovalCard: React.FC<ToolApprovalCardProps> = ({
   onResolve
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("chat");
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
   const argsText = useMemo(() => {
@@ -103,7 +105,7 @@ const ToolApprovalCard: React.FC<ToolApprovalCardProps> = ({
             density="normal"
             onClick={handleAllow}
           >
-            Allow
+            {t("chat:message.allow")}
           </EditorButton>
           <EditorButton
             variant="outlined"
@@ -111,7 +113,7 @@ const ToolApprovalCard: React.FC<ToolApprovalCardProps> = ({
             density="normal"
             onClick={handleAllowForChat}
           >
-            Allow for this chat
+            {t("chat:message.allowForChat")}
           </EditorButton>
           <EditorButton
             variant="outlined"
@@ -119,7 +121,7 @@ const ToolApprovalCard: React.FC<ToolApprovalCardProps> = ({
             density="normal"
             onClick={handleDeny}
           >
-            Deny
+            {t("chat:message.deny")}
           </EditorButton>
         </FlexRow>
       </FlexColumn>

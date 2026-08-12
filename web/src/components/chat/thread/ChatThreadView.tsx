@@ -10,6 +10,7 @@ import React, {
 } from "react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import {
   BORDER_RADIUS,
@@ -208,6 +209,7 @@ const StatusFooter = memo<StatusFooterProps>(
     pendingMediaMessage,
     theme
   }) => {
+    const { t } = useTranslation("chat");
     const isBusy = status === "loading" || status === "streaming";
     const elapsed = useElapsedTime(isBusy);
     return (
@@ -236,8 +238,8 @@ const StatusFooter = memo<StatusFooterProps>(
                   {progressMessage && !runningToolCallId
                     ? progressMessage
                     : status === "streaming"
-                      ? "Responding…"
-                      : "Thinking…"}
+                      ? t("chat:thread.responding")
+                      : t("chat:thread.thinking")}
                 </ShimmerText>
               </span>
               <span

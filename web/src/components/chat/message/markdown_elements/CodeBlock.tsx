@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useCallback, useMemo, memo } from "react";
+import { useTranslation } from "react-i18next";
 import Prism from "prismjs";
 import "../../../../prismGlobal";
 import DOMPurify from "dompurify";
@@ -103,6 +104,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = memo(({
   const codeContent = String(children).trimEnd();
   const match = /language-(\w+)/.exec(className || "");
   const isDarkMode = useIsDarkMode();
+  const { t } = useTranslation("chat");
   const handleInsert = useCallback(() => {
     if (typeof onInsert === "function") {
       const language = match ? match[1] : undefined;
@@ -158,7 +160,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = memo(({
                 type="button"
                 className="button"
                 onClick={handleInsert}
-                title="Insert into editor"
+                title={t("chat:message.insertIntoEditor")}
                 style={{
                   padding: `${getSpacingPx(SPACING.lg)} ${getSpacingPx(SPACING.xxl)}`,
                   fontSize: FONT_SIZE_SANS.caption,
@@ -169,7 +171,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = memo(({
                   cursor: "pointer"
                 }}
               >
-                Insert into editor
+                {t("chat:message.insertIntoEditorButton")}
               </button>
             )}
             <CopyButton value={codeContent} />

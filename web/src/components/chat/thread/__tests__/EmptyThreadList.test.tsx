@@ -16,6 +16,6 @@ describe("EmptyThreadList", () => {
   it("shows a no-match message when filtered", () => {
     renderWithTheme(<EmptyThreadList isFiltered />);
     expect(screen.getByText("No matching conversations")).toBeInTheDocument();
-    expect(screen.getByText("Try a different search term.")).toBeInTheDocument();
+    expect(screen.getByText("Try a different search.")).toBeInTheDocument();
   });
 });

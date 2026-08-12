@@ -1,4 +1,5 @@
 import React, { useState, memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, FlexRow } from "../../ui_primitives";
 import { ThreadItemProps } from "../types/thread.types";
 import { DeleteButton } from "../../ui_primitives";
@@ -22,6 +23,7 @@ const ThreadItemBase: React.FC<ThreadItemProps> = ({
   onDelete,
   previewText
 }) => {
+  const { t } = useTranslation("chat");
   const [isDeleting, setIsDeleting] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
@@ -76,10 +78,10 @@ const ThreadItemBase: React.FC<ThreadItemProps> = ({
         open={confirmOpen}
         onClose={handleConfirmClose}
         onConfirm={handleDelete}
-        title="Delete conversation"
-        content={`Delete "${thread.title || previewText}"? This cannot be undone.`}
-        confirmText="Delete"
-        cancelText="Cancel"
+        title={t("chat:list.deleteConversation")}
+        content={t("chat:list.deleteConversationConfirm", { name: thread.title || previewText })}
+        confirmText={t("chat:action.delete")}
+        cancelText={t("chat:action.cancel")}
       />
     </li>
   );

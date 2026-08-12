@@ -3,6 +3,7 @@ import React, { memo, useCallback, useMemo, useState } from "react";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { EditorButton } from "../../editor_ui";
@@ -110,11 +111,12 @@ const PlanApprovalCard: React.FC<PlanApprovalCardProps> = ({
   onResolve
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("chat");
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const [feedback, setFeedback] = useState("");
 
   const { plan } = approval;
-  const totalSteps = plan.tasks.reduce((sum, t) => sum + t.steps.length, 0);
+  const totalSteps = plan.tasks.reduce((sum, task) => sum + task.steps.length, 0);
 
   const handleApprove = useCallback(
     () => onResolve(approvalId, "approve"),
@@ -136,14 +138,14 @@ const PlanApprovalCard: React.FC<PlanApprovalCardProps> = ({
       <div className="plan-approval-header">
         <FlexColumn gap={0}>
           <Text size="small" weight={500}>
-            Execution plan
+            {t("chat:message.executionPlan")}
           </Text>
           <Text size="smaller" color="secondary">
             {plan.title}
           </Text>
         </FlexColumn>
         <span className="plan-approval-counts">
-          {plan.tasks.length} tasks · {totalSteps} steps
+          {t("chat:message.tasksSteps", { tasks: plan.tasks.length, steps: totalSteps })}
         </span>
       </div>
       <div className="plan-approval-tasks">
@@ -156,7 +158,7 @@ const PlanApprovalCard: React.FC<PlanApprovalCardProps> = ({
               </Text>
               {task.depends_on.length > 0 && (
                 <span className="plan-task-deps">
-                  after {task.depends_on.join(", ")}
+                  {t("chat:message.taskDependsOn", { deps: task.depends_on.join(", ") })}
                 </span>
               )}
             </FlexRow>
@@ -174,7 +176,7 @@ const PlanApprovalCard: React.FC<PlanApprovalCardProps> = ({
         <TextInput
           size="small"
           compact
-          placeholder="Request changes (optional) — sent to the agent on reject"
+          placeholder={t("chat:message.planFeedbackPlaceholder")}
           value={feedback}
           onChange={handleFeedbackChange}
           multiline
@@ -188,7 +190,7 @@ const PlanApprovalCard: React.FC<PlanApprovalCardProps> = ({
             onClick={handleReject}
             startIcon={<CloseRoundedIcon />}
           >
-            {hasFeedback ? "Reject with feedback" : "Reject"}
+            {hasFeedback ? t("chat:message.rejectWithFeedback") : t("chat:message.reject")}
           </EditorButton>
           <EditorButton
             variant="contained"
@@ -197,7 +199,7 @@ const PlanApprovalCard: React.FC<PlanApprovalCardProps> = ({
             onClick={handleApprove}
             startIcon={<PlayArrowRoundedIcon />}
           >
-            Approve & run
+            {t("chat:message.approveRun")}
           </EditorButton>
         </FlexRow>
       </div>

@@ -1,4 +1,5 @@
 import React, { useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { ProgressBar } from "../../ui_primitives";
 
 interface ProgressProps {
@@ -8,6 +9,7 @@ interface ProgressProps {
 
 export const Progress: React.FC<ProgressProps> = ({ progress, total }) => {
   const startTimeRef = useRef<number>(Date.now());
+  const { t } = useTranslation("chat");
 
   const eta = useMemo(() => {
     const elapsedTime = Date.now() - startTimeRef.current;
@@ -24,7 +26,11 @@ export const Progress: React.FC<ProgressProps> = ({ progress, total }) => {
       <ProgressBar
         value={percentValue}
         showValue={true}
-        formatValue={() => (eta ? `ETA: ${eta}s` : `${Math.round(percentValue)}%`)}
+        formatValue={() =>
+          eta
+            ? t("chat:progress.eta", { seconds: eta })
+            : t("chat:progress.percent", { percent: Math.round(percentValue) })
+        }
         color="primary"
       />
     </div>
