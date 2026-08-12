@@ -73,14 +73,20 @@ export const BUILTIN_NODE_PACKS: readonly BuiltinNodePack[] = [
     description: "Text-to-speech and voice generation via ElevenLabs.",
     namespaces: ["elevenlabs"]
   },
-  {
-    id: "minimax",
-    name: "MiniMax",
-    description: "MiniMax image, video, and audio generation.",
-    namespaces: ["minimax"]
-  },
-  {
-    id: "transformers-js",
+ {
+   id: "minimax",
+   name: "MiniMax",
+   description: "MiniMax image, video, and audio generation.",
+   namespaces: ["minimax"]
+ },
+ {
+   id: "volcengine",
+   name: "Volcengine Seedance",
+   description: "ByteDance Seedance video generation via Volcengine Ark.",
+   namespaces: ["volcengine"]
+ },
+ {
+   id: "transformers-js",
     name: "Transformers.js",
     description:
       "Run Hugging Face NLP, vision, and audio models locally via ONNX Runtime.",

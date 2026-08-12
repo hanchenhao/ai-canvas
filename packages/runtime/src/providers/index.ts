@@ -45,6 +45,7 @@ import { AtlasCloudProvider } from "./atlascloud-provider.js";
 import { AkiProvider } from "./aki-provider.js";
 import { MeshyProvider } from "./meshy-provider.js";
 import { RodinProvider } from "./rodin-provider.js";
+import { VolcengineProvider } from "./volcengine-provider.js";
 import { CohereProvider } from "./cohere-provider.js";
 import { VoyageProvider } from "./voyage-provider.js";
 import { JinaProvider } from "./jina-provider.js";
@@ -311,6 +312,7 @@ registerBuiltinProvider(PROVIDER_IDS.ATLASCLOUD, AtlasCloudProvider, { ATLASCLOU
 registerBuiltinProvider(PROVIDER_IDS.AKI, AkiProvider, { AKI_API_KEY: "" });
 registerBuiltinProvider(PROVIDER_IDS.MESHY, MeshyProvider, { MESHY_API_KEY: "" });
 registerBuiltinProvider(PROVIDER_IDS.RODIN, RodinProvider, { RODIN_API_KEY: "" });
+registerBuiltinProvider(PROVIDER_IDS.VOLCENGINE, VolcengineProvider, { VOLCENGINE_API_KEY: "" });
 registerBuiltinProvider(PROVIDER_IDS.OPENROUTER, OpenRouterProvider, { OPENROUTER_API_KEY: "" });
 registerBuiltinProvider(PROVIDER_IDS.TOGETHER, TogetherProvider, { TOGETHER_API_KEY: "" });
 registerBuiltinProvider(PROVIDER_IDS.ALIBABA, AlibabaProvider, { DASHSCOPE_API_KEY: "", DASHSCOPE_BASE_URL: "" });

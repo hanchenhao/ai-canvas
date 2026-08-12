@@ -31,6 +31,7 @@ import { refreshSandboxCatalog } from "./sandbox-catalog.js";
 import { registerBaseNodes } from "@nodetool-ai/base-nodes";
 import { registerElevenLabsNodes } from "@nodetool-ai/elevenlabs-nodes";
 import { registerMinimaxNodes } from "@nodetool-ai/minimax-nodes";
+import { registerVolcengineNodes } from "@nodetool-ai/volcengine-nodes";
 import { registerTransformersJsNodes } from "@nodetool-ai/transformers-js-nodes";
 import { registerFalNodes } from "@nodetool-ai/fal-nodes";
 import { registerKieNodes } from "@nodetool-ai/kie-nodes";
@@ -94,8 +95,9 @@ const BUILTIN_PACK_REGISTRARS: Record<string, (registry: NodeRegistry) => void> 
   {
     base: registerBaseNodes,
     elevenlabs: registerElevenLabsNodes,
-    minimax: registerMinimaxNodes,
-    "transformers-js": registerTransformersJsNodes,
+   minimax: registerMinimaxNodes,
+   volcengine: registerVolcengineNodes,
+   "transformers-js": registerTransformersJsNodes,
     fal: registerFalNodes,
     kie: registerKieNodes,
     topaz: registerTopazNodes,

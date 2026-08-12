@@ -419,6 +419,11 @@ sec(
 sec("MESHY_API_KEY", "Meshy", "Meshy AI API key for 3D model generation. Get yours at https://app.meshy.ai/settings/api-keys");
 sec("RODIN_API_KEY", "Rodin", "Rodin AI API key for 3D model generation. Get yours at https://hyperhuman.deemos.com/");
 sec(
+  "VOLCENGINE_API_KEY",
+  "Volcengine",
+  "Volcengine (火山引擎) API key for accessing Seedance video generation via the Ark platform. Get yours at https://console.volcengine.com/ark/region:ark+cn-beijing/apiKey"
+);
+sec(
   "GITHUB_CLIENT_ID",
   "GitHub",
   "GitHub OAuth App Client ID for OAuth PKCE authentication flow. Manage at https://github.com/settings/developers"

@@ -1053,10 +1053,11 @@ export const PROVIDER_IDS = {
   TOPAZ: "topaz",
   REVE: "reve",
   ATLASCLOUD: "atlascloud",
-  AKI: "aki",
-  MESHY: "meshy",
-  RODIN: "rodin",
-  // Embeddings / reranking
+ AKI: "aki",
+ MESHY: "meshy",
+ RODIN: "rodin",
+ VOLCENGINE: "volcengine",
+ // Embeddings / reranking
   VOYAGE: "voyage",
   JINA: "jina",
   // Local / self-hosted
