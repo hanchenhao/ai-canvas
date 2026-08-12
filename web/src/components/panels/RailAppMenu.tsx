@@ -10,6 +10,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import DownloadIcon from "@mui/icons-material/Download";
 import SpaceDashboardOutlinedIcon from "@mui/icons-material/SpaceDashboardOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
@@ -135,6 +136,11 @@ const RailAppMenu: React.FC<RailAppMenuProps> = ({ onAction }) => {
     finish();
   }, [navigate, finish]);
 
+  const goHome = useCallback(() => {
+    navigate("/studio");
+    finish();
+  }, [navigate, finish]);
+
   const goExamples = useCallback(() => openPage("examples"), [openPage]);
   const goTutorials = useCallback(() => openPage("tutorials"), [openPage]);
   const goCosts = useCallback(() => openPage("costs"), [openPage]);
@@ -204,6 +210,12 @@ const RailAppMenu: React.FC<RailAppMenuProps> = ({ onAction }) => {
         placement="bottom-left"
       >
         <div css={menuStyles()} role="menu">
+          <MenuItemPrimitive
+            label={t("common:menu.home")}
+            icon={<HomeOutlinedIcon />}
+            onClick={goHome}
+            dividerAfter
+          />
           <MenuItemPrimitive
             label={t("common:menu.dashboard")}
             icon={<SpaceDashboardOutlinedIcon />}
