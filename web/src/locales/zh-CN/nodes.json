@@ -82807,5 +82807,3234 @@
         "description": "推理步数。留空使用模型默认值。"
       }
     }
+  },
+  "elevenlabs.RealtimeSpeechToText": {
+    "title": "实时语音转文字",
+    "description": "通过 ElevenLabs WebSocket API 进行实时语音转文字转录。\n以流式方式输入音频块，并实时接收转录结果。\n音频, 转录, STT, 流式, 实时, WebSocket, ElevenLabs\n\n常见用途：\n- 实时音频转录\n- 直播字幕生成\n- 语音驱动应用\n- 带说话人识别的交互式转录",
+    "properties": {
+      "chunk": {
+        "title": "音频块",
+        "description": "音频块输入流（Base64 编码的 PCM16 音频）。"
+      },
+      "commit_strategy": {
+        "title": "提交策略",
+        "description": "转录提交策略：手动或语音活动检测。"
+      },
+      "include_language_detection": {
+        "title": "语言识别",
+        "description": "是否在转录结果中包含语言识别。"
+      },
+      "include_timestamps": {
+        "title": "时间戳",
+        "description": "是否在转录结果中包含词级时间戳。"
+      },
+      "language_code": {
+        "title": "语言代码",
+        "description": "ISO 639-1/3 语言代码。留空则自动识别。"
+      },
+      "min_silence_duration_ms": {
+        "title": "最短静音时长",
+        "description": "最短静音时长（毫秒）。"
+      },
+      "min_speech_duration_ms": {
+        "title": "最短语音时长",
+        "description": "最短语音时长（毫秒）。"
+      },
+      "model_id": {
+        "title": "模型",
+        "description": "要使用的实时转录模型。"
+      },
+      "vad_silence_threshold_secs": {
+        "title": "VAD 静音阈值",
+        "description": "VAD 模式下的静音阈值（秒）。"
+      },
+      "vad_threshold": {
+        "title": "VAD 阈值",
+        "description": "语音活动检测阈值。"
+      }
+    }
+  },
+  "elevenlabs.RealtimeTextToSpeech": {
+    "title": "实时文字转语音",
+    "description": "通过 ElevenLabs WebSocket API 进行流式文字转语音。\n消费文本块并实时输出音频块。\n音频, TTS, 语音, 流式, 实时, WebSocket, ElevenLabs\n\n常见用途：\n- 从流式文本实时生成语音\n- 交互式语音应用\n- 低延迟文字转语音转换\n- 流式对话生成",
+    "properties": {
+      "chunk": {
+        "title": "文本块",
+        "description": "文本块输入流。"
+      },
+      "enable_ssml_parsing": {
+        "title": "启用 SSML",
+        "description": "是否在文本输入中启用 SSML 解析。"
+      },
+      "language_code": {
+        "title": "语言",
+        "description": "强制使用的语言代码（需 Turbo v2.5 及以上版本）。"
+      },
+      "model_id": {
+        "title": "模型",
+        "description": "要使用的 TTS 模型。"
+      },
+      "output_format": {
+        "title": "输出格式",
+        "description": "流式输出的音频格式。"
+      },
+      "similarity_boost": {
+        "title": "相似度提升",
+        "description": "与原始音色的相似度（0-1）。"
+      },
+      "speed": {
+        "title": "语速",
+        "description": "生成语音的语速（0.7-1.2）。"
+      },
+      "stability": {
+        "title": "稳定性",
+        "description": "音色稳定性（0-1）。"
+      },
+      "style": {
+        "title": "风格",
+        "description": "说话风格强度（0-1）。"
+      },
+      "use_speaker_boost": {
+        "title": "说话人增强",
+        "description": "启用说话人增强以获得更清晰的输出。"
+      },
+      "voice_id": {
+        "title": "音色 ID",
+        "description": "生成时使用的 ElevenLabs 音色 ID。可连接标准音色节点或提供自定义音色 ID。"
+      }
+    }
+  },
+  "elevenlabs.SpeechToText": {
+    "title": "语音转文字",
+    "description": "使用 ElevenLabs 语音转文字 API 转录音频或视频文件。\n音频, 转录, 语音转文字, STT, ElevenLabs\n\n常见用途：\n- 转录音频文件\n- 从视频中提取文字\n- 说话人分离\n- 多语言转录\n- 字幕生成",
+    "properties": {
+      "audio": {
+        "title": "音频",
+        "description": "待转录的音频或视频文件。"
+      },
+      "diarize": {
+        "title": "说话人分离",
+        "description": "标注当前说话人。"
+      },
+      "file_format": {
+        "title": "文件格式",
+        "description": "音频格式：pcm_s16le_16 可获得更低延迟，其他值则支持所有格式。"
+      },
+      "language_code": {
+        "title": "语言代码",
+        "description": "ISO-639-1 或 ISO-639-3 语言代码（如 en、es）。留空则自动识别。"
+      },
+      "model_id": {
+        "title": "模型",
+        "description": "要使用的转录模型。"
+      },
+      "num_speakers": {
+        "title": "说话人数",
+        "description": "最大说话人数量（0 = 自动检测，最多 32）。"
+      },
+      "tag_audio_events": {
+        "title": "标记音频事件",
+        "description": "标记 (laughter)、(footsteps) 等音频事件。"
+      },
+      "timestamps_granularity": {
+        "title": "时间戳粒度",
+        "description": "时间戳粒度：none、word 或 character。"
+      }
+    }
+  },
+  "elevenlabs.StandardVoice": {
+    "title": "标准音色",
+    "description": "选择一个 ElevenLabs 标准音色并输出其音色 ID。\n音频, TTS, 语音, 音色, 音色 ID, ElevenLabs\n\n常见用途：\n- 按名称选取内置的 ElevenLabs 音色\n- 将音色 ID 传入文字转语音节点\n- 在工作流中复用同一音色",
+    "properties": {
+      "voice": {
+        "title": "音色",
+        "description": "要使用的 ElevenLabs 标准音色。"
+      }
+    }
+  },
+  "elevenlabs.TextToSpeech": {
+    "title": "文字转语音",
+    "description": "使用 ElevenLabs 文字转语音生成自然听感的语音。\n音频, TTS, 语音, 合成, 音色, ElevenLabs\n\n常见用途：\n- 制作专业配音\n- 生成角色声音\n- 生产多语言内容\n- 制作有声书",
+    "properties": {
+      "language_code": {
+        "title": "语言",
+        "description": "强制使用的语言代码（需 Turbo v2.5 及以上版本）。"
+      },
+      "model_id": {
+        "title": "模型",
+        "description": "要使用的 TTS 模型。"
+      },
+      "optimize_streaming_latency": {
+        "title": "流式延迟优化",
+        "description": "延迟优化级别（0-4）。值越高越快但质量下降。"
+      },
+      "seed": {
+        "title": "种子",
+        "description": "确定性生成的随机种子（-1 = 随机）。"
+      },
+      "similarity_boost": {
+        "title": "相似度提升",
+        "description": "与原始音色的相似度（0-1）。"
+      },
+      "stability": {
+        "title": "稳定性",
+        "description": "音色稳定性（0-1）。值越高越一致。"
+      },
+      "style": {
+        "title": "风格",
+        "description": "说话风格强度（0-1）。"
+      },
+      "text": {
+        "title": "文本",
+        "description": "要转换为语音的文本。"
+      },
+      "text_normalization": {
+        "title": "文本规范化",
+        "description": "控制文本规范化行为。"
+      },
+      "use_speaker_boost": {
+        "title": "说话人增强",
+        "description": "启用说话人增强以获得更清晰的输出。"
+      },
+      "voice_id": {
+        "title": "音色 ID",
+        "description": "生成时使用的 ElevenLabs 音色 ID。可连接标准音色节点或提供自定义音色 ID。"
+      }
+    }
+  },
+  "gemini.audio.TextToSpeech": {
+    "title": "文字转语音",
+    "description": "使用 Google Gemini 文字转语音模型从文本生成语音音频。\nGoogle, 文字转语音, TTS, 音频, 语音, 音色, AI\n\n该节点使用 Google 先进的文字转语音模型，将文本输入转换为自然听感的语音，支持多种音色与说话风格。\n\n常见用途：\n- 为视频和演示制作配音\n- 为播客和有声书生成音频内容\n- 为应用添加语音解说\n- 通过语音输出构建无障碍功能\n- 生成多语言音频内容",
+    "properties": {
+      "model": {
+        "title": "模型",
+        "description": "要使用的文字转语音模型"
+      },
+      "style_prompt": {
+        "title": "风格提示词",
+        "description": "可选的风格提示词，用于控制说话特征（例如“愉快地说”“激动地说”）"
+      },
+      "text": {
+        "title": "文本",
+        "description": "要转换为语音的文本。"
+      },
+      "voice_name": {
+        "title": "音色名称",
+        "description": "语音生成使用的音色"
+      }
+    }
+  },
+  "gemini.audio.Transcribe": {
+    "title": "音频转录",
+    "description": "使用 Google Gemini 模型将音频转录为文字。\nGoogle, 转录, 语音转文字, 音频, Whisper, AI\n\n该节点使用 Google 多模态 Gemini 模型将音频输入转换为文字。支持多种音频格式，提供准确的语音转文字转录。\n\n常见用途：\n- 将录制的音频转为文字\n- 转录播客和访谈\n- 从音轨生成字幕\n- 从录音生成会议纪要\n- 分析音频中的语音内容",
+    "properties": {
+      "audio": {
+        "title": "音频",
+        "description": "待转录的音频文件。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "用于转录的 Gemini 模型"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "给转录的说明，可自定义以请求特定格式或关注重点。"
+      }
+    }
+  },
+  "gemini.image.ImageGeneration": {
+    "title": "图像生成",
+    "description": "通过 Gemini API 使用 Google Imagen 模型生成图像。\nGoogle, 图像生成, AI, Imagen\n\n常见用途：\n- 从文字描述创建图像\n- 为创意项目生成素材\n- 探索 AI 驱动的图像合成",
+    "properties": {
+      "aspect_ratio": {
+        "title": "宽高比",
+        "description": "生成图像的宽高比"
+      },
+      "image": {
+        "title": "图像",
+        "description": "作为生成基础的图像。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "要使用的图像生成模型"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "描述待生成图像的文本提示词。"
+      },
+      "resolution": {
+        "title": "分辨率",
+        "description": "输出图像分辨率"
+      }
+    }
+  },
+  "gemini.text.Embedding": {
+    "title": "嵌入向量",
+    "description": "使用 Google Gemini API 生成文本的向量表示，用于语义分析。\n嵌入向量, 相似度, 搜索, 聚类, 分类, Gemini\n\n使用 Google 的文本嵌入模型生成稠密向量表示。这些向量捕捉语义信息，可用于：\n- 语义搜索\n- 文本聚类\n- 文档分类\n- 推荐系统\n- 异常检测\n- 衡量文本相似度与多样性",
+    "properties": {
+      "input": {
+        "title": "输入",
+        "description": "要生成嵌入向量的文本。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "要使用的嵌入模型"
+      }
+    }
+  },
+  "gemini.text.GroundedSearch": {
+    "title": "接地搜索",
+    "description": "使用 Google Gemini API 进行带接地能力的网络搜索。\nGoogle, 搜索, 接地, 网络, Gemini, AI\n\n该节点使用 Google Gemini API 执行网络搜索，返回带来源信息的结构化结果。需要 Gemini API 密钥。\n\n常见用途：\n- 研究当前事件和最新信息\n- 为事实核查寻找可靠来源\n- 收集带引用的网络信息\n- 获取超出模型训练数据范围的最新信息",
+    "properties": {
+      "model": {
+        "title": "模型",
+        "description": "用于搜索的 Gemini 模型"
+      },
+      "query": {
+        "title": "查询",
+        "description": "要执行的搜索查询"
+      }
+    }
+  },
+  "gemini.video.ImageToVideo": {
+    "title": "图生视频",
+    "description": "使用 Google Veo 模型从图像生成视频。\nGoogle, 视频, 生成, 图生视频, Veo, AI, 动画\n\n该节点使用 Google Veo 模型将静态图像动画化为动态视频。支持 720p 分辨率、24fps、8 秒时长，并原生生成音频。",
+    "properties": {
+      "aspect_ratio": {
+        "title": "宽高比",
+        "description": "生成视频的宽高比"
+      },
+      "image": {
+        "title": "图像",
+        "description": "要动画化为视频的图像"
+      },
+      "model": {
+        "title": "模型",
+        "description": "用于视频生成的 Veo 模型"
+      },
+      "negative_prompt": {
+        "title": "负向提示词",
+        "description": "负向提示词，用于指引视频中应避免的内容"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "可选的文本提示词，描述期望的动画效果"
+      },
+      "resolution": {
+        "title": "分辨率",
+        "description": "输出视频分辨率"
+      }
+    }
+  },
+  "gemini.video.TextToVideo": {
+    "title": "文生视频",
+    "description": "使用 Google Veo 模型从文本提示词生成视频。\nGoogle, 视频, 生成, 文生视频, Veo, AI\n\n该节点使用 Google Veo 模型从文字描述生成高质量视频。支持 720p 分辨率、24fps、8 秒时长，并原生生成音频。",
+    "properties": {
+      "aspect_ratio": {
+        "title": "宽高比",
+        "description": "生成视频的宽高比"
+      },
+      "model": {
+        "title": "模型",
+        "description": "用于视频生成的 Veo 模型"
+      },
+      "negative_prompt": {
+        "title": "负向提示词",
+        "description": "负向提示词，用于指引视频中应避免的内容"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "描述待生成视频的文本提示词"
+      },
+      "resolution": {
+        "title": "分辨率",
+        "description": "输出视频分辨率"
+      }
+    }
+  },
+  "huggingface.AudioClassification": {
+    "title": "音频分类",
+    "description": "为音频片段分配标签/类别。\n音频, 分类, 声音, 标签, Hugging Face\n\n常见用途：\n- 检测口述语言\n- 对声音或音乐流派分类\n- 情绪/关键词检测",
+    "properties": {
+      "audio": {
+        "title": "音频",
+        "description": "待分类的音频。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "音频分类模型仓库 ID。"
+      },
+      "top_k": {
+        "title": "Top K",
+        "description": "返回概率最高的 K 个类别。"
+      }
+    }
+  },
+  "huggingface.AutomaticSpeechRecognition": {
+    "title": "自动语音识别",
+    "description": "通过 Hugging Face Inference Providers 将音频转录为文字（语音转文字）。\n音频, ASR, 语音转文字, STT, 转录, Whisper, Hugging Face\n\n常见用途：\n- 转录录音和播客\n- 生成字幕\n- 构建语音交互界面",
+    "properties": {
+      "audio": {
+        "title": "音频",
+        "description": "待转录的音频。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "自动语音识别模型仓库 ID。"
+      },
+      "return_timestamps": {
+        "title": "返回时间戳",
+        "description": "同时返回每段的时间戳。"
+      }
+    }
+  },
+  "huggingface.ChatCompletion": {
+    "title": "对话补全",
+    "description": "通过 Hugging Face Inference Providers 调用对话式 LLM 生成聊天回复。\n文本, 对话, LLM, 补全, 会话, Hugging Face\n\n常见用途：\n- 用开源 LLM 回答问题\n- 构建对话式助手\n- 在系统指令下生成文本",
+    "properties": {
+      "max_tokens": {
+        "title": "最大 Token 数",
+        "description": "生成的最大 Token 数。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "对话模型仓库 ID（如 meta-llama/Llama-3.1-8B-Instruct、Qwen/Qwen2.5-7B-Instruct、openai/gpt-oss-120b）。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "发送给模型的用户消息。"
+      },
+      "system": {
+        "title": "系统提示词",
+        "description": "可选的系统提示词，用于设定助手行为。"
+      },
+      "temperature": {
+        "title": "温度",
+        "description": "采样温度（0-2）。值越高越随机。"
+      },
+      "top_p": {
+        "title": "Top P",
+        "description": "核采样概率质量（0-1）。"
+      }
+    }
+  },
+  "huggingface.FeatureExtraction": {
+    "title": "特征提取",
+    "description": "将文本转换为嵌入向量。\n文本, 嵌入向量, 特征提取, 向量, RAG, Hugging Face\n\n常见用途：\n- 构建语义搜索/RAG\n- 对文档聚类或去重\n- 计算句子相似度",
+    "properties": {
+      "inputs": {
+        "title": "文本",
+        "description": "要生成嵌入向量的文本。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "特征提取/嵌入模型仓库 ID。"
+      },
+      "normalize": {
+        "title": "归一化",
+        "description": "对返回的嵌入向量进行 L2 归一化。"
+      }
+    }
+  },
+  "huggingface.FillMask": {
+    "title": "完形填空",
+    "description": "预测序列中被掩盖的 Token。\n文本, 完形填空, 掩码语言模型, NLP, Hugging Face\n\n常见用途：\n- 补全缺失词语的句子\n- 探测语言模型掌握的知识\n- 数据增强",
+    "properties": {
+      "inputs": {
+        "title": "文本",
+        "description": "含掩码 Token 的文本（如 BERT 用 [MASK]，RoBERTa 用 <mask>）。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "完形填空模型仓库 ID。"
+      }
+    }
+  },
+  "huggingface.ImageClassification": {
+    "title": "图像分类",
+    "description": "为图像分配标签/类别。\n图像, 分类, 视觉, 标签, Hugging Face\n\n常见用途：\n- 对图像归类\n- 内容审核（如 NSFW 检测）\n- 质量/缺陷标注",
+    "properties": {
+      "image": {
+        "title": "图像",
+        "description": "待分类的图像。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "图像分类模型仓库 ID。"
+      },
+      "top_k": {
+        "title": "Top K",
+        "description": "返回概率最高的 K 个类别。"
+      }
+    }
+  },
+  "huggingface.ImageSegmentation": {
+    "title": "图像分割",
+    "description": "将图像分割为带掩码的标注区域。\n图像, 分割, 视觉, 掩码, Hugging Face\n\n常见用途：\n- 从场景中分离对象\n- 构建选区掩码\n- 场景理解",
+    "properties": {
+      "image": {
+        "title": "图像",
+        "description": "待分割的图像。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "图像分割模型仓库 ID。"
+      }
+    }
+  },
+  "huggingface.ImageToImage": {
+    "title": "图生图",
+    "description": "在提示词指引下变换源图像（编辑、重风格化、放大）。\n图像, 图生图, 编辑, 变换, 扩散, Hugging Face\n\n常见用途：\n- 编辑或重风格化图像\n- 照片上色或增强\n- 应用目标风格",
+    "properties": {
+      "guidance_scale": {
+        "title": "引导比例",
+        "description": "遵循提示词的紧密程度（0 = 模型默认值）。"
+      },
+      "image": {
+        "title": "图像",
+        "description": "待变换的源图像。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "图生图模型仓库 ID。"
+      },
+      "negative_prompt": {
+        "title": "负向提示词",
+        "description": "结果中不应出现的内容。"
+      },
+      "num_inference_steps": {
+        "title": "推理步数",
+        "description": "去噪步数（0 = 模型默认值）。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "指引变换的文本提示词。"
+      }
+    }
+  },
+  "huggingface.ObjectDetection": {
+    "title": "目标检测",
+    "description": "检测图像中的目标，返回标签、得分和边界框。\n图像, 目标检测, 视觉, 边界框, Hugging Face\n\n常见用途：\n- 在场景中定位目标\n- 统计图像中的物品数量\n- 构建视觉流水线",
+    "properties": {
+      "image": {
+        "title": "图像",
+        "description": "待分析的图像。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "目标检测模型仓库 ID。"
+      },
+      "threshold": {
+        "title": "阈值",
+        "description": "返回检测结果的最低置信度。"
+      }
+    }
+  },
+  "huggingface.QuestionAnswering": {
+    "title": "问答",
+    "description": "从给定上下文段落中检索问题的答案。\n文本, 问答, QA, 抽取式, NLP, Hugging Face\n\n常见用途：\n- 针对文档回答问题\n- 从文本中提取事实\n- 构建“搜索文档”类功能",
+    "properties": {
+      "context": {
+        "title": "上下文",
+        "description": "包含答案的段落。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "问答模型仓库 ID。"
+      },
+      "question": {
+        "title": "问题",
+        "description": "要回答的问题。"
+      }
+    }
+  },
+  "huggingface.Summarization": {
+    "title": "摘要",
+    "description": "在保留关键信息的前提下生成文档的简短版本。\n文本, 摘要, 总结, NLP, Hugging Face\n\n常见用途：\n- 摘要文章或报告\n- 制作 TL;DR\n- 压缩会议记录",
+    "properties": {
+      "inputs": {
+        "title": "文本",
+        "description": "待摘要的文本。"
+      },
+      "max_length": {
+        "title": "最大长度",
+        "description": "摘要的最大 Token 长度（0 = 模型默认值）。"
+      },
+      "min_length": {
+        "title": "最小长度",
+        "description": "摘要的最小 Token 长度（0 = 模型默认值）。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "摘要模型仓库 ID。"
+      }
+    }
+  },
+  "huggingface.TableQuestionAnswering": {
+    "title": "表格问答",
+    "description": "回答关于表格中数据的问题。\n文本, 表格, 问答, 表格式, NLP, Hugging Face\n\n常见用途：\n- 用自然语言查询电子表格\n- 从表格中聚合数值\n- 构建对话式数据工具",
+    "properties": {
+      "model": {
+        "title": "模型",
+        "description": "表格问答模型仓库 ID。"
+      },
+      "question": {
+        "title": "问题",
+        "description": "针对表格提出的问题。"
+      },
+      "table": {
+        "title": "表格",
+        "description": "表格对象，将每个列名映射到一组字符串单元格值。"
+      }
+    }
+  },
+  "huggingface.TextClassification": {
+    "title": "文本分类",
+    "description": "为一段文本分配标签/类别（如情感）。\n文本, 分类, 情感, NLP, Hugging Face\n\n常见用途：\n- 情感分析\n- 话题/意图检测\n- 内容审核",
+    "properties": {
+      "inputs": {
+        "title": "文本",
+        "description": "待分类的文本。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "文本分类模型仓库 ID。"
+      }
+    }
+  },
+  "huggingface.TextGeneration": {
+    "title": "文本生成",
+    "description": "使用 Hugging Face 文本生成模型从提示词续写/补全文本。\n文本, 生成, 补全, LLM, Hugging Face\n\n常见用途：\n- 续写一段文字\n- 生成创意文本\n- 用开源模型快速原型",
+    "properties": {
+      "max_new_tokens": {
+        "title": "最大新 Token 数",
+        "description": "生成的最大新 Token 数。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "文本生成模型仓库 ID。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "要续写的文本提示词。"
+      },
+      "return_full_text": {
+        "title": "返回完整文本",
+        "description": "返回文本中是否包含提示词。"
+      },
+      "temperature": {
+        "title": "温度",
+        "description": "采样温度。"
+      }
+    }
+  },
+  "huggingface.TextToImage": {
+    "title": "文生图",
+    "description": "通过 Hugging Face Inference Providers 从文本提示词生成图像。\n图像, 文生图, T2I, 生成, 扩散, Hugging Face\n\n常见用途：\n- 从描述创作艺术品\n- 生成产品或概念图\n- 快速验证视觉创意",
+    "properties": {
+      "guidance_scale": {
+        "title": "引导比例",
+        "description": "遵循提示词的紧密程度（0 = 模型默认值）。"
+      },
+      "height": {
+        "title": "高度",
+        "description": "输出高度（像素，0 = 模型默认值）。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "文生图模型仓库 ID（如 black-forest-labs/FLUX.1-schnell、stabilityai/stable-diffusion-xl-base-1.0）。"
+      },
+      "negative_prompt": {
+        "title": "负向提示词",
+        "description": "图像中不应出现的内容。"
+      },
+      "num_inference_steps": {
+        "title": "推理步数",
+        "description": "去噪步数（0 = 模型默认值）。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "描述图像的文本提示词。"
+      },
+      "seed": {
+        "title": "种子",
+        "description": "随机种子（-1 = 随机）。"
+      },
+      "width": {
+        "title": "宽度",
+        "description": "输出宽度（像素，0 = 模型默认值）。"
+      }
+    }
+  },
+  "huggingface.TextToVideo": {
+    "title": "文生视频",
+    "description": "通过 Hugging Face Inference Providers 从文本提示词生成视频。\n视频, 文生视频, T2V, 生成, 扩散, Hugging Face\n\n常见用途：\n- 从描述生成短视频\n- 快速验证动态创意\n- 制作动画内容",
+    "properties": {
+      "guidance_scale": {
+        "title": "引导比例",
+        "description": "遵循提示词的紧密程度（0 = 模型默认值）。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "文生视频模型仓库 ID。"
+      },
+      "negative_prompt": {
+        "title": "负向提示词",
+        "description": "视频中不应出现的内容。"
+      },
+      "num_frames": {
+        "title": "帧数",
+        "description": "生成帧数（0 = 模型默认值）。"
+      },
+      "num_inference_steps": {
+        "title": "推理步数",
+        "description": "去噪步数（0 = 模型默认值）。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "描述视频的文本提示词。"
+      },
+      "seed": {
+        "title": "种子",
+        "description": "随机种子（-1 = 随机）。"
+      }
+    }
+  },
+  "huggingface.TokenClassification": {
+    "title": "Token 分类",
+    "description": "为文本中的每个 Token 分配标签（命名实体识别）。\n文本, Token 分类, NER, 实体, NLP, Hugging Face\n\n常见用途：\n- 提取人物、地点、机构\n- 检测个人敏感信息（PII）\n- 词性标注",
+    "properties": {
+      "aggregation_strategy": {
+        "title": "聚合策略",
+        "description": "如何将子词 Token 聚合为实体。"
+      },
+      "inputs": {
+        "title": "文本",
+        "description": "待分析的文本。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "Token 分类/NER 模型仓库 ID。"
+      }
+    }
+  },
+  "huggingface.Translation": {
+    "title": "翻译",
+    "description": "将文本从一种语言翻译为另一种语言。\n文本, 翻译, 语言, NLP, Hugging Face\n\n常见用途：\n- 翻译文档\n- 内容本地化\n- 构建多语言应用",
+    "properties": {
+      "inputs": {
+        "title": "文本",
+        "description": "待翻译的文本。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "翻译模型仓库 ID（如 facebook/nllb-200-distilled-600M、Helsinki-NLP/opus-mt-en-fr）。"
+      },
+      "src_lang": {
+        "title": "源语言",
+        "description": "可选的源语言代码，用于多语言模型（如 eng_Latn）。"
+      },
+      "tgt_lang": {
+        "title": "目标语言",
+        "description": "可选的目标语言代码，用于多语言模型（如 fra_Latn）。"
+      }
+    }
+  },
+  "huggingface.ZeroShotClassification": {
+    "title": "零样本分类",
+    "description": "在无需专门训练的情况下将文本分类到任意标签。\n文本, 零样本, 分类, NLP, Hugging Face\n\n常见用途：\n- 即时分类到自定义类别\n- 无训练数据下的意图检测\n- 灵活的内容标注",
+    "properties": {
+      "candidate_labels": {
+        "title": "候选标签",
+        "description": "逗号分隔的候选标签列表。"
+      },
+      "inputs": {
+        "title": "文本",
+        "description": "待分类的文本。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "零样本分类模型仓库 ID。"
+      },
+      "multi_label": {
+        "title": "多标签",
+        "description": "允许同时有多个标签为真。"
+      }
+    }
+  },
+  "lib.apple.CreateCalendarEvent": {
+    "title": "创建日历事件",
+    "description": "通过 AppleScript 在 macOS 日历中创建新事件。\n日历, 事件, macOS, AppleScript",
+    "properties": {
+      "calendar_name": {
+        "title": "日历名称",
+        "description": "目标日历的名称"
+      },
+      "description_text": {
+        "title": "描述",
+        "description": "事件的备注"
+      },
+      "end_date": {
+        "title": "结束时间",
+        "description": "结束日期与时间"
+      },
+      "event_title": {
+        "title": "标题",
+        "description": "日历事件的标题"
+      },
+      "location": {
+        "title": "位置",
+        "description": "事件地点"
+      },
+      "start_date": {
+        "title": "开始时间",
+        "description": "开始日期与时间"
+      }
+    }
+  },
+  "lib.apple.CreateNote": {
+    "title": "创建备忘录",
+    "description": "通过 AppleScript 在 macOS 备忘录中创建新备忘。\n备忘录, macOS, AppleScript",
+    "properties": {
+      "body": {
+        "title": "正文",
+        "description": "正文内容（纯文本或 HTML）"
+      },
+      "folder": {
+        "title": "文件夹",
+        "description": "保存备忘的文件夹"
+      },
+      "title": {
+        "title": "标题",
+        "description": "备忘标题"
+      }
+    }
+  },
+  "lib.apple.CreateReminder": {
+    "title": "创建提醒事项",
+    "description": "通过 AppleScript 在 macOS 提醒事项中创建一条提醒。\n提醒事项, 待办, macOS",
+    "properties": {
+      "due_date": {
+        "title": "截止时间",
+        "description": "可选的截止时间；留空则不设置"
+      },
+      "list_name": {
+        "title": "列表",
+        "description": "提醒事项列表名称"
+      },
+      "notes": {
+        "title": "备注",
+        "description": "附加备注"
+      },
+      "title": {
+        "title": "标题",
+        "description": "提醒事项标题"
+      }
+    }
+  },
+  "lib.apple.GetClipboardText": {
+    "title": "读取剪贴板文本",
+    "description": "通过 AppleScript 读取 macOS 剪贴板中的纯文本。\n剪贴板, 文本, macOS",
+    "properties": {}
+  },
+  "lib.apple.GetFrontSafariTab": {
+    "title": "获取前置 Safari 标签页",
+    "description": "读取 Safari 最前面标签页的 URL 和标题。\nSafari, 浏览器, 标签页, macOS",
+    "properties": {}
+  },
+  "lib.apple.ListCalendarEvents": {
+    "title": "列出日历事件",
+    "description": "使用 AppleScript 列出指定时间范围内的日历事件。\n日历, 列表, 事件, macOS",
+    "properties": {
+      "calendar_name": {
+        "title": "日历名称",
+        "description": "要查询的日历"
+      },
+      "days_back": {
+        "title": "向前天数",
+        "description": "从今天向前的天数"
+      },
+      "days_forward": {
+        "title": "向后天数",
+        "description": "从今天向后的天数"
+      }
+    }
+  },
+  "lib.apple.ListNotes": {
+    "title": "列备忘录",
+    "description": "通过 AppleScript 列出 macOS 备忘录中的备忘。\n备忘录, 列表, macOS",
+    "properties": {
+      "folder": {
+        "title": "文件夹",
+        "description": "可选的文件夹名称；留空表示所有文件夹"
+      },
+      "limit": {
+        "title": "上限",
+        "description": "返回备忘的最大数量"
+      }
+    }
+  },
+  "lib.apple.ListReminders": {
+    "title": "列出提醒事项",
+    "description": "通过 AppleScript 列出指定列表中的提醒事项。\n提醒事项, 待办, 列表, macOS",
+    "properties": {
+      "include_completed": {
+        "title": "包含已完成",
+        "description": "是否包含已完成的提醒"
+      },
+      "list_name": {
+        "title": "列表",
+        "description": "提醒事项列表名称"
+      }
+    }
+  },
+  "lib.apple.OpenSafariURL": {
+    "title": "在 Safari 中打开 URL",
+    "description": "在 Safari 中打开 URL，并可选地将其置前。\nSafari, 浏览器, 打开, macOS",
+    "properties": {
+      "activate": {
+        "title": "置前",
+        "description": "将 Safari 切换到前台"
+      },
+      "url": {
+        "title": "URL",
+        "description": "要打开的 URL"
+      }
+    }
+  },
+  "lib.apple.PostNotification": {
+    "title": "发送通知",
+    "description": "通过 AppleScript 向 macOS 通知中心发送通知。\n通知, 提醒, macOS",
+    "properties": {
+      "message": {
+        "title": "消息",
+        "description": "通知正文"
+      },
+      "sound_name": {
+        "title": "声音",
+        "description": "可选的声音名称（如 Glass）；留空则静音"
+      },
+      "subtitle": {
+        "title": "副标题",
+        "description": "通知副标题"
+      },
+      "title": {
+        "title": "标题",
+        "description": "通知标题"
+      }
+    }
+  },
+  "lib.apple.SafariPageText": {
+    "title": "Safari 页面文本",
+    "description": "通过注入的 JavaScript 提取 Safari 最前面文档中的可见文本（需在 Safari 开发菜单中启用“允许 Apple 事件中的 JavaScript”）。\nSafari, 页面, 文本, 提取",
+    "properties": {
+      "max_chars": {
+        "title": "最大字符数",
+        "description": "将输出截断到该字符数"
+      },
+      "prefer_article": {
+        "title": "优先 article",
+        "description": "存在时使用 <article> 的 innerText"
+      }
+    }
+  },
+  "lib.apple.SafariSelectionText": {
+    "title": "Safari 选中文本",
+    "description": "返回 Safari 最前面文档中当前选中的文本（使用 `do JavaScript`；需在 Safari 开发菜单中启用“允许 Apple 事件中的 JavaScript”）。\nSafari, 选区, 文本",
+    "properties": {}
+  },
+  "lib.apple.SayText": {
+    "title": "朗读文本",
+    "description": "通过 AppleScript 的 `say` 命令使用 macOS 文字转语音朗读文本。\n语音, TTS, 音色, macOS",
+    "properties": {
+      "rate": {
+        "title": "语速",
+        "description": "朗读语速（每分钟字数）"
+      },
+      "text": {
+        "title": "文本",
+        "description": "要朗读的文本"
+      },
+      "voice": {
+        "title": "音色",
+        "description": "音色名称（如 Alex、Samantha）。留空则使用系统默认值。"
+      },
+      "wait": {
+        "title": "等待",
+        "description": "是否等待朗读结束再返回"
+      }
+    }
+  },
+  "lib.apple.SearchContacts": {
+    "title": "搜索通讯录",
+    "description": "通过 AppleScript 搜索 macOS 通讯录。\n通讯录, 搜索, 地址簿, macOS",
+    "properties": {
+      "limit": {
+        "title": "上限",
+        "description": "最大结果数"
+      },
+      "query": {
+        "title": "查询",
+        "description": "匹配姓名/邮箱/电话的子串"
+      }
+    }
+  },
+  "lib.apple.SendMail": {
+    "title": "发送邮件（Apple Mail）",
+    "description": "通过 AppleScript 在 Apple Mail 中撰写并发送邮件。\n邮件, 发送, macOS",
+    "properties": {
+      "body": {
+        "title": "正文",
+        "description": "邮件正文（纯文本）"
+      },
+      "cc_address": {
+        "title": "抄送",
+        "description": "抄送邮箱地址（可选）"
+      },
+      "subject": {
+        "title": "主题",
+        "description": "邮件主题"
+      },
+      "to_address": {
+        "title": "收件人",
+        "description": "收件人邮箱地址"
+      },
+      "visible": {
+        "title": "显示窗口",
+        "description": "在界面中显示邮件而非静默发送"
+      }
+    }
+  },
+  "lib.apple.SendMessage": {
+    "title": "发送 iMessage",
+    "description": "通过 AppleScript 向手机号或邮箱发送 iMessage。\n信息, iMessage, 发送, macOS",
+    "properties": {
+      "recipient": {
+        "title": "收件人",
+        "description": "收件人的手机号或邮箱"
+      },
+      "text": {
+        "title": "文本",
+        "description": "消息正文"
+      }
+    }
+  },
+  "lib.apple.SetClipboardText": {
+    "title": "写入剪贴板文本",
+    "description": "通过 AppleScript 将纯文本写入 macOS 剪贴板。\n剪贴板, 文本, macOS",
+    "properties": {
+      "text": {
+        "title": "文本",
+        "description": "要写入剪贴板的文本"
+      }
+    }
+  },
+  "lib.browser.Screenshot": {
+    "title": "网页截图",
+    "description": "截取网页或特定元素的截图。\n浏览器, 截图, 捕获, 图像\n\n常见用途：\n- 捕获网页的视觉表现\n- 为特定 UI 元素留档\n- 创建网页内容的视觉记录",
+    "properties": {
+      "selector": {
+        "title": "选择器",
+        "description": "可选的 CSS 选择器，用于截取特定元素"
+      },
+      "timeout": {
+        "title": "超时",
+        "description": "页面导航的超时时间（毫秒）"
+      },
+      "url": {
+        "title": "URL",
+        "description": "截图前要导航到的 URL"
+      }
+    }
+  },
+  "lib.charts.ChartRenderer": {
+    "title": "图表渲染器",
+    "description": "使用 seaborn 将图表配置渲染为图像格式的节点。\n图表, seaborn, 绘图, 可视化, 数据",
+    "properties": {
+      "background_color": {
+        "title": "背景色",
+        "description": "图表背景色（CSS 颜色字符串）。"
+      },
+      "chart_config": {
+        "title": "图表配置",
+        "description": "要渲染的图表配置。"
+      },
+      "data": {
+        "title": "数据",
+        "description": "以 pandas DataFrame 形式可视化数据。"
+      },
+      "despine": {
+        "title": "去边框",
+        "description": "是否移除顶部和右侧坐标轴边框。"
+      },
+      "height": {
+        "title": "高度",
+        "description": "图表高度（像素）。"
+      },
+      "trim_margins": {
+        "title": "裁剪边距",
+        "description": "是否使用紧凑布局边距。"
+      },
+      "width": {
+        "title": "宽度",
+        "description": "图表宽度（像素）。"
+      }
+    }
+  },
+  "lib.comfy.RunWorkflow": {
+    "title": "运行 ComfyUI 工作流",
+    "description": "在 ComfyUI 服务器上运行 ComfyUI 工作流。\nComfy, ComfyUI, 工作流, 图像, 扩散\n\n常见用途：\n- 使用现有 ComfyUI 工作流生成图像\n- 调用本地或远程 ComfyUI 服务器（RunPod 等）\n- 在 NodeTool 工作流中嵌入 ComfyUI 生成",
+    "properties": {
+      "endpoint": {
+        "title": "端点",
+        "description": "ComfyUI 服务器地址，例如 127.0.0.1:8188 或 http://host:8188。"
+      },
+      "timeout": {
+        "title": "超时",
+        "description": "等待工作流完成的最大秒数。"
+      },
+      "workflow": {
+        "title": "工作流",
+        "description": "API（prompt）格式的 ComfyUI 工作流，JSON 字符串：节点 ID 到 { class_type, inputs } 的映射。"
+      }
+    }
+  },
+  "lib.comfy.RunWorkflowOnWorker": {
+    "title": "运行 ComfyUI 工作流（Worker）",
+    "description": "通过 worker 桥接在 NodeTool worker（nodetool-worker-comfy）上运行 ComfyUI 工作流。\nComfy, ComfyUI, 工作流, Worker, RunPod, 扩散\n\n常见用途：\n- 在远程 GPU worker 上运行 ComfyUI，而无需直接暴露 ComfyUI\n- 从 NodeTool 工作流中驱动 RunPod ComfyUI worker",
+    "properties": {
+      "previews": {
+        "title": "预览",
+        "description": "工作流运行时流式传输 ComfyUI 预览图像。"
+      },
+      "timeout": {
+        "title": "超时",
+        "description": "等待工作流完成的最大秒数。"
+      },
+      "worker_token": {
+        "title": "Worker 令牌",
+        "description": "若需要鉴权，用于 worker 的 Bearer 令牌。"
+      },
+      "worker_url": {
+        "title": "Worker URL",
+        "description": "托管 ComfyUI 的 NodeTool worker 的 WebSocket URL，例如 ws://host:7777/ws。"
+      },
+      "workflow": {
+        "title": "工作流",
+        "description": "API（prompt）格式的 ComfyUI 工作流，JSON 字符串：节点 ID 到 { class_type, inputs } 的映射。"
+      }
+    }
+  },
+  "lib.google.CalendarCreateEvent": {
+    "title": "Google 日历创建事件",
+    "description": "从 RFC3339 起止时间创建一个 Google 日历事件。\nGoogle, 日历, 事件, 创建, 日程",
+    "properties": {
+      "attendees": {
+        "title": "参会者",
+        "description": "参会者邮箱地址，逗号分隔"
+      },
+      "calendar_id": {
+        "title": "日历 ID",
+        "description": "日历 ID，或 primary 表示默认日历"
+      },
+      "description": {
+        "title": "描述",
+        "description": "事件描述"
+      },
+      "end": {
+        "title": "结束时间",
+        "description": "RFC3339 结束时间"
+      },
+      "start": {
+        "title": "开始时间",
+        "description": "RFC3339 开始时间，例如 2026-07-27T15:00:00-07:00"
+      },
+      "summary": {
+        "title": "摘要",
+        "description": "事件标题"
+      }
+    }
+  },
+  "lib.google.CalendarListEvents": {
+    "title": "Google 日历列出事件",
+    "description": "按时间从近到远列出某时间窗内的 Google 日历事件。\nGoogle, 日历, 事件, 日程, 议程",
+    "properties": {
+      "calendar_id": {
+        "title": "日历 ID",
+        "description": "日历 ID，或 primary 表示默认日历"
+      },
+      "max_results": {
+        "title": "最大结果数",
+        "description": "返回事件的最大数量"
+      },
+      "time_max": {
+        "title": "时间上界",
+        "description": "RFC3339 时间窗上界"
+      },
+      "time_min": {
+        "title": "时间下界",
+        "description": "RFC3339 时间窗下界（留空表示当前）"
+      }
+    }
+  },
+  "lib.google.DocsAppend": {
+    "title": "Google Docs 追加文本",
+    "description": "在 Google 文档末尾追加文本。\nGoogle, Docs, 文档, 追加, 写入",
+    "properties": {
+      "document_id": {
+        "title": "文档 ID",
+        "description": "Google Docs 文档 ID"
+      },
+      "text": {
+        "title": "文本",
+        "description": "要追加的文本"
+      }
+    }
+  },
+  "lib.google.DocsCreate": {
+    "title": "Google Docs 创建文档",
+    "description": "创建一篇 Google 文档，可选地预填文本。\nGoogle, Docs, 文档, 创建, 写入",
+    "properties": {
+      "text": {
+        "title": "文本",
+        "description": "初始正文"
+      },
+      "title": {
+        "title": "标题",
+        "description": "文档标题"
+      }
+    }
+  },
+  "lib.google.DocsRead": {
+    "title": "Google Docs 读取",
+    "description": "读取 Google 文档的标题和全文。\nGoogle, Docs, 文档, 读取, 文本",
+    "properties": {
+      "document_id": {
+        "title": "文档 ID",
+        "description": "Google Docs 文档 ID"
+      }
+    }
+  },
+  "lib.google.DriveCreateFile": {
+    "title": "Google Drive 创建文件",
+    "description": "在已登录用户的 Google Drive 中创建一个文本文件。\nGoogle, Drive, 创建, 上传, 文件",
+    "properties": {
+      "content": {
+        "title": "内容",
+        "description": "文件内容"
+      },
+      "folder_id": {
+        "title": "文件夹 ID",
+        "description": "父文件夹 ID（留空表示我的云端硬盘根目录）"
+      },
+      "mime_type": {
+        "title": "MIME 类型",
+        "description": "上传内容的 MIME 类型"
+      },
+      "name": {
+        "title": "名称",
+        "description": "文件名"
+      }
+    }
+  },
+  "lib.google.DriveReadFile": {
+    "title": "Google Drive 读取文件",
+    "description": "将 Drive 文件作为文本读取。Docs、Sheets、Slides 会被导出为纯文本或 CSV。\nGoogle, Drive, 读取, 下载, 文件",
+    "properties": {
+      "file_id": {
+        "title": "文件 ID",
+        "description": "Drive 文件 ID"
+      }
+    }
+  },
+  "lib.google.DriveSearch": {
+    "title": "Google Drive 搜索",
+    "description": "在已登录用户的 Google Drive 中搜索文件。\nGoogle, Drive, 搜索, 文件, 云端",
+    "properties": {
+      "max_results": {
+        "title": "最大结果数",
+        "description": "返回文件的最大数量"
+      },
+      "query": {
+        "title": "查询",
+        "description": "搜索短语，或 Drive 查询语法，如 \"name contains 'report'\""
+      }
+    }
+  },
+  "lib.google.GmailModifyLabels": {
+    "title": "Gmail 修改标签",
+    "description": "在某封邮件上添加或移除 Gmail 标签。移除 INBOX 即可归档。\nGoogle, Gmail, 标签, 归档, 整理",
+    "properties": {
+      "add_labels": {
+        "title": "添加标签",
+        "description": "要添加的标签 ID，逗号分隔"
+      },
+      "message_id": {
+        "title": "邮件 ID",
+        "description": "Gmail 邮件 ID"
+      },
+      "remove_labels": {
+        "title": "移除标签",
+        "description": "要移除的标签 ID，逗号分隔"
+      }
+    }
+  },
+  "lib.google.GmailSearch": {
+    "title": "Gmail 搜索",
+    "description": "使用 Gmail 查询语法搜索 Gmail 并返回解析后的邮件。\nGoogle, Gmail, 邮件, 搜索, 收件箱",
+    "properties": {
+      "max_results": {
+        "title": "最大结果数",
+        "description": "返回邮件的最大数量"
+      },
+      "query": {
+        "title": "查询",
+        "description": "Gmail 查询语句，如 from:alice@example.com newer_than:7d"
+      }
+    }
+  },
+  "lib.google.GmailSend": {
+    "title": "Gmail 发送",
+    "description": "从已登录用户的 Gmail 账户发送一封纯文本邮件。\nGoogle, Gmail, 邮件, 发送, 消息",
+    "properties": {
+      "body": {
+        "title": "正文",
+        "description": "纯文本正文"
+      },
+      "cc": {
+        "title": "抄送",
+        "description": "抄送地址，逗号分隔"
+      },
+      "subject": {
+        "title": "主题",
+        "description": "主题行"
+      },
+      "to": {
+        "title": "收件人",
+        "description": "收件人地址，逗号分隔"
+      }
+    }
+  },
+  "lib.google.SheetsAppend": {
+    "title": "Google Sheets 追加",
+    "description": "在 Google 表格指定范围最后一个有数据的行下方追加新行。\nGoogle, Sheets, 电子表格, 追加, 行",
+    "properties": {
+      "range": {
+        "title": "范围",
+        "description": "标识该表格的 A1 表示法范围"
+      },
+      "spreadsheet_id": {
+        "title": "表格 ID",
+        "description": "Google Sheets 表格 ID"
+      },
+      "values": {
+        "title": "值",
+        "description": "JSON 形式的行，例如 [[\"Alice\", 30], [\"Bob\", 41]]"
+      }
+    }
+  },
+  "lib.google.SheetsRead": {
+    "title": "Google Sheets 读取",
+    "description": "将 Google 表格的一个范围读取为单元格值的行。\nGoogle, Sheets, 电子表格, 读取, 行",
+    "properties": {
+      "range": {
+        "title": "范围",
+        "description": "A1 表示法范围，例如 Sheet1!A1:D50"
+      },
+      "spreadsheet_id": {
+        "title": "表格 ID",
+        "description": "Google Sheets 表格 ID"
+      }
+    }
+  },
+  "lib.google.SheetsUpdate": {
+    "title": "Google Sheets 更新",
+    "description": "用新值覆盖 Google 表格的一个范围。\nGoogle, Sheets, 电子表格, 更新, 写入",
+    "properties": {
+      "range": {
+        "title": "范围",
+        "description": "要覆盖的 A1 表示法范围"
+      },
+      "spreadsheet_id": {
+        "title": "表格 ID",
+        "description": "Google Sheets 表格 ID"
+      },
+      "values": {
+        "title": "值",
+        "description": "JSON 形式的行，例如 [[\"Alice\", 30], [\"Bob\", 41]]"
+      }
+    }
+  },
+  "lib.grid.CombineImageGrid": {
+    "title": "合并图像网格",
+    "description": "将一组图像瓦片合并为单张图像。\n图像, 网格, 合并, 瓦片\n\n常见用途：\n- 重新拼合处理过的图像块\n- 从较小的部分创建合成图\n- 合并来自分布式处理的瓦片数据",
+    "properties": {
+      "columns": {
+        "title": "列数",
+        "description": "网格的列数。0 时从瓦片数自动推导。若瓦片携带来自 SliceImageGrid 的网格放置元数据则忽略此值。"
+      },
+      "tiles": {
+        "title": "瓦片",
+        "description": "要合并的图像瓦片列表。"
+      }
+    }
+  },
+  "lib.grid.SliceImageGrid": {
+    "title": "切片图像网格",
+    "description": "将一张图像切成网格状的瓦片。\n图像, 网格, 切片, 瓦片\n\n常见用途：\n- 将大图切成小块以处理\n- 制作图像拼图或马赛克效果\n- 将图像处理任务分发到多个 worker",
+    "properties": {
+      "columns": {
+        "title": "列数",
+        "description": "网格的列数。0 时从行数自动推导，若行数也为 0 则回退为 3x3 网格。"
+      },
+      "image": {
+        "title": "图像",
+        "description": "要切成网格的图像。"
+      },
+      "rows": {
+        "title": "行数",
+        "description": "网格的行数。0 时从列数自动推导，若列数也为 0 则回退为 3x3 网格。"
+      }
+    }
+  },
+  "lib.mail.AddLabel": {
+    "title": "添加标签",
+    "description": "为一封 Gmail 邮件添加标签。\n邮件, Gmail, 标签",
+    "properties": {
+      "label": {
+        "title": "标签",
+        "description": "要添加到邮件的标签"
+      },
+      "message_id": {
+        "title": "邮件 ID",
+        "description": "要打标签的邮件 ID"
+      }
+    }
+  },
+  "lib.mail.GmailSearch": {
+    "title": "Gmail 搜索",
+    "description": "使用 Gmail 专用搜索操作符搜索 Gmail 并返回匹配的邮件。\n邮件, Gmail, 搜索\n\n常见用途：\n- 按特定条件搜索邮件\n- 取出来自某发件人的邮件\n- 按主题、发件人或日期筛选邮件",
+    "properties": {
+      "body": {
+        "title": "正文",
+        "description": "要在邮件正文中搜索的文本"
+      },
+      "date_filter": {
+        "title": "日期筛选",
+        "description": "搜索的日期筛选"
+      },
+      "folder": {
+        "title": "文件夹",
+        "description": "要搜索的邮件文件夹"
+      },
+      "from_address": {
+        "title": "发件地址",
+        "description": "要搜索的发件人邮箱"
+      },
+      "keywords": {
+        "title": "关键词",
+        "description": "要搜索的自定义关键词或标签"
+      },
+      "max_results": {
+        "title": "最大结果数",
+        "description": "返回邮件的最大数量"
+      },
+      "subject": {
+        "title": "主题",
+        "description": "要在邮件主题中搜索的文本"
+      },
+      "text": {
+        "title": "文本",
+        "description": "在邮件任意位置搜索的通用文本"
+      },
+      "to_address": {
+        "title": "收件地址",
+        "description": "要搜索的收件人邮箱"
+      }
+    }
+  },
+  "lib.mail.MoveToArchive": {
+    "title": "移至归档",
+    "description": "将指定邮件移至 Gmail 归档。\n邮件, Gmail, 归档",
+    "properties": {
+      "message_id": {
+        "title": "邮件 ID",
+        "description": "要归档的邮件 ID"
+      }
+    }
+  },
+  "lib.nlp.ClassifyText": {
+    "title": "文本分类",
+    "description": "训练一个朴素贝叶斯分类器并对文本进行分类。\n分类, 归类, 朴素贝叶斯, 机器学习, NLP\n\n常见用途：\n- 将文本归入预定义标签\n- 构建简单的垃圾检测\n- 对客服工单分类\n- 按主题排序文档",
+    "properties": {
+      "text": {
+        "title": "文本",
+        "description": "待分类的文本"
+      },
+      "training_data": {
+        "title": "训练数据",
+        "description": "用于训练分类器的 {text, label} 对象数组"
+      }
+    }
+  },
+  "lib.nlp.ExtractEntities": {
+    "title": "抽取实体",
+    "description": "使用 compromise 抽取命名实体和词性。\nNER, 命名实体, 词性, NLP, 文本分析\n\n常见用途：\n- 从文本中抽取人物、地点、机构\n- 识别句子中的名词和动词\n- 从非结构化文本构建知识图谱\n- 分析文本结构与内容",
+    "properties": {
+      "text": {
+        "title": "文本",
+        "description": "要从中抽取实体的文本"
+      }
+    }
+  },
+  "lib.nlp.PhoneticMatch": {
+    "title": "音素匹配",
+    "description": "使用 Soundex、Metaphone 或 Double Metaphone 计算单词的音素代码。\n音素, Soundex, Metaphone, 模糊匹配, NLP\n\n常见用途：\n- 查找发音相近的词\n- 构建模糊姓名匹配系统\n- 实现拼写纠错建议\n- 匹配不同拼写形式的姓名",
+    "properties": {
+      "algorithm": {
+        "title": "算法",
+        "description": "要使用的音素算法"
+      },
+      "text": {
+        "title": "文本",
+        "description": "包含待计算音素代码的单词的文本"
+      }
+    }
+  },
+  "lib.nlp.SentimentAnalysis": {
+    "title": "情感分析",
+    "description": "使用基于 AFINN 的分析器分析文本情感。\n情感, 观点, 极性, 文本分析, NLP\n\n常见用途：\n- 判断文本的正负向基调\n- 分析客户反馈情感\n- 为产品评论打分\n- 监测社交媒体情感",
+    "properties": {
+      "language": {
+        "title": "语言",
+        "description": "输入文本的语言"
+      },
+      "text": {
+        "title": "文本",
+        "description": "待分析情感的文本"
+      }
+    }
+  },
+  "lib.nlp.Stem": {
+    "title": "词干提取",
+    "description": "将单词还原为词根形式。\n词干, 词根, 词形, NLP, 文本处理\n\n常见用途：\n- 将单词归并为基本形式以便匹配\n- 为搜索索引规范化文本\n- 为比对和去重准备文本\n- 改善文本相似度匹配",
+    "properties": {
+      "algorithm": {
+        "title": "算法",
+        "description": "要使用的词干提取算法"
+      },
+      "text": {
+        "title": "文本",
+        "description": "包含待提取词干的单词的文本"
+      }
+    }
+  },
+  "lib.nlp.TfIdf": {
+    "title": "TF-IDF",
+    "description": "跨多份文档计算词项的 TF-IDF 得分。\nTF-IDF, 词频, 文档频率, 文本分析, NLP\n\n常见用途：\n- 为搜索查询排序文档相关性\n- 识别一批文档中的重要词项\n- 构建关键词抽取流水线\n- 按词项重要性比较文档相似度",
+    "properties": {
+      "documents": {
+        "title": "文档",
+        "description": "用于跨文档计算 TF-IDF 的文本字符串列表"
+      },
+      "query": {
+        "title": "查询词项",
+        "description": "要计算 TF-IDF 的词项"
+      }
+    }
+  },
+  "lib.nlp.Tokenize": {
+    "title": "分词",
+    "description": "将文本切分为单词或句子。\n分词, 切分, 单词, 句子, NLP\n\n常见用途：\n- 将文本拆成单词以分析\n- 将文本拆成句子以处理\n- 为后续 NLP 操作准备文本\n- 统计文本中的词数或句数",
+    "properties": {
+      "mode": {
+        "title": "模式",
+        "description": "分词模式：按词或按句子切分"
+      },
+      "text": {
+        "title": "文本",
+        "description": "要分词的文本"
+      }
+    }
+  },
+  "lib.pdf.Pdftoppm": {
+    "title": "PDF 栅格化（pdftoppm）",
+    "description": "使用 poppler 的 pdftoppm 将 PDF 页面栅格化。对某些 PDF，保真度高于基于 PDFium 的截图节点，并支持抗锯齿控制。\nPDF, pdftoppm, poppler, 栅格化, 渲染, 图像, 页面",
+    "properties": {
+      "dpi": {
+        "title": "DPI",
+        "description": "渲染分辨率（每英寸点数）"
+      },
+      "end_page": {
+        "title": "结束页",
+        "description": "渲染的最后一页（-1 表示全部）"
+      },
+      "format": {
+        "title": "格式",
+        "description": "输出图像格式"
+      },
+      "pdf": {
+        "title": "PDF",
+        "description": "要处理的 PDF 文档"
+      },
+      "scale_to": {
+        "title": "缩放至（px）",
+        "description": "若大于 0，将最长边缩放至该像素数（覆盖 DPI）"
+      },
+      "start_page": {
+        "title": "起始页",
+        "description": "渲染的第一页（从 0 开始）"
+      }
+    }
+  },
+  "lib.pdf.Screenshot": {
+    "title": "PDF 页面截图",
+    "description": "将 PDF 页面渲染为 PNG 图像。\nPDF, 截图, 渲染, 图像, 页面, PNG",
+    "properties": {
+      "dpi": {
+        "title": "DPI",
+        "description": "渲染分辨率（每英寸点数）"
+      },
+      "end_page": {
+        "title": "结束页",
+        "description": "渲染的最后一页（-1 表示全部）"
+      },
+      "pdf": {
+        "title": "PDF",
+        "description": "要处理的 PDF 文档"
+      },
+      "start_page": {
+        "title": "起始页",
+        "description": "渲染的第一页（从 0 开始）"
+      }
+    }
+  },
+  "lib.secret.GetSecret": {
+    "title": "获取密钥",
+    "description": "从配置中读取一个密钥值。\n密钥, 凭证, 配置",
+    "properties": {
+      "default": {
+        "title": "默认值",
+        "description": "未找到时的默认值"
+      },
+      "name": {
+        "title": "名称",
+        "description": "密钥键名"
+      }
+    }
+  },
+  "lib.sqlite.GetDatabasePath": {
+    "title": "获取数据库路径",
+    "description": "获取 SQLite 数据库文件的完整路径。\nSQLite, 数据库, 路径, 位置\n\n常见用途：\n- 引用数据库位置\n- 校验数据库是否存在\n- 将路径传给外部工具",
+    "properties": {
+      "database_name": {
+        "title": "数据库名称",
+        "description": "SQLite 数据库文件名"
+      }
+    }
+  },
+  "lib.svg.Circle": {
+    "title": "圆形",
+    "description": "生成 SVG 圆形元素，可自定义位置、半径和样式。\nSVG, 形状, 矢量, 圆\n\n常见用途：\n- 创建圆形和图标\n- 设计按钮、徽章和指示器\n- 构建饼图等数据可视化\n- 创建装饰元素和图案",
+    "properties": {
+      "cx": {
+        "title": "圆心 X",
+        "description": "圆心 X 坐标"
+      },
+      "cy": {
+        "title": "圆心 Y",
+        "description": "圆心 Y 坐标"
+      },
+      "fill": {
+        "title": "填充",
+        "description": "填充颜色"
+      },
+      "radius": {
+        "title": "半径",
+        "description": "半径"
+      },
+      "stroke": {
+        "title": "描边",
+        "description": "描边颜色"
+      },
+      "stroke_width": {
+        "title": "描边宽度",
+        "description": "描边宽度"
+      }
+    }
+  },
+  "lib.svg.ClipPath": {
+    "title": "剪裁路径",
+    "description": "为 SVG 元素创建剪裁路径。\nSVG, 剪裁, 遮罩\n\n常见用途：\n- 遮罩元素局部\n- 通过剪裁创建复杂形状\n- 使用遮罩应用视觉效果",
+    "properties": {
+      "clip_content": {
+        "title": "剪裁内容",
+        "description": "作为剪裁路径使用的 SVG 元素"
+      },
+      "content": {
+        "title": "内容",
+        "description": "要被剪裁的 SVG 元素"
+      }
+    }
+  },
+  "lib.svg.Document": {
+    "title": "SVG 文档",
+    "description": "将多个 SVG 元素组合为完整的 SVG 文档。\nSVG, 文档, 组合\n\n常见用途：\n- 将多个 SVG 元素组合为单个文档\n- 设置 viewBox 和尺寸等文档级属性\n- 导出完整的 SVG 文档",
+    "properties": {
+      "elements": {
+        "title": "元素",
+        "description": "SVG 元素列表"
+      },
+      "height": {
+        "title": "高度",
+        "description": "文档高度"
+      },
+      "viewBox": {
+        "title": "视区",
+        "description": "SVG viewBox 属性"
+      },
+      "width": {
+        "title": "宽度",
+        "description": "文档宽度"
+      }
+    }
+  },
+  "lib.svg.DropShadow": {
+    "title": "投影",
+    "description": "为 SVG 元素应用投影滤镜效果，增加纵深感。\nSVG, 滤镜, 阴影, 效果\n\n常见用途：\n- 为元素增加深度和悬浮感\n- 创建逼真的阴影效果\n- 增强视觉层次\n- 改善元素分隔与可读性",
+    "properties": {
+      "color": {
+        "title": "颜色",
+        "description": "阴影颜色"
+      },
+      "dx": {
+        "title": "Dx",
+        "description": "阴影 X 偏移"
+      },
+      "dy": {
+        "title": "Dy",
+        "description": "阴影 Y 偏移"
+      },
+      "std_deviation": {
+        "title": "标准差",
+        "description": "模糊标准差"
+      }
+    }
+  },
+  "lib.svg.Ellipse": {
+    "title": "椭圆",
+    "description": "生成 SVG 椭圆元素，可自定义位置、半径和样式。\nSVG, 形状, 矢量, 椭圆\n\n常见用途：\n- 创建椭圆和有机形状\n- 设计气泡和标注\n- 构建数据可视化元素\n- 创建装饰图案和边框",
+    "properties": {
+      "cx": {
+        "title": "圆心 X",
+        "description": "圆心 X 坐标"
+      },
+      "cy": {
+        "title": "圆心 Y",
+        "description": "圆心 Y 坐标"
+      },
+      "fill": {
+        "title": "填充",
+        "description": "填充颜色"
+      },
+      "rx": {
+        "title": "Rx",
+        "description": "X 轴半径"
+      },
+      "ry": {
+        "title": "Ry",
+        "description": "Y 轴半径"
+      },
+      "stroke": {
+        "title": "描边",
+        "description": "描边颜色"
+      },
+      "stroke_width": {
+        "title": "描边宽度",
+        "description": "描边宽度"
+      }
+    }
+  },
+  "lib.svg.GaussianBlur": {
+    "title": "高斯模糊",
+    "description": "为 SVG 元素应用高斯模糊滤镜效果。\nSVG, 滤镜, 模糊, 效果\n\n常见用途：\n- 创建柔焦与景深效果\n- 添加细腻的阴影和光晕\n- 模拟运动模糊\n- 柔化图形边缘",
+    "properties": {
+      "std_deviation": {
+        "title": "标准差",
+        "description": "模糊标准差"
+      }
+    }
+  },
+  "lib.svg.Gradient": {
+    "title": "渐变",
+    "description": "为 SVG 元素创建线性或径向渐变。\nSVG, 渐变, 颜色\n\n常见用途：\n- 添加平滑颜色过渡\n- 创建复杂颜色效果\n- 定义可复用的渐变",
+    "properties": {
+      "color1": {
+        "title": "颜色 1",
+        "description": "渐变起始色"
+      },
+      "color2": {
+        "title": "颜色 2",
+        "description": "渐变结束色"
+      },
+      "gradient_type": {
+        "title": "渐变类型",
+        "description": "渐变类型"
+      },
+      "x1": {
+        "title": "X1",
+        "description": "起始 X 位置（线性）或圆心 X（径向）"
+      },
+      "x2": {
+        "title": "X2",
+        "description": "结束 X 位置（线性）或 X 轴半径（径向）"
+      },
+      "y1": {
+        "title": "Y1",
+        "description": "起始 Y 位置（线性）或圆心 Y（径向）"
+      },
+      "y2": {
+        "title": "Y2",
+        "description": "结束 Y 位置（线性）或 Y 轴半径（径向）"
+      }
+    }
+  },
+  "lib.svg.Line": {
+    "title": "直线",
+    "description": "生成 SVG 直线元素，可自定义端点和样式。\nSVG, 形状, 矢量, 直线\n\n常见用途：\n- 绘制直线和连接符\n- 创建分隔线和分割线\n- 构建图表和流程图\n- 设计网格图案和边框",
+    "properties": {
+      "stroke": {
+        "title": "描边",
+        "description": "描边颜色"
+      },
+      "stroke_width": {
+        "title": "描边宽度",
+        "description": "描边宽度"
+      },
+      "x1": {
+        "title": "X1",
+        "description": "起始 X 坐标"
+      },
+      "x2": {
+        "title": "X2",
+        "description": "结束 X 坐标"
+      },
+      "y1": {
+        "title": "Y1",
+        "description": "起始 Y 坐标"
+      },
+      "y2": {
+        "title": "Y2",
+        "description": "结束 Y 坐标"
+      }
+    }
+  },
+  "lib.svg.Path": {
+    "title": "路径",
+    "description": "使用路径数据命令生成 SVG 路径元素。\nSVG, 形状, 矢量, 路径\n\n常见用途：\n- 创建复杂的曲线和自定义形状\n- 构建徽标和自定义图标\n- 设计精巧的图案与插画\n- 从设计工具导入路径数据",
+    "properties": {
+      "fill": {
+        "title": "填充",
+        "description": "填充颜色"
+      },
+      "path_data": {
+        "title": "路径数据",
+        "description": "SVG 路径数据（d 属性）"
+      },
+      "stroke": {
+        "title": "描边",
+        "description": "描边颜色"
+      },
+      "stroke_width": {
+        "title": "描边宽度",
+        "description": "描边宽度"
+      }
+    }
+  },
+  "lib.svg.Polygon": {
+    "title": "多边形",
+    "description": "生成含多个顶点的 SVG 多边形元素。\nSVG, 形状, 矢量, 多边形\n\n常见用途：\n- 创建三角形、五边形、星形等多边形\n- 构建自定义图标和符号\n- 设计复杂的几何图案\n- 创建不规则形状",
+    "properties": {
+      "fill": {
+        "title": "填充",
+        "description": "填充颜色"
+      },
+      "points": {
+        "title": "点",
+        "description": "点列表，格式 x1,y1 x2,y2 x3,y3..."
+      },
+      "stroke": {
+        "title": "描边",
+        "description": "描边颜色"
+      },
+      "stroke_width": {
+        "title": "描边宽度",
+        "description": "描边宽度"
+      }
+    }
+  },
+  "lib.svg.Rect": {
+    "title": "矩形",
+    "description": "生成 SVG 矩形元素，可自定义位置、尺寸和样式。\nSVG, 形状, 矢量, 矩形\n\n常见用途：\n- 在 SVG 文档中创建矩形\n- 设计边框、外框和背景\n- 构建用户界面组件\n- 创建几何图案和布局",
+    "properties": {
+      "fill": {
+        "title": "填充",
+        "description": "填充颜色"
+      },
+      "height": {
+        "title": "高度",
+        "description": "高度"
+      },
+      "stroke": {
+        "title": "描边",
+        "description": "描边颜色"
+      },
+      "stroke_width": {
+        "title": "描边宽度",
+        "description": "描边宽度"
+      },
+      "width": {
+        "title": "宽度",
+        "description": "宽度"
+      },
+      "x": {
+        "title": "X",
+        "description": "X 坐标"
+      },
+      "y": {
+        "title": "Y",
+        "description": "Y 坐标"
+      }
+    }
+  },
+  "lib.svg.SVGToImage": {
+    "title": "SVG 转图像",
+    "description": "一步创建 SVG 文档并将其转换为位图。\nSVG, 文档, 位图, 转换\n\n常见用途：\n- 单次操作中创建并栅格化 SVG 文档\n- 从 SVG 元素生成图像文件\n- 以自定义尺寸将矢量图转换为位图",
+    "properties": {
+      "elements": {
+        "title": "元素",
+        "description": "SVG 元素列表"
+      },
+      "height": {
+        "title": "高度",
+        "description": "文档高度"
+      },
+      "scale": {
+        "title": "缩放",
+        "description": "栅格化的缩放系数"
+      },
+      "viewBox": {
+        "title": "视区",
+        "description": "SVG viewBox 属性"
+      },
+      "width": {
+        "title": "宽度",
+        "description": "文档宽度"
+      }
+    }
+  },
+  "lib.svg.Text": {
+    "title": "文本",
+    "description": "向 SVG 添加文本元素。\nSVG, 文本, 排版\n\n常见用途：\n- 为矢量图添加标签\n- 创建基于文本的徽标\n- 在 SVG 中生成动态文本内容",
+    "properties": {
+      "fill": {
+        "title": "填充",
+        "description": "文本颜色"
+      },
+      "font_family": {
+        "title": "字体族",
+        "description": "字体族"
+      },
+      "font_size": {
+        "title": "字号",
+        "description": "字号"
+      },
+      "text": {
+        "title": "文本",
+        "description": "文本内容"
+      },
+      "text_anchor": {
+        "title": "文本锚点",
+        "description": "文本锚点位置"
+      },
+      "x": {
+        "title": "X",
+        "description": "X 坐标"
+      },
+      "y": {
+        "title": "Y",
+        "description": "Y 坐标"
+      }
+    }
+  },
+  "lib.svg.Transform": {
+    "title": "变换",
+    "description": "对 SVG 元素应用变换。\nSVG, 变换, 动画\n\n常见用途：\n- 旋转、缩放或平移元素\n- 创建复合变换\n- 为动画准备元素",
+    "properties": {
+      "content": {
+        "title": "内容",
+        "description": "要变换的 SVG 元素"
+      },
+      "rotate": {
+        "title": "旋转",
+        "description": "旋转角度（度）"
+      },
+      "scale_x": {
+        "title": "X 缩放",
+        "description": "X 轴缩放系数"
+      },
+      "scale_y": {
+        "title": "Y 缩放",
+        "description": "Y 轴缩放系数"
+      },
+      "translate_x": {
+        "title": "X 平移",
+        "description": "X 轴平移"
+      },
+      "translate_y": {
+        "title": "Y 平移",
+        "description": "Y 轴平移"
+      }
+    }
+  },
+  "messaging.discord.DiscordBotTrigger": {
+    "title": "Discord 机器人触发器",
+    "description": "监听来自机器人账户的 Discord 消息并以事件形式发出。\nDiscord, 触发器, 机器人, 消息, 聊天, 事件, 监听",
+    "properties": {
+      "allow_bot_messages": {
+        "title": "允许机器人消息",
+        "description": "是否包含机器人发出的消息"
+      },
+      "channel_id": {
+        "title": "频道 ID",
+        "description": "可选的频道 ID，用于过滤消息"
+      },
+      "max_events": {
+        "title": "最大事件数",
+        "description": "处理事件的最大数量（0 = 不限）"
+      },
+      "token": {
+        "title": "令牌",
+        "description": "Discord 机器人令牌"
+      }
+    }
+  },
+  "messaging.telegram.TelegramBotTrigger": {
+    "title": "Telegram 机器人触发器",
+    "description": "使用长轮询监听 Telegram 消息并以事件形式发出。\nTelegram, 触发器, 机器人, 消息, 聊天, 事件, 监听",
+    "properties": {
+      "allow_bot_messages": {
+        "title": "允许机器人消息",
+        "description": "是否包含机器人发出的消息"
+      },
+      "chat_id": {
+        "title": "聊天 ID",
+        "description": "可选的聊天 ID，用于过滤消息"
+      },
+      "include_edited_messages": {
+        "title": "包含已编辑消息",
+        "description": "是否包含已编辑的消息"
+      },
+      "max_events": {
+        "title": "最大事件数",
+        "description": "处理事件的最大数量（0 = 不限）"
+      },
+      "poll_interval_seconds": {
+        "title": "轮询间隔（秒）",
+        "description": "轮询请求之间的间隔"
+      },
+      "poll_timeout_seconds": {
+        "title": "轮询超时（秒）",
+        "description": "长轮询超时时间（秒）"
+      },
+      "token": {
+        "title": "令牌",
+        "description": "Telegram 机器人令牌"
+      }
+    }
+  },
+  "mistral.embeddings.Embedding": {
+    "title": "嵌入向量",
+    "description": "使用 Mistral AI 生成向量嵌入。\nMistral, 嵌入向量, 向量, 语义, 相似度, 搜索\n\n使用 Mistral AI 的嵌入模型生成稠密向量表示。这些向量捕捉语义信息，可用于：\n- 语义搜索\n- 文本聚类\n- 文档分类\n- 推荐系统\n- 衡量文本相似度\n\n需要 Mistral API 密钥。",
+    "properties": {
+      "chunk_size": {
+        "title": "分块大小",
+        "description": "嵌入的文本分块大小"
+      },
+      "input": {
+        "title": "输入",
+        "description": "要生成嵌入向量的文本"
+      },
+      "model": {
+        "title": "模型",
+        "description": "要使用的嵌入模型"
+      }
+    }
+  },
+  "mistral.text.ChatComplete": {
+    "title": "对话补全",
+    "description": "使用 Mistral AI 对话补全模型生成文本。\nMistral, 对话, AI, 文本生成, LLM, 补全\n\n使用 Mistral AI 对话模型从提示词生成回复。需要 Mistral API 密钥。\n\n常见用途：\n- 根据提示词生成文本回复\n- 构建对话式 AI 应用\n- 使用 Codestral 生成代码\n- 使用 Pixtral 进行多模态理解",
+    "properties": {
+      "max_tokens": {
+        "title": "最大 Token 数",
+        "description": "生成的最大 Token 数"
+      },
+      "model": {
+        "title": "模型",
+        "description": "用于生成的 Mistral 模型"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "文本生成的提示词"
+      },
+      "system_prompt": {
+        "title": "系统提示词",
+        "description": "可选的系统提示词，用于引导模型行为"
+      },
+      "temperature": {
+        "title": "温度",
+        "description": "采样温度。值越高输出越随机。"
+      }
+    }
+  },
+  "mistral.text.CodeComplete": {
+    "title": "代码补全",
+    "description": "使用 Mistral AI Codestral 模型生成代码。\nMistral, 代码, Codestral, AI, 编程, 补全\n\n使用为代码生成专门设计的 Mistral AI Codestral 模型。支持填空（FIM）式代码补全任务。需要 Mistral API 密钥。\n\n常见用途：\n- 从自然语言描述生成代码\n- 补全部分代码片段\n- 填补前缀与后缀之间的代码\n- 为多种编程语言自动生成代码",
+    "properties": {
+      "max_tokens": {
+        "title": "最大 Token 数",
+        "description": "生成的最大 Token 数"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "生成的提示词或代码前缀"
+      },
+      "suffix": {
+        "title": "后缀",
+        "description": "可选的后缀，用于填空式补全"
+      },
+      "temperature": {
+        "title": "温度",
+        "description": "采样温度。代码生成时取较低值。"
+      }
+    }
+  },
+  "mistral.vision.ImageToText": {
+    "title": "图生文",
+    "description": "使用 Mistral AI Pixtral 模型分析图像并生成文字描述。\nMistral, Pixtral, 视觉, 图像, OCR, 分析, 多模态\n\n使用 Mistral AI Pixtral 视觉模型理解并描述图像。可执行 OCR、图像分析以及就图像内容回答问题。需要 Mistral API 密钥。\n\n常见用途：\n- 从图像中提取文字（OCR）\n- 描述图像内容\n- 回答关于图像的问题\n- 分析图表和示意图\n- 文档理解",
+    "properties": {
+      "image": {
+        "title": "图像",
+        "description": "待分析的图像"
+      },
+      "max_tokens": {
+        "title": "最大 Token 数",
+        "description": "生成的最大 Token 数"
+      },
+      "model": {
+        "title": "模型",
+        "description": "用于视觉任务的 Pixtral 模型"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "关于图像的提示词/问题"
+      },
+      "temperature": {
+        "title": "温度",
+        "description": "回复生成的采样温度"
+      }
+    }
+  },
+  "mistral.vision.OCR": {
+    "title": "OCR",
+    "description": "使用 Mistral AI Pixtral 模型从图像中提取文字。\nMistral, Pixtral, OCR, 文本提取, 文档, 图像\n\n使用 Pixtral 的专用光学字符识别（OCR）节点。针对从文档、截图和图像中提取文本内容做了优化。需要 Mistral API 密钥。\n\n常见用途：\n- 从扫描文档中提取文字\n- 读取截图中的文字\n- 将印刷材料数字化\n- 从表单和收据中提取数据",
+    "properties": {
+      "image": {
+        "title": "图像",
+        "description": "要从中提取文字的图像"
+      },
+      "model": {
+        "title": "模型",
+        "description": "用于 OCR 的 Pixtral 模型"
+      }
+    }
+  },
+  "openai.agents.RealtimeAgent": {
+    "title": "实时智能体",
+    "description": "基于 OpenAI WebSocket Realtime API 的实时对话智能体，低延迟地以音频/文本流入、文本/音频流出。\n实时, 流式, OpenAI, 音频输入, 文本输出, WebSocket",
+    "properties": {
+      "chunk": {
+        "title": "音频块",
+        "description": "作为输入的音频块。"
+      },
+      "model": {
+        "title": "模型"
+      },
+      "speed": {
+        "title": "语速",
+        "description": "模型语音回复的语速"
+      },
+      "system": {
+        "title": "系统提示词",
+        "description": "实时会话的系统指令"
+      },
+      "temperature": {
+        "title": "温度",
+        "description": "回复的温度"
+      },
+      "voice": {
+        "title": "音色",
+        "description": "音频输出的音色"
+      }
+    }
+  },
+  "openai.agents.RealtimeTranscription": {
+    "title": "实时转录",
+    "description": "基于 OpenAI WebSocket Realtime API 的实时语音转文字，流入音频块并即时输出转录结果。\n音频, 转录, STT, 流式, 实时, WebSocket, OpenAI",
+    "properties": {
+      "chunk": {
+        "title": "音频块",
+        "description": "音频块输入流（Base64 编码的 PCM16 音频）。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "要使用的实时模型。"
+      },
+      "system": {
+        "title": "系统提示词",
+        "description": "可选的系统指令"
+      },
+      "temperature": {
+        "title": "温度",
+        "description": "解码温度"
+      }
+    }
+  },
+  "openai.audio.TextToSpeech": {
+    "title": "文字转语音",
+    "description": "使用 OpenAI TTS 模型将文本转换为语音。\n音频, TTS, 文字转语音, 音色, 合成",
+    "properties": {
+      "input": {
+        "title": "输入"
+      },
+      "instructions": {
+        "title": "指令",
+        "description": "引导音色、情感与演绎（仅 gpt-4o-mini-tts 支持）。"
+      },
+      "model": {
+        "title": "模型"
+      },
+      "speed": {
+        "title": "语速"
+      },
+      "voice": {
+        "title": "音色"
+      }
+    }
+  },
+  "openai.audio.Transcribe": {
+    "title": "音频转录",
+    "description": "使用 OpenAI 语音转文字 API 将语音转为文字。\n音频, 转录, 语音转文字, STT, Whisper",
+    "properties": {
+      "audio": {
+        "title": "音频",
+        "description": "待转录的音频文件（最大 25 MB）。"
+      },
+      "language": {
+        "title": "语言",
+        "description": "输入音频的语言"
+      },
+      "model": {
+        "title": "模型",
+        "description": "用于转录的模型。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "可选文本，用于引导模型风格或衔接上一段音频。"
+      },
+      "temperature": {
+        "title": "温度",
+        "description": "0 到 1 之间的采样温度。较高的值（如 0.8）让输出更随机，较低的值（如 0.2）让输出更集中、确定。"
+      },
+      "timestamps": {
+        "title": "时间戳",
+        "description": "是否为生成的文本返回时间戳。"
+      }
+    }
+  },
+  "openai.audio.Translate": {
+    "title": "音频翻译",
+    "description": "将音频中的语音翻译为英文文本。\n音频, 翻译, 语音转文字, 本地化",
+    "properties": {
+      "audio": {
+        "title": "音频",
+        "description": "要翻译的音频文件。"
+      },
+      "temperature": {
+        "title": "温度",
+        "description": "翻译使用的温度。"
+      }
+    }
+  },
+  "openai.image.CreateImage": {
+    "title": "创建图像",
+    "description": "从文字描述生成图像。\n图像, T2I, TTI, 文生图, 创建, 生成, 图画, 照片, 艺术, 绘制, 插画",
+    "properties": {
+      "background": {
+        "title": "背景",
+        "description": "待生成图像的背景。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "用于图像生成的模型。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "使用的提示词。"
+      },
+      "quality": {
+        "title": "质量",
+        "description": "待生成图像的质量。"
+      },
+      "size": {
+        "title": "尺寸",
+        "description": "待生成图像的尺寸。"
+      }
+    }
+  },
+  "openai.image.EditImage": {
+    "title": "编辑图像",
+    "description": "使用 OpenAI gpt-image-1 模型编辑图像。\n图像, 编辑, 修改, 变换, 内补绘制, 外补绘制, 变体\n\n接收一张输入图像和一段文本提示词，生成修改后的版本。可用于内补绘制、外补绘制、风格迁移以及图像修改。可选地接受蒙版以指定要编辑的区域。",
+    "properties": {
+      "image": {
+        "title": "图像",
+        "description": "要编辑的图像。"
+      },
+      "mask": {
+        "title": "蒙版",
+        "description": "可选的蒙版图像。白色区域将被编辑，黑色区域保留。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "用于图像编辑的模型。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "描述期望编辑效果的提示词。"
+      },
+      "quality": {
+        "title": "质量",
+        "description": "生成图像的质量。"
+      },
+      "size": {
+        "title": "尺寸",
+        "description": "输出图像的尺寸。"
+      }
+    }
+  },
+  "openai.image.ImageVariation": {
+    "title": "图像变体",
+    "description": "使用 OpenAI 图像变体 API 从输入图像生成变体。\n图像, 变体, 混搭, 生成, 替代, DALL-E\n\n接收一张正方形 PNG 图像，产出一张基于它的变体图像。不使用文本提示词——模型直接基于源图像即兴发挥。",
+    "properties": {
+      "image": {
+        "title": "图像",
+        "description": "生成变体的源图像（正方形 PNG）。"
+      },
+      "size": {
+        "title": "尺寸",
+        "description": "生成图像的尺寸。"
+      }
+    }
+  },
+  "openai.text.Embedding": {
+    "title": "嵌入向量",
+    "description": "生成文本的向量表示，用于语义分析。\n嵌入向量, 相似度, 搜索, 聚类, 分类\n\n使用 OpenAI 嵌入模型生成稠密向量表示。这些向量捕捉语义信息，可用于：\n- 语义搜索\n- 文本聚类\n- 文档分类\n- 推荐系统\n- 异常检测\n- 衡量文本相似度与多样性",
+    "properties": {
+      "chunk_size": {
+        "title": "分块大小"
+      },
+      "input": {
+        "title": "输入"
+      },
+      "model": {
+        "title": "模型"
+      }
+    }
+  },
+  "openai.text.Moderation": {
+    "title": "内容审核",
+    "description": "使用 OpenAI 内容审核 API 检查文本内容是否可能违反政策。\n内容审核, 安全, 内容, 过滤, 政策, 有害, 毒性\n\n使用 OpenAI 内容审核模型检测可能有害的内容，包括：\n- 仇恨言论\n- 骚扰\n- 自残内容\n- 色情内容\n- 暴力内容\n- 露骨暴力\n\n返回标记状态与各类别得分，便于全面的内容分析。",
+    "properties": {
+      "input": {
+        "title": "输入",
+        "description": "要检查是否违规的文本内容。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "要使用的内容审核模型。"
+      }
+    }
+  },
+  "openai.text.WebSearch": {
+    "title": "网络搜索",
+    "description": "使用 OpenAI 联网搜索模型从最新信息回答查询。\nOpenAI, 网络, 搜索, 互联网, 浏览, 当前, 实时",
+    "properties": {
+      "query": {
+        "title": "查询",
+        "description": "要执行的搜索查询。"
+      }
+    }
+  },
+  "reve.CreateImage": {
+    "title": "创建图像",
+    "description": "使用 Reve 从文本提示词生成图像。\n图像, 生成, 文生图, Reve\n\n常见用途：\n- 产出高度贴合提示词的图像\n- 渲染清晰可读的文字与海报\n- 制作符合品牌调性的营销视觉",
+    "properties": {
+      "aspect_ratio": {
+        "title": "宽高比",
+        "description": "生成图像的比例。"
+      },
+      "postprocessing": {
+        "title": "后处理",
+        "description": "对结果应用的可选后处理操作。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "描述待生成图像的文本（最多 2560 字符）。"
+      },
+      "test_time_scaling": {
+        "title": "测试时缩放",
+        "description": "质量努力倍数（1-15）。值越高成本越高。"
+      },
+      "version": {
+        "title": "版本",
+        "description": "要使用的模型版本。"
+      }
+    }
+  },
+  "reve.EditImage": {
+    "title": "编辑图像",
+    "description": "使用 Reve 通过文本指令编辑现有图像。\n图像, 编辑, 指令, 内补绘制, Reve\n\n常见用途：\n- 用自然语言下达定向编辑\n- 修改照片的风格、颜色或对象\n- 在图像中添加或移除元素",
+    "properties": {
+      "aspect_ratio": {
+        "title": "宽高比",
+        "description": "输出比例。none 保留参考图的宽高比。"
+      },
+      "edit_instruction": {
+        "title": "编辑指令",
+        "description": "如何修改图像（最多 2560 字符）。"
+      },
+      "image": {
+        "title": "图像",
+        "description": "要编辑的参考图。"
+      },
+      "postprocessing": {
+        "title": "后处理",
+        "description": "对结果应用的可选后处理操作。"
+      },
+      "test_time_scaling": {
+        "title": "测试时缩放",
+        "description": "质量努力倍数（1-15）。值越高成本越高。"
+      },
+      "version": {
+        "title": "版本",
+        "description": "要使用的模型版本。"
+      }
+    }
+  },
+  "reve.RemixImage": {
+    "title": "混搭图像",
+    "description": "使用 Reve 将提示词与 1-6 张参考图组合。\n图像, 混搭, 参考, 合成, Reve\n\n常见用途：\n- 融合多张图像的主体与风格\n- 把参考图中的产品放进新场景\n- 从多张参考图合成角色\n\n在提示词中可用 <img>0</img>、<img>1</img> 等引用具体图像（0 表示第一张）。",
+    "properties": {
+      "aspect_ratio": {
+        "title": "宽高比",
+        "description": "输出比例。none 让模型自行选择宽高比。"
+      },
+      "postprocessing": {
+        "title": "后处理",
+        "description": "对结果应用的可选后处理操作。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "文本提示词（最多 2560 字符）。用 <img>0</img>、<img>1</img> 等按索引引用图像。"
+      },
+      "reference_images": {
+        "title": "参考图",
+        "description": "1-6 张用于混搭的参考图。"
+      },
+      "test_time_scaling": {
+        "title": "测试时缩放",
+        "description": "质量努力倍数（1-15）。值越高成本越高。"
+      },
+      "version": {
+        "title": "版本",
+        "description": "要使用的模型版本。"
+      }
+    }
+  },
+  "topaz.image.AdjustLighting": {
+    "title": "Topaz 光线调整",
+    "description": "Topaz 图像 API —— 颜色与光线。\n\nTopaz, 图像, 光线, 颜色, 白平衡, 上色\n\nMultipart POST /image/v1/lighting/async。调整光线（曝光）、白平衡以及上色（黑白 → 彩色）。",
+    "properties": {
+      "image": {
+        "title": "图像",
+        "description": "待调整的源图像。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "光线/颜色模型。"
+      },
+      "output_format": {
+        "title": "输出格式"
+      },
+      "strength": {
+        "title": "强度",
+        "description": "调整强度（0-1）。"
+      }
+    }
+  },
+  "topaz.image.DenoiseImage": {
+    "title": "Topaz 降噪",
+    "description": "Topaz 图像 API —— 标准降噪。\n\nTopaz, 图像, 降噪, 噪点\n\nMultipart POST /image/v1/denoise/async。Normal/Strong/Extreme 模型对应不同程度的噪点。",
+    "properties": {
+      "image": {
+        "title": "图像",
+        "description": "待降噪的源图像。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "降噪模型。"
+      },
+      "output_format": {
+        "title": "输出格式"
+      },
+      "sharpen": {
+        "title": "锐化",
+        "description": "降噪后施加的锐化（0-1）。"
+      },
+      "strength": {
+        "title": "强度",
+        "description": "降噪强度（0-1）。"
+      }
+    }
+  },
+  "topaz.image.DenoiseImageGenerative": {
+    "title": "Topaz 降噪（生成式）",
+    "description": "Topaz 图像 API —— 生成式降噪。\n\nTopaz, 图像, 降噪, 生成式\n\nMultipart POST /image/v1/denoise-gen/async。Denoise Max 以最高质量降噪并智能恢复细节。",
+    "properties": {
+      "creativity": {
+        "title": "创造性",
+        "description": "创造性等级（1-9）。"
+      },
+      "image": {
+        "title": "图像",
+        "description": "待降噪的源图像。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "生成式降噪模型。"
+      },
+      "output_format": {
+        "title": "输出格式"
+      },
+      "strength": {
+        "title": "强度",
+        "description": "降噪强度（0-1）。"
+      }
+    }
+  },
+  "topaz.image.EnhanceImage": {
+    "title": "Topaz 图像增强",
+    "description": "Topaz 图像 API —— 精细放大/增强。\n\nTopaz, 图像, 放大, 增强, 修复\n\nMultipart POST /image/v1/enhance/async，使用 Topaz 精细模型。支持人脸增强、锐化、降噪、压缩修复以及针对主体的应用。所选模型不支持的参数会被 API 忽略。",
+    "properties": {
+      "crop_to_fill": {
+        "title": "裁剪填充",
+        "description": "当输出与源宽高比不同时，使用裁剪而非信箱模式。"
+      },
+      "denoise": {
+        "title": "降噪",
+        "description": "降噪强度（0-1）。"
+      },
+      "face_enhancement": {
+        "title": "人脸增强",
+        "description": "启用人脸修复。"
+      },
+      "face_enhancement_creativity": {
+        "title": "人脸增强创造性",
+        "description": "人脸修复的真实（0）↔ 创造（1）。face_enhancement=true 时必填。"
+      },
+      "face_enhancement_strength": {
+        "title": "人脸增强强度",
+        "description": "人脸修复强度（0 = 关闭，1 = 最强）。face_enhancement=true 时必填。"
+      },
+      "fix_compression": {
+        "title": "压缩修复",
+        "description": "降低 JPEG/压缩伪影（0-1）。"
+      },
+      "image": {
+        "title": "图像",
+        "description": "待增强的源图像。支持格式：jpeg、png、tiff。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "Topaz 精细图像模型。"
+      },
+      "output_format": {
+        "title": "输出格式",
+        "description": "返回图像的编码格式。"
+      },
+      "output_height": {
+        "title": "输出高度",
+        "description": "输出高度（像素，1-32000）。0 表示由宽度按比例缩放。"
+      },
+      "output_width": {
+        "title": "输出宽度",
+        "description": "输出宽度（像素，1-32000）。0 表示由高度按比例缩放。"
+      },
+      "sharpen": {
+        "title": "锐化",
+        "description": "锐化强度（0-1）。"
+      },
+      "strength": {
+        "title": "强度",
+        "description": "整体模型强度（0.01-1）。过高可能显得不真实。"
+      },
+      "subject_detection": {
+        "title": "主体检测",
+        "description": "将增强限制在主体区域。"
+      }
+    }
+  },
+  "topaz.image.EnhanceImageGenerative": {
+    "title": "Topaz 图像增强（生成式）",
+    "description": "Topaz 图像 API —— 生成式放大（Wonder/Bloom/Redefine）。\n\nTopaz, 图像, 生成式, 放大, 提示词\n\nMultipart POST /image/v1/enhance-gen/async。提示词引导的增强，支持创造性、纹理、细节和人脸修复控制。所选模型不支持的参数会被忽略。",
+    "properties": {
+      "autoprompt": {
+        "title": "自动提示词",
+        "description": "让 Topaz 从图像自动生成提示词。"
+      },
+      "creativity": {
+        "title": "创造性",
+        "description": "创造性等级（1-9）。低 = 高保真；高 = 更具创造。"
+      },
+      "crop_to_fill": {
+        "title": "裁剪填充",
+        "description": "当输出与源宽高比不同时，使用裁剪而非信箱模式。"
+      },
+      "denoise": {
+        "title": "降噪"
+      },
+      "detail": {
+        "title": "添加细节",
+        "description": "在主渲染后添加一次细节处理。"
+      },
+      "detail_strength": {
+        "title": "细节强度",
+        "description": "细节处理强度（0-10）。detail=true 时必填。"
+      },
+      "face_enhancement": {
+        "title": "人脸增强"
+      },
+      "face_enhancement_creativity": {
+        "title": "人脸增强创造性"
+      },
+      "face_enhancement_strength": {
+        "title": "人脸增强强度"
+      },
+      "image": {
+        "title": "图像",
+        "description": "待增强的源图像。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "Topaz 生成式模型。"
+      },
+      "output_format": {
+        "title": "输出格式"
+      },
+      "output_height": {
+        "title": "输出高度",
+        "description": "输出高度（像素，1-32000）。0 表示由宽度按比例缩放。"
+      },
+      "output_width": {
+        "title": "输出宽度",
+        "description": "输出宽度（像素，1-32000）。0 表示由高度按比例缩放。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "描述期望增强效果（最多 1024 字符）。autoprompt=true 时忽略。"
+      },
+      "sharpen": {
+        "title": "锐化"
+      },
+      "subject_detection": {
+        "title": "主体检测"
+      },
+      "texture": {
+        "title": "纹理",
+        "description": "纹理添加量（1-5）。"
+      }
+    }
+  },
+  "topaz.image.MatteImage": {
+    "title": "Topaz 抠图",
+    "description": "Topaz 图像 API —— 抠图/背景移除。\n\nTopaz, 图像, 抠图, 背景, 移除, 主体\n\nMultipart POST /image/v1/matting/async。主体分离（Object）或干净背景移除（RemoveBG）。",
+    "properties": {
+      "image": {
+        "title": "图像",
+        "description": "源图像。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "抠图模型。Object = 主体分离；RemoveBG = 干净背景移除。"
+      },
+      "output_format": {
+        "title": "输出格式",
+        "description": "使用 png 以保留透明度。"
+      }
+    }
+  },
+  "topaz.image.RestoreImage": {
+    "title": "Topaz 修复图像",
+    "description": "Topaz 图像 API —— 生成式修复/清理。\n\nTopaz, 图像, 修复, 灰尘, 划痕, 清理\n\nMultipart POST /image/v1/restore-gen/async。自动清理灰尘、划痕和瑕疵。",
+    "properties": {
+      "image": {
+        "title": "图像",
+        "description": "待修复的源图像。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "修复模型。"
+      },
+      "output_format": {
+        "title": "输出格式"
+      },
+      "strength": {
+        "title": "强度",
+        "description": "清理强度（0-1）。"
+      }
+    }
+  },
+  "topaz.image.SharpenImage": {
+    "title": "Topaz 锐化",
+    "description": "Topaz 图像 API —— 标准锐化。\n\nTopaz, 图像, 锐化, 模糊\n\nMultipart POST /image/v1/sharpen/async。标准锐化模型适用于通用、人像、野生动物以及运动/镜头模糊恢复。所选模型不支持的参数会被忽略。",
+    "properties": {
+      "denoise": {
+        "title": "降噪",
+        "description": "锐化前施加的降噪（0-1）。"
+      },
+      "image": {
+        "title": "图像",
+        "description": "待锐化的源图像。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "标准锐化模型。"
+      },
+      "output_format": {
+        "title": "输出格式"
+      },
+      "strength": {
+        "title": "强度",
+        "description": "锐化强度（0-1）。"
+      }
+    }
+  },
+  "topaz.image.SharpenImageGenerative": {
+    "title": "Topaz 锐化（生成式）",
+    "description": "Topaz 图像 API —— 生成式锐化。\n\nTopaz, 图像, 锐化, 模糊, 生成式\n\nMultipart POST /image/v1/sharpen-gen/async。Super Focus V2/V3 模型通过扩散恢复严重模糊的图像。",
+    "properties": {
+      "creativity": {
+        "title": "创造性",
+        "description": "创造性等级（1-9）。低 = 高保真；高 = 更具创造。"
+      },
+      "image": {
+        "title": "图像",
+        "description": "待锐化的源图像。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "生成式锐化模型。"
+      },
+      "output_format": {
+        "title": "输出格式"
+      },
+      "strength": {
+        "title": "强度",
+        "description": "恢复强度（0-1）。"
+      }
+    }
+  },
+  "topaz.video.EnhanceVideo": {
+    "title": "Topaz 视频增强",
+    "description": "Topaz 视频 API —— 放大/增强流水线。\n\nTopaz, 视频, 放大, 增强, 修复, Starlight, Astra\n\nPOST /video/ → PATCH /video/{id}/accept → Multipart PUT 上传 → PATCH /video/{id}/complete-upload/ → GET /video/{id}/status。需要源视频元信息（分辨率、帧率、时长、帧数），通过 ffprobe 本地探测。包含 Proteus、Artemis、Dione、Gaia、Iris、Theia、Rhea、Nyx（降噪）、Themis（运动去模糊）、颜色，以及生成式 Starlight（slp-2.5、slhq-1、slm-1、wonder-1、slf-2）和 Astra（ast-2）。",
+    "properties": {
+      "audio_mode": {
+        "title": "音频",
+        "description": "copy = 保留源音频。aac/ac3/pcm = 重编码。none = 丢弃音频。"
+      },
+      "auto": {
+        "title": "参数模式",
+        "description": "Auto = 自动估计。Manual = 使用下列值。Relative = 自动 + 人工偏移。"
+      },
+      "blur": {
+        "title": "锐度",
+        "description": "对结果施加的锐度（-1 到 1）。"
+      },
+      "compression": {
+        "title": "压缩恢复",
+        "description": "压缩恢复强度（-1 到 1）。参数模式为 Manual/Relative 时使用。"
+      },
+      "crop_to_fit": {
+        "title": "裁剪适配",
+        "description": "居中裁剪到输出尺寸，而非信箱模式。"
+      },
+      "details": {
+        "title": "细节",
+        "description": "细节重建（-1 到 1）。"
+      },
+      "dynamic_compression_level": {
+        "title": "压缩级别",
+        "description": "自动 CQP 选择。如需固定码率请直接通过 API 使用 videoBitrate 式覆盖。"
+      },
+      "halo": {
+        "title": "光晕降低",
+        "description": "光晕降低（-1 到 1）。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "Topaz 视频放大/增强模型。帧插值模型位于插帧节点。"
+      },
+      "noise": {
+        "title": "降噪",
+        "description": "降噪（-1 到 1）。"
+      },
+      "output_container": {
+        "title": "容器"
+      },
+      "output_frame_rate": {
+        "title": "输出帧率",
+        "description": "0 = 与源相同。"
+      },
+      "output_height": {
+        "title": "输出高度",
+        "description": "0 = 与源相同。"
+      },
+      "output_width": {
+        "title": "输出宽度",
+        "description": "0 = 与源相同。"
+      },
+      "recover_original_detail": {
+        "title": "恢复原始细节",
+        "description": "将源细节重新引入输出（0 到 1）。"
+      },
+      "video": {
+        "title": "视频",
+        "description": "待增强的源视频。支持 mp4、mov、mkv。"
+      },
+      "video_encoder": {
+        "title": "视频编码器"
+      },
+      "video_type": {
+        "title": "视频类型",
+        "description": "源视频的帧/场类型。"
+      }
+    }
+  },
+  "topaz.video.InterpolateVideo": {
+    "title": "Topaz 视频插帧",
+    "description": "Topaz 视频 API —— 帧插值流水线。\n\nTopaz, 视频, 插帧, 慢动作, FPS\n\n与视频增强相同的多次步骤流水线，但使用帧插值滤镜。Apollo（apo-8）通用慢动作/提帧；Apollo Fast（apf-2）速度优先变体；Chronos（chr-2）适用于真实素材的自然慢动作；Chronos Fast（chf-3）速度优先变体；Aion（aion-1）适用于复杂 4K+ 运动的极致慢动作。",
+    "properties": {
+      "audio_mode": {
+        "title": "音频",
+        "description": "copy = 保留源音频。aac/ac3/pcm = 重编码。none = 丢弃音频。"
+      },
+      "duplicate": {
+        "title": "去除重复帧",
+        "description": "分析输入中的重复帧并在插帧前移除。"
+      },
+      "duplicate_threshold": {
+        "title": "重复阈值",
+        "description": "重复帧的检测灵敏度（0.001-0.1）。"
+      },
+      "dynamic_compression_level": {
+        "title": "压缩级别"
+      },
+      "fps": {
+        "title": "输出 FPS",
+        "description": "0 = 与源相同。否则为 15-240。不改变时长。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "帧插值模型。"
+      },
+      "output_container": {
+        "title": "容器"
+      },
+      "output_height": {
+        "title": "输出高度",
+        "description": "0 = 与源相同。"
+      },
+      "output_width": {
+        "title": "输出宽度",
+        "description": "0 = 与源相同。"
+      },
+      "slowmo": {
+        "title": "慢动作倍数",
+        "description": "1.0 = 无慢动作。>1 拉长时长（1-16）。"
+      },
+      "video": {
+        "title": "视频",
+        "description": "待插帧的源视频。"
+      },
+      "video_encoder": {
+        "title": "视频编码器"
+      }
+    }
+  },
+  "vector.Collection": {
+    "title": "集合",
+    "description": "获取或创建一个命名的向量数据库集合，用于存储嵌入向量。\n向量, 嵌入向量, 集合, RAG, 获取, 创建",
+    "properties": {
+      "embedding_model": {
+        "title": "嵌入模型",
+        "description": "用于嵌入的模型，搜索 nomic-embed-text 并下载"
+      },
+      "name": {
+        "title": "名称",
+        "description": "要创建的集合名称"
+      }
+    }
+  },
+  "vector.Count": {
+    "title": "统计文档数",
+    "description": "统计集合中的文档数。\n向量, 嵌入向量, 集合, RAG",
+    "properties": {
+      "collection": {
+        "title": "集合",
+        "description": "要统计的集合"
+      }
+    }
+  },
+  "vector.GetDocuments": {
+    "title": "获取文档",
+    "description": "从集合中获取文档。\n向量, 嵌入向量, 集合, RAG, 检索",
+    "properties": {
+      "collection": {
+        "title": "集合",
+        "description": "要获取的集合"
+      },
+      "ids": {
+        "title": "ID",
+        "description": "要获取的文档 ID"
+      },
+      "limit": {
+        "title": "上限",
+        "description": "获取文档的上限"
+      },
+      "offset": {
+        "title": "偏移",
+        "description": "获取文档的偏移量"
+      }
+    }
+  },
+  "vector.HybridSearch": {
+    "title": "混合搜索",
+    "description": "通过倒数排名融合将语义排序与关键词过滤后的语义排序合并。关键词支路在与查询词匹配的文档约束下执行同一语义查询，因此两支路都匹配的文档排名更高。\n向量, RAG, 查询, 语义, 文本, 相似度",
+    "properties": {
+      "collection": {
+        "title": "集合",
+        "description": "要查询的集合"
+      },
+      "k_constant": {
+        "title": "K 常数",
+        "description": "倒数排名融合的常数（默认 60.0）"
+      },
+      "min_keyword_length": {
+        "title": "最短关键词长度",
+        "description": "关键词 Token 的最小长度"
+      },
+      "n_results": {
+        "title": "结果数",
+        "description": "最终返回的结果数量"
+      },
+      "text": {
+        "title": "文本",
+        "description": "要查询的文本"
+      }
+    }
+  },
+  "vector.IndexAggregatedText": {
+    "title": "索引聚合文本",
+    "description": "使用来自 Ollama 的聚合嵌入向量一次性索引多个文本块。\n向量, 嵌入向量, 集合, RAG, 索引, 文本, 分块, 批量, Ollama",
+    "properties": {
+      "aggregation": {
+        "title": "聚合方式",
+        "description": "嵌入向量的聚合方式。"
+      },
+      "collection": {
+        "title": "集合",
+        "description": "要索引的集合"
+      },
+      "document": {
+        "title": "文档",
+        "description": "要索引的文档"
+      },
+      "document_id": {
+        "title": "文档 ID",
+        "description": "与文本关联的文档 ID"
+      },
+      "metadata": {
+        "title": "元数据",
+        "description": "与文本关联的元数据"
+      },
+      "text_chunks": {
+        "title": "文本块",
+        "description": "要索引的文本块列表"
+      }
+    }
+  },
+  "vector.IndexEmbedding": {
+    "title": "索引嵌入向量",
+    "description": "将单个嵌入向量连同可选元数据索引到集合中，创建可查询的条目以进行相似度匹配。\n向量, 索引, 嵌入向量, 存储, RAG",
+    "properties": {
+      "collection": {
+        "title": "集合",
+        "description": "要索引的集合"
+      },
+      "embedding": {
+        "title": "嵌入向量",
+        "description": "要索引的嵌入向量"
+      },
+      "index_id": {
+        "title": "索引 ID",
+        "description": "与嵌入向量关联的 ID"
+      },
+      "metadata": {
+        "title": "元数据",
+        "description": "与嵌入向量关联的元数据"
+      }
+    }
+  },
+  "vector.IndexImage": {
+    "title": "索引图像",
+    "description": "索引一组图像资产或文件。\n向量, 嵌入向量, 集合, RAG, 索引, 图像, 批量",
+    "properties": {
+      "collection": {
+        "title": "集合",
+        "description": "要索引的集合"
+      },
+      "image": {
+        "title": "图像",
+        "description": "要索引的图像资产"
+      },
+      "index_id": {
+        "title": "索引 ID",
+        "description": "与图像关联的 ID，默认为图像的 URI"
+      },
+      "metadata": {
+        "title": "元数据",
+        "description": "与图像关联的元数据"
+      },
+      "upsert": {
+        "title": "Upsert",
+        "description": "是否对图像执行 upsert"
+      }
+    }
+  },
+  "vector.IndexString": {
+    "title": "索引字符串",
+    "description": "将带文档 ID 的字符串索引到集合中。\n向量, 嵌入向量, 集合, RAG, 索引, 文本, 字符串",
+    "properties": {
+      "collection": {
+        "title": "集合",
+        "description": "要索引的集合"
+      },
+      "document_id": {
+        "title": "文档 ID",
+        "description": "与文本内容关联的文档 ID"
+      },
+      "metadata": {
+        "title": "元数据",
+        "description": "与文本关联的元数据"
+      },
+      "text": {
+        "title": "文本",
+        "description": "要索引的文本内容"
+      }
+    }
+  },
+  "vector.IndexTextChunk": {
+    "title": "索引文本块",
+    "description": "索引单个文本块。\n向量, 嵌入向量, 集合, RAG, 索引, 文本, 分块",
+    "properties": {
+      "collection": {
+        "title": "集合",
+        "description": "要索引的集合"
+      },
+      "document_id": {
+        "title": "文档 ID",
+        "description": "与文本块关联的文档 ID"
+      },
+      "metadata": {
+        "title": "元数据",
+        "description": "与文本块关联的元数据"
+      },
+      "text": {
+        "title": "文本",
+        "description": "要索引的文本"
+      }
+    }
+  },
+  "vector.Peek": {
+    "title": "预览",
+    "description": "预览集合中的文档。\n向量, 嵌入向量, 集合, RAG, 预览",
+    "properties": {
+      "collection": {
+        "title": "集合",
+        "description": "要预览的集合"
+      },
+      "limit": {
+        "title": "上限",
+        "description": "预览文档的上限"
+      }
+    }
+  },
+  "vector.QueryImage": {
+    "title": "查询图像",
+    "description": "在索引中查询相似图像。\n向量, RAG, 查询, 图像, 搜索, 相似度",
+    "properties": {
+      "collection": {
+        "title": "集合",
+        "description": "要查询的集合"
+      },
+      "image": {
+        "title": "图像",
+        "description": "要查询的图像"
+      },
+      "n_results": {
+        "title": "结果数",
+        "description": "返回的结果数量"
+      }
+    }
+  },
+  "vector.QueryText": {
+    "title": "查询文本",
+    "description": "在索引中查询相似文本。\n向量, RAG, 查询, 文本, 搜索, 相似度",
+    "properties": {
+      "collection": {
+        "title": "集合",
+        "description": "要查询的集合"
+      },
+      "n_results": {
+        "title": "结果数",
+        "description": "返回的结果数量"
+      },
+      "text": {
+        "title": "文本",
+        "description": "要查询的文本"
+      }
+    }
+  },
+  "vector.RemoveOverlap": {
+    "title": "去除重叠",
+    "description": "移除列表中相邻字符串之间的重叠词汇。将文本拆分为单词并匹配词序列，以更准确地检测重叠。\n向量, RAG, 查询, 文本, 处理, 重叠, 去重",
+    "properties": {
+      "documents": {
+        "title": "文档",
+        "description": "待去除重叠的字符串列表"
+      },
+      "min_overlap_words": {
+        "title": "最小重叠词数",
+        "description": "视为重叠所需的最小词数"
+      }
+    }
+  },
+  "xai.image.GenerateImage": {
+    "title": "生成图像",
+    "description": "使用 xAI Grok 图像模型从文本生成图像。\nxAI, Grok, 图像, T2I, 文生图, 创建, 生成, 图画, 艺术\n\n使用 xAI 兼容 OpenAI 的图像生成端点。模型会自动改写提示词；改写后的提示词作为第二个输出返回。需要 xAI API 密钥。",
+    "properties": {
+      "model": {
+        "title": "模型",
+        "description": "要使用的 Grok 图像模型（如 grok-2-image、grok-imagine-image）。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "描述待生成图像的提示词。"
+      }
+    }
+  },
+  "xai.text.ChatComplete": {
+    "title": "对话补全",
+    "description": "使用 xAI Grok 对话补全模型生成文本。\nxAI, Grok, 对话, AI, 文本生成, LLM, 补全\n\n使用 xAI Grok 模型，通过兼容 OpenAI 的对话补全端点从提示词生成回复。需要 xAI API 密钥。\n\n常见用途：\n- 根据提示词生成文本回复\n- 构建对话式 AI 应用\n- 摘要、改写和分类文本\n- 使用 Grok 模型完成推理任务",
+    "properties": {
+      "max_tokens": {
+        "title": "最大 Token 数",
+        "description": "生成的最大 Token 数"
+      },
+      "model": {
+        "title": "模型",
+        "description": "要使用的 Grok 模型（如 grok-4、grok-4.3、grok-3、grok-3-mini）。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "文本生成的提示词"
+      },
+      "system_prompt": {
+        "title": "系统提示词",
+        "description": "可选的系统提示词，用于引导模型行为"
+      },
+      "temperature": {
+        "title": "温度",
+        "description": "采样温度。值越高输出越随机。"
+      }
+    }
+  },
+  "xai.text.WebSearch": {
+    "title": "网络搜索",
+    "description": "使用 Grok 结合 xAI Live Search 在网络和 X 上回答问题。\nxAI, Grok, 搜索, 网络, 实时, 引用\n\n使用 xAI Live Search（search_parameters），让 Grok 从网络和 X 引入实时信息来回答查询。需要 xAI API 密钥。\n\n常见用途：\n- 回答关于时事的问题\n- 用最新来源做研究\n- 摘要近期新闻",
+    "properties": {
+      "max_results": {
+        "title": "最大结果数",
+        "description": "考虑的搜索结果最大数量。"
+      },
+      "model": {
+        "title": "模型",
+        "description": "用于搜索查询的 Grok 模型。"
+      },
+      "query": {
+        "title": "查询",
+        "description": "用实时网络/X 搜索研究的问题。"
+      },
+      "search_mode": {
+        "title": "搜索模式",
+        "description": "auto 让 Grok 决定何时搜索，on 强制搜索，off 禁用搜索。"
+      }
+    }
+  },
+  "xai.vision.ImageToText": {
+    "title": "图生文",
+    "description": "使用 xAI Grok 视觉模型分析图像并生成文字。\nxAI, Grok, 视觉, 图像, OCR, 分析, 多模态\n\n使用 Grok 多模态模型，通过兼容 OpenAI 的对话补全端点理解并描述图像。可执行 OCR、图像分析以及就图像内容回答问题。需要 xAI API 密钥。\n\n常见用途：\n- 描述图像内容\n- 回答关于图像的问题\n- 从图像中提取文字（OCR）\n- 分析图表和示意图",
+    "properties": {
+      "image": {
+        "title": "图像",
+        "description": "待分析的图像"
+      },
+      "max_tokens": {
+        "title": "最大 Token 数",
+        "description": "生成的最大 Token 数"
+      },
+      "model": {
+        "title": "模型",
+        "description": "要使用的 Grok 视觉模型（如 grok-2-vision-1212、grok-4）。"
+      },
+      "prompt": {
+        "title": "提示词",
+        "description": "关于图像的提示词/问题"
+      },
+      "temperature": {
+        "title": "温度",
+        "description": "回复生成的采样温度"
+      }
+    }
   }
 }
