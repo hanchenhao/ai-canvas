@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback } from "react";
 import { useTheme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
@@ -16,6 +17,7 @@ import { FlexRow, FlexColumn, Text, Caption, Card, EditorButton, Chip, BORDER_RA
  */
 const DiagnosticsSection = memo(function DiagnosticsSection() {
   const theme = useTheme();
+  const { t } = useTranslation("settings");
   const addNotification = useNotificationStore((s) => s.addNotification);
 
   const { data, isLoading, refetch } = trpc.settings.diagnostics.useQuery(undefined, {
@@ -54,11 +56,11 @@ const DiagnosticsSection = memo(function DiagnosticsSection() {
     if (!text) return;
     try {
       await navigator.clipboard.writeText(text);
-      addNotification({ type: "info", alert: true, content: "Diagnostics copied." });
+      addNotification({ type: "info", alert: true, content: t("diagnostics.actions.copySuccess") });
     } catch {
-      addNotification({ type: "error", alert: true, content: "Copy failed." });
+      addNotification({ type: "error", alert: true, content: t("diagnostics.actions.copyFailed") });
     }
-  }, [buildReport, addNotification]);
+  }, [buildReport, addNotification, t]);
 
   const handleExport = useCallback(() => {
     const text = buildReport();
@@ -75,7 +77,7 @@ const DiagnosticsSection = memo(function DiagnosticsSection() {
   if (isLoading) {
     return (
       <Card variant="outlined" padding="normal" sx={{ borderRadius: BORDER_RADIUS.lg, border: `1px solid ${theme.vars.palette.divider}` }}>
-        <Text size="small" color="secondary">Loading diagnostics...</Text>
+        <Text size="small" color="secondary">{t("diagnostics.loading")}</Text>
       </Card>
     );
   }
@@ -84,8 +86,8 @@ const DiagnosticsSection = memo(function DiagnosticsSection() {
     return (
       <Card variant="outlined" padding="normal" sx={{ borderRadius: BORDER_RADIUS.lg, border: `1px solid ${theme.vars.palette.divider}` }}>
         <FlexRow justify="space-between" align="center">
-          <Text size="small" color="secondary">Diagnostics unavailable.</Text>
-          <EditorButton size="small" variant="text" onClick={() => refetch()}>Retry</EditorButton>
+          <Text size="small" color="secondary">{t("diagnostics.unavailable")}</Text>
+          <EditorButton size="small" variant="text" onClick={() => refetch()}>{t("diagnostics.retry")}</EditorButton>
         </FlexRow>
       </Card>
     );
@@ -97,16 +99,16 @@ const DiagnosticsSection = memo(function DiagnosticsSection() {
         {/* Security */}
         <FlexRow justify="space-between" align="center">
           <FlexColumn gap={0.5}>
-            <Text size="small" weight={600}>Secret Encryption</Text>
+            <Text size="small" weight={600}>{t("diagnostics.secretEncryption.title")}</Text>
             <Caption sx={{ opacity: 0.6 }}>
               {data.secretEncryptionConfigured
-                ? "API keys are encrypted at rest."
-                : "No SECRETS_MASTER_KEY set. Keys stored without encryption."}
+                ? t("diagnostics.secretEncryption.encryptedRest")
+                : t("diagnostics.secretEncryption.noMasterKey")}
             </Caption>
           </FlexColumn>
           <Chip
             icon={data.secretEncryptionConfigured ? <CheckCircleIcon /> : <CancelIcon />}
-            label={data.secretEncryptionConfigured ? "Encrypted" : "Unencrypted"}
+            label={data.secretEncryptionConfigured ? t("diagnostics.secretEncryption.encrypted") : t("diagnostics.secretEncryption.unencrypted")}
             size="small"
             color={data.secretEncryptionConfigured ? "success" : "warning"}
             variant="outlined"
@@ -115,7 +117,7 @@ const DiagnosticsSection = memo(function DiagnosticsSection() {
 
         {/* Providers */}
         <FlexColumn gap={1}>
-          <Text size="small" weight={600}>Provider Status</Text>
+          <Text size="small" weight={600}>{t("diagnostics.providers.title")}</Text>
           {data.providers.map((provider) => (
             <FlexRow key={provider.id} justify="space-between" align="center">
               <FlexColumn gap={0.25}>
@@ -124,7 +126,7 @@ const DiagnosticsSection = memo(function DiagnosticsSection() {
               </FlexColumn>
               <Chip
                 icon={provider.configured ? <CheckCircleIcon /> : <CancelIcon />}
-                label={provider.configured ? provider.source : "Not set"}
+                label={provider.configured ? provider.source : t("diagnostics.providers.notSet")}
                 size="small"
                 color={provider.configured ? "success" : "default"}
                 variant="outlined"
@@ -136,10 +138,10 @@ const DiagnosticsSection = memo(function DiagnosticsSection() {
 
         {/* Storage */}
         <FlexColumn gap={1}>
-          <Text size="small" weight={600}>Asset Storage</Text>
+          <Text size="small" weight={600}>{t("diagnostics.storage.title")}</Text>
           <FlexRow justify="space-between" align="center">
             <FlexColumn gap={0.25}>
-              <Text size="smaller">{data.storage.kind === "file" ? "Local filesystem" : data.storage.kind.toUpperCase()}</Text>
+              <Text size="smaller">{data.storage.kind === "file" ? t("diagnostics.storage.localFilesystem") : data.storage.kind.toUpperCase()}</Text>
               {data.storage.bucket && (
                 <Caption size="smaller" sx={{ opacity: 0.5, fontFamily: "monospace" }}>
                   {data.storage.bucket}{data.storage.region ? ` (${data.storage.region})` : ""}
@@ -154,7 +156,7 @@ const DiagnosticsSection = memo(function DiagnosticsSection() {
             </FlexColumn>
             <Chip
               icon={data.storage.error ? <CancelIcon /> : <CheckCircleIcon />}
-              label={data.storage.error ? "Error" : "Healthy"}
+              label={data.storage.error ? t("diagnostics.storage.error") : t("diagnostics.storage.healthy")}
               size="small"
               color={data.storage.error ? "error" : "success"}
               variant="outlined"
@@ -164,13 +166,13 @@ const DiagnosticsSection = memo(function DiagnosticsSection() {
 
         {/* Data directory */}
         <FlexColumn gap={1}>
-          <Text size="small" weight={600}>Data Directory</Text>
+          <Text size="small" weight={600}>{t("diagnostics.dataDirectory.title")}</Text>
           <Caption size="smaller" sx={{ opacity: 0.5, fontFamily: "monospace", wordBreak: "break-all" }}>
             {data.dataDirectory}
           </Caption>
           {data.isUnsignedBuild && (
             <Caption size="smaller" color="warning.main" sx={{ lineHeight: 1.4 }}>
-              Unsigned test build. This application has not been code-signed or notarized.
+              {t("diagnostics.dataDirectory.unsignedWarning")}
             </Caption>
           )}
         </FlexColumn>
@@ -183,7 +185,7 @@ const DiagnosticsSection = memo(function DiagnosticsSection() {
             startIcon={<ContentCopyIcon sx={{ fontSize: 16 }} />}
             onClick={handleCopy}
           >
-            Copy
+            {t("diagnostics.actions.copy")}
           </EditorButton>
           <EditorButton
             size="small"
@@ -191,7 +193,7 @@ const DiagnosticsSection = memo(function DiagnosticsSection() {
             startIcon={<DownloadIcon sx={{ fontSize: 16 }} />}
             onClick={handleExport}
           >
-            Export Diagnostics
+            {t("diagnostics.actions.export")}
           </EditorButton>
         </FlexRow>
       </FlexColumn>

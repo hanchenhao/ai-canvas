@@ -95,5 +95,37 @@
     "bundleOpening": "正在 Claude Desktop 中打开 NodeTool 扩展 —— 请在其中确认安装。",
     "bundleRevealed": "已显示 nodetool.mcpb —— 请将其拖入 Claude Desktop → 设置 → 扩展。",
     "bundleInstallFailed": "扩展安装失败：{{error}}"
+  },
+  "diagnostics": {
+    "loading": "正在加载诊断信息…",
+    "unavailable": "诊断信息不可用。",
+    "retry": "重试",
+    "secretEncryption": {
+      "title": "密钥加密",
+      "encryptedRest": "API 密钥已加密存储。",
+      "noMasterKey": "未设置 SECRETS_MASTER_KEY。密钥将以未加密形式存储。",
+      "encrypted": "已加密",
+      "unencrypted": "未加密"
+    },
+    "providers": {
+      "title": "提供商状态",
+      "notSet": "未设置"
+    },
+    "storage": {
+      "title": "素材存储",
+      "localFilesystem": "本地文件系统",
+      "healthy": "正常",
+      "error": "错误"
+    },
+    "dataDirectory": {
+      "title": "数据目录",
+      "unsignedWarning": "未签名的测试构建。本应用未经过代码签名或公证。"
+    },
+    "actions": {
+      "copy": "复制",
+      "export": "导出诊断信息",
+      "copySuccess": "诊断信息已复制。",
+      "copyFailed": "复制失败。"
+    }
   }
 }

@@ -95,5 +95,37 @@
     "bundleOpening": "Opening the NodeTool extension in Claude Desktop — confirm the install there.",
     "bundleRevealed": "Revealed nodetool.mcpb — drag it into Claude Desktop → Settings → Extensions.",
     "bundleInstallFailed": "Extension install failed: {{error}}"
+  },
+  "diagnostics": {
+    "loading": "Loading diagnostics...",
+    "unavailable": "Diagnostics unavailable.",
+    "retry": "Retry",
+    "secretEncryption": {
+      "title": "Secret Encryption",
+      "encryptedRest": "API keys are encrypted at rest.",
+      "noMasterKey": "No SECRETS_MASTER_KEY set. Keys stored without encryption.",
+      "encrypted": "Encrypted",
+      "unencrypted": "Unencrypted"
+    },
+    "providers": {
+      "title": "Provider Status",
+      "notSet": "Not set"
+    },
+    "storage": {
+      "title": "Asset Storage",
+      "localFilesystem": "Local filesystem",
+      "healthy": "Healthy",
+      "error": "Error"
+    },
+    "dataDirectory": {
+      "title": "Data Directory",
+      "unsignedWarning": "Unsigned test build. This application has not been code-signed or notarized."
+    },
+    "actions": {
+      "copy": "Copy",
+      "export": "Export Diagnostics",
+      "copySuccess": "Diagnostics copied.",
+      "copyFailed": "Copy failed."
+    }
   }
 }
