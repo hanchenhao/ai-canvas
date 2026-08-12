@@ -118,6 +118,10 @@ const projectName = (prompt: string): string => {
   return normalized.length > 24 ? `${normalized.slice(0, 24)}…` : normalized;
 };
 
+type CreateStoryboardInput = Parameters<
+  ReturnType<typeof useCreateStoryboard>["mutateAsync"]
+>[0];
+
 const StudioHome = () => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -174,6 +178,9 @@ const StudioHome = () => {
         .mutateAsync({
           name: projectName(brief),
           projectId: "default",
+          // The tRPC document schema is zod `.passthrough()`, so its inferred
+          // type demands an index signature the ApiTypes model values lack —
+          // same wire-cast pattern as useStoryboardServerSync.
           document: {
             screenplay: null,
             shots: [],
@@ -184,7 +191,7 @@ const StudioHome = () => {
             directorModel: STUDIO_DIRECTOR_MODEL,
             imageModel: STUDIO_STILL_MODEL,
             videoModel: STUDIO_CLIP_MODEL
-          }
+          } as unknown as CreateStoryboardInput["document"]
         })
         .then((created) => navigate(`/studio/storyboard/${created.id}`))
         .catch(() => setCreateError("创建失败，请检查服务和模型配置后重试。"))
@@ -332,7 +339,7 @@ const StudioHome = () => {
           gap={SPACING.lg}
           sx={{ width: "100%", maxWidth: 1120, mx: "auto" }}
         >
-          <FlexRow align="end" justify="space-between">
+          <FlexRow align="flex-end" justify="space-between">
             <FlexColumn gap={SPACING.xs}>
               <Text size="big" weight={600}>
                 选择创作方式
