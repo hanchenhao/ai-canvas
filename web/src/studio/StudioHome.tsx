@@ -36,6 +36,7 @@ import { useCreateScript, useScripts } from "../hooks/script/useScripts";
 import { useTimelines } from "../hooks/useTimelineSequence";
 import { useWorkflowManager } from "../contexts/WorkflowManagerContext";
 import StudioShell from "./StudioShell";
+import QuickGeneratePanel from "./QuickGeneratePanel";
 import {
   STUDIO_CLIP_MODEL,
   STUDIO_DIRECTOR_MODEL,
@@ -372,6 +373,8 @@ const StudioHome = () => {
             />
           </FlexRow>
         </FlexColumn>
+
+        <QuickGeneratePanel />
 
         {recent.length > 0 && (
           <FlexColumn
