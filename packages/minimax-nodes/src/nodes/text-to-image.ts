@@ -3,8 +3,8 @@ import type { NodeClass } from "@nodetool-ai/node-sdk";
 import {
   assertBaseResp,
   getMinimaxApiKey,
+  getMinimaxBaseUrl,
   imageRefFromBytes,
-  MINIMAX_BASE_URL,
   MINIMAX_IMAGE_ASPECTS,
   minimaxHeaders,
   minimaxFetch
@@ -71,6 +71,7 @@ export class MinimaxTextToImageNode extends BaseNode {
 
   async process(): Promise<Record<string, unknown>> {
     const apiKey = getMinimaxApiKey(this._secrets);
+    const baseUrl = getMinimaxBaseUrl(this._secrets);
 
     const basePrompt = String(this.prompt ?? "");
     if (!basePrompt) throw new Error("Prompt is required");
@@ -89,7 +90,7 @@ export class MinimaxTextToImageNode extends BaseNode {
       prompt_optimizer: Boolean(this.prompt_optimizer ?? true)
     };
 
-    const res = await minimaxFetch(`${MINIMAX_BASE_URL}/v1/image_generation`, {
+    const res = await minimaxFetch(`${baseUrl}/v1/image_generation`, {
       method: "POST",
       headers: minimaxHeaders(apiKey),
       body: JSON.stringify(body)

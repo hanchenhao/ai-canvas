@@ -29,15 +29,16 @@ describe("MinimaxProvider", () => {
     expect(MinimaxProvider.requiredSecrets()).toEqual(["MINIMAX_API_KEY"]);
   });
 
-  it("returns container env with MINIMAX_API_KEY", () => {
-    const provider = new MinimaxProvider(
-      { MINIMAX_API_KEY: "test-key" },
-      { client: {} as any }
-    );
-    expect(provider.getContainerEnv()).toEqual({
-      MINIMAX_API_KEY: "test-key"
-    });
-  });
+ it("returns container env with MINIMAX_API_KEY", () => {
+   const provider = new MinimaxProvider(
+     { MINIMAX_API_KEY: "test-key" },
+     { client: {} as any }
+   );
+   expect(provider.getContainerEnv()).toEqual({
+     MINIMAX_API_KEY: "test-key",
+     MINIMAX_BASE_URL: "https://api.minimax.io"
+   });
+ });
 
   it("has tool support for all models", async () => {
     const provider = new MinimaxProvider(

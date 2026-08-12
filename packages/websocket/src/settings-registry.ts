@@ -302,7 +302,12 @@ sec(
 sec(
   "MINIMAX_API_KEY",
   "MiniMax",
-  "MiniMax API key for accessing MiniMax AI models. Get yours at https://platform.minimax.chat/user-center/basic-information/interface-key"
+  "MiniMax API key. Get your key from the platform you registered on: international (api.minimax.io) at https://platform.minimax.io/dashboard/api-key-management, or China domestic (api.minimax.chat) at https://platform.minimax.chat/user-center/basic-information/interface-key. Keys are NOT interchangeable between the two platforms — set MINIMAX_BASE_URL to match."
+);
+s(
+  "MINIMAX_BASE_URL",
+  "MiniMax",
+  "MiniMax API base URL. Use https://api.minimax.io (default) for international keys, or https://api.minimax.chat for China domestic keys."
 );
 sec(
   "AKI_API_KEY",

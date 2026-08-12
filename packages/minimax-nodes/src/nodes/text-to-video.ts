@@ -3,6 +3,7 @@ import type { NodeClass } from "@nodetool-ai/node-sdk";
 import {
   generateVideo,
   getMinimaxApiKey,
+  getMinimaxBaseUrl,
   MINIMAX_T2V_MODELS,
   MINIMAX_VIDEO_DURATIONS,
   MINIMAX_VIDEO_RESOLUTIONS,
@@ -65,8 +66,9 @@ export class MinimaxTextToVideoNode extends BaseNode {
   })
   declare resolution: any;
 
-  async process(): Promise<Record<string, unknown>> {
-    const apiKey = getMinimaxApiKey(this._secrets);
+ async process(): Promise<Record<string, unknown>> {
+   const apiKey = getMinimaxApiKey(this._secrets);
+   const baseUrl = getMinimaxBaseUrl(this._secrets);
 
     const prompt = String(this.prompt ?? "");
     if (!prompt) throw new Error("Prompt is required");
@@ -82,7 +84,7 @@ export class MinimaxTextToVideoNode extends BaseNode {
       )
     };
 
-    const bytes = await generateVideo(apiKey, body);
+    const bytes = await generateVideo(apiKey, body, { baseUrl });
     return { output: videoRefFromBytes(bytes) };
   }
 }

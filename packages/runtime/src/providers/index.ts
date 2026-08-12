@@ -282,7 +282,12 @@ registerBuiltinProvider(PROVIDER_IDS.GEMINI, GeminiProvider, { GEMINI_API_KEY: "
 registerBuiltinProvider(PROVIDER_IDS.GROQ, GroqProvider, { GROQ_API_KEY: "" });
 registerBuiltinProvider(PROVIDER_IDS.MISTRAL, MistralProvider, { MISTRAL_API_KEY: "" });
 registerBuiltinProvider(PROVIDER_IDS.MOONSHOT, MoonshotProvider, { KIMI_API_KEY: "" });
-registerBuiltinProvider(PROVIDER_IDS.MINIMAX, MinimaxProvider, { MINIMAX_API_KEY: "" });
+registerBuiltinProvider(
+  PROVIDER_IDS.MINIMAX,
+  MinimaxProvider,
+  { MINIMAX_API_KEY: "" },
+  { MINIMAX_BASE_URL: "" }
+);
 registerBuiltinProvider(PROVIDER_IDS.REPLICATE, ReplicateProvider, { REPLICATE_API_TOKEN: "" });
 registerBuiltinProvider(PROVIDER_IDS.FAL_AI, FalProvider, { FAL_API_KEY: "" });
 // NodeTool's own managed models: curated delegates on platform-owned keys,

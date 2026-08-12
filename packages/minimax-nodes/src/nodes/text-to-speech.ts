@@ -5,7 +5,7 @@ import {
   assertBaseResp,
   DEFAULT_VOICE,
   getMinimaxApiKey,
-  MINIMAX_BASE_URL,
+  getMinimaxBaseUrl,
   MINIMAX_EMOTIONS,
   MINIMAX_LANGUAGE_BOOST,
   MINIMAX_TTS_MODELS,
@@ -122,8 +122,9 @@ export class MinimaxTextToSpeechNode extends BaseNode {
   })
   declare format: any;
 
-  async process(): Promise<Record<string, unknown>> {
-    const apiKey = getMinimaxApiKey(this._secrets);
+ async process(): Promise<Record<string, unknown>> {
+   const apiKey = getMinimaxApiKey(this._secrets);
+   const baseUrl = getMinimaxBaseUrl(this._secrets);
 
     const text = String(this.text ?? "");
     if (!text) throw new Error("Text is required");
@@ -162,7 +163,7 @@ export class MinimaxTextToSpeechNode extends BaseNode {
       body.language_boost = languageBoost;
     }
 
-    const res = await fetch(`${MINIMAX_BASE_URL}/v1/t2a_v2`, {
+    const res = await fetch(`${baseUrl}/v1/t2a_v2`, {
       method: "POST",
       headers: minimaxHeaders(apiKey),
       body: JSON.stringify(body)

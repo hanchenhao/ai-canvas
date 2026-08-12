@@ -6,6 +6,7 @@ import {
   bytesToBase64,
   generateVideo,
   getMinimaxApiKey,
+  getMinimaxBaseUrl,
   inferImageMime,
   MINIMAX_I2V_MODELS,
   MINIMAX_VIDEO_DURATIONS,
@@ -81,7 +82,8 @@ export class MinimaxImageToVideoNode extends BaseNode {
   declare resolution: any;
 
   async process(context?: ProcessingContext): Promise<Record<string, unknown>> {
-    const apiKey = getMinimaxApiKey(this._secrets);
+   const apiKey = getMinimaxApiKey(this._secrets);
+   const baseUrl = getMinimaxBaseUrl(this._secrets);
 
     const imageBytes = await loadMediaRefBytes(this.image, context);
     if (!imageBytes || imageBytes.length === 0) {
@@ -109,7 +111,7 @@ export class MinimaxImageToVideoNode extends BaseNode {
     const prompt = String(this.prompt ?? "");
     if (prompt) body.prompt = prompt;
 
-    const bytes = await generateVideo(apiKey, body);
+    const bytes = await generateVideo(apiKey, body, { baseUrl });
     return { output: videoRefFromBytes(bytes) };
   }
 }

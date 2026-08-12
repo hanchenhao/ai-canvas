@@ -4,7 +4,7 @@ import {
   audioRefFromBytes,
   assertBaseResp,
   getMinimaxApiKey,
-  MINIMAX_BASE_URL,
+  getMinimaxBaseUrl,
   MINIMAX_MUSIC_MODELS,
   minimaxHeaders,
   resolveAudioPayload
@@ -69,8 +69,9 @@ export class MinimaxMusicNode extends BaseNode {
   })
   declare format: any;
 
-  async process(): Promise<Record<string, unknown>> {
-    const apiKey = getMinimaxApiKey(this._secrets);
+ async process(): Promise<Record<string, unknown>> {
+   const apiKey = getMinimaxApiKey(this._secrets);
+   const baseUrl = getMinimaxBaseUrl(this._secrets);
 
     const prompt = String(this.prompt ?? "");
     if (!prompt) throw new Error("Prompt is required");
@@ -93,7 +94,7 @@ export class MinimaxMusicNode extends BaseNode {
       output_format: "hex"
     };
 
-    const res = await fetch(`${MINIMAX_BASE_URL}/v1/music_generation`, {
+    const res = await fetch(`${baseUrl}/v1/music_generation`, {
       method: "POST",
       headers: minimaxHeaders(apiKey),
       body: JSON.stringify(body)

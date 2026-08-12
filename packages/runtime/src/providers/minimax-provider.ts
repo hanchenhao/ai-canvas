@@ -35,8 +35,7 @@ import type {
 
 const log = createLogger("nodetool.runtime.providers.minimax");
 
-const MINIMAX_BASE_URL = "https://api.minimax.io";
-const MINIMAX_OPENAI_BASE_URL = `${MINIMAX_BASE_URL}/v1`;
+const DEFAULT_MINIMAX_BASE_URL = "https://api.minimax.io";
 
 /**
  * Known voice IDs shipped with MiniMax speech models. This is a curated subset
@@ -186,32 +185,36 @@ export class MinimaxProvider extends OpenAICompatProvider {
   }
 
   private readonly _minimaxFetch: typeof fetch;
+  private readonly _baseUrl: string;
 
   constructor(
-    secrets: { MINIMAX_API_KEY?: string },
+    secrets: { MINIMAX_API_KEY?: string; MINIMAX_BASE_URL?: string },
     options: OpenAICompatProviderOptions = {}
   ) {
-    const apiKey = secrets.MINIMAX_API_KEY;
-    if (!apiKey) {
-      throw new Error("MINIMAX_API_KEY is required");
-    }
+   const apiKey = secrets.MINIMAX_API_KEY;
+   if (!apiKey) {
+     throw new Error("MINIMAX_API_KEY is required");
+   }
 
-    const fetchFn = options.fetchFn ?? globalThis.fetch.bind(globalThis);
+   const baseUrl = secrets.MINIMAX_BASE_URL || DEFAULT_MINIMAX_BASE_URL;
 
-    super(
-      {
-        providerId: "minimax",
-        apiKey,
-        baseURL: MINIMAX_OPENAI_BASE_URL
-      },
-      { ...options, fetchFn }
-    );
+   const fetchFn = options.fetchFn ?? globalThis.fetch.bind(globalThis);
 
-    this._minimaxFetch = fetchFn;
+   super(
+     {
+       providerId: "minimax",
+       apiKey,
+       baseURL: `${baseUrl}/v1`
+     },
+     { ...options, fetchFn }
+   );
+
+   this._baseUrl = baseUrl;
+   this._minimaxFetch = fetchFn;
   }
 
   override getContainerEnv(): Record<string, string> {
-    return { MINIMAX_API_KEY: this.apiKey };
+    return { MINIMAX_API_KEY: this.apiKey, MINIMAX_BASE_URL: this._baseUrl };
   }
 
   override async hasToolSupport(_model: string): Promise<boolean> {
@@ -385,7 +388,7 @@ export class MinimaxProvider extends OpenAICompatProvider {
     log.debug("MiniMax textToMusic", { model: body.model, format: fmt });
 
     const res = await this._minimaxFetch(
-      `${MINIMAX_BASE_URL}/v1/music_generation`,
+      `${this._baseUrl}/v1/music_generation`,
       {
         method: "POST",
         headers: this.headers(),
@@ -540,7 +543,7 @@ export class MinimaxProvider extends OpenAICompatProvider {
     log.debug("MiniMax textToImage", { model: body.model, n: body.n });
 
     const res = await this._minimaxFetch(
-      `${MINIMAX_BASE_URL}/v1/image_generation`,
+      `${this._baseUrl}/v1/image_generation`,
       {
         method: "POST",
         headers: this.headers(),
@@ -681,7 +684,7 @@ export class MinimaxProvider extends OpenAICompatProvider {
     log.debug("MiniMax textToVideo submit", { model: modelId });
 
     const submit = await this._minimaxFetch(
-      `${MINIMAX_BASE_URL}/v1/video_generation`,
+      `${this._baseUrl}/v1/video_generation`,
       {
         method: "POST",
         headers: this.headers(),
@@ -714,7 +717,7 @@ export class MinimaxProvider extends OpenAICompatProvider {
     maxAttempts = 360,
     signal?: AbortSignal
   ): Promise<string> {
-    const url = `${MINIMAX_BASE_URL}/v1/query/video_generation?task_id=${encodeURIComponent(
+    const url = `${this._baseUrl}/v1/query/video_generation?task_id=${encodeURIComponent(
       taskId
     )}`;
     for (let i = 0; i < maxAttempts; i++) {
@@ -755,7 +758,7 @@ export class MinimaxProvider extends OpenAICompatProvider {
     fileId: string,
     signal?: AbortSignal
   ): Promise<Uint8Array> {
-    const url = `${MINIMAX_BASE_URL}/v1/files/retrieve?file_id=${encodeURIComponent(
+    const url = `${this._baseUrl}/v1/files/retrieve?file_id=${encodeURIComponent(
       fileId
     )}`;
     const res = await this._minimaxFetch(url, {
@@ -862,7 +865,7 @@ export class MinimaxProvider extends OpenAICompatProvider {
 
     log.debug("MiniMax textToSpeech", { model: body.model, format });
 
-    const res = await this._minimaxFetch(`${MINIMAX_BASE_URL}/v1/t2a_v2`, {
+    const res = await this._minimaxFetch(`${this._baseUrl}/v1/t2a_v2`, {
       method: "POST",
       headers: this.headers(),
       body: JSON.stringify(body)

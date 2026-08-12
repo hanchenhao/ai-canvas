@@ -80,6 +80,16 @@ export function getMinimaxApiKey(secrets: Record<string, string>): string {
   return key;
 }
 
+/**
+ * Resolve the MiniMax API base URL from injected secrets or the environment.
+ * Defaults to the international endpoint (api.minimax.io). Users with a
+ * China-domestic key (from platform.minimax.chat) must set MINIMAX_BASE_URL
+ * to https://api.minimax.chat — the two platforms issue separate keys.
+ */
+export function getMinimaxBaseUrl(secrets: Record<string, string>): string {
+  return secrets?.MINIMAX_BASE_URL || process.env.MINIMAX_BASE_URL || MINIMAX_BASE_URL;
+}
+
 export function minimaxHeaders(apiKey: string): Record<string, string> {
   return {
     Authorization: `Bearer ${apiKey}`,
@@ -355,6 +365,8 @@ export function videoRenderSettings(
 export interface VideoTaskOptions {
   pollIntervalMs?: number;
   maxAttempts?: number;
+  /** Override the MiniMax API base URL (international vs domestic). */
+  baseUrl?: string;
 }
 
 /**
@@ -365,9 +377,10 @@ export interface VideoTaskOptions {
 export async function generateVideo(
   apiKey: string,
   body: Record<string, unknown>,
-  options: VideoTaskOptions = {}
+ options: VideoTaskOptions = {}
 ): Promise<Uint8Array> {
-  const submit = await minimaxFetch(`${MINIMAX_BASE_URL}/v1/video_generation`, {
+  const baseUrl = options.baseUrl ?? MINIMAX_BASE_URL;
+  const submit = await minimaxFetch(`${baseUrl}/v1/video_generation`, {
     method: "POST",
     headers: minimaxHeaders(apiKey),
     body: JSON.stringify(body)
@@ -388,7 +401,7 @@ export async function generateVideo(
   }
 
   const fileId = await pollVideoTask(apiKey, taskId, options);
-  return downloadFile(apiKey, fileId);
+  return downloadFile(apiKey, fileId, options.baseUrl);
 }
 
 async function pollVideoTask(
@@ -398,7 +411,8 @@ async function pollVideoTask(
 ): Promise<string> {
   const pollIntervalMs = options.pollIntervalMs ?? 5000;
   const maxAttempts = options.maxAttempts ?? 360;
-  const url = `${MINIMAX_BASE_URL}/v1/query/video_generation?task_id=${encodeURIComponent(
+  const baseUrl = options.baseUrl ?? MINIMAX_BASE_URL;
+  const url = `${baseUrl}/v1/query/video_generation?task_id=${encodeURIComponent(
     taskId
   )}`;
   for (let i = 0; i < maxAttempts; i++) {
@@ -434,9 +448,11 @@ async function pollVideoTask(
 
 async function downloadFile(
   apiKey: string,
-  fileId: string
+  fileId: string,
+  baseUrlOverride?: string
 ): Promise<Uint8Array> {
-  const url = `${MINIMAX_BASE_URL}/v1/files/retrieve?file_id=${encodeURIComponent(
+  const baseUrl = baseUrlOverride ?? MINIMAX_BASE_URL;
+  const url = `${baseUrl}/v1/files/retrieve?file_id=${encodeURIComponent(
     fileId
   )}`;
   const res = await minimaxFetch(url, { headers: minimaxHeaders(apiKey) });
