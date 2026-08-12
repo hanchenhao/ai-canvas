@@ -64606,7 +64606,7 @@
         "description": "Omega 缩放 for APG guidance, or similar for other CFG types."
       },
       "guidance_interval": {
-        "description": "Guidance interval."
+        "description": "引导间隔。"
       },
       "guidance_interval_decay": {
         "description": "引导间隔衰减"
@@ -64630,7 +64630,7 @@
         "description": "Number of 推理步数."
       },
       "scheduler": {
-        "description": "Scheduler type."
+        "description": "调度器类型。"
       },
       "seed": {
         "description": "随机种子. Set to -1 to randomize."
@@ -64651,7 +64651,7 @@
         "description": "Maximum 音频 length in milliseconds"
       },
       "speaker": {
-        "description": "Speaker ID (0 or 1)"
+        "description": "说话人 ID（0 或 1）"
       },
       "text": {
         "description": "文本 to 转换 to 语音"
@@ -64666,7 +64666,7 @@
         "description": "Path to the 参考音频 file (可选)"
       },
       "cfg_weight": {
-        "description": "CFG/Pace weight"
+        "description": "CFG/节奏权重"
       },
       "exaggeration": {
         "description": "Exaggeration (Neutral = 0.5, extreme 值 can be unstable)"
@@ -64720,7 +64720,7 @@
         "description": "Exaggeration (Neutral = 0.5, extreme 值 can be unstable)"
       },
       "pitch": {
-        "description": "Pitch"
+        "description": "音调"
       },
       "prompt": {
         "description": "文本 to synthesize"
@@ -65167,10 +65167,10 @@
         "description": "Number of decoding 步数 for stage 4"
       },
       "max_cfg": {
-        "description": "Max CFG coefficient"
+        "description": "最大 CFG 系数"
       },
       "min_cfg": {
-        "description": "Min CFG coefficient"
+        "description": "最小 CFG 系数"
       },
       "model": {
         "description": "要使用的模型"
@@ -65179,7 +65179,7 @@
         "description": "输入 文本"
       },
       "span_score": {
-        "description": "An enumeration."
+        "description": "枚举类型。"
       },
       "temperature": {
         "description": "温度 for sampling"
@@ -65452,7 +65452,7 @@
         "description": "Maximum number of tokens to 生成"
       },
       "repetition_penalty": {
-        "description": "Repetition penalty"
+        "description": "重复惩罚"
       },
       "temperature": {
         "description": "温度 for 生成"
@@ -66505,7 +66505,7 @@
         "description": "简化的目标面数"
       },
       "file_type": {
-        "description": "File type"
+        "description": "文件类型"
       },
       "generator_seed": {
         "description": "种子 for random generator"
@@ -66598,7 +66598,7 @@
     "description": "生成 复杂 3D models from 图像（含 Rodin Gen-2）\nreplicate, ai",
     "properties": {
       "addons": {
-        "description": "Additional features"
+        "description": "附加功能"
       },
       "bbox_condition": {
         "description": "边界框条件 [宽度, 高度, 长度]"
@@ -66610,7 +66610,7 @@
         "description": "输入图像 for 3D 生成 (up to 5 图像)"
       },
       "material": {
-        "description": "Material type"
+        "description": "材质类型"
       },
       "mesh_mode": {
         "description": "网格面类型"
@@ -67006,7 +67006,7 @@
     "description": "The CLIP Interrogator is a 提示词 engineering tool that combines OpenAI's CLIP and Salesforce's BLIP to optimize 文本 提示词 to match a given 图像. Use the resulting 提示词（含 文生图 models like Stable Diffusion to 创建 cool art!）\nreplicate, ai",
     "properties": {
       "clip_model_name": {
-        "description": "Choose ViT-L for Stable Diffusion 1, ViT-H for Stable Diffusion 2, or ViT-bigG for Stable Diffusion XL."
+        "description": "为 Stable Diffusion 1 选择 ViT-L，为 Stable Diffusion 2 选择 ViT-H，为 Stable Diffusion XL 选择 ViT-bigG。"
       },
       "image": {
         "description": "输入图像"
@@ -67198,7 +67198,7 @@
         "description": "Sampling 温度"
       },
       "top_p": {
-        "description": "Top-p sampling"
+        "description": "Top-p 采样"
       },
       "video": {
         "description": "输入视频 file"
@@ -68017,7 +68017,7 @@
         "description": "输入提示词"
       },
       "scheduler": {
-        "description": "Scheduler"
+        "description": "调度器"
       },
       "sdxl_weights": {
         "description": "选择要使用的基础权重"
@@ -70273,7 +70273,7 @@
         "description": "图像 to use with Flux Redux. This is used together with the 文本提示词 to guide the 生成 towards the composition of the image_prompt. Must be jpeg, png, gif, or webp."
       },
       "interval": {
-        "description": "Deprecated"
+        "description": "已弃用"
       },
       "output_format": {
         "description": "输出图像的格式."
@@ -70294,7 +70294,7 @@
         "description": "随机种子。设置后生成可复现"
       },
       "steps": {
-        "description": "Deprecated"
+        "description": "已弃用"
       },
       "width": {
         "description": "Width of the 生成 图像 in 文生图 模式. Only used when aspect_ratio=custom. Must be a multiple of 32 (if it's not, it will be rounded to nearest multiple of 32). Note: Ignored in img2img and 局部重绘 模式."
@@ -70744,7 +70744,7 @@
         "description": "Number of 图像 to 生成 (1-10)"
       },
       "openai_api_key": {
-        "description": "Your OpenAI API key"
+        "description": "你的 OpenAI API 密钥"
       },
       "output_compression": {
         "description": "压缩级别 (0-100%)"
@@ -70786,7 +70786,7 @@
         "description": "Number of 图像 to 生成 (1-10)"
       },
       "openai_api_key": {
-        "description": "Your OpenAI API key"
+        "description": "你的 OpenAI API 密钥"
       },
       "output_compression": {
         "description": "压缩级别 (0-100%)"
@@ -70849,7 +70849,7 @@
         "description": "请求的文档，传递给聊天模板"
       },
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_completion_tokens": {
         "description": "An upper bound for the number of tokens that can be 生成 for a completion, including visible 输出 tokens and reasoning tokens."
@@ -70864,13 +70864,13 @@
         "description": "The minimum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "Completion API user 提示词."
       },
       "repetition_penalty": {
-        "description": "Repetition penalty"
+        "description": "重复惩罚"
       },
       "response_format": {
         "description": "An object specifying the 格式 that the model must 输出."
@@ -70993,7 +70993,7 @@
     "description": "这是使用 pruna ai 优化工具包优化的 hidream-l1-dev 模型版本\nreplicate, ai",
     "properties": {
       "model_type": {
-        "description": "Model type"
+        "description": "模型类型"
       },
       "output_format": {
         "description": "输出格式"
@@ -71020,7 +71020,7 @@
     "description": "这是使用 pruna ai 优化工具包优化的 hidream-l1 模型版本\nreplicate, ai",
     "properties": {
       "model_type": {
-        "description": "Model type"
+        "description": "模型类型"
       },
       "negative_prompt": {
         "description": "负向提示词 for 生成 图像. Leave blank to use the 默认 负向提示词."
@@ -71050,7 +71050,7 @@
     "description": "这是使用 pruna ai 优化工具包优化的 hidream-full 模型版本\nreplicate, ai",
     "properties": {
       "model_type": {
-        "description": "Model type"
+        "description": "模型类型"
       },
       "output_format": {
         "description": "输出格式"
@@ -71080,13 +71080,13 @@
         "description": "输出格式"
       },
       "height": {
-        "description": "Viewport height"
+        "description": "视口高度"
       },
       "html": {
         "description": "HTML to 渲染"
       },
       "width": {
-        "description": "Viewport width"
+        "description": "视口宽度"
       }
     }
   },
@@ -71855,13 +71855,13 @@
     "description": "Kimi K2 Thinking 是开源思考模型的最新、最强大版本\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_tokens": {
         "description": "The maximum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "提示词"
@@ -71870,7 +71870,7 @@
         "description": "The 值 used to modulate the next token probabilities."
       },
       "top_p": {
-        "description": "Top-p (nucleus) sampling"
+        "description": "Top-p（核）采样"
       }
     }
   },
@@ -73256,7 +73256,7 @@
         "description": "提示词 强度 when using img2img / 局部重绘. 1.0 corresponds to full destruction of information in 图像"
       },
       "scheduler": {
-        "description": "scheduler"
+        "description": "调度器"
       },
       "seed": {
         "description": "随机种子. Leave blank to randomize the 种子"
@@ -73301,7 +73301,7 @@
         "description": "提示词 强度 when using img2img / 局部重绘. 1.0 corresponds to full destruction of information in 图像"
       },
       "scheduler": {
-        "description": "scheduler"
+        "description": "调度器"
       },
       "seed": {
         "description": "随机种子. Leave blank to randomize the 种子"
@@ -73334,10 +73334,10 @@
         "description": "ID 缩放"
       },
       "image_height": {
-        "description": "Height"
+        "description": "高度"
       },
       "image_width": {
-        "description": "Width"
+        "description": "宽度"
       },
       "main_face_image": {
         "description": "ID 图像 (main)"
@@ -73349,7 +73349,7 @@
         "description": "负向提示词"
       },
       "num_samples": {
-        "description": "Num samples"
+        "description": "采样数量"
       },
       "num_steps": {
         "description": "步数"
@@ -75290,7 +75290,7 @@
         "description": "描述产品的新设置"
       },
       "scheduler": {
-        "description": "scheduler"
+        "description": "调度器"
       },
       "seed": {
         "description": "Empty or 0 for a random 图像"
@@ -75371,7 +75371,7 @@
         "description": "Replicate LoRA weights to use. Leave blank to use the 默认 weights."
       },
       "scheduler": {
-        "description": "scheduler"
+        "description": "调度器"
       },
       "seed": {
         "description": "随机种子. Leave blank to randomize the 种子"
@@ -75431,7 +75431,7 @@
         "description": "Replicate LoRA weights to use. Leave blank to use the 默认 weights."
       },
       "scheduler": {
-        "description": "scheduler"
+        "description": "调度器"
       },
       "seed": {
         "description": "随机种子. Leave blank to randomize the 种子"
@@ -75854,7 +75854,7 @@
         "description": "Replicate LoRA weights to use. Leave blank to use the 默认 weights."
       },
       "scheduler": {
-        "description": "scheduler"
+        "description": "调度器"
       },
       "seed": {
         "description": "随机种子. Leave blank to randomize the 种子"
@@ -75887,7 +75887,7 @@
         "description": "输入提示词"
       },
       "scheduler": {
-        "description": "scheduler"
+        "description": "调度器"
       },
       "seed": {
         "description": "随机种子. Leave blank to randomize the 种子"
@@ -76275,19 +76275,19 @@
     "description": "Surya 是一个文档 OCR 工具包，功能包括：\nreplicate, ai",
     "properties": {
       "action": {
-        "description": "Action"
+        "description": "操作"
       },
       "image": {
         "description": "Upload PDF or 图像"
       },
       "languages_choices": {
-        "description": "Languages"
+        "description": "语言"
       },
       "languages_input": {
         "description": "语言（逗号分隔列表）"
       },
       "page_number": {
-        "description": "Page Number"
+        "description": "页码"
       }
     }
   },
@@ -76401,7 +76401,7 @@
         "description": "If you want the 图像 to have a solid margin. 缩放 of the solid margin. 1.0 means no resizing."
       },
       "scheduler": {
-        "description": "scheduler"
+        "description": "调度器"
       },
       "seed": {
         "description": "随机种子. Leave blank to randomize the 种子"
@@ -76606,7 +76606,7 @@
         "description": "缩放 factor"
       },
       "scheduler": {
-        "description": "scheduler"
+        "description": "调度器"
       },
       "sd_model": {
         "description": "Stable Diffusion 模型检查点"
@@ -76792,7 +76792,7 @@
         "description": "输入"
       },
       "scale": {
-        "description": "Rescaling factor"
+        "description": "缩放系数"
       },
       "version": {
         "description": "GFPGAN version. v1.3: better 质量. v1.4: more 细节 and better identity."
@@ -77185,7 +77185,7 @@
         "description": "降噪"
       },
       "force_uniform_tiles": {
-        "description": "Force Uniform Tiles"
+        "description": "强制统一分块"
       },
       "image": {
         "description": "输入图像"
@@ -77203,10 +77203,10 @@
         "description": "正向提示词"
       },
       "sampler_name": {
-        "description": "Sampler"
+        "description": "采样器"
       },
       "scheduler": {
-        "description": "Scheduler"
+        "description": "调度器"
       },
       "seam_fix_denoise": {
         "description": "Seam Fix 降噪"
@@ -77218,10 +77218,10 @@
         "description": "Seam Fix 模式"
       },
       "seam_fix_padding": {
-        "description": "Seam Fix Padding"
+        "description": "接缝修补填充"
       },
       "seam_fix_width": {
-        "description": "Seam Fix Width"
+        "description": "接缝修补宽度"
       },
       "seed": {
         "description": "Sampling 种子, leave Empty for Random"
@@ -77230,13 +77230,13 @@
         "description": "步数"
       },
       "tile_height": {
-        "description": "Tile Height"
+        "description": "分块高度"
       },
       "tile_padding": {
-        "description": "Tile Padding"
+        "description": "分块填充"
       },
       "tile_width": {
-        "description": "Tile Width"
+        "description": "分块宽度"
       },
       "upscale_by": {
         "description": "放大 By"
@@ -77245,7 +77245,7 @@
         "description": "放大"
       },
       "use_controlnet_tile": {
-        "description": "Use ControlNet Tile"
+        "description": "使用 ControlNet 分块"
       }
     }
   },
@@ -77485,13 +77485,13 @@
     "description": "通过强化学习训练的推理模型，性能与 OpenAI o1 相当\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_tokens": {
         "description": "The maximum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "提示词"
@@ -77500,7 +77500,7 @@
         "description": "The 值 used to modulate the next token probabilities."
       },
       "top_p": {
-        "description": "Top-p (nucleus) sampling"
+        "description": "Top-p（核）采样"
       }
     }
   },
@@ -77509,13 +77509,13 @@
     "description": "DeepSeek-V3-0324 是领先的非推理模型，开源领域的里程碑\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_tokens": {
         "description": "The maximum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "提示词"
@@ -77524,7 +77524,7 @@
         "description": "The 值 used to modulate the next token probabilities."
       },
       "top_p": {
-        "description": "Top-p (nucleus) sampling"
+        "description": "Top-p（核）采样"
       }
     }
   },
@@ -77533,13 +77533,13 @@
     "description": "Deepseek 最新的混合思考模型\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_tokens": {
         "description": "The maximum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "提示词"
@@ -77551,7 +77551,7 @@
         "description": "Reasoning effort level for DeepSeek models. Use 'medium' for 增强 reasoning or leave as None for 默认 behavior."
       },
       "top_p": {
-        "description": "Top-p (nucleus) sampling"
+        "description": "Top-p（核）采样"
       }
     }
   },
@@ -78172,13 +78172,13 @@
     "description": "OpenAI 的 120B 开源权重语言模型\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_tokens": {
         "description": "The maximum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "提示词"
@@ -78187,7 +78187,7 @@
         "description": "The 值 used to modulate the next token probabilities."
       },
       "top_p": {
-        "description": "Top-p (nucleus) sampling"
+        "description": "Top-p（核）采样"
       }
     }
   },
@@ -78196,13 +78196,13 @@
     "description": "OpenAI 的 20B 开源权重语言模型\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_tokens": {
         "description": "The maximum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "提示词"
@@ -78211,7 +78211,7 @@
         "description": "The 值 used to modulate the next token probabilities."
       },
       "top_p": {
-        "description": "Top-p (nucleus) sampling"
+        "description": "Top-p（核）采样"
       }
     }
   },
@@ -78220,7 +78220,7 @@
     "description": "Granite-3.2-8B-Instruct 是 80 亿参数、128K 上下文长度的语言模型，专为推理和指令跟随能力微调\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_tokens": {
         "description": "The maximum number of tokens the model should 生成 as 输出."
@@ -78229,7 +78229,7 @@
         "description": "The minimum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "提示词"
@@ -78268,7 +78268,7 @@
         "description": "请求的文档，传递给聊天模板"
       },
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_completion_tokens": {
         "description": "An upper bound for the number of tokens that can be 生成 for a completion, including visible 输出 tokens and reasoning tokens."
@@ -78283,7 +78283,7 @@
         "description": "The minimum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "Completion API user 提示词."
@@ -78337,7 +78337,7 @@
         "description": "请求的文档，传递给聊天模板"
       },
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_completion_tokens": {
         "description": "An upper bound for the number of tokens that can be 生成 for a completion, including visible 输出 tokens and reasoning tokens."
@@ -78352,13 +78352,13 @@
         "description": "The minimum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "Completion API user 提示词."
       },
       "repetition_penalty": {
-        "description": "Repetition penalty"
+        "description": "重复惩罚"
       },
       "response_format": {
         "description": "An object specifying the 格式 that the model must 输出."
@@ -78403,7 +78403,7 @@
         "description": "A template to 格式 the 提示词 with. If not provided, the 默认 提示词 template will be used."
       },
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_tokens": {
         "description": "The maximum number of tokens the model should 生成 as 输出."
@@ -78412,7 +78412,7 @@
         "description": "The minimum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "User 提示词 to send to the model."
@@ -78454,7 +78454,7 @@
         "description": "传递给聊天模板的额外参数"
       },
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_completion_tokens": {
         "description": "An upper bound for the number of tokens that can be 生成 for a completion, including visible 输出 tokens and reasoning tokens."
@@ -78469,13 +78469,13 @@
         "description": "The minimum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "Completion API user 提示词."
       },
       "repetition_penalty": {
-        "description": "Repetition penalty"
+        "description": "重复惩罚"
       },
       "seed": {
         "description": "随机种子. Leave unspecified to randomize the 种子."
@@ -78508,7 +78508,7 @@
         "description": "A template to 格式 the 提示词 with. If not provided, the 默认 提示词 template will be used."
       },
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "image": {
         "description": "Deprecated single 图像 输入.Use 图像 输入 instead.Ignored if 图像 used."
@@ -78523,7 +78523,7 @@
         "description": "The minimum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "User 提示词 to send to the model."
@@ -78562,7 +78562,7 @@
         "description": "传递给聊天模板的额外参数"
       },
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "images": {
         "description": "Completion API 图像 输入."
@@ -78580,13 +78580,13 @@
         "description": "The minimum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "Completion API user 提示词."
       },
       "repetition_penalty": {
-        "description": "Repetition penalty"
+        "description": "重复惩罚"
       },
       "seed": {
         "description": "随机种子. Leave unspecified to randomize the 种子."
@@ -78616,13 +78616,13 @@
     "description": "Grok 4 is xAI’s most 进阶 reasoning model. Excels at logical thinking and in-depth analysis. 理想，用于 insightful discussions and 复杂 problem-solving.\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_tokens": {
         "description": "The maximum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "提示词"
@@ -78631,7 +78631,7 @@
         "description": "The 值 used to modulate the next token probabilities."
       },
       "top_p": {
-        "description": "Top-p (nucleus) sampling"
+        "description": "Top-p（核）采样"
       }
     }
   },
@@ -78640,7 +78640,7 @@
     "description": "Moonshot AI's latest open model. It unifies vision and 文本, thinking and non-thinking 模式, and single-agent and multi-agent execution into one model\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "image": {
         "description": "图像 file to 分析 (可选). Will be resized if larger than 1024px."
@@ -78649,7 +78649,7 @@
         "description": "Maximum number of tokens to 生成."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "文本提示词"
@@ -78658,7 +78658,7 @@
         "description": "Sampling 温度."
       },
       "top_p": {
-        "description": "Top-p (nucleus) sampling"
+        "description": "Top-p（核）采样"
       }
     }
   },
@@ -78700,7 +78700,7 @@
     "description": "Meta 的旗舰 4050 亿参数语言模型，专为对话补全微调\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_tokens": {
         "description": "The maximum number of tokens the model should 生成 as 输出."
@@ -78709,7 +78709,7 @@
         "description": "The minimum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "提示词"
@@ -78953,7 +78953,7 @@
     "description": "170 亿参数、128 个专家的模型\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_tokens": {
         "description": "The maximum number of tokens the model should 生成 as 输出."
@@ -78962,7 +78962,7 @@
         "description": "The minimum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "提示词"
@@ -78992,7 +78992,7 @@
     "description": "170 亿参数、16 个专家的模型\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_tokens": {
         "description": "The maximum number of tokens the model should 生成 as 输出."
@@ -79001,7 +79001,7 @@
         "description": "The minimum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "提示词"
@@ -79124,13 +79124,13 @@
     "description": "更新的 Qwen3 模型，针对指令跟随优化\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
-        "description": "Frequency penalty"
+        "description": "频率惩罚"
       },
       "max_tokens": {
         "description": "The maximum number of tokens the model should 生成 as 输出."
       },
       "presence_penalty": {
-        "description": "Presence penalty"
+        "description": "存在惩罚"
       },
       "prompt": {
         "description": "提示词"
@@ -79139,7 +79139,7 @@
         "description": "The 值 used to modulate the next token probabilities."
       },
       "top_p": {
-        "description": "Top-p (nucleus) sampling"
+        "description": "Top-p（核）采样"
       }
     }
   },
@@ -79434,7 +79434,7 @@
         "description": "默认 正向提示词 postfix"
       },
       "face_bounding_box": {
-        "description": "Face position"
+        "description": "人脸位置"
       },
       "face_guidance": {
         "description": "Reference guidance 强度"
@@ -79677,7 +79677,7 @@
         "description": "Choose face 渲染"
       },
       "pose_style": {
-        "description": "Pose style"
+        "description": "姿态风格"
       },
       "preprocess": {
         "description": "Choose how to preprocess the 图像"
@@ -81875,7 +81875,7 @@
         "description": "视频 to 分割."
       },
       "output_type": {
-        "description": "An enumeration."
+        "description": "枚举类型。"
       }
     }
   },
@@ -82244,10 +82244,10 @@
         "description": "Sample guide 缩放"
       },
       "sample_shift": {
-        "description": "Sample shift"
+        "description": "采样偏移"
       },
       "sample_solver": {
-        "description": "Sample solver"
+        "description": "采样求解器"
       },
       "sample_steps": {
         "description": "Sample 步数"
@@ -82286,10 +82286,10 @@
         "description": "Sample guide 缩放"
       },
       "sample_shift": {
-        "description": "Sample shift"
+        "description": "采样偏移"
       },
       "sample_solver": {
-        "description": "Sample solver"
+        "description": "采样求解器"
       },
       "sample_steps": {
         "description": "Sample 步数"
@@ -83627,7 +83627,7 @@
         "description": "Caption 颜色"
       },
       "font": {
-        "description": "Font"
+        "description": "字体"
       },
       "fontsize": {
         "description": "Font 尺寸. 7.0 is good for 视频, 4.0 is good for reels"
@@ -83654,7 +83654,7 @@
         "description": "Stroke 颜色"
       },
       "stroke_width": {
-        "description": "Stroke width"
+        "description": "描边宽度"
       },
       "subs_position": {
         "description": "字幕 position"
