@@ -238,9 +238,9 @@ describe("Auto-updater Module", () => {
 
       expect(mockAutoUpdater.setFeedURL).toHaveBeenCalledWith({
         provider: "github",
-        owner: "nodetool-ai",
-        repo: "nodetool",
-        updaterCacheDirName: "nodetool-updater",
+        owner: "hanchenhao",
+        repo: "ai-canvas",
+        updaterCacheDirName: "brainvite-ai-canvas-updater",
       });
       expect(mockAutoUpdater.channel).toBe("latest");
       expect(mockAutoUpdater.allowPrerelease).toBe(false);
@@ -273,9 +273,9 @@ describe("Auto-updater Module", () => {
 
       expect(mockAutoUpdater.setFeedURL).toHaveBeenCalledWith({
         provider: "github",
-        owner: "nodetool-ai",
-        repo: "nodetool",
-        updaterCacheDirName: "nodetool-updater",
+        owner: "hanchenhao",
+        repo: "ai-canvas",
+        updaterCacheDirName: "brainvite-ai-canvas-updater",
         channel: "nightly",
       });
       expect(mockAutoUpdater.channel).toBe("nightly");
@@ -456,7 +456,7 @@ describe("Auto-updater Module", () => {
 
       await downloadedHandler({ version: "1.2.3" });
 
-      const clickHandler = clickHandlers["NodeTool Update Ready"];
+      const clickHandler = clickHandlers["BrainVite-AI-Canvas Update Ready"];
       expect(clickHandler).toBeDefined();
 
       clickHandler();

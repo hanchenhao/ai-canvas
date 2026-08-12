@@ -199,7 +199,7 @@ export const RUNTIME_PACKAGES: Record<RuntimePackageId, RuntimePackage> = {
     id: "node-llama-cpp",
     name: "llama.cpp (in-process)",
     description:
-      "Runs GGUF models inside the NodeTool server — no separate llama.cpp server. Ships Metal on macOS; on Windows and Linux npm pulls the CPU, Vulkan and CUDA builds, which is why the download is large.",
+      "Runs GGUF models inside the BrainVite-AI-Canvas service — no separate llama.cpp server. Ships Metal on macOS; on Windows and Linux npm pulls the CPU, Vulkan and CUDA builds, which is why the download is large.",
     category: "library",
     versionRange: "3.x",
     npmPackages: ["node-llama-cpp@3.19.1"],

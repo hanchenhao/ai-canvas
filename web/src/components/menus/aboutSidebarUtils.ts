@@ -17,6 +17,10 @@ export const getAboutSidebarSections = (): SidebarSection[] => {
       ]
     },
     {
+      category: "System",
+      items: [{ id: "diagnostics", label: "Diagnostics" }]
+    },
+    {
       category: "Resources",
       items: [
         ...(!isProduction

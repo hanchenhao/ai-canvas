@@ -395,8 +395,7 @@ export default defineConfig(async ({ mode }) => {
             rollupOptions: {
               external: ["web-worker"],
               input: {
-                main: resolve(configDir, "index.html"),
-                admin: resolve(configDir, "admin.html")
+                main: resolve(configDir, "index.html")
               },
               output: {
                 manualChunks(id) {

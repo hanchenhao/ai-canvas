@@ -128,9 +128,9 @@ async function findExistingServerPid(): Promise<number | null> {
 async function promptUserAboutExistingServer(pid: number): Promise<boolean> {
   const result = await dialog.showMessageBox({
     type: "question",
-    title: "NodeTool Server Already Running",
-    message: "A NodeTool server is already running.",
-    detail: `An existing NodeTool server process (PID ${pid}) was detected. Would you like to stop it and start a new server, or connect to the existing server?`,
+    title: "BrainVite-AI-Canvas Service Already Running",
+    message: "A BrainVite-AI-Canvas service is already running.",
+    detail: `An existing BrainVite-AI-Canvas service process (PID ${pid}) was detected. Would you like to stop it and start a new service, or connect to the existing service?`,
     buttons: ["Stop and Start New", "Use Existing Server"],
     defaultId: 0,
     cancelId: 1,

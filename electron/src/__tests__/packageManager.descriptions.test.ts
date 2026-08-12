@@ -56,7 +56,7 @@ describe('package descriptions', () => {
       description: 'Core system',
     });
 
-    expect(description).toContain('Essential NodeTool core nodes');
+    expect(description).toContain('Essential BrainVite-AI-Canvas core nodes');
   });
 
   test('keeps non-overridden registry descriptions trimmed', () => {

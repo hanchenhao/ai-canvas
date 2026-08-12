@@ -4,7 +4,7 @@ import { useState } from "react";
 import { css } from "@emotion/react";
 import TextEditorModal from "./properties/TextEditorModal";
 
-const SAMPLE_JS = `// NodeTool Code Node — Sandbox Environment
+const SAMPLE_JS = `// BrainVite-AI-Canvas Code Node — Sandbox Environment
 // Available: _, fetch, uuid, getSecret, workspace, state
 
 const items = [1, 2, 3, 4, 5];

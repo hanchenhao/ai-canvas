@@ -163,6 +163,7 @@
     "check:coupled-deps": "node scripts/check-coupled-deps.mjs",
     "check:lockfile": "node scripts/check-lockfile-sync.mjs",
     "check:execution-boundary": "node scripts/check-execution-boundary.mjs",
+    "check:brand-boundary": "node scripts/check-brand-boundary.mjs",
     "sync:genspend": "node scripts/sync-genspend-pricing.mjs",
     "sync:genspend:check": "node scripts/sync-genspend-pricing.mjs --check",
     "check": "npm run check:deps && npm run check:circular && npm run check:keys && npm run check:coupled-deps && npm run check:lockfile && npm run check:execution-boundary && npm run build:packages && npm run typecheck && npm run lint && npm run test:packages && npm run test",

@@ -82,8 +82,8 @@ describe("ensureAppUpdateConfig", () => {
           publish: [
             {
               provider: "github",
-              owner: "nodetool-ai",
-              repo: "nodetool",
+              owner: "hanchenhao",
+              repo: "ai-canvas",
             },
           ],
         },
@@ -101,9 +101,9 @@ describe("ensureAppUpdateConfig", () => {
       "utf8"
     );
     expect(config).toContain("provider: github");
-    expect(config).toContain("owner: nodetool-ai");
-    expect(config).toContain("repo: nodetool");
-    expect(config).toContain("updaterCacheDirName: nodetool-updater");
+    expect(config).toContain("owner: hanchenhao");
+    expect(config).toContain("repo: ai-canvas");
+    expect(config).toContain("updaterCacheDirName: brainvite-ai-canvas-updater");
     expect(config).not.toContain("nodetool-electron-updater");
   });
 
@@ -118,15 +118,15 @@ describe("ensureAppUpdateConfig", () => {
           publish: [
             {
               provider: "github",
-              owner: "nodetool-ai",
-              repo: "nodetool",
+              owner: "hanchenhao",
+              repo: "ai-canvas",
               channel: "nightly",
               releaseType: "prerelease",
             },
           ],
         },
         appInfo: {
-          updaterCacheDirName: "nodetool-updater",
+          updaterCacheDirName: "brainvite-ai-canvas-updater",
         },
       },
     });

@@ -32,6 +32,7 @@ import RemoteSettingsMenuComponent from "./RemoteSettingsMenu";
 import useRemoteSettingsStore from "../../stores/RemoteSettingStore";
 import FoldersSettings from "./FoldersSettingsMenu";
 import AboutMenu from "./AboutMenu";
+import DiagnosticsSection from "./DiagnosticsSection";
 import {
   APIKeysTabContent,
   APIKeysRightSidebar,
@@ -1134,7 +1135,7 @@ function SettingsPage() {
                     </>
                   )}
 
-                  {/* Nodetool API (hosted only): token copy card. */}
+                  {/* BrainVite API (hosted mode only): token copy card. */}
                   {session?.access_token && !isLocalhost && (
                     <>
                       <Text
@@ -1142,20 +1143,20 @@ function SettingsPage() {
                         id="nodetool-api-token"
                         className="settings-heading"
                       >
-                        Nodetool API
+                        BrainVite API
                       </Text>
                       <Text
                         className="explanation"
                         sx={{ margin: "0 0 1em 0" }}
                       >
-                        Use the Nodetool API to execute workflows
+                        Use the BrainVite API to execute workflows
                         programmatically.
                         <br />
                         <br />
                         <a
                           target="_blank"
                           rel="noopener noreferrer"
-                          href="https://github.com/nodetool-ai/nodetool#using-the-workflow-api-"
+                          href="https://github.com/hanchenhao/ai-canvas"
                         >
                           API documentation on GitHub <br />
                         </a>
@@ -1215,6 +1216,12 @@ function SettingsPage() {
                 {/* About */}
                 <TabPanel value={settingsTab} index={aboutTabIndex}>
                   <AboutMenu />
+                  <Box sx={{ marginTop: theme.spacing(4) }}>
+                    <Text size="big" id="diagnostics" className="settings-heading">
+                      Diagnostics
+                    </Text>
+                    <DiagnosticsSection />
+                  </Box>
                 </TabPanel>
               </div>
 

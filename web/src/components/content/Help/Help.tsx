@@ -241,18 +241,18 @@ const Help = ({
                 <Tab label="Keyboard" id="help-tab-1" />
                 <Tab label="DataTypes" id="help-tab-2" />
               </Tabs>
-              <Tooltip title="Open Nodetool Documentation Website" placement="bottom"
+              <Tooltip title="Open BrainVite Website" placement="bottom"
                 delay={TOOLTIP_ENTER_DELAY}
               >
                 <a
-                  href="https://docs.nodetool.ai"
+                  href="https://www.brainvite.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="docs-button"
                 >
                   <div className="docs-button-text">
-                    <span>Nodetool</span>
-                    <span>Docs</span>
+                    <span>BrainVite</span>
+                    <span>Website</span>
                   </div>
                   <OpenInNewIcon />
                 </a>

@@ -142,7 +142,7 @@ const ProviderCarousel: React.FC = () => {
       <div className="provider-carousel-header">
         <h3 className="provider-carousel-title">Supported Providers</h3>
         <p className="provider-carousel-subtitle">
-          NodeTool integrates with these AI providers. Sign up to get API keys.
+          BrainVite-AI-Canvas connects to these AI providers. Add your own API keys.
         </p>
       </div>
 
@@ -219,12 +219,12 @@ const BootMessage: React.FC<BootMessageProps> = ({
   return (
     <div id="boot-message">
       <div className={`boot-panel ${isInstalling ? 'boot-panel-installing' : ''}`}>
-        <div className="brand">NodeTool</div>
+        <div className="brand">BrainVite-AI-Canvas</div>
         <div className="brand-ring" aria-hidden="true" />
 
         {!isInstalling && (
           <div className="boot-logo-wrapper">
-            <img src={logoUrl} className="boot-logo" alt="Nodetool" />
+            <img src={logoUrl} className="boot-logo" alt="BrainVite-AI-Canvas" />
           </div>
         )}
 

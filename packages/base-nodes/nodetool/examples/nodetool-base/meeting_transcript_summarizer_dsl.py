@@ -25,7 +25,7 @@ Transcribe a meeting recording and summarize it.
 # Load meeting audio
 audio_input = Audio(
     value=AudioRef(
-        uri="https://app.nodetool.ai/examples/remove_silence.mp3",
+        uri="",
         type="audio",
     )
 )

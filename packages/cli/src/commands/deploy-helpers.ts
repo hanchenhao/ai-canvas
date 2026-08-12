@@ -9,7 +9,6 @@ import { spawnSync } from "node:child_process";
 
 import {
   AdminHTTPClient,
-  APIUserManager,
   DeploymentManager,
   StateManager,
   WorkflowSyncer,
@@ -154,16 +153,6 @@ export async function getAdminClient(
   const serverUrl = requireServerUrl(deployment, deploymentName);
   const token = await resolveAdminToken(opts);
   return new AdminHTTPClient({ baseUrl: serverUrl, authToken: token });
-}
-
-export async function getUserManager(
-  deployment: AnyDeployment,
-  deploymentName: string,
-  opts?: { token?: string }
-): Promise<APIUserManager> {
-  const serverUrl = requireServerUrl(deployment, deploymentName);
-  const token = await resolveAdminToken(opts);
-  return new APIUserManager(serverUrl, token);
 }
 
 // ---------------------------------------------------------------------------

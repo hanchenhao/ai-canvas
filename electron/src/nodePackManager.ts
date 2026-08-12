@@ -98,7 +98,7 @@ async function runNpm(args: string[]): Promise<void> {
   const npm = resolveNpmInvocation();
   if (!npm) {
     throw new Error(
-      "npm not found. Reinstall the NodeTool environment to restore the bundled Node.js/npm runtime."
+      "npm not found. Reinstall the BrainVite-AI-Canvas environment to restore the bundled Node.js/npm runtime."
     );
   }
   await ensureInstallRoot();
@@ -156,7 +156,7 @@ export async function installNodePack(
     if (record.mode === "unknown") {
       return {
         success: false,
-        message: `Installed ${spec} with lifecycle scripts disabled, but its manifest is not a supported NodeTool pack.`,
+        message: `Installed ${spec} with lifecycle scripts disabled, but its manifest is not a supported BrainVite-AI-Canvas pack.`,
         installation
       };
     }
@@ -194,12 +194,12 @@ export async function trustNodePack(name: string): Promise<NodePackActionResult>
     const ledger = await readLedger();
     const recorded = ledger.packs[name];
     if (recorded === undefined) {
-      return { success: false, message: `${name} was not installed by NodeTool, so there is no recorded artifact to verify.` };
+      return { success: false, message: `${name} was not installed by BrainVite-AI-Canvas, so there is no recorded artifact to verify.` };
     }
     if (recorded.mode === "unknown") {
       return {
         success: false,
-        message: `${name} does not declare a supported NodeTool manifest. Trust cannot be granted to an unknown pack.`,
+        message: `${name} does not declare a supported BrainVite-AI-Canvas manifest. Trust cannot be granted to an unknown pack.`,
         installation: nodePackInstallStatus(recorded)
       };
     }

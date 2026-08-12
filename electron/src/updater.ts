@@ -30,10 +30,11 @@ import { errorMessage } from "./utils";
  *
  * Configuration:
  * - Updates are only checked in packaged mode (not in development)
- * - Updates are fetched from the nodetool-ai/nodetool GitHub repository
- * - Update cache is stored in "nodetool-updater" directory
- *
- * Error Handling:
+* - Updates are fetched from the nodetool-ai/nodetool GitHub repository
+ * - Updates are fetched from the hanchenhao/ai-canvas GitHub repository
+ * - Update cache is stored in "brainvite-ai-canvas-updater" directory
+*
+* Error Handling:
  * - Gracefully handles missing app-update.yml file
  * - Logs warnings instead of crashing
  * - Skips auto-update when not in packaged mode
@@ -123,7 +124,7 @@ async function setupAutoUpdater(): Promise<void> {
       "Auto-update disabled: app-update.yml configuration file is missing. " +
       "This may occur on older installations. Please reinstall the application " +
       "from GitHub releases to enable auto-updates: " +
-      "https://github.com/nodetool-ai/nodetool/releases",
+      "https://github.com/hanchenhao/ai-canvas/releases",
       "warn"
     );
     return;
@@ -139,9 +140,9 @@ async function setupAutoUpdater(): Promise<void> {
     autoUpdater.allowDowngrade = true;
     autoUpdater.setFeedURL({
       provider: "github",
-      owner: "nodetool-ai",
-      repo: "nodetool",
-      updaterCacheDirName: "nodetool-updater",
+      owner: "hanchenhao",
+      repo: "ai-canvas",
+      updaterCacheDirName: "brainvite-ai-canvas-updater",
       ...(updateChannel === "nightly" ? { channel: "nightly" } : {}),
     });
 
@@ -186,7 +187,7 @@ function setupAutoUpdaterEvents(): void {
       logMessage(`Update available: ${info.version}`);
       const mainWindow = getMainWindow();
       if (mainWindow) {
-        const releaseUrl = `https://github.com/nodetool-ai/nodetool/releases/tag/v${info.version}`;
+        const releaseUrl = `https://github.com/hanchenhao/ai-canvas/releases/tag/v${info.version}`;
         mainWindow.webContents.send(IpcChannels.UPDATE_AVAILABLE, {
           version: info.version,
           releaseUrl,
@@ -200,10 +201,10 @@ function setupAutoUpdaterEvents(): void {
       if (Notification.isSupported()) {
         const autoUpdateEnabled = await isAutoUpdatesEnabledAsync();
         const notification = new Notification({
-          title: "NodeTool Update Available",
+          title: "BrainVite-AI-Canvas Update Available",
           body: autoUpdateEnabled
             ? `Version ${info.version} is available. Downloading in the background...`
-            : `Version ${info.version} is available. Click to open NodeTool.`,
+            : `Version ${info.version} is available. Click to open BrainVite-AI-Canvas.`,
         });
         notification.on("click", () => {
           const win = getMainWindow();
@@ -247,7 +248,7 @@ function setupAutoUpdaterEvents(): void {
 
       const mainWindow = getMainWindow();
       if (mainWindow) {
-        const releaseUrl = `https://github.com/nodetool-ai/nodetool/releases/tag/v${info.version}`;
+        const releaseUrl = `https://github.com/hanchenhao/ai-canvas/releases/tag/v${info.version}`;
         mainWindow.webContents.send(IpcChannels.UPDATE_AVAILABLE, {
           version: info.version,
           releaseUrl,
@@ -258,7 +259,7 @@ function setupAutoUpdaterEvents(): void {
       // Show native notification
       if (Notification.isSupported()) {
         const notification = new Notification({
-          title: "NodeTool Update Ready",
+          title: "BrainVite-AI-Canvas Update Ready",
           body: `Version ${info.version} has been downloaded. Click to restart and install.`,
         });
         notification.on("click", () => {

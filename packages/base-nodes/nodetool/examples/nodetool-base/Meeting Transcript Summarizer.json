@@ -44,7 +44,7 @@
           "name": "Recording",
           "description": "A meeting recording to transcribe. Leave empty if you paste a transcript below instead.",
           "value": {
-            "uri": "https://app.nodetool.ai/examples/remove_silence.mp3",
+            "uri": "",
             "type": "audio"
           }
         },

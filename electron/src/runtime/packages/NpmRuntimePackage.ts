@@ -141,7 +141,7 @@ export class NpmRuntimePackage implements RuntimePackage {
     const npm = resolveNpmInvocation();
     if (!npm) {
       throw new Error(
-        "npm not found. Reinstall the NodeTool environment to restore the bundled Node.js/npm runtime."
+        "npm not found. Reinstall the BrainVite-AI-Canvas environment to restore the bundled Node.js/npm runtime."
       );
     }
     await this.ensureRoot(ctx);

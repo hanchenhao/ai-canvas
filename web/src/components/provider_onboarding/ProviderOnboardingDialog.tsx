@@ -132,7 +132,7 @@ const ProviderOnboardingDialog: React.FC = () => {
     >
       <FlexColumn gap={SPACING.lg} sx={{ mt: SPACING.xs }}>
         <Caption sx={{ opacity: 0.75, lineHeight: 1.55 }}>
-          NodeTool connects to AI providers with your own account. Pick one
+          BrainVite-AI-Canvas connects to AI providers with your own account. Pick one
           below — your credentials are encrypted and stored locally, and you can
           add more or switch anytime.
         </Caption>

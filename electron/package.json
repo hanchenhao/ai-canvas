@@ -1,9 +1,9 @@
 {
-  "name": "nodetool-electron",
+  "name": "brainvite-ai-canvas-electron",
   "version": "0.7.0-rc.34",
   "private": true,
-  "description": "node-based AI development tool",
-  "homepage": "https://nodetool.ai",
+  "description": "Local-first AI image and video canvas",
+  "homepage": "https://www.brainvite.com",
   "main": "dist-electron/main.js",
   "scripts": {
     "start": "electron .",
@@ -31,7 +31,7 @@
     "test:coverage": "jest --coverage",
     "rebuild:native": "node scripts/rebuild-native.mjs"
   },
-  "author": "matti.georgi@gmail.com",
+  "author": "BrainVite contributors",
   "license": "AGPL-3.0-only",
   "devDependencies": {
     "@eslint/compat": "^2.1.0",
@@ -89,6 +89,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/nodetool-ai/nodetool.git"
+    "url": "https://github.com/hanchenhao/ai-canvas.git"
   }
 }

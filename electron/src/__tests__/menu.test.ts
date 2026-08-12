@@ -104,7 +104,7 @@ describe('buildMenu', () => {
       (item: any) => item.label === 'Learn More',
     );
     await learnMoreItem?.click?.();
-    expect(openExternalMock).toHaveBeenCalledWith('https://nodetool.ai');
+    expect(openExternalMock).toHaveBeenCalledWith('https://www.brainvite.com');
 
     expect(setApplicationMenuMock).toHaveBeenCalledWith({ template });
   });

@@ -298,7 +298,7 @@ describe("nodePackManager", () => {
     it("rejects a pack NodeTool never installed", async () => {
       const result = await trustNodePack("@scope/pkg");
       expect(result.success).toBe(false);
-      expect(result.message).toContain("was not installed by NodeTool");
+      expect(result.message).toContain("was not installed by BrainVite-AI-Canvas");
       expect(spawn).not.toHaveBeenCalled();
     });
 

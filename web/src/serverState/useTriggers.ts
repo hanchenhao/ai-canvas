@@ -184,7 +184,7 @@ export const useFireTrigger = (workflowId: string | null | undefined) => {
  * The webhook delivery URL a sender POSTs events to.
  *
  * The user pastes this into an external service, so it must be absolute. When
- * `VITE_API_URL` is set (Electron, or a build pointing at api.nodetool.ai)
+ * `VITE_API_URL` is set (Electron, or a build pointing at a configured API)
  * that is the host serving `/api/webhooks`. Without it — local dev behind the
  * Vite proxy — the page's own origin is the right host.
  */

@@ -1,4 +1,4 @@
-name: "NodeTool CodeQL config"
+name: "BrainVite-AI-Canvas CodeQL config"
 
 # CodeQL's js/missing-rate-limiting query recognizes Express-style middleware and
 # per-route @fastify/rate-limit config, but not a global @fastify/rate-limit

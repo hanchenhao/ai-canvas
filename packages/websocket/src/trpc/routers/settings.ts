@@ -8,8 +8,11 @@
  * populates the registry at module load time).
  */
 
+import { z } from "zod";
 import { Secret, Setting, clearSecretCache } from "@nodetool-ai/models";
 import type { Secret as SecretModel } from "@nodetool-ai/models";
+import { loadAssetStorageConfig } from "@nodetool-ai/config";
+import { getNodetoolDataDir } from "@nodetool-ai/config";
 import {
   clearProviderCache,
   checkCredential,
@@ -277,6 +280,106 @@ export const settingsRouter = router({
       }
 
       return { message: "Settings updated successfully" };
+    }),
+
+  /**
+   * Diagnostic status for the desktop settings About page. Returns the same
+   * security/storage/provider information the former admin panel surfaced, but
+   * without any admin-auth gate — the local single-user model does not need it.
+   */
+  diagnostics: protectedProcedure
+    .output(
+      z.object({
+        version: z.string(),
+        nodeVersion: z.string(),
+        uptimeSeconds: z.number(),
+        secretEncryptionConfigured: z.boolean(),
+        providers: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            secretKey: z.string(),
+            configured: z.boolean(),
+            source: z.enum(["database", "environment", "none"])
+          })
+        ),
+       storage: z.object({
+         kind: z.enum(["file", "s3", "supabase", "invalid"]),
+         bucket: z.string().nullable(),
+         region: z.string().nullable(),
+         endpoint: z.string().nullable(),
+         forcePathStyle: z.boolean().nullable(),
+         error: z.string().nullable()
+        }),
+        dataDirectory: z.string(),
+        isUnsignedBuild: z.boolean()
+      })
+    )
+    .query(async ({ ctx }) => {
+      const DIAGNOSTICS_PROVIDERS = [
+        { id: "minimax", name: "MiniMax", secretKey: "MINIMAX_API_KEY" },
+        { id: "kie", name: "Seedance (KIE)", secretKey: "KIE_API_KEY" },
+        {
+          id: "atlascloud",
+          name: "Seedance (AtlasCloud)",
+          secretKey: "ATLASCLOUD_API_KEY"
+        }
+      ] as const;
+
+      const [storedSecrets] = await Secret.listForUser(ctx.userId, 1000);
+      const storedKeys = new Set(storedSecrets.map((secret) => secret.key));
+      const providers = DIAGNOSTICS_PROVIDERS.map((provider) => {
+        const source = storedKeys.has(provider.secretKey)
+          ? ("database" as const)
+          : process.env[provider.secretKey]
+            ? ("environment" as const)
+            : ("none" as const);
+        return { ...provider, configured: source !== "none", source };
+      });
+
+      let storage: {
+        kind: "file" | "s3" | "supabase" | "invalid";
+        bucket: string | null;
+        region: string | null;
+        endpoint: string | null;
+        forcePathStyle: boolean | null;
+        error: string | null;
+      };
+      try {
+        const config = loadAssetStorageConfig();
+        storage = {
+          kind: config.kind,
+          bucket:
+            config.kind === "s3" || config.kind === "supabase"
+              ? config.bucket
+              : null,
+          region: config.kind === "s3" ? (config.region ?? null) : null,
+          endpoint: config.kind === "s3" ? (config.endpoint ?? null) : null,
+          forcePathStyle:
+            config.kind === "s3" ? (config.forcePathStyle ?? null) : null,
+          error: null
+        };
+      } catch (error) {
+        storage = {
+          kind: "invalid",
+          bucket: null,
+          region: null,
+          endpoint: null,
+          forcePathStyle: null,
+          error: error instanceof Error ? error.message : String(error)
+        };
+      }
+
+      return {
+        version: process.env.npm_package_version ?? "development",
+        nodeVersion: process.version,
+        uptimeSeconds: Math.floor(process.uptime()),
+        secretEncryptionConfigured: Boolean(process.env.SECRETS_MASTER_KEY),
+        providers,
+        storage,
+        dataDirectory: getNodetoolDataDir(),
+        isUnsignedBuild: process.env.npm_package_version === undefined
+      };
     }),
 
   secrets: secretsRouter

@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { router, publicProcedure } from "./index.js";
 import { assetsRouter } from "./routers/assets.js";
-import { adminRouter } from "./routers/admin.js";
 import { codeGenRouter } from "./routers/code-gen.js";
 import { collectionsRouter } from "./routers/collections.js";
 import { costsRouter } from "./routers/costs.js";
@@ -27,7 +26,6 @@ import { storyboardsRouter } from "./routers/storyboards.js";
 import { applicationsRouter } from "./routers/applications.js";
 import { resourcesRouter } from "./routers/resources.js";
 import { timelineRouter } from "./routers/timeline.js";
-import { usersRouter } from "./routers/users.js";
 import { workerRouter } from "./routers/worker.js";
 import { workflowsRouter } from "./routers/workflows.js";
 import { workspaceRouter } from "./routers/workspace.js";
@@ -36,9 +34,8 @@ export const appRouter = router({
   healthz: publicProcedure
     .output(z.object({ ok: z.literal(true) }))
     .query(() => ({
-      ok: true as const
-    })),
-  admin: adminRouter,
+    ok: true as const
+  })),
   assets: assetsRouter,
   codeGen: codeGenRouter,
   collections: collectionsRouter,
@@ -65,7 +62,6 @@ export const appRouter = router({
   threads: threadsRouter,
   threadMemories: threadMemoriesRouter,
   timeline: timelineRouter,
-  users: usersRouter,
   worker: workerRouter,
   workflows: workflowsRouter,
   workspace: workspaceRouter

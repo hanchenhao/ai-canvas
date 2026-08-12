@@ -204,7 +204,7 @@ const AboutMenu: React.FC = memo(() => {
       return;
     }
 
-    const text = `NodeTool System Information
+    const text = `BrainVite-AI-Canvas System Information
 =============================
 Version: ${VERSION}
 Git Commit: ${GIT_COMMIT_HASH}
@@ -413,7 +413,7 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
           }}
         >
           <a
-            href="https://github.com/nodetool-ai/nodetool"
+            href="https://github.com/hanchenhao/ai-canvas"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -424,18 +424,7 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
             GitHub Repository
           </a>
           <a
-            href="https://forum.nodetool.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: "var(--palette-primary-main)",
-              textDecoration: "none"
-            }}
-          >
-            NodeTool Forum
-          </a>
-          <a
-            href="https://nodetool.ai"
+            href="https://www.brainvite.com"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -444,28 +433,6 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
             }}
           >
             Website
-          </a>
-          <a
-            href="https://nodetool.ai/privacy"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: "var(--palette-primary-main)",
-              textDecoration: "none"
-            }}
-          >
-            Privacy Policy
-          </a>
-          <a
-            href="https://nodetool.ai/terms"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: "var(--palette-primary-main)",
-              textDecoration: "none"
-            }}
-          >
-            Terms of Use
           </a>
         </FlexColumn>
       </div>

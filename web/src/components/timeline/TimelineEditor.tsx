@@ -248,7 +248,7 @@ const PreviewRegion: React.FC<{
                 size="small"
                 onClick={onRetryFetch}
                 disabled={createSequencePending}
-                aria-label={t("timeline:sequence.retry")}
+                aria-label={t("timeline:sequence.retryAria")}
               >
                 {t("timeline:sequence.retry")}
               </EditorButton>
@@ -259,7 +259,7 @@ const PreviewRegion: React.FC<{
                 size="small"
                 onClick={onCreateNewSequence}
                 disabled={createSequencePending}
-                aria-label={t("timeline:sequence.newSequence")}
+                aria-label={t("timeline:sequence.newSequenceAria")}
               >
                 {createSequencePending ? t("timeline:sequence.creating") : t("timeline:sequence.newSequence")}
               </EditorButton>

@@ -95,7 +95,7 @@ const StudioAccountPage = () => {
                 )}
               </FlexRow>
               <Text size="smaller" color="secondary" sx={{ mt: SPACING.md }}>
-                Credits meter NodeTool's managed models only — bring your own
+                Credits meter BrainVite-AI-Canvas managed models only — bring your own
                 provider keys and those calls stay unmetered.
               </Text>
             </Card>

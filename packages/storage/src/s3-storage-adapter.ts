@@ -9,6 +9,7 @@ import type {
 } from "./storage-adapter.js";
 import { assertUploadWithinLimit } from "./storage-limits.js";
 import { joinStorageKey, normalizeStorageKey } from "./storage-keys.js";
+import { withStorageError } from "./storage-error.js";
 
 export interface S3StorageAdapterOptions {
   bucket: string;
@@ -93,25 +94,18 @@ export class S3StorageAdapter implements StorageAdapter {
     data: Uint8Array,
     contentType?: string
   ): Promise<string> {
-    assertUploadWithinLimit(key, data.byteLength);
-    const objectKey = joinStorageKey(this.prefix ?? undefined, key);
-    // Transient-failure retries live in S3Client; no second retry layer here.
-    try {
+    return withStorageError(`s3:store(${key})`, async () => {
+      assertUploadWithinLimit(key, data.byteLength);
+      const objectKey = joinStorageKey(this.prefix ?? undefined, key);
+      // Transient-failure retries live in S3Client; no second retry layer here.
       await this.getClient().putObject({
         bucket: this.bucket,
         key: objectKey,
         body: data,
         ...(contentType ? { contentType } : {})
       });
-    } catch (err) {
-      throw new Error(
-        `S3 upload failed for s3://${this.bucket}/${objectKey}: ${
-          err instanceof Error ? err.message : String(err)
-        }`,
-        { cause: err }
-      );
-    }
-    return `s3://${this.bucket}/${objectKey}`;
+      return `s3://${this.bucket}/${objectKey}`;
+    });
   }
 
   uriForKey(key: string): string {

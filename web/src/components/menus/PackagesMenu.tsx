@@ -207,7 +207,7 @@ const MODE_LABEL: Record<NodePackInstallMode, string> = {
  */
 function installStateText(status: NodePackInstallStatus): string {
   if (status.mode === "unknown") {
-    return `Inactive. The installed manifest is not a supported NodeTool pack, so trust cannot be granted.${
+    return `Inactive. The installed manifest is not a supported BrainVite-AI-Canvas pack, so trust cannot be granted.${
       status.reason ? ` ${status.reason}` : ""
     }`;
   }
@@ -260,7 +260,7 @@ const InstalledPacksPanel = memo(function InstalledPacksPanel({
   return (
     <FlexColumn gap={1.75}>
       <Text size="normal" weight={600}>
-        Installed by NodeTool ({packs.length})
+        Installed by BrainVite-AI-Canvas ({packs.length})
       </Text>
       <FlexColumn gap={1.25}>
         {packs.map((pack) => {

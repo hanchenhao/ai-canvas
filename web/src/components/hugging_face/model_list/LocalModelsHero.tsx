@@ -89,7 +89,7 @@ const LocalModelsHero: React.FC<LocalModelsHeroProps> = ({ models }) => {
               endIcon={<OpenInNewIcon sx={{ fontSize: 12 }} />}
               onClick={() =>
                 window.open(
-                  "https://docs.nodetool.ai/models-and-providers",
+                  "https://www.brainvite.com",
                   "_blank",
                   "noopener,noreferrer"
                 )

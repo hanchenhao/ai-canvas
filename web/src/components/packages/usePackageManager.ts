@@ -57,7 +57,7 @@ const TITLES: Record<string, string> = {
 
 const SUBTITLES: Record<string, string> = {
   software:
-    "Interpreters and tools NodeTool installs into your environment. Each runtime powers its own node types.",
+    "Interpreters and tools BrainVite-AI-Canvas installs into your environment. Each runtime powers its own node types.",
   included:
     "Reveal advanced and niche node categories, and toggle local packs. Provider nodes appear automatically once you set their API key.",
   python:
@@ -496,9 +496,9 @@ export function usePackageManager(params: {
 
     const notice =
       isSoftware && !rtAvailable
-        ? "Software installation runs in the NodeTool desktop app. Open the desktop app to install Python, FFmpeg, and other runtimes."
+        ? "Software installation runs in the BrainVite-AI-Canvas desktop app. Open the desktop app to install Python, FFmpeg, and other runtimes."
         : cat === "python" && !pyAvailable
-          ? "Installing node packs runs in the NodeTool desktop app. Open the desktop app to install, update, and remove Python node packs."
+          ? "Installing node packs runs in the BrainVite-AI-Canvas desktop app. Open the desktop app to install, update, and remove Python node packs."
           : null;
 
     const consoleModel = isSoftware

@@ -60,6 +60,7 @@ import {
   initDb,
   initPostgresDb,
   migrateSqliteDb,
+  backupSqliteDb,
   runSeeds,
   touchWorkerInstance
 } from "@nodetool-ai/models";
@@ -261,11 +262,16 @@ try {
       url: maskDatabaseUrl(postgresDatabaseUrl)
     });
   } else {
-    const dbPath = getDefaultDbPath();
-    log.info(`Initializing SQLite database at: ${dbPath}`);
-    mkdirSync(dirname(dbPath), { recursive: true });
+   const dbPath = getDefaultDbPath();
+   log.info(`Initializing SQLite database at: ${dbPath}`);
+  mkdirSync(dirname(dbPath), { recursive: true });
+   // Back up the database before migrations, so a failed migration can be rolled back.
+    const backupPath = await backupSqliteDb(dbPath);
+    if (backupPath) {
+      log.info(`Database backup created at: ${backupPath}`);
+    }
     const appliedMigrations = await migrateSqliteDb(dbPath);
-    if (appliedMigrations.length > 0) {
+   if (appliedMigrations.length > 0) {
       log.info(`SQLite migrations applied [${startupMs()}]`, {
         count: appliedMigrations.length,
         versions: appliedMigrations
@@ -1451,6 +1457,13 @@ app.listen({ port, host }, (err) => {
     `WebSocket endpoint: ${tlsEnabled ? "wss" : "ws"}://${host}:${port}/ws`
   );
 });
+
+// ---------------------------------------------------------------------------
+// Temp file cleanup — sweep orphaned temp files hourly
+// ---------------------------------------------------------------------------
+
+import { startTempCleanup } from "@nodetool-ai/storage";
+startTempCleanup();
 
 // ---------------------------------------------------------------------------
 // Triggers — durable wakeup service, dispatcher, and ingestion adapters

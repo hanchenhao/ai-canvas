@@ -142,16 +142,20 @@ const Logo = memo(function Logo({
       style={onClick ? { cursor: "pointer" } : undefined}
     >
       {small && (
-        <img className="logo-image" src="/nodetool_icon.png" alt="NodeTool" />
+        <img
+          className="logo-image"
+          src="/nodetool_icon.png"
+          alt="BrainVite-AI-Canvas"
+        />
       )}
       {enableText && (
         <div className="nt" onMouseEnter={handleMouseEnter} aria-hidden="true">
           <div className="nodetool" aria-hidden="true">
             {!singleLine && (
               <>
-                {"NODE"}
+                {"BRAIN"}
                 <br />
-                {"TOOL"}
+                {"VITE"}
               </>
             )}
           </div>

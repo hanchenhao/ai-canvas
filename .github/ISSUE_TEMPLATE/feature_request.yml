@@ -1,5 +1,5 @@
 name: Feature Request
-description: Suggest a new node, workflow capability, or improvement to NodeTool
+description: Suggest an improvement to BrainVite-AI-Canvas
 title: "[Feature]: "
 labels: ["enhancement"]
 body:
@@ -9,14 +9,13 @@ body:
         Thanks for suggesting a feature! Please describe your idea clearly so we can evaluate it.
 
         **Before submitting**, please check:
-        - [Existing issues](https://github.com/nodetool-ai/nodetool/issues) for similar requests
-        - [Discord](https://discord.gg/WmQTWZRcYE) to discuss ideas with the community
+        - [Existing issues](https://github.com/hanchenhao/ai-canvas/issues) for similar requests
 
   - type: dropdown
     id: area
     attributes:
       label: Feature Area
-      description: Which part of NodeTool does this relate to?
+      description: Which part of BrainVite-AI-Canvas does this relate to?
       options:
         - New node type
         - Workflow editor (canvas / UI)
@@ -47,7 +46,7 @@ body:
     attributes:
       label: Proposed Solution
       description: Describe the feature or change you'd like to see.
-      placeholder: "It would be great if NodeTool could..."
+      placeholder: "It would be great if BrainVite-AI-Canvas could..."
     validations:
       required: true
 

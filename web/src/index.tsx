@@ -625,7 +625,7 @@ const AppWrapper = ({ configReady }: { configReady: Promise<unknown> }) => {
                   {status === "pending" && !isDevTestRoute && (
                     <div
                       role="status"
-                      aria-label="Loading NodeTool"
+                      aria-label="Loading BrainVite-AI-Canvas"
                       style={{
                         display: "flex",
                         flexDirection: "column",
@@ -642,7 +642,7 @@ const AppWrapper = ({ configReady }: { configReady: Promise<unknown> }) => {
                           fontSize: "var(--fontSizeNormal)"
                         }}
                       >
-                        Loading NodeTool…
+                        Loading BrainVite-AI-Canvas…
                       </span>
                     </div>
                   )}

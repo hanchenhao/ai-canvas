@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report a problem with NodeTool (desktop app, backend, or workflow execution)
+description: Report a problem with BrainVite-AI-Canvas
 title: "[Bug]: "
 labels: ["bug"]
 body:
@@ -9,8 +9,7 @@ body:
         Thanks for taking the time to report a bug! Please fill out as much detail as possible.
 
         **Before submitting**, please check:
-        - [Existing issues](https://github.com/nodetool-ai/nodetool/issues) to avoid duplicates
-        - [Discord](https://discord.gg/WmQTWZRcYE) for quick help from the community
+        - [Existing issues](https://github.com/hanchenhao/ai-canvas/issues) to avoid duplicates
 
   - type: textarea
     id: description
@@ -27,7 +26,7 @@ body:
       label: Steps to Reproduce
       description: Step-by-step instructions to reproduce the issue.
       placeholder: |
-        1. Open NodeTool
+        1. Open BrainVite-AI-Canvas
         2. Add a '...' node
         3. Connect it to '...'
         4. Run the workflow
@@ -59,7 +58,7 @@ body:
         A **Debug Bundle** contains your logs, system info, and workflow data (secrets are automatically redacted).
 
         **How to export it:**
-        1. Open NodeTool
+        1. Open BrainVite-AI-Canvas
         2. Click the ⚙️ **Settings** icon in the top-right corner
         3. Scroll down to **"Export Debug Bundle"** and click it
         4. Attach the downloaded `.zip` file to this issue
@@ -75,7 +74,7 @@ body:
     attributes:
       label: Debug Bundle / Logs
       description: |
-        Attach the `.zip` Debug Bundle exported from NodeTool Settings.
+        Attach the `.zip` Debug Bundle exported from BrainVite-AI-Canvas Settings.
         If the app won't start, paste the relevant log content or error output here.
       placeholder: "Drag and drop the nodetool-debug-*.zip file here, or paste log/error output."
     validations:
@@ -84,7 +83,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: NodeTool Version
+      label: BrainVite-AI-Canvas Version
       description: Found in Settings → About, or in the title bar / window title.
       placeholder: "e.g. 0.6.12"
     validations:
@@ -132,7 +131,7 @@ body:
     id: run_mode
     attributes:
       label: Run Mode
-      description: How are you running NodeTool?
+      description: How are you running BrainVite-AI-Canvas?
       options:
         - Desktop app (Electron)
         - Docker / self-hosted server

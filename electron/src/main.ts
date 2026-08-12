@@ -552,10 +552,10 @@ app.on("window-all-closed", async () => {
   // Show dialog to ask user
   const result = await dialog.showMessageBox({
     type: "question",
-    title: "Close NodeTool",
+    title: "Close BrainVite-AI-Canvas",
     message: "What would you like to do?",
     detail:
-      "NodeTool can continue running in the background to keep services available.",
+      "BrainVite-AI-Canvas can continue running in the background to keep local services available.",
     buttons: ["Quit", "Keep Running in Background"],
     defaultId: 1,
     cancelId: 1,

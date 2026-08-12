@@ -63,7 +63,9 @@ function createMiniAppWindow(workflowId: string, workflowName?: string): Browser
     height: windowHeight,
     minWidth: 800,
     minHeight: 600,
-    title: workflowName ? `${workflowName} - NodeTool` : "Mini App - NodeTool",
+    title: workflowName
+      ? `${workflowName} - BrainVite-AI-Canvas`
+      : "Mini App - BrainVite-AI-Canvas",
     backgroundColor: "#181a1b",
     webPreferences: {
       nodeIntegration: false,
@@ -117,7 +119,7 @@ function createChatWindow(): BrowserWindow {
     height: windowHeight,
     minWidth: 800,
     minHeight: 600,
-    title: "Chat - NodeTool",
+    title: "Chat - BrainVite-AI-Canvas",
     backgroundColor: "#181a1b",
     webPreferences: {
       nodeIntegration: false,

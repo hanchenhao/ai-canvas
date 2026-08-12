@@ -125,11 +125,11 @@ async function ensureAppUpdateConfig(context) {
   // Must match the runtime updater's cache dir (electron/src/updater.ts) so
   // electron-updater reads and writes the same directory. Do NOT derive this
   // from appInfo.updaterCacheDirName: electron-builder defaults it to
-  // "<package name>-updater" → "nodetool-electron-updater", which diverges from
+  // "<package name>-updater", which can diverge from
   // the runtime value and fails the release verify gate.
   const config = {
     ...publishConfig,
-    updaterCacheDirName: "nodetool-updater",
+    updaterCacheDirName: "brainvite-ai-canvas-updater",
   };
 
   await fsp.mkdir(resourcesDir, { recursive: true });

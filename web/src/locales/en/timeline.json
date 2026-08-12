@@ -241,7 +241,9 @@
     "notFound": "Sequence not found",
     "notFoundHint": "The timeline sequence you requested does not exist or you do not have access to it.",
     "retry": "Retry",
+    "retryAria": "Retry loading sequence",
     "newSequence": "New sequence",
+    "newSequenceAria": "Create new sequence",
     "creating": "Creating…",
     "createFailed": "Could not create sequence.",
     "untitled": "Untitled sequence"

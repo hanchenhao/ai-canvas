@@ -6,6 +6,9 @@
  */
 
 import Database from "better-sqlite3";
+
+import fs from "fs";
+import path from "path";
 import {
   drizzle as drizzleSqlite,
   type BetterSQLite3Database
@@ -189,6 +192,54 @@ export async function migrateSqliteDb(dbPath: string): Promise<string[]> {
     return await runner.migrate();
   } finally {
     sqlite.close();
+  }
+}
+
+/**
+ * Close the database connection and reset state.
+ * For PostgreSQL, returns a Promise that resolves once the connection pool is drained.
+ */
+export async function backupSqliteDb(dbPath: string): Promise<string | null> {
+  try {
+    if (!fs.existsSync(dbPath)) return null;
+
+    const dir = path.dirname(dbPath);
+    const backupsDir = path.join(dir, "backups");
+    fs.mkdirSync(backupsDir, { recursive: true });
+
+    const ts = new Date().toISOString().replace(/[:.]/g, "-");
+    const backupPath = path.join(backupsDir, `nodetool-${ts}.bak`);
+
+    // Online backup API: consistent snapshot of a live database.
+    const source = new Database(dbPath, { readonly: true });
+    try {
+      source.backup(backupPath);
+    } finally {
+      source.close();
+    }
+
+    // Prune: keep only the 3 most recent backups.
+    const backups = fs
+      .readdirSync(backupsDir)
+      .filter((f) => f.startsWith("nodetool-") && f.endsWith(".bak"))
+      .map((f) => ({
+        name: f,
+        mtime: fs.statSync(path.join(backupsDir, f)).mtimeMs,
+      }))
+      .sort((a, b) => b.mtime - a.mtime);
+
+    for (const old of backups.slice(3)) {
+      try {
+        fs.unlinkSync(path.join(backupsDir, old.name));
+      } catch {
+        /* best-effort prune */
+      }
+    }
+
+    return backupPath;
+  } catch (err) {
+    console.error(`Database backup failed: ${err}`);
+    return null;
   }
 }
 

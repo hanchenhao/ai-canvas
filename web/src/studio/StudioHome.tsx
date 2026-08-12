@@ -36,6 +36,7 @@ import { useCreateScript, useScripts } from "../hooks/script/useScripts";
 import { useTimelines } from "../hooks/useTimelineSequence";
 import { useWorkflowManager } from "../contexts/WorkflowManagerContext";
 import StudioShell from "./StudioShell";
+import QuickGeneratePanel from "./QuickGeneratePanel";
 import {
   STUDIO_CLIP_MODEL,
   STUDIO_DIRECTOR_MODEL,
@@ -118,10 +119,6 @@ const projectName = (prompt: string): string => {
   return normalized.length > 24 ? `${normalized.slice(0, 24)}…` : normalized;
 };
 
-type CreateStoryboardInput = Parameters<
-  ReturnType<typeof useCreateStoryboard>["mutateAsync"]
->[0];
-
 const StudioHome = () => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -178,22 +175,19 @@ const StudioHome = () => {
         .mutateAsync({
           name: projectName(brief),
           projectId: "default",
-          // The tRPC document schema is zod `.passthrough()`, so its inferred
-          // type demands an index signature the ApiTypes model values lack —
-          // same wire-cast pattern as useStoryboardServerSync.
           document: {
             screenplay: null,
             shots: [],
             brief: brief.trim(),
             style: "",
             entityIds: [],
-            aspectRatio: "16:9",
-            directorModel: STUDIO_DIRECTOR_MODEL,
-            imageModel: STUDIO_STILL_MODEL,
-            videoModel: STUDIO_CLIP_MODEL
-          } as unknown as CreateStoryboardInput["document"]
-        })
-        .then((created) => navigate(`/studio/storyboard/${created.id}`))
+           aspectRatio: "16:9",
+            directorModel: { ...STUDIO_DIRECTOR_MODEL },
+            imageModel: { ...STUDIO_STILL_MODEL },
+            videoModel: { ...STUDIO_CLIP_MODEL }
+         }
+       })
+       .then((created) => navigate(`/studio/storyboard/${created.id}`))
         .catch(() => setCreateError("创建失败，请检查服务和模型配置后重试。"))
         .finally(() => {
           creatingRef.current = false;
@@ -379,6 +373,8 @@ const StudioHome = () => {
             />
           </FlexRow>
         </FlexColumn>
+
+        <QuickGeneratePanel />
 
         {recent.length > 0 && (
           <FlexColumn
