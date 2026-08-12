@@ -1,0 +1,86 @@
+{
+  "loading": {
+    "default": "加载中…"
+  },
+  "placeholder": {
+    "searchModels": "搜索模型…"
+  },
+  "empty": {
+    "noModels": "未找到模型{{suffix}}。",
+    "noModelsForQuery": "（关键词：「{{query}}」）",
+    "noActiveDownloads": "没有进行中的下载",
+    "noActiveDownloadsDesc": "请从「推荐模型」对话框或模型管理器启动模型下载。"
+  },
+  "button": {
+    "openHuggingfaceFolder": "打开 HuggingFace 文件夹",
+    "openOllamaFolder": "打开 Ollama 文件夹",
+    "close": "关闭",
+    "cancelDownload": "取消下载",
+    "reconnect": "重新连接",
+    "downloadAll": "全部下载",
+    "downloadRemaining": "下载剩余 {{count}} 个",
+    "allDownloaded": "已全部下载"
+  },
+  "tooltip": {
+    "copyMessage": "复制完整消息",
+    "removeCompleted": "从历史记录移除下载",
+    "clearCancelled": "清除已取消的下载",
+    "clearFailed": "清除失败的下载",
+    "removeDefault": "移除下载",
+    "completedChip": "下载已成功完成",
+    "cancelledChip": "下载已取消。可在模型浏览器重新开始。",
+    "failedChip": "下载失败",
+    "totalSize": "正在下载的文件总大小",
+    "fileCount": "已下载文件数与总文件数",
+    "cancelHint": "停止当前下载。之后可以重新开始。",
+    "expandPack": "展开模型包详情",
+    "collapsePack": "收起模型包详情",
+    "stalledDisconnected": "WebSocket 连接已断开。下载可能仍在服务器上运行。点击「重新连接」恢复进度更新。",
+    "stalledNoProgress": "已有 {{time}} 未收到进度。下载可能已停滞或连接已断开。请尝试取消并重新开始下载。"
+  },
+  "status": {
+    "starting": "正在开始下载…",
+    "pending": "等待下载…",
+    "completed": "已完成",
+    "cancelled": "已取消",
+    "failed": "失败",
+    "done": "完成",
+    "error": "错误",
+    "disconnected": "已断开",
+    "reconnecting": "重新连接中…",
+    "stalled": "已停滞",
+    "stalledSince": "已停滞（距上次更新 {{time}}）",
+    "unknownStalled": "未知（已停滞）"
+  },
+  "label": {
+    "size": "大小：",
+    "files": "文件：",
+    "downloading": "正在下载：",
+    "speed": "速度：",
+    "eta": "预计剩余：",
+    "includedModels": "包含的模型："
+  },
+  "details": {
+    "sizeOfTotal": "{{downloaded}} / {{total}}",
+    "filesOfTotal": "{{downloaded}} / {{total}}",
+    "speedValue": "{{value}} MB/s",
+    "modelCount": "{{count}} 个模型",
+    "modelCountOther": "{{count}} 个模型",
+    "downloadingModels": "正在下载 {{active}}/{{total}} 个模型…"
+  },
+  "dialog": {
+    "titleProgress": "下载进度",
+    "titleIdle": "模型下载",
+    "activeInfo": "下载会在后台继续。随时可从工具栏的下载图标查看。",
+    "idleInfoUseRecommended": "使用节点内的 <strong>推荐模型</strong> 按钮下载模型。",
+    "idleInfoModelManager": "右上角的 <strong>模型管理器</strong> 显示所有可用模型。"
+  },
+  "notice": {
+    "cacheLocation": "模型会下载到本地缓存文件夹（Hugging Face 和 Ollama 的标准位置）。",
+    "gatedModels": "受限或私有的 Hugging Face 模型需要先在 huggingface.co 取得访问权限（接受许可或申请访问），并为服务进程提供读取令牌：启动 NodeTool 前设置 HF_TOKEN，或运行一次 huggingface-cli login。如果下载失败，请打开进度面板并使用「复制消息」共享详情。"
+  },
+  "aria": {},
+  "progress": {
+    "pending": "…"
+  }
+}

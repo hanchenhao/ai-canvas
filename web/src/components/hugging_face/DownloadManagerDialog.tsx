@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useMemo } from "react";
 import { css } from "@emotion/react";
+import { useTranslation, Trans } from "react-i18next";
 
 import AnnouncementIcon from "@mui/icons-material/Announcement";
 import {
@@ -61,6 +62,7 @@ const styles = (theme: Theme) =>
   });
 
 const DownloadManagerDialog: React.FC = () => {
+  const { t } = useTranslation("huggingface");
   const { isDialogOpen, closeDialog, downloads } = useModelDownloadStore(
     useShallow((state) => ({
       isDialogOpen: state.isDialogOpen,
@@ -75,16 +77,20 @@ const DownloadManagerDialog: React.FC = () => {
   const theme = useTheme();
 
   const infoMessage = hasActiveDownloads ? (
-    "Downloads continue in the background. Access them anytime from the toolbar download icon."
+    t("dialog.activeInfo")
   ) : (
     <FlexColumn gap={1}>
       <span>
-        Download models using the <strong>Recommended Models</strong> button
-        inside nodes.
+        <Trans
+          i18nKey="huggingface:dialog.idleInfoUseRecommended"
+          components={{ strong: <strong /> }}
+        />
       </span>
       <span>
-        The <strong>Model Manager</strong> in the top right panel shows all
-        available models.
+        <Trans
+          i18nKey="huggingface:dialog.idleInfoModelManager"
+          components={{ strong: <strong /> }}
+        />
       </span>
     </FlexColumn>
   );
@@ -99,7 +105,9 @@ const DownloadManagerDialog: React.FC = () => {
       fullWidth
     >
       <DialogTitle sx={{ color: "inherit", position: "relative" }}>
-        {hasActiveDownloads ? "Download Progress" : "Model Downloads"}
+        {hasActiveDownloads
+          ? t("dialog.titleProgress")
+          : t("dialog.titleIdle")}
         <CloseButton
           onClick={closeDialog}
           className="title-close"
@@ -121,13 +129,14 @@ const DownloadManagerDialog: React.FC = () => {
               }}
             >
               <DownloadingIcon sx={{ opacity: 0.8 }} />
-              <Text size="normal" weight={600}>No active downloads</Text>
+              <Text size="normal" weight={600}>
+                {t("empty.noActiveDownloads")}
+              </Text>
               <Text
                 size="small"
                 sx={{ opacity: 0.8, textAlign: "center" }}
               >
-                Start a model download from the Recommended Models dialog or
-                Model Manager.
+                {t("empty.noActiveDownloadsDesc")}
               </Text>
             </FlexColumn>
           )}
@@ -144,14 +153,14 @@ const DownloadManagerDialog: React.FC = () => {
                   startIcon={<FolderOutlined />}
                   onClick={openHuggingfacePath}
                 >
-                  Open HuggingFace folder
+                  {t("button.openHuggingfaceFolder")}
                 </EditorButton>
                 <EditorButton
                   variant="outlined"
                   startIcon={<FolderOutlined />}
                   onClick={openOllamaPath}
                 >
-                  Open Ollama folder
+                  {t("button.openOllamaFolder")}
                 </EditorButton>
               </Box>
             </>
@@ -176,7 +185,7 @@ const DownloadManagerDialog: React.FC = () => {
           {infoMessage}
         </Text>
         <EditorButton onClick={closeDialog} variant="contained">
-          Close
+          {t("button.close")}
         </EditorButton>
       </DialogActions>
     </Dialog>

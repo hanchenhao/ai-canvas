@@ -1,0 +1,86 @@
+{
+  "loading": {
+    "default": "Loading…"
+  },
+  "placeholder": {
+    "searchModels": "Search models..."
+  },
+  "empty": {
+    "noModels": "No models found{{suffix}}.",
+    "noModelsForQuery": " for \"{{query}}\"",
+    "noActiveDownloads": "No active downloads",
+    "noActiveDownloadsDesc": "Start a model download from the Recommended Models dialog or Model Manager."
+  },
+  "button": {
+    "openHuggingfaceFolder": "Open HuggingFace folder",
+    "openOllamaFolder": "Open Ollama folder",
+    "close": "Close",
+    "cancelDownload": "Cancel Download",
+    "reconnect": "Reconnect",
+    "downloadAll": "Download All",
+    "downloadRemaining": "Download {{count}} Remaining",
+    "allDownloaded": "All Downloaded"
+  },
+  "tooltip": {
+    "copyMessage": "Copy full message",
+    "removeCompleted": "Remove download from history",
+    "clearCancelled": "Clear cancelled download",
+    "clearFailed": "Clear failed download",
+    "removeDefault": "Remove download",
+    "completedChip": "Download has finished successfully",
+    "cancelledChip": "Download was cancelled. You can restart it from the model browser.",
+    "failedChip": "Download failed",
+    "totalSize": "Total size of files being downloaded",
+    "fileCount": "Number of files downloaded vs total files",
+    "cancelHint": "Stop the current download. You can restart it later.",
+    "expandPack": "Expand model pack details",
+    "collapsePack": "Collapse model pack details",
+    "stalledDisconnected": "WebSocket connection lost. The download may still be running on the server. Click Reconnect to restore progress updates.",
+    "stalledNoProgress": "No progress received for {{time}}. The download may have stalled or the connection was lost. Try cancelling and restarting the download."
+  },
+  "status": {
+    "starting": "Starting download...",
+    "pending": "Pending download...",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "failed": "Failed",
+    "done": "Done",
+    "error": "Error",
+    "disconnected": "Disconnected",
+    "reconnecting": "Reconnecting...",
+    "stalled": "Stalled",
+    "stalledSince": "Stalled ({{time}} since last update)",
+    "unknownStalled": "Unknown (stalled)"
+  },
+  "label": {
+    "size": "Size:",
+    "files": "Files:",
+    "downloading": "Downloading:",
+    "speed": "Speed:",
+    "eta": "ETA:",
+    "includedModels": "Included Models:"
+  },
+  "details": {
+    "sizeOfTotal": "{{downloaded}} / {{total}}",
+    "filesOfTotal": "{{downloaded}} / {{total}}",
+    "speedValue": "{{value}} MB/s",
+    "modelCount": "{{count}} model",
+    "modelCountOther": "{{count}} models",
+    "downloadingModels": "Downloading {{active}} of {{total}} models…"
+  },
+  "dialog": {
+    "titleProgress": "Download Progress",
+    "titleIdle": "Model Downloads",
+    "activeInfo": "Downloads continue in the background. Access them anytime from the toolbar download icon.",
+    "idleInfoUseRecommended": "Download models using the <strong>Recommended Models</strong> button inside nodes.",
+    "idleInfoModelManager": "The <strong>Model Manager</strong> in the top right panel shows all available models."
+  },
+  "notice": {
+    "cacheLocation": "Models will be downloaded to your local cache folder in the standard location for Huggingface and Ollama.",
+    "gatedModels": "Gated or private Hugging Face models need access on huggingface.co (accept the license or request access) plus a read token for the server process: set HF_TOKEN before starting NodeTool, or run huggingface-cli login once. If a download fails, open the progress panel and use Copy message to share the details."
+  },
+  "aria": {},
+  "progress": {
+    "pending": "…"
+  }
+}

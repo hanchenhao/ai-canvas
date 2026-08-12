@@ -1,4 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { EditorButton, FlexRow, Text, SearchInput, ListGroup } from "../ui_primitives";
 import { UnifiedModel } from "../../stores/ApiTypes";
 import ModelListItem from "./model_list/ModelListItem";
@@ -28,6 +29,7 @@ const RecommendedModelsInner: React.FC<RecommendedModelsProps> = ({
   recommendedModels,
   startDownload
 }) => {
+  const { t } = useTranslation("huggingface");
   const theme = useTheme();
   const [searchQuery, setSearchQuery] = useState("");
   const { cacheStatuses, cachePending, cacheVersion, ensureStatuses } =
@@ -93,7 +95,7 @@ const RecommendedModelsInner: React.FC<RecommendedModelsProps> = ({
   }, [displayModels, handleDownload]);
 
   if (!recommendedModels) {
-    return <div>Loading…</div>;
+    return <div>{t("loading.default")}</div>;
   }
 
   return (
@@ -106,7 +108,7 @@ const RecommendedModelsInner: React.FC<RecommendedModelsProps> = ({
       >
         <SearchInput
           className="search-models-input"
-          placeholder="Search models..."
+          placeholder={t("placeholder.searchModels")}
           size="small"
           value={searchQuery}
           onChange={setSearchQuery}
@@ -118,7 +120,11 @@ const RecommendedModelsInner: React.FC<RecommendedModelsProps> = ({
         <Text
           sx={{ color: "var(--palette-grey-200)", ml: 2, mt: 8, mb: 8 }}
         >
-          No models found{searchQuery ? ` for "${searchQuery}"` : ""}.
+          {t("empty.noModels", {
+            suffix: searchQuery
+              ? t("empty.noModelsForQuery", { query: searchQuery })
+              : ""
+          })}
         </Text>
       ) : (
         <ListGroup>
@@ -152,8 +158,7 @@ const RecommendedModelsInner: React.FC<RecommendedModelsProps> = ({
             color: theme.vars.palette.warning.main
           }}
         />
-        Models will be downloaded to your local cache folder in the standard
-        location for Huggingface and Ollama.
+        {t("notice.cacheLocation")}
       </Text>
       <Text
         sx={{
@@ -166,11 +171,7 @@ const RecommendedModelsInner: React.FC<RecommendedModelsProps> = ({
         component="div"
         size="small"
       >
-        Gated or private Hugging Face models need access on huggingface.co (accept
-        the license or request access) plus a read token for the server process:
-        set HF_TOKEN before starting NodeTool, or run huggingface-cli login once.
-        If a download fails, open the progress panel and use Copy message to share
-        the details.
+        {t("notice.gatedModels")}
       </Text>
 
       {isLocalhost && isFileExplorerAvailable() && (
@@ -181,7 +182,7 @@ const RecommendedModelsInner: React.FC<RecommendedModelsProps> = ({
             onClick={openHuggingfacePath}
           >
             <FolderOutlined sx={{ mr: 0.5, fontSize: "1em" }} />
-            Open HuggingFace folder
+            {t("button.openHuggingfaceFolder")}
           </EditorButton>
           <EditorButton
             variant="outlined"
@@ -189,7 +190,7 @@ const RecommendedModelsInner: React.FC<RecommendedModelsProps> = ({
             onClick={openOllamaPath}
           >
             <FolderOutlined sx={{ mr: 0.5, fontSize: "1em" }} />
-            Open Ollama folder
+            {t("button.openOllamaFolder")}
           </EditorButton>
         </FlexRow>
       )}

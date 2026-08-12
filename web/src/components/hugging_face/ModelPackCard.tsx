@@ -1,4 +1,5 @@
 import React, { memo, useState, useMemo, useEffect, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   Text,
@@ -41,6 +42,7 @@ const ModelPackCard: React.FC<ModelPackCardProps> = ({
   pack,
   onDownloadAll
 }) => {
+  const { t } = useTranslation("huggingface");
   const [expanded, setExpanded] = useState(false);
   const packModelIds = useMemo(
     () => pack.models.map((m) => m.id),
@@ -185,7 +187,12 @@ const ModelPackCard: React.FC<ModelPackCardProps> = ({
                 />
               ))}
               <Chip
-                label={`${pack.models.length} model${pack.models.length > 1 ? "s" : ""}`}
+                label={t(
+                  pack.models.length > 1
+                    ? "details.modelCountOther"
+                    : "details.modelCount",
+                  { count: pack.models.length }
+                )}
                 size="small"
                 sx={{
                   backgroundColor: "var(--palette-grey-700)",
@@ -217,7 +224,10 @@ const ModelPackCard: React.FC<ModelPackCardProps> = ({
               }}
             />
             <Caption color="secondary">
-              Downloading {activeDownloads.length} of {pack.models.length} models…
+              {t("details.downloadingModels", {
+                active: activeDownloads.length,
+                total: pack.models.length
+              })}
             </Caption>
           </Box>
         )}
@@ -236,15 +246,21 @@ const ModelPackCard: React.FC<ModelPackCardProps> = ({
           }}
         >
           {allDownloaded
-            ? "All Downloaded"
+            ? t("button.allDownloaded")
             : someDownloaded
-              ? `Download ${pack.models.length - downloadedModels.size} Remaining`
-              : "Download All"}
+              ? t("button.downloadRemaining", {
+                  count: pack.models.length - downloadedModels.size
+                })
+              : t("button.downloadAll")}
         </EditorButton>
 
         <ToolbarIconButton
           icon={<ExpandMoreIcon />}
-          tooltip={expanded ? "Collapse model pack details" : "Expand model pack details"}
+          tooltip={
+            expanded
+              ? t("tooltip.collapsePack")
+              : t("tooltip.expandPack")
+          }
           onClick={handleToggleExpanded}
           sx={{
             transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
@@ -261,7 +277,7 @@ const ModelPackCard: React.FC<ModelPackCardProps> = ({
             color="secondary"
             sx={{ mb: 1 }}
           >
-            Included Models:
+            {t("label.includedModels")}
           </Text>
           <List dense disablePadding>
             {pack.models.map((model) => (

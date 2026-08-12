@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { keyframes } from "@emotion/react";
 
 import React, { useCallback, useMemo, useState, useEffect, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { Tooltip, Text, Caption, EditorButton, LoadingSpinner, Chip, CloseButton, FlexRow, FlexColumn, CopyButton, Box, BORDER_RADIUS, SPACING, getSpacingPx } from "../ui_primitives";
 import { ProgressBar } from "../ui_primitives";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
@@ -109,6 +110,7 @@ export const DownloadProgress: React.FC<{
   name: string;
   minimal?: boolean;
 }> = memo(({ name, minimal }) => {
+  const { t } = useTranslation("huggingface");
   const download = useModelDownloadStore((state) => state.downloads[name]);
   const { cancelDownload, removeDownload, wsConnectionState, reconnectWebSocket } =
     useModelDownloadStore(
@@ -191,19 +193,21 @@ export const DownloadProgress: React.FC<{
   // Display speed - show as stalled/disconnected if no recent updates
   const displaySpeed = useMemo(() => {
     if (isDisconnected) {
-      return "Disconnected";
+      return t("status.disconnected");
     }
     if (isReconnecting) {
-      return "Reconnecting...";
+      return t("status.reconnecting");
     }
     if (isStalled) {
-      return "Stalled";
+      return t("status.stalled");
     }
     if (download.speed) {
-      return `${(download.speed / 1024 / 1024).toFixed(2)} MB/s`;
+      return t("details.speedValue", {
+        value: (download.speed / 1024 / 1024).toFixed(2)
+      });
     }
     return "-";
-  }, [download.speed, isStalled, isDisconnected, isReconnecting]);
+  }, [download.speed, isStalled, isDisconnected, isReconnecting, t]);
 
   const showDetails =
     download.status === "start" ||
@@ -215,13 +219,13 @@ export const DownloadProgress: React.FC<{
   const getCloseButtonTooltip = () => {
     switch (download.status) {
       case "completed":
-        return "Remove download from history";
+        return t("tooltip.removeCompleted");
       case "cancelled":
-        return "Clear cancelled download";
+        return t("tooltip.clearCancelled");
       case "error":
-        return "Clear failed download";
+        return t("tooltip.clearFailed");
       default:
-        return "Remove download";
+        return t("tooltip.removeDefault");
     }
   };
 
@@ -237,12 +241,12 @@ export const DownloadProgress: React.FC<{
         : 0;
     const label =
       download.status === "completed"
-        ? "Done"
+        ? t("status.done")
         : download.status === "error"
-        ? "Error"
+        ? t("status.error")
         : totalBytes > 0
         ? `${percent.toFixed(0)}%`
-        : "…";
+        : t("progress.pending");
 
     const formatBytes = (bytes: number) => {
       if (!bytes || bytes < 0) {return "-";}
@@ -330,7 +334,7 @@ export const DownloadProgress: React.FC<{
           </Box>
           <CopyButton
             value={download.message}
-            tooltip="Copy full message"
+            tooltip={t("tooltip.copyMessage")}
             buttonSize="small"
             nodrag={false}
             sx={{ flexShrink: 0, mt: `-${getSpacingPx(SPACING.micro)}` }}
@@ -342,15 +346,15 @@ export const DownloadProgress: React.FC<{
           <LoadingSpinner size="small" />
           <Text size="small">
             {download.status === "start"
-              ? "Starting download..."
-              : "Pending download..."}
+              ? t("status.starting")
+              : t("status.pending")}
           </Text>
         </FlexRow>
       )}
       {download.status === "completed" && (
-        <Tooltip title="Download has finished successfully">
+        <Tooltip title={t("tooltip.completedChip")}>
           <Chip
-            label="Completed"
+            label={t("status.completed")}
             size="small"
             color="success"
             className="download-status"
@@ -358,9 +362,9 @@ export const DownloadProgress: React.FC<{
         </Tooltip>
       )}
       {download.status === "cancelled" && (
-        <Tooltip title="Download was cancelled. You can restart it from the model browser.">
+        <Tooltip title={t("tooltip.cancelledChip")}>
           <Chip
-            label="Cancelled"
+            label={t("status.cancelled")}
             size="small"
             color="warning"
             className="download-status"
@@ -368,9 +372,9 @@ export const DownloadProgress: React.FC<{
         </Tooltip>
       )}
       {download.status === "error" && (
-        <Tooltip title={download.message || "Download failed"}>
+        <Tooltip title={download.message || t("tooltip.failedChip")}>
           <Chip
-            label="Failed"
+            label={t("status.failed")}
             size="small"
             color="error"
             className="download-status"
@@ -387,18 +391,18 @@ export const DownloadProgress: React.FC<{
               <Tooltip
                 title={
                   isDisconnected
-                    ? "WebSocket connection lost. The download may still be running on the server. Click Reconnect to restore progress updates."
-                    : `No progress received for ${timeSinceUpdate}. The download may have stalled or the connection was lost. Try cancelling and restarting the download.`
+                    ? t("tooltip.stalledDisconnected")
+                    : t("tooltip.stalledNoProgress", { time: timeSinceUpdate })
                 }
               >
                 <FlexRow align="center" gap={0.5} sx={{ color: "var(--palette-warning-main)" }}>
                   <WarningAmberIcon fontSize="small" />
                   <Caption sx={{ fontWeight: 500 }}>
                     {isDisconnected
-                      ? "Disconnected"
+                      ? t("status.disconnected")
                       : isReconnecting
-                        ? "Reconnecting..."
-                        : `Stalled (${timeSinceUpdate} since last update)`}
+                        ? t("status.reconnecting")
+                        : t("status.stalledSince", { time: timeSinceUpdate })}
                   </Caption>
                   {isDisconnected && !isReconnecting && (
                     <EditorButton
@@ -412,7 +416,7 @@ export const DownloadProgress: React.FC<{
                         fontSize: "var(--fontSizeSmall)"
                       }}
                     >
-                      Reconnect
+                      {t("button.reconnect")}
                     </EditorButton>
                   )}
                 </FlexRow>
@@ -435,7 +439,7 @@ export const DownloadProgress: React.FC<{
             />
           </Box>
           <Box className="download-details">
-            <Tooltip title="Total size of files being downloaded">
+            <Tooltip title={t("tooltip.totalSize")}>
               <Text
                 className="download-progress-text download-size"
                 size="small"
@@ -444,23 +448,30 @@ export const DownloadProgress: React.FC<{
                   fontFamily: "var(--fontFamily2)"
                 }}
               >
-                Size: {(download.downloadedBytes / 1024 / 1024).toFixed(2)} MB /{" "}
-                {(download.totalBytes / 1024 / 1024).toFixed(2)} MB
+                {t("label.size")}{" "}
+                {t("details.sizeOfTotal", {
+                  downloaded: `${(download.downloadedBytes / 1024 / 1024).toFixed(2)} MB`,
+                  total: `${(download.totalBytes / 1024 / 1024).toFixed(2)} MB`
+                })}
               </Text>
             </Tooltip>
-            <Tooltip title="Number of files downloaded vs total files">
+            <Tooltip title={t("tooltip.fileCount")}>
               <Text
                 className="download-progress-text download-files"
                 size="small"
               >
-                Files: {download.downloadedFiles} / {download.totalFiles}
+                {t("label.files")}{" "}
+                {t("details.filesOfTotal", {
+                  downloaded: download.downloadedFiles,
+                  total: download.totalFiles
+                })}
               </Text>
             </Tooltip>
             <Text
               className="download-progress-text download-current"
               size="small"
             >
-              Downloading: {download.currentFiles?.join(", ")}
+              {t("label.downloading")} {download.currentFiles?.join(", ")}
             </Text>
             <Text
               className="download-progress-text download-speed"
@@ -471,7 +482,7 @@ export const DownloadProgress: React.FC<{
                 color: isStalled ? "var(--palette-warning-main)" : undefined
               }}
             >
-              Speed: {displaySpeed}
+              {t("label.speed")} {displaySpeed}
             </Text>
             <Text
               className="download-progress-text download-eta"
@@ -481,10 +492,11 @@ export const DownloadProgress: React.FC<{
                 color: isStalled ? "var(--palette-warning-main)" : undefined
               }}
             >
-              ETA: {isStalled ? "Unknown (stalled)" : eta || "-"}
+              {t("label.eta")}{" "}
+              {isStalled ? t("status.unknownStalled") : (eta || "-")}
             </Text>
           </Box>
-          <Tooltip title="Stop the current download. You can restart it later.">
+          <Tooltip title={t("tooltip.cancelHint")}>
             <EditorButton
               onClick={handleCancelDownload}
               variant="contained"
@@ -495,7 +507,7 @@ export const DownloadProgress: React.FC<{
               }}
               className="cancel-button"
             >
-              Cancel Download
+              {t("button.cancelDownload")}
             </EditorButton>
           </Tooltip>
         </>
