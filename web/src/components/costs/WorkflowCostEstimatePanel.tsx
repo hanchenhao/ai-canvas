@@ -11,6 +11,7 @@
 
 import { css } from "@emotion/react";
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
@@ -144,35 +145,40 @@ const styles = (theme: Theme) =>
 const WorkflowCostEstimatePanelInternal: React.FC<
   WorkflowCostEstimatePanelProps
 > = ({ workflowId }) => {
+  const { t } = useTranslation(["costs"]);
   const theme = useTheme();
   const estimate = useWorkflowCostEstimate(workflowId);
 
   return (
     <Box css={styles(theme)} className="cost-estimate">
       <div className="cost-head">
-        <div className="cost-title">Cost estimate</div>
-        <span className="cost-subtitle">Estimated cost of a single run</span>
+        <div className="cost-title">{t("costs:estimate.title")}</div>
+        <span className="cost-subtitle">
+          {t("costs:estimate.subtitle")}
+        </span>
       </div>
 
       {!estimate ? (
         <Caption size="smaller" color="muted">
-          Open a workflow to see its cost estimate.
+          {t("costs:estimate.openWorkflow")}
         </Caption>
       ) : estimate.items.length === 0 ? (
         <Caption size="smaller" color="muted">
-          Add a node that uses an AI model to estimate a run&apos;s cost.
+          {t("costs:estimate.addNode")}
         </Caption>
       ) : (
         <>
           <div className="cost-table">
             <div className="cost-row is-head">
-              <span className="cost-col-head">Node</span>
-              <span className="cost-col-head">Provider / model</span>
-              <span className="cost-col-head" style={{ textAlign: "right" }}>
-                Qty
+              <span className="cost-col-head">{t("costs:estimate.colNode")}</span>
+              <span className="cost-col-head">
+                {t("costs:estimate.colProviderModel")}
               </span>
               <span className="cost-col-head" style={{ textAlign: "right" }}>
-                Cost
+                {t("costs:estimate.colQty")}
+              </span>
+              <span className="cost-col-head" style={{ textAlign: "right" }}>
+                {t("costs:estimate.colCost")}
               </span>
             </div>
             {estimate.items.map((item) => (
@@ -181,8 +187,14 @@ const WorkflowCostEstimatePanelInternal: React.FC<
                   {item.node_type}
                 </span>
                 {item.confidence === "unknown" ? (
-                  <Tooltip title="Price unknown — excluded from the total" arrow>
-                    <span className="cost-unknown" aria-label="Price unknown">
+                  <Tooltip
+                    title={t("costs:estimate.priceUnknown")}
+                    arrow
+                  >
+                    <span
+                      className="cost-unknown"
+                      aria-label={t("costs:estimate.priceUnknownShort")}
+                    >
                       <HelpOutlineIcon fontSize="inherit" />
                     </span>
                   </Tooltip>
@@ -203,25 +215,26 @@ const WorkflowCostEstimatePanelInternal: React.FC<
           </div>
 
           <div className="cost-total">
-            <span className="cost-total-key">Total ({estimate.currency})</span>
+            <span className="cost-total-key">
+              {t("costs:estimate.total", { currency: estimate.currency })}
+            </span>
             <span className="cost-total-value">
               {formatMoney(estimate.total)}
             </span>
           </div>
           {estimate.unknown_count > 0 && (
             <span className="cost-note">
-              {estimate.unknown_count} node
-              {estimate.unknown_count === 1 ? "" : "s"} without a known price
-              {estimate.unknown_count === 1 ? " is" : " are"} excluded from the
-              total.
+              {t("costs:estimate.unknownNote", {
+                count: estimate.unknown_count
+              })}
             </span>
           )}
           <span className="cost-credit">
-            List prices from provider catalogs and{" "}
+            {t("costs:estimate.creditPrefix")}{" "}
             <ExternalLink href="https://genspend.io" size="small">
               genspend.io
             </ExternalLink>
-            , last updated {genspendUpdatedOn}.
+            {t("costs:estimate.creditSuffix", { date: genspendUpdatedOn })}
           </span>
         </>
       )}

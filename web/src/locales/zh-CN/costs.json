@@ -1,7 +1,9 @@
 {
   "title": "费用",
   "subtitle": "每次节点执行的花费",
-  "subtitleWithWorkflows": "跨 <strong>{{count}} 个工作流</strong>的节点执行花费",
+  "subtitlePrefix": "跨",
+  "subtitleWorkflows": "{{count}} 个工作流",
+  "subtitleSuffix": "的节点执行花费",
   "range": {
     "vsPrior": "对比上一个 {{range}}",
     "daily": "每日 · 最近 {{count}} 天"
@@ -36,6 +38,8 @@
     "executions": "执行次数",
     "shareOfSpend": "花费占比",
     "nodeType": "节点类型",
+    "provider": "供应商",
+    "model": "模型",
     "empty": "没有匹配当前筛选条件的执行记录。"
   },
   "filter": {
@@ -71,8 +75,8 @@
     "total": "总计（{{currency}}）",
     "priceUnknown": "价格未知 —— 已从总计中排除",
     "priceUnknownShort": "价格未知",
-    "unknownNoteOne": "{{count}} 个无已知价格的节点已从总计中排除。",
-    "unknownNoteOther": "{{count}} 个无已知价格的节点已从总计中排除。",
+    "unknownNote_one": "{{count}} 个无已知价格的节点已从总计中排除。",
+    "unknownNote_other": "{{count}} 个无已知价格的节点已从总计中排除。",
     "creditPrefix": "价格来自供应商目录与",
     "creditSuffix": "，最后更新于 {{date}}。",
     "noWorkflowDash": "—"

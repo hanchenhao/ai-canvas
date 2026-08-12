@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import type { SxProps } from "@mui/material";
@@ -48,12 +49,12 @@ import {
 import { useCostsDashboard } from "./useCostsDashboard";
 
 const RANGE_OPTIONS: DateRange[] = ["7d", "14d", "30d", "90d"];
-const GROUP_OPTIONS: { value: GroupByKey; label: string }[] = [
-  { value: "execution", label: "Execution" },
-  { value: "nodeType", label: "Node type" },
-  { value: "workflow", label: "Workflow" },
-  { value: "provider", label: "Provider" },
-  { value: "model", label: "Model" }
+const GROUP_KEYS: GroupByKey[] = [
+  "execution",
+  "nodeType",
+  "workflow",
+  "provider",
+  "model"
 ];
 
 const segmentedSx = (theme: Theme): SxProps<Theme> => ({
@@ -110,6 +111,7 @@ const matchesSearch = (
 };
 
 const CostsDashboard: React.FC = () => {
+  const { t } = useTranslation(["costs"]);
   const theme = useTheme();
 
   const [range, setRange] = useState<DateRange>("14d");
@@ -238,23 +240,25 @@ const CostsDashboard: React.FC = () => {
                 color: theme.vars.palette.text.primary
               }}
             >
-              Costs
+              {t("costs:title")}
             </Text>
             {view ? (
               <Text size="normal" color="secondary">
-                Spend per node execution across{" "}
+                {t("costs:subtitlePrefix")}{" "}
                 <Text
                   component="span"
                   weight={600}
                   sx={{ color: theme.vars.palette.text.primary }}
                 >
-                  {view.stats.workflowCount} workflows
+                  {t("costs:subtitleWorkflows", {
+                    count: view.stats.workflowCount
+                  })}
                 </Text>{" "}
                 · {rangeLabel}
               </Text>
             ) : (
               <Text size="normal" color="secondary">
-                Spend per node execution
+                {t("costs:subtitle")}
               </Text>
             )}
           </FlexColumn>
@@ -277,7 +281,11 @@ const CostsDashboard: React.FC = () => {
               <>
                 <FilterDropdown
                   icon={<FilterListIcon sx={{ fontSize: 16 }} />}
-                  label={providersAllSelected ? "All providers" : "Providers"}
+                  label={
+                    providersAllSelected
+                      ? t("costs:filter.allProviders")
+                      : t("costs:filter.providers")
+                  }
                   count={
                     providersAllSelected
                       ? String(providerUniverse.length)
@@ -302,7 +310,11 @@ const CostsDashboard: React.FC = () => {
 
                 <FilterDropdown
                   icon={<AccountTreeIcon sx={{ fontSize: 15 }} />}
-                  label={workflowsAllSelected ? "All workflows" : "Workflows"}
+                  label={
+                    workflowsAllSelected
+                      ? t("costs:filter.allWorkflows")
+                      : t("costs:filter.workflows")
+                  }
                   count={
                     workflowsAllSelected
                       ? undefined
@@ -350,7 +362,7 @@ const CostsDashboard: React.FC = () => {
                   }}
                 >
                   <FileDownloadIcon sx={{ fontSize: 17 }} />
-                  Export CSV
+                  {t("costs:action.exportCsv")}
                 </Box>
               </>
             )}
@@ -363,9 +375,7 @@ const CostsDashboard: React.FC = () => {
           </StateMessage>
         ) : isError ? (
           <StateMessage>
-            <Text color="secondary">
-              Couldn&apos;t load cost data. Please try again.
-            </Text>
+            <Text color="secondary">{t("costs:state.loadError")}</Text>
           </StateMessage>
         ) : view ? (
           <DashboardContent
@@ -382,7 +392,7 @@ const CostsDashboard: React.FC = () => {
           />
         ) : (
           <StateMessage>
-            <Text color="secondary">No cost data for this period.</Text>
+            <Text color="secondary">{t("costs:state.empty")}</Text>
           </StateMessage>
         )}
       </Box>
@@ -415,6 +425,7 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
   visibleCount,
   totalCount
 }) => {
+  const { t } = useTranslation(["costs"]);
   const theme = useTheme();
   const segmentedStyles = useMemo(() => segmentedSx(theme), [theme]);
   const stats = view.stats;
@@ -433,11 +444,11 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
       {/* stat cards */}
       <FlexRow gap={2} wrap sx={{ mb: 3 }}>
         <CostStatCard
-          label="Total spend"
+          label={t("costs:stat.totalSpend")}
           icon={AttachMoneyIcon}
           value={total.whole}
           decimal={total.decimal}
-          caption={`vs prior ${range}`}
+          caption={t("costs:range.vsPrior", { range })}
           badge={
             delta === null ? undefined : (
               <FlexRow
@@ -464,29 +475,33 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
           }
         />
         <CostStatCard
-          label="Node executions"
+          label={t("costs:stat.nodeExecutions")}
           icon={GridViewIcon}
           value={String(stats.executionCount)}
-          caption={`${stats.failedCount} failed · ${stats.workflowCount} workflows`}
+          caption={t("costs:stat.failedWorkflows", {
+            failed: stats.failedCount,
+            workflows: stats.workflowCount
+          })}
         />
         <CostStatCard
-          label="Avg / execution"
+          label={t("costs:stat.avgPerExecution")}
           icon={ShowChartIcon}
           value={formatMoney(stats.avgPerExecution)}
-          caption="across all node types"
+          caption={t("costs:stat.acrossAll")}
         />
         <CostStatCard
-          label="Top cost driver"
+          label={t("costs:stat.topCostDriver")}
           icon={BarChartIcon}
           value={driver ? driver.label : "—"}
           valueVariant="label"
           valueDotColor={driver ? providerColor(driver.providerId) : undefined}
           caption={
             driver
-              ? `${formatMoney(driver.cost)} · ${formatPercent(
-                  driverShare
-                )} of spend`
-              : "no spend yet"
+              ? t("costs:stat.driverShare", {
+                  cost: formatMoney(driver.cost),
+                  share: formatPercent(driverShare)
+                })
+              : t("costs:stat.noSpendYet")
           }
         />
       </FlexRow>
@@ -498,7 +513,7 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
           providers={view.providers}
           stackOrder={view.stackOrder}
           activeProviders={providerSel ?? undefined}
-          rangeLabel={`daily · last ${view.days.length} days`}
+          rangeLabel={t("costs:range.daily", { count: view.days.length })}
         />
       </Box>
 
@@ -519,7 +534,7 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
               color: theme.vars.palette.text.disabled
             }}
           >
-            Group by
+            {t("costs:group.label")}
           </Text>
           <ToggleGroup
             exclusive
@@ -527,9 +542,9 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
             onChange={(_, v) => v && setGroupBy(v as GroupByKey)}
             sx={segmentedStyles}
           >
-            {GROUP_OPTIONS.map((o) => (
-              <ToggleOption key={o.value} value={o.value}>
-                {o.label}
+            {GROUP_KEYS.map((key) => (
+              <ToggleOption key={key} value={key}>
+                {t(`costs:group.${key}`)}
               </ToggleOption>
             ))}
           </ToggleGroup>
@@ -540,7 +555,7 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
             <SearchInput
               value={search}
               onChange={setSearch}
-              placeholder="Filter nodes, models…"
+              placeholder={t("costs:filter.placeholder")}
               fullWidth
             />
           </Box>
@@ -601,6 +616,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
   onSelectAll,
   onClear
 }) => {
+  const { t } = useTranslation(["costs"]);
   const theme = useTheme();
   const anchorRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
@@ -680,7 +696,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
               onClick={onSelectAll}
               sx={linkButtonSx(theme)}
             >
-              Select all
+              {t("costs:filter.selectAll")}
             </Box>
             <Box
               component="button"
@@ -688,7 +704,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
               onClick={onClear}
               sx={linkButtonSx(theme)}
             >
-              Clear
+              {t("costs:filter.clear")}
             </Box>
           </FlexRow>
           {options.map((o) => (
@@ -718,7 +734,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
           ))}
           {options.length === 0 && (
             <Text size="small" color="secondary" sx={{ px: 1, py: 0.5 }}>
-              No options
+              {t("costs:filter.noOptions")}
             </Text>
           )}
         </FlexColumn>

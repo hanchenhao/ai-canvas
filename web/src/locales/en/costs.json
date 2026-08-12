@@ -1,7 +1,8 @@
 {
   "title": "Costs",
   "subtitle": "Spend per node execution",
-  "subtitleWithWorkflows": "Spend per node execution across <strong>{{count}} workflows</strong>",
+  "subtitlePrefix": "Spend per node execution across",
+  "subtitleWorkflows": "{{count}} workflows",
   "range": {
     "vsPrior": "vs prior {{range}}",
     "daily": "daily · last {{count}} days"
@@ -36,6 +37,8 @@
     "executions": "Executions",
     "shareOfSpend": "Share of spend",
     "nodeType": "Node type",
+    "provider": "Provider",
+    "model": "Model",
     "empty": "No executions match the current filters."
   },
   "filter": {
@@ -71,8 +74,8 @@
     "total": "Total ({{currency}})",
     "priceUnknown": "Price unknown — excluded from the total",
     "priceUnknownShort": "Price unknown",
-    "unknownNoteOne": "{{count}} node without a known price is excluded from the total.",
-    "unknownNoteOther": "{{count}} nodes without a known price are excluded from the total.",
+    "unknownNote_one": "{{count}} node without a known price is excluded from the total.",
+    "unknownNote_other": "{{count}} nodes without a known price are excluded from the total.",
     "creditPrefix": "List prices from provider catalogs and",
     "creditSuffix": ", last updated {{date}}.",
     "noWorkflowDash": "—"
