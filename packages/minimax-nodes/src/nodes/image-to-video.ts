@@ -31,7 +31,7 @@ export class MinimaxImageToVideoNode extends BaseNode {
   static readonly metadataOutputTypes = { output: "video" };
   static readonly inlineFields: string[] = [];
   static readonly inputFields: string[] = ["image", "prompt"];
-  static readonly requiredSettings = ["MINIMAX_API_KEY"];
+  static readonly requiredSettings = ["MINIMAX_API_KEY", "MINIMAX_BASE_URL"];
   static readonly autoSaveAsset = true;
 
   @prop({

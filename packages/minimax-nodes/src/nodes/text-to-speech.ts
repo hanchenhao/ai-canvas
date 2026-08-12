@@ -32,7 +32,7 @@ export class MinimaxTextToSpeechNode extends BaseNode {
   static readonly metadataOutputTypes = { output: "audio" };
   static readonly inlineFields: string[] = ["text"];
   static readonly inputFields: string[] = ["voice_id"];
-  static readonly requiredSettings = ["MINIMAX_API_KEY"];
+  static readonly requiredSettings = ["MINIMAX_API_KEY", "MINIMAX_BASE_URL"];
   static readonly autoSaveAsset = true;
 
   @prop({

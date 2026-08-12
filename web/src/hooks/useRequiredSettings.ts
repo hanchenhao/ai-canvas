@@ -18,8 +18,10 @@ export const useRequiredSettings = (nodeType: string): string[] => {
       return [];
     }
 
-    const missingSettings = requiredSettings.filter((envVar) => {
-      const setting = settings.find((s) => s.env_var === envVar);
+   const missingSettings = requiredSettings.filter((envVar) => {
+     // Settings with safe defaults that need not block the user.
+     if (envVar === "MINIMAX_BASE_URL") return false;
+     const setting = settings.find((s) => s.env_var === envVar);
       const value = setting?.value;
       return (
         !setting ||

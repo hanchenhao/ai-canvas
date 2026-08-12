@@ -83,6 +83,7 @@ export const BUILTIN_NODE_PACKS: readonly BuiltinNodePack[] = [
    id: "volcengine",
    name: "Volcengine Seedance",
    description: "ByteDance Seedance video generation via Volcengine Ark.",
+   defaultEnabled: true,
    namespaces: ["volcengine"]
  },
  {
