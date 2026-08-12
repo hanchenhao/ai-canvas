@@ -287,7 +287,12 @@
     "namespace": "Namespace",
     "dynamic": "Dynamic",
     "yes": "yes",
-    "any": "any"
+    "any": "any",
+    "tab": {
+      "params": "Params",
+      "io": "I/O",
+      "help": "Help"
+    }
   },
   "runSelected": {
     "runs": "Runs",

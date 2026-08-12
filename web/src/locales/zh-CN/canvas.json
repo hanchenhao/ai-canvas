@@ -287,7 +287,12 @@
     "namespace": "命名空间",
     "dynamic": "动态",
     "yes": "是",
-    "any": "任意"
+    "any": "任意",
+    "tab": {
+      "params": "参数",
+      "io": "输入/输出",
+      "help": "帮助"
+    }
   },
   "runSelected": {
     "runs": "运行次数",
