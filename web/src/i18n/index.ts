@@ -7,11 +7,13 @@ import enSettings from "../locales/en/settings.json";
 import enNodes from "../locales/en/nodes.json";
 import enErrors from "../locales/en/errors.json";
 import enTimeline from "../locales/en/timeline.json";
+import enSketch from "../locales/en/sketch.json";
 import zhCommon from "../locales/zh-CN/common.json";
 import zhSettings from "../locales/zh-CN/settings.json";
 import zhNodes from "../locales/zh-CN/nodes.json";
 import zhErrors from "../locales/zh-CN/errors.json";
 import zhTimeline from "../locales/zh-CN/timeline.json";
+import zhSketch from "../locales/zh-CN/sketch.json";
 
 export const SUPPORTED_LANGUAGES = ["auto", "en", "zh-CN"] as const;
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
@@ -28,14 +30,16 @@ void i18n
         settings: enSettings,
         nodes: enNodes,
         errors: enErrors,
-        timeline: enTimeline
+        timeline: enTimeline,
+        sketch: enSketch
       },
       "zh-CN": {
         common: zhCommon,
         settings: zhSettings,
         nodes: zhNodes,
         errors: zhErrors,
-        timeline: zhTimeline
+        timeline: zhTimeline,
+        sketch: zhSketch
       }
     },
     fallbackLng: FALLBACK_LANGUAGE,

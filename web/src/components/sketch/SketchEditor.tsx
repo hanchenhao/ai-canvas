@@ -38,6 +38,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { memo, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
@@ -158,13 +159,14 @@ const ConnectedColorPanel = memo(function ConnectedColorPanel() {
 /** Section header that mirrors the active foreground color as a hex chip. */
 const ColorSectionHeader = memo(function ColorSectionHeader() {
   const foregroundColor = useSketchStore((s) => s.foregroundColor) || "#ffffff";
+  const { t } = useTranslation(["sketch"]);
   return (
     <FlexRow
       align="center"
       justify="space-between"
       sx={{ width: "100%", pr: 1 }}
     >
-      <SectionTitle>Color</SectionTitle>
+      <SectionTitle>{t("sketch:editor.color")}</SectionTitle>
       <Chip
         compact
         label={colorToHex6(foregroundColor)}
@@ -213,6 +215,7 @@ function SketchEditor({
   ref
 }: SketchEditorProps) {
   const theme = useTheme();
+  const { t } = useTranslation(["sketch"]);
   // Tab toggles a fully chrome-less canvas view: hide the left tools
   // column AND the entire right panel column (color / layers / canvas).
   // The right column is gated here at the wrapper instead of inside
@@ -300,7 +303,7 @@ function SketchEditor({
       paintStrokes: (strokes) => {
         const canvas = canvasRef.current;
         if (!canvas) {
-          throw new Error("The canvas is not ready yet.");
+          throw new Error(t("sketch:editor.canvasNotReady"));
         }
         // A pointer stroke may still be waiting for its rAF merge; drain it so
         // the checkpoint below snapshots the layer as the user last saw it.
@@ -316,8 +319,8 @@ function SketchEditor({
         // pointer-down. Undo therefore rewinds the entire batch at once.
         pushHistory(
           strokes.length === 1
-            ? "paint stroke"
-            : `paint ${strokes.length} strokes`,
+            ? t("sketch:editor.paintStroke")
+            : t("sketch:editor.paintStrokes", { count: strokes.length }),
           snapshots
         );
 
@@ -345,7 +348,8 @@ function SketchEditor({
     session.canvasActions,
     session.historyStore,
     setCanvasGetters,
-    clearCanvasGetters
+    clearCanvasGetters,
+    t
   ]);
 
   // Reconcile bindings on document load: stale-mark layers whose source
@@ -376,7 +380,7 @@ function SketchEditor({
 
       <CollapsibleSection
         className="sketch-editor__layers-section"
-        title={<SectionTitle>Layers</SectionTitle>}
+        title={<SectionTitle>{t("sketch:editor.layers")}</SectionTitle>}
         defaultOpen
         compact
         sx={{
@@ -438,7 +442,7 @@ function SketchEditor({
 
       <CollapsibleSection
         className="sketch-editor__canvas-section"
-        title={<SectionTitle>Canvas</SectionTitle>}
+        title={<SectionTitle>{t("sketch:editor.canvas")}</SectionTitle>}
         defaultOpen={false}
         compact
         sx={{
@@ -580,11 +584,11 @@ function SketchEditor({
               has no Tab key — keep one always-visible affordance on the bare
               canvas. */}
           {panelsHidden && (
-            <Tooltip title="Show panels">
+            <Tooltip title={t("sketch:editor.showPanels")}>
               <Fab
                 className="sketch-editor__show-panels-fab"
                 size="small"
-                aria-label="Show panels"
+                aria-label={t("sketch:editor.showPanels")}
                 onClick={togglePanelsHidden}
                 sx={{
                   position: "absolute",
@@ -653,12 +657,12 @@ function SketchEditor({
           the panels sheet. Gated on the same panelsHidden chrome toggle. */}
       {isMobile && !panelsHidden && (
         <>
-          <Tooltip title="Layers & color">
+          <Tooltip title={t("sketch:editor.layersColor")}>
             <Fab
               className="sketch-editor__mobile-panels-fab"
               size="medium"
               color="primary"
-              aria-label="Open layers and color panel"
+              aria-label={t("sketch:editor.openLayersColor")}
               onClick={() => {
                 // Last action wins — never stack the two mobile sheets.
                 setAssistantPanelOpen(false);
@@ -678,8 +682,8 @@ function SketchEditor({
           <MobileBottomSheet
             open={mobilePanelsOpen}
             onClose={() => setMobilePanelsOpen(false)}
-            title="Layers & color"
-            ariaLabel="Layers and color panel"
+            title={t("sketch:editor.layersColor")}
+            ariaLabel={t("sketch:editor.layersColorPanel")}
           >
             <FlexColumn
               className="sketch-editor__panel-right sketch-editor__panel-right--mobile"
@@ -693,8 +697,8 @@ function SketchEditor({
           <MobileBottomSheet
             open={assistantPanelOpen}
             onClose={() => setAssistantPanelOpen(false)}
-            title="Assistant"
-            ariaLabel="AI assistant panel"
+            title={t("sketch:editor.assistant")}
+            ariaLabel={t("sketch:editor.aiAssistantPanel")}
             maxHeight="85vh"
           >
             <FlexColumn

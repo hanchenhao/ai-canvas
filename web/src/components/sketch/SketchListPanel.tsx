@@ -14,6 +14,7 @@ import {
   useState
 } from "react";
 import type { DragEvent, FocusEvent, KeyboardEvent, MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { usePanelStore } from "../../stores/PanelStore";
@@ -318,12 +319,13 @@ export const CreateSketchButton = memo(function CreateSketchButton() {
   const setVisibility = usePanelStore((state) => state.setVisibility);
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation(["sketch"]);
 
   const handleCreate = useCallback(async () => {
     try {
       const sketch = await createSketch.mutateAsync({
         id: newDocumentId(),
-        name: "Untitled sketch",
+        name: t("sketch:list.untitledSketch"),
         projectId: "default"
       });
       if (location.pathname.startsWith("/workspace")) {
@@ -331,7 +333,7 @@ export const CreateSketchButton = memo(function CreateSketchButton() {
           type: "sketch",
           ref: sketch.id,
           mode: "edit",
-          title: sketch.name || "Untitled sketch"
+          title: sketch.name || t("sketch:list.untitledSketch")
         });
       } else {
         navigate(`/sketch/${sketch.id}`);
@@ -343,9 +345,9 @@ export const CreateSketchButton = memo(function CreateSketchButton() {
   }, [createSketch, location.pathname, navigate, openTab, setVisibility]);
 
   return (
-    <Tooltip title="New sketch" placement="right-start">
+    <Tooltip title={t("sketch:list.newSketch")} placement="right-start">
       <ToolbarIconButton
-        ariaLabel="New sketch"
+        ariaLabel={t("sketch:list.newSketch")}
         onClick={() => void handleCreate()}
         disabled={createSketch.isPending}
         tabIndex={-1}
@@ -357,6 +359,7 @@ export const CreateSketchButton = memo(function CreateSketchButton() {
 
 const SketchListPanel = () => {
   const theme = useTheme();
+  const { t } = useTranslation(["sketch"]);
   const [filterValue, setFilterValue] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
   const autoFocusEnabled = useAutoFocusEnabled();
@@ -518,40 +521,40 @@ const SketchListPanel = () => {
         open={itemToDelete !== null}
         onClose={() => setItemToDelete(null)}
         onConfirm={handleConfirmDelete}
-        title="Delete sketch"
-        content={`Delete "${itemToDelete?.name ?? ""}"? This cannot be undone.`}
-        confirmText="Delete"
-        cancelText="Cancel"
+        title={t("sketch:list.deleteTitle")}
+        content={t("sketch:list.deleteContent", { name: itemToDelete?.name ?? "" })}
+        confirmText={t("sketch:list.delete")}
+        cancelText={t("sketch:list.cancel")}
       />
       <div className="sketch-search">
         <CategorySearchBar
           ref={searchRef}
           value={filterValue}
           onChange={setFilterValue}
-          placeholder="Search sketches..."
+          placeholder={t("sketch:list.searchPlaceholder")}
         />
       </div>
 
       {isLoading ? (
         <FlexColumn gap={2} justify="center" align="center" sx={{ flex: 1 }}>
-          <LoadingSpinner size="large" text="Loading sketches" />
+          <LoadingSpinner size="large" text={t("sketch:list.loading")} />
         </FlexColumn>
       ) : isError ? (
         <FlexColumn gap={2} justify="center" align="center" sx={{ flex: 1, px: 2 }}>
           <EmptyState
             variant="error"
-            title="Could not load sketches"
-            description={error?.message ?? "Try again later."}
+            title={t("sketch:list.loadFailed")}
+            description={error?.message ?? ""}
           />
         </FlexColumn>
       ) : sketches.length === 0 ? (
         <FlexColumn gap={2} justify="center" align="center" sx={{ flex: 1, px: 2 }}>
           <EmptyState
-            title={filterValue ? "No matching sketches" : "No sketches yet"}
+            title={filterValue ? t("sketch:list.emptyFiltered") : t("sketch:list.empty")}
             description={
               filterValue
-                ? "Try a different search term."
-                : "Create a new sketch with the + button above."
+                ? t("sketch:list.emptyFilteredHint")
+                : t("sketch:list.emptyHint")
             }
           />
         </FlexColumn>

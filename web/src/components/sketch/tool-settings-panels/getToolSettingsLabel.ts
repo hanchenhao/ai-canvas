@@ -1,32 +1,36 @@
 import type { SketchTool } from "../types";
 
+/**
+ * Returns the i18n key for a tool's settings label.
+ * The caller is responsible for passing the returned key through `t()`.
+ */
 export function getToolSettingsLabel(tool: SketchTool): string {
   switch (tool) {
     case "brush":
-      return "Brush";
+      return "sketch:tools.brush";
     case "pencil":
-      return "Pencil";
+      return "sketch:tools.pencil";
     case "eraser":
-      return "Eraser";
+      return "sketch:tools.eraser";
     case "fill":
-      return "Fill";
+      return "sketch:tools.fill";
     case "blur":
-      return "Blur Brush";
+      return "sketch:tools.blur";
     case "gradient":
-      return "Gradient";
+      return "sketch:tools.gradient";
     case "crop":
-      return "Crop";
+      return "sketch:tools.crop";
     case "select":
-      return "Selection";
+      return "sketch:tools.select";
     case "adjust":
-      return "Adjustments";
+      return "sketch:tools.adjust";
     case "segment":
-      return "Segment";
+      return "sketch:tools.segment";
     case "shape":
-      return "Shape";
+      return "sketch:tools.shape";
     case "transform":
-      return "Transform";
+      return "sketch:tools.transform";
     default:
-      return "Settings";
+      return "sketch:tools.settings";
   }
 }

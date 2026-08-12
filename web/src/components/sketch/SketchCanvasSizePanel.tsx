@@ -9,6 +9,7 @@ import React, {
   useMemo,
   useState
 } from "react";
+import { useTranslation } from "react-i18next";
 
 import CheckIcon from "@mui/icons-material/Check";
 import AspectRatioIcon from "@mui/icons-material/CropOriginal";
@@ -115,6 +116,7 @@ const SketchCanvasSizePanel: React.FC<SketchCanvasSizePanelProps> = ({
   canvasResizeHandlesEnabled,
   onCanvasResizeHandlesEnabledChange
 }) => {
+  const { t } = useTranslation(["sketch"]);
   const [customWidth, setCustomWidth] = useState(String(canvasWidth));
   const [customHeight, setCustomHeight] = useState(String(canvasHeight));
 
@@ -235,8 +237,8 @@ const SketchCanvasSizePanel: React.FC<SketchCanvasSizePanelProps> = ({
         <Tooltip
           title={
             canvasResizeHandlesEnabled
-              ? "Hide resize handles on canvas"
-              : "Show resize handles on canvas"
+              ? t("sketch:canvasSize.hideResizeHandles")
+              : t("sketch:canvasSize.showResizeHandles")
           }
           placement="left"
           enterDelay={SKETCH_TOOLTIP_DELAY_MS}
@@ -247,7 +249,7 @@ const SketchCanvasSizePanel: React.FC<SketchCanvasSizePanelProps> = ({
             checked={canvasResizeHandlesEnabled}
             onChange={(_, checked) => onCanvasResizeHandlesEnabledChange(checked)}
             inputProps={{
-              "aria-label": "Toggle canvas resize handles"
+              "aria-label": t("sketch:canvasSize.toggleResizeHandles")
             }}
           />
         </Tooltip>
@@ -256,7 +258,7 @@ const SketchCanvasSizePanel: React.FC<SketchCanvasSizePanelProps> = ({
       <Select
         size="small"
         displayEmpty
-        aria-label="Canvas size preset"
+        aria-label={t("sketch:canvasSize.preset")}
         value=""
         onChange={(e) => {
           const preset = CANVAS_PRESETS.find(
@@ -285,7 +287,7 @@ const SketchCanvasSizePanel: React.FC<SketchCanvasSizePanelProps> = ({
                 color: match ? "grey.200" : SKETCH_COLORS.textFaint
               }}
             >
-              {match ? match.label : "Presets…"}
+              {match ? match.label : t("sketch:canvasSize.presets")}
             </Text>
           );
         }}
@@ -333,7 +335,7 @@ const SketchCanvasSizePanel: React.FC<SketchCanvasSizePanelProps> = ({
           anchorEl={resolutionAnchor}
           open={!!resolutionAnchor}
           onClose={() => setResolutionAnchor(null)}
-          header="Resolution"
+          header={t("sketch:canvasSize.resolution")}
           value={resolutionId}
           options={resolutionOptions}
           onChange={handleResolutionResize}
@@ -364,8 +366,8 @@ const SketchCanvasSizePanel: React.FC<SketchCanvasSizePanelProps> = ({
         />
         <StateIconButton
           icon={<CheckIcon sx={{ fontSize: 18 }} />}
-          tooltip="Apply canvas size"
-          ariaLabel="Apply canvas size"
+          tooltip={t("sketch:canvasSize.apply")}
+          ariaLabel={t("sketch:canvasSize.apply")}
           onClick={handleApplyCustomSize}
           isActive={canvasCustomSizeApply.dirty}
           color="primary"

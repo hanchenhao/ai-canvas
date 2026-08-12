@@ -9,6 +9,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 
@@ -89,15 +90,17 @@ const styles = (theme: Theme) =>
     }
   });
 
-function renderToolButton(def: ToolDefinition, selectMode: SelectToolMode) {
+function renderToolButton(
+  def: ToolDefinition,
+  selectMode: SelectToolMode,
+  cloneStampSuffix: (label: string) => string
+) {
   const { tool, label, Icon } = def;
   const actionId = getToolShortcutActionId(tool, selectMode);
   const shortcut = actionId ? displayCombo(actionId) : "";
   const tooltipText = shortcut ? `${label} (${shortcut})` : label;
   const tooltip =
-    tool === "clone_stamp"
-      ? `${tooltipText} — Alt+click to set source`
-      : tooltipText;
+    tool === "clone_stamp" ? cloneStampSuffix(tooltipText) : tooltipText;
 
   return (
     <ToggleButton key={tool} value={tool} aria-label={label}>
@@ -137,6 +140,7 @@ const SketchToolbar: React.FC<SketchToolbarProps> = ({
   onResetColors
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["sketch"]);
 
   const handleToolChange = useCallback(
     (_: React.MouseEvent<HTMLElement>, value: string | null) => {
@@ -163,7 +167,9 @@ const SketchToolbar: React.FC<SketchToolbarProps> = ({
               className="tool-group"
             >
               {group.map((definition) =>
-                renderToolButton(definition, selectMode)
+                renderToolButton(definition, selectMode, (label) =>
+                  t("sketch:toolbar.cloneStampHint", { label })
+                )
               )}
             </ToggleButtonGroup>
           </FlexColumn>
