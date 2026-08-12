@@ -12,6 +12,7 @@ import { z } from "zod";
 import { Secret, Setting, clearSecretCache } from "@nodetool-ai/models";
 import type { Secret as SecretModel } from "@nodetool-ai/models";
 import { loadAssetStorageConfig } from "@nodetool-ai/config";
+import { getNodetoolDataDir } from "@nodetool-ai/config";
 import {
   clearProviderCache,
   checkCredential,
@@ -302,14 +303,16 @@ export const settingsRouter = router({
             source: z.enum(["database", "environment", "none"])
           })
         ),
-        storage: z.object({
-          kind: z.enum(["file", "s3", "supabase", "invalid"]),
-          bucket: z.string().nullable(),
-          region: z.string().nullable(),
-          endpoint: z.string().nullable(),
-          forcePathStyle: z.boolean().nullable(),
-          error: z.string().nullable()
-        })
+       storage: z.object({
+         kind: z.enum(["file", "s3", "supabase", "invalid"]),
+         bucket: z.string().nullable(),
+         region: z.string().nullable(),
+         endpoint: z.string().nullable(),
+         forcePathStyle: z.boolean().nullable(),
+         error: z.string().nullable()
+        }),
+        dataDirectory: z.string(),
+        isUnsignedBuild: z.boolean()
       })
     )
     .query(async ({ ctx }) => {
@@ -373,7 +376,9 @@ export const settingsRouter = router({
         uptimeSeconds: Math.floor(process.uptime()),
         secretEncryptionConfigured: Boolean(process.env.SECRETS_MASTER_KEY),
         providers,
-        storage
+        storage,
+        dataDirectory: getNodetoolDataDir(),
+        isUnsignedBuild: process.env.npm_package_version === undefined
       };
     }),
 

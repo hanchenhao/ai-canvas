@@ -17,6 +17,7 @@ import type {
 } from "./storage-adapter.js";
 import { isWithinRoot, normalizeStorageKey } from "./storage-keys.js";
 import { assertUploadWithinLimit } from "./storage-limits.js";
+import { withStorageError } from "./storage-error.js";
 
 /**
  * Percent-decode a storage key extracted from an `/api/storage/<key>` URL so it
@@ -118,12 +119,14 @@ export class FileStorageAdapter implements StorageAdapter {
     data: Uint8Array,
     _contentType?: string
   ): Promise<string> {
-    assertUploadWithinLimit(key, data.byteLength);
-    const r = await this.rootPromise;
-    const rel = normalizeStorageKey(key);
-    await r.write(rel, Buffer.from(data), { mkdir: true, overwrite: true });
-    const absolutePath = await r.resolve(rel);
-    return pathToFileURL(absolutePath).toString();
+    return withStorageError(`file:store(${key})`, async () => {
+      assertUploadWithinLimit(key, data.byteLength);
+      const r = await this.rootPromise;
+      const rel = normalizeStorageKey(key);
+      await r.write(rel, Buffer.from(data), { mkdir: true, overwrite: true });
+      const absolutePath = await r.resolve(rel);
+      return pathToFileURL(absolutePath).toString();
+    });
   }
 
   async retrieve(uri: string): Promise<Uint8Array | null> {

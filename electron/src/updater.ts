@@ -30,10 +30,11 @@ import { errorMessage } from "./utils";
  *
  * Configuration:
  * - Updates are only checked in packaged mode (not in development)
- * - Updates are fetched from the nodetool-ai/nodetool GitHub repository
- * - Update cache is stored in "nodetool-updater" directory
- *
- * Error Handling:
+* - Updates are fetched from the nodetool-ai/nodetool GitHub repository
+ * - Updates are fetched from the hanchenhao/ai-canvas GitHub repository
+ * - Update cache is stored in "brainvite-ai-canvas-updater" directory
+*
+* Error Handling:
  * - Gracefully handles missing app-update.yml file
  * - Logs warnings instead of crashing
  * - Skips auto-update when not in packaged mode

@@ -90,3 +90,11 @@ export {
   type CleanupOptions,
   type CleanupResult
 } from "./temp-cleanup.js";
+
+// Classified storage errors
+export {
+  StorageError,
+  classifyStorageError,
+  withStorageError,
+  type StorageErrorKind
+} from "./storage-error.js";

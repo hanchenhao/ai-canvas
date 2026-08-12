@@ -6,7 +6,6 @@ const SCAN_ROOTS = [
   "web/src",
   "web/public",
   "web/index.html",
-  "web/admin.html",
   "web/app-preview.html",
   "web/demo.html",
   "web/e2e-runner.html",

@@ -30,6 +30,8 @@ const DiagnosticsSection = memo(function DiagnosticsSection() {
       `Version: ${data.version}`,
       `Node.js: ${data.nodeVersion}`,
       `Uptime: ${data.uptimeSeconds}s`,
+      `Data Directory: ${data.dataDirectory}`,
+      `Build: ${data.isUnsignedBuild ? "Unsigned (test build)" : "Signed"}`,
       "",
       `Secret Encryption: ${data.secretEncryptionConfigured ? "Configured" : "Not configured"}`,
       "",
@@ -157,7 +159,20 @@ const DiagnosticsSection = memo(function DiagnosticsSection() {
               color={data.storage.error ? "error" : "success"}
               variant="outlined"
             />
-          </FlexRow>
+      </FlexRow>
+      </FlexColumn>
+
+        {/* Data directory */}
+        <FlexColumn gap={1}>
+          <Text size="small" weight={600}>Data Directory</Text>
+          <Caption size="smaller" sx={{ opacity: 0.5, fontFamily: "monospace", wordBreak: "break-all" }}>
+            {data.dataDirectory}
+          </Caption>
+          {data.isUnsignedBuild && (
+            <Caption size="smaller" color="warning.main" sx={{ lineHeight: 1.4 }}>
+              Unsigned test build. This application has not been code-signed or notarized.
+            </Caption>
+          )}
         </FlexColumn>
 
         {/* Export actions */}
