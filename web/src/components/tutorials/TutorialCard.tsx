@@ -5,6 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import { memo } from "react";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import { MOTION, BORDER_RADIUS, SPACING, getSpacingPx } from "../ui_primitives";
+import { useTranslation } from "react-i18next";
 import type { Tutorial } from "./tutorialsData";
 
 const styles = (theme: Theme, accent: string, active: boolean, compact: boolean) =>
@@ -152,12 +153,13 @@ const TutorialCardInner: React.FC<TutorialCardProps> = ({
   onClick
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["tutorials"]);
   return (
     <button
       type="button"
       css={styles(theme, tutorial.accent, active, compact)}
       onClick={() => onClick(tutorial.id)}
-      aria-label={`Play tutorial: ${tutorial.title}`}
+      aria-label={t("tutorials:page.playAria", { title: tutorial.title })}
       aria-pressed={active}
     >
       <span className="thumb">

@@ -1,0 +1,109 @@
+{
+  "page": {
+    "title": "Tutorials",
+    "subtitle": "Short, beginner-friendly walkthroughs of NodeTool",
+    "back": "Dashboard",
+    "count": "{{count}} tutorials",
+    "whatYouWillLearn": "What you'll learn",
+    "startBuilding": "Start building",
+    "browseExamples": "Browse examples",
+    "playAria": "Play tutorial: {{title}}"
+  },
+  "level": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  },
+  "tutorial": {
+    "first-workflow": {
+      "title": "Build your first workflow",
+      "tagline": "Text → enhance → image, end to end",
+      "description": "Watch a complete AI pipeline run on the canvas: a prompt is enhanced by an LLM, then turned into an image — all from connected nodes, no code.",
+      "learn": [
+        "How nodes pass data through their handles",
+        "Reading live status: running rings, streaming text, progress",
+        "Where generated outputs appear on the canvas"
+      ]
+    },
+    "connect-run": {
+      "title": "Connect & run",
+      "tagline": "The core loop in ten seconds",
+      "description": "The absolute basics. Add a node, drag from one handle into the next node's input, press Run, and read the result — the loop every workflow is built on.",
+      "learn": [
+        "Inputs, outputs, and how handles connect",
+        "Running a graph and watching nodes complete",
+        "Finding a node's result in a Preview"
+      ]
+    },
+    "list-generator": {
+      "title": "Generate a list",
+      "tagline": "One prompt, many results",
+      "description": "Turn a single topic into a structured list with one LLM node, then feed it downstream. The pattern behind batching, looping, and bulk generation.",
+      "learn": [
+        "Driving an LLM node from an input",
+        "Streaming multi-item output as it arrives",
+        "Passing a list into the rest of a workflow"
+      ]
+    },
+    "ask-ai": {
+      "title": "Ask the AI",
+      "tagline": "A question in, a streamed answer out",
+      "description": "The simplest chat-style graph: type a question, send it to an LLM node, and watch the answer stream in phrase by phrase before it lands in a Preview.",
+      "learn": [
+        "Feeding a question into an LLM node",
+        "Watching an answer stream as it generates",
+        "Reusing the answer downstream"
+      ]
+    },
+    "combine-inputs": {
+      "title": "Combine two inputs",
+      "tagline": "Merge values with a template",
+      "description": "The first graph that branches in: two text inputs flow into one Prompt node that fills a template, composing a single result from reusable parts.",
+      "learn": [
+        "Wiring several inputs into one node",
+        "Composing text with {{ placeholders }}",
+        "Building prompts from reusable parts"
+      ]
+    },
+    "summarize-text": {
+      "title": "Summarize a document",
+      "tagline": "Long text in, key points out",
+      "description": "Condense an article, transcript, or any block of text into a short summary with a single Summarizer node, streaming it as it writes.",
+      "learn": [
+        "Feeding a long passage into a Summarizer node",
+        "Watching the summary stream as it generates",
+        "Passing the result into the rest of a workflow"
+      ]
+    },
+    "describe-image": {
+      "title": "Describe an image",
+      "tagline": "Show the AI a picture, get words back",
+      "description": "The first multimodal graph: drop a picture into an Image Input, wire it into an Agent, and watch the model look at the image and describe it in words.",
+      "learn": [
+        "Bringing an image into a graph",
+        "Sending a picture to a vision model",
+        "Reusing the streamed description downstream"
+      ]
+    },
+    "chat-agent-qa": {
+      "title": "Ask the chat agent",
+      "tagline": "Global Chat · tool calls, streamed live",
+      "description": "A question goes straight to Global Chat: the agent calls a web-search tool in the open, then streams its answer back token by token.",
+      "learn": [
+        "Sending a message from Global Chat",
+        "Watching a tool call run in the open",
+        "Reading a streamed answer as it arrives"
+      ]
+    },
+    "timeline-trim-arrange": {
+      "title": "Cut a scene together",
+      "tagline": "Timeline editor · trim, arrange, caption",
+      "description": "A short editing session on the timeline: trim a clip, drag in another, drop in a word-synced caption, then scrub the finished cut.",
+      "learn": [
+        "Trimming and arranging clips on tracks",
+        "Adding a caption synced word-by-word",
+        "Scrubbing and previewing the cut live"
+      ]
+    }
+  }
+}

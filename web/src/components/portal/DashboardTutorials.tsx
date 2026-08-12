@@ -5,7 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import { memo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { TutorialCard } from "../tutorials/TutorialCard";
-import { TUTORIALS } from "../tutorials/tutorialsData";
+import { useTutorials } from "../tutorials/tutorialsData";
 import { SPACING, getSpacingPx } from "../ui_primitives";
 import { wrapStyles, SectionHeader, SectionLink } from "./dashboardChrome";
 
@@ -29,6 +29,7 @@ const gridStyles = (theme: Theme) =>
 const DashboardTutorials: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const tutorials = useTutorials();
 
   const open = useCallback(
     (id: string) => navigate(`/tutorials?id=${id}`),
@@ -44,7 +45,7 @@ const DashboardTutorials: React.FC = () => {
           </SectionLink>
         </SectionHeader>
         <div className="tut-grid">
-          {TUTORIALS.map((tutorial) => (
+          {tutorials.map((tutorial) => (
             <TutorialCard key={tutorial.id} tutorial={tutorial} onClick={open} />
           ))}
         </div>

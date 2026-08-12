@@ -5,7 +5,10 @@ import { ThemeProvider } from "@mui/material/styles";
 import { MemoryRouter } from "react-router-dom";
 import mockTheme from "../../../__mocks__/themeMock";
 import TutorialsPage from "../TutorialsPage";
-import { TUTORIALS } from "../tutorialsData";
+import enTutorials from "../../../locales/en/tutorials.json";
+
+/** Title of the second tutorial in English (connect-run). */
+const SECOND_TITLE = enTutorials.tutorial["connect-run"].title;
 
 const MAX_WIDTH_QUERY = /max-width/;
 
@@ -34,7 +37,6 @@ const renderPage = () =>
 
 describe("TutorialsPage responsive layout", () => {
   const originalMatchMedia = window.matchMedia;
-  const second = TUTORIALS[1];
 
   afterEach(() => {
     window.matchMedia = originalMatchMedia;
@@ -55,12 +57,16 @@ describe("TutorialsPage responsive layout", () => {
     expect(body).toContainElement(sidebar as HTMLElement);
 
     await userEvent.click(
-      screen.getByRole("button", { name: `Play tutorial: ${second.title}` })
+      screen.getByRole("button", {
+        name: `Play tutorial: ${SECOND_TITLE}`
+      })
     );
 
     expect(scrollTo).toHaveBeenCalledWith({ top: 0, behavior: "smooth" });
     expect(
-      screen.getByRole("button", { name: `Play tutorial: ${second.title}` })
+      screen.getByRole("button", {
+        name: `Play tutorial: ${SECOND_TITLE}`
+      })
     ).toHaveAttribute("aria-pressed", "true");
   });
 
@@ -72,7 +78,9 @@ describe("TutorialsPage responsive layout", () => {
     renderPage();
 
     await userEvent.click(
-      screen.getByRole("button", { name: `Play tutorial: ${second.title}` })
+      screen.getByRole("button", {
+        name: `Play tutorial: ${SECOND_TITLE}`
+      })
     );
 
     expect(scrollTo).not.toHaveBeenCalled();

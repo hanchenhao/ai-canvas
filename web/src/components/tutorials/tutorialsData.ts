@@ -3,16 +3,23 @@
  * logo menu. Each entry points at a pre-rendered MP4 + poster shipped under
  * `web/public/tutorials/` (produced by the Remotion harness in `demo/`), so the
  * app plays them with a plain <video> — no Remotion bundled into the build.
+ *
+ * Structural data only — all user-visible text (title, tagline, description,
+ * learn items) lives in `web/src/locales/{en,zh-CN}/tutorials.json` and is
+ * merged in by `useTutorials()`.
  */
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+
 export interface Tutorial {
-  /** Stable id, used in the `/tutorials?id=` query param. */
+  /** Stable id, used in the `/tutorials?id=` query param and as i18n key. */
   id: string;
   title: string;
   /** One-line hook shown under the title. */
   tagline: string;
   /** A sentence or two describing what the tutorial covers. */
   description: string;
-  /** Difficulty badge text. */
+  /** Translated difficulty label, e.g. "Beginner". */
   level: string;
   /** Human-readable runtime, e.g. "0:23". */
   durationLabel: string;
@@ -26,161 +33,139 @@ export interface Tutorial {
   learn: string[];
 }
 
-export const TUTORIALS: Tutorial[] = [
+interface TutorialStruct {
+  id: string;
+  /** Level code, maps to tutorials:level.<code>. */
+  level: string;
+  durationLabel: string;
+  video: string;
+  poster: string;
+  accent: string;
+  /** Number of learn-item entries in the locale file. */
+  learnCount: number;
+}
+
+const TUTORIAL_STRUCTS: readonly TutorialStruct[] = [
   {
     id: "first-workflow",
-    title: "Build your first workflow",
-    tagline: "Text → enhance → image, end to end",
-    description:
-      "Watch a complete AI pipeline run on the canvas: a prompt is enhanced by an LLM, then turned into an image — all from connected nodes, no code.",
-    level: "Beginner",
+    level: "beginner",
     durationLabel: "0:23",
     video: "/tutorials/first-workflow.mp4",
     poster: "/tutorials/first-workflow.jpg",
     accent: "#f59e0b",
-    learn: [
-      "How nodes pass data through their handles",
-      "Reading live status: running rings, streaming text, progress",
-      "Where generated outputs appear on the canvas",
-    ],
+    learnCount: 3
   },
   {
     id: "connect-run",
-    title: "Connect & run",
-    tagline: "The core loop in ten seconds",
-    description:
-      "The absolute basics. Add a node, drag from one handle into the next node's input, press Run, and read the result — the loop every workflow is built on.",
-    level: "Beginner",
+    level: "beginner",
     durationLabel: "0:11",
     video: "/tutorials/connect-run.mp4",
     poster: "/tutorials/connect-run.jpg",
     accent: "#22c55e",
-    learn: [
-      "Inputs, outputs, and how handles connect",
-      "Running a graph and watching nodes complete",
-      "Finding a node's result in a Preview",
-    ],
+    learnCount: 3
   },
   {
     id: "list-generator",
-    title: "Generate a list",
-    tagline: "One prompt, many results",
-    description:
-      "Turn a single topic into a structured list with one LLM node, then feed it downstream. The pattern behind batching, looping, and bulk generation.",
-    level: "Beginner",
+    level: "beginner",
     durationLabel: "0:17",
     video: "/tutorials/list-generator.mp4",
     poster: "/tutorials/list-generator.jpg",
     accent: "#8b5cf6",
-    learn: [
-      "Driving an LLM node from an input",
-      "Streaming multi-item output as it arrives",
-      "Passing a list into the rest of a workflow",
-    ],
+    learnCount: 3
   },
   {
     id: "ask-ai",
-    title: "Ask the AI",
-    tagline: "A question in, a streamed answer out",
-    description:
-      "The simplest chat-style graph: type a question, send it to an LLM node, and watch the answer stream in phrase by phrase before it lands in a Preview.",
-    level: "Beginner",
+    level: "beginner",
     durationLabel: "0:16",
     video: "/tutorials/ask-ai.mp4",
     poster: "/tutorials/ask-ai.jpg",
     accent: "#06b6d4",
-    learn: [
-      "Feeding a question into an LLM node",
-      "Watching an answer stream as it generates",
-      "Reusing the answer downstream",
-    ],
+    learnCount: 3
   },
   {
     id: "combine-inputs",
-    title: "Combine two inputs",
-    tagline: "Merge values with a template",
-    description:
-      "The first graph that branches in: two text inputs flow into one Prompt node that fills a template, composing a single result from reusable parts.",
-    level: "Beginner",
+    level: "beginner",
     durationLabel: "0:12",
     video: "/tutorials/combine-inputs.mp4",
     poster: "/tutorials/combine-inputs.jpg",
     accent: "#ec4899",
-    learn: [
-      "Wiring several inputs into one node",
-      "Composing text with {{ placeholders }}",
-      "Building prompts from reusable parts",
-    ],
+    learnCount: 3
   },
   {
     id: "summarize-text",
-    title: "Summarize a document",
-    tagline: "Long text in, key points out",
-    description:
-      "Condense an article, transcript, or any block of text into a short summary with a single Summarizer node, streaming it as it writes.",
-    level: "Beginner",
+    level: "beginner",
     durationLabel: "0:16",
     video: "/tutorials/summarize-text.mp4",
     poster: "/tutorials/summarize-text.jpg",
     accent: "#14b8a6",
-    learn: [
-      "Feeding a long passage into a Summarizer node",
-      "Watching the summary stream as it generates",
-      "Passing the result into the rest of a workflow",
-    ],
+    learnCount: 3
   },
   {
     id: "describe-image",
-    title: "Describe an image",
-    tagline: "Show the AI a picture, get words back",
-    description:
-      "The first multimodal graph: drop a picture into an Image Input, wire it into an Agent, and watch the model look at the image and describe it in words.",
-    level: "Beginner",
+    level: "beginner",
     durationLabel: "0:17",
     video: "/tutorials/describe-image.mp4",
     poster: "/tutorials/describe-image.jpg",
     accent: "#f97316",
-    learn: [
-      "Bringing an image into a graph",
-      "Sending a picture to a vision model",
-      "Reusing the streamed description downstream",
-    ],
+    learnCount: 3
   },
   {
     id: "chat-agent-qa",
-    title: "Ask the chat agent",
-    tagline: "Global Chat · tool calls, streamed live",
-    description:
-      "A question goes straight to Global Chat: the agent calls a web-search tool in the open, then streams its answer back token by token.",
-    level: "Beginner",
+    level: "beginner",
     durationLabel: "0:17",
     video: "/tutorials/chat-agent-qa.mp4",
     poster: "/tutorials/chat-agent-qa.jpg",
     accent: "#06b6d4",
-    learn: [
-      "Sending a message from Global Chat",
-      "Watching a tool call run in the open",
-      "Reading a streamed answer as it arrives",
-    ],
+    learnCount: 3
   },
   {
     id: "timeline-trim-arrange",
-    title: "Cut a scene together",
-    tagline: "Timeline editor · trim, arrange, caption",
-    description:
-      "A short editing session on the timeline: trim a clip, drag in another, drop in a word-synced caption, then scrub the finished cut.",
-    level: "Beginner",
+    level: "beginner",
     durationLabel: "0:23",
     video: "/tutorials/timeline-trim-arrange.mp4",
     poster: "/tutorials/timeline-trim-arrange.jpg",
     accent: "#8b5cf6",
-    learn: [
-      "Trimming and arranging clips on tracks",
-      "Adding a caption synced word-by-word",
-      "Scrubbing and previewing the cut live",
-    ],
-  },
+    learnCount: 3
+  }
 ];
 
-export const getTutorial = (id: string | null | undefined): Tutorial =>
-  TUTORIALS.find((t) => t.id === id) ?? TUTORIALS[0];
+/**
+ * Build a fully-translated Tutorial list from the structural data + current
+ * language's locale file. Call inside a component so it re-renders on language
+ * change.
+ */
+export function useTutorials(): Tutorial[] {
+  const { t } = useTranslation(["tutorials"]);
+  return useMemo(
+    () =>
+      TUTORIAL_STRUCTS.map((struct) => {
+        const baseKey = `tutorials:tutorial.${struct.id}`;
+        const learn: string[] = [];
+        for (let i = 0; i < struct.learnCount; i++) {
+          learn.push(t(`${baseKey}.learn.${i}`));
+        }
+        return {
+          id: struct.id,
+          title: t(`${baseKey}.title`),
+          tagline: t(`${baseKey}.tagline`),
+          description: t(`${baseKey}.description`),
+          level: t(`tutorials:level.${struct.level}`),
+          durationLabel: struct.durationLabel,
+          video: struct.video,
+          poster: struct.poster,
+          accent: struct.accent,
+          learn
+        };
+      }),
+    [t]
+  );
+}
+
+/** Translated lookup by id (falls back to first tutorial). */
+export function useTutorial(id: string | null | undefined): Tutorial {
+  const tutorials = useTutorials();
+  return useMemo(
+    () => tutorials.find((tut) => tut.id === id) ?? tutorials[0],
+    [tutorials, id]
+  );
+}

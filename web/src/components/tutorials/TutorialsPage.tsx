@@ -17,7 +17,8 @@ import {
   VideoPlayer
 } from "../ui_primitives";
 import { TutorialCard } from "./TutorialCard";
-import { TUTORIALS, getTutorial } from "./tutorialsData";
+import { useTutorials, useTutorial } from "./tutorialsData";
+import { useTranslation } from "react-i18next";
 
 const styles = (theme: Theme) =>
   css({
@@ -222,8 +223,10 @@ const TutorialsPage: React.FC = () => {
   const [params, setParams] = useSearchParams();
   const stacked = useMediaQuery(theme.breakpoints.down("md"));
   const bodyRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation(["tutorials"]);
+  const tutorials = useTutorials();
 
-  const active = getTutorial(params.get("id"));
+  const active = useTutorial(params.get("id"));
 
   const select = useCallback(
     (id: string) => {
@@ -241,20 +244,22 @@ const TutorialsPage: React.FC = () => {
       <header className="tut-header">
         <Logo small width="26px" height="26px" fontSize="1em" borderRadius={BORDER_RADIUS.sm} />
         <div className="titles">
-          <h1>Tutorials</h1>
-          <span className="sub">Short, beginner-friendly walkthroughs of NodeTool</span>
+          <h1>{t("tutorials:page.title")}</h1>
+          <span className="sub">{t("tutorials:page.subtitle")}</span>
         </div>
         <span className="spacer" />
         <button type="button" className="back" onClick={() => navigate("/dashboard")}>
           <ArrowBackRoundedIcon />
-          Dashboard
+          {t("tutorials:page.back")}
         </button>
       </header>
 
       <div className="tut-body" ref={bodyRef}>
         <aside className="tut-sidebar">
-          <span className="sidebar-label">{TUTORIALS.length} tutorials</span>
-          {TUTORIALS.map((tutorial) => (
+          <span className="sidebar-label">
+            {t("tutorials:page.count", { count: tutorials.length })}
+          </span>
+          {tutorials.map((tutorial) => (
             <TutorialCard
               key={tutorial.id}
               tutorial={tutorial}
@@ -288,7 +293,7 @@ const TutorialsPage: React.FC = () => {
             <p className="tut-desc">{active.description}</p>
 
             <section className="tut-learn">
-              <h2>What you'll learn</h2>
+              <h2>{t("tutorials:page.whatYouWillLearn")}</h2>
               <ul>
                 {active.learn.map((point) => (
                   <li key={point}>
@@ -301,10 +306,10 @@ const TutorialsPage: React.FC = () => {
 
             <div className="tut-cta">
               <EditorButton variant="contained" onClick={() => navigate("/dashboard")}>
-                Start building
+                {t("tutorials:page.startBuilding")}
               </EditorButton>
               <EditorButton variant="outlined" onClick={() => navigate("/examples")}>
-                Browse examples
+                {t("tutorials:page.browseExamples")}
               </EditorButton>
             </div>
           </div>
