@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useCallback, memo, useMemo, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { EditorButton, Text, Tooltip, Box, MOTION, BORDER_RADIUS } from "../ui_primitives";
 import FolderIcon from "@mui/icons-material/Folder";
 import NavigateIcon from "@mui/icons-material/NavigateNext";
@@ -195,6 +196,7 @@ const GlobalSearchResults: React.FC<GlobalSearchResultsProps> = ({
   containerWidth = 1200
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const { selectedAssetIds, handleSelectAsset } = useAssetSelection(results);
   const openContextMenu = useContextMenuStore((state) => state.openContextMenu);
   const globalSearchQuery = useAssetGridStore(
@@ -373,12 +375,12 @@ const GlobalSearchResults: React.FC<GlobalSearchResultsProps> = ({
         <div className="global-search-results-container search-results-container">
           <div className="global-search-results-header search-results-header">
             <Text className="global-search-results-title search-results-title">
-              Search Results
+              {t("search.searchResults")}
             </Text>
             <Text className="global-search-results-count search-results-count">
               {isSearching
-                ? `Searching for "${globalSearchQuery}"…`
-                : `No results for "${globalSearchQuery}"`}
+                ? t("search.searchingFor", { query: globalSearchQuery })
+                : t("search.noResultsFor", { query: globalSearchQuery })}
             </Text>
           </div>
           <div
@@ -393,10 +395,10 @@ const GlobalSearchResults: React.FC<GlobalSearchResultsProps> = ({
                   className="search-spinner"
                   style={spinnerStyle}
                 ></div>
-                <Text>Searching…</Text>
+                <Text>{t("search.searching")}</Text>
               </div>
             ) : (
-              <Text>No assets found matching your search.</Text>
+              <Text>{t("search.noAssetsFoundMatching")}</Text>
             )}
           </div>
         </div>
@@ -413,11 +415,10 @@ const GlobalSearchResults: React.FC<GlobalSearchResultsProps> = ({
       <div className="global-search-results-container search-results-container">
         <div className="global-search-results-header search-results-header">
           <Text className="global-search-results-title search-results-title">
-            Search Results
+            {t("search.searchResults")}
           </Text>
           <Text className="global-search-results-count search-results-count">
-            {results.length} result{results.length !== 1 ? "s" : ""} for &quot;
-            {globalSearchQuery}&quot;
+            {t("search.resultsCount", { count: results.length, query: globalSearchQuery })}
           </Text>
         </div>
 
@@ -523,7 +524,7 @@ const GlobalSearchResults: React.FC<GlobalSearchResultsProps> = ({
                       </span>
                     </div>
                     {onNavigateToFolder && (
-                      <Tooltip title="Go to folder">
+                      <Tooltip title={t("search.goToFolder")}>
                         <EditorButton
                           className="global-search-navigate-btn folder-navigate-btn"
                           density="compact"

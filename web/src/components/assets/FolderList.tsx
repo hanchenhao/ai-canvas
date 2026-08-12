@@ -11,6 +11,7 @@ import {
 } from "../ui_primitives";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React, { useCallback, useState, memo, useMemo, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import FolderItem from "./FolderItem";
 import useAssets from "../../serverState/useAssets";
 import useAuth from "../../stores/useAuth";
@@ -178,6 +179,7 @@ interface FolderListProps {
 
 const FolderList: React.FC<FolderListProps> = ({ isHorizontal }) => {
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const folderListStyles = useMemo(() => styles(theme), [theme]);
   const currentUser = useAuth((state) => state.user);
   const { folderTree } = useAssets();
@@ -405,11 +407,11 @@ const FolderList: React.FC<FolderListProps> = ({ isHorizontal }) => {
 
   const rootFolder: RootFolder = useMemo(() => ({
     id: currentUser?.id ?? "root",
-    name: "FOLDERS",
+    name: t("folders.foldersHeader"),
     content_type: "folder",
     children: (Object.values(folderTree || {}) as FolderNode[]) || [],
     parent_id: currentUser?.id || ""
-  }), [currentUser?.id, folderTree]);
+  }), [currentUser?.id, folderTree, t]);
 
   return (
     <div

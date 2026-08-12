@@ -3,6 +3,7 @@ import { useState, DragEvent, useRef, useCallback, useEffect } from "react";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import { MOTION, BORDER_RADIUS, FONT_WEIGHT, Z_INDEX } from "../ui_primitives";
 
 const styles = (theme: Theme) =>
@@ -53,6 +54,7 @@ export interface DropzoneProps {
 
 const Dropzone: React.FC<DropzoneProps> = (props) => {
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const [isExternalDrag, setIsExternalDrag] = useState(false);
   const leaveTimeoutId = useRef<NodeJS.Timeout | null>(null);
   const clearLeaveTimeout = () => {
@@ -115,7 +117,7 @@ const Dropzone: React.FC<DropzoneProps> = (props) => {
     >
       {isExternalDrag && (
         <div className="dragging-overlay">
-          <span className="dragging-overlay-text">Drop files to upload</span>
+          <span className="dragging-overlay-text">{t("dropzone.dropFilesToUpload")}</span>
         </div>
       )}
       {/* Upload button moved into the toolbar; keep drag-and-drop active here */}

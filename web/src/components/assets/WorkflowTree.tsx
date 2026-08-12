@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -147,6 +148,7 @@ const searchInputSx = {
  */
 const WorkflowTree: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const treeStyles = useMemo(() => styles(theme), [theme]);
   const [expanded, setExpanded] = useState(true);
   const [search, setSearch] = useState("");
@@ -195,12 +197,12 @@ const WorkflowTree: React.FC = () => {
         role="button"
         tabIndex={0}
         aria-expanded={expanded}
-        aria-label="Workflows"
+        aria-label={t("workflowTree.workflows")}
         onClick={toggleExpanded}
         onKeyDown={handleRootKeyDown}
       >
         <AccountTreeIcon className="root-icon" />
-        <span className="root-label">Workflows</span>
+        <span className="root-label">{t("workflowTree.workflows")}</span>
         <ExpandMoreIcon className="expand-icon" />
       </div>
 
@@ -210,7 +212,7 @@ const WorkflowTree: React.FC = () => {
             <SearchInput
               value={search}
               onChange={setSearch}
-              placeholder="Search workflows..."
+              placeholder={t("workflowTree.searchWorkflows")}
               fullWidth
               size="small"
               sx={searchInputSx}
@@ -220,7 +222,7 @@ const WorkflowTree: React.FC = () => {
         {isLoading ? (
           <LoadingSpinner size="small" />
         ) : workflows.length === 0 ? (
-          <div className="empty-row">No workflows</div>
+          <div className="empty-row">{t("workflowTree.noWorkflows")}</div>
         ) : (
           workflows.map((workflow) => (
             <div

@@ -8,6 +8,7 @@ import React, {
   useRef,
   useState
 } from "react";
+import { useTranslation } from "react-i18next";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useSettingsStore } from "../../stores/SettingsStore";
 import useAssets from "../../serverState/useAssets";
@@ -126,6 +127,7 @@ const AssetGridContent: React.FC<AssetGridContentProps> = memo(({
   const viewMode = useAssetGridStore((state) => state.viewMode);
 
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
   const [gridDimensions, setGridDimensions] = useState({
@@ -365,13 +367,13 @@ const AssetGridContent: React.FC<AssetGridContentProps> = memo(({
         }}
       >
         {isLoading ? (
-          <LoadingSpinner size="small" text="Loading assets" />
+          <LoadingSpinner size="small" text={t("explorer.loadingAssets")} />
         ) : error ? (
           <EmptyState
             variant="error"
-            title="Could not load assets"
-            description={error.message || "An error occurred. Please try again."}
-            actionText="Retry"
+            title={t("explorer.couldNotLoadAssets")}
+            description={error.message || t("explorer.errorOccurred")}
+            actionText={t("explorer.retry")}
             onAction={refetchAssets}
             size="small"
           />
@@ -380,13 +382,13 @@ const AssetGridContent: React.FC<AssetGridContentProps> = memo(({
             variant="no-data"
             title={
               workflowFilter
-                ? "No outputs from this workflow yet"
-                : "This folder is empty"
+                ? t("grid.noOutputsFromWorkflow")
+                : t("grid.thisFolderIsEmpty")
             }
             description={
               workflowFilter
-                ? "Run the workflow to generate assets, or drop files here to add inputs."
-                : "Drop files here or use the upload button to add assets"
+                ? t("grid.noOutputsDescription")
+                : t("grid.emptyFolderDescription")
             }
             size="small"
           />

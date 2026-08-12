@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 
 import React, { useCallback, useEffect, useRef, useState, memo } from "react";
+import { useTranslation } from "react-i18next";
 import BackspaceIcon from "@mui/icons-material/Backspace";
 import Public from "@mui/icons-material/Public";
 import Folder from "@mui/icons-material/Folder";
@@ -161,6 +162,7 @@ const AssetSearchInput: React.FC<AssetSearchInputProps> = ({
   width
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const inputRef = useRef<HTMLInputElement>(null);
   const [localSearchTerm, setLocalSearchTerm] = useState("");
   const isControlOrMetaPressed = useKeyPressedStore(
@@ -387,8 +389,8 @@ const AssetSearchInput: React.FC<AssetSearchInputProps> = ({
   ]);
 
   const effectivePlaceholder = isGlobalSearchMode
-    ? "Search all assets..."
-    : "Search current folder...";
+    ? t("search.searchAllAssets")
+    : t("search.searchCurrentFolder");
 
   return (
     <div
@@ -407,8 +409,8 @@ const AssetSearchInput: React.FC<AssetSearchInputProps> = ({
       <Tooltip
         title={
           isGlobalSearchMode
-            ? "Switch to local search"
-            : "Switch to global search"
+            ? t("search.switchToLocalSearch")
+            : t("search.switchToGlobalSearch")
         }
       >
         <button

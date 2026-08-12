@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 
 import React, { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import TuneIcon from "@mui/icons-material/Tune";
 import FolderIcon from "@mui/icons-material/Folder";
 import FolderOffIcon from "@mui/icons-material/FolderOff";
@@ -104,6 +105,7 @@ const AssetActionsMenu: React.FC<AssetActionsMenuProps> = ({
   const setSelectedAssetIds = useAssetGridStore(
     (state) => state.setSelectedAssetIds
   );
+  const { t } = useTranslation("assets");
   const setAssetSearchTerm = useAssetGridStore(
     (state) => state.setAssetSearchTerm
   );
@@ -148,7 +150,7 @@ const AssetActionsMenu: React.FC<AssetActionsMenuProps> = ({
 
   const typeFilterActive = typeFilter !== "all";
   const typeFilterLabel =
-    TYPE_FILTERS.find((f) => f.key === typeFilter)?.label ?? "All";
+    TYPE_FILTERS.find((f) => f.key === typeFilter)?.label ?? t("list.typeAll");
 
   return (
     <Box
@@ -182,7 +184,7 @@ const AssetActionsMenu: React.FC<AssetActionsMenuProps> = ({
         {!isFullscreenAssets && !hideFolderControls && hasFolders && (
           <ToolbarIconButton
             icon={foldersVisible ? <FolderIcon /> : <FolderOffIcon />}
-            tooltip={foldersVisible ? "Hide folders" : "Show folders"}
+            tooltip={foldersVisible ? t("menu.hideFolders") : t("menu.showFolders")}
             onClick={toggleFoldersVisible}
             tooltipPlacement="top"
             nodrag={false}
@@ -192,7 +194,7 @@ const AssetActionsMenu: React.FC<AssetActionsMenuProps> = ({
 
         {/* Filter: asset type (labeled to avoid icon guessing) */}
         <ToolbarIconButton
-          tooltip="Filter by type"
+          tooltip={t("menu.filterByType")}
           onClick={(e) => setTypeFilterAnchor(e.currentTarget)}
           tooltipPlacement="top"
           nodrag={false}
@@ -219,7 +221,7 @@ const AssetActionsMenu: React.FC<AssetActionsMenuProps> = ({
         {!isFullscreenAssets && (
           <ToolbarIconButton
             icon={<TuneIcon />}
-            tooltip={expanded ? "Hide search & sort" : "Search, sort & resize"}
+            tooltip={expanded ? t("menu.hideSearchSort") : t("menu.searchSortResize")}
             onClick={() => setExpanded((prev) => !prev)}
             tooltipPlacement="top"
             nodrag={false}
@@ -237,7 +239,7 @@ const AssetActionsMenu: React.FC<AssetActionsMenuProps> = ({
           {!hideFolderControls && (
             <ToolbarIconButton
               icon={<CreateNewFolderIcon />}
-              tooltip="Create folder"
+              tooltip={t("menu.createFolder")}
               onClick={() => setCreateFolderDialogOpen(true)}
               tooltipPlacement="top"
               nodrag={false}
@@ -246,7 +248,7 @@ const AssetActionsMenu: React.FC<AssetActionsMenuProps> = ({
           <UploadButton
             onFileSelect={(files) => onUploadFiles?.(files)}
             iconVariant="file"
-            tooltip="Upload files"
+            tooltip={t("menu.uploadFiles")}
             multiple
           />
         </FlexRow>

@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useCallback, useMemo, useRef, useState, useEffect, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { Asset } from "../../stores/ApiTypes";
 import { useAssetSelection } from "../../hooks/assets/useAssetSelection";
@@ -29,16 +30,16 @@ type VirtualListItemData =
   | { type: 'header'; key: string; data: { type: string; count: number; isExpanded: boolean } }
   | { type: 'asset'; key: string; data: { asset: Asset } };
 
-// Define typeMap outside the component to avoid recreation
-const TYPE_MAP: Record<string, string> = {
-  folder: "Folder",
-  image: "Images",
-  video: "Videos",
-  audio: "Audio",
-  model_3d: "3D Models",
-  text: "Text",
-  application: "Files",
-  other: "Other"
+// Maps asset categories to their translation key suffix under `list.type*`.
+const TYPE_KEYS: Record<string, string> = {
+  folder: "typeFolder",
+  image: "typeImages",
+  video: "typeVideos",
+  audio: "typeAudio",
+  model_3d: "type3dModels",
+  text: "typeText",
+  application: "typeFiles",
+  other: "typeOther"
 };
 
 const styles = (theme: Theme) =>
@@ -222,6 +223,7 @@ const AssetListView: React.FC<AssetListViewProps> = ({
   isHorizontal = false
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const listStyles = useMemo(() => styles(theme), [theme]);
   const assetsOrder = useSettingsStore((state) => state.settings.assetsOrder);
   const { selectedAssetIds, handleSelectAsset, handleDeselectAssets } =
@@ -326,8 +328,9 @@ const AssetListView: React.FC<AssetListViewProps> = ({
   }, []);
 
   const getTypeDisplayName = useCallback((type: string) => {
-    return TYPE_MAP[type] || type.charAt(0).toUpperCase() + type.slice(1);
-  }, []);
+    const key = TYPE_KEYS[type];
+    return key ? t(`list.${key}`) : type.charAt(0).toUpperCase() + type.slice(1);
+  }, [t]);
 
   // Determine which columns to show based on container width and layout
   // In horizontal layout, be more aggressive about hiding columns
@@ -493,8 +496,8 @@ const AssetListView: React.FC<AssetListViewProps> = ({
         {showType && (
           <div className="asset-item-type">
             {isFolder
-              ? "Folder"
-              : asset.content_type?.split("/")[1] || "Unknown"}
+              ? t("list.folder")
+              : asset.content_type?.split("/")[1] || t("list.unknown")}
           </div>
         )}
 
@@ -505,14 +508,14 @@ const AssetListView: React.FC<AssetListViewProps> = ({
         )}
       </div>
     );
-  }, [virtualListItems, handleSelectAsset, onDoubleClick, handleContextMenu, toggleExpanded, showSize, showType, showDate, emptyCallback, formatDate, getTypeDisplayName]);
+  }, [virtualListItems, handleSelectAsset, onDoubleClick, handleContextMenu, toggleExpanded, showSize, showType, showDate, emptyCallback, formatDate, getTypeDisplayName, t]);
 
   if (assets.length === 0) {
     return (
       <Box css={listStyles} className="asset-list-view">
         <EmptyState
           variant="no-data"
-          title="No assets to display"
+          title={t("list.noAssetsToDisplay")}
           size="small"
         />
       </Box>
@@ -524,10 +527,10 @@ const AssetListView: React.FC<AssetListViewProps> = ({
       <div className="asset-list-container">
         <div className="asset-list-header">
           <div className="asset-header-icon-space"></div>
-          <div className="asset-header-name">Name</div>
-          {showSize && <div className="asset-header-size">Size</div>}
-          {showType && <div className="asset-header-type">Type</div>}
-          {showDate && <div className="asset-header-date">Modified</div>}
+          <div className="asset-header-name">{t("list.name")}</div>
+          {showSize && <div className="asset-header-size">{t("list.size")}</div>}
+          {showType && <div className="asset-header-type">{t("list.type")}</div>}
+          {showDate && <div className="asset-header-date">{t("list.modified")}</div>}
         </div>
 
         <div

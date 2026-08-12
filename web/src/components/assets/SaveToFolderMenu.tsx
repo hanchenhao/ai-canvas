@@ -3,6 +3,7 @@ import React, { useCallback, useMemo, useState } from "react";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import PhotoLibraryOutlinedIcon from "@mui/icons-material/PhotoLibraryOutlined";
 import CreateNewFolderOutlinedIcon from "@mui/icons-material/CreateNewFolderOutlined";
@@ -88,6 +89,7 @@ const SaveToFolderMenu: React.FC<SaveToFolderMenuProps> = ({
   onSelectFolder
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const { data: folderTree = {} } = useFolderTree("name");
   const createFolder = useAssetStore((state) => state.createFolder);
@@ -200,12 +202,12 @@ const SaveToFolderMenu: React.FC<SaveToFolderMenuProps> = ({
     >
       <div css={cssStyles} role="menu">
         <Caption className="folder-menu-header" size="small">
-          Save to folder
+          {t("saveToFolder.saveToFolder")}
         </Caption>
         <div className="folder-menu-scroll">
           {renderRow(
             null,
-            "Assets",
+            t("saveToFolder.assets"),
             <PhotoLibraryOutlinedIcon fontSize="small" />,
             0
           )}
@@ -224,9 +226,9 @@ const SaveToFolderMenu: React.FC<SaveToFolderMenuProps> = ({
                 fullWidth
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
-                placeholder="Folder name…"
+                placeholder={t("saveToFolder.folderNamePlaceholder")}
                 disabled={busy}
-                inputProps={{ "aria-label": "New folder name" }}
+                inputProps={{ "aria-label": t("saveToFolder.newFolderAriaLabel") }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
@@ -257,7 +259,7 @@ const SaveToFolderMenu: React.FC<SaveToFolderMenuProps> = ({
                 <CreateNewFolderOutlinedIcon fontSize="small" />
               </span>
               <Text size="normal" weight={500} sx={{ color: "inherit" }}>
-                New folder…
+                {t("saveToFolder.newFolder")}
               </Text>
             </div>
           )}

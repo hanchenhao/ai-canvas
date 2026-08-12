@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import React, { useMemo, memo } from "react";
 import { Box } from "../ui_primitives";
 import { useLocation } from "react-router-dom";
@@ -51,6 +52,7 @@ const styles = (theme: Theme) =>
 const StorageAnalytics: React.FC<StorageAnalyticsProps> = ({ assets }) => {
   const location = useLocation();
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const analyticsStyles = useMemo(() => styles(theme), [theme]);
 
   const { totalSize, fileCount, folderCount } = useMemo(() => {
@@ -81,19 +83,19 @@ const StorageAnalytics: React.FC<StorageAnalyticsProps> = ({ assets }) => {
     <Box css={analyticsStyles} className="storage-analytics">
       <div className="storage-stats">
         <div className="stat-item">
-          <span className="stat-label">Total Size</span>
+          <span className="stat-label">{t("storage.totalSize")}</span>
           <span className="stat-value">{formatFileSize(totalSize)}</span>
         </div>
 
         {folderCount > 0 && (
           <div className="stat-item">
-            <span className="stat-label">Folders</span>
+            <span className="stat-label">{t("storage.folders")}</span>
             <span className="stat-value">{folderCount}</span>
           </div>
         )}
 
         <div className="stat-item">
-          <span className="stat-label">Files</span>
+          <span className="stat-label">{t("storage.files")}</span>
           <span className="stat-value">{fileCount}</span>
         </div>
       </div>

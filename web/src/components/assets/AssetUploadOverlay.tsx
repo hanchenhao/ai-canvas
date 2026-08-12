@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import ReactDOM from "react-dom";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 
 import { Text, Box, BORDER_RADIUS, Z_INDEX } from "../ui_primitives";
 import { useAssetUpload } from "../../serverState/useAssetUpload";
@@ -42,6 +43,7 @@ const styles = (theme: Theme) =>
 
 const AssetUploadOverlay = () => {
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const { files, isUploading, overallProgress, completed } = useAssetUpload();
 
   if (!isUploading) {
@@ -52,9 +54,9 @@ const AssetUploadOverlay = () => {
     <div css={styles(theme)} className="uploading-overlay">
       <div className="uploading-message">
         <Box>
-          <Text size="big" >Uploading assets</Text>
+          <Text size="big" >{t("upload.uploadingAssets")}</Text>
           <Text size="normal" weight={600}>
-            {completed} / {files.length} files completed
+            {t("upload.filesCompleted", { completed, total: files.length })}
           </Text>
         </Box>
         <LinearProgressWithLabel value={overallProgress} />

@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { memo, useMemo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, MOTION } from "../ui_primitives";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import HomeIcon from "@mui/icons-material/Home";
@@ -60,15 +61,16 @@ const styles = (theme: Theme) =>
 function buildBreadcrumbPath(
   folderTree: FolderTree | undefined,
   currentFolderId: string | null,
-  rootId: string
+  rootId: string,
+  rootName: string
 ): Array<{ id: string; name: string }> {
   if (!folderTree || !currentFolderId) {
-    return [{ id: rootId, name: "Assets" }];
+    return [{ id: rootId, name: rootName }];
   }
 
   // If we're at root, just show root
   if (currentFolderId === rootId) {
-    return [{ id: rootId, name: "Assets" }];
+    return [{ id: rootId, name: rootName }];
   }
 
   // Build a lookup map from the tree
@@ -99,23 +101,26 @@ function buildBreadcrumbPath(
   }
 
   // Always prepend root
-  path.unshift({ id: rootId, name: "Assets" });
+  path.unshift({ id: rootId, name: rootName });
 
   return path;
 }
 
 const BreadcrumbNav: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const currentFolderId = useAssetGridStore((state) => state.currentFolderId);
   const currentUser = useAuth((state) => state.user);
   const { folderTree, navigateToFolderId } = useAssets();
 
   const rootId = currentUser?.id ?? "root";
+  const rootName = t("breadcrumb.assets");
+  const homeLabel = t("breadcrumb.home");
   const breadcrumbStyles = useMemo(() => styles(theme), [theme]);
 
   const breadcrumbs = useMemo(
-    () => buildBreadcrumbPath(folderTree, currentFolderId, rootId),
-    [folderTree, currentFolderId, rootId]
+    () => buildBreadcrumbPath(folderTree, currentFolderId, rootId, rootName),
+    [folderTree, currentFolderId, rootId, rootName]
   );
 
   const handleClick = useCallback(
@@ -147,7 +152,7 @@ const BreadcrumbNav: React.FC = () => {
                 className="breadcrumb-item current"
                 component="span"
                 aria-current="page"
-                aria-label={isRoot ? "Home" : crumb.name}
+                aria-label={isRoot ? homeLabel : crumb.name}
               >
                 {isRoot && <HomeIcon className="breadcrumb-home" />}
                 {!isRoot && crumb.name}
@@ -158,7 +163,7 @@ const BreadcrumbNav: React.FC = () => {
                 component="button"
                 type="button"
                 onClick={() => handleClick(crumb.id)}
-                aria-label={isRoot ? "Home" : crumb.name}
+                aria-label={isRoot ? homeLabel : crumb.name}
               >
                 {isRoot && <HomeIcon className="breadcrumb-home" />}
                 {!isRoot && crumb.name}

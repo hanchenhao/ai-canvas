@@ -1,0 +1,137 @@
+{
+  "dropzone": {
+    "dropFilesToUpload": "Drop files to upload"
+  },
+  "tree": {
+    "itemsCount": "({{count}} items)",
+    "noAssetsFound": "No assets found"
+  },
+  "workflowTree": {
+    "workflows": "Workflows",
+    "searchWorkflows": "Search workflows...",
+    "noWorkflows": "No workflows"
+  },
+  "storage": {
+    "totalSize": "Total Size",
+    "folders": "Folders",
+    "files": "Files"
+  },
+  "upload": {
+    "uploadingAssets": "Uploading assets",
+    "filesCompleted": "{{completed}} / {{total}} files completed"
+  },
+  "actions": {
+    "selectAll": "Select all",
+    "deselect": "Deselect",
+    "switchToListView": "Switch to list view",
+    "switchToGridView": "Switch to grid view",
+    "sortAssets": "Sort assets",
+    "sortByName": "Name",
+    "sortByDate": "Date",
+    "sortBySize": "Size",
+    "filterByFileSize": "Filter by file size",
+    "filterBySize": "Filter by size",
+    "itemSize": "Item Size",
+    "itemSizeSliderAriaLabel": "Small"
+  },
+  "list": {
+    "name": "Name",
+    "size": "Size",
+    "type": "Type",
+    "modified": "Modified",
+    "folder": "Folder",
+    "unknown": "Unknown",
+    "noAssetsToDisplay": "No assets to display",
+    "typeAll": "All",
+    "typeFolder": "Folder",
+    "typeImages": "Images",
+    "typeVideos": "Videos",
+    "typeAudio": "Audio",
+    "type3dModels": "3D Models",
+    "typeText": "Text",
+    "typeFiles": "Files",
+    "typeOther": "Other"
+  },
+  "breadcrumb": {
+    "assets": "Assets",
+    "home": "Home"
+  },
+  "compare": {
+    "close": "Close",
+    "compareImages": "Compare images"
+  },
+  "search": {
+    "searchResults": "Search Results",
+    "searchingFor": "Searching for \"{{query}}\"…",
+    "noResultsFor": "No results for \"{{query}}\"",
+    "searching": "Searching…",
+    "noAssetsFoundMatching": "No assets found matching your search.",
+    "resultsCount": "{{count}} result for \"{{query}}\"",
+    "resultsCount_plural": "{{count}} results for \"{{query}}\"",
+    "goToFolder": "Go to folder",
+    "searchAllAssets": "Search all assets...",
+    "searchCurrentFolder": "Search current folder...",
+    "switchToLocalSearch": "Switch to local search",
+    "switchToGlobalSearch": "Switch to global search"
+  },
+  "folders": {
+    "foldersHeader": "FOLDERS"
+  },
+  "saveToFolder": {
+    "saveToFolder": "Save to folder",
+    "assets": "Assets",
+    "newFolder": "New folder…",
+    "folderNamePlaceholder": "Folder name…",
+    "newFolderAriaLabel": "New folder name"
+  },
+  "menu": {
+    "hideFolders": "Hide folders",
+    "showFolders": "Show folders",
+    "filterByType": "Filter by type",
+    "hideSearchSort": "Hide search & sort",
+    "searchSortResize": "Search, sort & resize",
+    "createFolder": "Create folder",
+    "uploadFiles": "Upload files"
+  },
+  "explorer": {
+    "title": "Assets",
+    "subtitle": "Browse, organize, and preview your images, audio, video, and other files.",
+    "loadingAssets": "Loading assets",
+    "couldNotLoadAssets": "Could not load assets",
+    "errorOccurred": "An error occurred. Please try again.",
+    "retry": "Retry"
+  },
+  "grid": {
+    "itemSelected": "item selected",
+    "itemsSelected": "items selected",
+    "totalSizeOfSelectedItems": "Total size of selected items",
+    "clearSelection": "Clear selection",
+    "couldNotRefreshAssets": "Could not refresh assets",
+    "retry": "Retry",
+    "noOutputsFromWorkflow": "No outputs from this workflow yet",
+    "thisFolderIsEmpty": "This folder is empty",
+    "noOutputsDescription": "Run the workflow to generate assets, or drop files here to add inputs.",
+    "emptyFolderDescription": "Drop files here or use the upload button to add assets"
+  },
+  "viewer": {
+    "previousAsset": "Previous asset",
+    "nextAsset": "Next asset",
+    "assetViewer": "Asset viewer",
+    "selectAnotherToCompare": "Select another image from the thumbnails below to compare",
+    "cancel": "Cancel",
+    "editImage": "Edit Image",
+    "edit3d": "Edit in 3D Editor",
+    "editAudio": "Edit Audio",
+    "editTimeline": "Edit Timeline",
+    "createTimelineFromVideo": "Create Timeline from Video",
+    "copied": "Copied!",
+    "copyImage": "Copy Image",
+    "copyVideoInfo": "Copy Video Info",
+    "copyAudioInfo": "Copy Audio Info",
+    "copyContent": "Copy Content",
+    "compareWithAnother": "Compare with another image",
+    "hideInfo": "Hide info",
+    "showInfo": "Show info",
+    "close": "Close"
+  }
+}

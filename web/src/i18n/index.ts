@@ -23,6 +23,7 @@ import enModel3d from "../locales/en/model3d.json";
 import enHuggingface from "../locales/en/huggingface.json";
 import enCollections from "../locales/en/collections.json";
 import enProperties from "../locales/en/properties.json";
+import enAssets from "../locales/en/assets.json";
 import zhCommon from "../locales/zh-CN/common.json";
 import zhSettings from "../locales/zh-CN/settings.json";
 import zhNodes from "../locales/zh-CN/nodes.json";
@@ -44,6 +45,7 @@ import zhModel3d from "../locales/zh-CN/model3d.json";
 import zhHuggingface from "../locales/zh-CN/huggingface.json";
 import zhCollections from "../locales/zh-CN/collections.json";
 import zhProperties from "../locales/zh-CN/properties.json";
+import zhAssets from "../locales/zh-CN/assets.json";
 
 export const SUPPORTED_LANGUAGES = ["auto", "en", "zh-CN"] as const;
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
@@ -76,7 +78,8 @@ void i18n
         model3d: enModel3d,
         huggingface: enHuggingface,
         collections: enCollections,
-        properties: enProperties
+        properties: enProperties,
+        assets: enAssets
       },
       "zh-CN": {
         common: zhCommon,
@@ -99,7 +102,8 @@ void i18n
         model3d: zhModel3d,
         huggingface: zhHuggingface,
         collections: zhCollections,
-        properties: zhProperties
+        properties: zhProperties,
+        assets: zhAssets
       }
     },
     fallbackLng: FALLBACK_LANGUAGE,

@@ -16,6 +16,7 @@ const activePop = keyframes({
 const EASE_OUT_QUINT = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 import { useEffect, useState, useRef, useCallback, useMemo, memo } from "react";
+import { useTranslation } from "react-i18next";
 //mui
 import {
   EditorButton,
@@ -305,6 +306,7 @@ type AssetViewerProps = {
 
 const AssetViewer: React.FC<AssetViewerProps> = (props) => {
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const {
     asset,
     sortedAssets,
@@ -638,7 +640,7 @@ const AssetViewer: React.FC<AssetViewerProps> = (props) => {
           <>
             <ToolbarIconButton
               icon={<KeyboardArrowLeftIcon />}
-              tooltip="Previous asset"
+              tooltip={t("viewer.previousAsset")}
               onClick={handlePrevAsset}
               disabled={prevAssets?.length === 0}
               className="prev-next-button left"
@@ -646,7 +648,7 @@ const AssetViewer: React.FC<AssetViewerProps> = (props) => {
             />
             <ToolbarIconButton
               icon={<KeyboardArrowRightIcon />}
-              tooltip="Next asset"
+              tooltip={t("viewer.nextAsset")}
               onClick={handleNextAsset}
               disabled={nextAssets?.length === 0}
               className="prev-next-button right"
@@ -740,7 +742,8 @@ const AssetViewer: React.FC<AssetViewerProps> = (props) => {
     handleNextAsset,
     compareMode,
     compareAssetA,
-    compareAssetB
+    compareAssetB,
+    t
   ]);
 
   if (!open) {
@@ -755,7 +758,7 @@ const AssetViewer: React.FC<AssetViewerProps> = (props) => {
         fullWidth
         open={open}
         onClose={handleClose}
-        aria-label="Asset viewer"
+        aria-label={t("viewer.assetViewer")}
         slotProps={{
           // Override the primitive's default glass/rounded/bordered paper so the
           // viewer is a true edge-to-edge fullscreen surface with no top gap.
@@ -785,10 +788,10 @@ const AssetViewer: React.FC<AssetViewerProps> = (props) => {
         {compareMode && !compareAssetB && (
           <FlexRow className="compare-mode-bar" gap={SPACING.xs} align="center">
             <Text size="small">
-              Select another image from the thumbnails below to compare
+              {t("viewer.selectAnotherToCompare")}
             </Text>
             <EditorButton density="compact" onClick={cancelCompareMode}>
-              Cancel
+              {t("viewer.cancel")}
             </EditorButton>
           </FlexRow>
         )}
@@ -837,7 +840,7 @@ const AssetViewer: React.FC<AssetViewerProps> = (props) => {
           {isImage && !compareMode && (
             <ToolbarIconButton
               icon={<EditIcon />}
-              tooltip="Edit Image"
+              tooltip={t("viewer.editImage")}
               onClick={handleOpenImageEditor}
               className="button edit"
               nodrag={false}
@@ -847,7 +850,7 @@ const AssetViewer: React.FC<AssetViewerProps> = (props) => {
           {isModel3D && !compareMode && (
             <ToolbarIconButton
               icon={<EditIcon />}
-              tooltip="Edit in 3D Editor"
+              tooltip={t("viewer.edit3d")}
               onClick={handleOpenModel3DEditor}
               className="button edit"
               nodrag={false}
@@ -857,7 +860,7 @@ const AssetViewer: React.FC<AssetViewerProps> = (props) => {
           {isAudio && !compareMode && (
             <ToolbarIconButton
               icon={<EditIcon />}
-              tooltip="Edit Audio"
+              tooltip={t("viewer.editAudio")}
               onClick={handleOpenAudioEditor}
               className="button edit"
               nodrag={false}
@@ -869,8 +872,8 @@ const AssetViewer: React.FC<AssetViewerProps> = (props) => {
               icon={<EditIcon />}
               tooltip={
                 currentAsset?.timeline_id
-                  ? "Edit Timeline"
-                  : "Create Timeline from Video"
+                  ? t("viewer.editTimeline")
+                  : t("viewer.createTimelineFromVideo")
               }
               onClick={handleOpenVideoEditor}
               className="button edit"
@@ -883,14 +886,14 @@ const AssetViewer: React.FC<AssetViewerProps> = (props) => {
               icon={copied ? <CheckIcon /> : <ContentCopyIcon />}
               tooltip={
                 copied
-                  ? "Copied!"
+                  ? t("viewer.copied")
                   : currentAsset.content_type.startsWith("image/")
-                    ? "Copy Image"
+                    ? t("viewer.copyImage")
                     : currentAsset.content_type.startsWith("video/")
-                      ? "Copy Video Info"
+                      ? t("viewer.copyVideoInfo")
                       : currentAsset.content_type.startsWith("audio/")
-                        ? "Copy Audio Info"
-                        : "Copy Content"
+                        ? t("viewer.copyAudioInfo")
+                        : t("viewer.copyContent")
               }
               onClick={handleCopyToClipboard}
               className="button copy"
@@ -901,7 +904,7 @@ const AssetViewer: React.FC<AssetViewerProps> = (props) => {
           {canCompare && !compareMode && !compareAssetB && (
             <ToolbarIconButton
               icon={<CompareIcon />}
-              tooltip="Compare with another image"
+              tooltip={t("viewer.compareWithAnother")}
               onClick={startCompareMode}
               className="button compare"
               nodrag={false}
@@ -911,7 +914,7 @@ const AssetViewer: React.FC<AssetViewerProps> = (props) => {
           {currentAsset && !compareMode && (
             <ToolbarIconButton
               icon={<InfoOutlinedIcon />}
-              tooltip={showInfo ? "Hide info" : "Show info"}
+              tooltip={showInfo ? t("viewer.hideInfo") : t("viewer.showInfo")}
               onClick={toggleInfo}
               className="button info"
               nodrag={false}
@@ -920,7 +923,7 @@ const AssetViewer: React.FC<AssetViewerProps> = (props) => {
           )}
           <CloseButton
             onClick={compareAssetB ? exitCompareView : handleClose}
-            tooltip="Close"
+            tooltip={t("viewer.close")}
             className="button close"
             nodrag={false}
             sx={viewerActionButtonSx}

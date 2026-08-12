@@ -1,0 +1,137 @@
+{
+  "dropzone": {
+    "dropFilesToUpload": "拖放文件以上传"
+  },
+  "tree": {
+    "itemsCount": "({{count}} 项)",
+    "noAssetsFound": "未找到素材"
+  },
+  "workflowTree": {
+    "workflows": "工作流",
+    "searchWorkflows": "搜索工作流…",
+    "noWorkflows": "暂无工作流"
+  },
+  "storage": {
+    "totalSize": "总大小",
+    "folders": "文件夹",
+    "files": "文件"
+  },
+  "upload": {
+    "uploadingAssets": "正在上传素材",
+    "filesCompleted": "{{completed}} / {{total}} 个文件已完成"
+  },
+  "actions": {
+    "selectAll": "全选",
+    "deselect": "取消选择",
+    "switchToListView": "切换到列表视图",
+    "switchToGridView": "切换到网格视图",
+    "sortAssets": "排序素材",
+    "sortByName": "名称",
+    "sortByDate": "日期",
+    "sortBySize": "大小",
+    "filterByFileSize": "按文件大小筛选",
+    "filterBySize": "按大小筛选",
+    "itemSize": "项目大小",
+    "itemSizeSliderAriaLabel": "小"
+  },
+  "list": {
+    "name": "名称",
+    "size": "大小",
+    "type": "类型",
+    "modified": "修改时间",
+    "folder": "文件夹",
+    "unknown": "未知",
+    "noAssetsToDisplay": "暂无素材",
+    "typeAll": "全部",
+    "typeFolder": "文件夹",
+    "typeImages": "图片",
+    "typeVideos": "视频",
+    "typeAudio": "音频",
+    "type3dModels": "3D 模型",
+    "typeText": "文本",
+    "typeFiles": "文件",
+    "typeOther": "其他"
+  },
+  "breadcrumb": {
+    "assets": "素材库",
+    "home": "主页"
+  },
+  "compare": {
+    "close": "关闭",
+    "compareImages": "对比图片"
+  },
+  "search": {
+    "searchResults": "搜索结果",
+    "searchingFor": "正在搜索「{{query}}」…",
+    "noResultsFor": "「{{query}}」无搜索结果",
+    "searching": "搜索中…",
+    "noAssetsFoundMatching": "没有找到匹配的素材。",
+    "resultsCount": "「{{query}}」的 {{count}} 条结果",
+    "resultsCount_plural": "「{{query}}」的 {{count}} 条结果",
+    "goToFolder": "转到文件夹",
+    "searchAllAssets": "搜索全部素材…",
+    "searchCurrentFolder": "搜索当前文件夹…",
+    "switchToLocalSearch": "切换到本地搜索",
+    "switchToGlobalSearch": "切换到全局搜索"
+  },
+  "folders": {
+    "foldersHeader": "文件夹"
+  },
+  "saveToFolder": {
+    "saveToFolder": "保存到文件夹",
+    "assets": "素材库",
+    "newFolder": "新建文件夹…",
+    "folderNamePlaceholder": "文件夹名称…",
+    "newFolderAriaLabel": "新文件夹名称"
+  },
+  "menu": {
+    "hideFolders": "隐藏文件夹",
+    "showFolders": "显示文件夹",
+    "filterByType": "按类型筛选",
+    "hideSearchSort": "隐藏搜索和排序",
+    "searchSortResize": "搜索、排序和调整大小",
+    "createFolder": "新建文件夹",
+    "uploadFiles": "上传文件"
+  },
+  "explorer": {
+    "title": "素材库",
+    "subtitle": "浏览、整理和预览图片、音频、视频及其他文件。",
+    "loadingAssets": "正在加载素材",
+    "couldNotLoadAssets": "无法加载素材",
+    "errorOccurred": "发生错误，请重试。",
+    "retry": "重试"
+  },
+  "grid": {
+    "itemSelected": "项已选中",
+    "itemsSelected": "项已选中",
+    "totalSizeOfSelectedItems": "所选项目总大小",
+    "clearSelection": "清除选择",
+    "couldNotRefreshAssets": "无法刷新素材",
+    "retry": "重试",
+    "noOutputsFromWorkflow": "此工作流尚无输出",
+    "thisFolderIsEmpty": "此文件夹为空",
+    "noOutputsDescription": "运行工作流以生成素材，或拖放文件至此处添加输入。",
+    "emptyFolderDescription": "拖放文件至此处或使用上传按钮添加素材"
+  },
+  "viewer": {
+    "previousAsset": "上一个素材",
+    "nextAsset": "下一个素材",
+    "assetViewer": "素材查看器",
+    "selectAnotherToCompare": "从下方缩略图中选择另一张图片进行对比",
+    "cancel": "取消",
+    "editImage": "编辑图片",
+    "edit3d": "在 3D 编辑器中编辑",
+    "editAudio": "编辑音频",
+    "editTimeline": "编辑时间线",
+    "createTimelineFromVideo": "从视频创建时间线",
+    "copied": "已复制！",
+    "copyImage": "复制图片",
+    "copyVideoInfo": "复制视频信息",
+    "copyAudioInfo": "复制音频信息",
+    "copyContent": "复制内容",
+    "compareWithAnother": "与另一张图片对比",
+    "hideInfo": "隐藏信息",
+    "showInfo": "显示信息",
+    "close": "关闭"
+  }
+}

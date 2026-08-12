@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useEffect, useMemo, memo } from "react";
+import { useTranslation } from "react-i18next";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   Text,
@@ -57,6 +58,7 @@ const SelectedItemsInfo: React.FC<{
   assets: Asset[];
   onClear: () => void;
 }> = memo(({ selectedAssetIds, assets, onClear }) => {
+  const { t } = useTranslation("assets");
   const totalSize = useMemo(() => {
     if (selectedAssetIds.length === 0) return 0;
     const selectedSet = new Set(selectedAssetIds);
@@ -75,9 +77,11 @@ const SelectedItemsInfo: React.FC<{
       <div className="selected-asset-info">
         <Text className="selected-info">
           {selectedAssetIds.length}{" "}
-          {selectedAssetIds.length === 1 ? "item" : "items"} selected
+          {selectedAssetIds.length === 1
+            ? t("grid.itemSelected")
+            : t("grid.itemsSelected")}
           {totalSize > 0 && (
-            <Tooltip title="Total size of selected items" disableInteractive>
+            <Tooltip title={t("grid.totalSizeOfSelectedItems")} disableInteractive>
               <span style={{ marginLeft: "0.5em", opacity: 0.7 }}>
                 ({formatFileSize(totalSize)})
               </span>
@@ -87,7 +91,7 @@ const SelectedItemsInfo: React.FC<{
         <ToolbarIconButton
           className="clear-selection"
           icon={<CloseIcon />}
-          tooltip="Clear selection"
+          tooltip={t("grid.clearSelection")}
           shortcut={["Esc"]}
           tooltipPlacement="top"
           onClick={onClear}
@@ -128,6 +132,7 @@ const AssetGrid: React.FC<AssetGridProps> = ({
 }) => {
   const { error, folderFilesFiltered, folderTree, refetchAssetsAndFolders } =
     useAssets();
+  const { t } = useTranslation("assets");
   const {
     setOpenAsset,
     setSelectedAssetIds,
@@ -305,7 +310,7 @@ const AssetGrid: React.FC<AssetGridProps> = ({
           className="asset-grid-fetch-error"
           severity="error"
           compact
-          title="Could not refresh assets"
+          title={t("grid.couldNotRefreshAssets")}
           sx={{
             flexShrink: 0,
             mb: getSpacingPx(SPACING.sm),
@@ -317,7 +322,7 @@ const AssetGrid: React.FC<AssetGridProps> = ({
               size="small"
               onClick={() => refetchAssetsAndFolders()}
             >
-              Retry
+              {t("grid.retry")}
             </EditorButton>
           }
         >
