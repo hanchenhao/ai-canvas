@@ -26,10 +26,15 @@ web/src/
 
 | Namespace | 用途 | 维护方式 |
 |-----------|------|----------|
-| `common`  | 通用按钮、菜单、语言选择器等跨页面文案 | 手工维护 |
+| `common`  | 通用按钮、菜单、语言选择器、顶栏、侧栏、对话框等跨页面文案 | 手工维护 |
 | `settings`| 设置页（侧栏分类、条目、段标题、页标题） | 手工维护 |
-| `nodes`   | 节点库（title / description / properties.* ） | 英文源由 `npm run extract:nodes` 自动生成；中文翻译手工填 |
-| `errors`  | 用户可见错误消息 | 手工维护，码在 `USER_FACING_ERROR_CODES` |
+| `nodes`   | 节点库（title / description / properties.* ） | 英文源由 `npm run extract:nodes` 自动生成；中文翻译手工填 + `scripts/translate-nodes-batch2.mjs` 辅助 |
+| `errors`  | 用户可见错误消息 | 手工维护，码用 `ApiErrorCode`（`@nodetool-ai/protocol/api-schemas`）|
+| `timeline`| 时间线编辑器（视频剪辑工具栏、轨道、片段操作） | 手工维护 |
+| `sketch`  | 草图/图像编辑器（图层、画笔、工具设置） | 手工维护 |
+| `storyboard`| 故事板/分镜（镜头、场景、队列） | 手工维护 |
+
+**当前覆盖**：节点库中文翻译覆盖度 100%（2923/2923）。UI 文案覆盖了设置页、顶栏、左侧栏、删除对话框、悬浮工具栏、工作流列表、Inspector、节点搜索/库/信息面板、Chain 编辑器、Timeline / Sketch / Storyboard 三个专业编辑器。剩余未迁移的字符串（部分 LabeledSwitch 的 description、上下文菜单、Tooltip）按下方模式渐进推进。
 
 ## 模式
 
@@ -132,33 +137,38 @@ npm run extract:nodes   # 重新生成 web/src/locales/en/nodes.json（幂等，
 
 `properties` 可省略——属性级 key 缺失时 hook 回退到 store 中的英文属性 title/description。
 
-**翻译进度**：`en/nodes.json` 当前有 2900+ 节点条目；`zh-CN/nodes.json` 已翻译 **20 个种子节点**（`nodetool.constant.*`、`nodetool.text.*`、`nodetool.image.*` 等高频节点）。剩余约 2900 个节点的中文翻译是内容工作，按 PR 增量补充——见下方「后续工作」。
+**翻译进度**：`en/nodes.json` 有 2923 节点；`zh-CN/nodes.json` 覆盖率 **100%**（2923/2923）。`scripts/translate-nodes-batch2.mjs` 是辅助翻译脚本（短语替换 + 词典），当 `npm run extract:nodes` 抽出新的英文节点后，跑这个脚本得到首版中文翻译，再人工润色。
 
-`npm run extract:nodes` 幂等可重复运行；输出按 `node_type` 与属性名排序，diff 稳定。源码：`scripts/extract-node-strings.ts`。
+`npm run extract:nodes` 幂等可重复运行；输出按 `node_type` 与属性名排序，diff 稳定。源码：`scripts/extract-node-strings.ts`，纯函数 `extractNodeStrings` 在 `web/src/i18n/extractNodeStrings.ts`（带单元测试）。
 
 ### 5. 添加新错误码
 
-1. 在 `packages/protocol/src/errors.ts` 的 `USER_FACING_ERROR_CODES` 加码（同时会自动推导 `UserFacingErrorCode` 类型）。
+错误码系统**复用**后端现有的 `ApiErrorCode`（`@nodetool-ai/protocol/api-schemas`），不再单独维护平行枚举。后端通过 `throwApiError(code, message)` 抛出，tRPC error formatter 把码附在 `err.data.apiCode`，前端 `ErrorStore.nodeErrorToDisplayString` 自动调 `translateError` 渲染。
+
+1. 在 `packages/protocol/src/api-schemas/api-error-code.ts` 的 `ApiErrorCode` 枚举里加新码。
 2. 在 `web/src/locales/en/errors.json` 与 `web/src/locales/zh-CN/errors.json` 加同 key 翻译（支持 `{{param}}` 插值）。
-3. 后端 throw 时携带错误码（后续工程，见下方「后续工作」）。
-4. 前端调用点用 `translateError`：
+3. 后端 throw：`throwApiError(ApiErrorCode.YOUR_NEW_CODE, "english fallback message")`。
+4. 前端不需要额外代码——任何 tRPC 错误经过 `nodeErrorToDisplayString` 都会自动本地化。
+
+直接调用 `translateError`（用于非 tRPC 错误路径）：
 
 ```ts
 import { translateError } from "../utils/translateError";
+import { ApiErrorCode } from "@nodetool-ai/protocol/api-schemas";
 
 const message = translateError(
-  "node_invocation_error",           // 错误码
-  `Node '${nodeType}' failed`,       // 回退消息（码无翻译时显示）
-  { nodeType }                       // 可选插值参数
+  ApiErrorCode.WORKFLOW_NOT_FOUND,    // 错误码
+  `Workflow ${id} not found`,         // 回退消息（码无翻译时显示）
+  { id }                              // 可选插值参数
 );
 ```
 
 **translateError 行为**：
 
 - 码在当前语言 `errors` namespace 命中：返回翻译后的消息（带插值）。
-- 码未命中（码不在 `USER_FACING_ERROR_CODES`，或当前语言缺翻译）：返回调用方传入的 `fallback` 字符串。**绝不返回 key 字符串本身**——这是 `translateError` 用 `i18n.exists` 而非字符串对比的原因。
+- 码未命中：返回调用方传入的 `fallback` 字符串。**绝不返回 key 字符串本身**——这是 `translateError` 用 `i18n.exists` 而非字符串对比的原因。
 
-当前支持的 10 个错误码见 `packages/protocol/src/errors.ts`。
+当前 `errors.json` 覆盖了 `ApiErrorCode` 全部 16 个码（`NOT_FOUND` / `WORKFLOW_NOT_FOUND` / `WORKFLOW_EXECUTION_FAILED` / `ASSET_NOT_FOUND` / `BUDGET_EXCEEDED` 等）。
 
 ## 翻译质量约束
 
@@ -182,11 +192,12 @@ const message = translateError(
 
 切换语言不需要刷新页面——`useTranslation` 的组件会自动重渲染。
 
-## 后续工作（不在 12-task 计划内）
+## 后续工作
 
 以下迁移按本指南持续推进，可在多个 PR 中分批完成：
 
 1. **剩余 SettingsMenu 文案**：通用 Tab 之外的设置项标签、描述、`LabeledSwitch` 的 `label`/`description` prop。
 2. **对话框、上下文菜单、工具提示**：各 `Dialog`、右键菜单、`Tooltip` 内容。
-3. **剩余节点翻译**：`zh-CN/nodes.json` 从 20 个种子节点扩到 2900+——纯内容工作。
-4. **后端错误码接入**：后端 throw 时使用 `USER_FACING_ERROR_CODES` 中的码（替换或补充原始错误消息），前端用 `translateError` 渲染。
+3. **节点描述润色**：`zh-CN/nodes.json` 已 100% 覆盖，但 `fal.*` / `replicate.*` 中部分长描述因模型名括注保留了英文片段。深度润色需要语义级翻译，不能纯靠正则替换——优先级低于新功能开发。
+4. **新错误码**：当前 16 个 `ApiErrorCode` 都已有翻译。新增码时记得同步 `errors.json`。
+5. **节点抽取流程**：新增节点源码后跑 `npm run extract:nodes` 重新生成 `en/nodes.json`，再跑 `scripts/translate-nodes-batch2.mjs` 得到首版 zh-CN 翻译，最后人工审校。
