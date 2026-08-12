@@ -50036,6 +50036,7 @@
   },
   "kie.audio.AddInstrumental": {
     "title": "为音乐添加伴奏",
+    "description": "通过 Kie.ai 为音乐添加伴奏。\n\n关键词：kie、音频、AI\n\n    基于上传的音频文件生成器乐伴奏。可上传音频文件，并为其添加伴奏音轨。",
     "properties": {
       "audioWeight": {
         "title": "音频权重",
@@ -50077,6 +50078,7 @@
   },
   "kie.audio.AddVocals": {
     "title": "为音乐添加人声",
+    "description": "通过 Kie.ai 为音乐添加人声。\n\n关键词：kie、音频、AI\n\n    基于上传的音频文件生成带人声演唱的音乐。可上传音频文件，并为其添加人声演唱。",
     "properties": {
       "audioWeight": {
         "title": "音频权重",
@@ -50122,6 +50124,7 @@
   },
   "kie.audio.BoostMusicStyle": {
     "title": "强化音乐风格",
+    "description": "通过 Kie.ai 强化音乐风格。\n\n关键词：kie、音频、AI\n\n    强化音乐风格",
     "properties": {
       "content": {
         "title": "内容",
@@ -50131,6 +50134,7 @@
   },
   "kie.audio.ConvertToWav": {
     "title": "转换为 WAV 格式",
+    "description": "通过 Kie.ai 转换为 WAV 格式。\n\n关键词：kie、音频、AI\n\n    将已有音乐音轨转换为高品质 WAV 格式。",
     "properties": {
       "audioId": {
         "title": "音频 ID",
@@ -50144,6 +50148,7 @@
   },
   "kie.audio.CreateMusicVideo": {
     "title": "制作音乐视频",
+    "description": "通过 Kie.ai 制作音乐视频。\n\n关键词：kie、音频、AI\n\n    基于生成的音乐音轨制作带可视化效果的视频。",
     "properties": {
       "audioId": {
         "title": "音频 ID",
@@ -50165,6 +50170,7 @@
   },
   "kie.audio.ElevenlabsAudioIsolation": {
     "title": "elevenlabs/audio-isolation",
+    "description": "通过 Kie.ai 调用 elevenlabs/audio-isolation。\n\n关键词：kie、音频、AI\n\n    使用 elevenlabs/audio-isolation 生成内容",
     "properties": {
       "audio": {
         "title": "音频",
@@ -50174,6 +50180,7 @@
   },
   "kie.audio.ElevenlabsTextToDialogueV3": {
     "title": "elevenlabs/text-to-dialogue-v3",
+    "description": "通过 Kie.ai 调用 elevenlabs/text-to-dialogue-v3。\n\n关键词：kie、音频、AI\n\n    使用 elevenlabs/text-to-dialogue-v3 生成对话文本转语音",
     "properties": {
       "dialogue": {
         "title": "对白",
@@ -50191,6 +50198,7 @@
   },
   "kie.audio.ElevenlabsTextToSpeechMultilingualV2": {
     "title": "elevenlabs/text-to-speech-multilingual-v2",
+    "description": "通过 Kie.ai 调用 elevenlabs/text-to-speech-multilingual-v2。\n\n关键词：kie、音频、AI\n\n    使用 elevenlabs/text-to-speech-multilingual-v2 生成内容",
     "properties": {
       "language_code": {
         "title": "语言代码",
@@ -50236,6 +50244,7 @@
   },
   "kie.audio.ElevenlabsTextToSpeechTurbo25": {
     "title": "elevenlabs/text-to-speech-turbo-2-5",
+    "description": "通过 Kie.ai 调用 elevenlabs/text-to-speech-turbo-2-5。\n\n关键词：kie、音频、AI\n\n    使用 elevenlabs/text-to-speech-turbo-2-5 生成内容",
     "properties": {
       "language_code": {
         "title": "语言代码",
@@ -50281,6 +50290,7 @@
   },
   "kie.audio.ExtendMusic": {
     "title": "延长音乐",
+    "description": "通过 Kie.ai 延长音乐。\n\n关键词：kie、音频、AI\n\n    以源音频音轨为基础创作续写部分，延长或修改已有音乐。",
     "properties": {
       "audioId": {
         "title": "音频 ID",
@@ -50346,6 +50356,7 @@
   },
   "kie.audio.Gemini25ProTts": {
     "title": "Gemini 2.5 Pro 文本转语音",
+    "description": "通过 Kie.ai 调用 Gemini 2.5 Pro 文本转语音。\n\n关键词：kie、音频、AI\n\n    使用 elevenlabs/audio-isolation 生成内容",
     "properties": {
       "dialogue_turns": {
         "title": "对白轮次",
@@ -50371,6 +50382,7 @@
   },
   "kie.audio.Gemini31FlashTts": {
     "title": "Gemini 3.1 Flash 文本转语音",
+    "description": "通过 Kie.ai 调用 Gemini 3.1 Flash 文本转语音。\n\n关键词：kie、音频、AI\n\n    使用 elevenlabs/audio-isolation 生成内容",
     "properties": {
       "dialogue_turns": {
         "title": "对白轮次",
@@ -50396,6 +50408,7 @@
   },
   "kie.audio.GenerateCover": {
     "title": "生成音乐翻唱",
+    "description": "通过 Kie.ai 生成音乐翻唱。\n\n关键词：kie、音频、AI\n\n    基于原始音乐任务生成个性化封面图。",
     "properties": {
       "taskId": {
         "title": "任务 ID",
@@ -50405,6 +50418,7 @@
   },
   "kie.audio.GenerateLyrics": {
     "title": "生成歌词",
+    "description": "通过 Kie.ai 生成歌词。\n\n关键词：kie、音频、AI\n\n    根据文本提示生成创意歌词内容。",
     "properties": {
       "prompt": {
         "title": "提示词",
@@ -50414,6 +50428,7 @@
   },
   "kie.audio.GenerateMashup": {
     "title": "生成混搭音乐",
+    "description": "通过 Kie.ai 生成混搭音乐。\n\n关键词：kie、音频、AI\n\n    > 使用 AI 模型将多条音轨组合创作混音音乐。",
     "properties": {
       "audioWeight": {
         "title": "音频权重",
@@ -50467,6 +50482,7 @@
   },
   "kie.audio.GenerateMidi": {
     "title": "从音频生成 MIDI",
+    "description": "通过 Kie.ai 从音频生成 MIDI。\n\n关键词：kie、音频、AI\n\n    > 将分离后的音轨转换为 MIDI 格式，并包含每种乐器的详细音符信息。",
     "properties": {
       "audioId": {
         "title": "音频 ID",
@@ -50480,6 +50496,7 @@
   },
   "kie.audio.GenerateMusic": {
     "title": "生成音乐",
+    "description": "通过 Kie.ai 生成音乐。\n\n关键词：kie、音频、AI\n\n    使用 AI 模型生成带歌词或纯器乐的音乐。",
     "properties": {
       "audioWeight": {
         "title": "音频权重",
@@ -50541,6 +50558,7 @@
   },
   "kie.audio.GeneratePersona": {
     "title": "生成角色",
+    "description": "通过 Kie.ai 生成角色。\n\n关键词：kie、音频、AI\n\n    生成角色（Persona）",
     "properties": {
       "audioId": {
         "title": "音频 ID",
@@ -50574,6 +50592,7 @@
   },
   "kie.audio.GenerateSounds": {
     "title": "生成音效",
+    "description": "通过 Kie.ai 生成音效。\n\n关键词：kie、音频、AI\n\n    用于创建音效生成任务（Sounds Task）。支持循环、速度（BPM）、调性（Key）以及歌词字幕提取等设置。",
     "properties": {
       "grabLyrics": {
         "title": "抓取歌词",
@@ -50602,6 +50621,7 @@
   },
   "kie.audio.GetTimestampedLyrics": {
     "title": "获取带时间戳的歌词",
+    "description": "通过 Kie.ai 获取带时间戳的歌词。\n\n关键词：kie、音频、AI\n\n    获取与音乐音轨精确同步、带时间戳的歌词。",
     "properties": {
       "audioId": {
         "title": "音频 ID",
@@ -50615,6 +50635,7 @@
   },
   "kie.audio.ReplaceSection": {
     "title": "替换音乐片段",
+    "description": "通过 Kie.ai 替换音乐片段。\n\n关键词：kie、音频、AI\n\n    > 替换已有音乐中指定时间段的片段。",
     "properties": {
       "audioId": {
         "title": "音频 ID",
@@ -50664,6 +50685,7 @@
   },
   "kie.audio.SeparateVocals": {
     "title": "人声与器乐分轨",
+    "description": "通过 Kie.ai 进行人声与器乐分轨。\n\n关键词：kie、音频、AI\n\n    使用先进的音频处理技术，将音乐分离为人声、伴奏以及各乐器的独立分轨。",
     "properties": {
       "audioId": {
         "title": "音频 ID",
@@ -50689,6 +50711,7 @@
   },
   "kie.audio.SunoVoiceCheckVoice": {
     "title": "Suno 校验音色可用性 API",
+    "description": "通过 Kie.ai 校验 Suno 音色可用性。\n\n关键词：kie、音频、AI\n\n    检查生成的 Suno 自定义音色是否可用。",
     "properties": {
       "task_id": {
         "title": "任务 ID",
@@ -50698,6 +50721,7 @@
   },
   "kie.audio.SunoVoiceGenerate": {
     "title": "Suno 创建自定义音色 API",
+    "description": "通过 Kie.ai 创建 Suno 自定义音色。\n\n关键词：kie、音频、AI\n\n    用户朗读校验短句后，生成自定义 Suno 音色。",
     "properties": {
       "description": {
         "title": "描述",
@@ -50727,6 +50751,7 @@
   },
   "kie.audio.SunoVoiceRegenerate": {
     "title": "Suno 重新生成校验短句",
+    "description": "通过 Kie.ai 重新生成 Suno 校验短句。\n\n关键词：kie、音频、AI\n\n    为已有的 Suno 音色任务重新生成校验短句。",
     "properties": {
       "calBackUrl": {
         "title": "回调 URL",
@@ -50740,6 +50765,7 @@
   },
   "kie.audio.SunoVoiceValidate": {
     "title": "Suno 生成校验短句 API",
+    "description": "通过 Kie.ai 生成 Suno 校验短句。\n\n关键词：kie、音频、AI\n\n    为 Suno 自定义音色流程生成校验短句。",
     "properties": {
       "language": {
         "title": "语言",
@@ -50761,6 +50787,7 @@
   },
   "kie.audio.UploadAndCoverAudio": {
     "title": "上传并翻配音频",
+    "description": "通过 Kie.ai 上传并翻配音频。\n\n关键词：kie、音频、AI\n\n    > 此 API 在保留音轨核心旋律的前提下将其转换为全新风格，从而生成翻配版本。它结合了 Suno 的上传能力，用户可上传音频文件进行处理。预期结果是得到一条风格焕然一新、同时完整保留原旋律的音轨。",
     "properties": {
       "audioWeight": {
         "title": "音频权重",
@@ -50826,6 +50853,7 @@
   },
   "kie.audio.UploadAndExtendAudio": {
     "title": "上传并延长音频",
+    "description": "通过 Kie.ai 上传并延长音频。\n\n关键词：kie、音频、AI\n\n    上传并延长音乐",
     "properties": {
       "audioWeight": {
         "title": "音频权重",
@@ -50891,6 +50919,7 @@
   },
   "kie.dynamic_schema.KieAI": {
     "title": "Kie AI",
+    "description": "用于运行任意 kie.ai 模型的动态 Kie.ai 节点。\n    关键词：kie、动态、schema、API、推理、运行时、模型\n\n    常见用途：\n    - 无需专用 Python 节点即可调用任意 kie.ai 模型\n    - 新模型发布后即可用于搭建原型工作流\n    - 粘贴模型的 API 文档即可运行该模型\n    - 动态访问完整的 kie.ai 模型目录",
     "properties": {
       "model_info": {
         "title": "模型信息",
@@ -50900,6 +50929,7 @@
   },
   "kie.image.BytedanceSeedream": {
     "title": "Seedream 3.0 - 文生图",
+    "description": "通过 Kie.ai 调用 Seedream 3.0 文生图。\n\n关键词：kie、图像、AI\n\n    由 Seedream 3.0 生成图像",
     "properties": {
       "guidance_scale": {
         "title": "引导系数",
@@ -50921,6 +50951,7 @@
   },
   "kie.image.BytedanceSeedreamV4Edit": {
     "title": "Seedream 4.0 - 编辑",
+    "description": "通过 Kie.ai 调用 Seedream 4.0 编辑。\n\n关键词：kie、图像、AI\n\n    由 Seedream 4.0 编辑图像",
     "properties": {
       "image_resolution": {
         "title": "图像分辨率",
@@ -50954,6 +50985,7 @@
   },
   "kie.image.BytedanceSeedreamV4TextToImage": {
     "title": "Seedream 4.0 - 文生图",
+    "description": "通过 Kie.ai 调用 Seedream 4.0 文生图。\n\n关键词：kie、图像、AI\n\n    依托 Seedream 4.0 先进 AI 模型生成高质量写实图像",
     "properties": {
       "image_resolution": {
         "title": "图像分辨率",
@@ -50983,6 +51015,7 @@
   },
   "kie.image.Flux2FlexImageToImage": {
     "title": "Flux-2 - 图生图",
+    "description": "通过 Kie.ai 调用 Flux-2 图生图。\n\n关键词：kie、图像、AI\n\n    由 flux-2/flex-image-to-image 生成图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51008,6 +51041,7 @@
   },
   "kie.image.Flux2FlexTextToImage": {
     "title": "Flux-2 - 文生图",
+    "description": "通过 Kie.ai 调用 Flux-2 文生图。\n\n关键词：kie、图像、AI\n\n    依托 Flux-2 先进 AI 模型生成高质量写实图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51029,6 +51063,7 @@
   },
   "kie.image.Flux2ProImageToImage": {
     "title": "Flux-2 Pro - 图生图",
+    "description": "通过 Kie.ai 调用 Flux-2 Pro 图生图。\n\n关键词：kie、图像、AI\n\n    由 flux-2/pro-image-to-image 生成图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51054,6 +51089,7 @@
   },
   "kie.image.Flux2ProTextToImage": {
     "title": "Flux-2 Pro - 文生图",
+    "description": "通过 Kie.ai 调用 Flux-2 Pro 文生图。\n\n关键词：kie、图像、AI\n\n    依托 Flux-2 先进 AI 模型生成高质量写实图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51075,6 +51111,7 @@
   },
   "kie.image.GoogleImagen4": {
     "title": "Google - imagen4",
+    "description": "通过 Kie.ai 调用 Google imagen4。\n\n关键词：kie、图像、AI\n\n    由 Google imagen4 生成图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51096,6 +51133,7 @@
   },
   "kie.image.GoogleImagen4Fast": {
     "title": "Google - imagen4-fast",
+    "description": "通过 Kie.ai 调用 Google imagen4-fast。\n\n关键词：kie、图像、AI\n\n    由 Google imagen4-fast 生成图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51117,6 +51155,7 @@
   },
   "kie.image.GoogleImagen4Ultra": {
     "title": "Google - imagen4-ultra",
+    "description": "通过 Kie.ai 调用 Google imagen4-ultra。\n\n关键词：kie、图像、AI\n\n    由 Google imagen4-ultra 生成图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51138,6 +51177,7 @@
   },
   "kie.image.GoogleNanoBanana": {
     "title": "Google - Nano Banana",
+    "description": "通过 Kie.ai 调用 Google Nano Banana。\n\n关键词：kie、图像、AI\n\n    使用 google/nano-banana 生成内容",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51159,6 +51199,7 @@
   },
   "kie.image.GoogleNanoBanana2": {
     "title": "Google - Nano Banana 2",
+    "description": "通过 Kie.ai 调用 Google Nano Banana 2。\n\n关键词：kie、图像、AI\n\n    由 Nano Banana 2 生成图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51184,6 +51225,7 @@
   },
   "kie.image.GoogleNanoBananaEdit": {
     "title": "Google - Nano Banana 编辑",
+    "description": "通过 Kie.ai 调用 Google Nano Banana 编辑。\n\n关键词：kie、图像、AI\n\n    使用 Google Nano Banana Edit 模型编辑图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51205,6 +51247,7 @@
   },
   "kie.image.GptImage15ImageToImage": {
     "title": "GPT Image-1.5 - 图生图",
+    "description": "通过 Kie.ai 调用 GPT Image-1.5 图生图。\n\n关键词：kie、图像、AI\n\n    概述",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51226,6 +51269,7 @@
   },
   "kie.image.GptImage15TextToImage": {
     "title": "GPT Image-1.5 - 文生图",
+    "description": "通过 Kie.ai 调用 GPT Image-1.5 文生图。\n\n关键词：kie、图像、AI\n\n    概述",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51243,6 +51287,7 @@
   },
   "kie.image.GptImage2ImageToImage": {
     "title": "GPT Image 2 - 图生图",
+    "description": "通过 Kie.ai 调用 GPT Image 2 图生图。\n\n关键词：kie、图像、AI\n\n    创建任务",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51264,6 +51309,7 @@
   },
   "kie.image.GptImage2TextToImage": {
     "title": "GPT Image-2 - 文生图",
+    "description": "通过 Kie.ai 调用 GPT Image-2 文生图。\n\n关键词：kie、图像、AI\n\n    创建任务",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51281,6 +51327,7 @@
   },
   "kie.image.GrokImagineImageToImage": {
     "title": "Grok Imagine - 图生图",
+    "description": "通过 Kie.ai 调用 Grok Imagine 图生图。\n\n关键词：kie、图像、AI\n\n    使用 grok-imagine/image-to-image 生成内容",
     "properties": {
       "images": {
         "title": "图像",
@@ -51298,6 +51345,7 @@
   },
   "kie.image.GrokImagineTextToImage": {
     "title": "Grok Imagine - 文生图",
+    "description": "通过 Kie.ai 调用 Grok Imagine 文生图。\n\n关键词：kie、图像、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51319,6 +51367,7 @@
   },
   "kie.image.IdeogramCharacter": {
     "title": "Ideogram - 角色",
+    "description": "通过 Kie.ai 调用 Ideogram 角色。\n\n关键词：kie、图像、AI\n\n    由 ideogram/character 生成图像",
     "properties": {
       "expand_prompt": {
         "title": "扩写提示词",
@@ -51356,6 +51405,7 @@
   },
   "kie.image.IdeogramCharacterEdit": {
     "title": "Ideogram - 角色编辑",
+    "description": "通过 Kie.ai 调用 Ideogram 角色编辑。\n\n关键词：kie、图像、AI\n\n    由 ideogram/character-edit 生成图像",
     "properties": {
       "expand_prompt": {
         "title": "扩写提示词",
@@ -51393,6 +51443,7 @@
   },
   "kie.image.IdeogramCharacterRemix": {
     "title": "Ideogram - 角色二次创作",
+    "description": "通过 Kie.ai 调用 Ideogram 角色二次创作。\n\n关键词：kie、图像、AI\n\n    由 ideogram/character-remix 生成图像",
     "properties": {
       "expand_prompt": {
         "title": "扩写提示词",
@@ -51446,6 +51497,7 @@
   },
   "kie.image.IdeogramV3Edit": {
     "title": "Ideogram V3 编辑",
+    "description": "通过 Kie.ai 调用 Ideogram V3 编辑。\n\n关键词：kie、图像、AI\n\n    由 ideogram/v3-edit 生成图像",
     "properties": {
       "expand_prompt": {
         "title": "扩写提示词",
@@ -51475,6 +51527,7 @@
   },
   "kie.image.IdeogramV3Remix": {
     "title": "Ideogram V3 二次创作",
+    "description": "通过 Kie.ai 调用 Ideogram V3 二次创作。\n\n关键词：kie、图像、AI\n\n    由 ideogram/v3-remix 生成图像",
     "properties": {
       "expand_prompt": {
         "title": "扩写提示词",
@@ -51516,6 +51569,7 @@
   },
   "kie.image.IdeogramV3TextToImage": {
     "title": "Ideogram V3 文生图",
+    "description": "通过 Kie.ai 调用 Ideogram V3 文生图。\n\n关键词：kie、图像、AI\n\n    由 ideogram/v3-text-to-image 生成图像",
     "properties": {
       "expand_prompt": {
         "title": "扩写提示词",
@@ -51549,6 +51603,7 @@
   },
   "kie.image.NanoBanana2Lite": {
     "title": "Google - Nano Banana 2 Lite",
+    "description": "通过 Kie.ai 调用 Google Nano Banana 2 Lite。\n\n关键词：kie、图像、AI\n\n    创建任务",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51566,6 +51621,7 @@
   },
   "kie.image.NanoBananaPro": {
     "title": "Google - Nano Banana Pro",
+    "description": "通过 Kie.ai 调用 Google Nano Banana Pro。\n\n关键词：kie、图像、AI\n\n    使用 Google Pro 图生图模型生成图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51591,6 +51647,7 @@
   },
   "kie.image.Qwen2ImageEdit": {
     "title": "通义千问 2 - 图像编辑",
+    "description": "通过 Kie.ai 调用通义千问 2 图像编辑。\n\n关键词：kie、图像、AI\n\n    由 qwen2/image-edit 生成图像",
     "properties": {
       "image": {
         "title": "图像",
@@ -51620,6 +51677,7 @@
   },
   "kie.image.Qwen2TextToImage": {
     "title": "通义千问 2 - 文生图",
+    "description": "通过 Kie.ai 调用通义千问 2 文生图。\n\n关键词：kie、图像、AI\n\n    由 qwen2/text-to-image 生成图像",
     "properties": {
       "image_size": {
         "title": "图像尺寸",
@@ -51645,6 +51703,7 @@
   },
   "kie.image.Qwen3ImageToImage": {
     "title": "通义千问 3 图生图",
+    "description": "通过 Kie.ai 调用通义千问 3 图生图。\n\n关键词：kie、图像、AI\n\n    创建任务",
     "properties": {
       "image_size": {
         "title": "图像尺寸",
@@ -51686,6 +51745,7 @@
   },
   "kie.image.Qwen3ProImageToImage": {
     "title": "通义千问 3 Pro 图生图",
+    "description": "通过 Kie.ai 调用通义千问 3 Pro 图生图。\n\n关键词：kie、图像、AI\n\n    创建任务",
     "properties": {
       "image_size": {
         "title": "图像尺寸",
@@ -51727,6 +51787,7 @@
   },
   "kie.image.Qwen3ProTextToImage": {
     "title": "通义千问 3 Pro 文生图",
+    "description": "通过 Kie.ai 调用通义千问 3 Pro 文生图。\n\n关键词：kie、图像、AI\n\n    创建任务",
     "properties": {
       "image_size": {
         "title": "图像尺寸",
@@ -51764,6 +51825,7 @@
   },
   "kie.image.Qwen3TextToImage": {
     "title": "通义千问 3 文生图",
+    "description": "通过 Kie.ai 调用通义千问 3 文生图。\n\n关键词：kie、图像、AI\n\n    创建任务",
     "properties": {
       "image_size": {
         "title": "图像尺寸",
@@ -51801,6 +51863,7 @@
   },
   "kie.image.QwenImageEdit": {
     "title": "通义千问 - 图像编辑",
+    "description": "通过 Kie.ai 调用通义千问图像编辑。\n\n关键词：kie、图像、AI\n\n    由 qwen/image-edit 生成图像",
     "properties": {
       "acceleration": {
         "title": "加速等级",
@@ -51854,6 +51917,7 @@
   },
   "kie.image.QwenImageToImage": {
     "title": "通义千问 - 图生图",
+    "description": "通过 Kie.ai 调用通义千问图生图。\n\n关键词：kie、图像、AI\n\n    由通义千问先进 AI 模型生成图像",
     "properties": {
       "acceleration": {
         "title": "加速等级",
@@ -51903,6 +51967,7 @@
   },
   "kie.image.QwenTextToImage": {
     "title": "通义千问 - 文生图",
+    "description": "通过 Kie.ai 调用通义千问文生图。\n\n关键词：kie、图像、AI\n\n    依托通义千问先进 AI 模型生成高质量写实图像",
     "properties": {
       "acceleration": {
         "title": "加速等级",
@@ -51948,6 +52013,7 @@
   },
   "kie.image.RecraftCrispUpscale": {
     "title": "Recraft - 清晰放大",
+    "description": "通过 Kie.ai 调用 Recraft 清晰放大。\n\n关键词：kie、图像、AI\n\n    借助 Recraft 先进的 AI 超分技术提升图像分辨率与画质",
     "properties": {
       "image": {
         "title": "图像",
@@ -51957,6 +52023,7 @@
   },
   "kie.image.RecraftRemoveBackground": {
     "title": "Recraft - 移除背景",
+    "description": "通过 Kie.ai 调用 Recraft 移除背景。\n\n关键词：kie、图像、AI\n\n    使用 recraft/remove-background 移除背景",
     "properties": {
       "image": {
         "title": "图像",
@@ -51966,6 +52033,7 @@
   },
   "kie.image.Seedream45Edit": {
     "title": "Seedream 4.5 - 编辑",
+    "description": "通过 Kie.ai 调用 Seedream 4.5 编辑。\n\n关键词：kie、图像、AI\n\n    由 Seedream 4.5 编辑图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -51991,6 +52059,7 @@
   },
   "kie.image.Seedream45TextToImage": {
     "title": "Seedream 4.5 - 文生图",
+    "description": "通过 Kie.ai 调用 Seedream 4.5 文生图。\n\n关键词：kie、图像、AI\n\n    依托 Seedream 先进 AI 模型生成高质量写实图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52012,6 +52081,7 @@
   },
   "kie.image.Seedream5LiteImageToImage": {
     "title": "Seedream 5.0 Lite - 图生图",
+    "description": "通过 Kie.ai 调用 Seedream 5.0 Lite 图生图。\n\n关键词：kie、图像、AI\n\n    依托 Seedream 先进 AI 模型生成高质量写实图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52041,6 +52111,7 @@
   },
   "kie.image.Seedream5LiteTextToImage": {
     "title": "Seedream 5.0 Lite - 文生图",
+    "description": "通过 Kie.ai 调用 Seedream 5.0 Lite 文生图。\n\n关键词：kie、图像、AI\n\n    依托 Seedream 先进 AI 模型生成高质量写实图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52066,6 +52137,7 @@
   },
   "kie.image.Seedream5ProImageToImage": {
     "title": "Seedream 5.0 Pro - 图生图",
+    "description": "通过 Kie.ai 调用 Seedream 5.0 Pro 图生图。\n\n关键词：kie、图像、AI\n\n    依托 Seedream 先进 AI 模型生成高质量写实图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52095,6 +52167,7 @@
   },
   "kie.image.Seedream5ProTextToImage": {
     "title": "Seedream 5.0 Pro - 文生图",
+    "description": "通过 Kie.ai 调用 Seedream 5.0 Pro 文生图。\n\n关键词：kie、图像、AI\n\n    依托 Seedream 先进 AI 模型生成高质量写实图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52120,6 +52193,7 @@
   },
   "kie.image.TopazImageUpscale": {
     "title": "Topaz - 图像放大",
+    "description": "通过 Kie.ai 调用 Topaz 图像放大。\n\n关键词：kie、图像、AI\n\n    借助 Topaz 先进的 AI 超分技术提升图像分辨率与画质",
     "properties": {
       "image": {
         "title": "图像",
@@ -52133,6 +52207,7 @@
   },
   "kie.image.Wan27Image": {
     "title": "Wan 2.7 Image",
+    "description": "通过 Kie.ai 调用 Wan 2.7 Image。\n\n关键词：kie、图像、AI\n\n    基于 wan/2-7-image 实现图像生成与编辑",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52186,6 +52261,7 @@
   },
   "kie.image.Wan27ImagePro": {
     "title": "Wan 2.7 Image Pro",
+    "description": "通过 Kie.ai 调用 Wan 2.7 Image Pro。\n\n关键词：kie、图像、AI\n\n    基于 wan/2-7-image-pro 实现图像生成与编辑",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52239,6 +52315,7 @@
   },
   "kie.image.ZImage": {
     "title": "Z-Image",
+    "description": "通过 Kie.ai 调用 Z-Image。\n\n关键词：kie、图像、AI\n\n    由 z-image 生成图像",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52256,6 +52333,7 @@
   },
   "kie.video.BytedanceSeedance15Pro": {
     "title": "字节 Seedance 1.5 Pro",
+    "description": "通过 Kie.ai 调用字节 Seedance 1.5 Pro。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52347,6 +52425,7 @@
   },
   "kie.video.BytedanceSeedance2Fast": {
     "title": "字节 Seedance 2.0 Fast",
+    "description": "通过 Kie.ai 调用字节 Seedance 2.0 Fast。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52400,6 +52479,7 @@
   },
   "kie.video.BytedanceSeedance2Mini": {
     "title": "字节 Seedance 2.0 Mini",
+    "description": "通过 Kie.ai 调用字节 Seedance 2.0 Mini。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52453,6 +52533,7 @@
   },
   "kie.video.BytedanceV1LiteImageToVideo": {
     "title": "字节 Seedance V1 Lite 图生视频",
+    "description": "通过 Kie.ai 调用字节 Seedance V1 Lite 图生视频。\n\n关键词：kie、视频、AI\n\n    使用 bytedance/v1-lite-image-to-video 生成内容",
     "properties": {
       "camera_fixed": {
         "title": "锁定相机",
@@ -52494,6 +52575,7 @@
   },
   "kie.video.BytedanceV1LiteTextToVideo": {
     "title": "字节 Seedance V1 Lite 文生视频",
+    "description": "通过 Kie.ai 调用字节 Seedance V1 Lite 文生视频。\n\n关键词：kie、视频、AI\n\n    使用 bytedance/v1-lite-text-to-video 生成内容",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52531,6 +52613,7 @@
   },
   "kie.video.BytedanceV1ProFastImageToVideo": {
     "title": "字节 Seedance V1 Pro Fast 图生视频",
+    "description": "通过 Kie.ai 调用字节 Seedance V1 Pro Fast 图生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "duration": {
         "title": "时长",
@@ -52556,6 +52639,7 @@
   },
   "kie.video.BytedanceV1ProImageToVideo": {
     "title": "字节 Seedance V1 Pro 图生视频",
+    "description": "通过 Kie.ai 调用字节 Seedance V1 Pro 图生视频。\n\n关键词：kie、视频、AI\n\n    使用 bytedance/v1-pro-image-to-video 生成内容",
     "properties": {
       "camera_fixed": {
         "title": "锁定相机",
@@ -52593,6 +52677,7 @@
   },
   "kie.video.BytedanceV1ProTextToVideo": {
     "title": "字节 Seedance V1 Pro 文生视频",
+    "description": "通过 Kie.ai 调用字节 Seedance V1 Pro 文生视频。\n\n关键词：kie、视频、AI\n\n    使用 bytedance/v1-pro-text-to-video 生成内容",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52630,6 +52715,7 @@
   },
   "kie.video.GeminiOmniAudio": {
     "title": "Gemini 多模态音频",
+    "description": "通过 Kie.ai 调用 Gemini 多模态音频。\n\n关键词：kie、视频、AI\n\n    创建任务",
     "properties": {
       "audio_id": {
         "title": "音频 ID",
@@ -52651,6 +52737,7 @@
   },
   "kie.video.GeminiOmniCharacter": {
     "title": "Gemini 多模态角色",
+    "description": "通过 Kie.ai 调用 Gemini 多模态角色。\n\n关键词：kie、视频、AI\n\n    - `image_urls` 仅支持 `1` 张图片，且每张图片不得超过 `20MB`",
     "properties": {
       "audio_ids": {
         "title": "音频 ID",
@@ -52672,6 +52759,7 @@
   },
   "kie.video.GeminiOmniVideo": {
     "title": "Gemini 多模态视频",
+    "description": "通过 Kie.ai 调用 Gemini 多模态视频。\n\n关键词：kie、视频、AI\n\n    创建任务",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52713,6 +52801,7 @@
   },
   "kie.video.GrokImagineExtend": {
     "title": "Grok Imagine - 视频延长",
+    "description": "通过 Kie.ai 调用 Grok Imagine 视频延长。\n\n关键词：kie、视频、AI\n\n    Grok Imagine - 视频延长",
     "properties": {
       "extend_at": {
         "title": "延长位置",
@@ -52734,6 +52823,7 @@
   },
   "kie.video.GrokImagineImageToVideo": {
     "title": "Grok Imagine 图生视频",
+    "description": "通过 Kie.ai 调用 Grok Imagine 图生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52775,6 +52865,7 @@
   },
   "kie.video.GrokImagineTextToVideo": {
     "title": "Grok Imagine 文生视频",
+    "description": "通过 Kie.ai 调用 Grok Imagine 文生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52804,6 +52895,7 @@
   },
   "kie.video.GrokImagineUpscale": {
     "title": "Grok Imagine - 视频放大",
+    "description": "通过 Kie.ai 调用 Grok Imagine 视频放大。\n\n关键词：kie、视频、AI\n\n    Grok Imagine - 视频放大",
     "properties": {
       "resolution": {
         "title": "分辨率",
@@ -52817,6 +52909,7 @@
   },
   "kie.video.GrokImagineVideo15PreviewCreateTask": {
     "title": "Grok Imagine Video 1.5 预览版",
+    "description": "通过 Kie.ai 调用 Grok Imagine Video 1.5 预览版。\n\n关键词：kie、视频、AI\n\n    创建任务",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -52846,6 +52939,7 @@
   },
   "kie.video.Hailuo02ImageToVideoPro": {
     "title": "海螺 Pro 图生视频",
+    "description": "通过 Kie.ai 调用海螺 Pro 图生视频。\n\n关键词：kie、视频、AI\n\n    使用 hailuo/02-image-to-video-pro 生成内容",
     "properties": {
       "end_image": {
         "title": "尾帧图像",
@@ -52871,6 +52965,7 @@
   },
   "kie.video.Hailuo02ImageToVideoStandard": {
     "title": "海螺 Standard 图生视频",
+    "description": "通过 Kie.ai 调用海螺 Standard 图生视频。\n\n关键词：kie、视频、AI\n\n    使用 hailuo/02-image-to-video-standard 生成内容",
     "properties": {
       "duration": {
         "title": "时长",
@@ -52904,6 +52999,7 @@
   },
   "kie.video.Hailuo02TextToVideoPro": {
     "title": "海螺 Pro 文生视频",
+    "description": "通过 Kie.ai 调用海螺 Pro 文生视频。\n\n关键词：kie、视频、AI\n\n    使用 hailuo/02-text-to-video-pro 生成内容",
     "properties": {
       "nsfw_checker": {
         "title": "NSFW 检查",
@@ -52921,6 +53017,7 @@
   },
   "kie.video.Hailuo02TextToVideoStandard": {
     "title": "海螺 Standard 文生视频",
+    "description": "通过 Kie.ai 调用海螺 Standard 文生视频。\n\n关键词：kie、视频、AI\n\n    使用 hailuo/02-text-to-video-standard 生成内容",
     "properties": {
       "duration": {
         "title": "时长",
@@ -52942,6 +53039,7 @@
   },
   "kie.video.Hailuo23ImageToVideoPro": {
     "title": "海螺 2.3 Pro 图生视频",
+    "description": "通过 Kie.ai 调用海螺 2.3 Pro 图生视频。\n\n关键词：kie、视频、AI\n\n    使用 hailuo/2-3-image-to-video-pro 生成内容",
     "properties": {
       "duration": {
         "title": "时长",
@@ -52967,6 +53065,7 @@
   },
   "kie.video.Hailuo23ImageToVideoStandard": {
     "title": "海螺 2.3 Standard 图生视频",
+    "description": "通过 Kie.ai 调用海螺 2.3 Standard 图生视频。\n\n关键词：kie、视频、AI\n\n    使用 hailuo/2-3-image-to-video-standard 生成内容",
     "properties": {
       "duration": {
         "title": "时长",
@@ -52992,6 +53091,7 @@
   },
   "kie.video.Happyhorse11ImageToVideo": {
     "title": "HappyHorse-1-1 图生视频",
+    "description": "通过 Kie.ai 调用 HappyHorse-1-1 图生视频。\n\n关键词：kie、视频、AI\n\n    HappyHorse-1-1 图生视频",
     "properties": {
       "duration": {
         "title": "时长",
@@ -53013,6 +53113,7 @@
   },
   "kie.video.Happyhorse11ReferenceToVideo": {
     "title": "HappyHorse-1-1 参考生视频",
+    "description": "通过 Kie.ai 调用 HappyHorse-1-1 参考生视频。\n\n关键词：kie、视频、AI\n\n    HappyHorse-1-1 参考生视频",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -53038,6 +53139,7 @@
   },
   "kie.video.Happyhorse11TextToVideo": {
     "title": "HappyHorse-1-1 文生视频",
+    "description": "通过 Kie.ai 调用 HappyHorse-1-1 文生视频。\n\n关键词：kie、视频、AI\n\n    HappyHorse-1-1 文生视频",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -53059,6 +53161,7 @@
   },
   "kie.video.HappyhorseImageToVideo": {
     "title": "happyhorse-image-to-video",
+    "description": "通过 Kie.ai 调用 happyhorse-image-to-video。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "duration": {
         "title": "时长",
@@ -53084,6 +53187,7 @@
   },
   "kie.video.HappyhorseReferenceToVideo": {
     "title": "happyhorse/reference-to-video",
+    "description": "通过 Kie.ai 调用 happyhorse/reference-to-video。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -53113,6 +53217,7 @@
   },
   "kie.video.HappyhorseTextToVideo": {
     "title": "happyhorse-text-to-video",
+    "description": "通过 Kie.ai 调用 happyhorse-text-to-video。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -53138,6 +53243,7 @@
   },
   "kie.video.HappyhorseVideoEdit": {
     "title": "happyhorse/video-edit",
+    "description": "通过 Kie.ai 调用 happyhorse/video-edit。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "audio_setting": {
         "title": "音频设置",
@@ -53167,6 +53273,7 @@
   },
   "kie.video.InfinitalkFromAudio": {
     "title": "Infinitalk - 从音频",
+    "description": "通过 Kie.ai 调用 Infinitalk 从音频生成。\n\n关键词：kie、视频、AI\n\n    使用 infinitalk/from-audio 生成内容",
     "properties": {
       "audio": {
         "title": "音频",
@@ -53192,6 +53299,7 @@
   },
   "kie.video.Kling26ImageToVideo": {
     "title": "Kling 2.6 图生视频",
+    "description": "通过 Kie.ai 调用 Kling 2.6 图生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "duration": {
         "title": "时长",
@@ -53213,6 +53321,7 @@
   },
   "kie.video.Kling26MotionControl": {
     "title": "Kling 2.6 运镜控制",
+    "description": "通过 Kie.ai 调用 Kling 2.6 运镜控制。\n\n关键词：kie、视频、AI\n\n    文件上传要求",
     "properties": {
       "character_orientation": {
         "title": "角色方向",
@@ -53238,6 +53347,7 @@
   },
   "kie.video.Kling26TextToVideo": {
     "title": "Kling 2.6 文生视频",
+    "description": "通过 Kie.ai 调用 Kling 2.6 文生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -53259,6 +53369,7 @@
   },
   "kie.video.Kling30": {
     "title": "Kling 3.0",
+    "description": "通过 Kie.ai 调用 Kling 3.0。\n\n关键词：kie、视频、AI\n\n    使用 Kling 3.0 AI 生成高质量视频，支持高级多镜头能力与元素参考",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -53300,6 +53411,7 @@
   },
   "kie.video.Kling30MotionControl": {
     "title": "Kling 3.0 运镜控制",
+    "description": "通过 Kie.ai 调用 Kling 3.0 运镜控制。\n\n关键词：kie、视频、AI\n\n    文件上传要求",
     "properties": {
       "background_source": {
         "title": "背景来源",
@@ -53329,6 +53441,7 @@
   },
   "kie.video.KlingAiAvatarPro": {
     "title": "Kling AI 数字人 Pro",
+    "description": "通过 Kie.ai 调用 Kling AI 数字人 Pro。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "audio": {
         "title": "音频",
@@ -53346,6 +53459,7 @@
   },
   "kie.video.KlingAiAvatarStandard": {
     "title": "Kling AI 数字人 Standard",
+    "description": "通过 Kie.ai 调用 Kling AI 数字人 Standard。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "audio": {
         "title": "音频",
@@ -53363,6 +53477,7 @@
   },
   "kie.video.KlingV21MasterImageToVideo": {
     "title": "Kling - V2.5 Turbo 图生视频 Pro",
+    "description": "通过 Kie.ai 调用 Kling - V2.5 Turbo 图生视频 Pro。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "cfg_scale": {
         "title": "CFG 系数",
@@ -53392,6 +53507,7 @@
   },
   "kie.video.KlingV21MasterImageToVideo2": {
     "title": "Kling V2.1 Master 图生视频",
+    "description": "通过 Kie.ai 调用 Kling V2.1 Master 图生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "cfg_scale": {
         "title": "CFG 系数",
@@ -53417,6 +53533,7 @@
   },
   "kie.video.KlingV21MasterTextToVideo": {
     "title": "Kling V2.1 Master 文生视频",
+    "description": "通过 Kie.ai 调用 Kling V2.1 Master 文生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -53442,6 +53559,7 @@
   },
   "kie.video.KlingV21Pro": {
     "title": "Kling V2.1 Pro",
+    "description": "通过 Kie.ai 调用 Kling V2.1 Pro。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "cfg_scale": {
         "title": "CFG 系数",
@@ -53471,6 +53589,7 @@
   },
   "kie.video.KlingV21Standard": {
     "title": "Kling V2.1 Standard",
+    "description": "通过 Kie.ai 调用 Kling V2.1 Standard。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "cfg_scale": {
         "title": "CFG 系数",
@@ -53496,6 +53615,7 @@
   },
   "kie.video.KlingV25TurboTextToVideoPro": {
     "title": "Kling - V2.5 Turbo 文生视频 Pro",
+    "description": "通过 Kie.ai 调用 Kling - V2.5 Turbo 文生视频 Pro。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -53521,6 +53641,7 @@
   },
   "kie.video.KlingV3TurboImageToVideo": {
     "title": "Kling - V3 Turbo 图生视频",
+    "description": "通过 Kie.ai 调用 Kling - V3 Turbo 图生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "duration": {
         "title": "时长",
@@ -53542,6 +53663,7 @@
   },
   "kie.video.KlingV3TurboTextToVideo": {
     "title": "Kling - V3 Turbo 文生视频",
+    "description": "通过 Kie.ai 调用 Kling - V3 Turbo 文生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -53563,6 +53685,7 @@
   },
   "kie.video.MinimaxH3ImageToVideo": {
     "title": "MiniMax H3 图生视频",
+    "description": "通过 Kie.ai 调用 MiniMax H3 图生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "duration": {
         "title": "时长",
@@ -53588,6 +53711,7 @@
   },
   "kie.video.MinimaxH3ReferenceToVideo": {
     "title": "MiniMax H3 参考生视频",
+    "description": "通过 Kie.ai 调用 MiniMax H3 参考生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -53621,6 +53745,7 @@
   },
   "kie.video.MinimaxH3TextToVideo": {
     "title": "MiniMax H3 文生视频",
+    "description": "通过 Kie.ai 调用 MiniMax H3 文生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -53642,6 +53767,7 @@
   },
   "kie.video.Omnihuman15": {
     "title": "Omnihuman 1.5",
+    "description": "通过 Kie.ai 调用 Omnihuman 1.5。\n\n关键词：kie、视频、AI\n\n    创建任务",
     "properties": {
       "audio": {
         "title": "音频",
@@ -53675,6 +53801,7 @@
   },
   "kie.video.Omnihuman15HumanIdentification": {
     "title": "OmniHuman 1.5 人物识别",
+    "description": "通过 Kie.ai 调用 OmniHuman 1.5 人物识别。\n\n关键词：kie、视频、AI\n\n    创建任务",
     "properties": {
       "image": {
         "title": "图像",
@@ -53684,6 +53811,7 @@
   },
   "kie.video.Omnihuman15SubjectDetection": {
     "title": "OmniHuman 1.5 主体检测",
+    "description": "通过 Kie.ai 调用 OmniHuman 1.5 主体检测。\n\n关键词：kie、视频、AI\n\n    创建任务",
     "properties": {
       "image": {
         "title": "图像",
@@ -53693,6 +53821,7 @@
   },
   "kie.video.PixverseV6FirstLastFrameTransition": {
     "title": "PixVerse V6 首尾帧转场",
+    "description": "通过 Kie.ai 调用 PixVerse V6 首尾帧转场。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "duration": {
         "title": "时长",
@@ -53726,6 +53855,7 @@
   },
   "kie.video.PixverseV6FusionReferenceToVideo": {
     "title": "PixVerse V6 Fusion / 参考生视频",
+    "description": "通过 Kie.ai 调用 PixVerse V6 Fusion / 参考生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -53759,6 +53889,7 @@
   },
   "kie.video.PixverseV6ImageToVideo": {
     "title": "PixVerse V6 图生视频",
+    "description": "通过 Kie.ai 调用 PixVerse V6 图生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "duration": {
         "title": "时长",
@@ -53796,6 +53927,7 @@
   },
   "kie.video.PixverseV6TextToVideo": {
     "title": "PixVerse V6 文生视频",
+    "description": "通过 Kie.ai 调用 PixVerse V6 文生视频。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -53829,6 +53961,7 @@
   },
   "kie.video.PixverseV6VideoExtension": {
     "title": "PixVerse V6 视频延长",
+    "description": "通过 Kie.ai 调用 PixVerse V6 视频延长。\n\n关键词：kie、视频、AI\n\n    查询任务状态",
     "properties": {
       "duration": {
         "title": "时长",
@@ -53862,6 +53995,7 @@
   },
   "kie.video.TopazVideoUpscale": {
     "title": "Topaz - 视频放大",
+    "description": "通过 Kie.ai 调用 Topaz 视频放大。\n\n关键词：kie、视频、AI\n\n    借助 Topaz 先进的 AI 超分技术提升视频分辨率与画质",
     "properties": {
       "upscale_factor": {
         "title": "放大倍数",
@@ -53875,6 +54009,7 @@
   },
   "kie.video.VolcengineVideoToVideoLipSync": {
     "title": "火山引擎视频口型同步",
+    "description": "通过 Kie.ai 调用火山引擎视频口型同步。\n\n关键词：kie、视频、AI\n\n    创建任务",
     "properties": {
       "align_audio": {
         "title": "对齐音频",
@@ -53912,6 +54047,7 @@
   },
   "kie.video.Wan22A14bImageToVideoTurbo": {
     "title": "Wan - 图生视频",
+    "description": "通过 Kie.ai 调用 Wan 图生视频。\n\n关键词：kie、视频、AI\n\n    依托 Wan 先进 AI 模型将图像转化为动态视频",
     "properties": {
       "acceleration": {
         "title": "加速等级",
@@ -53945,6 +54081,7 @@
   },
   "kie.video.Wan22A14bSpeechToVideoTurbo": {
     "title": "Wan - 2.2 A14B 语音转视频 Turbo",
+    "description": "通过 Kie.ai 调用 Wan - 2.2 A14B 语音转视频 Turbo。\n\n关键词：kie、视频、AI\n\n    依托 Wan 先进 AI 模型生成视频",
     "properties": {
       "audio": {
         "title": "音频",
@@ -53998,6 +54135,7 @@
   },
   "kie.video.Wan22A14bTextToVideoTurbo": {
     "title": "Wan - 文生视频",
+    "description": "通过 Kie.ai 调用 Wan 文生视频。\n\n关键词：kie、视频、AI\n\n    依托 Wan 先进 AI 模型，根据文本描述生成高质量视频",
     "properties": {
       "acceleration": {
         "title": "加速等级",
@@ -54031,6 +54169,7 @@
   },
   "kie.video.Wan22AnimateMove": {
     "title": "Wan - 动画移动",
+    "description": "通过 Kie.ai 调用 Wan 动画移动。\n\n关键词：kie、视频、AI\n\n    使用 Wan 先进 AI 模型生成内容",
     "properties": {
       "image": {
         "title": "图像",
@@ -54052,6 +54191,7 @@
   },
   "kie.video.Wan22AnimateReplace": {
     "title": "Wan - 动画替换",
+    "description": "通过 Kie.ai 调用 Wan 动画替换。\n\n关键词：kie、视频、AI\n\n    使用 Wan 先进 AI 模型生成内容",
     "properties": {
       "image": {
         "title": "图像",
@@ -54073,6 +54213,7 @@
   },
   "kie.video.Wan25ImageToVideo": {
     "title": "Wan 2.5 - 图生视频",
+    "description": "通过 Kie.ai 调用 Wan 2.5 图生视频。\n\n关键词：kie、视频、AI\n\n    由 wan/2-5-image-to-video 生成视频",
     "properties": {
       "duration": {
         "title": "时长",
@@ -54110,6 +54251,7 @@
   },
   "kie.video.Wan25TextToVideo": {
     "title": "Wan 2.5 - 文生视频",
+    "description": "通过 Kie.ai 调用 Wan 2.5 文生视频。\n\n关键词：kie、视频、AI\n\n    由 wan/2-5-text-to-video 生成视频",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -54147,6 +54289,7 @@
   },
   "kie.video.Wan26FlashImageToVideo": {
     "title": "Wan - 2.6-flash 图生视频",
+    "description": "通过 Kie.ai 调用 Wan - 2.6-flash 图生视频。\n\n关键词：kie、视频、AI\n\n    > 依托 Wan 先进 AI 模型将图像转化为动态视频",
     "properties": {
       "audio": {
         "title": "音频",
@@ -54180,6 +54323,7 @@
   },
   "kie.video.Wan26FlashVideoToVideo": {
     "title": "Wan - 2.6-flash 视频生视频",
+    "description": "通过 Kie.ai 调用 Wan - 2.6-flash 视频生视频。\n\n关键词：kie、视频、AI\n\n    > 使用 wan/2-6-flash-video-to-video 生成内容",
     "properties": {
       "audio": {
         "title": "音频",
@@ -54213,6 +54357,7 @@
   },
   "kie.video.Wan26ImageToVideo": {
     "title": "Wan 2.6 - 图生视频",
+    "description": "通过 Kie.ai 调用 Wan 2.6 图生视频。\n\n关键词：kie、视频、AI\n\n    依托 Wan 先进 AI 模型将静态图像转化为动态视频",
     "properties": {
       "duration": {
         "title": "时长",
@@ -54242,6 +54387,7 @@
   },
   "kie.video.Wan26TextToVideo": {
     "title": "Wan 2.6 - 文生视频",
+    "description": "通过 Kie.ai 调用 Wan 2.6 文生视频。\n\n关键词：kie、视频、AI\n\n    依托 Wan 先进 AI 模型，根据文本描述生成高质量视频",
     "properties": {
       "duration": {
         "title": "时长",
@@ -54267,6 +54413,7 @@
   },
   "kie.video.Wan26VideoToVideo": {
     "title": "Wan 2.6 - 视频生视频",
+    "description": "通过 Kie.ai 调用 Wan 2.6 视频生视频。\n\n关键词：kie、视频、AI\n\n    依托 Wan 先进 AI 模型，用新的提示词改造已有视频",
     "properties": {
       "duration": {
         "title": "时长",
@@ -54296,6 +54443,7 @@
   },
   "kie.video.Wan27ImageToVideo": {
     "title": "Wan 2.7 - 图生视频",
+    "description": "通过 Kie.ai 调用 Wan 2.7 图生视频。\n\n关键词：kie、视频、AI\n\n    创建任务",
     "properties": {
       "driving_audio": {
         "title": "驱动音频",
@@ -54349,6 +54497,7 @@
   },
   "kie.video.Wan27R2v": {
     "title": "Wan 2.7 - 参考生视频",
+    "description": "通过 Kie.ai 调用 Wan 2.7 参考生视频。\n\n关键词：kie、视频、AI\n\n    创建任务",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -54406,6 +54555,7 @@
   },
   "kie.video.Wan27TextToVideo": {
     "title": "Wan 2.7 - 文生视频",
+    "description": "通过 Kie.ai 调用 Wan 2.7 文生视频。\n\n关键词：kie、视频、AI\n\n    创建任务",
     "properties": {
       "audio": {
         "title": "音频",
@@ -54451,6 +54601,7 @@
   },
   "kie.video.Wan27Videoedit": {
     "title": "Wan 2.7 - 视频编辑",
+    "description": "通过 Kie.ai 调用 Wan 2.7 视频编辑。\n\n关键词：kie、视频、AI\n\n    创建任务",
     "properties": {
       "aspect_ratio": {
         "title": "宽高比",
@@ -56225,6 +56376,7 @@
   },
   "minimax.ImageToVideo": {
     "title": "MiniMax 图生视频",
+    "description": "使用 MiniMax 海螺与 Director 模型将静态图像动画化为视频。图像将作为首帧（S2V-01 则作为角色参考）。\n视频, 生成, 图生视频, i2v, 海螺, MiniMax\n\n常见用途：\n- 让照片或渲染图动起来\n- 为产品图或角色图添加动态效果\n- 用关键帧制作动画片头",
     "properties": {
       "duration": {
         "title": "时长",
@@ -56250,6 +56402,7 @@
   },
   "minimax.MusicGeneration": {
     "title": "MiniMax 音乐生成",
+    "description": "使用 MiniMax 音乐模型，根据风格描述和歌词生成带人声的完整歌曲。\n音频, 音乐, 歌曲, 生成, 歌词, 人声, MiniMax\n\n常见用途：\n- 将歌词变成成品歌曲\n- 尝试旋律与编曲原型\n- 为视频创作背景音乐\n- 制作广告歌与主题曲",
     "properties": {
       "format": {
         "title": "格式",
@@ -56297,6 +56450,7 @@
   },
   "minimax.TextToSpeech": {
     "title": "MiniMax 文本转语音",
+    "description": "使用 MiniMax T2A 生成自然流畅的语音，支持情感与细腻的音色控制。\n音频, TTS, 语音, 合成, 音色, 情感, MiniMax\n\n常见用途：\n- 创作带情感控制的配音\n- 制作多语言旁白\n- 生成角色语音\n- 制作有声书与播客",
     "properties": {
       "emotion": {
         "title": "情绪",
@@ -56360,6 +56514,7 @@
   },
   "minimax.Voice": {
     "title": "MiniMax 音色",
+    "description": "选择一个 MiniMax 系统音色并输出其音色 ID。\n音频, TTS, 语音, 音色, 音色 ID, MiniMax\n\n常见用途：\n- 按名称选取内置的 MiniMax 音色\n- 将音色 ID 传入 MiniMax 文本转语音节点\n- 在工作流中复用同一音色",
     "properties": {
       "voice": {
         "title": "人声",
