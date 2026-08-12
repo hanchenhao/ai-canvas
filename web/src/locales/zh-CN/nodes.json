@@ -222,7 +222,7 @@
       },
       "thinking_level": {
         "title": "思考级别",
-        "description": "Internal reasoning depth before generating."
+        "description": "生成前的内部推理深度。"
       }
     }
   },
@@ -304,7 +304,7 @@
       },
       "thinking_level": {
         "title": "思考级别",
-        "description": "Internal reasoning depth before generating."
+        "description": "生成前的内部推理深度。"
       }
     }
   },
@@ -718,7 +718,7 @@
       },
       "weird": {
         "title": "怪异",
-        "description": "Makes results quirky and unconventional (0-3000)."
+        "description": "使结果更加奇特和非常规（0-3000）。"
       }
     }
   },
@@ -764,7 +764,7 @@
       },
       "weird": {
         "title": "怪异",
-        "description": "Makes results quirky and unconventional (0-3000)."
+        "description": "使结果更加奇特和非常规（0-3000）。"
       }
     }
   },
@@ -788,7 +788,7 @@
       },
       "prompt": {
         "title": "提示词",
-        "description": "Description of the target artistic style (e.g. 'cyberpunk neon night style')."
+        "description": "目标艺术风格的描述（例如'赛博朋克霓虹夜景风格'）。"
       }
     }
   },
@@ -830,7 +830,7 @@
       },
       "weird": {
         "title": "怪异",
-        "description": "Makes results quirky and unconventional (0-3000)."
+        "description": "使结果更加奇特和非常规（0-3000）。"
       }
     }
   },
@@ -5306,7 +5306,7 @@
         "description": "种子 for geometry 生成 可复现."
       },
       "orientation": {
-        "description": "Model orientation."
+        "description": "模型方向。"
       },
       "pbr": {
         "description": "Whether to 生成 PBR (Physically Based 渲染) materials. If true, texture is also enabled."
@@ -8003,7 +8003,7 @@
         "description": "输出图像 格式 (png or jpeg)"
       },
       "scale": {
-        "description": "Rescaling factor"
+        "description": "缩放系数"
       },
       "tile": {
         "description": "Tile 尺寸. 默认 is 0, that is no tile. When encountering the out-of-GPU-memory issue, please specify it, e.g., 400 or 200"
@@ -12156,7 +12156,7 @@
         "description": "The real classifier-free-引导系数 for the 生成."
       },
       "enable_hr_fix": {
-        "description": "Use HR fix"
+        "description": "使用高清修复"
       },
       "enable_safety_checker": {
         "description": "若设为 true，将启用安全检查器。"
@@ -14163,10 +14163,10 @@
         "description": "a"
       },
       "bg_th": {
-        "description": "bg_th"
+        "description": "背景阈值"
       },
       "depth_and_normal": {
-        "description": "depth_and_normal"
+        "description": "深度与法线"
       },
       "image": {
         "description": "输入图像 url."
@@ -15815,7 +15815,7 @@
         "description": "Blue channel shift 数量"
       },
       "blur_radius": {
-        "description": "Blur radius"
+        "description": "模糊半径"
       },
       "blur_sigma": {
         "description": "高斯模糊的 Sigma 值"
@@ -15833,10 +15833,10 @@
         "description": "对比度 调整"
       },
       "desaturate_factor": {
-        "description": "Desaturation factor"
+        "description": "去饱和系数"
       },
       "desaturate_method": {
-        "description": "Desaturation method"
+        "description": "去饱和方法"
       },
       "dissolve_factor": {
         "description": "溶解混合系数"
@@ -15920,7 +15920,7 @@
         "description": "噪声 radius for smart sharpen"
       },
       "parabolize_coeff": {
-        "description": "Parabolize coefficient"
+        "description": "抛物化系数"
       },
       "preserve_edges": {
         "description": "边缘保留系数"
@@ -15962,10 +15962,10 @@
         "description": "Tint 强度"
       },
       "vertex_x": {
-        "description": "Vertex X position"
+        "description": "顶点 X 位置"
       },
       "vertex_y": {
-        "description": "Vertex Y position"
+        "description": "顶点 Y 位置"
       },
       "vignette_strength": {
         "description": "Vignette 强度 (when enabled)"
@@ -15977,7 +15977,7 @@
     "description": "Apply Gaussian or Kuwahara blur 效果（含 adjustable radius and sigma parameters）\nediting, 转换, 图生图, img2img",
     "properties": {
       "blur_radius": {
-        "description": "Blur radius"
+        "description": "模糊半径"
       },
       "blur_sigma": {
         "description": "高斯模糊的 Sigma 值"
@@ -16061,10 +16061,10 @@
     "description": "Post 处理\nediting, 转换, 图生图, img2img, professional",
     "properties": {
       "desaturate_factor": {
-        "description": "Desaturation factor"
+        "description": "去饱和系数"
       },
       "desaturate_method": {
-        "description": "Desaturation method"
+        "description": "去饱和方法"
       },
       "image": {
         "description": "URL of 图像 to 处理"
@@ -16127,13 +16127,13 @@
         "description": "URL of 图像 to 处理"
       },
       "parabolize_coeff": {
-        "description": "Parabolize coefficient"
+        "description": "抛物化系数"
       },
       "vertex_x": {
-        "description": "Vertex X position"
+        "description": "顶点 X 位置"
       },
       "vertex_y": {
-        "description": "Vertex Y position"
+        "description": "顶点 Y 位置"
       }
     }
   },
@@ -19108,7 +19108,7 @@
         "description": "URLs of reference glyph 图像 whose style should be matched. Provide 1 to 8 图像 of individual glyph characters."
       },
       "repetition_penalty": {
-        "description": "Repetition penalty."
+        "description": "重复惩罚。"
       },
       "seed": {
         "description": "随机种子 for 可复现."
@@ -20832,13 +20832,13 @@
         "description": "URL of an 音频 file for the avatar to lip-sync to. When provided, overrides 提示词 and 语音."
       },
       "background": {
-        "description": "Background configuration"
+        "description": "背景配置"
       },
       "caption": {
         "description": "Whether to 添加 captions to the 视频"
       },
       "expression": {
-        "description": "Facial expression"
+        "description": "面部表情"
       },
       "image": {
         "description": "URL of the 图像 to animate. The 图像 should contain a clear face."
@@ -26385,7 +26385,7 @@
     "description": "生成 视频 提示词，使用 variety of techniques including camera direction, style, pacing, special 效果 and more.\nllm, language-model, 文本-生成, ai",
     "properties": {
       "camera_direction": {
-        "description": "Camera direction"
+        "description": "镜头方向"
       },
       "camera_style": {
         "description": "相机运动 style"
@@ -26403,7 +26403,7 @@
         "description": "要使用的模型"
       },
       "pacing": {
-        "description": "Pacing rhythm"
+        "description": "节奏韵律"
       },
       "prompt_length": {
         "description": "Length of the 提示词"
@@ -30825,7 +30825,7 @@
         "description": "用于生成图像的提示词，描述越详细效果越好。"
       },
       "refiner_model": {
-        "description": "Refiner (SDXL or SD 1.5)"
+        "description": "精修模型（SDXL 或 SD 1.5）"
       },
       "refiner_switch": {
         "description": "Use 0.4 for SD1.5 逼真 models; 0.667 for SD1.5 anime models 0.8 for XL-refiners; or any 值 for switching two SDXL models."
@@ -30898,7 +30898,7 @@
         "description": "用于生成图像的提示词，描述越详细效果越好。"
       },
       "refiner_model": {
-        "description": "Refiner (SDXL or SD 1.5)"
+        "description": "精修模型（SDXL 或 SD 1.5）"
       },
       "refiner_switch": {
         "description": "Use 0.4 for SD1.5 逼真 models; 0.667 for SD1.5 anime models 0.8 for XL-refiners; or any 值 for switching two SDXL models."
@@ -30995,7 +30995,7 @@
         "description": "用于生成图像的提示词，描述越详细效果越好。"
       },
       "refiner_model": {
-        "description": "Refiner (SDXL or SD 1.5)"
+        "description": "精修模型（SDXL 或 SD 1.5）"
       },
       "refiner_switch": {
         "description": "Use 0.4 for SD1.5 逼真 models; 0.667 for SD1.5 anime models 0.8 for XL-refiners; or any 值 for switching two SDXL models."
@@ -31050,7 +31050,7 @@
         "description": "用于生成图像的提示词，描述越详细效果越好。"
       },
       "refiner_model": {
-        "description": "Refiner (SDXL or SD 1.5)"
+        "description": "精修模型（SDXL 或 SD 1.5）"
       },
       "refiner_switch": {
         "description": "Use 0.4 for SD1.5 逼真 models; 0.667 for SD1.5 anime models 0.8 for XL-refiners; or any 值 for switching two SDXL models."
@@ -40250,7 +40250,7 @@
         "description": "URL to the 输入 data zip archive. The zip should contain pairs of 图像 and corresponding captions. The 图像 should be named: ROOT.EXT. For example: 001.jpg The corresponding captions should be named: ROOT.txt. For example: 001.txt If no 文本 file is provided for an 图像, the default_caption will be used."
       },
       "learning_rate": {
-        "description": "Learning rate."
+        "description": "学习率。"
       },
       "steps": {
         "description": "步数 to train for"
@@ -40628,7 +40628,7 @@
         "description": "URL to the 输入 data zip archive. The zip should contain pairs of 图像 and corresponding captions. The 图像 should be named: ROOT.EXT. For example: 001.jpg The corresponding captions should be named: ROOT.txt. For example: 001.txt If no 文本 file is provided for an 图像, the default_caption will be used."
       },
       "learning_rate": {
-        "description": "Learning rate."
+        "description": "学习率。"
       },
       "steps": {
         "description": "步数 to train for"
@@ -40928,7 +40928,7 @@
         "description": "URL to the 输入 data zip archive. The zip should contain pairs of 图像 and corresponding captions. The 图像 should be named: ROOT.EXT. For example: 001.jpg The corresponding captions should be named: ROOT.txt. For example: 001.txt If no 文本 file is provided for an 图像, the default_caption will be used."
       },
       "learning_rate": {
-        "description": "Learning rate."
+        "description": "学习率。"
       },
       "steps": {
         "description": "步数 to train for"
@@ -40967,7 +40967,7 @@
         "description": "URL to the 输入 data zip archive. The zip should contain pairs of 图像 and corresponding captions. The 图像 should be named: ROOT.EXT. For example: 001.jpg The corresponding captions should be named: ROOT.txt. For example: 001.txt If no 文本 file is provided for an 图像, the default_caption will be used."
       },
       "learning_rate": {
-        "description": "Learning rate."
+        "description": "学习率。"
       },
       "steps": {
         "description": "步数 to train for"
@@ -47328,7 +47328,7 @@
     "description": "Steady Dancer\n视频, editing, 视频生视频, vid2vid",
     "properties": {
       "acceleration": {
-        "description": "Acceleration levels."
+        "description": "加速级别。"
       },
       "aspect_ratio": {
         "description": "生成视频的宽高比。 If 'auto', will be determined from the 参考图像."
@@ -55675,7 +55675,7 @@
     }
   },
   "lib.audio.Bitcrush": {
-    "title": "Bitcrush",
+    "title": "比特粉碎",
     "description": "Applies a bitcrushing 效果 to an 音频 file, reducing 位深 and/or 采样率. 音频, 效果, distortion Use cases: - 创建 lo-fi or retro-style 音频 效果 - Simulate vintage digital 音频 equipment - 添加 digital distortion and 伪影 to sounds",
     "properties": {
       "audio": {
@@ -55693,12 +55693,12 @@
     }
   },
   "lib.audio.Compress": {
-    "title": "Compress",
+    "title": "压缩",
     "description": "Applies dynamic range compression to an 音频 file. 音频, 效果, dynamics Use cases: - Even out volume levels in a recording - Increase perceived loudness of 音频 - 控制 peaks in 音频 signals",
     "properties": {
       "attack": {
         "title": "起音",
-        "description": "Attack time in milliseconds."
+        "description": "启动时间（毫秒）。"
       },
       "audio": {
         "title": "音频",
@@ -55714,7 +55714,7 @@
       },
       "release": {
         "title": "释音",
-        "description": "Release time in milliseconds."
+        "description": "释放时间（毫秒）。"
       },
       "threshold": {
         "title": "阈值",
@@ -55723,7 +55723,7 @@
     }
   },
   "lib.audio.Delay": {
-    "title": "Delay",
+    "title": "延迟",
     "description": "Applies a delay 效果 to an 音频 file. 音频, 效果, time-based Use cases: - 创建 echo 效果 - 添加 spaciousness to sounds - 产生 rhythmic patterns",
     "properties": {
       "audio": {
@@ -55732,7 +55732,7 @@
       },
       "delay_seconds": {
         "title": "延迟（秒）",
-        "description": "Delay time in seconds."
+        "description": "延迟时间（秒）。"
       },
       "feedback": {
         "title": "反馈",
@@ -55740,12 +55740,12 @@
       },
       "mix": {
         "title": "混合",
-        "description": "Mix between the dry (original) and wet (delayed) signals."
+        "description": "干声（原始）与湿声（延迟）信号之间的混合比例。"
       }
     }
   },
   "lib.audio.Distortion": {
-    "title": "Distortion",
+    "title": "失真",
     "description": "Applies a distortion 效果 to an 音频 file. 音频, 效果, distortion Use cases: - 添加 grit and character to instruments - 创建 aggressive 音效 - Simulate overdriven amplifiers",
     "properties": {
       "audio": {
@@ -55759,7 +55759,7 @@
     }
   },
   "lib.audio.Gain": {
-    "title": "Gain",
+    "title": "增益",
     "description": "Applies a gain (volume 调整) to an 音频 file. 音频, 效果, volume Use cases: - Increase or decrease overall volume of 音频 - Balance levels between different 音频 追踪 - Prepare 音频，用于 further 处理",
     "properties": {
       "audio": {
@@ -55773,7 +55773,7 @@
     }
   },
   "lib.audio.HighPassFilter": {
-    "title": "High Pass Filter",
+    "title": "高通滤波器",
     "description": "Applies a high-pass filter to attenuate frequencies below a cutoff point. 音频, 效果, equalizer Use cases: - 移除 low-frequency rumble or 噪声 - 干净 up the low end of a mix - 创建 filter sweep 效果",
     "properties": {
       "audio": {
@@ -55782,12 +55782,12 @@
       },
       "cutoff_frequency_hz": {
         "title": "截止频率 (Hz)",
-        "description": "The cutoff frequency of the high-pass filter in Hz."
+        "description": "高通滤波器的截止频率（Hz）。"
       }
     }
   },
   "lib.audio.HighShelfFilter": {
-    "title": "High Shelf Filter",
+    "title": "高频搁架滤波器",
     "description": "Applies a high shelf filter to boost or cut high frequencies. 音频, 效果, equalizer Use cases: - 增强 or reduce treble frequencies - 添加 亮度 or air to 音频 - Tame harsh high frequencies",
     "properties": {
       "audio": {
@@ -55796,16 +55796,16 @@
       },
       "cutoff_frequency_hz": {
         "title": "截止频率 (Hz)",
-        "description": "The cutoff frequency of the shelf filter in Hz."
+        "description": "搁架滤波器的截止频率（Hz）。"
       },
       "gain_db": {
         "title": "增益 (dB)",
-        "description": "The gain to apply to the frequencies above the cutoff, in dB."
+        "description": "对截止频率以上频段应用的增益（dB）。"
       }
     }
   },
   "lib.audio.Limiter": {
-    "title": "Limiter",
+    "title": "限制器",
     "description": "Applies a limiter 效果 to an 音频 file. 音频, 效果, dynamics Use cases: - Prevent 音频 clipping - Increase perceived loudness without distortion - 控制 dynamic range of 音频",
     "properties": {
       "audio": {
@@ -55818,7 +55818,7 @@
       },
       "release_ms": {
         "title": "释音 (ms)",
-        "description": "Release time in milliseconds."
+        "description": "释放时间（毫秒）。"
       },
       "threshold_db": {
         "title": "阈值 (dB)",
@@ -55827,7 +55827,7 @@
     }
   },
   "lib.audio.LowPassFilter": {
-    "title": "Low Pass Filter",
+    "title": "低通滤波器",
     "description": "Applies a low-pass filter to attenuate frequencies above a cutoff point. 音频, 效果, equalizer Use cases: - Reduce high-frequency harshness - Simulate muffled or distant sounds - 创建 dub-style 效果",
     "properties": {
       "audio": {
@@ -55836,12 +55836,12 @@
       },
       "cutoff_frequency_hz": {
         "title": "截止频率 (Hz)",
-        "description": "The cutoff frequency of the low-pass filter in Hz."
+        "description": "低通滤波器的截止频率（Hz）。"
       }
     }
   },
   "lib.audio.LowShelfFilter": {
-    "title": "Low Shelf Filter",
+    "title": "低频搁架滤波器",
     "description": "Applies a low shelf filter to boost or cut low frequencies. 音频, 效果, equalizer Use cases: - 增强 or reduce bass frequencies - Shape the low-end response of 音频 - Compensate for speaker or room deficiencies",
     "properties": {
       "audio": {
@@ -55850,21 +55850,21 @@
       },
       "cutoff_frequency_hz": {
         "title": "截止频率 (Hz)",
-        "description": "The cutoff frequency of the shelf filter in Hz."
+        "description": "搁架滤波器的截止频率（Hz）。"
       },
       "gain_db": {
         "title": "增益 (dB)",
-        "description": "The gain to apply to the frequencies below the cutoff, in dB."
+        "description": "对截止频率以下频段应用的增益（dB）。"
       }
     }
   },
   "lib.audio.NoiseGate": {
-    "title": "Noise Gate",
+    "title": "噪声门",
     "description": "Applies a 噪声 gate 效果 to an 音频 file. 音频, 效果, dynamics Use cases: - Reduce background 噪声 in recordings - 干净 up 音频 追踪（含 unwanted low-level sounds - 创建 rhythmic 效果 by gating sustained sounds）",
     "properties": {
       "attack_ms": {
         "title": "起音 (ms)",
-        "description": "Attack time in milliseconds."
+        "description": "启动时间（毫秒）。"
       },
       "audio": {
         "title": "音频",
@@ -55872,7 +55872,7 @@
       },
       "release_ms": {
         "title": "释音 (ms)",
-        "description": "Release time in milliseconds."
+        "description": "释放时间（毫秒）。"
       },
       "threshold_db": {
         "title": "阈值 (dB)",
@@ -55881,7 +55881,7 @@
     }
   },
   "lib.audio.PeakFilter": {
-    "title": "Peak Filter",
+    "title": "峰值滤波器",
     "description": "Applies a peak filter to boost or cut a specific frequency range. 音频, 效果, equalizer Use cases: - Isolate specific frequency ranges - 创建 telephone or radio 语音 效果 - Focus on particular instrument ranges in a mix",
     "properties": {
       "audio": {
@@ -55890,7 +55890,7 @@
       },
       "cutoff_frequency_hz": {
         "title": "截止频率 (Hz)",
-        "description": "The cutoff frequency of the band-pass filter in Hz."
+        "description": "带通滤波器的截止频率（Hz）。"
       },
       "gain_db": {
         "title": "增益 (dB)",
@@ -55903,7 +55903,7 @@
     }
   },
   "lib.audio.Phaser": {
-    "title": "Phaser",
+    "title": "移相器",
     "description": "Applies a phaser 效果 to an 音频 file. 音频, 效果, modulation Use cases: - 创建 sweeping, swooshing sounds - 添加 movement to static sounds - 产生 psychedelic or space-like 效果",
     "properties": {
       "audio": {
@@ -55912,7 +55912,7 @@
       },
       "centre_frequency_hz": {
         "title": "中心频率 (Hz)",
-        "description": "Centre frequency of the phaser in Hz."
+        "description": "移相器的中心频率（Hz）。"
       },
       "depth": {
         "title": "深度",
@@ -55924,7 +55924,7 @@
       },
       "mix": {
         "title": "混合",
-        "description": "Mix between the dry (original) and wet (effected) signals."
+        "description": "干声（原始）与湿声（效果）信号之间的混合比例。"
       },
       "rate_hz": {
         "title": "速率 (Hz)",
@@ -55933,7 +55933,7 @@
     }
   },
   "lib.audio.PitchShift": {
-    "title": "Pitch Shift",
+    "title": "变调",
     "description": "Shifts the pitch of an 音频 file without changing its 时长. 音频, 效果, pitch Use cases: - Transpose 音频 to a different key - 创建 harmonies or vocal 效果 - 调整 instrument tuning",
     "properties": {
       "audio": {
@@ -55947,7 +55947,7 @@
     }
   },
   "lib.audio.Reverb": {
-    "title": "Reverb",
+    "title": "混响",
     "description": "Applies a reverb 效果 to an 音频 file. 音频, 效果, reverb Use cases: - 添加 spatial depth to dry recordings - Simulate different room acoustics - 创建 atmospheric 音效",
     "properties": {
       "audio": {
@@ -55973,7 +55973,7 @@
     }
   },
   "lib.audio.TimeStretch": {
-    "title": "Time Stretch",
+    "title": "时间拉伸",
     "description": "Changes the 速度 of an 音频 file without altering its pitch. 音频, 转换, time Use cases: - 调整 音频 时长 to fit 视频 length - 创建 slow-motion or 快速-motion 音频 效果 - Synchronize 音频 追踪 of different lengths",
     "properties": {
       "audio": {
@@ -56355,7 +56355,7 @@
     }
   },
   "lib.image.Mask": {
-    "title": "Mask",
+    "title": "遮罩",
     "description": "Combine two 图像，使用 蒙版，用于 进阶 compositing. composite, 蒙版, blend, layering Use cases: - 创建 复杂 图像 compositions - Apply selective blending or 效果 - Implement 进阶 photo editing techniques",
     "properties": {
       "image1": {
@@ -56373,7 +56373,7 @@
     }
   },
   "lib.image.channel.Merge": {
-    "title": "Channel Merge",
+    "title": "通道合并",
     "description": "Take RGB from one 图像 and a selectable channel of another as the new alpha. 图像, channels, merge, alpha",
     "properties": {
       "alpha": {
@@ -56391,7 +56391,7 @@
     }
   },
   "lib.image.channel.Shuffle": {
-    "title": "Channel Shuffle",
+    "title": "通道重排",
     "description": "Permute RGBA channels. Each 输出 channel picks any 输入 channel (0=R, 1=G, 2=B, 3=A). 图像, channels, swap, rgba",
     "properties": {
       "a_from": {
@@ -56417,7 +56417,7 @@
     }
   },
   "lib.image.color.BrightnessContrast": {
-    "title": "Brightness / Contrast",
+    "title": "亮度 / 对比度",
     "description": "Additive 亮度, multiplicative 对比度 around mid-gray. 图像, 颜色, 亮度, 对比度, levels",
     "properties": {
       "brightness": {
@@ -56439,7 +56439,7 @@
     }
   },
   "lib.image.color.ChannelSplit": {
-    "title": "Channel Split",
+    "title": "通道分离",
     "description": "提取 single channel (R/G/B/A) as a grayscale 图像, preserving alpha. 图像, 颜色, channel, split, isolate",
     "properties": {
       "image": {
@@ -56453,7 +56453,7 @@
     }
   },
   "lib.image.color.Exposure": {
-    "title": "Exposure",
+    "title": "曝光",
     "description": "调整 exposure in stops (rgb *= 2^stops). 图像, 颜色, exposure, stops, ev",
     "properties": {
       "image": {
@@ -56471,7 +56471,7 @@
     }
   },
   "lib.image.color.Grade": {
-    "title": "Color Grade",
+    "title": "调色",
     "description": "Full colour-grade pass: 亮度, 对比度, 饱和度, hue, 温度, tint, shadows, highlights. 图像, 颜色, grade, 颜色 correction",
     "properties": {
       "brightness": {
@@ -56539,7 +56539,7 @@
     }
   },
   "lib.image.color.Invert": {
-    "title": "Invert",
+    "title": "反转",
     "description": "Invert RGB (1 - rgb), preserve alpha. 数量 fades between passthrough and full invert. 图像, 颜色, invert, negative",
     "properties": {
       "amount": {
@@ -56557,7 +56557,7 @@
     }
   },
   "lib.image.color.Posterize": {
-    "title": "Posterize",
+    "title": "色调分离",
     "description": "Quantize each channel to N levels. 图像, 颜色, posterize, quantize, levels",
     "properties": {
       "image": {
@@ -56596,15 +56596,15 @@
       },
       "power_b": {
         "title": "Power B",
-        "description": "Blue power (gamma)."
+        "description": "蓝色幂（伽马）。"
       },
       "power_g": {
         "title": "Power G",
-        "description": "Green power (gamma)."
+        "description": "绿色幂（伽马）。"
       },
       "power_r": {
         "title": "Power R",
-        "description": "Red power (gamma)."
+        "description": "红色幂（伽马）。"
       },
       "saturation": {
         "title": "饱和度",
@@ -56612,20 +56612,20 @@
       },
       "slope_b": {
         "title": "Slope B",
-        "description": "Blue slope (multiplier)."
+        "description": "蓝色斜率（乘数）。"
       },
       "slope_g": {
         "title": "Slope G",
-        "description": "Green slope (multiplier)."
+        "description": "绿色斜率（乘数）。"
       },
       "slope_r": {
         "title": "Slope R",
-        "description": "Red slope (multiplier)."
+        "description": "红色斜率（乘数）。"
       }
     }
   },
   "lib.image.color_grading.ColorBalance": {
-    "title": "Color Balance",
+    "title": "色彩平衡",
     "description": "调整 颜色 温度 and tint for white balance correction. white balance, 温度, tint, 颜色 balance, warm, cool Use cases: - Correct white balance in photos and 视频 - Warm up or cool down the overall 图像 - Fix 颜色 casts from mixed lighting - 创建 mood through 颜色 温度 shifts",
     "properties": {
       "image": {
@@ -56643,7 +56643,7 @@
     }
   },
   "lib.image.color_grading.Curves": {
-    "title": "Curves",
+    "title": "曲线",
     "description": "RGB curves 调整（含 控制 points）for 精确 tonal 控制. curves, rgb, tonal, 对比度, levels Use cases: - 创建 custom 对比度 curves - 调整 specific tonal ranges precisely - 创建 cross-处理 or stylized looks - Match the tonal characteristics of film stocks",
     "properties": {
       "black_point": {
@@ -56685,7 +56685,7 @@
     }
   },
   "lib.image.color_grading.Exposure": {
-    "title": "Exposure",
+    "title": "曝光",
     "description": "Comprehensive tonal exposure 控制 similar to Lightroom/Camera Raw. exposure, 对比度, highlights, shadows, whites, blacks, tonal Use cases: - Correct over/underexposed 图像 - Recover highlight and shadow 细节 - 调整 overall 对比度 and tonal range - Fine-tune the 亮度 of specific tonal regions",
     "properties": {
       "blacks": {
@@ -56702,7 +56702,7 @@
       },
       "highlights": {
         "title": "高光",
-        "description": "Highlight recovery/boost. Affects brightest areas."
+        "description": "高光恢复/增强，影响最亮区域。"
       },
       "image": {
         "title": "图像",
@@ -56710,7 +56710,7 @@
       },
       "shadows": {
         "title": "阴影",
-        "description": "Shadow recovery/darken. Affects darkest areas."
+        "description": "阴影恢复/压暗，影响最暗区域。"
       },
       "whites": {
         "title": "白色",
@@ -56719,7 +56719,7 @@
     }
   },
   "lib.image.color_grading.FilmLook": {
-    "title": "Film Look",
+    "title": "胶片质感",
     "description": "Apply preset 电影感 film looks with adjustable 强度. film look, 电影感, preset, movie, lut, 颜色 grade Use cases: - Quickly apply popular 电影感 颜色 grades - 创建 consistent looks across multiple 图像 - Emulate 经典 film stock characteristics - Starting point for custom 颜色 grading",
     "properties": {
       "image": {
@@ -56768,11 +56768,11 @@
     "properties": {
       "gain_b": {
         "title": "增益 B",
-        "description": "Blue gain (highlight multiplier)."
+        "description": "蓝色增益（高光乘数）。"
       },
       "gain_g": {
         "title": "增益 G",
-        "description": "Green gain (highlight multiplier)."
+        "description": "绿色增益（高光乘数）。"
       },
       "gain_master": {
         "title": "增益主",
@@ -56780,7 +56780,7 @@
       },
       "gain_r": {
         "title": "增益 R",
-        "description": "Red gain (highlight multiplier)."
+        "description": "红色增益（高光乘数）。"
       },
       "gamma_b": {
         "title": "Gamma B",
@@ -56792,7 +56792,7 @@
       },
       "gamma_master": {
         "title": "Gamma 主",
-        "description": "Master gamma (overall midtones)."
+        "description": "主伽马（整体中间调）。"
       },
       "gamma_r": {
         "title": "Gamma R",
@@ -56821,7 +56821,7 @@
     }
   },
   "lib.image.color_grading.SaturationVibrance": {
-    "title": "Saturation Vibrance",
+    "title": "饱和度与自然饱和度",
     "description": "调整 颜色 饱和度（含 milder secondary vibrance 控制）. 饱和度, vibrance, 颜色 强度 Use cases: - Boost or reduce overall 颜色 强度 - Apply a gentler 饱和度 nudge via vibrance - 创建 desaturated or oversaturated looks - Fine-tune 颜色 强度（含 two strengths Vibrance is a half-weight secondary 饱和度 控制; it does not protect skin tones or already-saturated 颜色）.",
     "properties": {
       "image": {
@@ -56839,16 +56839,16 @@
     }
   },
   "lib.image.color_grading.SplitToning": {
-    "title": "Split Toning",
+    "title": "分色调",
     "description": "Apply different 颜色 tints to shadows and highlights. split toning, shadows, highlights, tint, duotone Use cases: - 创建 经典 teal and orange looks - 添加 颜色 对比度 between shadows and highlights - Emulate film 处理 techniques - 创建 stylized 颜色-graded 图像",
     "properties": {
       "balance": {
         "title": "平衡",
-        "description": "Balance between shadows (-1) and highlights (+1)."
+        "description": "阴影（-1）与高光（+1）之间的平衡。"
       },
       "highlight_hue": {
         "title": "高光色相",
-        "description": "Hue of highlight tint in degrees."
+        "description": "高光色调的色相（度）。"
       },
       "highlight_saturation": {
         "title": "高光饱和度",
@@ -56860,7 +56860,7 @@
       },
       "shadow_hue": {
         "title": "阴影色相",
-        "description": "Hue of shadow tint in degrees (0=red, 120=green, 240=blue)."
+        "description": "阴影色调的色相（度，0=红，120=绿，240=蓝）。"
       },
       "shadow_saturation": {
         "title": "阴影饱和度",
@@ -56869,7 +56869,7 @@
     }
   },
   "lib.image.color_grading.Vignette": {
-    "title": "Vignette",
+    "title": "晕影",
     "description": "Apply 电影感 vignette 效果 to darken or lighten 图像 edges. vignette, edge, darken, focus, 电影感 Use cases: - Draw attention to the center of the 图像 - 创建 经典 电影感 look - Simulate lens light falloff - 添加 subtle framing to photos",
     "properties": {
       "amount": {
@@ -56878,7 +56878,7 @@
       },
       "feather": {
         "title": "羽化",
-        "description": "Softness of the vignette edge."
+        "description": "晕影边缘的柔和度。"
       },
       "image": {
         "title": "图像",
@@ -56886,12 +56886,12 @@
       },
       "midpoint": {
         "title": "中点",
-        "description": "Distance from center where vignette begins (0=center, 1=edges)."
+        "description": "晕影起始位置距中心的距离（0=中心，1=边缘）。"
       }
     }
   },
   "lib.image.draw.AngularGradient": {
-    "title": "Angular Gradient",
+    "title": "角度渐变",
     "description": "Sweep gradient around the canvas centre. 图像, gradient, angular, conic, draw",
     "properties": {
       "color_a": {
@@ -56915,7 +56915,7 @@
     }
   },
   "lib.image.draw.Background": {
-    "title": "Background",
+    "title": "背景",
     "description": "The Background Node 创建 blank background. 图像, background, blank, base, layer This node is mainly used for generating a base layer for 图像 处理 tasks. It 产生 uniform 图像, having a user-specified width, height and 颜色. The 颜色 is given in a hexadecimal 格式, defaulting to white if not specified. #### Applications - As a base layer for creating composite 图像. - As a starting point for generating patterns or graphics. - When blank backgrounds of specific 颜色 are required for visualization tasks.",
     "properties": {
       "color": {
@@ -56930,7 +56930,7 @@
     }
   },
   "lib.image.draw.Checkerboard": {
-    "title": "Checkerboard",
+    "title": "棋盘格",
     "description": "Two-颜色 checkerboard with configurable cell 尺寸. 图像, checkerboard, pattern, draw",
     "properties": {
       "cell_size": {
@@ -56954,7 +56954,7 @@
     }
   },
   "lib.image.draw.DiamondGradient": {
-    "title": "Diamond Gradient",
+    "title": "菱形渐变",
     "description": "Inner-to-outer diamond / square gradient. 图像, gradient, diamond, draw",
     "properties": {
       "color_inner": {
@@ -56978,7 +56978,7 @@
     }
   },
   "lib.image.draw.GaussianNoise": {
-    "title": "Gaussian Noise",
+    "title": "高斯噪声",
     "description": "This node 创建 and 添加 Gaussian 噪声 to an 图像. 图像, 噪声, gaussian, distortion, 伪影 Gaussian 噪声 Node is designed to simulate 逼真 distortions that can occur in a photographic 图像. It 生成 噪声-filled 图像，使用 Gaussian (normal) distribution. The 噪声 level can be 调整，使用 mean and standard deviation parameters. #### Applications - Simulating sensor 噪声 in synthetic data. - Testing 图像-处理 algorithms' resilience to 噪声. - Creating artistic 效果 in 图像.",
     "properties": {
       "height": {
@@ -57000,7 +57000,7 @@
     }
   },
   "lib.image.draw.LinearGradient": {
-    "title": "Linear Gradient",
+    "title": "线性渐变",
     "description": "Two-stop linear gradient with angle and midpoint. 图像, gradient, linear, draw",
     "properties": {
       "angle": {
@@ -57028,7 +57028,7 @@
     }
   },
   "lib.image.draw.RadialGradient": {
-    "title": "Radial Gradient",
+    "title": "径向渐变",
     "description": "Inner-to-outer radial gradient centred on the canvas. 图像, gradient, radial, draw",
     "properties": {
       "color_inner": {
@@ -57052,7 +57052,7 @@
     }
   },
   "lib.image.draw.RenderText": {
-    "title": "Render Text",
+    "title": "渲染文本",
     "description": "Draw 文本 onto an 图像，使用 system-available font family. 文本, font, label, title, 水印, caption, 图像, overlay This node takes 文本, a font family name, coordinates (where to place the 文本), and an 图像 to work with. Use it to 添加 label or title to an 图像, 水印 图像, or place a caption directly on an 图像. You can set the font family name, 尺寸, 颜色, and alignment (left, center, or right), and position the 文本 anywhere on the 图像. ### Fonts Only the font's `name` is used, as a font-family name resolved against the fonts available to the 渲染 (Canvas2D in the browser, sharp/librsvg on the server). If the named family isn't available, the 渲染 falls back to a 默认. The node does not download fonts, so the font's `source`, `url`, and `weight` fields are ignored. #### Applications - Labeling 图像 in an 图像 gallery or database. - Watermarking 图像，用于 copyright protection. - 添加 custom captions to photographs. - Creating instructional 图像 to guide the reader's view.",
     "properties": {
       "align": {
@@ -57080,16 +57080,16 @@
       },
       "x": {
         "title": "X",
-        "description": "The x coordinate."
+        "description": "X 坐标。"
       },
       "y": {
         "title": "Y",
-        "description": "The y coordinate."
+        "description": "Y 坐标。"
       }
     }
   },
   "lib.image.effects.Add": {
-    "title": "Add Blend",
+    "title": "叠加混合",
     "description": "Additive composite of two 图像: out = source + over × gain. 图像, 添加, blend, composite",
     "properties": {
       "gain": {
@@ -57107,7 +57107,7 @@
     }
   },
   "lib.image.effects.ColorOverlay": {
-    "title": "Color Overlay",
+    "title": "颜色叠加",
     "description": "Tint an 图像（含 constant colour）while preserving source coverage. 图像, overlay, tint, layer 效果",
     "properties": {
       "amount": {
@@ -57125,7 +57125,7 @@
     }
   },
   "lib.image.effects.DropShadow": {
-    "title": "Drop Shadow",
+    "title": "投影",
     "description": "Cast a soft drop shadow behind the source silhouette. 图像, drop shadow, layer 效果, blur",
     "properties": {
       "color": {
@@ -57155,7 +57155,7 @@
     }
   },
   "lib.image.effects.Glow": {
-    "title": "Glow",
+    "title": "发光",
     "description": "Bloom / glow 效果: bright-pass + blur + additive composite over source. 图像, glow, bloom, layer 效果, blur",
     "properties": {
       "image": {
@@ -57181,7 +57181,7 @@
     }
   },
   "lib.image.effects.Outline": {
-    "title": "Outline",
+    "title": "描边",
     "description": "Draw a flat outline / stroke around the source silhouette. 图像, outline, stroke, edge, layer 效果",
     "properties": {
       "color": {
@@ -57203,7 +57203,7 @@
     }
   },
   "lib.image.enhance.AdaptiveContrast": {
-    "title": "Adaptive Contrast",
+    "title": "自适应对比度",
     "description": "Applies localized 对比度 增强，使用 adaptive techniques. 图像, 对比度, 增强 Use cases: - Improve visibility in 图像（含 varying lighting conditions - Prepare 图像）for improved feature 检测 in computer vision",
     "properties": {
       "clip_limit": {
@@ -57221,7 +57221,7 @@
     }
   },
   "lib.image.enhance.AutoContrast": {
-    "title": "Auto Contrast",
+    "title": "自动对比度",
     "description": "Automatically 调整 图像 对比度，用于 增强 visual 质量. 图像, 对比度, balance Use cases: - 增强 图像 clarity for better visual perception - Pre-处理 图像，用于 computer vision tasks - Improve photo aesthetics in editing workflows",
     "properties": {
       "cutoff": {
@@ -57235,7 +57235,7 @@
     }
   },
   "lib.image.enhance.Detail": {
-    "title": "Detail",
+    "title": "细节",
     "description": "Enhances fine 细节 in 图像. 图像, 细节, 增强 Use cases: - Improve clarity of textural elements in photographs - 增强 visibility of small features for analysis - Prepare 图像，用于 high-分辨率 display or printing",
     "properties": {
       "image": {
@@ -57255,7 +57255,7 @@
     }
   },
   "lib.image.enhance.Equalize": {
-    "title": "Equalize",
+    "title": "色调均化",
     "description": "Enhances 图像 对比度 by equalizing 强度 distribution. 图像, 对比度, histogram Use cases: - Improve visibility in poorly lit 图像 - 增强 细节，用于 图像 analysis tasks - Normalize 图像 data for machine learning",
     "properties": {
       "image": {
@@ -57265,7 +57265,7 @@
     }
   },
   "lib.image.enhance.RankFilter": {
-    "title": "Rank Filter",
+    "title": "排名滤波器",
     "description": "Applies rank-based filtering to 增强 or 平滑 图像 features. 图像, filter, 增强 Use cases: - Reduce 噪声 while preserving edges in 图像 - 增强 specific 图像 features based on local 强度 - Pre-处理 图像，用于 improved 分割 results",
     "properties": {
       "image": {
@@ -57301,7 +57301,7 @@
     }
   },
   "lib.image.filter.Contour": {
-    "title": "Contour",
+    "title": "轮廓",
     "description": "Apply a contour filter to highlight 图像 edges. 图像, filter, contour - 提取 key features from 复杂 图像 - Aid pattern recognition and object 检测 - 创建 stylized contour sketch art 效果",
     "properties": {
       "image": {
@@ -57311,7 +57311,7 @@
     }
   },
   "lib.image.filter.ConvertToGrayscale": {
-    "title": "Convert To Grayscale",
+    "title": "转换为灰度",
     "description": "转换 图像 to grayscale. 图像, grayscale - Simplify 图像，用于 feature and edge 检测 - Prepare 图像，用于 shape-based machine learning - 创建 vintage or monochrome aesthetic 效果",
     "properties": {
       "image": {
@@ -57321,7 +57321,7 @@
     }
   },
   "lib.image.filter.Emboss": {
-    "title": "Emboss",
+    "title": "浮雕",
     "description": "Apply an emboss filter for a 3D raised 效果. 图像, filter, emboss - 添加 texture and depth to photos - 创建 visually interesting graphics - Incorporate unique 效果 in digital artwork",
     "properties": {
       "image": {
@@ -57331,7 +57331,7 @@
     }
   },
   "lib.image.filter.Expand": {
-    "title": "Expand",
+    "title": "扩展",
     "description": "添加 border around an 图像 to increase its 尺寸. 图像, border, expand - Make 图像 stand out by 添加 colored border - 创建 framed photo 效果 - Separate 图像 content from surroundings",
     "properties": {
       "border": {
@@ -57349,7 +57349,7 @@
     }
   },
   "lib.image.filter.FindEdges": {
-    "title": "Find Edges",
+    "title": "查找边缘",
     "description": "检测 and highlight edges in an 图像. 图像, filter, edges - 分析 structural patterns in 图像 - Aid object 检测 in computer vision - 检测 important features like corners and ridges",
     "properties": {
       "image": {
@@ -57359,7 +57359,7 @@
     }
   },
   "lib.image.filter.GaussianBlur": {
-    "title": "Gaussian Blur",
+    "title": "高斯模糊",
     "description": "Separable two-pass gaussian blur (horizontal then vertical). 图像, blur, gaussian, 平滑, filter",
     "properties": {
       "image": {
@@ -57372,12 +57372,12 @@
       },
       "sigma": {
         "title": "Sigma",
-        "description": "0 = derived from radius"
+        "description": "0 = 从半径推导"
       }
     }
   },
   "lib.image.filter.Invert": {
-    "title": "Invert",
+    "title": "反转",
     "description": "Invert the 颜色 of an 图像. 图像, filter, invert - 创建 negative versions of 图像，用于 visual 效果 - 分析 图像 data by bringing out hidden 细节 - Preprocess 图像，用于 operations that work better on inverted 颜色",
     "properties": {
       "image": {
@@ -57387,7 +57387,7 @@
     }
   },
   "lib.image.filter.Pixelate": {
-    "title": "Pixelate",
+    "title": "像素化",
     "description": "Average each N×N block to a single colour. 图像, pixelate, mosaic, filter",
     "properties": {
       "cell_size": {
@@ -57405,12 +57405,12 @@
     }
   },
   "lib.image.filter.Posterize": {
-    "title": "Posterize",
+    "title": "色调分离",
     "description": "Reduce the number of 颜色 in an 图像，用于 poster-like 效果. 图像, filter, posterize - 创建 graphic art by simplifying 图像 颜色 - Apply artistic 效果 to photographs - 生成 visually compelling content for advertising",
     "properties": {
       "bits": {
         "title": "位深",
-        "description": "Number of bits to posterize to."
+        "description": "色调分离的目标位数。"
       },
       "image": {
         "title": "图像",
@@ -57419,7 +57419,7 @@
     }
   },
   "lib.image.filter.Smooth": {
-    "title": "Smooth",
+    "title": "平滑",
     "description": "Apply smoothing to reduce 图像 噪声 and 细节. 图像, filter, 平滑 - 增强 visual aesthetics of 图像 - Improve object 检测 by reducing irrelevant 细节 - Aid facial recognition by simplifying 图像",
     "properties": {
       "image": {
@@ -57429,7 +57429,7 @@
     }
   },
   "lib.image.filter.Solarize": {
-    "title": "Solarize",
+    "title": "负感光",
     "description": "Apply a solarize 效果 to partially invert 图像 tones. 图像, filter, solarize - 创建 surreal artistic photo 效果 - 增强 visual data by making certain elements more prominent - 添加 unique style to 图像，用于 graphic design",
     "properties": {
       "image": {
@@ -57443,7 +57443,7 @@
     }
   },
   "lib.image.filter.Threshold": {
-    "title": "Threshold",
+    "title": "阈值",
     "description": "Smoothstep luminance 阈值 — keeps pixels above the cutoff, fades around it. 图像, 阈值, brightpass, filter",
     "properties": {
       "image": {
@@ -57461,7 +57461,7 @@
     }
   },
   "lib.image.filter.UnsharpMask": {
-    "title": "Unsharp Mask",
+    "title": "锐化遮罩",
     "description": "Sharpening via local-对比度 boost. 数量 控制 强度, 阈值 suppresses 噪声. 图像, sharpen, unsharp 蒙版, filter, 细节",
     "properties": {
       "amount": {
@@ -57483,7 +57483,7 @@
     }
   },
   "lib.image.filter.Vignette": {
-    "title": "Vignette",
+    "title": "晕影",
     "description": "Radial darkening around the 帧 corners. Negative 强度 brightens edges. 图像, vignette, filter, lens",
     "properties": {
       "image": {
@@ -57509,7 +57509,7 @@
     }
   },
   "lib.image.keyer.ChromaKey": {
-    "title": "Chroma Key",
+    "title": "色度键控",
     "description": "Knock out pixels close to a key colour, with 可选 spill suppression. 图像, chroma key, green screen, keying",
     "properties": {
       "image": {
@@ -57535,7 +57535,7 @@
     }
   },
   "lib.image.keyer.LumaKey": {
-    "title": "Luma Key",
+    "title": "亮度键控",
     "description": "Keep pixels whose luminance falls inside [low, high] with smoothstep edges. 图像, luma key, keying, 亮度",
     "properties": {
       "high": {
@@ -57557,7 +57557,7 @@
     }
   },
   "lib.image.mask.Apply": {
-    "title": "Apply Mask",
+    "title": "应用遮罩",
     "description": "Multiply a coverage 蒙版 (read from 蒙版.a) into the source's alpha. RGB unchanged. 图像, 蒙版, apply, alpha",
     "properties": {
       "image": {
@@ -57570,12 +57570,12 @@
       },
       "mask": {
         "title": "蒙版",
-        "description": "Coverage in alpha channel"
+        "description": "Alpha 通道中的覆盖范围"
       }
     }
   },
   "lib.image.mask.FromImage": {
-    "title": "Mask From Image",
+    "title": "从图像生成遮罩",
     "description": "Derive a 蒙版，从 an 图像 channel. 图像, 蒙版, alpha, channel 模式: 0 alpha / 1 luminance / 2 R / 3 G / 4 B / 5 max channel.",
     "properties": {
       "image": {
@@ -57593,7 +57593,7 @@
     }
   },
   "lib.image.mask.Invert": {
-    "title": "Invert Mask",
+    "title": "反转遮罩",
     "description": "Invert 蒙版 alpha (coverage → 1 − coverage). 图像, 蒙版, invert, alpha",
     "properties": {
       "image": {
@@ -57628,11 +57628,11 @@
       },
       "target_height": {
         "title": "目标高度",
-        "description": "0 = match source"
+        "description": "0 = 匹配源"
       },
       "target_width": {
         "title": "目标宽度",
-        "description": "0 = match source"
+        "description": "0 = 匹配源"
       },
       "tx": {
         "title": "tx",
@@ -57645,7 +57645,7 @@
     }
   },
   "lib.image.warp.CornerPin": {
-    "title": "Corner Pin",
+    "title": "边角固定",
     "description": "Perspective warp via an inverse 3×3 homography (H22 fixed at 1). 图像, perspective, corner pin, homography, warp",
     "properties": {
       "h00": {
@@ -57687,7 +57687,7 @@
     }
   },
   "lib.image.warp.Displace": {
-    "title": "Displace",
+    "title": "置换",
     "description": "Per-pixel UV 偏移 driven by a 置换贴图 (R+G channels). Useful for ripples and glass. 图像, displace, warp, ripple, distortion",
     "properties": {
       "amount_x": {
@@ -57709,7 +57709,7 @@
     }
   },
   "lib.image.warp.Offset": {
-    "title": "Offset",
+    "title": "偏移",
     "description": "Translate the 图像 by (dx, dy) UV units with selectable wrap. 图像, 偏移, translate, shift",
     "properties": {
       "dx": {
@@ -57726,17 +57726,17 @@
       },
       "wrap": {
         "title": "环绕",
-        "description": "0 clamp / 1 repeat / 2 mirror"
+        "description": "0 钳位 / 1 重复 / 2 镜像"
       }
     }
   },
   "lib.image.warp.Pad": {
-    "title": "Pad",
+    "title": "填充",
     "description": "Pad with empty / coloured space on each side. 输出 enlarges to fit. 图像, pad, border, expand, 帧",
     "properties": {
       "bottom": {
         "title": "底部",
-        "description": "× source height"
+        "description": "× 源高度"
       },
       "color": {
         "title": "填充颜色",
@@ -57748,20 +57748,20 @@
       },
       "left": {
         "title": "左",
-        "description": "× source width"
+        "description": "× 源宽度"
       },
       "right": {
         "title": "右",
-        "description": "× source width"
+        "description": "× 源宽度"
       },
       "top": {
         "title": "顶部",
-        "description": "× source height"
+        "description": "× 源高度"
       }
     }
   },
   "lib.image.warp.PolarRemap": {
-    "title": "Polar Remap",
+    "title": "极坐标重映射",
     "description": "转换 between rectangular and polar UV space. 0 rect→polar / 1 polar→rect. 图像, polar, warp, kaleidoscope",
     "properties": {
       "image": {
@@ -57780,7 +57780,7 @@
     "properties": {
       "amount": {
         "title": "数量",
-        "description": "negative pinches"
+        "description": "负值向内收缩"
       },
       "image": {
         "title": "图像",
@@ -57789,7 +57789,7 @@
     }
   },
   "lib.image.warp.Tile": {
-    "title": "Tile",
+    "title": "平铺",
     "description": "Tile the source N × M times across the same-sized canvas. 图像, tile, repeat, pattern",
     "properties": {
       "image": {
@@ -57806,7 +57806,7 @@
       },
       "wrap": {
         "title": "环绕",
-        "description": "0 clamp / 1 repeat / 2 mirror"
+        "description": "0 钳位 / 1 重复 / 2 镜像"
       }
     }
   },
@@ -58411,7 +58411,7 @@
     }
   },
   "lib.video.download.YtDlpDownload": {
-    "title": "YouTube Downloader",
+    "title": "YouTube 下载器",
     "description": "Download media from URLs using yt-dlp. download, 视频, 音频, youtube, media, yt-dlp, metadata, 字幕 Use cases: - Download 视频，从 YouTube and other platforms - 提取 音频，从 视频 URLs - Retrieve 视频/音频 metadata without downloading - Download 字幕 and thumbnails",
     "properties": {
       "container": {
@@ -58428,11 +58428,11 @@
       },
       "overwrite": {
         "title": "覆盖",
-        "description": "Overwrite existing files"
+        "description": "覆盖已有文件"
       },
       "rate_limit_kbps": {
         "title": "速率限制 (Kbps)",
-        "description": "Rate limit in KB/s (0 = unlimited)"
+        "description": "限速（KB/s，0 = 不限速）"
       },
       "sub_langs": {
         "title": "字幕语言",
@@ -58448,11 +58448,11 @@
       },
       "timeout": {
         "title": "超时",
-        "description": "Timeout in seconds"
+        "description": "超时时间（秒）"
       },
       "url": {
         "title": "URL",
-        "description": "URL of the media to download"
+        "description": "待下载媒体的 URL"
       }
     }
   },

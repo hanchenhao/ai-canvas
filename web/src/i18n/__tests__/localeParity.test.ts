@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
+import allowlist from "./identical-allowlist.json";
 
 const enDir = path.join(__dirname, "../../locales/en");
 const zhDir = path.join(__dirname, "../../locales/zh-CN");
@@ -13,6 +14,15 @@ function flattenKeys(obj: JsonObject, prefix = ""): string[] {
       ? flattenKeys(v as JsonObject, key)
       : [key];
   });
+}
+
+function flattenValues(obj: JsonObject, prefix = ""): Record<string, unknown> {
+  return Object.entries(obj).reduce((acc, [k, v]) => {
+    const key = prefix ? `${prefix}.${k}` : k;
+    return typeof v === "object" && v !== null
+      ? { ...acc, ...flattenValues(v as JsonObject, key) }
+      : { ...acc, [key]: v };
+  }, {} as Record<string, unknown>);
 }
 
 function loadJson(dir: string, file: string): JsonObject {
@@ -48,4 +58,28 @@ describe("locale parity (en vs zh-CN)", () => {
       });
     });
   }
+
+  test("zh-CN values differ from en unless allowlisted", () => {
+    const allow = new Map(
+      Object.entries(allowlist as Record<string, string[]>),
+    );
+    const violations: string[] = [];
+    for (const file of files) {
+      const ns = file.replace(".json", "");
+      const allowed = new Set(allow.get(ns) ?? []);
+      const en = flattenValues(loadJson(enDir, file));
+      const zh = flattenValues(loadJson(zhDir, file));
+      for (const [key, value] of Object.entries(en)) {
+        if (
+          typeof value === "string" &&
+          /[a-zA-Z]{2,}/.test(value) &&
+          zh[key] === value &&
+          !allowed.has(key)
+        ) {
+          violations.push(`${ns}:${key}`);
+        }
+      }
+    }
+    expect(violations).toEqual([]);
+  });
 });
