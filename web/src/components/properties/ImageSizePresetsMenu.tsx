@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   FlexColumn,
@@ -32,6 +33,7 @@ export const ImageSizePresetsMenu: React.FC<ImageSizePresetsMenuProps> = ({
   currentHeight
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const { t } = useTranslation("properties");
   // Skipped on touch, where the virtual keyboard would cover the preset list.
   const autoFocusEnabled = useAutoFocusEnabled();
 
@@ -50,13 +52,13 @@ export const ImageSizePresetsMenu: React.FC<ImageSizePresetsMenuProps> = ({
                    (preset.aspectRatio?.toLowerCase().includes(query));
 
       if (match) {
-        const category = preset.category || "Other";
+        const category = preset.category || t("sizePresets.other");
         if (!groups[category]) {groups[category] = [];}
         groups[category].push(preset);
       }
     });
     return groups;
-  }, [searchQuery]);
+  }, [searchQuery, t]);
 
   const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -116,7 +118,7 @@ export const ImageSizePresetsMenu: React.FC<ImageSizePresetsMenuProps> = ({
         <NodeTextField
           className="presets-search-field"
           fullWidth
-          placeholder="Search presets..."
+          placeholder={t("sizePresets.searchPlaceholder")}
           value={searchQuery}
           onChange={handleSearchChange}
           onKeyDown={handleSearchKeyDown}
@@ -139,7 +141,7 @@ export const ImageSizePresetsMenu: React.FC<ImageSizePresetsMenuProps> = ({
       </FlexRow>
 
       {Object.entries(filteredGroupedPresets).length === 0 ? (
-        <EditorMenuItem disabled sx={{ fontSize: 'var(--fontSizeSmall)' }}>No presets found</EditorMenuItem>
+        <EditorMenuItem disabled sx={{ fontSize: 'var(--fontSizeSmall)' }}>{t("sizePresets.noPresetsFound")}</EditorMenuItem>
       ) : (
         Object.entries(filteredGroupedPresets).map(([category, items]) => [
           <ListSubheader key={category} className="presets-category-header">{category}</ListSubheader>,

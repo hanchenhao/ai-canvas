@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
 import { memo, useCallback, useMemo, useState, useRef, ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { Asset } from "../../stores/ApiTypes";
 import { useFileDrop } from "../../hooks/handlers/useFileDrop";
 import { Tooltip, ToolbarIconButton, MOTION, SPACING, BORDER_RADIUS, Z_INDEX, getSpacingPx } from "../ui_primitives";
@@ -37,6 +38,9 @@ const PropertyDropzone = ({
   showRecorder = true
 }: PropertyDropzoneProps) => {
   const theme = useTheme();
+  const { t } = useTranslation("properties");
+  const mediaType = contentType.split("/")[0];
+  const mediaTypeLabel = t(`mediaType.${mediaType}`, { defaultValue: mediaType });
   const onChangeAsset = (asset: Asset) =>
     props.onChange({ asset_id: asset.id, uri: asset.get_url, type: "audio" });
 
@@ -260,23 +264,22 @@ const PropertyDropzone = ({
 
     try {
       const getFilters = () => {
-        const type = contentType.split("/")[0];
-        switch (type) {
+        switch (mediaType) {
           case "image":
             return [
-              { name: "Images", extensions: ["jpg", "jpeg", "png", "gif", "bmp", "webp", "svg"] }
+              { name: t("fileFilter.images"), extensions: ["jpg", "jpeg", "png", "gif", "bmp", "webp", "svg"] }
             ];
           case "audio":
             return [
-              { name: "Audio", extensions: ["mp3", "wav", "ogg", "m4a", "flac", "aac"] }
+              { name: t("fileFilter.audio"), extensions: ["mp3", "wav", "ogg", "m4a", "flac", "aac"] }
             ];
           case "video":
             return [
-              { name: "Video", extensions: ["mp4", "avi", "mov", "wmv", "flv", "webm", "mkv"] }
+              { name: t("fileFilter.video"), extensions: ["mp4", "avi", "mov", "wmv", "flv", "webm", "mkv"] }
             ];
           case "document":
             return [
-              { name: "Documents", extensions: ["pdf", "doc", "docx", "txt", "html"] }
+              { name: t("fileFilter.documents"), extensions: ["pdf", "doc", "docx", "txt", "html"] }
             ];
           default:
             return undefined;
@@ -284,7 +287,7 @@ const PropertyDropzone = ({
       };
 
       const result = await window.api.dialog.openFile({
-        title: `Select ${contentType.split("/")[0]}`,
+        title: t("dropzone.selectType", { type: mediaTypeLabel }),
         filters: getFilters()
       });
 
@@ -321,7 +324,7 @@ const PropertyDropzone = ({
     } catch (error) {
       console.error("Error opening file picker:", error);
     }
-  }, [contentType, onChange, uploadAssetFn]);
+  }, [contentType, onChange, uploadAssetFn, t, mediaType, mediaTypeLabel]);
 
   const handleDropzoneClick = useCallback(() => {
     if (isElectron && window.api?.dialog?.openFile) {
@@ -337,7 +340,7 @@ const PropertyDropzone = ({
   }, [handleDropzoneClick]);
 
   const renderViewer = useMemo(() => {
-    switch (contentType.split("/")[0]) {
+    switch (mediaType) {
       case "image":
         return (
           <>
@@ -381,15 +384,15 @@ const PropertyDropzone = ({
                   style={{ width: "100%", height: "20px" }}
                   onVolumeChange={handleVolumeChange}
                   src={uri as string}
-                  aria-label={filename || "Audio"}
+                  aria-label={filename || t("dropzone.audioLabel")}
                 >
-                  Your browser does not support the audio element.
+                  {t("dropzone.browserNoAudio")}
                 </audio>
                 <p className="centered uppercase">{filename}</p>
                 <AudioPlayer filename={filename} source={uri as string} />
               </div>
             ) : (
-              <p className="centered uppercase">Drop audio</p>
+              <p className="centered uppercase">{t("dropzone.dropAudio")}</p>
             )}
           </>
         );
@@ -409,14 +412,14 @@ const PropertyDropzone = ({
                   style={{ width: "100%", height: "auto" }}
                   controls
                   src={uri}
-                  aria-label={filename || "Video"}
+                  aria-label={filename || t("dropzone.videoLabel")}
                 >
-                  Your browser does not support the video element.
+                  {t("dropzone.browserNoVideo")}
                 </video>
                 <p className="centered uppercase">{filename}</p>
               </>
             ) : (
-              <p className="centered uppercase">Drop video</p>
+              <p className="centered uppercase">{t("dropzone.dropVideo")}</p>
             )}
           </>
         );
@@ -429,7 +432,7 @@ const PropertyDropzone = ({
               src={uri}
               style={{ width: "100%", height: "400px", border: "none" }}
               allow="fullscreen; clipboard-write"
-              title="PDF viewer"
+              title={t("dropzone.pdfViewer")}
             />
           );
         }
@@ -446,7 +449,7 @@ const PropertyDropzone = ({
               sandbox=""
               style={{ width: "100%", height: "400px", border: "none" }}
               allow="fullscreen"
-              title="Text viewer"
+              title={t("dropzone.textViewer")}
             />
           );
         }
@@ -456,7 +459,7 @@ const PropertyDropzone = ({
       default:
         return null;
     }
-  }, [contentType, uri, openViewer, asset, id, filename, handleImageLoad, handleDoubleClick, handleCloseViewer, imageDimensions, handleVolumeChange]);
+  }, [contentType, uri, openViewer, asset, id, filename, handleImageLoad, handleDoubleClick, handleCloseViewer, imageDimensions, handleVolumeChange, mediaType, t]);
 
   return (
     <div css={styles(theme)}>
@@ -503,7 +506,7 @@ const PropertyDropzone = ({
                     }}
                   />
                   <ToolbarIconButton
-                    tooltip="Replace file"
+                    tooltip={t("dropzone.replaceFile")}
                     icon={<FolderOpenIcon fontSize="small" />}
                     className="asset-action-button"
                     onClick={handleReplaceClick}
@@ -513,8 +516,8 @@ const PropertyDropzone = ({
               )}
             </>
           ) : (
-            <Tooltip title="Click to select a file or drag and drop">
-              <p className="prop-drop centered uppercase">Click or drop {contentType}</p>
+            <Tooltip title={t("dropzone.selectOrDrag")}>
+              <p className="prop-drop centered uppercase">{t("dropzone.clickOrDrop", { type: mediaTypeLabel })}</p>
             </Tooltip>
           )}
         </div>

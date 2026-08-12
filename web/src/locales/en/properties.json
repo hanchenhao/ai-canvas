@@ -1,0 +1,61 @@
+{
+  "awaitingUpstream": "Awaiting upstream",
+  "dropzone": {
+    "clickOrDrop": "Click or drop {{type}}",
+    "selectOrDrag": "Click to select a file or drag and drop",
+    "replaceFile": "Replace file",
+    "dropAudio": "Drop audio",
+    "dropVideo": "Drop video",
+    "audioLabel": "Audio",
+    "videoLabel": "Video",
+    "browserNoAudio": "Your browser does not support the audio element.",
+    "browserNoVideo": "Your browser does not support the video element.",
+    "pdfViewer": "PDF viewer",
+    "textViewer": "Text viewer",
+    "selectType": "Select {{type}}"
+  },
+  "mediaType": {
+    "image": "image",
+    "audio": "audio",
+    "video": "video",
+    "document": "document"
+  },
+  "fileFilter": {
+    "images": "Images",
+    "audio": "Audio",
+    "video": "Video",
+    "documents": "Documents",
+    "textFiles": "Text Files"
+  },
+  "list": {
+    "clickOrDropImages": "Click or drop images here",
+    "clickOrDropAudio": "Click or drop audio files here",
+    "clickOrDropVideos": "Click or drop videos here",
+    "clickOrDropText": "Click or drop text files here",
+    "selectOrDragImages": "Click to select images or drag and drop",
+    "selectOrDragAudio": "Click to select audio files or drag and drop",
+    "selectOrDragVideos": "Click to select videos or drag and drop",
+    "selectOrDragText": "Click to select text files or drag and drop",
+    "removeImage": "Remove image",
+    "removeAudio": "Remove audio",
+    "removeVideo": "Remove video",
+    "removeText": "Remove text file",
+    "itemAlt": "Item {{index}}",
+    "videoAlt": "Video {{index}}",
+    "selectImages": "Select images",
+    "selectAudioFiles": "Select audio files",
+    "selectVideos": "Select videos",
+    "selectTextFiles": "Select text files"
+  },
+  "font": {
+    "selectFont": "Select a font",
+    "unnamedFont": "Unnamed Font",
+    "loading": "Loading fonts…",
+    "loadError": "Error loading fonts"
+  },
+  "sizePresets": {
+    "searchPlaceholder": "Search presets...",
+    "noPresetsFound": "No presets found",
+    "other": "Other"
+  }
+}

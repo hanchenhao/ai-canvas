@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { memo, useCallback, useState, useMemo, useRef, ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { PropertyProps } from "../node/PropertyInput";
 import PropertyLabel from "../node/PropertyLabel";
 import { Asset } from "../../stores/ApiTypes";
@@ -160,6 +161,7 @@ const flattenAudioItems = (items: unknown): AudioItem[] => {
 
 const AudioListProperty = (props: PropertyProps) => {
   const theme = useTheme();
+  const { t } = useTranslation("properties");
   const id = `audio-list-${props.property.name}-${props.propertyIndex}`;
   const { uploadAsset } = useAssetUpload();
 
@@ -319,9 +321,9 @@ const AudioListProperty = (props: PropertyProps) => {
 
     try {
       const result = await window.api.dialog.openFile({
-        title: "Select audio files",
+        title: t("list.selectAudioFiles"),
         filters: [
-          { name: "Audio", extensions: ["mp3", "wav", "ogg", "m4a", "flac", "aac"] }
+          { name: t("fileFilter.audio"), extensions: ["mp3", "wav", "ogg", "m4a", "flac", "aac"] }
         ],
         multiSelections: true
       });
@@ -364,7 +366,7 @@ const AudioListProperty = (props: PropertyProps) => {
     } catch (error) {
       console.error("Error opening file picker:", error);
     }
-  }, [uploadAsset, handleAddAudios]);
+  }, [uploadAsset, handleAddAudios, t]);
 
   // Handle files from browser file input
   const handleBrowserFilePicker = useCallback(() => {
@@ -461,7 +463,7 @@ const AudioListProperty = (props: PropertyProps) => {
                 className="remove-button"
                 onClick={removeHandlers[index]}
                 buttonSize="small"
-                tooltip="Remove audio"
+                tooltip={t("list.removeAudio")}
               />
             </div>
           ))}
@@ -469,7 +471,7 @@ const AudioListProperty = (props: PropertyProps) => {
       )}
 
       {/* Dropzone */}
-      <Tooltip title="Click to select audio files or drag and drop">
+      <Tooltip title={t("list.selectOrDragAudio")}>
         <div
           role="button"
           tabIndex={0}
@@ -480,7 +482,7 @@ const AudioListProperty = (props: PropertyProps) => {
           onDragLeave={handleDragLeave}
           onDrop={onDrop}
         >
-          <p>Click or drop audio files here</p>
+          <p>{t("list.clickOrDropAudio")}</p>
         </div>
       </Tooltip>
     </div>

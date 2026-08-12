@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { memo, useCallback, useState, useMemo, useRef, ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { PropertyProps } from "../node/PropertyInput";
 import PropertyLabel from "../node/PropertyLabel";
 import { Asset } from "../../stores/ApiTypes";
@@ -152,6 +153,7 @@ const flattenVideoItems = (items: unknown): VideoItem[] => {
 
 const VideoListProperty = (props: PropertyProps) => {
   const theme = useTheme();
+  const { t } = useTranslation("properties");
   const id = `video-list-${props.property.name}-${props.propertyIndex}`;
   const { uploadAsset } = useAssetUpload();
 
@@ -293,9 +295,9 @@ const VideoListProperty = (props: PropertyProps) => {
 
     try {
       const result = await window.api.dialog.openFile({
-        title: "Select videos",
+        title: t("list.selectVideos"),
         filters: [
-          { name: "Video", extensions: ["mp4", "avi", "mov", "wmv", "flv", "webm", "mkv"] }
+          { name: t("fileFilter.video"), extensions: ["mp4", "avi", "mov", "wmv", "flv", "webm", "mkv"] }
         ],
         multiSelections: true
       });
@@ -338,7 +340,7 @@ const VideoListProperty = (props: PropertyProps) => {
     } catch (error) {
       console.error("Error opening file picker:", error);
     }
-  }, [uploadAsset, handleAddVideos]);
+  }, [uploadAsset, handleAddVideos, t]);
 
   const handleBrowserFilePicker = useCallback(() => {
     fileInputRef.current?.click();
@@ -420,21 +422,21 @@ const VideoListProperty = (props: PropertyProps) => {
                   controls
                   muted
                   preload="metadata"
-                  aria-label={`Video ${index + 1}`}
+                  aria-label={t("list.videoAlt", { index: index + 1 })}
                 />
               </div>
               <CloseButton
                 className="remove-button"
                 onClick={removeHandlers[index]}
                 buttonSize="small"
-                tooltip="Remove video"
+                tooltip={t("list.removeVideo")}
               />
             </div>
           ))}
         </div>
       )}
 
-      <Tooltip title="Click to select videos or drag and drop">
+      <Tooltip title={t("list.selectOrDragVideos")}>
         <div
           role="button"
           tabIndex={0}
@@ -445,7 +447,7 @@ const VideoListProperty = (props: PropertyProps) => {
           onDragLeave={handleDragLeave}
           onDrop={onDrop}
         >
-          <p>Click or drop videos here</p>
+          <p>{t("list.clickOrDropVideos")}</p>
         </div>
       </Tooltip>
     </div>

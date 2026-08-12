@@ -7,6 +7,7 @@ import PropertyLabel from "../node/PropertyLabel";
 import { PropertyProps } from "../node/PropertyInput";
 import PropertyDropzone from "./PropertyDropzone";
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import { useUpstreamValue } from "../../hooks/nodes/useNodeIO";
 import ImageRefPreview from "../node/ImageRefPreview";
@@ -33,6 +34,7 @@ const awaitingStyles = css({
 
 const ImageProperty = (props: PropertyProps) => {
   const theme = useTheme();
+  const { t } = useTranslation("properties");
   const id = `image-${props.property.name}-${props.propertyIndex}`;
 
   const { asset, uri } = useAsset({ image: props.value });
@@ -61,7 +63,7 @@ const ImageProperty = (props: PropertyProps) => {
         <div css={connectedPreviewStyles}>
           <ImageRefPreview
             value={upstreamValue}
-            placeholder={<div css={awaitingStyles}>Awaiting upstream</div>}
+            placeholder={<div css={awaitingStyles}>{t("awaitingUpstream")}</div>}
           />
         </div>
       ) : (

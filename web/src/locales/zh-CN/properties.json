@@ -1,0 +1,61 @@
+{
+  "awaitingUpstream": "等待上游数据",
+  "dropzone": {
+    "clickOrDrop": "点击或拖放{{type}}",
+    "selectOrDrag": "点击选择文件或拖放到此处",
+    "replaceFile": "替换文件",
+    "dropAudio": "拖放音频",
+    "dropVideo": "拖放视频",
+    "audioLabel": "音频",
+    "videoLabel": "视频",
+    "browserNoAudio": "您的浏览器不支持音频元素。",
+    "browserNoVideo": "您的浏览器不支持视频元素。",
+    "pdfViewer": "PDF 查看器",
+    "textViewer": "文本查看器",
+    "selectType": "选择{{type}}"
+  },
+  "mediaType": {
+    "image": "图像",
+    "audio": "音频",
+    "video": "视频",
+    "document": "文档"
+  },
+  "fileFilter": {
+    "images": "图像",
+    "audio": "音频",
+    "video": "视频",
+    "documents": "文档",
+    "textFiles": "文本文件"
+  },
+  "list": {
+    "clickOrDropImages": "点击或拖放图像到此处",
+    "clickOrDropAudio": "点击或拖放音频文件到此处",
+    "clickOrDropVideos": "点击或拖放视频到此处",
+    "clickOrDropText": "点击或拖放文本文件到此处",
+    "selectOrDragImages": "点击选择图像或拖放到此处",
+    "selectOrDragAudio": "点击选择音频文件或拖放到此处",
+    "selectOrDragVideos": "点击选择视频或拖放到此处",
+    "selectOrDragText": "点击选择文本文件或拖放到此处",
+    "removeImage": "移除图像",
+    "removeAudio": "移除音频",
+    "removeVideo": "移除视频",
+    "removeText": "移除文本文件",
+    "itemAlt": "第 {{index}} 项",
+    "videoAlt": "视频 {{index}}",
+    "selectImages": "选择图像",
+    "selectAudioFiles": "选择音频文件",
+    "selectVideos": "选择视频",
+    "selectTextFiles": "选择文本文件"
+  },
+  "font": {
+    "selectFont": "选择字体",
+    "unnamedFont": "未命名字体",
+    "loading": "正在加载字体…",
+    "loadError": "加载字体失败"
+  },
+  "sizePresets": {
+    "searchPlaceholder": "搜索预设...",
+    "noPresetsFound": "未找到预设",
+    "other": "其他"
+  }
+}

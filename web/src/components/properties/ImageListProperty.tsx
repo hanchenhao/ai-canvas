@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { memo, useCallback, useState, useRef, useMemo, ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { PropertyProps } from "../node/PropertyInput";
 import PropertyLabel from "../node/PropertyLabel";
 import { Asset } from "../../stores/ApiTypes";
@@ -163,6 +164,7 @@ const flattenImageItems = (items: unknown): ImageItem[] => {
 
 const ImageListProperty = (props: PropertyProps) => {
   const theme = useTheme();
+  const { t } = useTranslation("properties");
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const id = `image-list-${props.property.name}-${props.propertyIndex}`;
   const { uploadAsset } = useAssetUpload();
@@ -355,9 +357,9 @@ const ImageListProperty = (props: PropertyProps) => {
 
     try {
       const result = await window.api.dialog.openFile({
-        title: "Select images",
+        title: t("list.selectImages"),
         filters: [
-          { name: "Images", extensions: ["jpg", "jpeg", "png", "gif", "bmp", "webp", "svg"] }
+          { name: t("fileFilter.images"), extensions: ["jpg", "jpeg", "png", "gif", "bmp", "webp", "svg"] }
         ],
         multiSelections: true
       });
@@ -398,7 +400,7 @@ const ImageListProperty = (props: PropertyProps) => {
     } catch (error) {
       console.error("Error opening file picker:", error);
     }
-  }, [uploadAsset, handleAddImages]);
+  }, [uploadAsset, handleAddImages, t]);
 
   // Handle files from browser file input
   const handleBrowserFilePicker = useCallback(() => {
@@ -471,7 +473,7 @@ const ImageListProperty = (props: PropertyProps) => {
                 <div className="image-content">
                   <img
                     src={resolveUri(image.uri)}
-                    alt={`Item ${index + 1}`}
+                    alt={t("list.itemAlt", { index: index + 1 })}
                     draggable={false}
                   />
                 </div>
@@ -490,7 +492,7 @@ const ImageListProperty = (props: PropertyProps) => {
               margin: `${theme.spacing(SPACING.sm)} 0`
             })}
           >
-            Awaiting upstream
+            {t("awaitingUpstream")}
           </div>
         )}
       </div>
@@ -528,7 +530,7 @@ const ImageListProperty = (props: PropertyProps) => {
                     }
                   }}
                   src={resolveUri(image.uri)}
-                  alt={`Item ${index + 1}`}
+                  alt={t("list.itemAlt", { index: index + 1 })}
                   draggable={false}
                   onLoad={loadHandlers[image.uri]}
                 />
@@ -543,7 +545,7 @@ const ImageListProperty = (props: PropertyProps) => {
                 className="remove-button"
                 onClick={removeHandlers[index]}
                 buttonSize="small"
-                tooltip="Remove image"
+                tooltip={t("list.removeImage")}
               />
             </div>
           ))}
@@ -551,7 +553,7 @@ const ImageListProperty = (props: PropertyProps) => {
       )}
 
       {/* Dropzone */}
-      <Tooltip title="Click to select images or drag and drop">
+      <Tooltip title={t("list.selectOrDragImages")}>
         <div
           role="button"
           tabIndex={0}
@@ -562,7 +564,7 @@ const ImageListProperty = (props: PropertyProps) => {
           onDragLeave={handleDragLeave}
           onDrop={onDrop}
         >
-          <p>Click or drop images here</p>
+          <p>{t("list.clickOrDropImages")}</p>
         </div>
       </Tooltip>
     </div>
