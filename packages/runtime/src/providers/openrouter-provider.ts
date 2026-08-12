@@ -54,9 +54,9 @@ export class OpenRouterProvider extends OpenAICompatProvider {
         // Stryker disable next-line ObjectLiteral
         defaultHeaders: {
           // Stryker disable next-line StringLiteral
-          "HTTP-Referer": "https://github.com/nodetool-ai/nodetool-core",
+          "HTTP-Referer": "https://www.brainvite.com",
           // Stryker disable next-line StringLiteral
-          "X-Title": "NodeTool"
+          "X-Title": "BrainVite-AI-Canvas"
         }
       },
       { ...options, fetchFn }
@@ -194,8 +194,8 @@ export class OpenRouterProvider extends OpenAICompatProvider {
       {
         headers: {
           Authorization: `Bearer ${this.apiKey}`,
-          "HTTP-Referer": "https://github.com/nodetool-ai/nodetool-core",
-          "X-Title": "NodeTool"
+          "HTTP-Referer": "https://www.brainvite.com",
+          "X-Title": "BrainVite-AI-Canvas"
         }
       }
     );

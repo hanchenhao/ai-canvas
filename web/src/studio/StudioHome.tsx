@@ -180,13 +180,13 @@ const StudioHome = () => {
             brief: brief.trim(),
             style: "",
             entityIds: [],
-            aspectRatio: "16:9",
-            directorModel: STUDIO_DIRECTOR_MODEL,
-            imageModel: STUDIO_STILL_MODEL,
-            videoModel: STUDIO_CLIP_MODEL
-          }
-        })
-        .then((created) => navigate(`/studio/storyboard/${created.id}`))
+           aspectRatio: "16:9",
+            directorModel: { ...STUDIO_DIRECTOR_MODEL },
+            imageModel: { ...STUDIO_STILL_MODEL },
+            videoModel: { ...STUDIO_CLIP_MODEL }
+         }
+       })
+       .then((created) => navigate(`/studio/storyboard/${created.id}`))
         .catch(() => setCreateError("创建失败，请检查服务和模型配置后重试。"))
         .finally(() => {
           creatingRef.current = false;
@@ -332,7 +332,7 @@ const StudioHome = () => {
           gap={SPACING.lg}
           sx={{ width: "100%", maxWidth: 1120, mx: "auto" }}
         >
-          <FlexRow align="end" justify="space-between">
+          <FlexRow align="flex-end" justify="space-between">
             <FlexColumn gap={SPACING.xs}>
               <Text size="big" weight={600}>
                 选择创作方式

@@ -1,12 +1,12 @@
 /**
- * Deep links into the documentation site (https://docs.nodetool.ai).
+ * Deep links into the BrainVite product website.
  *
  * One entry per surface that shows a help icon, so a page that moves is
  * renamed here instead of in a dozen components. Paths are extensionless —
  * the docs site's own navigation links that way.
  */
 
-export const DOCS_BASE_URL = "https://docs.nodetool.ai";
+export const DOCS_BASE_URL = "https://www.brainvite.com";
 
 export const docsUrl = (path: string): string =>
   `${DOCS_BASE_URL}/${path.replace(/^\//, "")}`;

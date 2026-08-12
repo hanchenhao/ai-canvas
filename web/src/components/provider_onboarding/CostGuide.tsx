@@ -35,8 +35,8 @@ const COST_POINTS: CostPoint[] = [
   },
   {
     icon: <PaymentsOutlinedIcon sx={{ fontSize: 18 }} />,
-    title: "You pay the provider, not NodeTool",
-    body: "Your API key bills your own account with each provider directly. NodeTool never adds a markup and never sees your card — set spending limits in the provider's dashboard to stay in control."
+    title: "You pay the provider, not BrainVite-AI-Canvas",
+    body: "Your API key bills your own account with each provider directly. BrainVite-AI-Canvas never adds a markup and never sees your card — set spending limits in the provider's dashboard to stay in control."
   },
   {
     icon: <SavingsOutlinedIcon sx={{ fontSize: 18 }} />,

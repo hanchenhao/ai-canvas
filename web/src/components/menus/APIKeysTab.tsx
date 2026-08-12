@@ -461,7 +461,7 @@ const ProviderHero = memo(function ProviderHero({ theme }: { theme: Theme }) {
           Models &amp; Providers
         </Text>
         <Caption sx={{ opacity: 0.65, lineHeight: 1.5, maxWidth: 520 }}>
-          Connect the AI providers you want to use. NodeTool unlocks their
+          Connect the AI providers you want to use. BrainVite-AI-Canvas unlocks their
           language, image, video, audio, and embedding models across the editor
           and your workflows.
         </Caption>
@@ -1145,7 +1145,7 @@ export const SecurityNotice = memo(function SecurityNotice() {
             endIcon={<OpenInNewIcon sx={{ fontSize: 12 }} />}
             onClick={() =>
               window.open(
-                "https://github.com/nodetool-ai/nodetool/blob/main/docs/security.md",
+                "https://github.com/hanchenhao/ai-canvas/blob/main/docs/security.md",
                 "_blank",
                 "noopener,noreferrer"
               )

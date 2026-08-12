@@ -194,7 +194,7 @@ const WelcomeFlow: React.FC<WelcomeFlowProps> = ({
     <div css={styles(theme, fullWidth)}>
       <div className="welcome-eyebrow">
         {statusDot && <span className="welcome-eyebrow-dot" />}
-        Welcome to NodeTool
+        Welcome to BrainVite-AI-Canvas
       </div>
       <h1 className="welcome-heading">What do you want to make today?</h1>
       <p className="welcome-sub">

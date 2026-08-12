@@ -6,7 +6,7 @@
  * speech synthesis, Notification Center) by spawning `osascript`. No
  * PyObjC, no native bindings — just AppleScript over stdin.
  *
- * Areas mirror https://github.com/nodetool-ai/nodetool-apple, restricted
+ * Areas mirror the upstream Apple automation pack, restricted
  * to the subset that can be done in AppleScript alone.
  */
 

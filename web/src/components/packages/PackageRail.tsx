@@ -183,7 +183,7 @@ const PackageRail = ({
         borderTop: `1px solid ${theme.vars.palette.divider}`
       })}
     >
-      Changes take effect after the NodeTool server restarts.
+      Changes take effect after the BrainVite-AI-Canvas service restarts.
     </Text>
   </FlexColumn>
 );

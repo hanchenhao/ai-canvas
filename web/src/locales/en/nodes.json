@@ -56040,7 +56040,7 @@
   },
   "lib.comfy.RunWorkflow": {
     "title": "Run ComfyUI Workflow",
-    "description": "Run a ComfyUI workflow on a ComfyUI server.\n    comfy, comfyui, workflow, image, diffusion\n\n    Use cases:\n    - Generate images with an existing ComfyUI workflow\n    - Call a local or remote ComfyUI server (RunPod, etc.)\n    - Embed ComfyUI generation inside a NodeTool workflow",
+    "description": "Run a ComfyUI workflow on a ComfyUI server.\n    comfy, comfyui, workflow, image, diffusion\n\n    Use cases:\n    - Generate images with an existing ComfyUI workflow\n    - Call a local or remote ComfyUI server (RunPod, etc.)\n    - Embed ComfyUI generation inside a BrainVite-AI-Canvas workflow",
     "properties": {
       "endpoint": {
         "title": "Endpoint",
@@ -56058,7 +56058,7 @@
   },
   "lib.comfy.RunWorkflowOnWorker": {
     "title": "Run ComfyUI Workflow (Worker)",
-    "description": "Run a ComfyUI workflow on a NodeTool worker (nodetool-worker-comfy) over the worker bridge.\n    comfy, comfyui, workflow, worker, runpod, diffusion\n\n    Use cases:\n    - Run ComfyUI on a remote GPU worker without exposing ComfyUI directly\n    - Drive a RunPod ComfyUI worker from inside a NodeTool workflow",
+    "description": "Run a ComfyUI workflow on a BrainVite worker (nodetool-worker-comfy) over the worker bridge.\n    comfy, comfyui, workflow, worker, runpod, diffusion\n\n    Use cases:\n    - Run ComfyUI on a remote GPU worker without exposing ComfyUI directly\n    - Drive a RunPod ComfyUI worker from inside a BrainVite-AI-Canvas workflow",
     "properties": {
       "previews": {
         "title": "Previews",
@@ -56074,7 +56074,7 @@
       },
       "worker_url": {
         "title": "Worker URL",
-        "description": "WebSocket URL of the NodeTool worker fronting ComfyUI, e.g. ws://host:7777/ws."
+        "description": "WebSocket URL of the BrainVite worker fronting ComfyUI, e.g. ws://host:7777/ws."
       },
       "workflow": {
         "title": "Workflow",

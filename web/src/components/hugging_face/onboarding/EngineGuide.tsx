@@ -179,7 +179,7 @@ const EngineGuide: React.FC = () => {
             Local engines
           </Text>
           <Caption sx={{ opacity: 0.7 }}>
-            NodeTool runs models through these engines. Ollama is the easiest
+            BrainVite-AI-Canvas runs models through these engines. Ollama is the easiest
             start; the others unlock more model types.
           </Caption>
         </FlexColumn>

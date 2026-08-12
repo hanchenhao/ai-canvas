@@ -83883,7 +83883,7 @@
   },
   "lib.comfy.RunWorkflow": {
     "title": "运行 ComfyUI 工作流",
-    "description": "在 ComfyUI 服务器上运行 ComfyUI 工作流。\nComfy, ComfyUI, 工作流, 图像, 扩散\n\n常见用途：\n- 使用现有 ComfyUI 工作流生成图像\n- 调用本地或远程 ComfyUI 服务器（RunPod 等）\n- 在 NodeTool 工作流中嵌入 ComfyUI 生成",
+    "description": "在 ComfyUI 服务器上运行 ComfyUI 工作流。\nComfy, ComfyUI, 工作流, 图像, 扩散\n\n常见用途：\n- 使用现有 ComfyUI 工作流生成图像\n- 调用本地或远程 ComfyUI 服务器（RunPod 等）\n- 在 BrainVite-AI-Canvas 工作流中嵌入 ComfyUI 生成",
     "properties": {
       "endpoint": {
         "title": "端点",
@@ -83901,7 +83901,7 @@
   },
   "lib.comfy.RunWorkflowOnWorker": {
     "title": "运行 ComfyUI 工作流（Worker）",
-    "description": "通过 worker 桥接在 NodeTool worker（nodetool-worker-comfy）上运行 ComfyUI 工作流。\nComfy, ComfyUI, 工作流, Worker, RunPod, 扩散\n\n常见用途：\n- 在远程 GPU worker 上运行 ComfyUI，而无需直接暴露 ComfyUI\n- 从 NodeTool 工作流中驱动 RunPod ComfyUI worker",
+    "description": "通过 worker 桥接在 BrainVite worker（nodetool-worker-comfy）上运行 ComfyUI 工作流。\nComfy, ComfyUI, 工作流, Worker, RunPod, 扩散\n\n常见用途：\n- 在远程 GPU worker 上运行 ComfyUI，而无需直接暴露 ComfyUI\n- 从 BrainVite-AI-Canvas 工作流中驱动 RunPod ComfyUI worker",
     "properties": {
       "previews": {
         "title": "预览",
@@ -83917,7 +83917,7 @@
       },
       "worker_url": {
         "title": "Worker URL",
-        "description": "托管 ComfyUI 的 NodeTool worker 的 WebSocket URL，例如 ws://host:7777/ws。"
+        "description": "托管 ComfyUI 的 BrainVite worker 的 WebSocket URL，例如 ws://host:7777/ws。"
       },
       "workflow": {
         "title": "工作流",

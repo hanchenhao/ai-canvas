@@ -247,7 +247,7 @@ export const PROVIDER_META: ProviderMeta[] = [
     section: "media",
     docsUrl: "https://fal.ai/docs",
     icon: falColorIcon,
-    note: 'For exact cost tracking, use an admin key (fal.ai dashboard → Keys → scope "Admin"). NodeTool reads each request\'s actual billing from FAL; a standard key only yields estimates.'
+    note: 'For exact cost tracking, use an admin key (fal.ai dashboard → Keys → scope "Admin"). BrainVite-AI-Canvas reads each request\'s actual billing from FAL; a standard key only yields estimates.'
   },
   {
     key: "REPLICATE_API_TOKEN",
@@ -371,14 +371,14 @@ export const PROVIDER_META: ProviderMeta[] = [
   {
     key: "RUNPOD_API_KEY",
     name: "RunPod",
-    description: "Rent GPU pods to run NodeTool workers.",
+    description: "Rent GPU pods to run BrainVite-AI-Canvas workers.",
     section: "compute",
     docsUrl: "https://docs.runpod.io/"
   },
   {
     key: "VAST_API_KEY",
     name: "Vast.ai",
-    description: "Rent marketplace GPUs to run NodeTool workers.",
+    description: "Rent marketplace GPUs to run BrainVite-AI-Canvas workers.",
     section: "compute",
     docsUrl: "https://docs.vast.ai/"
   },
@@ -431,9 +431,9 @@ export const PROVIDER_META: ProviderMeta[] = [
   {
     key: "SERVER_AUTH_TOKEN",
     name: "Server Auth Token",
-    description: "Bearer token to secure NodeTool server endpoints.",
+    description: "Bearer token to secure BrainVite-AI-Canvas service endpoints.",
     section: "advanced",
-    docsUrl: "https://github.com/nodetool-ai/nodetool"
+    docsUrl: "https://github.com/hanchenhao/ai-canvas"
   }
 ];
 

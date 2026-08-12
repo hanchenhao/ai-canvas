@@ -22,7 +22,7 @@ import {
 } from "../../utils/bugReport";
 
 const GITHUB_ISSUE_URL =
-  "https://github.com/nodetool-ai/nodetool/issues/new";
+  "https://github.com/hanchenhao/ai-canvas/issues/new";
 
 /** Gather browser / OS / build system information. */
 function getSystemInfo(): string {
@@ -31,7 +31,7 @@ function getSystemInfo(): string {
     `Platform: ${navigator.platform}`,
     `Language: ${navigator.language}`,
     `Screen: ${window.screen.width}x${window.screen.height} (devicePixelRatio: ${window.devicePixelRatio})`,
-    `NodeTool version: ${VERSION} (build ${BUILD_NUMBER}, commit ${GIT_COMMIT_HASH})`,
+    `BrainVite-AI-Canvas version: ${VERSION} (build ${BUILD_NUMBER}, commit ${GIT_COMMIT_HASH})`,
   ];
   return lines.join("\n");
 }

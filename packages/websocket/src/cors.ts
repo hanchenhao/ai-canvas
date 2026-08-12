@@ -11,8 +11,7 @@
  *
  * Defaults cover the known web dev server and the server's own origin
  * (localhost / 127.0.0.1 / [::1] on any port), the Electron renderer
- * (`file://`), and the first-party NodeTool product domains
- * (`https://nodetool.ai` and its subdomains, e.g. `app.nodetool.ai`).
+ * (`file://`). Public web origins must be opted in explicitly.
  * Additional origins are granted via the `NODETOOL_ALLOWED_ORIGINS` env var
  * (comma-separated). Set it to `*` to restore allow-all behaviour for trusted
  * deployments fronted by their own gateway.
@@ -21,7 +20,7 @@ import { getEnv } from "@nodetool-ai/config";
 
 /**
  * Origins always permitted: localhost/127.0.0.1/[::1] (any port), Electron
- * file://, and the first-party `nodetool.ai` product domains over HTTPS.
+ * file://. Public web origins are not enabled in the local-first build.
  */
 const DEFAULT_ALLOWED_ORIGIN_PATTERNS: RegExp[] = [
   /^https?:\/\/localhost(?::\d+)?$/,
@@ -30,11 +29,7 @@ const DEFAULT_ALLOWED_ORIGIN_PATTERNS: RegExp[] = [
   // Electron renderer requests that carry a literal `file://` origin. (A
   // `file://` document that sends `Origin: null` is handled by the
   // missing-origin branch in isOriginAllowed, not this pattern.)
-  /^file:\/\//,
-  // First-party NodeTool product: https://nodetool.ai and any subdomain
-  // (app.nodetool.ai, api.nodetool.ai, …). HTTPS only — no port allowed so a
-  // look-alike like `nodetool.ai.evil.com` cannot match.
-  /^https:\/\/([a-z0-9-]+\.)*nodetool\.ai$/
+  /^file:\/\//
 ];
 
 interface CorsConfig {

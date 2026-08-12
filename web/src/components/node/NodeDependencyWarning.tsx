@@ -171,7 +171,7 @@ const NodeDependencyWarning: FC<NodeDependencyWarningProps> = ({
         </button>
       ) : (
         <div className="warning-text">
-          Install it on the machine running the NodeTool server to use this
+          Install it on the machine running the BrainVite-AI-Canvas service to use this
           node.
         </div>
       )}

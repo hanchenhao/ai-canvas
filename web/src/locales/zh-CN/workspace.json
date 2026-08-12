@@ -98,7 +98,7 @@
     "added": "工作区已添加",
     "removed": "工作区已移除",
     "removeTitle": "移除此工作区？",
-    "removeContent": "该工作区将从 NodeTool 中移除，文件夹本身不会被删除。",
+    "removeContent": "该工作区将从 BrainVite-AI-Canvas 中移除，文件夹本身不会被删除。",
     "removeConfirm": "移除",
     "removeCancel": "取消"
   },

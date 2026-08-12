@@ -137,14 +137,14 @@ const MCPSettingsMenu = () => {
           type: "error",
           alert: true,
           content:
-            result.error ?? "Could not find the NodeTool extension bundle."
+            result.error ?? "Could not find the BrainVite-AI-Canvas extension bundle."
         });
       } else if (result.opened) {
         addNotification({
           type: "success",
           alert: true,
           content:
-            "Opening the NodeTool extension in Claude Desktop — confirm the install there."
+            "Opening the BrainVite-AI-Canvas extension in Claude Desktop — confirm the install there."
         });
       } else {
         addNotification({
@@ -172,9 +172,9 @@ const MCPSettingsMenu = () => {
     >
       <div className="settings-main-content">
         <Text className="description" sx={{ mb: 1 }}>
-          Connect AI coding assistants to NodeTool via the{" "}
+          Connect AI coding assistants to BrainVite-AI-Canvas via the{" "}
           <strong>Model Context Protocol</strong>. When installed, Claude Code,
-          Codex, and OpenCode can use NodeTool workflows, assets, nodes, and
+          Codex, and OpenCode can use BrainVite-AI-Canvas workflows, assets, nodes, and
           collections as tools.
         </Text>
 
@@ -277,7 +277,7 @@ const MCPSettingsMenu = () => {
           <div className="settings-section" style={{ marginTop: "1.5em" }}>
             <Text sx={{ fontWeight: 500, mb: 0.5 }}>Claude Desktop</Text>
             <Text className="description" sx={{ mb: 1 }}>
-              Install the NodeTool extension bundled with this app. Claude
+              Install the BrainVite-AI-Canvas extension bundled with this app. Claude
               Desktop opens its install dialog; confirm it there.
             </Text>
             <FlexRow justify="flex-start">

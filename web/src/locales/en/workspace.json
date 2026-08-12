@@ -98,7 +98,7 @@
     "added": "Workspace added",
     "removed": "Workspace removed",
     "removeTitle": "Remove this workspace?",
-    "removeContent": "The workspace will be removed from NodeTool. The folder itself will not be deleted.",
+    "removeContent": "The workspace will be removed from BrainVite-AI-Canvas. The folder itself will not be deleted.",
     "removeConfirm": "Remove",
     "removeCancel": "Cancel"
   },

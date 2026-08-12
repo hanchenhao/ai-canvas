@@ -76,7 +76,7 @@ export const ONBOARDING_ENGINES: readonly OnboardingEngine[] = [
     tagline: "GGUF models in-process",
     formats: ["GGUF"],
     description:
-      "Runs GGUF language models directly inside the NodeTool backend — no separate server. Great for GGUF weights pulled straight from Hugging Face.",
+      "Runs GGUF language models directly inside the BrainVite-AI-Canvas backend — no separate server. Great for GGUF weights pulled straight from Hugging Face.",
     runtimeId: "node-llama-cpp",
     docsUrl: "https://github.com/withcatai/node-llama-cpp"
   },
@@ -263,7 +263,7 @@ export const ONBOARDING_MODELS: readonly OnboardingModel[] = [
   ollama(
     "gpt-oss:20b",
     "GPT-OSS 20B",
-    "OpenAI's open-weight reasoning model. NodeTool's default local chat model.",
+    "OpenAI's open-weight reasoning model. BrainVite-AI-Canvas's default local chat model.",
     14.0,
     16,
     "chat",

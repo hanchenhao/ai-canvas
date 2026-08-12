@@ -197,7 +197,7 @@ const ErrorBoundary: React.FC = () => {
     <ThemeProvider theme={theme}>
       <Box css={errorBoundaryStyles(theme)}>
         <Box className="hero">
-          <img src="/logo192.png" alt="NodeTool Logo" className="logo" />
+          <img src="/logo192.png" alt="BrainVite-AI-Canvas" className="logo" />
           <Text className="heading">Something went wrong</Text>
           <Text className="subtext">
             An unexpected error occurred. You can try reloading the page. If
@@ -226,15 +226,12 @@ const ErrorBoundary: React.FC = () => {
           </Box>
           <Box className="contact-row">
             <a
-              href="https://discord.gg/GQqBKAWD"
+              href="https://www.brainvite.com"
               className="contact-link"
               target="_blank"
               rel="noreferrer"
             >
-              Join our Discord
-            </a>
-            <a href="mailto:hello@nodetool.ai" className="contact-link">
-              Email hello@nodetool.ai
+              BrainVite website
             </a>
           </Box>
         </Box>

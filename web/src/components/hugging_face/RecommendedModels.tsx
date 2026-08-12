@@ -168,7 +168,7 @@ const RecommendedModelsInner: React.FC<RecommendedModelsProps> = ({
       >
         Gated or private Hugging Face models need access on huggingface.co (accept
         the license or request access) plus a read token for the server process:
-        set HF_TOKEN before starting NodeTool, or run huggingface-cli login once.
+        set HF_TOKEN before starting BrainVite-AI-Canvas, or run huggingface-cli login once.
         If a download fails, open the progress panel and use Copy message to share
         the details.
       </Text>

@@ -39,7 +39,7 @@ const DashboardTutorials: React.FC = () => {
   return (
     <section css={gridStyles(theme)}>
       <div css={wrapStyles(theme)}>
-        <SectionHeader title="Learn the basics" count="new to NodeTool? start here">
+        <SectionHeader title="Learn the basics" count="new here? start here">
           <SectionLink onClick={() => navigate("/tutorials")}>
             All tutorials
           </SectionLink>

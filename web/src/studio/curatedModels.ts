@@ -13,6 +13,7 @@ import type {
   TTSModelValue,
   VideoModelValue
 } from "../stores/ApiTypes";
+import { getBuildEnv } from "../lib/buildEnv";
 
 export interface CuratedOption<T> {
   id: string;
@@ -69,11 +70,12 @@ export const STUDIO_STILL_MODELS: CuratedOption<ImageModelValue>[] = [
  * provider/model can be changed at build time without exposing its API key.
  */
 const configuredVideoProvider =
-  import.meta.env.VITE_STUDIO_VIDEO_PROVIDER?.trim() || "kie";
+  getBuildEnv("VITE_STUDIO_VIDEO_PROVIDER")?.trim() || "kie";
 const configuredVideoModel =
-  import.meta.env.VITE_STUDIO_VIDEO_MODEL?.trim() || "bytedance/seedance-2";
+  getBuildEnv("VITE_STUDIO_VIDEO_MODEL")?.trim() ||
+  "bytedance/seedance-2";
 const configuredVideoName =
-  import.meta.env.VITE_STUDIO_VIDEO_MODEL_NAME?.trim() || "Seedance 2.0";
+  getBuildEnv("VITE_STUDIO_VIDEO_MODEL_NAME")?.trim() || "Seedance 2.0";
 
 export const STUDIO_CLIP_MODELS: CuratedOption<VideoModelValue>[] = [
   {

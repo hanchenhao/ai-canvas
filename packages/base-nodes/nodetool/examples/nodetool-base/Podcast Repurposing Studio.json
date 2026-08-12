@@ -267,7 +267,7 @@
           "name": "episode_audio",
           "value": {
             "type": "audio",
-            "uri": "https://app.nodetool.ai/examples/remove_silence.mp3"
+            "uri": ""
           },
           "description": "The full episode recording (any common audio format)"
         },

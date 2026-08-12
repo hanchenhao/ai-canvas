@@ -149,7 +149,7 @@ describe("ErrorBoundary", () => {
     // jsdom's Location.reload() is read-only and cannot be mocked
   });
 
-  it("displays Discord link", () => {
+  it("displays BrainVite website link", () => {
     const testError = new Error("Test error");
     mockUseRouteError.mockReturnValue(testError);
 
@@ -159,10 +159,10 @@ describe("ErrorBoundary", () => {
       </ThemeProvider>
     );
 
-    const discordLink = screen.getByRole("link", { name: /discord/i });
-    expect(discordLink).toBeInTheDocument();
-    expect(discordLink).toHaveAttribute("href", "https://discord.gg/GQqBKAWD");
-    expect(discordLink).toHaveAttribute("target", "_blank");
+    const websiteLink = screen.getByRole("link", { name: /BrainVite website/i });
+    expect(websiteLink).toBeInTheDocument();
+    expect(websiteLink).toHaveAttribute("href", "https://www.brainvite.com");
+    expect(websiteLink).toHaveAttribute("target", "_blank");
   });
 
   it("displays logo", () => {
@@ -175,7 +175,7 @@ describe("ErrorBoundary", () => {
       </ThemeProvider>
     );
 
-    const logo = screen.getByAltText("NodeTool Logo");
+    const logo = screen.getByAltText("BrainVite-AI-Canvas");
     expect(logo).toBeInTheDocument();
     expect(logo).toHaveAttribute("src", "/logo192.png");
   });

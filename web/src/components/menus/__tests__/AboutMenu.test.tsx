@@ -110,16 +110,7 @@ describe("AboutMenu", () => {
       render(<AboutMenu />, { wrapper });
 
       const link = screen.getByText("GitHub Repository").closest("a");
-      expect(link).toHaveAttribute("href", "https://github.com/nodetool-ai/nodetool");
-      expect(link).toHaveAttribute("target", "_blank");
-      expect(link).toHaveAttribute("rel", "noopener noreferrer");
-    });
-
-    it("should render NodeTool Forum link with correct attributes", () => {
-      render(<AboutMenu />, { wrapper });
-
-      const link = screen.getByText("NodeTool Forum").closest("a");
-      expect(link).toHaveAttribute("href", "https://forum.nodetool.ai");
+      expect(link).toHaveAttribute("href", "https://github.com/hanchenhao/ai-canvas");
       expect(link).toHaveAttribute("target", "_blank");
       expect(link).toHaveAttribute("rel", "noopener noreferrer");
     });
@@ -128,7 +119,7 @@ describe("AboutMenu", () => {
       render(<AboutMenu />, { wrapper });
 
       const link = screen.getByText("Website").closest("a");
-      expect(link).toHaveAttribute("href", "https://nodetool.ai");
+      expect(link).toHaveAttribute("href", "https://www.brainvite.com");
       expect(link).toHaveAttribute("target", "_blank");
       expect(link).toHaveAttribute("rel", "noopener noreferrer");
     });
@@ -139,7 +130,6 @@ describe("AboutMenu", () => {
       render(<AboutMenu />, { wrapper });
 
       expect(screen.getByRole("link", { name: "GitHub Repository" })).toBeInTheDocument();
-      expect(screen.getByRole("link", { name: "NodeTool Forum" })).toBeInTheDocument();
       expect(screen.getByRole("link", { name: "Website" })).toBeInTheDocument();
     });
 
@@ -172,7 +162,6 @@ describe("AboutMenu", () => {
       expect(screen.getByText("Operating System")).toBeInTheDocument();
       expect(screen.getByText("Links")).toBeInTheDocument();
       expect(screen.getByText("GitHub Repository")).toBeInTheDocument();
-      expect(screen.getByText("NodeTool Forum")).toBeInTheDocument();
       expect(screen.getByText("Website")).toBeInTheDocument();
     });
   });

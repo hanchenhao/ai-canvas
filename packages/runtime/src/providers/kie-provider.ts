@@ -62,7 +62,7 @@ const KIE_UPLOAD_URL =
   "https://kieai.redpandaai.co/api/file-stream-upload";
 // The Suno API always requires a callBackUrl. When KIE_WEBHOOK_URL is set we
 // use it; otherwise a placeholder satisfies the requirement (we poll instead).
-const KIE_SUNO_CALLBACK = "https://nodetool.ai/kie-callback";
+const KIE_SUNO_CALLBACK = "https://www.brainvite.com/kie-callback";
 
 /**
  * When set, KIE tasks are submitted with a real callBackUrl and the provider

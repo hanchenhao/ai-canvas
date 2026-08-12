@@ -40,8 +40,8 @@ const COMFY_WORKER_IMAGE = "ghcr.io/nodetool-ai/nodetool-worker-comfy:latest";
 // Sentinel select value that keeps the free-text image field for a custom build.
 const CUSTOM_IMAGE = "__custom_image__";
 const IMAGE_PRESETS = [
-  { value: DEFAULT_WORKER_IMAGE, label: "NodeTool Worker" },
-  { value: COMFY_WORKER_IMAGE, label: "NodeTool Worker + ComfyUI" },
+  { value: DEFAULT_WORKER_IMAGE, label: "BrainVite Worker" },
+  { value: COMFY_WORKER_IMAGE, label: "BrainVite Worker + ComfyUI" },
   { value: CUSTOM_IMAGE, label: "Custom…" }
 ] as const;
 const DEFAULT_IDLE_TIMEOUT = "30";

@@ -60,7 +60,7 @@ describe("Logo", () => {
         enableText
       />
     );
-    expect(screen.getByAltText("NodeTool")).toBeInTheDocument();
+    expect(screen.getByAltText("BrainVite-AI-Canvas")).toBeInTheDocument();
   });
 
   it("renders text when enableText is true", () => {
@@ -74,7 +74,7 @@ describe("Logo", () => {
         enableText
       />
     );
-    const text = screen.getByText(/NODE/);
+    const text = screen.getByText(/BRAIN/);
     expect(text).toBeInTheDocument();
   });
 });

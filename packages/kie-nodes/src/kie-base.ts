@@ -562,7 +562,7 @@ export async function kieSubmitSuno(
   const webhookBase = getWebhookBaseUrl();
   const callBackUrl = webhookBase
     ? `${webhookBase}/api/kie/webhook`
-    : "https://nodetool.ai/kie-callback";
+    : "https://www.brainvite.com/kie-callback";
   const body = input.callBackUrl
     ? input
     : { ...input, callBackUrl };
