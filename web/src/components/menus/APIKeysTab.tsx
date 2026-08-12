@@ -1148,13 +1148,13 @@ export const SecurityNotice = memo(function SecurityNotice() {
             variant="text"
             size="small"
             endIcon={<OpenInNewIcon sx={{ fontSize: 12 }} />}
-            onClick={() =>
-              window.open(
-                "https://github.com/nodetool-ai/nodetool/blob/main/docs/security.md",
-                "_blank",
-                "noopener,noreferrer"
-              )
-            }
+           onClick={() =>
+             window.open(
+               "https://docs.brainvite.com/security",
+               "_blank",
+               "noopener,noreferrer"
+             )
+           }
             sx={{ alignSelf: "flex-start", marginTop: theme.spacing(1) }}
           >
             {t("apiKey.security.learnMore")}
