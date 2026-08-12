@@ -2,6 +2,7 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useShallow } from "zustand/react/shallow";
+import { useTranslation } from "react-i18next";
 import AddIcon from "@mui/icons-material/Add";
 
 import useGlobalChatStore, {
@@ -30,6 +31,7 @@ const useOpenThreadTab = () => {
   const openTab = useWorkspaceTabsStore((state) => state.openTab);
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation("chat");
 
   return useCallback(
     (threadId: string, title?: string) => {
@@ -37,13 +39,13 @@ const useOpenThreadTab = () => {
         type: "chat",
         ref: threadId,
         mode: "view",
-        title: title || "New chat"
+        title: title || t("chat:list.newChat")
       });
       if (!location.pathname.startsWith("/workspace")) {
         navigate("/workspace");
       }
     },
-    [location.pathname, navigate, openTab]
+    [location.pathname, navigate, openTab, t]
   );
 };
 
@@ -53,6 +55,7 @@ export const CreateChatButton = memo(function CreateChatButton() {
     (state) => state.addNotification
   );
   const openThreadTab = useOpenThreadTab();
+  const { t } = useTranslation("chat");
 
   const handleCreate = useCallback(async () => {
     try {
@@ -62,15 +65,15 @@ export const CreateChatButton = memo(function CreateChatButton() {
       console.error("Failed to create new chat thread:", error);
       addNotification({
         type: "error",
-        content: "Could not start a new conversation. Please try again."
+        content: t("chat:list.createError")
       });
     }
-  }, [createNewThread, openThreadTab, addNotification]);
+  }, [createNewThread, openThreadTab, addNotification, t]);
 
   return (
-    <Tooltip title="New chat" placement="right-start">
+    <Tooltip title={t("chat:list.newChat")} placement="right-start">
       <ToolbarIconButton
-        ariaLabel="New chat"
+        ariaLabel={t("chat:list.newChat")}
         onClick={() => void handleCreate()}
         tabIndex={-1}
         icon={<AddIcon />}
@@ -88,6 +91,7 @@ const ChatListPanel = () => {
   const [filterValue, setFilterValue] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
   const autoFocusEnabled = useAutoFocusEnabled();
+  const { t } = useTranslation("chat");
 
   useEffect(() => {
     if (autoFocusEnabled) {
@@ -118,8 +122,8 @@ const ChatListPanel = () => {
     (threadId: string) =>
       threads[threadId]
         ? threadPreview(threads[threadId].title, messageCache[threadId])
-        : "Empty conversation",
-    [threads, messageCache]
+        : t("chat:list.emptyConversation"),
+    [threads, messageCache, t]
   );
 
   const threadsWithMessages = useMemo<Record<string, ThreadInfo>>(() => {
@@ -154,11 +158,11 @@ const ChatListPanel = () => {
         console.error("Failed to delete thread:", error);
         addNotification({
           type: "error",
-          content: "Could not delete the conversation. Please try again."
+          content: t("chat:list.deleteError")
         });
       });
     },
-    [deleteThread, addNotification]
+    [deleteThread, addNotification, t]
   );
 
   const createNewThread = useGlobalChatStore((state) => state.createNewThread);
@@ -179,7 +183,7 @@ const ChatListPanel = () => {
           ref={searchRef}
           value={filterValue}
           onChange={setFilterValue}
-          placeholder="Search conversations..."
+          placeholder={t("chat:list.searchConversations")}
         />
       </FlexColumn>
 
@@ -191,7 +195,7 @@ const ChatListPanel = () => {
             role="status"
             aria-live="polite"
           >
-            <ShimmerText>Loading conversations…</ShimmerText>
+            <ShimmerText>{t("chat:list.loadingConversations")}</ShimmerText>
           </Text>
         </FlexColumn>
       ) : threadsError ? (
@@ -203,7 +207,7 @@ const ChatListPanel = () => {
         >
           <EmptyState
             variant="error"
-            title="Could not load conversations"
+            title={t("chat:list.couldNotLoad")}
             description={threadsError.message}
           />
         </FlexColumn>
@@ -215,8 +219,8 @@ const ChatListPanel = () => {
           sx={{ flex: 1, px: 2 }}
         >
           <EmptyState
-            title="No conversations yet"
-            description="Start a new chat with the + button above."
+            title={t("chat:list.noConversationsYet")}
+            description={t("chat:list.noConversationsDescription")}
           />
         </FlexColumn>
       ) : (

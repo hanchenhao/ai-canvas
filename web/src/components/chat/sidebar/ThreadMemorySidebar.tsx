@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import { memo, useMemo, useState } from "react";
 import {
   FlexColumn,
@@ -133,6 +134,7 @@ const MemoryCard: React.FC<{
   onDelete: (id: string) => void;
   deleteDisabled: boolean;
 }> = memo(({ memory, onDelete, deleteDisabled }) => {
+    const { t } = useTranslation("chat");
     const imageAssets = memory.resources.filter(isImageAsset);
     const otherResources = memory.resources.filter((r) => !isImageAsset(r));
     return (
@@ -148,7 +150,7 @@ const MemoryCard: React.FC<{
           </FlexRow>
           <span className="memory-delete">
             <DeleteButton
-              tooltip="Delete memory"
+              tooltip={t("chat:sidebar.deleteMemoryTooltip")}
               onClick={() => onDelete(memory.id)}
               disabled={deleteDisabled}
             />
@@ -187,6 +189,7 @@ MemoryCard.displayName = "MemoryCard";
 export const ThreadMemorySidebar: React.FC<ThreadMemorySidebarProps> = memo(
   ({ threadId, onClose }) => {
     const theme = useTheme();
+    const { t } = useTranslation("chat");
     const cssStyles = useMemo(() => styles(theme), [theme]);
     const utils = trpc.useUtils();
     const addNotification = useNotificationStore(
@@ -210,7 +213,7 @@ export const ThreadMemorySidebar: React.FC<ThreadMemorySidebarProps> = memo(
         addNotification({
           type: "error",
           alert: true,
-          content: `Could not delete memory: ${error.message}`
+          content: t("chat:sidebar.deleteMemoryError", { error: error.message })
         });
       }
     });
@@ -225,7 +228,7 @@ export const ThreadMemorySidebar: React.FC<ThreadMemorySidebarProps> = memo(
             weight={600}
             sx={{ letterSpacing: 0.6, textTransform: "uppercase" }}
           >
-            Memory
+            {t("chat:sidebar.memory")}
           </Text>
           <FlexRow align="center" gap={2}>
             {memories.length > 0 && (
@@ -233,15 +236,14 @@ export const ThreadMemorySidebar: React.FC<ThreadMemorySidebarProps> = memo(
                 {memories.length}
               </Text>
             )}
-            {onClose && <CloseButton onClick={onClose} tooltip="Hide memory" />}
+            {onClose && <CloseButton onClick={onClose} tooltip={t("chat:sidebar.hideMemory")} />}
           </FlexRow>
         </FlexRow>
         <ScrollArea className="memory-list">
           {memories.length === 0 ? (
             <div className="empty-state">
               <Text size="small">
-                Nothing saved yet. The agent records project notes and the
-                assets it creates here as it works.
+                {t("chat:sidebar.memoryEmpty")}
               </Text>
             </div>
           ) : (
@@ -265,10 +267,10 @@ export const ThreadMemorySidebar: React.FC<ThreadMemorySidebarProps> = memo(
               deleteMemory.mutate({ id: memoryToDelete });
             }
           }}
-          title="Delete memory"
-          content="Delete this memory? This cannot be undone."
-          confirmText="Delete"
-          cancelText="Cancel"
+          title={t("chat:sidebar.deleteMemory")}
+          content={t("chat:sidebar.deleteMemoryConfirm")}
+          confirmText={t("chat:action.delete")}
+          cancelText={t("chat:action.cancel")}
         />
       </aside>
     );

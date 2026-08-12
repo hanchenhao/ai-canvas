@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useState, type FC } from "react";
 import type { SxProps, Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import { AlertBanner, Text, FlexRow, EditorButton } from "../../ui_primitives";
 import { getIsElectronDetails } from "../../../utils/browser";
 import { useOpenPackageManager } from "../../../hooks/useOpenPackageManager";
@@ -38,6 +39,7 @@ const ClaudeCodeInstallPrompt: FC<{ onInstalled?: () => void }> = ({
   onInstalled
 }) => {
   const { isElectron } = getIsElectronDetails();
+  const { t } = useTranslation("chat");
   const [installing, setInstalling] = useState(false);
   const [installError, setInstallError] = useState<string | null>(null);
   const [installed, setInstalled] = useState(false);
@@ -57,24 +59,23 @@ const ClaudeCodeInstallPrompt: FC<{ onInstalled?: () => void }> = ({
         setInstalled(true);
         onInstalled?.();
       } else {
-        setInstallError(result.message || "Installation failed.");
+        setInstallError(result.message || t("chat:error.installFailed"));
       }
     } catch (err) {
       setInstallError(
-        err instanceof Error ? err.message : "Installation failed."
+        err instanceof Error ? err.message : t("chat:error.installFailed")
       );
       // Fall back to the package manager UI so the user can retry manually.
       openPackageManager();
     } finally {
       setInstalling(false);
     }
-  }, [onInstalled, openPackageManager]);
+  }, [onInstalled, openPackageManager, t]);
 
   if (installed) {
     return (
       <Text size="small" component="span">
-        Claude Code installed. Send your message again to use the Claude Agent
-        provider.
+        {t("chat:error.claudeCodeInstalled")}
       </Text>
     );
   }
@@ -82,8 +83,7 @@ const ClaudeCodeInstallPrompt: FC<{ onInstalled?: () => void }> = ({
   return (
     <FlexRow gap={1} align="center" wrap>
       <Text size="small" component="span">
-        Claude Code isn&apos;t installed. It&apos;s required to use the Claude
-        Agent provider.
+        {t("chat:error.claudeCodeNotInstalled")}
       </Text>
       {isElectron ? (
         <EditorButton
@@ -92,12 +92,13 @@ const ClaudeCodeInstallPrompt: FC<{ onInstalled?: () => void }> = ({
           disabled={installing}
           sx={{ ml: "auto", whiteSpace: "nowrap" }}
         >
-          {installing ? "Installing…" : "Install Claude Code"}
+          {installing ? t("chat:error.installing") : t("chat:error.installClaudeCode")}
         </EditorButton>
       ) : (
         <Text size="small" component="span">
-          Run{" "}
-          <code>npm install -g @anthropic-ai/claude-code</code> to install it.
+          {t("chat:error.installCommand")}{" "}
+          <code>npm install -g @anthropic-ai/claude-code</code>{" "}
+          {t("chat:error.installCommandHint")}
         </Text>
       )}
       {installError && (

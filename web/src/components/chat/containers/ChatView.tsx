@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import type { Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import { useCallback, useMemo, memo } from "react";
 import {
   Node,
@@ -228,6 +229,7 @@ const ChatView = ({
   threadId
 }: ChatViewProps) => {
   const theme = useTheme();
+  const { t } = useTranslation("chat");
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const handleSendMessage = useCallback(
     async (
@@ -293,7 +295,7 @@ const ChatView = ({
             {canShowMemorySidebar && (
               <ToolbarIconButton
                 onClick={toggleMemoryPanel}
-                tooltip={memoryPanelOpen ? "Hide memory" : "Show memory"}
+                tooltip={memoryPanelOpen ? t("chat:sidebar.hideMemory") : t("chat:sidebar.memory")}
                 active={memoryPanelOpen}
                 icon={<PsychologyOutlinedIcon fontSize="small" />}
               />
@@ -301,7 +303,7 @@ const ChatView = ({
             {showNewChatButton && onNewChat && (
               <ToolbarIconButton
                 onClick={onNewChat}
-                tooltip="New chat"
+                tooltip={t("chat:list.newChat")}
                 icon={<AddIcon fontSize="small" />}
               />
             )}

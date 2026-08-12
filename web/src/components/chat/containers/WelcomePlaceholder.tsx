@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import {
   Text,
   Chip,
@@ -78,13 +79,13 @@ const styles = (theme: Theme) =>
     }
   });
 
-const SUGGESTIONS = [
-  "Summarize a document",
-  "Analyze an image",
-  "Generate creative text",
-  "Build a workflow",
-  "Help me with code"
-];
+const SUGGESTION_KEYS = [
+  "chat:welcome.suggestionSummarize",
+  "chat:welcome.suggestionAnalyzeImage",
+  "chat:welcome.suggestionCreative",
+  "chat:welcome.suggestionWorkflow",
+  "chat:welcome.suggestionCode"
+] as const;
 
 // Cloud LLM providers we point first-time users at. Each maps to an API key
 // they can add on the Settings → Models & Providers tab.
@@ -108,8 +109,11 @@ const WelcomePlaceholder: React.FC<WelcomePlaceholderProps> = ({
   onSuggestionClick
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("chat");
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const { providers, isLoading, error } = useLanguageModelProviders();
+
+  const suggestions = useMemo(() => SUGGESTION_KEYS.map((key) => t(key)), [t]);
 
   const handleClick = useCallback(
     (suggestion: string) => {
@@ -121,9 +125,9 @@ const WelcomePlaceholder: React.FC<WelcomePlaceholderProps> = ({
   const handleConnectProvider = useCallback(() => {
     openProviderOnboarding({
       capability: "generate_message",
-      reason: "Chat needs a language model. Connect a provider to start."
+      reason: t("chat:composer.setupChat")
     });
-  }, []);
+  }, [t]);
 
   // Only treat the chat as "no provider" once the provider query has settled
   // successfully — while loading (or on a transient fetch error, which the
@@ -137,11 +141,10 @@ const WelcomePlaceholder: React.FC<WelcomePlaceholderProps> = ({
           <FlexColumn align="center" gap={1.5} sx={{ textAlign: "center" }}>
             <KeyRoundedIcon className="welcome-icon" />
             <Text className="welcome-title">
-              Connect an AI provider to get started
+              {t("chat:welcome.connectProviderTitle")}
             </Text>
             <Text className="welcome-subtitle" sx={{ maxWidth: 520 }}>
-              Add an API key for OpenAI, Anthropic, or Gemini to start chatting.
-              Your keys are encrypted and stored securely.
+              {t("chat:welcome.connectProviderSubtitle")}
             </Text>
             <FlexRow gap={1} justify="center" wrap sx={{ mt: 0.5 }}>
               {SETUP_PROVIDERS.map((provider) => (
@@ -184,18 +187,18 @@ const WelcomePlaceholder: React.FC<WelcomePlaceholderProps> = ({
               onClick={handleConnectProvider}
               sx={{ mt: 1 }}
             >
-              Connect a provider
+              {t("chat:welcome.connectProviderButton")}
             </EditorButton>
           </FlexColumn>
         ) : (
           <div className="chat-suggestions-block">
             <AutoAwesomeIcon className="welcome-icon" />
-            <Text className="welcome-title">How can I help you today?</Text>
+            <Text className="welcome-title">{t("chat:welcome.title")}</Text>
             <Text className="welcome-subtitle">
-              Ask me anything, drop files to analyze, or try one of these:
+              {t("chat:welcome.subtitle")}
             </Text>
             <div className="suggestions">
-              {SUGGESTIONS.map((suggestion) => (
+              {suggestions.map((suggestion) => (
                 <Chip
                   key={suggestion}
                   label={suggestion}

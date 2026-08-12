@@ -2,6 +2,7 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useShallow } from "zustand/react/shallow";
+import { useTranslation } from "react-i18next";
 import AddIcon from "@mui/icons-material/Add";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -49,6 +50,7 @@ const ChatPanelHeader: React.FC<ChatPanelHeaderProps> = ({
   docsLabel = "Chat & agents"
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation("chat");
   const openTab = useWorkspaceTabsStore((state) => state.openTab);
   const threadsAnchorRef = useRef<HTMLButtonElement>(null);
   const [threadsOpen, setThreadsOpen] = useState(false);
@@ -71,8 +73,8 @@ const ChatPanelHeader: React.FC<ChatPanelHeaderProps> = ({
     (threadId: string) =>
       threads?.[threadId]
         ? threadPreview(threads[threadId].title, messageCache[threadId])
-        : "Empty conversation",
-    [threads, messageCache]
+        : t("chat:list.emptyConversation"),
+    [threads, messageCache, t]
   );
 
   const threadsWithMessages: Record<string, ThreadInfo> = useMemo(() => {
@@ -104,11 +106,11 @@ const ChatPanelHeader: React.FC<ChatPanelHeaderProps> = ({
         console.error("Failed to delete thread:", error);
         addNotification({
           type: "error",
-          content: "Could not delete the conversation. Please try again."
+          content: t("chat:list.deleteError")
         });
       });
     },
-    [deleteThread, addNotification]
+    [deleteThread, addNotification, t]
   );
 
   const handleOpenAsTab = useCallback(() => {
@@ -140,18 +142,18 @@ const ChatPanelHeader: React.FC<ChatPanelHeaderProps> = ({
       <FlexRow align="center" gap={0.25}>
         <ToolbarIconButton
           onClick={onNewChat}
-          tooltip="New chat"
+          tooltip={t("chat:list.newChat")}
           icon={<AddIcon fontSize="small" />}
         />
         <ToolbarIconButton
           ref={threadsAnchorRef}
           onClick={() => setThreadsOpen(true)}
-          tooltip="Conversations"
+          tooltip={t("chat:list.conversations")}
           icon={<ForumOutlinedIcon fontSize="small" />}
         />
         <ToolbarIconButton
           onClick={handleOpenAsTab}
-          tooltip="Open in a workspace tab"
+          tooltip={t("chat:list.openInWorkspaceTab")}
           icon={<OpenInNewIcon fontSize="small" />}
         />
         <DocsHelpLink topic={docsTopic} label={docsLabel} />
