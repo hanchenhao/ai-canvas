@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -122,8 +123,8 @@ type ChatViewProps = {
   messages: Array<Message>;
 };
 
-const formatToolName = (name?: string) => {
-  if (!name) {return "Agent Task";}
+const formatToolName = (name: string | undefined, fallback: string) => {
+  if (!name) {return fallback;}
   return name
     .replace(/[_-]+/g, " ")
     .replace(/\s+/g, " ")
@@ -134,6 +135,7 @@ const formatToolName = (name?: string) => {
 const ToolCallsView: React.FC<{ toolCalls?: ToolCall[] | null }> = memo(({
   toolCalls
 }) => {
+  const { t } = useTranslation("canvas");
   if (!toolCalls || toolCalls.length === 0) {return null;}
   return (
     <div className="tool-calls">
@@ -142,8 +144,8 @@ const ToolCallsView: React.FC<{ toolCalls?: ToolCall[] | null }> = memo(({
         return (
           <div key={stableKey} className="tool-call">
             <div className="tool-call__header">
-              <span className="tool-call__badge">Agent Task</span>
-              <span className="tool-call__name">{formatToolName(tc.name)}</span>
+              <span className="tool-call__badge">{t("node.agentTask")}</span>
+              <span className="tool-call__name">{formatToolName(tc.name, t("node.agentTask"))}</span>
             </div>
             {tc.message && (
               <div className="tool-call__message">

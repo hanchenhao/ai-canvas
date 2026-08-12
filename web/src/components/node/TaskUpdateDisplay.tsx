@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -117,36 +118,28 @@ interface TaskUpdateDisplayProps {
   taskUpdate: TaskUpdate;
 }
 
-const getEventDisplayText = (event: string): string => {
-  switch (event) {
-    case "task_created":
-      return "Task Created";
-    case "step_started":
-      return "Step Started";
-    case "entered_conclusion_stage":
-      return "Entering Conclusion";
-    case "max_iterations_reached":
-      return "Max Iterations Reached";
-    case "max_tool_calls_reached":
-      return "Max Tool Calls Reached";
-    case "step_completed":
-      return "Step Completed";
-    case "step_failed":
-      return "Step Failed";
-    case "task_completed":
-      return "Task Completed";
-    case "task_failed":
-      return "Task Failed";
-    default:
-      return event.replace(/_/g, " ");
-  }
+const EVENT_I18N_KEYS: Record<string, string> = {
+  task_created: "node.taskEvents.taskCreated",
+  step_started: "node.taskEvents.stepStarted",
+  entered_conclusion_stage: "node.taskEvents.enteringConclusion",
+  max_iterations_reached: "node.taskEvents.maxIterationsReached",
+  max_tool_calls_reached: "node.taskEvents.maxToolCallsReached",
+  step_completed: "node.taskEvents.stepCompleted",
+  step_failed: "node.taskEvents.stepFailed",
+  task_completed: "node.taskEvents.taskCompleted",
+  task_failed: "node.taskEvents.taskFailed"
 };
 
 const TaskUpdateDisplay: React.FC<TaskUpdateDisplayProps> = ({
   taskUpdate
 }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
+  const eventKey = EVENT_I18N_KEYS[taskUpdate.event];
+  const eventDisplayText = eventKey
+    ? t(eventKey)
+    : taskUpdate.event.replace(/_/g, " ");
   const task = taskUpdate.task;
   const currentStep = taskUpdate.step;
   const currentStepInPlan =
@@ -161,10 +154,10 @@ const TaskUpdateDisplay: React.FC<TaskUpdateDisplayProps> = ({
     <div className="task-update-container noscroll" css={cssStyles}>
       <div className="task-header">
         <Text className="task-animated-heading">
-          Agent Task
+          {t("node.agentTask")}
         </Text>
         <span className="task-event-badge">
-          {getEventDisplayText(taskUpdate.event)}
+          {eventDisplayText}
         </span>
       </div>
 
@@ -183,7 +176,7 @@ const TaskUpdateDisplay: React.FC<TaskUpdateDisplayProps> = ({
 
       {task?.steps && task.steps.length > 0 && (
         <Box className="steps-section">
-          <Text className="steps-header">Execution Plan</Text>
+          <Text className="steps-header">{t("node.executionPlan")}</Text>
           {task.steps.map((step, idx) => {
             const isCurrent =
               currentStep &&

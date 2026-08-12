@@ -12,6 +12,7 @@ import {
   MenuItem
 } from "../ui_primitives";
 import { useCallback, useState, memo, useId } from "react";
+import { useTranslation } from "react-i18next";
 import { TypeMetadata } from "../../stores/ApiTypes";
 import { validateIdentifierName } from "../../utils/identifierValidation";
 
@@ -33,6 +34,7 @@ const AddDynamicOutputDialog: React.FC<AddDynamicOutputDialogProps> = ({
   onClose,
   onAdd
 }) => {
+  const { t } = useTranslation("canvas");
   const titleId = useId();
   const [name, setName] = useState("");
   const [type, setType] = useState("str");
@@ -69,12 +71,12 @@ const AddDynamicOutputDialog: React.FC<AddDynamicOutputDialogProps> = ({
       fullWidth
       aria-labelledby={titleId}
     >
-      <DialogTitle id={titleId}>Add Output</DialogTitle>
+      <DialogTitle id={titleId}>{t("node.addOutputTitle")}</DialogTitle>
       <DialogContent>
         <FlexRow css={css({ gap: 8, marginTop: 8 })}>
           <TextField
             autoFocus
-            label="Name"
+            label={t("node.nameLabel")}
             size="small"
             value={name}
             onChange={(e) => {
@@ -89,12 +91,12 @@ const AddDynamicOutputDialog: React.FC<AddDynamicOutputDialogProps> = ({
               }
             }}
             error={!!nameError}
-            helperText={nameError || "Cannot start with a number"}
+            helperText={nameError || t("node.nameCannotStartWithNumber")}
             sx={{ flex: 1 }}
           />
           <TextField
             select
-            label="Type"
+            label={t("node.typeLabel")}
             size="small"
             value={type}
             onChange={(e) => setType(e.target.value)}
@@ -110,10 +112,10 @@ const AddDynamicOutputDialog: React.FC<AddDynamicOutputDialogProps> = ({
       </DialogContent>
       <DialogActions>
         <EditorButton onClick={handleClose} variant="text" size="small">
-          Cancel
+          {t("common:button.cancel")}
         </EditorButton>
         <EditorButton onClick={handleSubmit} variant="contained" size="small">
-          Add
+          {t("common:button.add")}
         </EditorButton>
       </DialogActions>
     </Dialog>

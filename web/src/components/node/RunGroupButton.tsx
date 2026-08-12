@@ -6,6 +6,7 @@ import { Tooltip, ToolbarIconButton, LoadingSpinner, MOTION, BORDER_RADIUS } fro
 import PlayArrow from "@mui/icons-material/PlayArrow";
 import { TOOLTIP_ENTER_DELAY } from "../../config/constants";
 import { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 const styles = (theme: Theme, _isRunning: boolean) =>
   css({
@@ -47,6 +48,7 @@ const RunGroupButton: React.FC<RunGroupButtonProps> = ({
   state,
   onClick
 }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const isRunning = state === "running";
   const cssStyles = useMemo(() => styles(theme, isRunning), [theme, isRunning]);
@@ -73,13 +75,13 @@ const RunGroupButton: React.FC<RunGroupButtonProps> = ({
     <Tooltip
       title={
         isWorkflowRunning ? (
-          "Group is currently running..."
+          t("node.groupRunning")
         ) : (
           <div
             className="tooltip-span"
             style={tooltipSpanStyle}
           >
-            <span style={tooltipTextStyle}>Run Group</span>
+            <span style={tooltipTextStyle}>{t("node.runGroup")}</span>
           </div>
         )
       }

@@ -22,6 +22,7 @@ import React, {
   useEffect
 } from "react";
 import { Handle, NodeProps, NodeToolbar, Position } from "@xyflow/react";
+import { useTranslation } from "react-i18next";
 import { Box, Text, MOTION, SPACING, getSpacingPx, Z_INDEX } from "../../ui_primitives";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
@@ -491,6 +492,7 @@ interface SketchNodeProps extends NodeProps {
 }
 
 const SketchNode: React.FC<SketchNodeProps> = (props) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const hasParent = props.parentId !== undefined;
   const isFocused = useNodeFocusStore(
@@ -1367,7 +1369,7 @@ const SketchNode: React.FC<SketchNodeProps> = (props) => {
             id={props.id}
             data={props.data}
             hasParent={hasParent}
-            metadataTitle="Sketch"
+            metadataTitle={t("node.sketch.title")}
             selected={props.selected}
             backgroundColor="transparent"
             iconType="image"
@@ -1380,7 +1382,7 @@ const SketchNode: React.FC<SketchNodeProps> = (props) => {
             <div
               className="sketch-preview-wrap"
               role="button"
-              aria-label="Open sketch editor"
+              aria-label={t("node.sketch.openEditor")}
               tabIndex={0}
               onClick={handleOpenEditor}
               onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleOpenEditor(); } }}
@@ -1391,7 +1393,7 @@ const SketchNode: React.FC<SketchNodeProps> = (props) => {
                     <img
                       className="preview-image"
                       src={displayPreviewUri}
-                      alt="Image editor preview"
+                      alt={t("node.sketch.editorPreviewAlt")}
                     />
                     <div className="edit-overlay">
                       <EditIcon
@@ -1400,12 +1402,12 @@ const SketchNode: React.FC<SketchNodeProps> = (props) => {
                           color: theme.vars.palette.common.white
                         }}
                       />
-                      <span className="edit-overlay-label">Edit Sketch</span>
+                      <span className="edit-overlay-label">{t("node.sketch.editSketch")}</span>
                     </div>
                   </>
                 ) : (
                   <Text className="hint">
-                    Click to open sketch editor
+                    {t("node.sketch.clickToOpen")}
                   </Text>
                 )}
               </div>
@@ -1443,7 +1445,7 @@ const SketchNode: React.FC<SketchNodeProps> = (props) => {
               <NodeOutput
                 id={props.id}
                 output={SKETCH_LAYERS_OUTPUT}
-                displayName="Layers"
+                displayName={t("node.sketch.layers")}
               />
               {exposedOutputLayerOutputs.map((item) => (
                 <NodeOutput
@@ -1468,7 +1470,7 @@ const SketchNode: React.FC<SketchNodeProps> = (props) => {
       <SketchProvider active={isModalOpen}>
         <SketchModal
           open={isModalOpen}
-          title="Sketch"
+          title={t("node.sketch.title")}
           initialDocument={editorDocument || sketchDoc}
           onClose={handleCloseEditor}
           onDocumentChange={handleDocumentChange}
