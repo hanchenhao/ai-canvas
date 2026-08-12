@@ -7,6 +7,7 @@
  */
 
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { css } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
@@ -80,9 +81,10 @@ export const BottomStatusBar: React.FC<BottomStatusBarProps> = memo(
     actionSlot
   }) => {
     const theme = useTheme();
+    const { t } = useTranslation(["timeline"]);
 
     const modeStatus: StatusType = mode === "cloud" ? "success" : "info";
-    const modeLabel = mode === "cloud" ? "Cloud" : "Local";
+    const modeLabel = mode === "cloud" ? t("timeline:status.cloud") : t("timeline:status.local");
     const ModeIcon = mode === "cloud" ? CloudIcon : ComputerIcon;
 
     return (
@@ -107,14 +109,14 @@ export const BottomStatusBar: React.FC<BottomStatusBarProps> = memo(
           {generatingCount > 0 && (
             <FlexRow gap={0.5} align="center" className="count-badge">
               <span className="dot dot-generating" aria-hidden />
-              <Caption>{generatingCount} generating</Caption>
+              <Caption>{t("timeline:status.generating", { count: generatingCount })}</Caption>
             </FlexRow>
           )}
 
           {failedCount > 0 && (
             <FlexRow gap={0.5} align="center" className="count-badge">
               <span className="dot dot-failed" aria-hidden />
-              <Caption color="error">{failedCount} failed</Caption>
+              <Caption color="error">{t("timeline:status.failed", { count: failedCount })}</Caption>
             </FlexRow>
           )}
         </FlexRow>

@@ -19,6 +19,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useTimelineStoreApi } from "../../stores/timeline/TimelineStore";
 import { applyTimelineSequenceToStore } from "../../hooks/timeline/useLoadTimelineIntoStore";
@@ -48,10 +49,10 @@ import {
   getSpacingPx
 } from "../ui_primitives";
 
-const SAVE_TYPE_LABEL: Record<TimelineVersionSaveType, string> = {
-  manual: "Manual",
-  autosave: "Auto",
-  restore: "Restore"
+const SAVE_TYPE_LABEL_KEY: Record<TimelineVersionSaveType, string> = {
+  manual: "timeline:versionHistory.manual",
+  autosave: "timeline:versionHistory.auto",
+  restore: "timeline:versionHistory.restoreType"
 };
 
 const SAVE_TYPE_COLOR: Record<
@@ -92,6 +93,7 @@ interface VersionRowProps {
 
 const VersionRow: React.FC<VersionRowProps> = memo(
   ({ version, busy, onRestore, onDelete }) => {
+    const { t } = useTranslation(["timeline"]);
     const handleRestore = useCallback(
       () => onRestore(version),
       [onRestore, version]
@@ -108,7 +110,7 @@ const VersionRow: React.FC<VersionRowProps> = memo(
             v{version.version}
           </Text>
           <Chip
-            label={SAVE_TYPE_LABEL[version.saveType]}
+            label={t(SAVE_TYPE_LABEL_KEY[version.saveType])}
             color={SAVE_TYPE_COLOR[version.saveType]}
             compact
             size="small"
@@ -129,19 +131,19 @@ const VersionRow: React.FC<VersionRowProps> = memo(
               variant="text"
               disabled={busy}
               onClick={handleRestore}
-              aria-label={`Restore version ${version.version}`}
+              aria-label={t("timeline:versionHistory.restoreVersion", { version: version.version })}
             >
-              Restore
+              {t("timeline:versionHistory.restore")}
             </EditorButton>
             <EditorButton
               density="compact"
               variant="text"
               disabled={busy}
               onClick={handleDelete}
-              aria-label={`Delete version ${version.version}`}
+              aria-label={t("timeline:versionHistory.deleteVersion", { version: version.version })}
               sx={{ color: "text.secondary" }}
             >
-              Delete
+              {t("timeline:versionHistory.delete")}
             </EditorButton>
           </FlexRow>
         </FlexRow>
@@ -167,6 +169,7 @@ export const TimelineVersionHistoryPanel: React.FC<
   TimelineVersionHistoryPanelProps
 > = ({ sequenceId }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
   const store = useTimelineStoreApi();
   const {
     versions,
@@ -254,16 +257,16 @@ export const TimelineVersionHistoryPanel: React.FC<
         onClick={openSaveDialog}
         disabled={!sequenceId || isCreatingVersion}
       >
-        {isCreatingVersion ? "Saving…" : "Save version"}
+        {isCreatingVersion ? t("timeline:versionHistory.saving") : t("timeline:versionHistory.saveVersion")}
       </EditorButton>
     ),
-    [openSaveDialog, sequenceId, isCreatingVersion]
+    [openSaveDialog, sequenceId, isCreatingVersion, t]
   );
 
   return (
     <FlexColumn fullWidth fullHeight sx={{ minHeight: 0, overflow: "hidden" }}>
       <PanelToolbar
-        title="History"
+        title={t("timeline:versionHistory.history")}
         count={ordered.length}
         actions={toolbarActions}
       />
@@ -271,11 +274,11 @@ export const TimelineVersionHistoryPanel: React.FC<
       <ScrollArea css={listStyles(theme)} sx={{ flex: 1, minHeight: 0 }}>
         {isLoading ? (
           <FlexColumn align="center" justify="center" sx={{ py: 4 }}>
-            <LoadingSpinner size="small" text="Loading versions…" />
+            <LoadingSpinner size="small" text={t("timeline:versionHistory.loading")} />
           </FlexColumn>
         ) : error ? (
           <FlexColumn gap={0.5} sx={{ p: 2 }}>
-            <Text color="error">Failed to load versions</Text>
+            <Text color="error">{t("timeline:versionHistory.loadFailed")}</Text>
             <Caption size="smaller" color="secondary">
               {error instanceof Error ? error.message : String(error)}
             </Caption>
@@ -283,8 +286,8 @@ export const TimelineVersionHistoryPanel: React.FC<
         ) : ordered.length === 0 ? (
           <FlexColumn align="center" sx={{ py: 4, px: 2 }}>
             <EmptyState
-              title="No versions yet"
-              description="Save a version to snapshot the sequence you can come back to."
+              title={t("timeline:versionHistory.noVersions")}
+              description={t("timeline:versionHistory.noVersionsHint")}
             />
           </FlexColumn>
         ) : (
@@ -303,21 +306,21 @@ export const TimelineVersionHistoryPanel: React.FC<
       <Dialog
         open={saveDialogOpen}
         onClose={closeSaveDialog}
-        title="Save a version"
+        title={t("timeline:versionHistory.saveDialogTitle")}
         onConfirm={handleConfirmSave}
         onCancel={closeSaveDialog}
-        confirmText="Save version"
+        confirmText={t("timeline:versionHistory.saveVersion")}
       >
         <FlexColumn gap={1} sx={{ minWidth: 320, py: 1 }}>
           <TextInput
-            label="Name (optional)"
+            label={t("timeline:versionHistory.saveDialogName")}
             value={saveName}
             onChange={handleSaveNameChange}
             size="small"
             autoFocus
           />
           <Caption size="smaller" color="secondary">
-            Snapshots the sequence as it is right now.
+            {t("timeline:versionHistory.saveDialogHint")}
           </Caption>
         </FlexColumn>
       </Dialog>
@@ -326,20 +329,20 @@ export const TimelineVersionHistoryPanel: React.FC<
         open={restoreTarget !== null}
         onClose={clearRestoreTarget}
         title={
-          restoreTarget ? `Restore v${restoreTarget.version}?` : "Restore?"
+          restoreTarget
+            ? t("timeline:versionHistory.restoreTitle", { version: restoreTarget.version })
+            : t("timeline:versionHistory.restoreTitleShort")
         }
         onConfirm={handleConfirmRestore}
         onCancel={clearRestoreTarget}
-        confirmText="Restore"
+        confirmText={t("timeline:versionHistory.restore")}
       >
         <FlexColumn gap={1} sx={{ maxWidth: 420 }}>
           <Text color="secondary">
-            This replaces the current tracks, clips, and markers with that
-            snapshot.
+            {t("timeline:versionHistory.restoreHint")}
           </Text>
           <Caption size="smaller" color="muted">
-            A snapshot of the current state is saved first, so you can undo the
-            restore from this list.
+            {t("timeline:versionHistory.restoreSnapshotNote")}
           </Caption>
         </FlexColumn>
       </Dialog>
@@ -347,13 +350,17 @@ export const TimelineVersionHistoryPanel: React.FC<
       <Dialog
         open={deleteTarget !== null}
         onClose={clearDeleteTarget}
-        title={deleteTarget ? `Delete v${deleteTarget.version}?` : "Delete?"}
+        title={
+          deleteTarget
+            ? t("timeline:versionHistory.deleteTitle", { version: deleteTarget.version })
+            : t("timeline:versionHistory.deleteTitleShort")
+        }
         onConfirm={handleConfirmDelete}
         onCancel={clearDeleteTarget}
-        confirmText="Delete"
+        confirmText={t("timeline:versionHistory.delete")}
         destructive
       >
-        <Text color="secondary">This action cannot be undone.</Text>
+        <Text color="secondary">{t("timeline:versionHistory.deleteHint")}</Text>
       </Dialog>
     </FlexColumn>
   );

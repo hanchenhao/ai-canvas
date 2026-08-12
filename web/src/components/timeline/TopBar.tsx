@@ -12,6 +12,7 @@
  */
 
 import React, { memo, useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { css } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
@@ -79,6 +80,7 @@ export const TopBar: React.FC<TopBarProps> = memo(
   }) => {
     const theme = useTheme();
     const isMobile = useTimelineIsMobile();
+    const { t } = useTranslation(["timeline"]);
     const [overflowAnchor, setOverflowAnchor] = useState<HTMLElement | null>(
       null
     );
@@ -108,8 +110,8 @@ export const TopBar: React.FC<TopBarProps> = memo(
               <ToolbarIconButton
                 ref={overflowButtonRef}
                 onClick={(e) => setOverflowAnchor(e.currentTarget)}
-                tooltip="More actions"
-                aria-label="More actions"
+                tooltip={t("timeline:topBar.moreActions")}
+                aria-label={t("timeline:topBar.moreActions")}
                 sx={{ flexShrink: 0 }}
               >
                 <MoreVertIcon fontSize="small" />
@@ -122,14 +124,14 @@ export const TopBar: React.FC<TopBarProps> = memo(
                 {onOpenSettings && (
                   <MenuItemPrimitive
                     icon={<TuneIcon fontSize="small" />}
-                    label="Project settings"
+                    label={t("timeline:topBar.projectSettings")}
                     onClick={runFromMenu(onOpenSettings)}
                   />
                 )}
                 {onSave && (
                   <MenuItemPrimitive
                     icon={<SaveIcon fontSize="small" />}
-                    label={isSaving ? "Saving…" : "Save"}
+                    label={isSaving ? t("timeline:topBar.saving") : t("timeline:topBar.save")}
                     disabled={isSaving}
                     onClick={runFromMenu(onSave)}
                   />
@@ -137,7 +139,7 @@ export const TopBar: React.FC<TopBarProps> = memo(
                 {onSaveToAssets && (
                   <MenuItemPrimitive
                     icon={<VideoLibraryOutlinedIcon fontSize="small" />}
-                    label="Save as Asset"
+                    label={t("timeline:topBar.saveAsAsset")}
                     disabled={isExporting}
                     onClick={runFromMenu(() => {
                       const anchor = overflowButtonRef.current;
@@ -148,7 +150,7 @@ export const TopBar: React.FC<TopBarProps> = memo(
                 {onExportVideo && (
                   <MenuItemPrimitive
                     icon={<FileDownloadIcon fontSize="small" />}
-                    label={isExporting ? "Exporting…" : "Export video"}
+                    label={isExporting ? t("timeline:topBar.exporting") : t("timeline:topBar.exportVideo")}
                     disabled={isExporting}
                     onClick={runFromMenu(onExportVideo)}
                   />
@@ -174,9 +176,9 @@ export const TopBar: React.FC<TopBarProps> = memo(
             onClick={onOpenSettings}
             startIcon={<TuneIcon />}
             size="small"
-            aria-label="Project settings"
+            aria-label={t("timeline:topBar.projectSettings")}
           >
-            Settings
+            {t("timeline:topBar.settings")}
           </EditorButton>
         )}
 
@@ -188,7 +190,7 @@ export const TopBar: React.FC<TopBarProps> = memo(
             startIcon={<SaveIcon />}
             size="small"
           >
-            {isSaving ? "Saving…" : "Save"}
+            {isSaving ? t("timeline:topBar.saving") : t("timeline:topBar.save")}
           </EditorButton>
         )}
 
@@ -200,7 +202,7 @@ export const TopBar: React.FC<TopBarProps> = memo(
             startIcon={<VideoLibraryOutlinedIcon />}
             size="small"
           >
-            Save as Asset
+            {t("timeline:topBar.saveAsAsset")}
           </EditorButton>
         )}
 
@@ -212,7 +214,7 @@ export const TopBar: React.FC<TopBarProps> = memo(
             startIcon={<FileDownloadIcon />}
             size="small"
           >
-            {isExporting ? "Exporting…" : "Export"}
+            {isExporting ? t("timeline:topBar.exporting") : t("timeline:topBar.export")}
           </EditorButton>
         )}
       </FlexRow>

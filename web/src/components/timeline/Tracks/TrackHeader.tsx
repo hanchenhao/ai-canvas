@@ -9,6 +9,7 @@
  */
 
 import React, { memo, useCallback, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -282,6 +283,7 @@ export interface TrackHeaderProps {
 
 export const TrackHeader: React.FC<TrackHeaderProps> = memo(({ track, typedIndex, compact = false }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
 
   const setTrackVisible = useTimelineStore((s) => s.setTrackVisible);
   const setTrackLocked = useTimelineStore((s) => s.setTrackLocked);
@@ -507,7 +509,7 @@ export const TrackHeader: React.FC<TrackHeaderProps> = memo(({ track, typedIndex
               aria-label={`Reorder ${track.name}`}
               role="button"
               tabIndex={-1}
-              title="Drag to reorder track"
+              title={t("timeline:tracks.dragReorder")}
               data-testid={`track-drag-handle-${track.id}`}
             >
               <DragIndicatorIcon />
@@ -549,12 +551,12 @@ export const TrackHeader: React.FC<TrackHeaderProps> = memo(({ track, typedIndex
         css={controlsRowStyles(compact)}
         className={compact ? "timeline-track-controls" : undefined}
       >
-        <Tooltip title={track.visible ? "Hide track" : "Show track"}>
+        <Tooltip title={track.visible ? t("timeline:tracks.hideTrack") : t("timeline:tracks.showTrack")}>
           <button
             type="button"
             css={iconButtonStyles(theme, track.visible)}
             onClick={() => setTrackVisible(track.id, !track.visible)}
-            aria-label={track.visible ? "Hide track" : "Show track"}
+            aria-label={track.visible ? t("timeline:tracks.hideTrack") : t("timeline:tracks.showTrack")}
             aria-pressed={!track.visible}
           >
             {track.visible ? (
@@ -565,12 +567,12 @@ export const TrackHeader: React.FC<TrackHeaderProps> = memo(({ track, typedIndex
           </button>
         </Tooltip>
 
-        <Tooltip title={track.locked ? "Unlock track" : "Lock track"}>
+        <Tooltip title={track.locked ? t("timeline:tracks.unlockTrack") : t("timeline:tracks.lockTrack")}>
           <button
             type="button"
             css={iconButtonStyles(theme, !track.locked)}
             onClick={() => setTrackLocked(track.id, !track.locked)}
-            aria-label={track.locked ? "Unlock track" : "Lock track"}
+            aria-label={track.locked ? t("timeline:tracks.unlockTrack") : t("timeline:tracks.lockTrack")}
             aria-pressed={track.locked}
           >
             {track.locked ? <LockOutlinedIcon /> : <LockOpenOutlinedIcon />}
@@ -579,24 +581,24 @@ export const TrackHeader: React.FC<TrackHeaderProps> = memo(({ track, typedIndex
 
         {isAudioTrack && (
           <>
-            <Tooltip title={track.muted ? "Unmute" : "Mute"} key="mute">
+            <Tooltip title={track.muted ? t("timeline:tracks.unmute") : t("timeline:tracks.mute")} key="mute">
               <button
                 type="button"
                 css={iconButtonStyles(theme, !track.muted)}
                 onClick={() => setTrackMuted(track.id, !track.muted)}
-                aria-label={track.muted ? "Unmute" : "Mute"}
+                aria-label={track.muted ? t("timeline:tracks.unmute") : t("timeline:tracks.mute")}
                 aria-pressed={!!track.muted}
               >
                 {track.muted ? <VolumeOffOutlinedIcon /> : <VolumeUpOutlinedIcon />}
               </button>
             </Tooltip>
 
-            <Tooltip title={track.solo ? "Unsolo" : "Solo"}>
+            <Tooltip title={track.solo ? t("timeline:tracks.unsolo") : t("timeline:tracks.solo")}>
               <button
                 type="button"
                 css={iconButtonStyles(theme, !!track.solo)}
                 onClick={() => setTrackSolo(track.id, !track.solo)}
-                aria-label={track.solo ? "Unsolo" : "Solo"}
+                aria-label={track.solo ? t("timeline:tracks.unsolo") : t("timeline:tracks.solo")}
                 aria-pressed={!!track.solo}
               >
                 <span
@@ -617,15 +619,15 @@ export const TrackHeader: React.FC<TrackHeaderProps> = memo(({ track, typedIndex
           <Tooltip
             title={
               effectsCount === 0
-                ? "Effects chain (empty)"
-                : `Effects chain (${effectsCount})`
+                ? t("timeline:tracks.effectsChainEmpty")
+                : t("timeline:tracks.effectsChainCount", { count: effectsCount })
             }
           >
             <button
               type="button"
               css={iconButtonStyles(theme, hasActiveEffects || fxExpanded)}
               onClick={handleFxToggle}
-              aria-label={fxExpanded ? "Hide effects chain" : "Show effects chain"}
+              aria-label={fxExpanded ? t("timeline:tracks.hideEffects") : t("timeline:tracks.showEffects")}
               aria-pressed={fxExpanded}
               data-testid={`track-fx-${track.id}`}
             >
@@ -634,12 +636,12 @@ export const TrackHeader: React.FC<TrackHeaderProps> = memo(({ track, typedIndex
           </Tooltip>
         )}
 
-        <Tooltip title="Remove track">
+        <Tooltip title={t("timeline:tracks.removeTrack")}>
           <button
             type="button"
             css={iconButtonStyles(theme, true)}
             onClick={() => setConfirmRemoveOpen(true)}
-            aria-label="Remove track"
+            aria-label={t("timeline:tracks.removeTrack")}
           >
             <DeleteOutlineOutlinedIcon />
           </button>
@@ -653,7 +655,7 @@ export const TrackHeader: React.FC<TrackHeaderProps> = memo(({ track, typedIndex
         onPointerMove={handleResizePointerMove}
         onPointerUp={handleResizePointerEnd}
         onPointerCancel={handleResizePointerEnd}
-        aria-label="Resize track height"
+        aria-label={t("timeline:tracks.resizeHeight")}
         role="separator"
         aria-orientation="horizontal"
       />
@@ -662,10 +664,10 @@ export const TrackHeader: React.FC<TrackHeaderProps> = memo(({ track, typedIndex
       open={confirmRemoveOpen}
       onClose={() => setConfirmRemoveOpen(false)}
       onConfirm={() => removeTrack(track.id)}
-      title="Remove track"
-      content={`Remove track "${track.name}" and all its clips?`}
-      confirmText="Remove"
-      cancelText="Cancel"
+      title={t("timeline:tracks.removeTrack")}
+      content={t("timeline:tracks.removeTrackConfirm", { name: track.name })}
+      confirmText={t("timeline:tracks.removeTrack")}
+      cancelText={t("timeline:list.cancel")}
     />
     </>
   );

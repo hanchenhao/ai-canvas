@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { memo, useCallback, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -38,6 +39,7 @@ export const ClipActions: React.FC<ClipActionsProps> = memo(
   ({ clipId, duplicateOffsetMs = 0 }) => {
     const theme = useTheme();
     const navigate = useNavigate();
+    const { t } = useTranslation(["timeline"]);
 
     const clip = useTimelineStore((s) => findClipById(s.clips, clipId));
     const sequenceId = useTimelineStore((s) => s.sequenceId);
@@ -65,13 +67,13 @@ export const ClipActions: React.FC<ClipActionsProps> = memo(
         selectClip(newClipId);
       } catch (err) {
         setDuplicateError(
-          err instanceof Error ? err.message : "Failed to duplicate clip"
+          err instanceof Error ? err.message : t("timeline:clipActions.duplicateFailed")
         );
       } finally {
         duplicateBusyRef.current = false;
         setDuplicateBusy(false);
       }
-    }, [clipId, duplicateOffsetMs, duplicateClip, selectClip]);
+    }, [clipId, duplicateOffsetMs, duplicateClip, selectClip, t]);
 
     // ── Regenerate as new clip ─────────────────────────────────────────────
     // Drops a fresh sibling immediately to the right with the same binding
@@ -83,10 +85,10 @@ export const ClipActions: React.FC<ClipActionsProps> = memo(
         selectClip(newClipId);
       } catch (err) {
         setDuplicateError(
-          err instanceof Error ? err.message : "Failed to create copy"
+          err instanceof Error ? err.message : t("timeline:clipActions.copyFailed")
         );
       }
-    }, [clipId, duplicateOffsetMs, regenerateAsCopy, selectClip]);
+    }, [clipId, duplicateOffsetMs, regenerateAsCopy, selectClip, t]);
 
     // ── Lock ───────────────────────────────────────────────────────────────
 
@@ -138,19 +140,19 @@ export const ClipActions: React.FC<ClipActionsProps> = memo(
               panel; this toolbar is for clip operations only. */}
           <ToolbarIconButton
             icon={<ContentCopyIcon fontSize="small" />}
-            tooltip="Duplicate — copies overrides; tweak params for a variation"
+            tooltip={t("timeline:clipActions.duplicateTooltip")}
             onClick={() => void handleDuplicate()}
             disabled={duplicateBusy}
-            aria-label="Duplicate clip"
+            aria-label={t("timeline:clipActions.ariaDuplicate")}
             data-testid="clip-action-duplicate"
           />
 
           {clip.sourceType === "generated" && (
             <ToolbarIconButton
               icon={<AutoAwesomeMotionIcon fontSize="small" />}
-              tooltip="Regenerate as new clip — drops a fresh copy beside this one so you can roll a new take without losing the existing render"
+              tooltip={t("timeline:clipActions.regenerateTooltip")}
               onClick={handleRegenerateAsCopy}
-              aria-label="Regenerate as new clip"
+              aria-label={t("timeline:clipActions.ariaRegenerate")}
               data-testid="clip-action-regenerate-as-copy"
             />
           )}
@@ -165,29 +167,29 @@ export const ClipActions: React.FC<ClipActionsProps> = memo(
             }
             tooltip={
               clip.locked
-                ? "Locked — successful generations do not replace current output"
-                : "Unlocked — successful generations replace current output"
+                ? t("timeline:clipActions.lockedTooltip")
+                : t("timeline:clipActions.unlockedTooltip")
             }
             active={clip.locked}
             onClick={handleToggleLock}
-            aria-label={clip.locked ? "Unlock clip" : "Lock clip"}
+            aria-label={clip.locked ? t("timeline:clipActions.ariaUnlock") : t("timeline:clipActions.ariaLock")}
             data-testid="clip-action-lock"
           />
 
           <ToolbarIconButton
             icon={<ImageIcon fontSize="small" />}
-            tooltip="Replace Output… — pick an existing asset without regenerating"
+            tooltip={t("timeline:clipActions.replaceOutputTooltip")}
             onClick={handleOpenReplace}
-            aria-label="Replace clip output"
+            aria-label={t("timeline:clipActions.ariaReplaceOutput")}
             data-testid="clip-action-replace-output"
           />
 
           {clip.workflowId && sequenceId && (
             <ToolbarIconButton
               icon={<OpenInNewIcon fontSize="small" />}
-              tooltip="Open in Node Editor"
+              tooltip={t("timeline:clipActions.openInNodeEditor")}
               onClick={handleOpenInNodeEditor}
-              aria-label="Open clip workflow in node editor"
+              aria-label={t("timeline:clipActions.ariaOpenInEditor")}
               data-testid="clip-action-open-in-editor"
             />
           )}
@@ -197,22 +199,21 @@ export const ClipActions: React.FC<ClipActionsProps> = memo(
         <Dialog
           open={replaceOpen}
           onClose={handleCancelReplace}
-          title="Replace Output"
+          title={t("timeline:clipActions.replaceOutputDialog")}
           onConfirm={handleConfirmReplace}
           onCancel={handleCancelReplace}
-          confirmText="Replace"
-          cancelText="Cancel"
+          confirmText={t("timeline:clipActions.replace")}
+          cancelText={t("timeline:clipActions.cancel")}
           showActions
         >
           <Text size="small" sx={{ mb: 1 }}>
-            Enter the asset ID to use as the clip&apos;s current output. The
-            generation state and param overrides will not be changed.
+            {t("timeline:clipActions.replaceOutputHint")}
           </Text>
           <TextInput
             value={assetIdInput}
             onChange={(e) => setAssetIdInput(e.target.value)}
-            placeholder="Asset ID"
-            inputProps={{ "aria-label": "Asset ID" }}
+            placeholder={t("timeline:clipActions.assetIdPlaceholder")}
+            inputProps={{ "aria-label": t("timeline:clipActions.assetIdPlaceholder") }}
             fullWidth
             size="small"
           />

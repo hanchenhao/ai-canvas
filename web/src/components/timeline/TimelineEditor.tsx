@@ -23,6 +23,7 @@
  */
 
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useShallow } from "zustand/react/shallow";
 import { css } from "@emotion/react";
@@ -171,18 +172,22 @@ const dragHandleStyles = (theme: Theme, tall: boolean) =>
 
 /** Human-readable label for the current export phase. */
 function exportPhaseLabel(
+  t: (key: string, opts?: Record<string, unknown>) => string,
   progress: { phase: string; frame: number; totalFrames: number } | null
 ): string {
-  if (!progress) return "Preparing…";
+  if (!progress) return t("timeline:export.preparing");
   switch (progress.phase) {
     case "audio":
-      return "Mixing audio…";
+      return t("timeline:export.mixingAudio");
     case "video":
-      return `Encoding frame ${progress.frame} / ${progress.totalFrames}`;
+      return t("timeline:export.encodingFrame", {
+        frame: progress.frame,
+        total: progress.totalFrames
+      });
     case "finalizing":
-      return "Finalizing…";
+      return t("timeline:export.finalizing");
     default:
-      return "Preparing…";
+      return t("timeline:export.preparing");
   }
 }
 
@@ -205,6 +210,7 @@ const PreviewRegion: React.FC<{
   fullWidth = false
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
   // Canvas size + fps come from the store — the single source of truth the
   // compositor and the export already read — so Project settings changes show
   // up in the preview immediately, without waiting on a query refetch.
@@ -222,7 +228,7 @@ const PreviewRegion: React.FC<{
       }
     >
       {isLoading ? (
-        <LoadingSpinner text="Loading sequence…" />
+        <LoadingSpinner text={t("timeline:sequence.loading")} />
       ) : sequenceUnavailable ? (
         <FlexColumn
           align="center"
@@ -232,8 +238,8 @@ const PreviewRegion: React.FC<{
         >
           <EmptyState
             variant="error"
-            title="Sequence not found"
-            description="The timeline sequence you requested does not exist or you do not have access to it."
+            title={t("timeline:sequence.notFound")}
+            description={t("timeline:sequence.notFoundHint")}
           />
           <FlexRow gap={1} align="center" justify="center" sx={{ flexWrap: "wrap" }}>
             {onRetryFetch ? (
@@ -242,9 +248,9 @@ const PreviewRegion: React.FC<{
                 size="small"
                 onClick={onRetryFetch}
                 disabled={createSequencePending}
-                aria-label="Retry loading sequence"
+                aria-label={t("timeline:sequence.retry")}
               >
-                Retry
+                {t("timeline:sequence.retry")}
               </EditorButton>
             ) : null}
             {onCreateNewSequence ? (
@@ -253,9 +259,9 @@ const PreviewRegion: React.FC<{
                 size="small"
                 onClick={onCreateNewSequence}
                 disabled={createSequencePending}
-                aria-label="Create new sequence"
+                aria-label={t("timeline:sequence.newSequence")}
               >
-                {createSequencePending ? "Creating…" : "New sequence"}
+                {createSequencePending ? t("timeline:sequence.creating") : t("timeline:sequence.newSequence")}
               </EditorButton>
             ) : null}
           </FlexRow>
@@ -280,23 +286,32 @@ PreviewRegion.displayName = "PreviewRegion";
 type InspectorTab = "inspector" | "agent" | "history" | "script";
 
 const INSPECTOR_TABS = [
-  { value: "inspector", label: "Inspector", icon: <TuneOutlinedIcon /> },
-  { value: "agent", label: "Assistant", icon: <AutoAwesomeIcon /> },
-  { value: "history", label: "History", icon: <HistoryOutlinedIcon /> }
+  { value: "inspector", labelKey: "timeline:tabs.inspector", icon: <TuneOutlinedIcon /> },
+  { value: "agent", labelKey: "timeline:tabs.assistant", icon: <AutoAwesomeIcon /> },
+  { value: "history", labelKey: "timeline:tabs.history", icon: <HistoryOutlinedIcon /> }
 ];
 
 const SCRIPT_TAB = {
   value: "script",
-  label: "Script",
+  labelKey: "timeline:tabs.script",
   icon: <SubtitlesOutlinedIcon />
 };
 
 const InspectorRegion: React.FC<{ sequenceId: string | undefined }> = memo(
   ({ sequenceId }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
   const [tab, setTab] = useState<InspectorTab>("inspector");
 
-  const tabs = INSPECTOR_TABS;
+  const tabs = useMemo(
+    () =>
+      INSPECTOR_TABS.map((tabDef) => ({
+        value: tabDef.value,
+        label: t(tabDef.labelKey),
+        icon: tabDef.icon
+      })),
+    [t]
+  );
 
   return (
     <FlexColumn
@@ -365,9 +380,17 @@ const MobilePanelSheet: React.FC<{
   onTabChange: (tab: InspectorTab) => void;
 }> = memo(({ open, onClose, sequenceId, tab, onTabChange }) => {
   const hasScript = useHasScript();
+  const { t } = useTranslation(["timeline"]);
   const tabs = useMemo(
-    () => (hasScript ? [...INSPECTOR_TABS, SCRIPT_TAB] : INSPECTOR_TABS),
-    [hasScript]
+    () =>
+      (hasScript ? [...INSPECTOR_TABS, SCRIPT_TAB] : INSPECTOR_TABS).map(
+        (tabDef) => ({
+          value: tabDef.value,
+          label: t(tabDef.labelKey),
+          icon: tabDef.icon
+        })
+      ),
+    [hasScript, t]
   );
 
   // A sequence can lose its script while the Script tab is showing.
@@ -393,7 +416,7 @@ const MobilePanelSheet: React.FC<{
       maxHeight="62vh"
       showDragHandle
       showClose={false}
-      ariaLabel="Timeline panels"
+      ariaLabel={t("timeline:panels.timelinePanels")}
     >
       <FlexColumn fullWidth sx={{ height: "52vh", minHeight: 0 }}>
         {activeTab === "inspector" ? (
@@ -471,6 +494,7 @@ const TimelineEditorBody: React.FC<
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useTimelineIsMobile();
+  const { t } = useTranslation(["timeline"]);
 
   // Phone panel sheet (Inspector / Assistant / History / Script).
   const [panelSheetOpen, setPanelSheetOpen] = useState(false);
@@ -678,7 +702,7 @@ const TimelineEditorBody: React.FC<
   const handleCreateNewSequence = useCallback(() => {
     createTimeline.reset();
     createTimeline.mutate(
-      { name: "Untitled sequence", projectId: projectIdForNewSequence },
+      { name: t("timeline:sequence.untitled"), projectId: projectIdForNewSequence },
       {
         onSuccess: (created) => {
           const next = new URLSearchParams(searchParams);
@@ -694,7 +718,7 @@ const TimelineEditorBody: React.FC<
 
   const createErrorMessage =
     createTimeline.error != null
-      ? createTimeline.error.message || "Could not create sequence."
+      ? createTimeline.error.message || t("timeline:sequence.createFailed")
       : null;
 
   // Export dialog action button — memoized so re-renders unrelated to export
@@ -708,10 +732,10 @@ const TimelineEditorBody: React.FC<
         size="small"
         onClick={isExporting ? cancelExport : clearExportError}
       >
-        {isExporting ? "Cancel" : "Close"}
+        {isExporting ? t("timeline:export.cancel") : t("timeline:export.close")}
       </EditorButton>
     ),
-    [isExporting, hasExportError, cancelExport, clearExportError]
+    [isExporting, hasExportError, cancelExport, clearExportError, t]
   );
 
   return (
@@ -764,7 +788,7 @@ const TimelineEditorBody: React.FC<
         ref={handleRef}
         role="separator"
         aria-orientation="horizontal"
-        aria-label="Resize tracks panel"
+        aria-label={t("timeline:tracks.resizeTracksPanel")}
         aria-valuenow={tracksHeight}
         aria-valuemin={MIN_TRACKS_HEIGHT_PX}
         aria-valuemax={MAX_TRACKS_HEIGHT_PX}
@@ -783,8 +807,8 @@ const TimelineEditorBody: React.FC<
           isMobile ? (
             <ToolbarIconButton
               onClick={openPanelSheet}
-              tooltip="Panels"
-              aria-label="Open panels"
+              tooltip={t("timeline:panels.panels")}
+              aria-label={t("timeline:panels.openPanels")}
               // Tinted while a clip is selected: that's when the Inspector has
               // something to show, and it's the only hint on a phone that
               // tapping a clip led somewhere.
@@ -817,7 +841,7 @@ const TimelineEditorBody: React.FC<
       <Dialog
         open={isExporting || hasExportError}
         onClose={isExporting ? undefined : clearExportError}
-        title={hasExportError ? "Export failed" : "Exporting video"}
+        title={hasExportError ? t("timeline:export.failed") : t("timeline:export.title")}
         actions={exportDialogActions}
       >
         {exportError != null ? (
@@ -833,7 +857,7 @@ const TimelineEditorBody: React.FC<
                   ? "determinate"
                   : "indeterminate"
               }
-              label={exportPhaseLabel(exportProgress)}
+              label={exportPhaseLabel(t, exportProgress)}
             />
           </FlexColumn>
         )}

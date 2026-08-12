@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme, type Theme } from "@mui/material/styles";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
@@ -70,9 +71,9 @@ const inspectorPanelSx = {
 };
 
 const TEXT_ALIGNMENTS = [
-  { value: "left", label: "Left" },
-  { value: "center", label: "Center" },
-  { value: "right", label: "Right" }
+  { value: "left", labelKey: "timeline:inspector.alignLeft" },
+  { value: "center", labelKey: "timeline:inspector.alignCenter" },
+  { value: "right", labelKey: "timeline:inspector.alignRight" }
 ] as const;
 
 const clamp = (value: number, min: number, max: number) =>
@@ -82,6 +83,15 @@ const clamp = (value: number, min: number, max: number) =>
 
 export const TimelineInspector: React.FC = memo(() => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
+  const TEXT_ALIGN_LABELS = useMemo(
+    () =>
+      TEXT_ALIGNMENTS.map((a) => ({
+        value: a.value,
+        label: t(a.labelKey)
+      })),
+    [t]
+  );
 
   const selectedClipIds = useTimelineUIStore((s) => s.selectedClipIds);
   const clipId = selectedClipIds.size === 1 ? [...selectedClipIds][0] : null;
@@ -144,12 +154,12 @@ export const TimelineInspector: React.FC = memo(() => {
         css={containerStyles}
         sx={inspectorPanelSx}
       >
-        <InspectorHeader eyebrow="Inspector" />
+        <InspectorHeader eyebrow={t("timeline:inspector.inspector")} />
         <EmptyState
           variant="empty"
           size="small"
-          title="No selection"
-          description="Select a clip on the timeline to edit its properties."
+          title={t("timeline:inspector.noSelection")}
+          description={t("timeline:inspector.noSelectionHint")}
         />
       </Panel>
     );
@@ -164,18 +174,18 @@ export const TimelineInspector: React.FC = memo(() => {
         sx={inspectorPanelSx}
       >
         <InspectorHeader
-          eyebrow={`${selectedCount} Clips`}
+          eyebrow={t("timeline:inspector.clipsSelected", { count: selectedCount })}
           actions={[
             {
               icon: <DeleteOutlineOutlinedIcon />,
-              label: "Delete selection",
+              label: t("timeline:inspector.deleteSelection"),
               onClick: () => deleteSelected(selectedClipIds),
               variant: "danger"
             }
           ]}
         />
         <Text size="small" sx={{ px: 0.5, color: "text.secondary" }}>
-          Multi-clip editing is not yet supported.
+          {t("timeline:inspector.multiSelectUnsupported")}
         </Text>
       </Panel>
     );
@@ -216,7 +226,7 @@ export const TimelineInspector: React.FC = memo(() => {
           <CollapsibleSection
             title={
               <InspectorSectionTitle
-                title="Text"
+                title={t("timeline:inspector.text")}
                 icon={<PermMediaOutlinedIcon />}
               />
             }
@@ -235,9 +245,9 @@ export const TimelineInspector: React.FC = memo(() => {
                     textStyle: { ...textStyle, text: event.target.value }
                   })
                 }
-                inputProps={{ "aria-label": "Text content" }}
+                inputProps={{ "aria-label": t("timeline:inspector.textContent") }}
               />
-              <InspectorRow label="Font size">
+              <InspectorRow label={t("timeline:inspector.fontSize")}>
                 <InspectorPillInput
                   value={String(textStyle.fontSizePx)}
                   unit="px"
@@ -248,10 +258,10 @@ export const TimelineInspector: React.FC = memo(() => {
                       textStyle: { ...textStyle, fontSizePx }
                     });
                   }}
-                  ariaLabel="Text font size"
+                  ariaLabel={t("timeline:inspector.textFontSize")}
                 />
               </InspectorRow>
-              <InspectorRow label="Weight">
+              <InspectorRow label={t("timeline:inspector.fontWeight")}>
                 <InspectorPillInput
                   value={String(textStyle.fontWeight ?? 400)}
                   onCommit={(raw) => {
@@ -261,10 +271,10 @@ export const TimelineInspector: React.FC = memo(() => {
                       textStyle: { ...textStyle, fontWeight }
                     });
                   }}
-                  ariaLabel="Text font weight"
+                  ariaLabel={t("timeline:inspector.textFontWeight")}
                 />
               </InspectorRow>
-              <InspectorRow label="Color">
+              <InspectorRow label={t("timeline:inspector.color")}>
                 <TextInput
                   type="color"
                   value={textStyle.color}
@@ -273,14 +283,14 @@ export const TimelineInspector: React.FC = memo(() => {
                       textStyle: { ...textStyle, color: event.target.value }
                     })
                   }
-                  inputProps={{ "aria-label": "Text color" }}
+                  inputProps={{ "aria-label": t("timeline:inspector.textColor") }}
                 />
               </InspectorRow>
-              <InspectorRow label="Align">
+              <InspectorRow label={t("timeline:inspector.align")}>
                 <InspectorSelect
-                  label="Text alignment"
+                  label={t("timeline:inspector.textAlign")}
                   value={textStyle.align ?? "center"}
-                  options={TEXT_ALIGNMENTS}
+                  options={TEXT_ALIGN_LABELS}
                   onChange={(value) =>
                     patchClip(clip.id, {
                       textStyle: {
@@ -300,7 +310,7 @@ export const TimelineInspector: React.FC = memo(() => {
       <CollapsibleSection
         title={
           <InspectorSectionTitle
-            title="Media"
+            title={t("timeline:inspector.media")}
             icon={<PermMediaOutlinedIcon />}
           />
         }
@@ -309,10 +319,10 @@ export const TimelineInspector: React.FC = memo(() => {
         unmountOnExit
       >
         <FlexColumn css={sectionContentStyles(theme)}>
-          <InspectorRow label="Type">
+          <InspectorRow label={t("timeline:inspector.type")}>
             <InspectorStaticValue value={clip.mediaType} />
           </InspectorRow>
-          <InspectorRow label="Asset">
+          <InspectorRow label={t("timeline:inspector.asset")}>
             <InspectorStaticValue value={clip.currentAssetId ?? "—"} />
           </InspectorRow>
         </FlexColumn>
@@ -323,7 +333,7 @@ export const TimelineInspector: React.FC = memo(() => {
       <CollapsibleSection
         title={
           <InspectorSectionTitle
-            title="Timing"
+            title={t("timeline:inspector.timing")}
             icon={<ScheduleOutlinedIcon />}
           />
         }
@@ -332,7 +342,7 @@ export const TimelineInspector: React.FC = memo(() => {
         unmountOnExit
       >
         <FlexColumn css={sectionContentStyles(theme)}>
-          <InspectorRow label="Start">
+          <InspectorRow label={t("timeline:inspector.start")}>
             <InspectorPillInput
               value={formatTimecode(clip.startMs, fps)}
               onCommit={(raw) => {
@@ -341,10 +351,10 @@ export const TimelineInspector: React.FC = memo(() => {
                 patchClip(clip.id, { startMs: Math.max(0, ms) });
               }}
               minWidth={112}
-              ariaLabel="Start timecode"
+              ariaLabel={t("timeline:inspector.startTimecode")}
             />
           </InspectorRow>
-          <InspectorRow label="Duration">
+          <InspectorRow label={t("timeline:inspector.duration")}>
             <InspectorPillInput
               value={(clip.durationMs / 1000).toFixed(2)}
               unit="s"
@@ -354,20 +364,20 @@ export const TimelineInspector: React.FC = memo(() => {
                 if (ms == null || ms < 1) return;
                 patchClip(clip.id, { durationMs: ms });
               }}
-              ariaLabel="Duration in seconds"
+              ariaLabel={t("timeline:inspector.durationSeconds")}
             />
           </InspectorRow>
-          <InspectorRow label="Speed">
+          <InspectorRow label={t("timeline:inspector.speed")}>
             <InspectorPillInput
               value={(clip.speedMultiplier ?? 1).toFixed(2)}
               unit="×"
               scrub={{ step: 0.01, min: 0.1, max: 8 }}
               onCommit={(raw) => onPatchNumber("speedMultiplier", raw, 0.1, 8)}
-              ariaLabel="Playback speed"
+              ariaLabel={t("timeline:inspector.playbackSpeed")}
             />
           </InspectorRow>
           <InspectorToggleRow
-            label="Hidden"
+            label={t("timeline:inspector.hidden")}
             checked={!!clip.hidden}
             onChange={(next) => patchClip(clip.id, { hidden: next })}
           />

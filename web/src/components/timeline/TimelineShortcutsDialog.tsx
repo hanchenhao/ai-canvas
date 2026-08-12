@@ -8,6 +8,7 @@
  * TracksRegion; keep the two in sync when adding a shortcut.
  */
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -25,13 +26,13 @@ import {
 
 interface Shortcut {
   keys: string[];
-  action: string;
+  actionKey: string;
   /** Alternate binding shown after the primary one (e.g. "or Backspace"). */
   alt?: string[];
 }
 
 interface ShortcutGroup {
-  title: string;
+  titleKey: string;
   shortcuts: Shortcut[];
 }
 
@@ -43,51 +44,51 @@ interface ShortcutGroup {
  */
 const SHORTCUT_GROUPS: ShortcutGroup[] = [
   {
-    title: "Tools",
+    titleKey: "timeline:shortcuts.tools",
     shortcuts: [
-      { keys: ["V"], action: "Select tool" },
-      { keys: ["C"], action: "Cut (blade) tool" },
-      { keys: ["Esc"], action: "Clear selection · back to Select" }
+      { keys: ["V"], actionKey: "timeline:shortcuts.selectTool" },
+      { keys: ["C"], actionKey: "timeline:shortcuts.cutTool" },
+      { keys: ["Esc"], actionKey: "timeline:shortcuts.clearSelection" }
     ]
   },
   {
-    title: "Editing",
+    titleKey: "timeline:shortcuts.editing",
     shortcuts: [
-      { keys: ["S"], action: "Split selected clips at playhead" },
-      { keys: ["Delete"], action: "Delete selected clips", alt: ["Backspace"] },
-      { keys: ["Ctrl", "D"], action: "Duplicate (after each source)" },
-      { keys: ["Ctrl", "Shift", "D"], action: "Duplicate with a 1 s gap" },
-      { keys: ["Ctrl", "A"], action: "Select all clips" }
+      { keys: ["S"], actionKey: "timeline:shortcuts.splitAtPlayhead" },
+      { keys: ["Delete"], actionKey: "timeline:shortcuts.deleteSelected", alt: ["Backspace"] },
+      { keys: ["Ctrl", "D"], actionKey: "timeline:shortcuts.duplicate" },
+      { keys: ["Ctrl", "Shift", "D"], actionKey: "timeline:shortcuts.duplicateGap" },
+      { keys: ["Ctrl", "A"], actionKey: "timeline:shortcuts.selectAll" }
     ]
   },
   {
-    title: "Clipboard",
+    titleKey: "timeline:shortcuts.clipboard",
     shortcuts: [
-      { keys: ["Ctrl", "C"], action: "Copy selected clips" },
-      { keys: ["Ctrl", "X"], action: "Cut selected clips" },
-      { keys: ["Ctrl", "V"], action: "Paste at playhead" }
+      { keys: ["Ctrl", "C"], actionKey: "timeline:shortcuts.copy" },
+      { keys: ["Ctrl", "X"], actionKey: "timeline:shortcuts.cut" },
+      { keys: ["Ctrl", "V"], actionKey: "timeline:shortcuts.paste" }
     ]
   },
   {
-    title: "Move",
+    titleKey: "timeline:shortcuts.move",
     shortcuts: [
-      { keys: ["←"], action: "Nudge one frame", alt: ["→"] },
-      { keys: ["Shift", "←"], action: "Nudge one second", alt: ["Shift", "→"] }
+      { keys: ["←"], actionKey: "timeline:shortcuts.nudgeFrame", alt: ["→"] },
+      { keys: ["Shift", "←"], actionKey: "timeline:shortcuts.nudgeSecond", alt: ["Shift", "→"] }
     ]
   },
   {
-    title: "Zoom & view",
+    titleKey: "timeline:shortcuts.zoomView",
     shortcuts: [
-      { keys: ["+"], action: "Zoom in", alt: ["="] },
-      { keys: ["-"], action: "Zoom out", alt: ["_"] },
-      { keys: ["Shift", "Z"], action: "Zoom to fit content" }
+      { keys: ["+"], actionKey: "timeline:shortcuts.zoomIn", alt: ["="] },
+      { keys: ["-"], actionKey: "timeline:shortcuts.zoomOut", alt: ["_"] },
+      { keys: ["Shift", "Z"], actionKey: "timeline:shortcuts.zoomFit" }
     ]
   },
   {
-    title: "History",
+    titleKey: "timeline:shortcuts.history",
     shortcuts: [
-      { keys: ["Ctrl", "Z"], action: "Undo" },
-      { keys: ["Ctrl", "Shift", "Z"], action: "Redo", alt: ["Ctrl", "Y"] }
+      { keys: ["Ctrl", "Z"], actionKey: "timeline:shortcuts.undo" },
+      { keys: ["Ctrl", "Shift", "Z"], actionKey: "timeline:shortcuts.redo", alt: ["Ctrl", "Y"] }
     ]
   }
 ];
@@ -121,18 +122,18 @@ const keysCellStyles = css({
   flexShrink: 0
 });
 
-const ShortcutRow: React.FC<{ shortcut: Shortcut }> = ({ shortcut }) => {
+const ShortcutRow: React.FC<{ shortcut: Shortcut; action: string; orLabel: string }> = ({ shortcut, action, orLabel }) => {
   const theme = useTheme();
   return (
     <div css={rowStyles(theme)}>
       <Text size="small" sx={{ minWidth: 0 }}>
-        {shortcut.action}
+        {action}
       </Text>
       <div css={keysCellStyles}>
         <ShortcutHint shortcut={shortcut.keys} />
         {shortcut.alt ? (
           <>
-            <Caption sx={{ opacity: 0.6 }}>or</Caption>
+            <Caption sx={{ opacity: 0.6 }}>{orLabel}</Caption>
             <ShortcutHint shortcut={shortcut.alt} />
           </>
         ) : null}
@@ -150,11 +151,12 @@ export interface TimelineShortcutsDialogProps {
 export const TimelineShortcutsDialog: React.FC<TimelineShortcutsDialogProps> =
   memo(({ open, onClose }) => {
     const theme = useTheme();
+    const { t } = useTranslation(["timeline"]);
     return (
       <Dialog
         open={open}
         onClose={onClose}
-        title="Keyboard shortcuts"
+        title={t("timeline:shortcuts.title")}
         minWidth="min(680px, 100vw - 32px)"
       >
         <div
@@ -167,10 +169,15 @@ export const TimelineShortcutsDialog: React.FC<TimelineShortcutsDialogProps> =
           })}
         >
           {SHORTCUT_GROUPS.map((group) => (
-            <FlexColumn key={group.title} gap={0.5} css={groupStyles}>
-              <Caption sx={groupTitleSx}>{group.title}</Caption>
+            <FlexColumn key={group.titleKey} gap={0.5} css={groupStyles}>
+              <Caption sx={groupTitleSx}>{t(group.titleKey)}</Caption>
               {group.shortcuts.map((shortcut) => (
-                <ShortcutRow key={shortcut.action} shortcut={shortcut} />
+                <ShortcutRow
+                  key={shortcut.actionKey}
+                  shortcut={shortcut}
+                  action={t(shortcut.actionKey)}
+                  orLabel={t("timeline:shortcuts.or")}
+                />
               ))}
             </FlexColumn>
           ))}
@@ -181,11 +188,9 @@ export const TimelineShortcutsDialog: React.FC<TimelineShortcutsDialogProps> =
           gap={0.5}
           sx={{ pt: 2, mt: 1, borderTop: `1px solid ${theme.vars.palette.divider}` }}
         >
-          <Caption sx={{ opacity: 0.7 }}>Press</Caption>
+          <Caption sx={{ opacity: 0.7 }}>{t("timeline:shortcuts.press")}</Caption>
           <ShortcutHint shortcut={["?"]} />
-          <Caption sx={{ opacity: 0.7 }}>
-            any time to toggle this panel · Ctrl also responds to ⌘ on macOS
-          </Caption>
+          <Caption sx={{ opacity: 0.7 }}>{t("timeline:shortcuts.toggleHint")}</Caption>
         </FlexRow>
       </Dialog>
     );

@@ -9,6 +9,7 @@
  */
 
 import React, { memo, useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -53,29 +54,29 @@ const buttonStyles = (theme: Theme, compact: boolean) =>
 
 interface TrackTypeOption {
   type: TimelineTrack["type"];
-  label: string;
+  labelKey: string;
   icon: React.ReactNode;
 }
 
 const TRACK_TYPES: TrackTypeOption[] = [
   {
     type: "video",
-    label: "Video",
+    labelKey: "timeline:tracks.video",
     icon: <VideocamOutlinedIcon fontSize="small" />
   },
   {
     type: "audio",
-    label: "Audio",
+    labelKey: "timeline:tracks.audio",
     icon: <AudiotrackOutlinedIcon fontSize="small" />
   },
   {
     type: "overlay",
-    label: "Overlay",
+    labelKey: "timeline:tracks.overlay",
     icon: <LayersOutlinedIcon fontSize="small" />
   },
   {
     type: "subtitle",
-    label: "Subtitle",
+    labelKey: "timeline:tracks.subtitle",
     icon: <SubtitlesOutlinedIcon fontSize="small" />
   }
 ];
@@ -87,6 +88,7 @@ export interface AddTrackButtonProps {
 
 export const AddTrackButton: React.FC<AddTrackButtonProps> = memo(({ compact = false }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
   const addTrack = useTimelineStore((s) => s.addTrack);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
@@ -112,13 +114,13 @@ export const AddTrackButton: React.FC<AddTrackButtonProps> = memo(({ compact = f
         type="button"
         css={buttonStyles(theme, compact)}
         onClick={handleOpen}
-        aria-label="Add track"
-        title="Add track"
+        aria-label={t("timeline:tracks.addTrack")}
+        title={t("timeline:tracks.addTrack")}
         aria-haspopup="menu"
         data-testid="add-track-button"
       >
         <AddIcon />
-        {!compact && <span>Track</span>}
+        {!compact && <span>{t("timeline:tracks.track")}</span>}
       </button>
       <Popover
         open={Boolean(anchorEl)}
@@ -129,7 +131,7 @@ export const AddTrackButton: React.FC<AddTrackButtonProps> = memo(({ compact = f
         {TRACK_TYPES.map((opt) => (
           <MenuItemPrimitive
             key={opt.type}
-            label={opt.label}
+            label={t(opt.labelKey)}
             icon={opt.icon}
             onClick={() => handleSelect(opt.type)}
           />

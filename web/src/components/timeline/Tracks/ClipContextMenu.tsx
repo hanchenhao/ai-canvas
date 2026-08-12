@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import ContentCutOutlinedIcon from "@mui/icons-material/ContentCutOutlined";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
@@ -40,6 +41,7 @@ export function ClipContextMenu({
   onRequestReplace,
   onError
 }: ClipContextMenuProps) {
+  const { t } = useTranslation(["timeline"]);
   const actions = useClipMenuActions(clipId, { onRequestReplace, onError });
 
   const run = (fn: () => void) => () => {
@@ -50,27 +52,27 @@ export function ClipContextMenu({
   return (
     <ContextMenu open position={position} onClose={onClose} compact>
       <MenuItemPrimitive
-        label="Split at playhead"
+        label={t("timeline:clipMenu.splitAtPlayhead")}
         icon={<ContentCutOutlinedIcon fontSize="small" />}
         compact
         onClick={run(actions.splitAtPlayhead)}
       />
       <MenuItemPrimitive
-        label="Duplicate"
+        label={t("timeline:clipMenu.duplicate")}
         icon={<ContentCopyIcon fontSize="small" />}
         compact
         onClick={run(actions.duplicate)}
       />
       {actions.isGenerated && (
         <MenuItemPrimitive
-          label="Regenerate as new clip"
+          label={t("timeline:clipMenu.regenerateAsNew")}
           icon={<AutoAwesomeMotionIcon fontSize="small" />}
           compact
           onClick={run(actions.regenerateAsCopy)}
         />
       )}
       <MenuItemPrimitive
-        label={actions.locked ? "Unlock" : "Lock"}
+        label={actions.locked ? t("timeline:clipMenu.unlock") : t("timeline:clipMenu.lock")}
         icon={
           actions.locked ? (
             <LockIcon fontSize="small" />
@@ -82,14 +84,14 @@ export function ClipContextMenu({
         onClick={run(actions.toggleLock)}
       />
       <MenuItemPrimitive
-        label="Replace clip…"
+        label={t("timeline:clipMenu.replaceClip")}
         icon={<ImageIcon fontSize="small" />}
         compact
         onClick={run(actions.openReplace)}
       />
       {actions.canOpenInNodeEditor && (
         <MenuItemPrimitive
-          label="Open in node editor"
+          label={t("timeline:clipMenu.openInNodeEditor")}
           icon={<OpenInNewIcon fontSize="small" />}
           compact
           onClick={run(actions.openInNodeEditor)}
@@ -97,14 +99,14 @@ export function ClipContextMenu({
       )}
       {isLinked && (
         <MenuItemPrimitive
-          label="Unlink"
+          label={t("timeline:clipMenu.unlink")}
           icon={<LinkOffIcon fontSize="small" />}
           compact
           onClick={run(onUnlink)}
         />
       )}
       <MenuItemPrimitive
-        label="Delete"
+        label={t("timeline:clipMenu.delete")}
         icon={<DeleteOutlineOutlinedIcon fontSize="small" />}
         compact
         onClick={run(onDelete)}

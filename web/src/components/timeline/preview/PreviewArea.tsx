@@ -7,6 +7,7 @@ import React, {
   useRef,
   useState
 } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -194,6 +195,7 @@ export interface PreviewAreaProps {
 export const PreviewArea: React.FC<PreviewAreaProps> = memo(
   ({ fps = 30 }) => {
     const theme = useTheme();
+    const { t } = useTranslation(["timeline"]);
 
     const {
       currentTimeMs,
@@ -762,7 +764,7 @@ export const PreviewArea: React.FC<PreviewAreaProps> = memo(
         css={containerStyles(theme)}
         tabIndex={0}
         onKeyDown={handleKeyDown}
-        aria-label="Preview area"
+        aria-label={t("timeline:preview.previewArea")}
         data-testid="preview-area"
       >
         <div css={viewportStyles}>
@@ -772,55 +774,55 @@ export const PreviewArea: React.FC<PreviewAreaProps> = memo(
         <div css={controlBarStyles(theme)}>
           <ToolbarIconButton
             icon={<SkipPreviousIcon />}
-            tooltip="Previous clip boundary (Shift+←)"
+            tooltip={t("timeline:preview.prevBoundaryShortcut")}
             onClick={jumpToPrevBoundary}
-            aria-label="Previous clip boundary"
+            aria-label={t("timeline:preview.prevBoundary")}
             size="small"
             className="timeline-preview__secondary-control"
           />
 
           <ToolbarIconButton
             icon={<NavigateBeforeIcon />}
-            tooltip="Step back one frame (←)"
+            tooltip={t("timeline:preview.stepBackShortcut")}
             onClick={stepBack}
             disabled={isPlaying}
-            aria-label="Step back one frame"
+            aria-label={t("timeline:preview.stepBack")}
             size="small"
             className="timeline-preview__secondary-control"
           />
 
           <ToolbarIconButton
             icon={isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
-            tooltip={isPlaying ? "Pause (Space)" : "Play (Space)"}
+            tooltip={isPlaying ? t("timeline:preview.pauseShortcut") : t("timeline:preview.playShortcut")}
             onClick={handlePlayPauseToggle}
-            aria-label={isPlaying ? "Pause" : "Play"}
+            aria-label={isPlaying ? t("timeline:preview.pause") : t("timeline:preview.play")}
             variant="primary"
             size="small"
           />
 
           <ToolbarIconButton
             icon={<StopIcon />}
-            tooltip="Stop and return to start"
+            tooltip={t("timeline:preview.stopShortcut")}
             onClick={handleStop}
-            aria-label="Stop"
+            aria-label={t("timeline:preview.stop")}
             size="small"
           />
 
           <ToolbarIconButton
             icon={<NavigateNextIcon />}
-            tooltip="Step forward one frame (→)"
+            tooltip={t("timeline:preview.stepForwardShortcut")}
             onClick={stepForward}
             disabled={isPlaying}
-            aria-label="Step forward one frame"
+            aria-label={t("timeline:preview.stepForward")}
             size="small"
             className="timeline-preview__secondary-control"
           />
 
           <ToolbarIconButton
             icon={<SkipNextIcon />}
-            tooltip="Next clip boundary (Shift+→)"
+            tooltip={t("timeline:preview.nextBoundaryShortcut")}
             onClick={jumpToNextBoundary}
-            aria-label="Next clip boundary"
+            aria-label={t("timeline:preview.nextBoundary")}
             size="small"
             className="timeline-preview__secondary-control"
           />
@@ -831,7 +833,7 @@ export const PreviewArea: React.FC<PreviewAreaProps> = memo(
           </Text>
           <div css={scrubberStyles}>
             <Slider
-              aria-label="Scrub timeline"
+              aria-label={t("timeline:preview.scrubTimeline")}
               min={0}
               max={scrubMax}
               step={frameDeltaMs(fps)}
@@ -850,9 +852,9 @@ export const PreviewArea: React.FC<PreviewAreaProps> = memo(
 
           <ToolbarIconButton
             icon={isFullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
-            tooltip={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+            tooltip={isFullscreen ? t("timeline:preview.exitFullscreen") : t("timeline:preview.fullscreen")}
             onClick={handleFullscreen}
-            aria-label={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+            aria-label={isFullscreen ? t("timeline:preview.exitFullscreen") : t("timeline:preview.fullscreen")}
             size="small"
             className="timeline-preview__fullscreen"
           />

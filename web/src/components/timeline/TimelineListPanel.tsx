@@ -14,6 +14,7 @@ import {
   useState
 } from "react";
 import type { DragEvent, FocusEvent, KeyboardEvent, MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useCreateTimeline, useTimelines } from "../../hooks/useTimelineSequence";
@@ -314,12 +315,13 @@ export const CreateTimelineButton = memo(function CreateTimelineButton() {
   const setVisibility = usePanelStore((state) => state.setVisibility);
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation(["timeline"]);
 
   const handleCreate = useCallback(async () => {
     try {
       const timeline = await createTimeline.mutateAsync({
         id: newDocumentId(),
-        name: "Untitled video",
+        name: t("timeline:list.untitledVideo"),
         projectId: "default"
       });
       if (location.pathname.startsWith("/workspace")) {
@@ -327,7 +329,7 @@ export const CreateTimelineButton = memo(function CreateTimelineButton() {
           type: "timeline",
           ref: timeline.id,
           mode: "edit",
-          title: timeline.name || "Untitled video"
+          title: timeline.name || t("timeline:list.untitledVideo")
         });
       } else {
         navigate(`/timeline/${timeline.id}`);
@@ -336,12 +338,12 @@ export const CreateTimelineButton = memo(function CreateTimelineButton() {
     } catch (error) {
       notifyMutationError("create the timeline", error);
     }
-  }, [createTimeline, location.pathname, navigate, openTab, setVisibility]);
+  }, [createTimeline, location.pathname, navigate, openTab, setVisibility, t]);
 
   return (
-    <Tooltip title="New timeline" placement="right-start">
+    <Tooltip title={t("timeline:list.newTimeline")} placement="right-start">
       <ToolbarIconButton
-        ariaLabel="New timeline"
+        ariaLabel={t("timeline:list.newTimeline")}
         onClick={() => void handleCreate()}
         disabled={createTimeline.isPending}
         tabIndex={-1}
@@ -353,6 +355,7 @@ export const CreateTimelineButton = memo(function CreateTimelineButton() {
 
 const TimelineListPanel = () => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
   const [filterValue, setFilterValue] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
   const autoFocusEnabled = useAutoFocusEnabled();
@@ -405,7 +408,7 @@ const TimelineListPanel = () => {
           type: "timeline",
           ref: id,
           mode: "edit",
-          title: name || "Untitled video"
+          title: name || t("timeline:list.untitledVideo")
         });
       } else {
         navigate(`/timeline/${id}`);
@@ -526,40 +529,40 @@ const TimelineListPanel = () => {
         open={itemToDelete !== null}
         onClose={() => setItemToDelete(null)}
         onConfirm={handleConfirmDelete}
-        title="Delete timeline"
-        content={`Delete "${itemToDelete?.name ?? ""}"? This cannot be undone.`}
-        confirmText="Delete"
-        cancelText="Cancel"
+        title={t("timeline:list.deleteTitle")}
+        content={t("timeline:list.deleteContent", { name: itemToDelete?.name ?? "" })}
+        confirmText={t("timeline:list.delete")}
+        cancelText={t("timeline:list.cancel")}
       />
       <div className="timeline-search">
         <CategorySearchBar
           ref={searchRef}
           value={filterValue}
           onChange={setFilterValue}
-          placeholder="Search timelines..."
+          placeholder={t("timeline:list.searchPlaceholder")}
         />
       </div>
 
       {isLoading ? (
         <FlexColumn gap={2} justify="center" align="center" sx={{ flex: 1 }}>
-          <LoadingSpinner size="large" text="Loading timelines" />
+          <LoadingSpinner size="large" text={t("timeline:list.loading")} />
         </FlexColumn>
       ) : isError ? (
         <FlexColumn gap={2} justify="center" align="center" sx={{ flex: 1, px: 2 }}>
           <EmptyState
             variant="error"
-            title="Could not load timelines"
-            description={error?.message ?? "Try again later."}
+            title={t("timeline:list.loadFailed")}
+            description={error?.message ?? ""}
           />
         </FlexColumn>
       ) : timelines.length === 0 ? (
         <FlexColumn gap={2} justify="center" align="center" sx={{ flex: 1, px: 2 }}>
           <EmptyState
-            title={filterValue ? "No matching timelines" : "No timelines yet"}
+            title={filterValue ? t("timeline:list.emptyFiltered") : t("timeline:list.empty")}
             description={
               filterValue
-                ? "Try a different search term."
-                : "Create a new video timeline with the + button above."
+                ? t("timeline:list.emptyFilteredHint")
+                : t("timeline:list.emptyHint")
             }
           />
         </FlexColumn>

@@ -43,6 +43,7 @@
  */
 
 import React, { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -217,6 +218,7 @@ export const TracksRegion: React.FC<TracksRegionProps> = memo(
   ({ heightPx }) => {
     const theme = useTheme();
     const isMobile = useTimelineIsMobile();
+    const { t } = useTranslation(["timeline"]);
     const headerWidthPx = isMobile
       ? MOBILE_TRACK_HEADER_WIDTH_PX
       : TRACK_HEADER_WIDTH_PX;
@@ -931,7 +933,7 @@ export const TracksRegion: React.FC<TracksRegionProps> = memo(
           } as React.CSSProperties
         }
         data-testid="tracks-region"
-        aria-label="Tracks region"
+        aria-label={t("timeline:tracks.tracksRegion")}
       >
         {/* ── Tool toolbar (above the ruler) ──────────────────────────── */}
         <FlexRow
@@ -950,7 +952,7 @@ export const TracksRegion: React.FC<TracksRegionProps> = memo(
             <HelpButton
               onClick={() => setShortcutsOpen(true)}
               iconVariant="helpOutline"
-              tooltip="Keyboard shortcuts (?)"
+              tooltip={t("timeline:tracks.keyboardShortcuts")}
             />
           )}
         </FlexRow>
@@ -958,10 +960,10 @@ export const TracksRegion: React.FC<TracksRegionProps> = memo(
         {/* ── Sub-header: TRACKS label + ruler ────────────────────────── */}
         <FlexRow align="stretch" fullWidth>
           <div css={tracksSectionHeaderStyles(theme, isMobile)}>
-            <span>Tracks</span>
+            <span>{t("timeline:tracks.tracks")}</span>
             <span
               css={trackCountChipStyles(theme)}
-              aria-label={`${tracks.length} tracks`}
+              aria-label={t("timeline:tracks.tracksCount", { count: tracks.length })}
             >
               {tracks.length}
             </span>

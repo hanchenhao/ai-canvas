@@ -7,6 +7,7 @@
  * Pairs with the V (select) / C (cut) keyboard shortcuts in TracksRegion.
  */
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -111,10 +112,11 @@ export interface ToolToggleProps {
 export const ToolToggle: React.FC<ToolToggleProps> = memo(({ compact = false }) => {
   const activeTool = useTimelineUIStore((s) => s.activeTool);
   const setActiveTool = useTimelineUIStore((s) => s.setActiveTool);
+  const { t } = useTranslation(["timeline"]);
   return (
     <FlexRow gap={0.5} align="center">
       <ToolButton
-        label="Select"
+        label={t("timeline:tools.select")}
         shortcut="V"
         active={activeTool === "select"}
         compact={compact}
@@ -123,7 +125,7 @@ export const ToolToggle: React.FC<ToolToggleProps> = memo(({ compact = false }) 
         <PointerIcon />
       </ToolButton>
       <ToolButton
-        label="Cut"
+        label={t("timeline:tools.cut")}
         shortcut="C"
         active={activeTool === "cut"}
         compact={compact}

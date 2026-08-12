@@ -13,6 +13,7 @@
  */
 
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -126,6 +127,7 @@ interface WorkflowListProps {
 const WorkflowList: React.FC<WorkflowListProps> = memo(
   ({ workflows, isLoading, searchQuery, onSelect, emptyLabel }) => {
     const theme = useTheme();
+    const { t } = useTranslation(["timeline"]);
 
     const filtered = useMemo(
       () =>
@@ -148,7 +150,7 @@ const WorkflowList: React.FC<WorkflowListProps> = memo(
     if (filtered.length === 0) {
       return (
         <EmptyState
-          title={searchQuery ? "No matches" : emptyLabel}
+          title={searchQuery ? t("timeline:addClip.noMatches") : emptyLabel}
           size="small"
         />
       );
@@ -216,22 +218,23 @@ interface OutputSelectPanelProps {
 const OutputSelectPanel: React.FC<OutputSelectPanelProps> = memo(
   ({ outputs, workflowName, onSelect, onBack }) => {
     const theme = useTheme();
+    const { t } = useTranslation(["timeline"]);
 
     return (
       <FlexColumn gap={1}>
         <FlexRow align="center" gap={0.5}>
           <ToolbarIconButton
             icon={<ArrowBackIcon fontSize="small" />}
-            tooltip="Back"
+            tooltip={t("timeline:addClip.back")}
             onClick={onBack}
-            aria-label="Back to workflow list"
+            aria-label={t("timeline:addClip.backToList")}
           />
           <Text size="small" weight={500} sx={{ flex: 1 }}>
-            Select output - {workflowName}
+            {t("timeline:addClip.selectOutput", { name: workflowName })}
           </Text>
         </FlexRow>
         <Caption sx={{ color: "text.secondary" }}>
-          This workflow has multiple output nodes. Pick one:
+          {t("timeline:addClip.multiOutputHint")}
         </Caption>
         <FlexColumn gap={0}>
           {outputs.map((out) => (
@@ -298,6 +301,7 @@ export interface AddClipMenuProps {
 export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
   ({ trackId, startMs, trackType, anchorEl, onClose }) => {
     const theme = useTheme();
+    const { t } = useTranslation(["timeline"]);
     const directGenKind = trackDirectGenKind(trackType);
     const mediaTypeForClip = trackMediaType(trackType);
     const [activeTab, setActiveTab] = useState<"templates" | "all">(
@@ -378,13 +382,13 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
           onClose();
         } catch (err) {
           const msg =
-            err instanceof Error ? err.message : "Failed to add clip";
+            err instanceof Error ? err.message : t("timeline:addClip.failedToAdd");
           setError(msg);
         } finally {
           setIsAdding(false);
         }
       },
-      [addGeneratedClip, trackId, startMs, trackType, onClose]
+      [addGeneratedClip, trackId, startMs, trackType, onClose, t]
     );
 
     // ── Handlers ───────────────────────────────────────────────────────────
@@ -409,7 +413,7 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
           if (result.outputs.length === 0) {
             // Server will throw TIMELINE_NO_MEDIA_OUTPUT; surface gracefully
             throw new Error(
-              "This workflow has no media output node (image, video, or audio)."
+              t("timeline:addClip.noMediaOutput")
             );
           }
 
@@ -424,12 +428,12 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
           }
         } catch (err) {
           const msg =
-            err instanceof Error ? err.message : "Failed to add clip";
+            err instanceof Error ? err.message : t("timeline:addClip.failedToAdd");
           setError(msg);
           setIsAdding(false);
         }
       },
-      [createClip, templatesQuery.data, allWorkflowsQuery.data]
+      [createClip, templatesQuery.data, allWorkflowsQuery.data, t]
     );
 
     const handleOutputSelect = useCallback(
@@ -506,7 +510,7 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
         await directGen.start(clipId);
         onClose();
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to add clip");
+        setError(err instanceof Error ? err.message : t("timeline:addClip.failedToAdd"));
       } finally {
         setIsAdding(false);
       }
@@ -556,7 +560,7 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
             <>
               <FlexRow align="center" justify="space-between">
                 <Text size="small" weight={600}>
-                  Add Generated Clip
+                  {t("timeline:addClip.title")}
                 </Text>
                 {isAdding && <LoadingSpinner size="small" />}
               </FlexRow>
@@ -573,10 +577,10 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
                       onKeyDown={handlePromptKeyDown}
                       placeholder={
                         directGenKind === "video"
-                          ? "Describe a video and press Enter…"
+                          ? t("timeline:addClip.promptVideo")
                           : directGenKind === "audio"
-                            ? "Type text to speak and press Enter…"
-                            : "Describe an image and press Enter…"
+                            ? t("timeline:addClip.promptAudio")
+                            : t("timeline:addClip.promptImage")
                       }
                       multiline
                       minRows={2}
@@ -585,7 +589,7 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
                       autoFocus={autoFocusEnabled}
                       fullWidth
                       inputProps={{
-                        "aria-label": "Prompt",
+                        "aria-label": t("timeline:addClip.title"),
                         "data-testid": "add-clip-prompt-input"
                       }}
                     />
@@ -596,7 +600,7 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
                         fontSize: theme.fontSizeSmaller
                       })}
                     >
-                      ↵ generate · ⇧↵ new line
+                      {t("timeline:addClip.promptHint")}
                     </Caption>
                     {directGenKind === "video" ? (
                       <VideoModelSelect
@@ -636,7 +640,7 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
                       fontSize: theme.fontSizeSmaller
                     })}
                   >
-                    - or use a workflow -
+                    {t("timeline:addClip.orWorkflow")}
                   </Caption>
                 </>
               )}
@@ -645,8 +649,8 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
               <TabGroup
                 size="small"
                 tabs={[
-                  { value: "templates", label: "Templates" },
-                  { value: "all", label: "All workflows" }
+                  { value: "templates", label: t("timeline:addClip.templates") },
+                  { value: "all", label: t("timeline:addClip.allWorkflows") }
                 ]}
                 value={activeTab}
                 onChange={handleTabChange}
@@ -656,7 +660,7 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
               <SearchInput
                 value={searchQuery}
                 onChange={setSearchQuery}
-                placeholder="Search…"
+                placeholder={t("timeline:addClip.search")}
                 autoFocus
                 fullWidth
                 debounceMs={150}
@@ -674,7 +678,7 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
                   isLoading={templatesQuery.isLoading}
                   searchQuery={searchQuery}
                   onSelect={handleSelect}
-                  emptyLabel="No templates found"
+                  emptyLabel={t("timeline:addClip.noTemplates")}
                 />
               </TabPanel>
 
@@ -685,7 +689,7 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
                   isLoading={allWorkflowsQuery.isLoading}
                   searchQuery={searchQuery}
                   onSelect={handleSelect}
-                  emptyLabel="No workflows found"
+                  emptyLabel={t("timeline:addClip.noWorkflows")}
                 />
               </TabPanel>
             </>

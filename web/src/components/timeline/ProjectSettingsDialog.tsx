@@ -8,6 +8,7 @@
  * {@link TimelineStore}. Applying persists via {@link useTimelineProjectSettings}.
  */
 import React, { memo, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
 
 import {
@@ -82,6 +83,7 @@ const ProjectSettingsDialogInternal: React.FC<ProjectSettingsDialogProps> = ({
   open,
   onClose
 }) => {
+  const { t } = useTranslation(["timeline"]);
   const { fps, width, height } = useTimelineStore(
     useShallow((s) => ({ fps: s.fps, width: s.width, height: s.height }))
   );
@@ -148,11 +150,11 @@ const ProjectSettingsDialogInternal: React.FC<ProjectSettingsDialogProps> = ({
     <Dialog
       open={open}
       onClose={() => onClose()}
-      title="Project settings"
+      title={t("timeline:projectSettings.title")}
       onConfirm={() => void handleApply()}
       onCancel={onClose}
-      confirmText="Apply"
-      cancelText="Cancel"
+      confirmText={t("timeline:projectSettings.apply")}
+      cancelText={t("timeline:projectSettings.cancel")}
       isLoading={isSaving}
       confirmDisabled={!allValid || !dirty || isSaving}
       minWidth="min(440px, 100vw - 32px)"
@@ -161,22 +163,25 @@ const ProjectSettingsDialogInternal: React.FC<ProjectSettingsDialogProps> = ({
         {/* ── Canvas size ─────────────────────────────────────────── */}
         <FlexColumn gap={1.5}>
           <Text size="small" weight={600} sx={{ mb: 1.5 }}>
-            Canvas size
+            {t("timeline:projectSettings.canvasSize")}
           </Text>
           {/* Label hidden — the section header names it; an outlined variant
               keeps it consistent with the Width/Height fields below. */}
           <SelectField
-            label="Canvas preset"
+            label={t("timeline:projectSettings.canvasPreset")}
             hideLabel
             variant="outlined"
             value={resolutionPreset}
             onChange={handleResolutionPreset}
-            options={RESOLUTION_OPTIONS}
+            options={[
+              ...RESOLUTION_PRESETS.map((p) => ({ value: p.value, label: p.label })),
+              { value: CUSTOM, label: t("timeline:projectSettings.custom") }
+            ]}
             size="small"
           />
           <FlexRow gap={1.5} align="flex-start" sx={{ mt: 2 }}>
             <TextInput
-              label="Width"
+              label={t("timeline:projectSettings.width")}
               type="number"
               size="small"
               value={widthText}
@@ -190,7 +195,7 @@ const ProjectSettingsDialogInternal: React.FC<ProjectSettingsDialogProps> = ({
               sx={{ flex: 1 }}
             />
             <TextInput
-              label="Height"
+              label={t("timeline:projectSettings.height")}
               type="number"
               size="small"
               value={heightText}
@@ -209,17 +214,20 @@ const ProjectSettingsDialogInternal: React.FC<ProjectSettingsDialogProps> = ({
         {/* ── Frame rate ──────────────────────────────────────────── */}
         <FlexColumn gap={1.5}>
           <Text size="small" weight={600} sx={{ mb: 1.5 }}>
-            Frame rate
+            {t("timeline:projectSettings.frameRate")}
           </Text>
           <FlexRow gap={1.5} align="flex-start">
             <FlexColumn sx={{ flex: 1 }}>
               <SelectField
-                label="Frame rate preset"
+                label={t("timeline:projectSettings.frameRatePreset")}
                 hideLabel
                 variant="outlined"
                 value={fpsPreset}
                 onChange={handleFpsPreset}
-                options={FPS_OPTIONS}
+                options={[
+                  ...FPS_PRESETS.map((f) => ({ value: String(f), label: `${f} fps` })),
+                  { value: CUSTOM, label: t("timeline:projectSettings.custom") }
+                ]}
                 size="small"
               />
             </FlexColumn>
@@ -241,8 +249,7 @@ const ProjectSettingsDialogInternal: React.FC<ProjectSettingsDialogProps> = ({
         </FlexColumn>
 
         <Caption sx={{ color: "text.secondary" }}>
-          Applies to the preview and the exported video. Existing clips keep
-          their own source resolution and are scaled to fit the canvas.
+          {t("timeline:projectSettings.hint")}
         </Caption>
       </FlexColumn>
     </Dialog>

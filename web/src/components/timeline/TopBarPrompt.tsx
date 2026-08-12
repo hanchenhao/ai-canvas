@@ -18,6 +18,7 @@
  */
 
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import MovieIcon from "@mui/icons-material/Movie";
@@ -81,6 +82,7 @@ export interface TopBarPromptProps {
 
 export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
   const inStudio = useInStudio();
   const [prompt, setPrompt] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -142,7 +144,7 @@ export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false
     setError(null);
     const trackId = pickOrCreateVideoTrack();
     if (!trackId) {
-      setError("Unlock the video track first.");
+      setError(t("timeline:prompt.unlockTrack"));
       return;
     }
     const startMs = useTimelinePlaybackStore.getState().currentTimeMs;
@@ -164,7 +166,7 @@ export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false
       await directGen.start(clipId);
       setPrompt("");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to generate");
+      setError(err instanceof Error ? err.message : t("timeline:prompt.generateFailed"));
     } finally {
       setBusy(false);
     }
@@ -177,7 +179,8 @@ export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false
     resolution,
     duration,
     selectClip,
-    directGen
+    directGen,
+    t
   ]);
 
   const handleKeyDown = useCallback(
@@ -224,13 +227,13 @@ export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false
       onChange={(e) => setPrompt(e.target.value)}
       onKeyDown={handleKeyDown}
       placeholder={
-        compact ? "Generate a video…" : "Generate a video at the playhead…"
+        compact ? t("timeline:prompt.placeholderCompact") : t("timeline:prompt.placeholder")
       }
       compact
       fullWidth
       disabled={busy}
       inputProps={{
-        "aria-label": "Quick text-to-video prompt",
+        "aria-label": t("timeline:prompt.ariaQuickPrompt"),
         "data-testid": "topbar-prompt-input"
       }}
       slotProps={{
@@ -267,7 +270,7 @@ export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false
       data-testid="topbar-generate"
       // Icon-only on phones: the label costs ~70px the prompt needs, and the
       // sparkle plus the field's placeholder already say what it does.
-      aria-label="Generate video"
+      aria-label={t("timeline:prompt.generateVideo")}
       sx={{
         flexShrink: 0,
         height: 34,
@@ -276,7 +279,7 @@ export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false
           : null)
       }}
     >
-      {compact ? null : "Generate"}
+      {compact ? null : t("timeline:prompt.generate")}
     </EditorButton>
   );
 
@@ -285,7 +288,7 @@ export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false
       <MediaControlChip
           ref={videoModelAnchorRef}
           icon={<MovieIcon fontSize="small" />}
-          label={selectedModel?.name || "Select Model"}
+          label={selectedModel?.name || t("timeline:prompt.selectModel")}
           active={videoModelOpen}
           onClick={() => setVideoModelOpen(true)}
           truncate
@@ -297,7 +300,7 @@ export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false
               anchorEl={videoModelAnchorRef.current}
               open
               onClose={() => setVideoModelOpen(false)}
-              header="Video model"
+              header={t("timeline:prompt.videoModel")}
               value={selectedModel?.id ?? ""}
               options={curatedClipOptions}
               onChange={(id) => {
@@ -327,7 +330,7 @@ export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false
           anchorEl={durationAnchor}
           open={!!durationAnchor}
           onClose={() => setDurationAnchor(null)}
-          header="Duration"
+          header={t("timeline:prompt.duration")}
           value={duration}
           options={durationOptions}
           onChange={(d) => setDuration(d)}
@@ -344,7 +347,7 @@ export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false
           anchorEl={resolutionAnchor}
           open={!!resolutionAnchor}
           onClose={() => setResolutionAnchor(null)}
-          header="Video Resolution"
+          header={t("timeline:prompt.resolution")}
           value={resolution}
           options={resolutionOptions}
           onChange={(r) => setResolution(r)}
