@@ -20,6 +20,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { memo, useCallback, useMemo, useState, type MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useNavigate } from "react-router-dom";
@@ -118,6 +119,7 @@ const popoverStyles = (theme: Theme) =>
 
 const OptionalPacksSection = () => {
   const theme = useTheme();
+  const { t } = useTranslation("canvas");
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [pendingPackIds, setPendingPackIds] = useState<Set<string>>(
@@ -211,12 +213,12 @@ const OptionalPacksSection = () => {
         type="button"
         className="optional-packs-trigger"
         onClick={handleOpen}
-        title="Reveal advanced and niche node packs"
+        title={t("nodeMenu.packs.triggerTitle")}
         aria-haspopup="dialog"
         aria-expanded={Boolean(anchorEl)}
       >
         <Inventory2OutlinedIcon className="icon" />
-        <span className="label">Optional packs</span>
+        <span className="label">{t("nodeMenu.packs.trigger")}</span>
         <span className="count">
           {enabledCount > 0 ? `${enabledCount}/${total}` : `+${total}`}
         </span>
@@ -233,27 +235,24 @@ const OptionalPacksSection = () => {
         <div css={popoverStyles(theme)}>
           <FlexColumn gap={1}>
             <Text size="normal" weight={600}>
-              Optional node packs
+              {t("nodeMenu.packs.heading")}
             </Text>
             <Text size="small" color="secondary">
-              Advanced and niche nodes are tucked into optional packs to keep
-              this menu focused. Turn on what you need — they appear in the list
-              right away. Search always finds every node, even when its pack is
-              off.
+              {t("nodeMenu.packs.description")}
             </Text>
 
             <Divider />
 
             <FlexRow align="center" justify="space-between">
               <Text size="small" weight={600}>
-                Categories
+                {t("nodeMenu.packs.categories")}
               </Text>
               <FlexRow gap={1.5} align="center">
                 <TextLink asButton onClick={() => enableAll()}>
-                  Show all
+                  {t("nodeMenu.packs.showAll")}
                 </TextLink>
                 <TextLink asButton onClick={() => disableAll()}>
-                  Hide all
+                  {t("nodeMenu.packs.hideAll")}
                 </TextLink>
               </FlexRow>
             </FlexRow>
@@ -277,11 +276,10 @@ const OptionalPacksSection = () => {
                 <Divider />
                 <FlexColumn gap={0.25}>
                   <Text size="small" weight={600}>
-                    Providers
+                    {t("nodeMenu.packs.providers")}
                   </Text>
                   <Text size="small" color="secondary">
-                    Provider nodes appear once you add their API key — setting a
-                    key enables the pack automatically.
+                    {t("nodeMenu.packs.providersDescription")}
                   </Text>
                 </FlexColumn>
                 <FlexColumn gap={0.25}>
@@ -302,18 +300,18 @@ const OptionalPacksSection = () => {
                           <span className="key-set">
                             <CheckCircleOutlineIcon />
                             <Text size="small" color="inherit">
-                              Key set
+                              {t("nodeMenu.packs.keySet")}
                             </Text>
                           </span>
                         ) : (
                           <TextLink
                             asButton
                             onClick={openApiKeys}
-                            title={`Add ${getSecretDisplayName(
-                              provider.requiredKey
-                            )}`}
+                            title={t("nodeMenu.packs.addKeyTitle", {
+                              name: getSecretDisplayName(provider.requiredKey)
+                            })}
                           >
-                            Add API key
+                            {t("nodeMenu.packs.addApiKey")}
                           </TextLink>
                         )}
                       </FlexRow>
@@ -328,10 +326,10 @@ const OptionalPacksSection = () => {
                 <Divider />
                 <FlexColumn gap={0.25}>
                   <Text size="small" weight={600}>
-                    Local packs
+                    {t("nodeMenu.packs.localPacks")}
                   </Text>
                   <Text size="small" color="secondary">
-                    Run locally — no API key required.
+                    {t("nodeMenu.packs.localPacksDescription")}
                   </Text>
                 </FlexColumn>
                 <FlexColumn gap={0.25}>
@@ -358,7 +356,7 @@ const OptionalPacksSection = () => {
                 <Divider />
                 <FlexRow justify="flex-end">
                   <TextLink asButton onClick={handleManagePacks}>
-                    More packs…
+                    {t("nodeMenu.packs.morePacks")}
                   </TextLink>
                 </FlexRow>
               </>

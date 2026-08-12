@@ -77,6 +77,56 @@
       "layers": "Layers"
     }
   },
+  "nodeMenu": {
+    "library": {
+      "title": "Node library",
+      "docsLabel": "Node reference",
+      "searchPlaceholder": "Search nodes…",
+      "searchAriaLabel": "Search nodes",
+      "clearSearch": "Clear search",
+      "categoriesAriaLabel": "Node categories",
+      "noMatchingNodes": "No matching nodes",
+      "infoEmptyHint": "Drag a node to place it on the workspace. Hover for details",
+      "dragKbd": "drag",
+      "dragToAdd": "to add"
+    },
+    "recent": {
+      "title": "Recent Nodes",
+      "clearTooltip": "Clear recent nodes",
+      "tileHint": "Click to place · Drag to canvas",
+      "metadataNotFound": "Unable to find metadata for {{nodeType}}.",
+      "clearConfirmTitle": "Clear recent nodes?",
+      "clearConfirmContent": "This clears your recently used nodes list. This cannot be undone.",
+      "clearConfirmButton": "Clear recent",
+      "clearedNotification": "Recent nodes cleared"
+    },
+    "packs": {
+      "trigger": "Optional packs",
+      "triggerTitle": "Reveal advanced and niche node packs",
+      "heading": "Optional node packs",
+      "description": "Advanced and niche nodes are tucked into optional packs to keep this menu focused. Turn on what you need — they appear in the list right away. Search always finds every node, even when its pack is off.",
+      "categories": "Categories",
+      "showAll": "Show all",
+      "hideAll": "Hide all",
+      "providers": "Providers",
+      "providersDescription": "Provider nodes appear once you add their API key — setting a key enables the pack automatically.",
+      "keySet": "Key set",
+      "addKeyTitle": "Add {{name}}",
+      "addApiKey": "Add API key",
+      "localPacks": "Local packs",
+      "localPacksDescription": "Run locally — no API key required.",
+      "morePacks": "More packs…"
+    },
+    "empty": {
+      "browseTitle": "Browse Nodes",
+      "browseHint": "Click on the namespaces to the left",
+      "searchTitle": "Search Nodes",
+      "searchHint": "Type in the search bar to search for nodes.",
+      "createTitle": "Create Nodes",
+      "createHintClick": "Click on a node",
+      "createHintDrag": "Drag a node onto the canvas"
+    }
+  },
   "contextMenu": {
     "copy": "Copy",
     "cut": "Cut",

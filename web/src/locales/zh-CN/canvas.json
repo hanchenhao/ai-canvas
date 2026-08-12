@@ -77,6 +77,56 @@
       "layers": "图层"
     }
   },
+  "nodeMenu": {
+    "library": {
+      "title": "节点库",
+      "docsLabel": "节点参考",
+      "searchPlaceholder": "搜索节点…",
+      "searchAriaLabel": "搜索节点",
+      "clearSearch": "清除搜索",
+      "categoriesAriaLabel": "节点分类",
+      "noMatchingNodes": "没有匹配的节点",
+      "infoEmptyHint": "拖拽节点即可放到工作区，悬停查看详情",
+      "dragKbd": "拖拽",
+      "dragToAdd": "即可添加"
+    },
+    "recent": {
+      "title": "最近使用",
+      "clearTooltip": "清除最近使用的节点",
+      "tileHint": "点击放置 · 拖拽到画布",
+      "metadataNotFound": "找不到 {{nodeType}} 的元数据。",
+      "clearConfirmTitle": "清除最近使用的节点？",
+      "clearConfirmContent": "这将清空你最近使用的节点列表，且无法撤销。",
+      "clearConfirmButton": "清除",
+      "clearedNotification": "已清除最近使用的节点"
+    },
+    "packs": {
+      "trigger": "可选包",
+      "triggerTitle": "显示高级和小众节点包",
+      "heading": "可选节点包",
+      "description": "高级和小众节点被收纳在可选包中，让此菜单保持简洁。按需开启即可——它们会立即出现在列表里。搜索始终能找到所有节点，即使其所属的包未开启。",
+      "categories": "分类",
+      "showAll": "全部显示",
+      "hideAll": "全部隐藏",
+      "providers": "提供商",
+      "providersDescription": "添加 API 密钥后，对应的提供商节点即会出现——设置密钥会自动启用相应的包。",
+      "keySet": "已设置密钥",
+      "addKeyTitle": "添加 {{name}}",
+      "addApiKey": "添加 API 密钥",
+      "localPacks": "本地包",
+      "localPacksDescription": "本地运行——无需 API 密钥。",
+      "morePacks": "更多包…"
+    },
+    "empty": {
+      "browseTitle": "浏览节点",
+      "browseHint": "点击左侧的命名空间",
+      "searchTitle": "搜索节点",
+      "searchHint": "在搜索栏中输入以搜索节点。",
+      "createTitle": "创建节点",
+      "createHintClick": "点击节点",
+      "createHintDrag": "将节点拖拽到画布上"
+    }
+  },
   "contextMenu": {
     "copy": "复制",
     "cut": "剪切",

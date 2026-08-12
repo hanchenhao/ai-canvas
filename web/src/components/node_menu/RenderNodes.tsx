@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
 import { useTheme } from "@mui/material/styles";
 import { useVirtualizer } from "@tanstack/react-virtual";
@@ -82,6 +83,7 @@ const RenderNodes: React.FC<RenderNodesProps> = ({
   showFavoriteButton = true
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("canvas");
   const { setDragToCreate, groupedSearchResults, searchTerm } =
     useNodeMenuStore(
       useShallow((state) => ({
@@ -283,21 +285,21 @@ const RenderNodes: React.FC<RenderNodesProps> = ({
         <div className="no-selection">
           <div className="explanation">
             <Text size="normal" weight={600} style={{ marginTop: 0 }}>
-              Browse Nodes
+              {t("nodeMenu.empty.browseTitle")}
             </Text>
             <ul>
-              <li>Click on the namespaces to the left</li>
+              <li>{t("nodeMenu.empty.browseHint")}</li>
             </ul>
 
-            <Text size="normal" weight={600}>Search Nodes</Text>
+            <Text size="normal" weight={600}>{t("nodeMenu.empty.searchTitle")}</Text>
             <ul>
-              <li>Type in the search bar to search for nodes.</li>
+              <li>{t("nodeMenu.empty.searchHint")}</li>
             </ul>
 
-            <Text size="normal" weight={600}>Create Nodes</Text>
+            <Text size="normal" weight={600}>{t("nodeMenu.empty.createTitle")}</Text>
             <ul>
-              <li>Click on a node</li>
-              <li>Drag a node onto the canvas</li>
+              <li>{t("nodeMenu.empty.createHintClick")}</li>
+              <li>{t("nodeMenu.empty.createHintDrag")}</li>
             </ul>
           </div>
         </div>

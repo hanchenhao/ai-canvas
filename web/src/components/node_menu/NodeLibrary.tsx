@@ -11,6 +11,7 @@ import {
   useState
 } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
+import { useTranslation } from "react-i18next";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 
@@ -309,6 +310,7 @@ interface NodeLibraryProps {
 const NodeLibrary = memo<NodeLibraryProps>(
   ({ activeSubcategory, onSubcategoryChange, isMobile = false }) => {
     const theme = useTheme();
+    const { t } = useTranslation("canvas");
     const cssStyles = useMemo(() => styles(theme, isMobile), [theme, isMobile]);
     const [query, setQuery] = useState("");
     const [hoveredType, setHoveredType] = useState<string | null>(null);
@@ -421,10 +423,10 @@ const NodeLibrary = memo<NodeLibraryProps>(
       <div css={cssStyles} className="nl-root">
         <div className="nl-header">
           <Text className="nl-title" component="h2">
-            Node library
+            {t("nodeMenu.library.title")}
           </Text>
           <span className="nl-count">{nodes.length}</span>
-          <DocsHelpLink topic="nodes" label="Node reference" />
+          <DocsHelpLink topic="nodes" label={t("nodeMenu.library.docsLabel")} />
         </div>
 
         <div className="nl-search">
@@ -434,15 +436,15 @@ const NodeLibrary = memo<NodeLibraryProps>(
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search nodes…"
-            aria-label="Search nodes"
+            placeholder={t("nodeMenu.library.searchPlaceholder")}
+            aria-label={t("nodeMenu.library.searchAriaLabel")}
           />
           {query && (
             <button
               type="button"
               className="nl-search-clear"
               onClick={() => setQuery("")}
-              aria-label="Clear search"
+              aria-label={t("nodeMenu.library.clearSearch")}
             >
               <ClearIcon />
             </button>
@@ -451,7 +453,7 @@ const NodeLibrary = memo<NodeLibraryProps>(
 
         <div className="nl-body">
           <div className="nl-browse">
-            <nav className="nl-rail" role="tablist" aria-label="Node categories">
+            <nav className="nl-rail" role="tablist" aria-label={t("nodeMenu.library.categoriesAriaLabel")}>
               {NODE_SUBCATEGORIES.map((sub) => (
                 <button
                   key={sub.id}
@@ -470,7 +472,7 @@ const NodeLibrary = memo<NodeLibraryProps>(
 
             {nodes.length === 0 ? (
               <div className="nl-list">
-                <div className="nl-empty">No matching nodes</div>
+                <div className="nl-empty">{t("nodeMenu.library.noMatchingNodes")}</div>
               </div>
             ) : (
               <div
@@ -517,7 +519,7 @@ const NodeLibrary = memo<NodeLibraryProps>(
             ) : (
               <div className="nl-info-empty">
                 <Text component="span">
-                  Drag a node to place it on the workspace. Hover for details
+                  {t("nodeMenu.library.infoEmptyHint")}
                 </Text>
               </div>
             )}
@@ -528,7 +530,7 @@ const NodeLibrary = memo<NodeLibraryProps>(
           <span>{category.label}</span>
           {!isMobile && (
             <span className="nl-footer-hint">
-              <span className="nl-kbd">drag</span> to add
+              <span className="nl-kbd">{t("nodeMenu.library.dragKbd")}</span> {t("nodeMenu.library.dragToAdd")}
             </span>
           )}
         </div>

@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 import { useShallow } from "zustand/react/shallow";
 import type { DragEvent as ReactDragEvent } from "react";
@@ -158,6 +159,7 @@ const tileStyles = (theme: Theme) =>
 
 const RecentNodesTiles = memo(function RecentNodesTiles() {
   const theme = useTheme();
+  const { t } = useTranslation("canvas");
   const memoizedStyles = useMemo(() => tileStyles(theme), [theme]);
 
   const { recentNodes, clearRecentNodes } = useRecentNodesStore(
@@ -235,7 +237,7 @@ const RecentNodesTiles = memo(function RecentNodesTiles() {
         console.warn(`Metadata not found for node type: ${nodeType}`);
         addNotification({
           type: "warning",
-          content: `Unable to find metadata for ${nodeType}.`,
+          content: t("nodeMenu.recent.metadataNotFound", { nodeType }),
           timeout: NOTIFICATION_TIMEOUT_MEDIUM
         });
         return;
@@ -243,7 +245,7 @@ const RecentNodesTiles = memo(function RecentNodesTiles() {
 
       requestCreate(metadata);
     },
-    [getMetadata, addNotification, requestCreate]
+    [getMetadata, addNotification, requestCreate, t]
   );
 
   const handleTileMouseEnter = useCallback(
@@ -322,15 +324,15 @@ const RecentNodesTiles = memo(function RecentNodesTiles() {
   return (
     <div css={memoizedStyles}>
       <div className="tiles-header">
-        <Text size="normal" weight={600}>Recent Nodes</Text>
+        <Text size="normal" weight={600}>{t("nodeMenu.recent.title")}</Text>
         <ToolbarIconButton
           icon={<ClearIcon fontSize="small" />}
-          tooltip="Clear recent nodes"
+          tooltip={t("nodeMenu.recent.clearTooltip")}
           tooltipPlacement="top"
           size="small"
           className="clear-button"
           onClick={() => setClearConfirmOpen(true)}
-          aria-label="Clear recent nodes"
+          aria-label={t("nodeMenu.recent.clearTooltip")}
         />
       </div>
       <div className="tiles-container">
@@ -354,7 +356,7 @@ const RecentNodesTiles = memo(function RecentNodesTiles() {
                       marginTop: getSpacingPx(SPACING.xs)
                     }}
                   >
-                    Click to place · Drag to canvas
+                    {t("nodeMenu.recent.tileHint")}
                   </div>
                 </div>
               }
@@ -392,11 +394,11 @@ const RecentNodesTiles = memo(function RecentNodesTiles() {
         open={clearConfirmOpen}
         onClose={() => setClearConfirmOpen(false)}
         onConfirm={handleClearRecent}
-        title="Clear recent nodes?"
-        content="This clears your recently used nodes list. This cannot be undone."
-        confirmText="Clear recent"
-        cancelText="Cancel"
-        notificationMessage="Recent nodes cleared"
+        title={t("nodeMenu.recent.clearConfirmTitle")}
+        content={t("nodeMenu.recent.clearConfirmContent")}
+        confirmText={t("nodeMenu.recent.clearConfirmButton")}
+        cancelText={t("common:button.cancel")}
+        notificationMessage={t("nodeMenu.recent.clearedNotification")}
         notificationType="success"
       />
     </div>
