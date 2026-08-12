@@ -1,4 +1,6 @@
 import React, { memo, useEffect } from "react";
+import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 
 import { SketchModeToggle, SketchModeOption } from "./SketchModeToggle";
 import {
@@ -40,40 +42,41 @@ import {
   LOCAL_SAM3_NODE_PACK_HINT
 } from "./shared";
 
-function promptModeHelpText(mode: SegmentPromptMode): string {
+function promptModeHelpText(t: TFunction, mode: SegmentPromptMode): string {
   if (mode === "point") {
-    return "Click: include · Alt+click: exclude";
+    return t("sketch:segmentPanel.promptModePointHint");
   }
   if (mode === "box") {
-    return "Drag to draw a bounding box";
+    return t("sketch:segmentPanel.promptModeBoxHint");
   }
-  return "Auto-detect prominent objects";
+  return t("sketch:segmentPanel.promptModeAutoHint");
 }
 
-function getSegmentationStatusMessage(status: SegmentationStatus): string {
+function getSegmentationStatusMessage(t: TFunction, status: SegmentationStatus): string {
   switch (status) {
     case "checking-model":
-      return "Checking model…";
+      return t("sketch:segmentPanel.statusCheckingModel");
     case "encoding":
-      return "Encoding image…";
+      return t("sketch:segmentPanel.statusEncoding");
     case "inferring":
-      return "Segmenting…";
+      return t("sketch:segmentPanel.statusInferring");
     default:
-      return "Processing…";
+      return t("sketch:segmentPanel.statusProcessing");
   }
 }
 
 function getSegmentModelStatusText(
+  t: TFunction,
   isLocalSam3: boolean,
   localSam3Downloading: boolean | undefined,
   localSam3Ready: boolean,
   modelInfo: SamModelInfo | null
 ): string | undefined {
   if (isLocalSam3 && localSam3Downloading) {
-    return "Local SAM3 is downloading";
+    return t("sketch:segmentPanel.localSam3Downloading");
   }
   if (localSam3Ready) {
-    return "Local SAM3 is ready";
+    return t("sketch:segmentPanel.localSam3Ready");
   }
   return modelInfo?.errorMessage;
 }
@@ -103,6 +106,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
   onClearPrompts,
   onCheckModel
 }: SegmentSettingsPanelProps) {
+  const { t } = useTranslation(["sketch"]);
   const isRunning =
     segmentationStatus === "inferring" ||
     segmentationStatus === "encoding" ||
@@ -169,11 +173,12 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
     (settings.promptMode === "point" && supportsPointPrompts) ||
     (settings.promptMode === "box" && supportsBoxPrompts);
   const segmentActionLabel =
-    settings.promptMode === "auto" ? "Split selected layer" : "Segment";
+    settings.promptMode === "auto" ? t("sketch:segmentPanel.splitSelectedLayer") : t("sketch:segmentPanel.segment");
   const showClearPrompts = settings.promptMode !== "auto";
   const backendLabel =
-    modelInfo?.backendLabel ?? (isLocalSam3 ? "Local SAM3" : "Selected backend");
+    modelInfo?.backendLabel ?? (isLocalSam3 ? "Local SAM3" : t("sketch:segmentPanel.backend"));
   const modelStatusText = getSegmentModelStatusText(
+    t,
     isLocalSam3,
     localSam3Downloading,
     localSam3Ready,
@@ -203,7 +208,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
   return (
     <>
       <Box className="setting-row" sx={{ gap: getSpacingPx(SPACING.xs) }}>
-        <Text className="setting-label">Backend</Text>
+        <Text className="setting-label">{t("sketch:segmentPanel.backend")}</Text>
         <SketchModeToggle
           value={settings.backend}
           onChange={(_, v) => {
@@ -239,14 +244,17 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
             }}
           >
             {modelInfo.status === "available" &&
-              (modelStatusText ?? `✓ ${modelInfo.modelName}`)}
+              (modelStatusText ?? t("sketch:segmentPanel.modelReadyPrefix", { modelName: modelInfo.modelName }))}
             {modelInfo.status === "not-installed" &&
-              (modelStatusText ?? "Model not available")}
+              (modelStatusText ?? t("sketch:segmentPanel.modelNotAvailable"))}
             {modelInfo.status === "error" &&
-              (modelStatusText ?? "Connection failed")}
-            {modelInfo.status === "checking" && "Checking…"}
+              (modelStatusText ?? t("sketch:segmentPanel.connectionFailed"))}
+            {modelInfo.status === "checking" && t("sketch:segmentPanel.checking")}
             {modelInfo.status === "downloading" &&
-              `${modelStatusText ?? "Downloading…"} ${Math.round((modelInfo.downloadProgress ?? 0) * 100)}%`}
+              t("sketch:segmentPanel.downloadProgress", {
+                status: modelStatusText ?? t("sketch:segmentPanel.downloading"),
+                percent: Math.round((modelInfo.downloadProgress ?? 0) * 100)
+              })}
           </Text>
         </Box>
       )}
@@ -261,16 +269,16 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
         sx={{ mb: getSpacingPx(SPACING.xs) }}
       >
         {visiblePromptModes.includes("point") && (
-          <SketchModeOption value="point">Point</SketchModeOption>
+          <SketchModeOption value="point">{t("sketch:segmentPanel.pointPromptMode")}</SketchModeOption>
         )}
         {visiblePromptModes.includes("box") && (
-          <SketchModeOption value="box">Box</SketchModeOption>
+          <SketchModeOption value="box">{t("sketch:segmentPanel.boxPromptMode")}</SketchModeOption>
         )}
-        <SketchModeOption value="auto">Auto</SketchModeOption>
+        <SketchModeOption value="auto">{t("sketch:segmentPanel.autoPromptMode")}</SketchModeOption>
       </SketchModeToggle>
 
       <Box className="setting-row">
-        <Text className="setting-label">Max Objects</Text>
+        <Text className="setting-label">{t("sketch:segmentPanel.maxObjects")}</Text>
         <Slider
           sx={sketchSliderSx}
           size="small"
@@ -283,7 +291,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
       </Box>
 
       <Box className="setting-row">
-        <Text className="setting-label">Confidence</Text>
+        <Text className="setting-label">{t("sketch:segmentPanel.confidence")}</Text>
         <Slider
           sx={sketchSliderSx}
           size="small"
@@ -299,7 +307,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
       </Box>
 
       <Box className="setting-row">
-        <Text className="setting-label">Min Size</Text>
+        <Text className="setting-label">{t("sketch:segmentPanel.minSize")}</Text>
         <Slider
           sx={sketchSliderSx}
           size="small"
@@ -315,7 +323,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
       </Box>
 
       <Box className="setting-row">
-        <Text className="setting-label">Feather</Text>
+        <Text className="setting-label">{t("sketch:segmentPanel.feather")}</Text>
         <Slider
           sx={sketchSliderSx}
           size="small"
@@ -331,7 +339,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
       </Box>
 
       <Box className="setting-row" sx={{ gap: getSpacingPx(SPACING.xs) }}>
-        <Text className="setting-label">Source Layer</Text>
+        <Text className="setting-label">{t("sketch:segmentPanel.sourceLayer")}</Text>
         <SketchModeToggle
           value={settings.sourceLayerAction}
           onChange={(_, v) => {
@@ -340,9 +348,9 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
             }
           }}
         >
-          <SketchModeOption value="keep">Keep</SketchModeOption>
-          <SketchModeOption value="hide">Hide</SketchModeOption>
-          <SketchModeOption value="lock">Lock</SketchModeOption>
+          <SketchModeOption value="keep">{t("sketch:segmentPanel.sourceKeep")}</SketchModeOption>
+          <SketchModeOption value="hide">{t("sketch:segmentPanel.sourceHide")}</SketchModeOption>
+          <SketchModeOption value="lock">{t("sketch:segmentPanel.sourceLock")}</SketchModeOption>
         </SketchModeToggle>
       </Box>
 
@@ -356,7 +364,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
         }
         label={
           <Text sx={{ fontSize: SKETCH_FONT.xs }}>
-            {settings.outputCutouts ? "Cutout layers" : "Mask layers"}
+            {settings.outputCutouts ? t("sketch:segmentPanel.outputCutoutLayers") : t("sketch:segmentPanel.outputMaskLayers")}
           </Text>
         }
         sx={{ mt: getSpacingPx(SPACING.micro), ml: 0 }}
@@ -365,7 +373,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
       {supportsTextPrompts && (
         <Box className="setting-row" sx={{ alignItems: "flex-start" }}>
           <Text className="setting-label" sx={{ pt: getSpacingPx(SPACING.sm) }}>
-            Concept
+            {t("sketch:segmentPanel.concept")}
           </Text>
           <TextInput
             compact
@@ -373,9 +381,9 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
             onChange={(event) =>
               onChange({ conceptPrompt: event.target.value })
             }
-            placeholder="Describe the object to isolate"
+            placeholder={t("sketch:segmentPanel.conceptPlaceholder")}
             fullWidth
-            inputProps={{ "aria-label": "Concept prompt" }}
+            inputProps={{ "aria-label": t("sketch:segmentPanel.conceptPromptAria") }}
             sx={{
               flex: 1,
               "& .MuiInputBase-root": {
@@ -389,7 +397,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
       {isLocalSam3 && (
         <>
           <Box className="setting-row">
-            <Text className="setting-label">Points / Side</Text>
+            <Text className="setting-label">{t("sketch:segmentPanel.pointsPerSide")}</Text>
             <Slider
               sx={sketchSliderSx}
               size="small"
@@ -407,7 +415,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
           </Box>
 
           <Box className="setting-row">
-            <Text className="setting-label">Pred IoU</Text>
+            <Text className="setting-label">{t("sketch:segmentPanel.predIou")}</Text>
             <Slider
               sx={sketchSliderSx}
               size="small"
@@ -438,7 +446,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
                 }}
                 sx={{ ...sketchButtonSmallSx, minWidth: "56px" }}
               >
-                Download Local SAM3
+                {t("sketch:segmentPanel.downloadLocalSam3")}
               </EditorButton>
             )}
             {isLocalSam3 && localSam3Downloading && (
@@ -451,7 +459,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
                 }}
                 sx={{ ...sketchButtonSmallSx, minWidth: "56px" }}
               >
-                Cancel download
+                {t("sketch:segmentPanel.cancelDownload")}
               </EditorButton>
             )}
             <EditorButton
@@ -470,7 +478,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
                 onClick={onClearPrompts}
                 sx={{ ...sketchButtonSmallSx, minWidth: "56px" }}
               >
-                Clear
+                {t("sketch:segmentPanel.clear")}
               </EditorButton>
             )}
           </>
@@ -487,7 +495,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
                 alignItems: "center"
               }}
             >
-              {getSegmentationStatusMessage(segmentationStatus)}
+              {getSegmentationStatusMessage(t, segmentationStatus)}
             </Text>
             <EditorButton
               size="small"
@@ -496,7 +504,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
               onClick={onCancelSegmentation}
               sx={{ ...sketchButtonSmallSx, minWidth: "56px" }}
             >
-              Cancel
+              {t("sketch:adjustPanel.cancel")}
             </EditorButton>
           </>
         )}
@@ -509,7 +517,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
               onClick={onApplyResult}
               sx={{ ...sketchButtonSmallSx, minWidth: "56px" }}
             >
-              Apply
+              {t("sketch:adjustPanel.apply")}
             </EditorButton>
             <EditorButton
               size="small"
@@ -517,7 +525,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
               onClick={onDiscardResult}
               sx={{ ...sketchButtonSmallSx, minWidth: "56px" }}
             >
-              Discard
+              {t("sketch:segmentPanel.discard")}
             </EditorButton>
           </>
         )}
@@ -533,8 +541,8 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
         }}
       >
         {supportsPointPrompts || supportsBoxPrompts || supportsTextPrompts
-          ? promptModeHelpText(settings.promptMode)
-          : `${backendLabel} currently supports automatic layer split only.`}
+          ? promptModeHelpText(t, settings.promptMode)
+          : t("sketch:segmentPanel.backendAutoOnlyNotice", { backendLabel })}
       </Text>
 
       {settings.promptMode === "auto" && !canSplitSelectedLayer && (
@@ -546,7 +554,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
             mt: getSpacingPx(SPACING.micro)
           }}
         >
-          Select exactly one raster layer to split.
+          {t("sketch:segmentPanel.selectOneRasterLayer")}
         </Text>
       )}
 
@@ -559,7 +567,7 @@ export const SegmentSettingsPanel = memo(function SegmentSettingsPanel({
             mt: getSpacingPx(SPACING.micro)
           }}
         >
-          Segmentation failed. Check model availability and try again.
+          {t("sketch:segmentPanel.segmentationFailed")}
         </Text>
       )}
     </>

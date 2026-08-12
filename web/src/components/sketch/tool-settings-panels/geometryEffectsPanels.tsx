@@ -1,4 +1,5 @@
 import React, { memo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   Box,
@@ -55,17 +56,18 @@ interface CloneStampSettingsPanelProps {
   onChange: (settings: Partial<CloneStampSettings>) => void;
 }
 
-const SHAPE_TYPES: { value: ShapeToolType; label: string }[] = [
-  { value: "line", label: "Line" },
-  { value: "rectangle", label: "Rect" },
-  { value: "ellipse", label: "Ellipse" },
-  { value: "arrow", label: "Arrow" }
+const SHAPE_TYPES: { value: ShapeToolType; labelKey: string }[] = [
+  { value: "line", labelKey: "shapePanel.line" },
+  { value: "rectangle", labelKey: "shapePanel.rect" },
+  { value: "ellipse", labelKey: "shapePanel.ellipse" },
+  { value: "arrow", labelKey: "shapePanel.arrow" }
 ];
 
 export const ShapeSettingsPanel = memo(function ShapeSettingsPanel({
   settings,
   onChange
 }: ShapeSettingsPanelProps) {
+  const { t } = useTranslation(["sketch"]);
   const canFill =
     settings.shapeType === "rectangle" || settings.shapeType === "ellipse";
   return (
@@ -79,18 +81,18 @@ export const ShapeSettingsPanel = memo(function ShapeSettingsPanel({
         }}
         sx={{ mb: getSpacingPx(SPACING.xs) }}
       >
-        {SHAPE_TYPES.map(({ value, label }) => (
+        {SHAPE_TYPES.map(({ value, labelKey }) => (
           <SketchModeOption key={value} value={value}>
-            {label}
+            {t(`sketch:${labelKey}`)}
           </SketchModeOption>
         ))}
       </SketchModeToggle>
       <Box className="setting-row">
-        <Text className="setting-label">Stroke</Text>
+        <Text className="setting-label">{t("sketch:shapePanel.stroke")}</Text>
         <input
           type="color"
           className="color-input"
-          aria-label="Stroke color"
+          aria-label={t("sketch:shapePanel.strokeColorAria")}
           value={colorToHex6(settings.strokeColor)}
           onChange={(e) =>
             onChange({
@@ -103,7 +105,7 @@ export const ShapeSettingsPanel = memo(function ShapeSettingsPanel({
         />
       </Box>
       <Box className="setting-row">
-        <Text className="setting-label">Width</Text>
+        <Text className="setting-label">{t("sketch:shapePanel.width")}</Text>
         <Slider
           sx={sketchSliderSx}
           size="small"
@@ -127,16 +129,16 @@ export const ShapeSettingsPanel = memo(function ShapeSettingsPanel({
               />
             }
             label={
-              <Text sx={{ fontSize: SKETCH_FONT.section }}>Fill</Text>
+              <Text sx={{ fontSize: SKETCH_FONT.section }}>{t("sketch:shapePanel.fill")}</Text>
             }
           />
           {settings.filled && (
             <Box className="setting-row">
-              <Text className="setting-label">Fill</Text>
+              <Text className="setting-label">{t("sketch:shapePanel.fill")}</Text>
               <input
                 type="color"
                 className="color-input"
-                aria-label="Fill color"
+                aria-label={t("sketch:shapePanel.fillColorAria")}
                 value={colorToHex6(settings.fillColor)}
                 onChange={(e) =>
                   onChange({
@@ -159,9 +161,10 @@ export const FillSettingsPanel = memo(function FillSettingsPanel({
   settings,
   onChange
 }: FillSettingsPanelProps) {
+  const { t } = useTranslation(["sketch"]);
   return (
     <Box className="setting-row">
-      <Text className="setting-label">Tolerance</Text>
+      <Text className="setting-label">{t("sketch:fillPanel.tolerance")}</Text>
       <Slider
         sx={sketchSliderSx}
         size="small"
@@ -179,10 +182,11 @@ export const BlurSettingsPanel = memo(function BlurSettingsPanel({
   settings,
   onChange
 }: BlurSettingsPanelProps) {
+  const { t } = useTranslation(["sketch"]);
   return (
     <>
       <Box className="setting-row">
-        <Text className="setting-label">Size</Text>
+        <Text className="setting-label">{t("sketch:blurPanel.size")}</Text>
         <Slider
           sx={sketchSliderSx}
           size="small"
@@ -194,7 +198,7 @@ export const BlurSettingsPanel = memo(function BlurSettingsPanel({
         <Text className="setting-value">{settings.size}</Text>
       </Box>
       <Box className="setting-row">
-        <Text className="setting-label">Strength</Text>
+        <Text className="setting-label">{t("sketch:blurPanel.strength")}</Text>
         <Slider
           sx={sketchSliderSx}
           size="small"
@@ -213,6 +217,7 @@ export const GradientSettingsPanel = memo(function GradientSettingsPanel({
   settings,
   onChange
 }: GradientSettingsPanelProps) {
+  const { t } = useTranslation(["sketch"]);
   const [startAnchor, setStartAnchor] = useState<HTMLElement | null>(null);
   const [endAnchor, setEndAnchor] = useState<HTMLElement | null>(null);
   const [startInitial, setStartInitial] = useState(settings.startColor);
@@ -221,12 +226,12 @@ export const GradientSettingsPanel = memo(function GradientSettingsPanel({
   return (
     <>
       <Box className="setting-row">
-        <Text className="setting-label">Start</Text>
+        <Text className="setting-label">{t("sketch:gradientPanel.start")}</Text>
         <Box
           sx={{ ...colorSwatchSx }}
           role="button"
           tabIndex={0}
-          aria-label="Gradient start color"
+          aria-label={t("sketch:gradientPanel.startColorAria")}
           aria-haspopup="dialog"
           onClick={(e) => {
             setStartInitial(settings.startColor);
@@ -247,12 +252,12 @@ export const GradientSettingsPanel = memo(function GradientSettingsPanel({
         </Box>
       </Box>
       <Box className="setting-row">
-        <Text className="setting-label">End</Text>
+        <Text className="setting-label">{t("sketch:gradientPanel.end")}</Text>
         <Box
           sx={{ ...colorSwatchSx }}
           role="button"
           tabIndex={0}
-          aria-label="Gradient end color"
+          aria-label={t("sketch:gradientPanel.endColorAria")}
           aria-haspopup="dialog"
           onClick={(e) => {
             setEndInitial(settings.endColor);
@@ -280,8 +285,8 @@ export const GradientSettingsPanel = memo(function GradientSettingsPanel({
           }
         }}
       >
-        <SketchModeOption value="linear">Linear</SketchModeOption>
-        <SketchModeOption value="radial">Radial</SketchModeOption>
+        <SketchModeOption value="linear">{t("sketch:gradientPanel.linear")}</SketchModeOption>
+        <SketchModeOption value="radial">{t("sketch:gradientPanel.radial")}</SketchModeOption>
       </SketchModeToggle>
 
       <ColorPickerPopover
@@ -306,10 +311,11 @@ export const CloneStampSettingsPanel = memo(function CloneStampSettingsPanel({
   settings,
   onChange
 }: CloneStampSettingsPanelProps) {
+  const { t } = useTranslation(["sketch"]);
   return (
     <>
       <Box className="setting-row">
-        <Text className="setting-label">Size</Text>
+        <Text className="setting-label">{t("sketch:cloneStampPanel.size")}</Text>
         <Slider
           sx={sketchSliderSx}
           size="small"
@@ -321,7 +327,7 @@ export const CloneStampSettingsPanel = memo(function CloneStampSettingsPanel({
         <Text className="setting-value">{settings.size}</Text>
       </Box>
       <Box className="setting-row">
-        <Text className="setting-label">Opacity</Text>
+        <Text className="setting-label">{t("sketch:cloneStampPanel.opacity")}</Text>
         <Slider
           sx={sketchSliderSx}
           size="small"
@@ -336,7 +342,7 @@ export const CloneStampSettingsPanel = memo(function CloneStampSettingsPanel({
         </Text>
       </Box>
       <Box className="setting-row">
-        <Text className="setting-label">Hardness</Text>
+        <Text className="setting-label">{t("sketch:cloneStampPanel.hardness")}</Text>
         <Slider
           sx={sketchSliderSx}
           size="small"
@@ -358,11 +364,11 @@ export const CloneStampSettingsPanel = memo(function CloneStampSettingsPanel({
           }
         }}
       >
-        <SketchModeOption value="active_layer">Active Layer</SketchModeOption>
-        <SketchModeOption value="composited">All Layers</SketchModeOption>
+        <SketchModeOption value="active_layer">{t("sketch:cloneStampPanel.activeLayer")}</SketchModeOption>
+        <SketchModeOption value="composited">{t("sketch:cloneStampPanel.allLayers")}</SketchModeOption>
       </SketchModeToggle>
       <Text sx={{ ...sketchHintTextSx, mt: 1 }}>
-        Alt+click to set source point
+        {t("sketch:cloneStampPanel.setSourceHint")}
       </Text>
     </>
   );

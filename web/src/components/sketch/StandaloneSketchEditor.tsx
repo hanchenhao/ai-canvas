@@ -22,6 +22,7 @@
  */
 
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
@@ -77,6 +78,7 @@ interface StandaloneSketchEditorProps {
 
 const StandaloneSketchEditorBody: React.FC<StandaloneSketchEditorProps> = memo(
   function StandaloneSketchEditorBody({ documentId, headerActions }) {
+    const { t } = useTranslation(["sketch"]);
     const theme = useTheme();
     const styles = useMemo(() => containerStyles(theme), [theme]);
     const editorRef = useRef<SketchEditorHandle | null>(null);
@@ -180,7 +182,7 @@ const StandaloneSketchEditorBody: React.FC<StandaloneSketchEditorProps> = memo(
         <ListItemIcon>
           <SaveOutlinedIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText>{saving ? "Saving…" : "Save"}</ListItemText>
+        <ListItemText>{saving ? t("sketch:standalone.saving") : t("sketch:standalone.save")}</ListItemText>
       </EditorMenuItem>,
       <EditorMenuItem
         key="save-as-asset"
@@ -195,7 +197,7 @@ const StandaloneSketchEditorBody: React.FC<StandaloneSketchEditorProps> = memo(
           <AddPhotoAlternateOutlinedIcon fontSize="small" />
         </ListItemIcon>
         <ListItemText>
-          {savingAsAsset ? "Saving…" : "Save as Asset"}
+          {savingAsAsset ? t("sketch:standalone.saving") : t("sketch:standalone.saveAsAsset")}
         </ListItemText>
       </EditorMenuItem>,
       <EditorMenuItem
@@ -209,7 +211,7 @@ const StandaloneSketchEditorBody: React.FC<StandaloneSketchEditorProps> = memo(
         <ListItemIcon>
           <FileDownloadOutlinedIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText>Export PNG</ListItemText>
+        <ListItemText>{t("sketch:standalone.exportPng")}</ListItemText>
       </EditorMenuItem>
     ];
 
@@ -222,8 +224,8 @@ const StandaloneSketchEditorBody: React.FC<StandaloneSketchEditorProps> = memo(
           <FlexColumn align="center" justify="center" sx={centered}>
             <EmptyState
               variant="error"
-              title="Sketch document not found"
-              description="The image document you requested does not exist or you do not have access to it."
+              title={t("sketch:standalone.notFoundTitle")}
+              description={t("sketch:standalone.notFoundDescription")}
             />
           </FlexColumn>
         );

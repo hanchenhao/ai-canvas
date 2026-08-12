@@ -12,6 +12,7 @@
  */
 
 import React, { memo, useCallback, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FitScreenIcon from "@mui/icons-material/FitScreen";
@@ -70,6 +71,7 @@ export const ConnectedEditorActions = memo(function ConnectedEditorActions({
   inlineActions,
   menuItems
 }: ConnectedEditorActionsProps) {
+  const { t } = useTranslation(["sketch"]);
   const assistantPanelOpen = useSketchStore((s) => s.assistantPanelOpen);
   const toggleAssistantPanel = useSketchStore((s) => s.toggleAssistantPanel);
   const togglePanelsHidden = useSketchStore((s) => s.togglePanelsHidden);
@@ -112,7 +114,7 @@ export const ConnectedEditorActions = memo(function ConnectedEditorActions({
 
       {documentId && (
         <>
-          <Tooltip title="Generate an image from a prompt">
+          <Tooltip title={t("sketch:editorActions.generateTooltip")}>
             <span>
               <EditorButton
                 ref={generateAnchorRef}
@@ -125,7 +127,7 @@ export const ConnectedEditorActions = memo(function ConnectedEditorActions({
                 startIcon={<AutoAwesomeIcon fontSize="small" />}
                 data-testid="sketch-open-generate"
               >
-                Generate
+                {t("sketch:editorActions.generate")}
               </EditorButton>
             </span>
           </Tooltip>
@@ -139,11 +141,11 @@ export const ConnectedEditorActions = memo(function ConnectedEditorActions({
         </>
       )}
 
-      <Tooltip title="Editor actions">
+      <Tooltip title={t("sketch:editorActions.editorActionsTooltip")}>
         <IconButton
           size="small"
           onClick={(e) => setMenuAnchor(e.currentTarget)}
-          aria-label="Editor actions"
+          aria-label={t("sketch:editorActions.editorActionsTooltip")}
           aria-haspopup="menu"
           data-testid="sketch-editor-menu"
         >
@@ -168,7 +170,7 @@ export const ConnectedEditorActions = memo(function ConnectedEditorActions({
             <SmartToyOutlinedIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>
-            {assistantPanelOpen ? "Hide Assistant" : "Assistant"}
+            {assistantPanelOpen ? t("sketch:editorActions.hideAssistant") : t("sketch:editorActions.assistant")}
           </ListItemText>
         </EditorMenuItem>
 
@@ -176,7 +178,7 @@ export const ConnectedEditorActions = memo(function ConnectedEditorActions({
           <ListItemIcon>
             <FitScreenIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText>Fit to viewport</ListItemText>
+          <ListItemText>{t("sketch:editorActions.fitToViewport")}</ListItemText>
         </EditorMenuItem>
 
         <EditorMenuItem
@@ -186,7 +188,7 @@ export const ConnectedEditorActions = memo(function ConnectedEditorActions({
           <ListItemIcon>
             <ViewSidebarOutlinedIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText>Hide panels</ListItemText>
+          <ListItemText>{t("sketch:editorActions.hidePanels")}</ListItemText>
         </EditorMenuItem>
 
         {menuItems ? <Divider key="host-divider" /> : null}

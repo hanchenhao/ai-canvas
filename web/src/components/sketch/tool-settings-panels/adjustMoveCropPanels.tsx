@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   FlexRow,
@@ -48,11 +49,12 @@ export const AdjustmentsSettingsPanel = memo(function AdjustmentsSettingsPanel({
   onApply,
   onCancel
 }: AdjustmentsSettingsPanelProps) {
+  const { t } = useTranslation(["sketch"]);
   const hasChanges = brightness !== 0 || contrast !== 0 || saturation !== 0;
   return (
     <>
       <Box className="setting-row">
-        <Text className="setting-label">Bright</Text>
+        <Text className="setting-label">{t("sketch:adjustPanel.brightness")}</Text>
         <Slider
           sx={sketchSliderSx}
           size="small"
@@ -64,7 +66,7 @@ export const AdjustmentsSettingsPanel = memo(function AdjustmentsSettingsPanel({
         <Text className="setting-value">{brightness}</Text>
       </Box>
       <Box className="setting-row">
-        <Text className="setting-label">Contrast</Text>
+        <Text className="setting-label">{t("sketch:adjustPanel.contrast")}</Text>
         <Slider
           sx={sketchSliderSx}
           size="small"
@@ -76,7 +78,7 @@ export const AdjustmentsSettingsPanel = memo(function AdjustmentsSettingsPanel({
         <Text className="setting-value">{contrast}</Text>
       </Box>
       <Box className="setting-row">
-        <Text className="setting-label">Satur.</Text>
+        <Text className="setting-label">{t("sketch:adjustPanel.saturation")}</Text>
         <Slider
           sx={sketchSliderSx}
           size="small"
@@ -96,7 +98,7 @@ export const AdjustmentsSettingsPanel = memo(function AdjustmentsSettingsPanel({
           onClick={onApply}
           sx={{ ...sketchButtonSmallSx, flex: 1 }}
         >
-          Apply
+          {t("sketch:adjustPanel.apply")}
         </EditorButton>
         <EditorButton
           size="small"
@@ -105,7 +107,7 @@ export const AdjustmentsSettingsPanel = memo(function AdjustmentsSettingsPanel({
           onClick={onCancel}
           sx={{ ...sketchButtonSmallSx, flex: 1 }}
         >
-          Cancel
+          {t("sketch:adjustPanel.cancel")}
         </EditorButton>
       </FlexRow>
     </>
@@ -121,6 +123,7 @@ export const MoveSettingsPanel = memo(function MoveSettingsPanel({
   autoSelect,
   onAutoSelectChange
 }: MoveSettingsPanelProps) {
+  const { t } = useTranslation(["sketch"]);
   return (
     <FormControlLabel
       control={
@@ -135,7 +138,7 @@ export const MoveSettingsPanel = memo(function MoveSettingsPanel({
         <Text
           sx={{ ...SKETCH_FONT, fontSize: "var(--fontSizeSmall)", userSelect: "none" }}
         >
-          Auto-Select
+          {t("sketch:movePanel.autoSelect")}
         </Text>
       }
       sx={{ mr: 2, ml: 0 }}
@@ -168,6 +171,7 @@ export const TransformSettingsPanel = memo(function TransformSettingsPanel({
   onCancel,
   onReset
 }: TransformSettingsPanelProps) {
+  const { t } = useTranslation(["sketch"]);
   const rotDeg = Math.round(((rotation * 180) / Math.PI) * 10) / 10;
   return (
     <>
@@ -184,13 +188,13 @@ export const TransformSettingsPanel = memo(function TransformSettingsPanel({
           <Text
             sx={{ ...SKETCH_FONT, fontSize: "var(--fontSizeSmall)", userSelect: "none" }}
           >
-            Auto-Select
+            {t("sketch:movePanel.autoSelect")}
           </Text>
         }
         sx={{ mr: 2, ml: 0 }}
       />
       <Box className="setting-row">
-        <Text className="setting-label">Mode</Text>
+        <Text className="setting-label">{t("sketch:transformPanel.mode")}</Text>
         <SketchModeToggle
           value={mode}
           onChange={(_, nextMode: TransformMode | null) => {
@@ -216,39 +220,39 @@ export const TransformSettingsPanel = memo(function TransformSettingsPanel({
         </SketchModeToggle>
       </Box>
       <Box className="setting-row">
-        <Text className="setting-label">Scale X</Text>
+        <Text className="setting-label">{t("sketch:transformPanel.scaleX")}</Text>
         <Text className="setting-value">
           {(scaleX * 100).toFixed(0)}%
         </Text>
       </Box>
       <Box className="setting-row">
-        <Text className="setting-label">Scale Y</Text>
+        <Text className="setting-label">{t("sketch:transformPanel.scaleY")}</Text>
         <Text className="setting-value">
           {(scaleY * 100).toFixed(0)}%
         </Text>
       </Box>
       <Box className="setting-row">
-        <Text className="setting-label">Rotation</Text>
+        <Text className="setting-label">{t("sketch:transformPanel.rotation")}</Text>
         <Text className="setting-value">{rotDeg}°</Text>
       </Box>
       <FlexRow sx={{ gap: getSpacingPx(SPACING.micro), ml: 1 }}>
         <ToolbarIconButton
           icon={<CheckIcon sx={{ fontSize: 18 }} />}
-          tooltip="Commit (Enter)"
+          tooltip={t("sketch:transformPanel.commitTooltip")}
           tooltipPlacement="bottom"
           onClick={onCommit}
           sx={{ padding: 1, color: "success.main" }}
         />
         <ToolbarIconButton
           icon={<CloseIcon sx={{ fontSize: 18 }} />}
-          tooltip="Cancel (Esc)"
+          tooltip={t("sketch:transformPanel.cancelTooltip")}
           tooltipPlacement="bottom"
           onClick={onCancel}
           sx={{ padding: 1, color: "error.main" }}
         />
         <ToolbarIconButton
           icon={<RestartAltIcon sx={{ fontSize: 18 }} />}
-          tooltip="Reset"
+          tooltip={t("sketch:transformPanel.resetTooltip")}
           tooltipPlacement="bottom"
           onClick={onReset}
           sx={{ padding: 1, color: SKETCH_COLORS.textSecondary }}
@@ -259,9 +263,10 @@ export const TransformSettingsPanel = memo(function TransformSettingsPanel({
 });
 
 export const NoSettingsMessage = memo(function NoSettingsMessage() {
+  const { t } = useTranslation(["sketch"]);
   return (
     <Text sx={{ ...sketchHintTextSx }}>
-      No settings for this tool.
+      {t("sketch:noSettings")}
     </Text>
   );
 });
@@ -275,16 +280,16 @@ export const CropSettingsPanel = memo(function CropSettingsPanel({
   onApply: () => void;
   onCancel: () => void;
 }) {
+  const { t } = useTranslation(["sketch"]);
   return (
     <>
       <Text sx={{ ...sketchHintTextSx }}>
-        Drag to outline the crop. Drag edges or corners to adjust. Press Enter
-        or Apply to crop the canvas.
+        {t("sketch:cropPanel.hint")}
       </Text>
       <FlexRow sx={{ gap: getSpacingPx(SPACING.micro), ml: 1 }}>
         <ToolbarIconButton
           icon={<CheckIcon sx={{ fontSize: 18 }} />}
-          tooltip="Apply crop (Enter)"
+          tooltip={t("sketch:cropPanel.applyTooltip")}
           tooltipPlacement="bottom"
           disabled={!hasPendingCrop}
           onClick={onApply}
@@ -292,7 +297,7 @@ export const CropSettingsPanel = memo(function CropSettingsPanel({
         />
         <ToolbarIconButton
           icon={<CloseIcon sx={{ fontSize: 18 }} />}
-          tooltip="Cancel crop preview (Esc)"
+          tooltip={t("sketch:cropPanel.cancelTooltip")}
           tooltipPlacement="bottom"
           disabled={!hasPendingCrop}
           onClick={onCancel}

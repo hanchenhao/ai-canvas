@@ -8,6 +8,7 @@
  */
 
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 import type { Layer } from "../types";
 import { summarizeLayerImageReference } from "../types";
 import {
@@ -26,6 +27,7 @@ export interface ImportedLayerPanelProps {
 
 export const ImportedLayerPanel: React.FC<ImportedLayerPanelProps> = memo(
   ({ layer }) => {
+    const { t } = useTranslation(["sketch"]);
     const ref = layer.imageReference;
     return (
       <Panel
@@ -40,10 +42,10 @@ export const ImportedLayerPanel: React.FC<ImportedLayerPanelProps> = memo(
                 {layer.name}
               </Label>
             </FlexRow>
-            <Caption color="secondary">Imported layer</Caption>
+            <Caption color="secondary">{t("sketch:importedLayerPanel.importedLayer")}</Caption>
           </FlexColumn>
 
-          <CollapsibleSection title="Source" defaultOpen>
+          <CollapsibleSection title={t("sketch:importedLayerPanel.source")} defaultOpen>
             {ref ? (
               <FlexColumn gap={0.5}>
                 <Text size="small">
@@ -54,7 +56,7 @@ export const ImportedLayerPanel: React.FC<ImportedLayerPanelProps> = memo(
                 </Text>
               </FlexColumn>
             ) : (
-              <Caption color="secondary">No image source recorded.</Caption>
+              <Caption color="secondary">{t("sketch:importedLayerPanel.noImageSource")}</Caption>
             )}
           </CollapsibleSection>
         </FlexColumn>

@@ -7,6 +7,7 @@
  */
 
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 import type { LayerWorkflowBinding } from "@nodetool-ai/image-editor";
 import type { Layer } from "../types";
 
@@ -37,6 +38,7 @@ export interface GeneratedLayerHeaderProps {
 
 export const GeneratedLayerHeader: React.FC<GeneratedLayerHeaderProps> = memo(
   ({ layer, binding }) => {
+    const { t } = useTranslation(["sketch"]);
     const visual = LAYER_STATUS_MAP[binding.status];
     const latestVersion =
       binding.versions[binding.versions.length - 1] ?? null;
@@ -55,11 +57,13 @@ export const GeneratedLayerHeader: React.FC<GeneratedLayerHeaderProps> = memo(
           />
         </FlexRow>
 
-        <Caption color="secondary">Generated layer</Caption>
+        <Caption color="secondary">{t("sketch:generatedLayerHeader.generatedLayer")}</Caption>
 
         {latestVersion && (
           <Caption color="secondary">
-            Generated: {formatTimestamp(latestVersion.createdAt)}
+            {t("sketch:generatedLayerHeader.generated", {
+              timestamp: formatTimestamp(latestVersion.createdAt)
+            })}
           </Caption>
         )}
       </FlexColumn>

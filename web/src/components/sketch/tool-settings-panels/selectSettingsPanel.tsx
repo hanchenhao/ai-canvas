@@ -1,4 +1,5 @@
 import React, { memo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { SketchModeToggle, SketchModeOption } from "./SketchModeToggle";
 import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
@@ -52,6 +53,7 @@ export const SelectSettingsPanel = memo(function SelectSettingsPanel({
   onSmoothSelectionBorders,
   onConvertSelectionToBorder
 }: SelectSettingsPanelProps) {
+  const { t } = useTranslation(["sketch"]);
   const refineAnchorRef = useRef<HTMLButtonElement | null>(null);
   const [refineOpen, setRefineOpen] = useState(false);
   const selectionPreviewMode = useSketchStore((s) => s.selectionPreviewMode);
@@ -73,40 +75,40 @@ export const SelectSettingsPanel = memo(function SelectSettingsPanel({
         <SketchModeOption
           value="rectangle"
           variant="icon"
-          aria-label="Rectangular marquee"
-          title="Rectangular marquee"
+          aria-label={t("sketch:selectPanel.rectangularMarquee")}
+          title={t("sketch:selectPanel.rectangularMarquee")}
         >
           <RectangleOutlinedIcon fontSize="inherit" />
         </SketchModeOption>
         <SketchModeOption
           value="ellipse"
           variant="icon"
-          aria-label="Elliptical marquee"
-          title="Elliptical marquee"
+          aria-label={t("sketch:selectPanel.ellipticalMarquee")}
+          title={t("sketch:selectPanel.ellipticalMarquee")}
         >
           <RadioButtonUncheckedIcon fontSize="inherit" />
         </SketchModeOption>
         <SketchModeOption
           value="lasso"
           variant="icon"
-          aria-label="Freehand lasso"
-          title="Freehand (lasso)"
+          aria-label={t("sketch:selectPanel.freehandLasso")}
+          title={t("sketch:selectPanel.freehandLasso")}
         >
           <GestureOutlinedIcon fontSize="inherit" />
         </SketchModeOption>
         <SketchModeOption
           value="lasso_polygon"
           variant="icon"
-          aria-label="Polygon selection"
-          title="Polygon"
+          aria-label={t("sketch:selectPanel.polygon")}
+          title={t("sketch:selectPanel.polygon")}
         >
           <PentagonOutlinedIcon fontSize="inherit" />
         </SketchModeOption>
         <SketchModeOption
           value="magic_wand"
           variant="icon"
-          aria-label="Magic wand"
-          title="Magic wand (click to sample)"
+          aria-label={t("sketch:selectPanel.magicWand")}
+          title={t("sketch:selectPanel.magicWand")}
         >
           <AutoAwesomeOutlinedIcon fontSize="inherit" />
         </SketchModeOption>
@@ -115,7 +117,7 @@ export const SelectSettingsPanel = memo(function SelectSettingsPanel({
       {settings.mode === "magic_wand" ? (
         <>
           <Box className="setting-row">
-            <Text className="setting-label">Tol.</Text>
+            <Text className="setting-label">{t("sketch:selectPanel.tolerance")}</Text>
             <Slider
               sx={sketchSliderSx}
               size="small"
@@ -140,8 +142,8 @@ export const SelectSettingsPanel = memo(function SelectSettingsPanel({
             }}
             sx={{ flexWrap: "wrap" }}
           >
-            <SketchModeOption value="contiguous">Contiguous</SketchModeOption>
-            <SketchModeOption value="allLayers">All Layers</SketchModeOption>
+            <SketchModeOption value="contiguous">{t("sketch:selectPanel.contiguous")}</SketchModeOption>
+            <SketchModeOption value="allLayers">{t("sketch:selectPanel.allLayers")}</SketchModeOption>
           </SketchModeToggle>
         </>
       ) : null}
@@ -174,9 +176,9 @@ export const SelectSettingsPanel = memo(function SelectSettingsPanel({
               lineHeight: 1
             }}
           >
-            Invert
+            {t("sketch:selectPanel.invert")}
           </EditorButton>
-          <Tooltip title="Refine selection (grow, shrink, feather, smooth, border)">
+          <Tooltip title={t("sketch:selectPanel.refineTooltip")}>
             <span>
               <EditorButton
                 ref={refineAnchorRef}
@@ -192,15 +194,15 @@ export const SelectSettingsPanel = memo(function SelectSettingsPanel({
                   "& .MuiButton-startIcon": { mr: 0.5 }
                 }}
               >
-                Refine…
+                {t("sketch:selectPanel.refine")}
               </EditorButton>
             </span>
           </Tooltip>
           <Tooltip
             title={
               showAsMask
-                ? "Showing selection as red overlay — click to switch to marching ants"
-                : "Showing selection as marching ants — click to switch to red overlay"
+                ? t("sketch:selectPanel.previewMaskTooltip")
+                : t("sketch:selectPanel.previewAntsTooltip")
             }
           >
             <span>
@@ -210,8 +212,8 @@ export const SelectSettingsPanel = memo(function SelectSettingsPanel({
                 }
                 aria-label={
                   showAsMask
-                    ? "Switch to marching ants"
-                    : "Switch to mask overlay"
+                    ? t("sketch:selectPanel.switchToAnts")
+                    : t("sketch:selectPanel.switchToMask")
                 }
                 sx={{
                   ...iconButtonCompactSx,
@@ -247,12 +249,12 @@ export const SelectSettingsPanel = memo(function SelectSettingsPanel({
               flexItem
               sx={{ alignSelf: "stretch", borderColor: "grey.700" }}
             />
-            <Tooltip title="Crop canvas to selection">
+            <Tooltip title={t("sketch:selectPanel.cropCanvasToSelection")}>
               <span>
                 <ToolbarIconButton
                   disabled={!hasActiveSelection}
                   onClick={onCropCanvasToSelection}
-                  aria-label="Crop canvas to selection"
+                  aria-label={t("sketch:selectPanel.cropCanvasToSelection")}
                   sx={{
                     ...iconButtonCompactSx,
                     border: `1px solid ${SKETCH_COLORS.border}`,
