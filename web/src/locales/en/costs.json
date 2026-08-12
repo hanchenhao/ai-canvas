@@ -1,0 +1,80 @@
+{
+  "title": "Costs",
+  "subtitle": "Spend per node execution",
+  "subtitleWithWorkflows": "Spend per node execution across <strong>{{count}} workflows</strong>",
+  "range": {
+    "vsPrior": "vs prior {{range}}",
+    "daily": "daily · last {{count}} days"
+  },
+  "stat": {
+    "totalSpend": "Total spend",
+    "nodeExecutions": "Node executions",
+    "avgPerExecution": "Avg / execution",
+    "topCostDriver": "Top cost driver",
+    "noSpendYet": "no spend yet",
+    "acrossAll": "across all node types",
+    "failedWorkflows": "{{failed}} failed · {{workflows}} workflows",
+    "driverShare": "{{cost}} · {{share}} of spend"
+  },
+  "group": {
+    "label": "Group by",
+    "execution": "Execution",
+    "nodeType": "Node type",
+    "workflow": "Workflow",
+    "provider": "Provider",
+    "model": "Model"
+  },
+  "table": {
+    "node": "Node",
+    "workflow": "Workflow",
+    "providerModel": "Provider / Model",
+    "tokens": "Tokens (in/out)",
+    "runtime": "Runtime",
+    "status": "Status",
+    "when": "When",
+    "cost": "Cost",
+    "executions": "Executions",
+    "shareOfSpend": "Share of spend",
+    "nodeType": "Node type",
+    "empty": "No executions match the current filters."
+  },
+  "filter": {
+    "placeholder": "Filter nodes, models…",
+    "allProviders": "All providers",
+    "providers": "Providers",
+    "allWorkflows": "All workflows",
+    "workflows": "Workflows",
+    "selectAll": "Select all",
+    "clear": "Clear",
+    "noOptions": "No options"
+  },
+  "action": {
+    "exportCsv": "Export CSV"
+  },
+  "chart": {
+    "spendOverTime": "Spend over time",
+    "total": "Total"
+  },
+  "state": {
+    "loadError": "Couldn't load cost data. Please try again.",
+    "empty": "No cost data for this period."
+  },
+  "estimate": {
+    "title": "Cost estimate",
+    "subtitle": "Estimated cost of a single run",
+    "openWorkflow": "Open a workflow to see its cost estimate.",
+    "addNode": "Add a node that uses an AI model to estimate a run's cost.",
+    "colNode": "Node",
+    "colProviderModel": "Provider / model",
+    "colQty": "Qty",
+    "colCost": "Cost",
+    "total": "Total ({{currency}})",
+    "priceUnknown": "Price unknown — excluded from the total",
+    "priceUnknownShort": "Price unknown",
+    "unknownNoteOne": "{{count}} node without a known price is excluded from the total.",
+    "unknownNoteOther": "{{count}} nodes without a known price are excluded from the total.",
+    "creditPrefix": "List prices from provider catalogs and",
+    "creditSuffix": ", last updated {{date}}.",
+    "noWorkflowDash": "—"
+  }
+}

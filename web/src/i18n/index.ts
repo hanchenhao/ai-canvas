@@ -12,6 +12,8 @@ import enStoryboard from "../locales/en/storyboard.json";
 import enWorkspace from "../locales/en/workspace.json";
 import enTutorials from "../locales/en/tutorials.json";
 import enCanvas from "../locales/en/canvas.json";
+import enJobs from "../locales/en/jobs.json";
+import enCosts from "../locales/en/costs.json";
 import zhCommon from "../locales/zh-CN/common.json";
 import zhSettings from "../locales/zh-CN/settings.json";
 import zhNodes from "../locales/zh-CN/nodes.json";
@@ -22,6 +24,8 @@ import zhStoryboard from "../locales/zh-CN/storyboard.json";
 import zhWorkspace from "../locales/zh-CN/workspace.json";
 import zhTutorials from "../locales/zh-CN/tutorials.json";
 import zhCanvas from "../locales/zh-CN/canvas.json";
+import zhJobs from "../locales/zh-CN/jobs.json";
+import zhCosts from "../locales/zh-CN/costs.json";
 
 export const SUPPORTED_LANGUAGES = ["auto", "en", "zh-CN"] as const;
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
@@ -43,7 +47,9 @@ void i18n
         storyboard: enStoryboard,
         workspace: enWorkspace,
         tutorials: enTutorials,
-        canvas: enCanvas
+        canvas: enCanvas,
+        jobs: enJobs,
+        costs: enCosts
       },
       "zh-CN": {
         common: zhCommon,
@@ -55,7 +61,9 @@ void i18n
         storyboard: zhStoryboard,
         workspace: zhWorkspace,
         tutorials: zhTutorials,
-        canvas: zhCanvas
+        canvas: zhCanvas,
+        jobs: zhJobs,
+        costs: zhCosts
       }
     },
     fallbackLng: FALLBACK_LANGUAGE,

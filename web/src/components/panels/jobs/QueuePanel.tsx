@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useMemo, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useRunningJobs } from "../../../hooks/useRunningJobs";
 import { Job } from "../../../stores/ApiTypes";
 import JobItem from "./JobItem";
@@ -81,6 +82,7 @@ JobColumn.displayName = "JobColumn";
  * scan faster than a single status-mixed list.
  */
 const QueuePanel = memo(function QueuePanel() {
+  const { t } = useTranslation(["jobs"]);
   const { data: jobs, isLoading, error } = useRunningJobs();
 
   const { running, queued, cancelled, completed } = useMemo(() => {
@@ -115,7 +117,7 @@ const QueuePanel = memo(function QueuePanel() {
     return (
       <Box sx={{ p: 2 }}>
         <Text size="small" color="error">
-          Error loading jobs
+          {t("jobs:job.errorLoading")}
         </Text>
       </Box>
     );
@@ -123,17 +125,25 @@ const QueuePanel = memo(function QueuePanel() {
 
   return (
     <FlexRow sx={{ flex: 1, minHeight: 0, height: "100%" }}>
-      <JobColumn title="Running" jobs={running} emptyText="Nothing running" />
-      <JobColumn title="Queued" jobs={queued} emptyText="Queue is empty" />
       <JobColumn
-        title="Completed"
-        jobs={completed}
-        emptyText="No completed jobs"
+        title={t("jobs:column.running")}
+        jobs={running}
+        emptyText={t("jobs:empty.running")}
       />
       <JobColumn
-        title="Cancelled"
+        title={t("jobs:column.queued")}
+        jobs={queued}
+        emptyText={t("jobs:empty.queued")}
+      />
+      <JobColumn
+        title={t("jobs:column.completed")}
+        jobs={completed}
+        emptyText={t("jobs:empty.completed")}
+      />
+      <JobColumn
+        title={t("jobs:column.cancelled")}
         jobs={cancelled}
-        emptyText="Nothing cancelled"
+        emptyText={t("jobs:empty.cancelled")}
         last
       />
     </FlexRow>

@@ -1,0 +1,40 @@
+{
+  "status": {
+    "running": "运行中",
+    "queued": "排队中",
+    "completed": "已完成",
+    "cancelled": "已取消",
+    "failed": "失败",
+    "inQueue": "排队中",
+    "cancelling": "取消中…",
+    "pending": "等待中"
+  },
+  "column": {
+    "running": "运行中",
+    "queued": "排队中",
+    "completed": "已完成",
+    "cancelled": "已取消"
+  },
+  "empty": {
+    "running": "暂无运行中的任务",
+    "queued": "队列为空",
+    "completed": "暂无已完成的任务",
+    "cancelled": "暂无已取消的任务"
+  },
+  "job": {
+    "loadingName": "加载中…",
+    "notStarted": "未开始",
+    "invalidDate": "无效日期",
+    "openOutput": "查看任务输出",
+    "output": "输出",
+    "file": "文件",
+    "stopJob": "停止任务",
+    "stop": "停止",
+    "assetVideo": "个视频",
+    "assetImage": "张图片",
+    "assetGeneric": "个产物",
+    "assetCountOne": "{{count}} {{noun}}",
+    "assetCountOther": "{{count}} {{noun}}",
+    "errorLoading": "加载任务失败"
+  }
+}

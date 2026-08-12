@@ -1,0 +1,80 @@
+{
+  "title": "费用",
+  "subtitle": "每次节点执行的花费",
+  "subtitleWithWorkflows": "跨 <strong>{{count}} 个工作流</strong>的节点执行花费",
+  "range": {
+    "vsPrior": "对比上一个 {{range}}",
+    "daily": "每日 · 最近 {{count}} 天"
+  },
+  "stat": {
+    "totalSpend": "总花费",
+    "nodeExecutions": "节点执行次数",
+    "avgPerExecution": "平均 / 次执行",
+    "topCostDriver": "花费占用项",
+    "noSpendYet": "尚无花费",
+    "acrossAll": "覆盖所有节点类型",
+    "failedWorkflows": "{{failed}} 次失败 · {{workflows}} 个工作流",
+    "driverShare": "{{cost}} · 占总花费 {{share}}"
+  },
+  "group": {
+    "label": "分组",
+    "execution": "执行",
+    "nodeType": "节点类型",
+    "workflow": "工作流",
+    "provider": "供应商",
+    "model": "模型"
+  },
+  "table": {
+    "node": "节点",
+    "workflow": "工作流",
+    "providerModel": "供应商 / 模型",
+    "tokens": "Token（入/出）",
+    "runtime": "运行时长",
+    "status": "状态",
+    "when": "时间",
+    "cost": "费用",
+    "executions": "执行次数",
+    "shareOfSpend": "花费占比",
+    "nodeType": "节点类型",
+    "empty": "没有匹配当前筛选条件的执行记录。"
+  },
+  "filter": {
+    "placeholder": "筛选节点、模型…",
+    "allProviders": "全部供应商",
+    "providers": "供应商",
+    "allWorkflows": "全部工作流",
+    "workflows": "工作流",
+    "selectAll": "全选",
+    "clear": "清除",
+    "noOptions": "无选项"
+  },
+  "action": {
+    "exportCsv": "导出 CSV"
+  },
+  "chart": {
+    "spendOverTime": "花费趋势",
+    "total": "总计"
+  },
+  "state": {
+    "loadError": "无法加载费用数据，请重试。",
+    "empty": "此时间段暂无费用数据。"
+  },
+  "estimate": {
+    "title": "费用估算",
+    "subtitle": "单次运行的估算费用",
+    "openWorkflow": "打开一个工作流以查看其费用估算。",
+    "addNode": "添加一个使用 AI 模型的节点以估算运行费用。",
+    "colNode": "节点",
+    "colProviderModel": "供应商 / 模型",
+    "colQty": "数量",
+    "colCost": "费用",
+    "total": "总计（{{currency}}）",
+    "priceUnknown": "价格未知 —— 已从总计中排除",
+    "priceUnknownShort": "价格未知",
+    "unknownNoteOne": "{{count}} 个无已知价格的节点已从总计中排除。",
+    "unknownNoteOther": "{{count}} 个无已知价格的节点已从总计中排除。",
+    "creditPrefix": "价格来自供应商目录与",
+    "creditSuffix": "，最后更新于 {{date}}。",
+    "noWorkflowDash": "—"
+  }
+}

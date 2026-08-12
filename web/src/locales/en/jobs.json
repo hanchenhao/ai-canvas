@@ -1,0 +1,40 @@
+{
+  "status": {
+    "running": "Running",
+    "queued": "Queued",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "failed": "Failed",
+    "inQueue": "In queue",
+    "cancelling": "Cancelling…",
+    "pending": "Pending"
+  },
+  "column": {
+    "running": "Running",
+    "queued": "Queued",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "empty": {
+    "running": "Nothing running",
+    "queued": "Queue is empty",
+    "completed": "No completed jobs",
+    "cancelled": "Nothing cancelled"
+  },
+  "job": {
+    "loadingName": "Loading…",
+    "notStarted": "Not started",
+    "invalidDate": "Invalid date",
+    "openOutput": "Open job output",
+    "output": "Output",
+    "file": "file",
+    "stopJob": "Stop job",
+    "stop": "Stop",
+    "assetVideo": "video",
+    "assetImage": "image",
+    "assetGeneric": "asset",
+    "assetCountOne": "{{count}} {{noun}}",
+    "assetCountOther": "{{count}} {{noun}}s",
+    "errorLoading": "Error loading jobs"
+  }
+}

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, memo, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { alpha } from "@mui/material/styles";
 import {
   FlexColumn,
@@ -47,13 +48,16 @@ const formatDuration = (ms: number): string => {
   return `${hours}h ${minutes}m`;
 };
 
-const formatElapsedTime = (startedAt: string | null | undefined): string => {
+const formatElapsedTime = (
+  startedAt: string | null | undefined,
+  t: (key: string) => string
+): string => {
   if (!startedAt) {
-    return "Not started";
+    return t("jobs:job.notStarted");
   }
   const start = new Date(startedAt).getTime();
   if (isNaN(start)) {
-    return "Invalid date";
+    return t("jobs:job.invalidDate");
   }
   const elapsed = Date.now() - start;
   return formatDuration(elapsed);
@@ -166,6 +170,7 @@ const StatusTile = memo(function StatusTile({
  * everything else as a small type tile. Clicking opens the asset.
  */
 const AssetThumb = memo(function AssetThumb({ asset }: { asset: Asset }) {
+  const { t } = useTranslation(["jobs"]);
   const isVisual =
     asset.content_type?.startsWith("image/") ||
     asset.content_type?.startsWith("video/");
@@ -200,7 +205,7 @@ const AssetThumb = memo(function AssetThumb({ asset }: { asset: Asset }) {
       <Box
         role="button"
         tabIndex={0}
-        aria-label="Open job output"
+        aria-label={t("jobs:job.openOutput")}
         onClick={handleOpen}
         onKeyDown={handleKeyDown}
         sx={{
@@ -222,12 +227,12 @@ const AssetThumb = memo(function AssetThumb({ asset }: { asset: Asset }) {
           <Box
             component="img"
             src={src}
-            alt={asset.name || "Output"}
+            alt={asset.name || t("jobs:job.output")}
             loading="lazy"
             sx={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
         ) : (
-          <Text size="smaller" color="secondary" truncate sx={{ px: 0.5 }}>{asset.content_type?.split("/")[1] || "file"}</Text>
+          <Text size="smaller" color="secondary" truncate sx={{ px: 0.5 }}>{asset.content_type?.split("/")[1] || t("jobs:job.file")}</Text>
         )}
       </Box>
     </Tooltip>
@@ -235,11 +240,12 @@ const AssetThumb = memo(function AssetThumb({ asset }: { asset: Asset }) {
 });
 
 const JobItem = ({ job }: { job: Job }) => {
+  const { t } = useTranslation(["jobs"]);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { data: workflow } = useWorkflow(job.workflow_id);
   const [elapsedTime, setElapsedTime] = useState(
-    formatElapsedTime(job.started_at)
+    formatElapsedTime(job.started_at, t)
   );
   const [cancelling, setCancelling] = useState(false);
 
@@ -253,7 +259,7 @@ const JobItem = ({ job }: { job: Job }) => {
       return;
     }
     const interval = setInterval(() => {
-      setElapsedTime(formatElapsedTime(job.started_at));
+      setElapsedTime(formatElapsedTime(job.started_at, t));
     }, 1000);
     return () => clearInterval(interval);
   }, [job.started_at, job.status]);
@@ -301,7 +307,7 @@ const JobItem = ({ job }: { job: Job }) => {
     [cancelling, job.id, job.workflow_id, queryClient]
   );
 
-  const workflowName = job.name || workflow?.name || "Loading...";
+  const workflowName = job.name || workflow?.name || t("jobs:job.loadingName");
   const shortId = `#${job.id.slice(0, 4)}`;
   const isActive =
     job.status === "running" ||
@@ -315,10 +321,10 @@ const JobItem = ({ job }: { job: Job }) => {
   const duration = getJobDuration(job.started_at, job.finished_at);
   const assetCount = assets?.length ?? 0;
   const assetNoun = assets?.[0]?.content_type?.startsWith("video/")
-    ? "video"
+    ? t("jobs:job.assetVideo")
     : assets?.[0]?.content_type?.startsWith("image/")
-      ? "image"
-      : "asset";
+      ? t("jobs:job.assetImage")
+      : t("jobs:job.assetGeneric");
   const countText =
     assetCount > 0
       ? `${assetCount} ${assetNoun}${assetCount > 1 ? "s" : ""}`
@@ -326,28 +332,28 @@ const JobItem = ({ job }: { job: Job }) => {
 
   let metaText: string;
   if (cancelling) {
-    metaText = "Cancelling…";
+    metaText = t("jobs:status.cancelling");
   } else if (isError) {
-    metaText = job.error || "Failed";
+    metaText = job.error || t("jobs:status.failed");
   } else if (job.status === "running") {
-    metaText = ["Running", elapsed].filter(Boolean).join(" · ");
+    metaText = [t("jobs:status.running"), elapsed].filter(Boolean).join(" · ");
   } else if (
     job.status === "queued" ||
     job.status === "scheduled" ||
     job.status === "starting"
   ) {
-    metaText = ["In queue", clockLabel(job.started_at)].filter(Boolean).join(
-      " · "
-    );
+    metaText = [t("jobs:status.inQueue"), clockLabel(job.started_at)].filter(
+      Boolean
+    ).join(" · ");
   } else if (job.status === "cancelled") {
-    metaText = ["Cancelled", clockLabel(job.finished_at)]
+    metaText = [t("jobs:status.cancelled"), clockLabel(job.finished_at)]
       .filter(Boolean)
       .join(" · ");
   } else {
     metaText =
       [duration, countText, clockLabel(job.finished_at)]
         .filter(Boolean)
-        .join(" · ") || "Completed";
+        .join(" · ") || t("jobs:status.completed");
   }
 
   return (
@@ -397,8 +403,8 @@ const JobItem = ({ job }: { job: Job }) => {
           size="small"
           onClick={handleStop}
           disabled={cancelling}
-          ariaLabel="Stop job"
-          tooltip="Stop job"
+          ariaLabel={t("jobs:job.stopJob")}
+          tooltip={t("jobs:job.stopJob")}
           icon={
             cancelling ? (
               <LoadingSpinner size="small" />
