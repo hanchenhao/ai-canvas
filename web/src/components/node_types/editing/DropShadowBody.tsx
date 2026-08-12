@@ -9,6 +9,7 @@
  */
 
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -103,14 +104,17 @@ const styles = (theme: Theme) =>
     }
   });
 
-const ImagePreview: React.FC<{ value: unknown }> = ({ value }) => (
-  <ImageRefPreview
-    value={value}
-    placeholder={
-      <CheckerDropzone message="Connect an image, then run" icon={<ImageIcon />} />
-    }
-  />
-);
+const ImagePreview: React.FC<{ value: unknown }> = ({ value }) => {
+  const { t } = useTranslation("canvas");
+  return (
+    <ImageRefPreview
+      value={value}
+      placeholder={
+        <CheckerDropzone message={t("dropShadow.connectImageThenRun")} icon={<ImageIcon />} />
+      }
+    />
+  );
+};
 
 export interface DropShadowBodyProps {
   id: string;
@@ -131,6 +135,7 @@ const DropShadowBodyInner: React.FC<DropShadowBodyProps> = ({
   status,
   isOutputNode
 }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(
     () => [styles(theme), adjustmentSliderStyles(theme)],
@@ -178,7 +183,7 @@ const DropShadowBodyInner: React.FC<DropShadowBodyProps> = ({
       </div>
 
       <FlexRow className="color-row" align="center" justify="space-between">
-        <span className="color-label">Shadow Color</span>
+        <span className="color-label">{t("dropShadow.shadowColor")}</span>
         <ColorPicker
           color={shadowColor}
           onColorChange={handleColorChange}

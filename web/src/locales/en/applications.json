@@ -97,5 +97,22 @@
     "title": "Versions",
     "workflowCount": "1 workflow",
     "workflowCountOther": "{{count}} workflows"
+  },
+  "widget": {
+    "noImage": "No image",
+    "noAudioYet": "No audio yet",
+    "noVideoYet": "No video yet",
+    "noResultYet": "No result yet",
+    "noRowsYet": "No rows yet",
+    "noItemsYet": "No items yet",
+    "noValuesYet": "No values yet",
+    "nothingToDownload": "Nothing to download yet",
+    "nameTabToShow": "Name a tab to show its content",
+    "valueColumn": "Value",
+    "alertFallback": "Alert",
+    "download": "Download",
+    "button": "Button",
+    "section": "Section",
+    "running": "Running"
   }
 }

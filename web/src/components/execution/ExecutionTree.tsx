@@ -9,6 +9,7 @@
  */
 
 import React, { memo, useMemo, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -467,20 +468,21 @@ StatusBadge.displayName = "StatusBadge";
 // ---------------------------------------------------------------------------
 
 const StepInspector: React.FC<{ step: StepState }> = memo(({ step }) => {
+  const { t } = useTranslation("canvas");
   const resultText = useMemo(() => stringifyResult(step.rawResult), [step.rawResult]);
 
   return (
     <div className="tl-inspector">
       {step.instructions ? (
         <div className="tl-inspector-section">
-          <span className="tl-inspector-label">Instructions</span>
+          <span className="tl-inspector-label">{t("executionTree.instructions")}</span>
           <span className="tl-inspector-body">{step.instructions}</span>
         </div>
       ) : null}
 
       {step.duration !== undefined ? (
         <div className="tl-inspector-section">
-          <span className="tl-inspector-label">Duration</span>
+          <span className="tl-inspector-label">{t("executionTree.duration")}</span>
           <span className="tl-inspector-body">
             {formatDuration(step.duration)}
           </span>
@@ -490,7 +492,7 @@ const StepInspector: React.FC<{ step: StepState }> = memo(({ step }) => {
       {step.toolCalls.length > 0 ? (
         <div className="tl-inspector-section">
           <span className="tl-inspector-label">
-            Tool calls ({step.toolCalls.length})
+            {t("executionTree.toolCalls", { count: step.toolCalls.length })}
           </span>
           {step.toolCalls.map((call: StepToolCallEntry, i: number) => (
             <div
@@ -498,7 +500,7 @@ const StepInspector: React.FC<{ step: StepState }> = memo(({ step }) => {
               className="tl-inspector-tool"
             >
               <span className="tl-inspector-body">
-                <strong>{call.name || "tool"}</strong>
+                <strong>{call.name || t("executionTree.tool")}</strong>
                 {call.message ? `  ${call.message}` : ""}
               </span>
               {call.name === "execute_code" &&
@@ -520,14 +522,14 @@ const StepInspector: React.FC<{ step: StepState }> = memo(({ step }) => {
 
       {resultText ? (
         <div className="tl-inspector-section">
-          <span className="tl-inspector-label">Result</span>
+          <span className="tl-inspector-label">{t("executionTree.result")}</span>
           <pre className="tl-inspector-code">{resultText}</pre>
         </div>
       ) : null}
 
       {step.error ? (
         <div className="tl-inspector-section">
-          <span className="tl-inspector-label tl-inspector-error">Error</span>
+          <span className="tl-inspector-label tl-inspector-error">{t("executionTree.error")}</span>
           <pre className="tl-inspector-code tl-inspector-error">
             {step.error}
           </pre>
@@ -547,6 +549,7 @@ const StepNode: React.FC<{
   step: StepState;
   isLast: boolean;
 }> = memo(({ step, isLast }) => {
+  const { t } = useTranslation("canvas");
   const [expanded, setExpanded] = useState(false);
 
   const displayName = step.toolName
@@ -600,7 +603,7 @@ const StepNode: React.FC<{
             <span className={`tl-name ${step.status}`}>{displayName}</span>
           </FlexRow>
           {step.status === "running" ? (
-            <span className="tl-meta running">In progress</span>
+            <span className="tl-meta running">{t("executionTree.inProgress")}</span>
           ) : step.duration !== undefined ? (
             <span className="tl-meta">
               <AccessTimeRoundedIcon aria-hidden />
@@ -631,6 +634,7 @@ const TaskNode: React.FC<{
   isLast: boolean;
   onToggleTask: (taskId: string) => void;
 }> = memo(({ task, isLast, onToggleTask }) => {
+  const { t } = useTranslation("canvas");
   const stepCount = task.steps.length;
   const completedSteps = task.steps.filter(
     (s) => s.status === "completed"
@@ -680,9 +684,9 @@ const TaskNode: React.FC<{
             )}
           </FlexRow>
           {task.status === "running" ? (
-            <span className="tl-meta running">In progress</span>
+            <span className="tl-meta running">{t("executionTree.inProgress")}</span>
           ) : task.status === "waiting" ? (
-            <span className="tl-meta waiting">waiting</span>
+            <span className="tl-meta waiting">{t("executionTree.waiting")}</span>
           ) : (
             <span className="tl-meta">
               {duration && (
@@ -691,7 +695,7 @@ const TaskNode: React.FC<{
                   {duration}
                 </>
               )}
-              {hasSteps ? ` ${completedSteps}/${stepCount} steps` : null}
+              {hasSteps ? ` ${t("executionTree.stepsProgress", { done: completedSteps, total: stepCount })}` : null}
             </span>
           )}
         </div>
@@ -721,6 +725,7 @@ const PlanningLog: React.FC<{
   entries: PlanningEntry[];
   isActive: boolean;
 }> = memo(({ entries, isActive }) => {
+  const { t } = useTranslation("canvas");
   if (entries.length === 0) {
     if (isActive) {
       return (
@@ -731,8 +736,8 @@ const PlanningLog: React.FC<{
             </div>
             <div className="tl-content">
               <div className="tl-row">
-                <span className="planning-phase">Planning</span>
-                <span className="tl-meta running">In progress</span>
+                <span className="planning-phase">{t("executionTree.planning")}</span>
+                <span className="tl-meta running">{t("executionTree.inProgress")}</span>
               </div>
             </div>
           </div>
@@ -766,7 +771,7 @@ const PlanningLog: React.FC<{
             <div className="tl-content">
               <div className="tl-row">
                 <span className="planning-phase">{entry.phase}</span>
-                {isRunning && <span className="tl-meta running">In progress</span>}
+                {isRunning && <span className="tl-meta running">{t("executionTree.inProgress")}</span>}
               </div>
               {entry.content ? (
                 <div className="planning-content">{entry.content}</div>
@@ -791,6 +796,7 @@ interface ExecutionTreeProps {
 }
 
 const ExecutionTree: React.FC<ExecutionTreeProps> = ({ state, onToggleTask }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
 
   const counts = useMemo(() => {
@@ -816,14 +822,14 @@ const ExecutionTree: React.FC<ExecutionTreeProps> = ({ state, onToggleTask }) =>
       {hasTasks && (
         <div className="plan-card">
           <FlexRow className="plan-header" align="center" gap={2}>
-            <span className="plan-title">Execution plan</span>
+            <span className="plan-title">{t("executionTree.executionPlan")}</span>
             <div
               className="plan-progress-track"
               role="progressbar"
               aria-valuenow={counts.completed}
               aria-valuemin={0}
               aria-valuemax={total}
-              aria-label="Completed tasks"
+              aria-label={t("executionTree.completedTasks")}
             >
               <div
                 className="plan-progress-fill"

@@ -207,5 +207,18 @@
   "progress": {
     "eta": "ETA: {{seconds}}s",
     "percent": "{{percent}}%"
+  },
+  "quickStart": {
+    "title": "Write this prompt with AI",
+    "subtitle": "Describe what you want, or start from one of these. Drafts drop straight into the editor.",
+    "quickStarts": "Quick starts",
+    "draftFromScratch": "Draft a prompt from scratch",
+    "addInputVariables": "Add input variables",
+    "makeConcise": "Make it more concise",
+    "addSystemRole": "Add a system role & sections",
+    "draftFromScratchPrompt": "Draft {{target}} from scratch. Ask me about the goal and audience if you need to, then write a clear, well-structured prompt.",
+    "addInputVariablesPrompt": "Rewrite {{target}} to use {{ variable }} placeholders for the key inputs so it works as a reusable template.",
+    "makeConcisePrompt": "Make {{target}} more concise without losing any important instructions or constraints.",
+    "addSystemRolePrompt": "Restructure {{target}} with a clear system role and labeled sections (context, task, constraints, output format)."
   }
 }

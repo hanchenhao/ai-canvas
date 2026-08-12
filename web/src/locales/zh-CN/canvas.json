@@ -264,5 +264,141 @@
       "selectOutputs": "选中输出节点",
       "rightClick": "右键"
     }
+  },
+  "inspector": {
+    "closeInspector": "关闭检查器",
+    "issuesToFix_one": "1 个待修复问题",
+    "issuesToFix_other": "{{count}} 个待修复问题",
+    "nodesSelected": "已选中 {{count}} 个节点",
+    "metadataUnavailable": "部分节点缺少元数据",
+    "editingSharedProperties": "正在编辑共享属性",
+    "mixedValues": "所选节点取值不一致",
+    "noSharedProperties": "所选节点没有可编辑的共享属性。",
+    "noMetadata": "此节点暂无元数据",
+    "browseNamespace": "在节点菜单中浏览此命名空间",
+    "copyNamespace": "复制命名空间",
+    "required": "必填",
+    "inputsCount": "输入({{count}})",
+    "outputsCount": "输出({{count}})",
+    "noInputs": "无输入。",
+    "noOutputs": "无输出。",
+    "noDescription": "此节点暂无描述。",
+    "type": "类型",
+    "namespace": "命名空间",
+    "dynamic": "动态",
+    "yes": "是",
+    "any": "任意"
+  },
+  "runSelected": {
+    "runs": "运行次数",
+    "decreaseRuns": "减少运行次数",
+    "increaseRuns": "增加运行次数",
+    "runSelectedNodes": "运行所选节点",
+    "runProgress": "运行 {{current}}/{{total}}"
+  },
+  "executionTree": {
+    "instructions": "指令",
+    "duration": "耗时",
+    "toolCalls": "工具调用({{count}})",
+    "tool": "工具",
+    "result": "结果",
+    "error": "错误",
+    "inProgress": "进行中",
+    "waiting": "等待中",
+    "stepsProgress": "{{done}}/{{total}} 步",
+    "executionPlan": "执行计划",
+    "completedTasks": "已完成任务",
+    "planning": "规划中"
+  },
+  "findDialog": {
+    "findNodes": "查找节点",
+    "findNodesPlaceholder": "查找节点…",
+    "clearSearch": "清除搜索",
+    "previousMatch": "上一个(Shift+Enter)",
+    "previousMatchAria": "上一个匹配",
+    "nextMatch": "下一个(Enter)",
+    "nextMatchAria": "下一个匹配",
+    "close": "关闭(Esc)",
+    "nodesFound_one": "已找到 {{total}} 个节点中的第 {{index}} 个",
+    "nodesFound_other": "已找到 {{total}} 个节点中的第 {{index}} 个",
+    "noNodesFound": "未找到节点",
+    "typeToSearch": "输入关键词搜索节点",
+    "noMatchingNodes": "没有匹配的节点"
+  },
+  "nodeInfoPanel": {
+    "clickToShowInMenu": "点击在节点菜单中显示",
+    "useCases": "使用场景",
+    "focus": "聚焦"
+  },
+  "contentCard": {
+    "runToGenerate": "运行以生成",
+    "runToGenerateVideo": "运行以生成视频",
+    "runToGenerateText": "运行以生成文本",
+    "runToGenerateAudio": "运行以生成音频",
+    "runToGenerate3d": "运行以生成 3D",
+    "runModel": "运行模型",
+    "noMaskYet": "暂无蒙版",
+    "download": "下载",
+    "downloadVideo": "下载视频",
+    "saveToAssets": "保存到素材",
+    "saveVideoToAssets": "保存视频到素材",
+    "filesAddedToAssets_one": "已添加 1 个文件到素材",
+    "filesAddedToAssets_other": "已添加 {{count}} 个文件到素材",
+    "failedToStartDownload": "无法开始下载",
+    "failedToAddVideo": "无法添加视频到素材",
+    "generatedText": "生成的文本",
+    "model3d": "3D 模型"
+  },
+  "chromaKey": {
+    "connectImageThenRun": "请连接图片后运行",
+    "keyColor": "键控颜色"
+  },
+  "dropShadow": {
+    "connectImageThenRun": "请连接图片后运行",
+    "shadowColor": "阴影颜色"
+  },
+  "collection": {
+    "titleEmpty": "集合",
+    "titleWithCount_one": "{{count}} 个项目",
+    "titleWithCount_other": "{{count}} 个项目",
+    "clearCollection": "清空集合",
+    "dropAssetsHere": "将素材拖到此处",
+    "dropAssetsHint": "可来自素材面板、文件或生成历史",
+    "remove": "移除",
+    "removeItemAria": "移除第 {{index}} 项",
+    "typeMismatch": "集合仅接受「{{type}}」类型的项目。"
+  },
+  "audioOut": {
+    "out": "输出",
+    "runPatchToHear": "运行模块以试听"
+  },
+  "compositor": {
+    "canvasSize": "画布尺寸",
+    "width": "宽度",
+    "height": "高度",
+    "canvasWidthDesc": "画布宽度(像素)",
+    "canvasHeightDesc": "画布高度(像素)",
+    "selectedLayer": "当前图层",
+    "resetTransform": "重置变换",
+    "selectLayerToTransform": "选择一个图层进行变换。",
+    "layers": "图层",
+    "noLayersYet": "暂无图层,可在下方添加。",
+    "layer": "图层"
+  },
+  "tracePanel": {
+    "title": "追踪",
+    "copyToClipboard": "复制到剪贴板",
+    "exportAsJson": "导出为 JSON",
+    "clearTrace": "清空追踪",
+    "noTraceData": "暂无追踪数据",
+    "runToSeeTrace": "运行工作流以查看执行追踪",
+    "request": "请求({{count}} 条消息)",
+    "response": "响应",
+    "toolCalls": "工具调用",
+    "tokensIn": "输入:{{count}}",
+    "tokensOut": "输出:{{count}}",
+    "cost": "费用:${{cost}}",
+    "duration": "耗时:{{ms}}ms",
+    "error": "错误"
   }
 }

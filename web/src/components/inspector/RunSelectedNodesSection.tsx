@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { memo, useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
@@ -97,6 +98,7 @@ const styles = (theme: Theme) =>
   });
 
 const RunSelectedNodesSectionInternal: React.FC = () => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const { runSelectedNodes, isWorkflowRunning, runProgress } =
     useRunSelectedNodes();
@@ -128,12 +130,12 @@ const RunSelectedNodesSectionInternal: React.FC = () => {
         fullWidth
         className="runs-row"
       >
-        <span className="runs-label">Runs</span>
+        <span className="runs-label">{t("runSelected.runs")}</span>
         <FlexRow gap={0} align="center" className="stepper-control">
           <EditorButton
             onClick={decrement}
             disabled={runs <= MIN_RUNS || isWorkflowRunning}
-            aria-label="Decrease runs"
+            aria-label={t("runSelected.decreaseRuns")}
           >
             <RemoveIcon fontSize="small" />
           </EditorButton>
@@ -143,7 +145,7 @@ const RunSelectedNodesSectionInternal: React.FC = () => {
           <EditorButton
             onClick={increment}
             disabled={runs >= MAX_RUNS || isWorkflowRunning}
-            aria-label="Increase runs"
+            aria-label={t("runSelected.increaseRuns")}
           >
             <AddIcon fontSize="small" />
           </EditorButton>
@@ -154,7 +156,7 @@ const RunSelectedNodesSectionInternal: React.FC = () => {
           placement="top"
           title={
             <FlexRow gap={1} align="center">
-              <span>Run selected nodes</span>
+              <span>{t("runSelected.runSelectedNodes")}</span>
               <ShortcutHint shortcut={["⌘", "Enter"]} />
             </FlexRow>
           }
@@ -164,15 +166,15 @@ const RunSelectedNodesSectionInternal: React.FC = () => {
             density="normal"
             onClick={handleRun}
             disabled={buttonDisabled}
-            aria-label="Run selected nodes"
+            aria-label={t("runSelected.runSelectedNodes")}
           >
             <PlayArrowIcon className="play-icon" />
-            <span className="run-label">Run selected nodes</span>
+            <span className="run-label">{t("runSelected.runSelectedNodes")}</span>
           </EditorButton>
         </Tooltip>
         {inSequence && runProgress !== null ? (
           <Caption size="smaller" color="muted">
-            {`Run ${runProgress.current}/${runProgress.total}`}
+            {t("runSelected.runProgress", { current: runProgress.current, total: runProgress.total })}
           </Caption>
         ) : null}
       </FlexColumn>

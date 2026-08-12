@@ -1,4 +1,6 @@
 /** @jsxImportSource @emotion/react */
+// i18n 不适用:dev-only layout test (gated behind `isLocalhost` in index.tsx).
+// 此页面仅用于开发期检视 UI primitives 的视觉效果,不含面向最终用户的文案,故不做 i18n 迁移。
 import React, { useState, memo } from "react";
 import { css } from "@emotion/react";
 import { useColorScheme, useTheme } from "@mui/material/styles";

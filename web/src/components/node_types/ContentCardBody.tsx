@@ -19,6 +19,7 @@
  */
 
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -455,6 +456,7 @@ const VideoPreview: React.FC<{ value: unknown; nodeId: string }> = ({
   value,
   nodeId
 }) => {
+  const { t } = useTranslation("canvas");
   const src = useMediaSrc(value, "video");
   // Inside NodeHistoryViewer the unified overlay already owns download — only
   // add our actions on the direct (non-gallery) path, where the video isn't
@@ -472,9 +474,9 @@ const VideoPreview: React.FC<{ value: unknown; nodeId: string }> = ({
       });
     } catch (error) {
       console.error("VideoPreview: download failed", error);
-      addNotification({ type: "error", content: "Failed to start download" });
+      addNotification({ type: "error", content: t("contentCard.failedToStartDownload") });
     }
-  }, [nodeId, value, addNotification]);
+  }, [nodeId, value, addNotification, t]);
 
   const handleAddToAssets = useCallback(async () => {
     try {
@@ -485,18 +487,16 @@ const VideoPreview: React.FC<{ value: unknown; nodeId: string }> = ({
       await Promise.all(assetFiles.map(({ file }) => createAsset(file)));
       addNotification({
         type: "success",
-        content: `${assetFiles.length} file${
-          assetFiles.length === 1 ? "" : "s"
-        } added to assets`
+        content: t("contentCard.filesAddedToAssets", { count: assetFiles.length })
       });
     } catch (error) {
       console.error("VideoPreview: add to assets failed", error);
       addNotification({
         type: "error",
-        content: "Failed to add video to assets"
+        content: t("contentCard.failedToAddVideo")
       });
     }
-  }, [value, nodeId, createAsset, addNotification]);
+  }, [value, nodeId, createAsset, addNotification, t]);
 
   if (!src) {
     return <OutputRenderer value={value} showTextActions={false} />;
@@ -508,18 +508,18 @@ const VideoPreview: React.FC<{ value: unknown; nodeId: string }> = ({
       {!suppressed && (
         <div className="video-preview-actions">
           <ToolbarIconButton
-            title="Download"
+            title={t("contentCard.download")}
             size="small"
             onClick={handleDownload}
-            aria-label="Download video"
+            aria-label={t("contentCard.downloadVideo")}
           >
             <DownloadIcon />
           </ToolbarIconButton>
           <ToolbarIconButton
-            title="Save to Assets"
+            title={t("contentCard.saveToAssets")}
             size="small"
             onClick={handleAddToAssets}
-            aria-label="Save video to assets"
+            aria-label={t("contentCard.saveVideoToAssets")}
           >
             <AddIcon />
           </ToolbarIconButton>
@@ -562,11 +562,12 @@ const TextPreview: React.FC<{ value: unknown }> = ({ value }) => {
   // height is capped (see `.preview-area` CSS) so long/streaming text scrolls
   // in place; the generations navigator's "Open full text" control
   // (NodeHistoryViewer) opens the full text in a readable popup.
+  const { t } = useTranslation("canvas");
   const text = extractTextValue(value);
   return (
     <div
       className="text-preview nodrag nopan nowheel"
-      aria-label="Generated text"
+      aria-label={t("contentCard.generatedText")}
     >
       <TextRenderer text={text} showActions={false} />
     </div>
@@ -575,6 +576,7 @@ const TextPreview: React.FC<{ value: unknown }> = ({ value }) => {
 
 const Model3DPreview: React.FC<{ value: unknown }> = ({ value }) => {
   // Static thumbnail only — no interactive viewer.
+  const { t } = useTranslation("canvas");
   const v =
     value && typeof value === "object"
       ? (value as Record<string, unknown>)
@@ -582,7 +584,7 @@ const Model3DPreview: React.FC<{ value: unknown }> = ({ value }) => {
   const name =
     (typeof v?.name === "string" && v.name) ||
     (typeof v?.uri === "string" && v.uri.split("/").pop()) ||
-    "3D model";
+    t("contentCard.model3d");
   return (
     <div className="model-3d-thumb">
       <ViewInArIcon className="model-3d-icon" />
@@ -598,13 +600,14 @@ const PreviewArea: React.FC<{
   value: unknown;
   nodeId: string;
 }> = ({ variant, value, nodeId }) => {
+  const { t } = useTranslation("canvas");
   // Empty state — variant-specific empty surface.
   if (value === undefined || value === null) {
     if (variant === "image_mask") {
       return (
         <div className="mask-empty">
           <LayersIcon className="mask-icon" />
-          <span>No mask yet</span>
+          <span>{t("contentCard.noMaskYet")}</span>
         </div>
       );
     }
@@ -612,12 +615,12 @@ const PreviewArea: React.FC<{
       Exclude<ContentCardVariant, "image_mask">,
       { message: string; icon: React.ReactNode }
     > = {
-      image: { message: "Run to generate", icon: <ImageIcon /> },
-      video: { message: "Run to generate video", icon: <MovieIcon /> },
-      text: { message: "Run to generate text", icon: <TextFieldsIcon /> },
-      audio: { message: "Run to generate audio", icon: <AudiotrackIcon /> },
-      model_3d: { message: "Run to generate 3D", icon: <ViewInArIcon /> },
-      generic: { message: "Run Model", icon: undefined }
+      image: { message: t("contentCard.runToGenerate"), icon: <ImageIcon /> },
+      video: { message: t("contentCard.runToGenerateVideo"), icon: <MovieIcon /> },
+      text: { message: t("contentCard.runToGenerateText"), icon: <TextFieldsIcon /> },
+      audio: { message: t("contentCard.runToGenerateAudio"), icon: <AudiotrackIcon /> },
+      model_3d: { message: t("contentCard.runToGenerate3d"), icon: <ViewInArIcon /> },
+      generic: { message: t("contentCard.runModel"), icon: undefined }
     };
     const { message, icon } = empty[variant];
     return <CheckerDropzone message={message} icon={icon} />;

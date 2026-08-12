@@ -97,5 +97,22 @@
     "title": "版本",
     "workflowCount": "1 个工作流",
     "workflowCountOther": "{{count}} 个工作流"
+  },
+  "widget": {
+    "noImage": "暂无图片",
+    "noAudioYet": "暂无音频",
+    "noVideoYet": "暂无视频",
+    "noResultYet": "暂无结果",
+    "noRowsYet": "暂无数据行",
+    "noItemsYet": "暂无项目",
+    "noValuesYet": "暂无数值",
+    "nothingToDownload": "暂无可下载内容",
+    "nameTabToShow": "为标签页命名以显示内容",
+    "valueColumn": "数值",
+    "alertFallback": "提醒",
+    "download": "下载",
+    "button": "按钮",
+    "section": "分区",
+    "running": "运行中"
   }
 }

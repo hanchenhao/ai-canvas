@@ -264,5 +264,141 @@
       "selectOutputs": "Select Outputs",
       "rightClick": "Right-Click"
     }
+  },
+  "inspector": {
+    "closeInspector": "Close inspector",
+    "issuesToFix_one": "1 issue to fix",
+    "issuesToFix_other": "{{count}} issues to fix",
+    "nodesSelected": "{{count}} nodes selected",
+    "metadataUnavailable": "Metadata unavailable for some nodes",
+    "editingSharedProperties": "Editing shared properties",
+    "mixedValues": "Mixed values across the selected nodes",
+    "noSharedProperties": "No shared editable properties across the selected nodes.",
+    "noMetadata": "No metadata available for this node",
+    "browseNamespace": "Browse this namespace in the node menu",
+    "copyNamespace": "Copy namespace",
+    "required": "Required",
+    "inputsCount": "Inputs ({{count}})",
+    "outputsCount": "Outputs ({{count}})",
+    "noInputs": "No inputs.",
+    "noOutputs": "No outputs.",
+    "noDescription": "No description provided for this node.",
+    "type": "Type",
+    "namespace": "Namespace",
+    "dynamic": "Dynamic",
+    "yes": "yes",
+    "any": "any"
+  },
+  "runSelected": {
+    "runs": "Runs",
+    "decreaseRuns": "Decrease runs",
+    "increaseRuns": "Increase runs",
+    "runSelectedNodes": "Run selected nodes",
+    "runProgress": "Run {{current}}/{{total}}"
+  },
+  "executionTree": {
+    "instructions": "Instructions",
+    "duration": "Duration",
+    "toolCalls": "Tool calls ({{count}})",
+    "tool": "tool",
+    "result": "Result",
+    "error": "Error",
+    "inProgress": "In progress",
+    "waiting": "waiting",
+    "stepsProgress": "{{done}}/{{total}} steps",
+    "executionPlan": "Execution plan",
+    "completedTasks": "Completed tasks",
+    "planning": "Planning"
+  },
+  "findDialog": {
+    "findNodes": "Find nodes",
+    "findNodesPlaceholder": "Find nodes...",
+    "clearSearch": "Clear search",
+    "previousMatch": "Previous (Shift+Enter)",
+    "previousMatchAria": "Previous match",
+    "nextMatch": "Next (Enter)",
+    "nextMatchAria": "Next match",
+    "close": "Close (Escape)",
+    "nodesFound_one": "{{index}} of {{total}} node found",
+    "nodesFound_other": "{{index}} of {{total}} nodes found",
+    "noNodesFound": "No nodes found",
+    "typeToSearch": "Type to search nodes",
+    "noMatchingNodes": "No matching nodes"
+  },
+  "nodeInfoPanel": {
+    "clickToShowInMenu": "Click to show in NodeMenu",
+    "useCases": "Use cases",
+    "focus": "Focus"
+  },
+  "contentCard": {
+    "runToGenerate": "Run to generate",
+    "runToGenerateVideo": "Run to generate video",
+    "runToGenerateText": "Run to generate text",
+    "runToGenerateAudio": "Run to generate audio",
+    "runToGenerate3d": "Run to generate 3D",
+    "runModel": "Run Model",
+    "noMaskYet": "No mask yet",
+    "download": "Download",
+    "downloadVideo": "Download video",
+    "saveToAssets": "Save to Assets",
+    "saveVideoToAssets": "Save video to assets",
+    "filesAddedToAssets_one": "1 file added to assets",
+    "filesAddedToAssets_other": "{{count}} files added to assets",
+    "failedToStartDownload": "Failed to start download",
+    "failedToAddVideo": "Failed to add video to assets",
+    "generatedText": "Generated text",
+    "model3d": "3D model"
+  },
+  "chromaKey": {
+    "connectImageThenRun": "Connect an image, then run",
+    "keyColor": "Key Color"
+  },
+  "dropShadow": {
+    "connectImageThenRun": "Connect an image, then run",
+    "shadowColor": "Shadow Color"
+  },
+  "collection": {
+    "titleEmpty": "Collection",
+    "titleWithCount_one": "{{count}} item",
+    "titleWithCount_other": "{{count}} items",
+    "clearCollection": "Clear collection",
+    "dropAssetsHere": "Drop assets here",
+    "dropAssetsHint": "from the asset panel, files, or generation history",
+    "remove": "Remove",
+    "removeItemAria": "Remove item {{index}}",
+    "typeMismatch": "Collection only accepts \"{{type}}\" items."
+  },
+  "audioOut": {
+    "out": "Out",
+    "runPatchToHear": "Run the patch to hear it"
+  },
+  "compositor": {
+    "canvasSize": "Canvas size",
+    "width": "Width",
+    "height": "Height",
+    "canvasWidthDesc": "Canvas width (px)",
+    "canvasHeightDesc": "Canvas height (px)",
+    "selectedLayer": "Selected layer",
+    "resetTransform": "Reset transform",
+    "selectLayerToTransform": "Select a layer to transform it.",
+    "layers": "Layers",
+    "noLayersYet": "No layers yet - add one below.",
+    "layer": "layer"
+  },
+  "tracePanel": {
+    "title": "Trace",
+    "copyToClipboard": "Copy to clipboard",
+    "exportAsJson": "Export as JSON",
+    "clearTrace": "Clear trace",
+    "noTraceData": "No trace data",
+    "runToSeeTrace": "Run a workflow to see the execution trace",
+    "request": "Request ({{count}} messages)",
+    "response": "Response",
+    "toolCalls": "Tool Calls",
+    "tokensIn": "In: {{count}}",
+    "tokensOut": "Out: {{count}}",
+    "cost": "Cost: ${{cost}}",
+    "duration": "Duration: {{ms}}ms",
+    "error": "Error"
   }
 }

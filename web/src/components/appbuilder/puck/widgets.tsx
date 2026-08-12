@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { keyframes } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import ReactMarkdown, { type Options } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -265,6 +266,7 @@ export const ImageWidget: React.FC<WidgetCommon & {
   placeholder?: string;
 }> = (props) => {
   const { value } = useBinding(props, "read");
+  const { t } = useTranslation("applications");
   const sources = React.useMemo(
     () =>
       asItems(value)
@@ -275,7 +277,7 @@ export const ImageWidget: React.FC<WidgetCommon & {
   const height = numOr(props.height, 240);
   if (sources.length === 0) {
     return (
-      <MediaPlaceholder height={height} text={props.placeholder ?? "No image"} />
+      <MediaPlaceholder height={height} text={props.placeholder ?? t("widget.noImage")} />
     );
   }
   if (sources.length === 1) {
@@ -301,6 +303,7 @@ export const AudioWidget: React.FC<WidgetCommon & { placeholder?: string }> = (
   props
 ) => {
   const { value } = useBinding(props, "read");
+  const { t } = useTranslation("applications");
   const sources = React.useMemo(
     () =>
       asItems(value)
@@ -310,7 +313,7 @@ export const AudioWidget: React.FC<WidgetCommon & { placeholder?: string }> = (
   );
   if (sources.length === 0) {
     return (
-      <MediaPlaceholder height={56} text={props.placeholder ?? "No audio yet"} />
+      <MediaPlaceholder height={56} text={props.placeholder ?? t("widget.noAudioYet")} />
     );
   }
   return (
@@ -327,6 +330,7 @@ export const VideoWidget: React.FC<WidgetCommon & {
   placeholder?: string;
 }> = (props) => {
   const { value } = useBinding(props, "read");
+  const { t } = useTranslation("applications");
   const sources = React.useMemo(
     () =>
       asItems(value)
@@ -337,7 +341,7 @@ export const VideoWidget: React.FC<WidgetCommon & {
   const height = numOr(props.height, 320);
   if (sources.length === 0) {
     return (
-      <MediaPlaceholder height={height} text={props.placeholder ?? "No video yet"} />
+      <MediaPlaceholder height={height} text={props.placeholder ?? t("widget.noVideoYet")} />
     );
   }
   return (
@@ -393,12 +397,13 @@ export const OutputWidget: React.FC<WidgetCommon & { placeholder?: string }> = (
   props
 ) => {
   const { value } = useBinding(props, "read");
+  const { t } = useTranslation("applications");
   const items = props.formattedValue
     ? [props.formattedValue]
     : asItems(value).filter((item) => item != null && item !== "");
   if (items.length === 0) {
     return (
-      <Caption color="secondary">{props.placeholder ?? "No result yet"}</Caption>
+      <Caption color="secondary">{props.placeholder ?? t("widget.noResultYet")}</Caption>
     );
   }
   if (items.length === 1) {
@@ -428,6 +433,7 @@ export const TableWidget: React.FC<WidgetCommon & {
   maxHeight?: number;
 }> = (props) => {
   const { value } = useBinding(props, "read");
+  const { t } = useTranslation("applications");
   // Memoized because the column/row derivation below depends on it, and that
   // stringifies every cell.
   const items = React.useMemo(
@@ -462,17 +468,17 @@ export const TableWidget: React.FC<WidgetCommon & {
       };
     }
     return {
-      columns: [{ key: "value", label: props.label || "Value" }],
+      columns: [{ key: "value", label: props.label || t("widget.valueColumn") }],
       rows: items.map((item) => ({
         value:
           typeof item === "object" ? JSON.stringify(item) : str(item)
       }))
     };
-  }, [items, props.label]);
+  }, [items, props.label, t]);
 
   if (rows.length === 0) {
     return (
-      <Caption color="secondary">{props.placeholder ?? "No rows yet"}</Caption>
+      <Caption color="secondary">{props.placeholder ?? t("widget.noRowsYet")}</Caption>
     );
   }
   return (
@@ -536,6 +542,7 @@ export const AlertWidget: React.FC<WidgetCommon & {
   title?: string;
 }> = (props) => {
   const { value, designMode } = useBinding(props, "read");
+  const { t } = useTranslation("applications");
   const text =
     props.formattedValue ?? (value != null ? str(value) : props.text ?? "");
   if (!text && !designMode) return null;
@@ -551,7 +558,7 @@ export const AlertWidget: React.FC<WidgetCommon & {
       title={props.title || undefined}
       sx={{ width: "100%" }}
     >
-      {text || "Alert"}
+      {text || t("widget.alertFallback")}
     </AlertBanner>
   );
 };
@@ -610,12 +617,13 @@ export const ListWidget: React.FC<WidgetCommon & {
   placeholder?: string;
 }> = (props) => {
   const { value } = useBinding(props, "read");
+  const { t } = useTranslation("applications");
   const items = (
     props.formattedValue ? [props.formattedValue] : asItems(value)
   ).filter((item) => item != null && item !== "");
   if (items.length === 0) {
     return (
-      <Caption color="secondary">{props.placeholder ?? "No items yet"}</Caption>
+      <Caption color="secondary">{props.placeholder ?? t("widget.noItemsYet")}</Caption>
     );
   }
   return (
@@ -652,6 +660,7 @@ export const KeyValueWidget: React.FC<WidgetCommon & {
   placeholder?: string;
 }> = (props) => {
   const { value } = useBinding(props, "read");
+  const { t } = useTranslation("applications");
   const entries =
     value && typeof value === "object" && !Array.isArray(value)
       ? Object.entries(value as Record<string, unknown>)
@@ -661,7 +670,7 @@ export const KeyValueWidget: React.FC<WidgetCommon & {
   if (entries.length === 0) {
     return (
       <Caption color="secondary">
-        {props.placeholder ?? "No values yet"}
+        {props.placeholder ?? t("widget.noValuesYet")}
       </Caption>
     );
   }
@@ -727,11 +736,12 @@ export const DownloadWidget: React.FC<WidgetCommon & {
   placeholder?: string;
 }> = (props) => {
   const { value, designMode } = useBinding(props, "read");
+  const { t } = useTranslation("applications");
   const href = resolveImageSrc(asItems(value)[0]);
   if (!href && !designMode) {
     return (
       <Caption color="secondary">
-        {props.placeholder ?? "Nothing to download yet"}
+        {props.placeholder ?? t("widget.nothingToDownload")}
       </Caption>
     );
   }
@@ -748,7 +758,7 @@ export const DownloadWidget: React.FC<WidgetCommon & {
       rel="noopener"
       download={props.filename || ""}
     >
-      {props.label ?? "Download"}
+      {props.label ?? t("widget.download")}
     </EditorButton>
   );
 };
@@ -987,28 +997,31 @@ const ellipsisPulse = keyframes`
   50% { opacity: 1; }
 `;
 
-const RunningLabel: React.FC = () => (
-  <Box
-    component="span"
-    sx={{ display: "inline-flex", alignItems: "baseline", gap: "0.15em" }}
-  >
-    Running
-    <Box component="span" aria-hidden sx={{ display: "inline-flex" }}>
-      {[0, 1, 2].map((i) => (
-        <Box
-          key={i}
-          component="span"
-          sx={{
-            animation: `${ellipsisPulse} ${MOTION.pulse} ${i * 0.18}s infinite`,
-            ...reducedMotion({ animation: "none", opacity: 1 })
-          }}
-        >
-          .
-        </Box>
-      ))}
+const RunningLabel: React.FC = () => {
+  const { t } = useTranslation("applications");
+  return (
+    <Box
+      component="span"
+      sx={{ display: "inline-flex", alignItems: "baseline", gap: "0.15em" }}
+    >
+      {t("widget.running")}
+      <Box component="span" aria-hidden sx={{ display: "inline-flex" }}>
+        {[0, 1, 2].map((i) => (
+          <Box
+            key={i}
+            component="span"
+            sx={{
+              animation: `${ellipsisPulse} ${MOTION.pulse} ${i * 0.18}s infinite`,
+              ...reducedMotion({ animation: "none", opacity: 1 })
+            }}
+          >
+            .
+          </Box>
+        ))}
+      </Box>
     </Box>
-  </Box>
-);
+  );
+};
 
 export const ButtonWidget: React.FC<WidgetCommon & {
   label?: string;
@@ -1016,6 +1029,7 @@ export const ButtonWidget: React.FC<WidgetCommon & {
   color?: string;
 }> = (props) => {
   const { emit, designMode, runnerState } = useBinding(props, "none");
+  const { t } = useTranslation("applications");
   const isRunning = runnerState === "running";
   const showRunning = isRunning && !designMode;
   return (
@@ -1051,7 +1065,7 @@ export const ButtonWidget: React.FC<WidgetCommon & {
         })
       }}
     >
-      {showRunning ? <RunningLabel /> : props.label ?? "Button"}
+      {showRunning ? <RunningLabel /> : props.label ?? t("widget.button")}
     </EditorButton>
   );
 };
@@ -1127,6 +1141,7 @@ export const TabsWidget: React.FC<{
   tab2?: SlotComponent;
   tab3?: SlotComponent;
 }> = ({ tab1Label, tab2Label, tab3Label, tab1, tab2, tab3 }) => {
+  const { t } = useTranslation("applications");
   const panes = [
     { value: "tab1", label: tab1Label, Slot: tab1 },
     { value: "tab2", label: tab2Label, Slot: tab2 },
@@ -1140,7 +1155,7 @@ export const TabsWidget: React.FC<{
     : panes[0]?.value;
 
   if (panes.length === 0) {
-    return <Caption color="secondary">Name a tab to show its content</Caption>;
+    return <Caption color="secondary">{t("widget.nameTabToShow")}</Caption>;
   }
   return (
     <FlexColumn gap={SPACING.lg} fullWidth>
@@ -1174,12 +1189,15 @@ export const AccordionWidget: React.FC<{
   title?: string;
   defaultOpen?: boolean;
   content?: SlotComponent;
-}> = ({ title, defaultOpen, content: Content }) => (
-  <CollapsibleSection
-    title={title || "Section"}
-    defaultOpen={defaultOpen !== false}
-    compact
-  >
-    {Content ? <Content style={slotStack} /> : null}
-  </CollapsibleSection>
-);
+}> = ({ title, defaultOpen, content: Content }) => {
+  const { t } = useTranslation("applications");
+  return (
+    <CollapsibleSection
+      title={title || t("widget.section")}
+      defaultOpen={defaultOpen !== false}
+      compact
+    >
+      {Content ? <Content style={slotStack} /> : null}
+    </CollapsibleSection>
+  );
+};

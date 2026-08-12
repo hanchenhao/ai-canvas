@@ -4,6 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import type React from "react";
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import DataObjectIcon from "@mui/icons-material/DataObject";
@@ -14,8 +15,8 @@ import { MOTION, BORDER_RADIUS } from "../ui_primitives";
 
 interface QuickStart {
   icon: React.ReactNode;
-  label: string;
-  prompt: string;
+  labelKey: string;
+  promptKey: string;
 }
 
 interface AssistantQuickStartsProps {
@@ -23,31 +24,28 @@ interface AssistantQuickStartsProps {
   onQuickStart: (prompt: string) => void;
 }
 
-const buildQuickStarts = (propertyName: string): QuickStart[] => {
-  const target = `the "${propertyName}" value`;
-  return [
-    {
-      icon: <AutoFixHighIcon />,
-      label: "Draft a prompt from scratch",
-      prompt: `Draft ${target} from scratch. Ask me about the goal and audience if you need to, then write a clear, well-structured prompt.`
-    },
-    {
-      icon: <DataObjectIcon />,
-      label: "Add input variables",
-      prompt: `Rewrite ${target} to use {{ variable }} placeholders for the key inputs so it works as a reusable template.`
-    },
-    {
-      icon: <NotesIcon />,
-      label: "Make it more concise",
-      prompt: `Make ${target} more concise without losing any important instructions or constraints.`
-    },
-    {
-      icon: <ArticleOutlinedIcon />,
-      label: "Add a system role & sections",
-      prompt: `Restructure ${target} with a clear system role and labeled sections (context, task, constraints, output format).`
-    }
-  ];
-};
+const QUICK_STARTS: QuickStart[] = [
+  {
+    icon: <AutoFixHighIcon />,
+    labelKey: "quickStart.draftFromScratch",
+    promptKey: "quickStart.draftFromScratchPrompt"
+  },
+  {
+    icon: <DataObjectIcon />,
+    labelKey: "quickStart.addInputVariables",
+    promptKey: "quickStart.addInputVariablesPrompt"
+  },
+  {
+    icon: <NotesIcon />,
+    labelKey: "quickStart.makeConcise",
+    promptKey: "quickStart.makeConcisePrompt"
+  },
+  {
+    icon: <ArticleOutlinedIcon />,
+    labelKey: "quickStart.addSystemRole",
+    promptKey: "quickStart.addSystemRolePrompt"
+  }
+];
 
 const styles = (theme: Theme) =>
   css({
@@ -140,8 +138,9 @@ const AssistantQuickStarts = ({
   propertyName,
   onQuickStart
 }: AssistantQuickStartsProps) => {
+  const { t } = useTranslation("chat");
   const theme = useTheme();
-  const quickStarts = buildQuickStarts(propertyName);
+  const target = `the "${propertyName}" value`;
 
   return (
     <div className="assistant-quick-starts" css={styles(theme)}>
@@ -149,23 +148,22 @@ const AssistantQuickStarts = ({
         <div className="hero-badge">
           <AutoAwesomeIcon />
         </div>
-        <h3 className="hero-title">Write this prompt with AI</h3>
+        <h3 className="hero-title">{t("quickStart.title")}</h3>
         <p className="hero-text">
-          Describe what you want, or start from one of these. Drafts drop
-          straight into the editor.
+          {t("quickStart.subtitle")}
         </p>
       </div>
-      <span className="quick-label">Quick starts</span>
+      <span className="quick-label">{t("quickStart.quickStarts")}</span>
       <div className="quick-list">
-        {quickStarts.map((item) => (
+        {QUICK_STARTS.map((item) => (
           <button
-            key={item.label}
+            key={item.labelKey}
             type="button"
             className="quick-item"
-            onClick={() => onQuickStart(item.prompt)}
+            onClick={() => onQuickStart(t(item.promptKey, { target }))}
           >
             <span className="quick-icon">{item.icon}</span>
-            <span className="quick-text">{item.label}</span>
+            <span className="quick-text">{t(item.labelKey)}</span>
             <span className="quick-arrow">
               <ChevronRightIcon />
             </span>
