@@ -158,7 +158,7 @@ function GraphInner() {
         setError(String(err));
       }
     })();
-  }, [workflowId, searchParams]);
+  }, [workflowId, searchParams, t]);
 
   // Fit view once nodes are initialized
   useEffect(() => {

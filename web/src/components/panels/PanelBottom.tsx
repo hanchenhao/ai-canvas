@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 
 import {
   Tooltip,
@@ -407,6 +408,7 @@ const PanelBodyContent = memo(function PanelBodyContent({
 }: {
   activeView: BottomPanelView;
 }) {
+  const { t } = useTranslation(["canvas"]);
   const currentWorkflowId = useWorkflowManager((state) => state.currentWorkflowId);
   const activeNodeStore = useWorkflowManager((state) =>
     state.currentWorkflowId
@@ -459,7 +461,7 @@ const PanelBodyContent = memo(function PanelBodyContent({
             padding: "0 1em"
           }}
         >
-          <PanelHeadline title="Queue" docsTopic="debugging" />
+          <PanelHeadline title={t("canvas:panel.queue")} docsTopic="debugging" />
           <QueuePanel />
         </FlexColumn>
       );
@@ -493,6 +495,7 @@ const PanelBodyContent = memo(function PanelBodyContent({
 
 const PanelBottom: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation(["canvas"]);
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const path = useLocation().pathname;
   const {
@@ -589,7 +592,7 @@ const PanelBottom: React.FC = () => {
             onMouseDown={handleMouseDown}
             style={{ cursor: "ns-resize" }}
             role="slider"
-            aria-label="Resize panel"
+            aria-label={t("canvas:panel.resize")}
             aria-valuenow={panelSize}
             aria-valuemin={40}
             aria-valuemax={600}
@@ -601,13 +604,21 @@ const PanelBottom: React.FC = () => {
             <div
               className="status-cluster"
               role="status"
-              aria-label={`Worker ${isConnected ? "connected" : "disconnected"}`}
+              aria-label={
+                isConnected
+                  ? t("canvas:panel.workerConnected")
+                  : t("canvas:panel.workerDisconnected")
+              }
             >
               <span
                 className={`status-dot ${isConnected ? "" : "disconnected"}`}
                 aria-hidden
               />
-              <span>{isConnected ? "connected" : "offline"}</span>
+              <span>
+                {isConnected
+                  ? t("canvas:panel.connected")
+                  : t("canvas:panel.offline")}
+              </span>
               <span className="sep" aria-hidden>·</span>
               <span>{workerLabel}</span>
               <WorkerStatusIndicator />
@@ -623,14 +634,14 @@ const PanelBottom: React.FC = () => {
                 />
               ))}
             </div>
-            <div className="meta-cluster" aria-label="Workflow stats">
+            <div className="meta-cluster" aria-label={t("canvas:panel.workflowStats")}>
               {currentWorkflowId && (
                 <span className="meta-pair">
                   <span className="meta-value">{nodeCount}</span>
-                  <span className="meta-key">nodes</span>
+                  <span className="meta-key">{t("canvas:panel.nodes")}</span>
                   <span className="sep" aria-hidden>·</span>
                   <span className="meta-value">{edgeCount}</span>
-                  <span className="meta-key">edges</span>
+                  <span className="meta-key">{t("canvas:panel.edges")}</span>
                 </span>
               )}
               {systemStats && (

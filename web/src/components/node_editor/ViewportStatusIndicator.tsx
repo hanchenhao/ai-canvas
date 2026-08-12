@@ -1,4 +1,5 @@
 import { memo, useCallback, useMemo, useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   Tooltip,
@@ -37,6 +38,7 @@ const ViewportStatusIndicator: React.FC<ViewportStatusIndicatorProps> = ({
   visible = true
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["canvas"]);
   const zoom = useStore((s) => s.transform[2]);
   const { zoomTo, fitView } = useReactFlow();
   const [zoomMenuAnchor, setZoomMenuAnchor] = useState<HTMLElement | null>(
@@ -207,7 +209,7 @@ const ViewportStatusIndicator: React.FC<ViewportStatusIndicatorProps> = ({
             <Box>
               <Box>{getShortcutTooltip("resetZoom")}</Box>
               <Box sx={{ mt: 0.5, fontSize: "var(--fontSizeSmaller)", opacity: 0.8 }}>
-                Click for zoom presets
+                {t("canvas:viewport.clickForPresets")}
               </Box>
             </Box>
           }

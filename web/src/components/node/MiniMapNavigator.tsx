@@ -2,6 +2,7 @@
 import { memo, useMemo, useState, useCallback } from "react";
 import { MiniMap, Node } from "@xyflow/react";
 import { useTheme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import { useIsDarkMode } from "../../hooks/useIsDarkMode";
 import { useMiniMapStore } from "../../stores/MiniMapStore";
 import {
@@ -38,6 +39,7 @@ const minimapStyle = {
 
 const MiniMapNavigator: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation(["canvas"]);
   const isDarkMode = useIsDarkMode();
   const visible = useMiniMapStore((state) => state.visible);
   const colorMode = useMiniMapStore((state) => state.colorMode);
@@ -189,7 +191,7 @@ const MiniMapNavigator: React.FC = () => {
           >
             {colorMode === "type" && showLegend && (
               <ToolbarIconButton
-                title="Node Type Legend"
+                title={t("canvas:minimap.nodeTypeLegend")}
                 size="small"
                 onClick={handleOpenLegend}
                 sx={{
@@ -206,7 +208,7 @@ const MiniMapNavigator: React.FC = () => {
               </ToolbarIconButton>
             )}
             <ToolbarIconButton
-              title="Color Mode Settings"
+              title={t("canvas:minimap.colorModeSettings")}
               size="small"
               onClick={handleOpenSettings}
               sx={{

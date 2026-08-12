@@ -808,6 +808,7 @@ MobilePanelLeft.displayName = "MobilePanelLeft";
 const PanelLeft: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { t } = useTranslation(["canvas"]);
   const location = useLocation();
   const { activeTabType, activeTabMode } = useWorkspaceTabsStore(
     useShallow((state) => {
@@ -935,7 +936,7 @@ const PanelLeft: React.FC = () => {
             ref={panelRef}
             className={`drawer-content ${isDragging ? "dragging" : ""}`}
             role="region"
-            aria-label="Left panel"
+            aria-label={t("canvas:panel.leftPanel")}
             style={{
               width: `${Math.max(
                 panelSize - TOOLBAR_WIDTH,
@@ -963,7 +964,7 @@ const PanelLeft: React.FC = () => {
               className="panel-resize-handle"
               onMouseDown={handleMouseDown}
               role="slider"
-              aria-label="Resize panel"
+              aria-label={t("canvas:panel.resize")}
               aria-valuenow={panelSize}
               aria-valuemin={60}
               aria-valuemax={800}

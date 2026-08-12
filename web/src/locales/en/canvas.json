@@ -1,0 +1,34 @@
+{
+  "panel": {
+    "inspector": "Inspector",
+    "queue": "Queue",
+    "leftPanel": "Left panel",
+    "resize": "Resize panel",
+    "workflowStats": "Workflow stats",
+    "workerConnected": "Worker connected",
+    "workerDisconnected": "Worker disconnected",
+    "connected": "connected",
+    "offline": "offline",
+    "nodes": "nodes",
+    "edges": "edges"
+  },
+  "toolbar": {
+    "moveChatDock": "Move chat dock"
+  },
+  "viewport": {
+    "clickForPresets": "Click for zoom presets"
+  },
+  "minimap": {
+    "nodeTypeLegend": "Node Type Legend",
+    "colorModeSettings": "Color Mode Settings"
+  },
+  "queue": {
+    "stopRun": "Stop run",
+    "showOnCanvas": "Show run on canvas",
+    "removeFromQueue": "Remove from queue",
+    "expand": "Expand queue",
+    "collapse": "Collapse queue",
+    "queue": "Queue",
+    "queued": "{{count}} queued"
+  }
+}

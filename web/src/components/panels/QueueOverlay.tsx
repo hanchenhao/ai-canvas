@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from "@emotion/react";
 import { useTheme, type Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Box,
@@ -162,6 +163,7 @@ const RunningCard = memo(function RunningCard({
   onFocusJob?: (jobId: string) => void;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation(["canvas"]);
   const name = useJobName(job);
   const elapsed = formatClock(job.started_at, now);
   const handleFocus = useCallback(() => onFocusJob?.(job.id), [onFocusJob, job.id]);
@@ -218,7 +220,7 @@ const RunningCard = memo(function RunningCard({
         >
           <IconButton
             icon={<CloseIcon sx={{ fontSize: 15 }} />}
-            label="Stop run"
+            label={t("canvas:queue.stopRun")}
             onClick={() => onCancel(job.id)}
             hoverColor="error.main"
           />
@@ -235,7 +237,7 @@ const RunningCard = memo(function RunningCard({
       <Box
         role="button"
         tabIndex={0}
-        aria-label="Show run on canvas"
+        aria-label={t("canvas:queue.showOnCanvas")}
         aria-pressed={isFocused}
         onClick={handleFocus}
         onKeyDown={(e: React.KeyboardEvent) => {
@@ -274,6 +276,7 @@ const EnqueuedCard = memo(function EnqueuedCard({
   index: number;
   onCancel: (id: string) => void;
 }) {
+  const { t } = useTranslation(["canvas"]);
   const name = useJobName(job);
   return (
     <Box sx={cardSx}>
@@ -287,7 +290,7 @@ const EnqueuedCard = memo(function EnqueuedCard({
         </Text>
         <IconButton
           icon={<CloseIcon sx={{ fontSize: 15 }} />}
-          label="Remove from queue"
+          label={t("canvas:queue.removeFromQueue")}
           onClick={() => onCancel(job.id)}
           hoverColor="error.main"
         />
@@ -392,6 +395,7 @@ const SingleName = memo(function SingleName({ job }: { job: Job }) {
  */
 const QueueOverlay = memo(function QueueOverlay() {
   const theme = useTheme();
+  const { t } = useTranslation(["canvas"]);
   const queryClient = useQueryClient();
   const { data: jobs } = useRunningJobs();
   const [expanded, setExpanded] = useState(false);
@@ -505,7 +509,7 @@ const QueueOverlay = memo(function QueueOverlay() {
               ) : running.length ? (
                 `${running.length} jobs running`
               ) : (
-                "Queue"
+                t("canvas:queue.queue")
               )}
             </Text>
             {single && (
@@ -513,7 +517,7 @@ const QueueOverlay = memo(function QueueOverlay() {
             )}
             <IconButton
               icon={<KeyboardArrowDownIcon sx={{ fontSize: 18 }} />}
-              label="Expand queue"
+              label={t("canvas:queue.expand")}
               onClick={() => setExpanded(true)}
             />
           </FlexRow>
@@ -521,7 +525,7 @@ const QueueOverlay = memo(function QueueOverlay() {
           {queued.length > 0 && (
             <FlexRow align="center" gap={0.5} sx={{ color: "text.secondary" }}>
               <ScheduleIcon sx={{ fontSize: 13 }} />
-              <Text size="smaller" color="secondary">{queued.length} queued
+              <Text size="smaller" color="secondary">{t("canvas:queue.queued", { count: queued.length })}
                             </Text>
             </FlexRow>
           )}
@@ -535,7 +539,7 @@ const QueueOverlay = memo(function QueueOverlay() {
       <FlexRow align="center" gap={1} sx={{ px: 2, py: 1.5, flex: "0 0 auto" }}>
         <LayersIcon sx={{ fontSize: 17, color: "text.secondary" }} />
         <Text size="normal" weight={600} sx={{ flex: 1 }}>
-          Queue
+          {t("canvas:queue.queue")}
         </Text>
         <FlexRow align="center" gap={1.25}>
           <HeaderCount
@@ -549,7 +553,7 @@ const QueueOverlay = memo(function QueueOverlay() {
         </FlexRow>
         <IconButton
           icon={<RemoveIcon sx={{ fontSize: 16 }} />}
-          label="Collapse queue"
+          label={t("canvas:queue.collapse")}
           onClick={() => setExpanded(false)}
         />
       </FlexRow>

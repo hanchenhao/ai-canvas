@@ -265,7 +265,7 @@ const FloatingToolBar: React.FC = memo(function FloatingToolBar() {
   const location = useLocation();
   const path = location.pathname;
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation(["common", "canvas"]);
 
   const {
     paneMenuOpen,
@@ -468,7 +468,7 @@ const FloatingToolBar: React.FC = memo(function FloatingToolBar() {
       <span
         role="button"
         tabIndex={-1}
-        aria-label="Move chat dock"
+        aria-label={t("canvas:toolbar.moveChatDock")}
         className="dock-drag-handle composer-drag-handle"
         onDoubleClick={resetPosition}
       >

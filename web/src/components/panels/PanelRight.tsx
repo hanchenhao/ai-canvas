@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import Inspector from "../Inspector";
 import { useResizeRightPanel } from "../../hooks/handlers/useResizeRightPanel";
 import { useRightPanelStore } from "../../stores/RightPanelStore";
@@ -133,6 +134,7 @@ const InspectorVisibilitySync = memo(function InspectorVisibilitySync({
 
 const PanelRight: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation(["canvas"]);
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const {
     ref: panelRef,
@@ -208,8 +210,8 @@ const PanelRight: React.FC = () => {
         <MobileBottomSheet
           open={isVisible}
           onClose={handleMobileSheetClose}
-          title="Inspector"
-          ariaLabel="Inspector panel"
+          title={t("canvas:panel.inspector")}
+          ariaLabel={t("canvas:panel.inspector")}
         >
           <FlexColumn
             sx={{
@@ -244,7 +246,7 @@ const PanelRight: React.FC = () => {
             className="panel-button"
             onMouseDown={handleMouseDown}
             role="slider"
-            aria-label="Resize panel"
+            aria-label={t("canvas:panel.resize")}
             aria-valuenow={panelSize}
             aria-valuemin={60}
             aria-valuemax={600}

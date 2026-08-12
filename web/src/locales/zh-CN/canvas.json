@@ -1,0 +1,34 @@
+{
+  "panel": {
+    "inspector": "检查器",
+    "queue": "队列",
+    "leftPanel": "左侧面板",
+    "resize": "调整面板大小",
+    "workflowStats": "工作流统计",
+    "workerConnected": "Worker 已连接",
+    "workerDisconnected": "Worker 已断开",
+    "connected": "已连接",
+    "offline": "离线",
+    "nodes": "节点",
+    "edges": "连线"
+  },
+  "toolbar": {
+    "moveChatDock": "移动对话面板"
+  },
+  "viewport": {
+    "clickForPresets": "点击查看缩放预设"
+  },
+  "minimap": {
+    "nodeTypeLegend": "节点类型图例",
+    "colorModeSettings": "配色模式设置"
+  },
+  "queue": {
+    "stopRun": "停止运行",
+    "showOnCanvas": "在画布上显示运行",
+    "removeFromQueue": "从队列中移除",
+    "expand": "展开队列",
+    "collapse": "折叠队列",
+    "queue": "队列",
+    "queued": "{{count}} 个已排队"
+  }
+}
