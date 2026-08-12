@@ -1,0 +1,41 @@
+name: Dependency Security Report
+
+on:
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: brainvite-security
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    name: npm audit report
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Generate audit report
+        shell: bash
+        run: |
+          npm audit --omit=optional --json > npm-audit.json || true
+          node -e 'const r=require("./npm-audit.json"); const v=r.metadata?.vulnerabilities ?? {}; console.log(`## Dependency audit\n\n- Critical: ${v.critical ?? 0}\n- High: ${v.high ?? 0}\n- Moderate: ${v.moderate ?? 0}\n- Low: ${v.low ?? 0}`)' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload full report
+        uses: actions/upload-artifact@v7
+        with:
+          name: npm-audit-${{ github.run_id }}
+          path: npm-audit.json
+          retention-days: 14

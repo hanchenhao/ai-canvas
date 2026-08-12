@@ -1,0 +1,79 @@
+name: BrainVite Desktop CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: brainvite-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Verify product build
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CI: "true"
+      ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
+      npm_config_onnxruntime_node_install_cuda: skip
+      NODE_OPTIONS: --max-old-space-size=4096
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install native build libraries
+        run: sudo apt-get update && sudo apt-get install -y libsecret-1-dev
+
+      - name: Verify lockfile
+        run: npm ci --no-audit --no-fund
+
+      - name: Verify BrainVite product links
+        run: npm run check:brand-boundary
+
+      - name: Build backend packages
+        run: npm run build:packages
+
+      - name: Type-check product packages
+        run: |
+          npm run typecheck --workspace=web
+          npm run lint --workspace=packages/websocket
+          npm run typecheck --workspace=electron
+
+      - name: Lint web product
+        run: npm run lint --workspace=web
+
+      - name: Test changed infrastructure
+        run: |
+          npm run test --workspace=packages/config
+          npm run test --workspace=packages/storage
+          npm run test --workspace=packages/websocket
+
+      - name: Test web product
+        run: npm run test --workspace=web -- --runInBand
+
+      - name: Test desktop shell
+        run: npm run test --workspace=electron -- --runInBand
+
+      - name: Build web app
+        run: npm run build --workspace=web
+
+      - name: Confirm production build exists
+        run: |
+          test -f web/dist/index.html
+          if grep -R -E "nodetool\\.ai|github\\.com/nodetool-ai|discord\\.gg/WmQTWZRcYE" web/dist --exclude='*.map'; then
+            echo "Upstream product link found in the production build"
+            exit 1
+          fi
