@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, memo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { shallow } from "zustand/shallow";
 
 import { useVirtualizer } from "@tanstack/react-virtual";
@@ -42,6 +43,7 @@ import { useCodeGenFromHandle } from "../../hooks/useCodeGenFromHandle";
 const NODE_ROW_HEIGHT = 28;
 
 const OutputContextMenu: React.FC = () => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const {
     nodeId,
@@ -478,14 +480,15 @@ const OutputContextMenu: React.FC = () => {
     return () => window.clearTimeout(timeout);
   }, [menuPosition, autoFocusEnabled]);
 
-  const saveLabel = `Save${
-    sourceType?.type === "string"
-      ? "Text"
-      : sourceType?.type_name
-      ? sourceType.type_name?.charAt(0).toUpperCase() +
-        sourceType.type_name?.slice(1)
-      : ""
-  }`;
+  const saveLabel = t("contextMenu.output.save", {
+    type:
+      sourceType?.type === "string"
+        ? "Text"
+        : sourceType?.type_name
+        ? sourceType.type_name?.charAt(0).toUpperCase() +
+          sourceType.type_name?.slice(1)
+        : ""
+  });
   const showStaticActions = searchTerm.trim().length === 0;
 
   // Shared by every action row: serialize the sx object once, not once per row per render.
@@ -559,12 +562,12 @@ const OutputContextMenu: React.FC = () => {
             inputRef={searchInputRef}
             size="small"
             fullWidth
-            placeholder="Search nodes..."
+            placeholder={t("contextMenu.output.searchPlaceholder")}
             value={searchTerm}
             onChange={handleSearchChange}
             onClick={(event) => event.stopPropagation()}
             onKeyDown={handleSearchKeyDown}
-            aria-label="Search connectable nodes"
+            aria-label={t("contextMenu.output.searchAriaLabel")}
             sx={{
               "& .MuiOutlinedInput-root": {
                 backgroundColor: "action.disabledBackground",
@@ -598,7 +601,7 @@ const OutputContextMenu: React.FC = () => {
                 endAdornment: searchTerm ? (
                   <InputAdornment position="end">
                     <ToolbarIconButton
-                      aria-label="clear search"
+                      aria-label={t("contextMenu.output.clearSearch")}
                       onClick={handleClearSearch}
                       size="small"
                       icon={<ClearIcon sx={{ fontSize: 16 }} />}
@@ -623,7 +626,7 @@ const OutputContextMenu: React.FC = () => {
                 <span className="icon-bg">
                   <DeleteOutlineIcon />
                 </span>
-                <Text size="small">Delete output</Text>
+                <Text size="small">{t("contextMenu.output.deleteOutput")}</Text>
               </Box>
             </Box>
             <Divider />
@@ -639,7 +642,7 @@ const OutputContextMenu: React.FC = () => {
             sx={actionRowStyles}
           >
             <span className="icon-bg"><VisibilityIcon /></span>
-            <Text size="small">Preview</Text>
+            <Text size="small">{t("contextMenu.output.preview")}</Text>
           </Box>
           {outputNodeMetadata != null && (
             <Box
@@ -650,7 +653,7 @@ const OutputContextMenu: React.FC = () => {
               sx={actionRowStyles}
             >
               <span className="icon-bg"><DataObjectIcon /></span>
-              <Text size="small">Output</Text>
+              <Text size="small">{t("contextMenu.output.output")}</Text>
             </Box>
           )}
           <Box
@@ -661,7 +664,7 @@ const OutputContextMenu: React.FC = () => {
             sx={actionRowStyles}
           >
             <span className="icon-bg"><AltRouteIcon /></span>
-            <Text size="small">Reroute</Text>
+            <Text size="small">{t("contextMenu.output.reroute")}</Text>
           </Box>
             {saveNodeMetadata != null && (
               <Box
@@ -684,7 +687,7 @@ const OutputContextMenu: React.FC = () => {
                 sx={actionRowStyles}
               >
                 <span className="icon-bg"><AutoAwesomeIcon /></span>
-                <Text size="small">Transform this output…</Text>
+                <Text size="small">{t("contextMenu.output.transformWithAI")}</Text>
               </Box>
             )}
           </Box>
@@ -714,7 +717,7 @@ const OutputContextMenu: React.FC = () => {
           {rankedConnectableNodes.length === 0 ? (
             <Box sx={{ p: 2, textAlign: "center", color: "text.secondary" }}>
               <Text size="small">
-                No nodes match &quot;{searchTerm}&quot;.
+                {t("contextMenu.output.noNodesMatch", { term: searchTerm })}
               </Text>
             </Box>
           ) : (

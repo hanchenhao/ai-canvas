@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 //mui
 
 import {
@@ -57,6 +58,7 @@ function resolvePropertyMenuTargetNodeIds(
 }
 
 const PropertyContextMenuComponent: React.FC = () => {
+  const { t } = useTranslation("canvas");
   const { writeClipboard } = useClipboard();
   const addNotification = useNotificationStore(
     (state) => state.addNotification
@@ -229,18 +231,18 @@ const PropertyContextMenuComponent: React.FC = () => {
           await writeClipboard(serialized, true);
           addNotification({
             type: "success",
-            content: "Value copied to clipboard"
+            content: t("contextMenu.property.valueCopied")
           });
         } catch {
           addNotification({
             type: "error",
-            content: "Failed to copy to clipboard"
+            content: t("contextMenu.property.copyFailed")
           });
         }
       } else {
         addNotification({
           type: "warning",
-          content: "No value to copy"
+          content: t("contextMenu.property.noValueToCopy")
         });
       }
     }
@@ -308,7 +310,7 @@ const PropertyContextMenuComponent: React.FC = () => {
       position={menuPosition}
     >
       <MenuItem disabled>
-        <Text>Property</Text>
+        <Text>{t("contextMenu.property.property")}</Text>
       </MenuItem>
 
       {description && description.length > 0 && (
@@ -335,14 +337,14 @@ const PropertyContextMenuComponent: React.FC = () => {
       <Divider />
       <ContextMenuItem
         onClick={handleCopyValue}
-        label="Copy Value"
+        label={t("contextMenu.property.copyValue")}
         addButtonClassName="copy-value"
         IconComponent={<ContentCopyIcon />}
-        tooltip="Copy property value to clipboard"
+        tooltip={t("contextMenu.property.copyValueTooltip")}
       />
       <ContextMenuItem
         onClick={handleReset}
-        label="Reset To Default Value"
+        label={t("contextMenu.property.resetToDefault")}
         addButtonClassName="reset"
         IconComponent={<SettingsBackupRestoreIcon />}
         tooltip={getShortcutTooltip("resetDefault")}
@@ -354,34 +356,34 @@ const PropertyContextMenuComponent: React.FC = () => {
             onClick={handleToggleExposedInput}
             label={
               isExposedHandle
-                ? "Hide Input Handle (Top)"
-                : "Show As Input Handle (Top)"
+                ? t("contextMenu.property.hideInputHandle")
+                : t("contextMenu.property.showInputHandle")
             }
             addButtonClassName="toggle-exposed-input"
             IconComponent={<ArrowForwardIcon />}
             tooltip={
               isExposedHandle
                 ? isConnected
-                  ? "Hide top input handle (disconnects edge)"
-                  : "Hide top input handle"
-                : "Show as handle on the left/top of the node (no label)"
+                  ? t("contextMenu.property.hideInputHandleDisconnectTooltip")
+                  : t("contextMenu.property.hideInputHandleTooltip")
+                : t("contextMenu.property.showInputHandleTooltip")
             }
           />
           <ContextMenuItem
             onClick={handleToggleExposedInputLabeled}
             label={
               isExposedLabeled
-                ? "Hide Labeled Input (Bottom)"
-                : "Show Labeled Input (Bottom)"
+                ? t("contextMenu.property.hideLabeledInput")
+                : t("contextMenu.property.showLabeledInput")
             }
             addButtonClassName="toggle-exposed-input-labeled"
             IconComponent={<ArrowForwardIcon />}
             tooltip={
               isExposedLabeled
                 ? isConnected
-                  ? "Hide labeled input at bottom (disconnects edge)"
-                  : "Hide labeled input at bottom"
-                : "Show input at bottom with parameter title and editor"
+                  ? t("contextMenu.property.hideLabeledInputDisconnectTooltip")
+                  : t("contextMenu.property.hideLabeledInputTooltip")
+                : t("contextMenu.property.showLabeledInputTooltip")
             }
           />
         </>
@@ -390,7 +392,7 @@ const PropertyContextMenuComponent: React.FC = () => {
       {isDynamicProperty && <Divider />}
       {slotTypeOptions !== null && (
         <MenuItem disabled>
-          <Text size="small">Slot Type</Text>
+          <Text size="small">{t("contextMenu.property.slotType")}</Text>
         </MenuItem>
       )}
       {slotTypeOptions?.map((option) => (
@@ -402,16 +404,19 @@ const PropertyContextMenuComponent: React.FC = () => {
             option
           )}`}
           IconComponent={<CategoryIcon />}
-          tooltip={`Declare "${propertyName}" as ${slotTypeLabel(option)}`}
+          tooltip={t("contextMenu.property.declareSlotType", {
+            name: propertyName,
+            type: slotTypeLabel(option)
+          })}
         />
       ))}
       {isDynamicProperty && (
         <ContextMenuItem
           onClick={handleRemoveDynamicProperty}
-          label="Remove Dynamic Property"
+          label={t("contextMenu.property.removeDynamicProperty")}
           addButtonClassName="remove-dynamic-property"
           IconComponent={<DeleteIcon />}
-          tooltip="Remove this property from being dynamic"
+          tooltip={t("contextMenu.property.removeDynamicPropertyTooltip")}
         />
       )}
     </ContextMenu>

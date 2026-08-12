@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, memo } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   Text,
@@ -43,6 +44,7 @@ interface SelectionContextMenuProps {
 }
 
 const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
+  const { t } = useTranslation(["canvas", "common"]);
   const { handleCopy, handleCut } = useCopyPaste();
   const { deleteNodes, toggleBypassSelected } = useNodes((state) => ({
     deleteNodes: state.deleteNodes,
@@ -197,17 +199,17 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
             padding: "0"
           }}
         >
-          SELECTION
+          {t("canvas:contextMenu.selection.selection")}
         </Text>
       </MenuItem>
 
       <ContextMenuItem
         onClick={handleDuplicateNodes}
-        label="Duplicate"
+        label={t("canvas:contextMenu.duplicate")}
         IconComponent={<QueueIcon />}
         tooltip={
           <div className="tooltip-span">
-            <div className="tooltip-title">Duplicate</div>
+            <div className="tooltip-title">{t("canvas:contextMenu.duplicate")}</div>
             <div className="tooltip-key">
               <kbd>CTRL</kbd>+<kbd>D</kbd> / <kbd>⌘</kbd>+<kbd>D</kbd>
             </div>
@@ -216,11 +218,11 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
       />
       <ContextMenuItem
         onClick={handleCopyNodes}
-        label="Copy"
+        label={t("canvas:contextMenu.copy")}
         IconComponent={<CopyAllIcon />}
         tooltip={
           <div className="tooltip-span">
-            <div className="tooltip-title">Copy</div>
+            <div className="tooltip-title">{t("canvas:contextMenu.copy")}</div>
             <div className="tooltip-key">
               <kbd>CTRL</kbd>+<kbd>C</kbd> / <kbd>⌘</kbd>+<kbd>C</kbd>
             </div>
@@ -229,11 +231,11 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
       />
       <ContextMenuItem
         onClick={handleCutNodes}
-        label="Cut"
+        label={t("canvas:contextMenu.cut")}
         IconComponent={<ContentCutIcon />}
         tooltip={
           <div className="tooltip-span">
-            <div className="tooltip-title">Cut</div>
+            <div className="tooltip-title">{t("canvas:contextMenu.cut")}</div>
             <div className="tooltip-key">
               <kbd>CTRL</kbd>+<kbd>X</kbd> / <kbd>⌘</kbd>+<kbd>X</kbd>
             </div>
@@ -242,18 +244,18 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
       />
       <ContextMenuItem
         onClick={handleRunSelected}
-        label="Run Selected"
+        label={t("canvas:contextMenu.selection.runSelected")}
         IconComponent={<PlayArrowIcon />}
-        tooltip="Run the selected nodes as their own job"
+        tooltip={t("canvas:contextMenu.selection.runSelectedTooltip")}
       />
       {selectedNodes?.length > 1 && (
         <ContextMenuItem
           onClick={handleAlignNodesFalse}
-          label="Align"
+          label={t("canvas:contextMenu.selection.align")}
           IconComponent={<FormatAlignLeftIcon />}
           tooltip={
             <div className="tooltip-span">
-              <div className="tooltip-title">Align</div>
+              <div className="tooltip-title">{t("canvas:contextMenu.selection.align")}</div>
               <div className="tooltip-key">
                 <kbd>A</kbd>
               </div>
@@ -264,11 +266,11 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
       {selectedNodes?.length > 1 && (
         <ContextMenuItem
           onClick={handleAlignNodesTrue}
-          label="Arrange"
+          label={t("canvas:contextMenu.selection.arrange")}
           IconComponent={<FormatAlignLeftIcon />}
           tooltip={
             <div className="tooltip-span">
-              <div className="tooltip-title">Arrange</div>
+              <div className="tooltip-title">{t("canvas:contextMenu.selection.arrange")}</div>
               <div className="tooltip-key">
                 <kbd>SHIFT</kbd>+<kbd>A</kbd>
               </div>
@@ -279,12 +281,12 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
 
       <ContextMenuItem
         onClick={handleToggleBypass}
-        label={majorityBypassed ? "Enable All" : "Bypass All"}
+        label={majorityBypassed ? t("canvas:contextMenu.selection.enableAll") : t("canvas:contextMenu.selection.bypassAll")}
         IconComponent={<BlockIcon />}
         tooltip={
           <div className="tooltip-span">
             <div className="tooltip-title">
-              {majorityBypassed ? "Enable Nodes" : "Bypass Nodes"}
+              {majorityBypassed ? t("canvas:contextMenu.selection.enableNodes") : t("canvas:contextMenu.selection.bypassNodes")}
             </div>
             <div className="tooltip-key">
               <kbd>B</kbd>
@@ -295,11 +297,11 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
 
       <ContextMenuItem
         onClick={handleToggleCollapsed}
-        label="Collapse / Expand"
+        label={t("canvas:contextMenu.selection.collapseExpand")}
         IconComponent={<UnfoldLessIcon />}
         tooltip={
           <div className="tooltip-span">
-            <div className="tooltip-title">Collapse / Expand</div>
+            <div className="tooltip-title">{t("canvas:contextMenu.selection.collapseExpand")}</div>
             <div className="tooltip-key">
               <kbd>C</kbd>
             </div>
@@ -310,11 +312,11 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
       {!anyHasParent && (
         <ContextMenuItem
           onClick={handleSurroundWithGroup}
-          label="Surround With Group"
+          label={t("canvas:contextMenu.selection.surroundWithGroup")}
           IconComponent={<GroupWorkIcon />}
           tooltip={
             <div className="tooltip-span">
-              <div className="tooltip-title">Surround With Group</div>
+              <div className="tooltip-title">{t("canvas:contextMenu.selection.surroundWithGroup")}</div>
               <div className="tooltip-key">
                 <kbd>CTRL</kbd>/<kbd>⌘</kbd>+<kbd>G</kbd>
               </div>
@@ -328,9 +330,9 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
 
       <ContextMenuItem
         onClick={handleGroupIntoSubgraph}
-        label="Group into Subgraph"
+        label={t("canvas:contextMenu.groupIntoSubgraph")}
         IconComponent={<AccountTreeIcon />}
-        tooltip="Move the selected nodes into a new subgraph node"
+        tooltip={t("canvas:contextMenu.groupIntoSubgraphTooltip")}
         addButtonClassName={`action ${
           selectedNodes.length < 1 ? "disabled" : ""
         }`}
@@ -339,13 +341,13 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
       {anyHasParent && (
         <ContextMenuItem
           onClick={handleRemoveFromGroup}
-          label="Remove from Group"
+          label={t("canvas:contextMenu.removeFromGroup")}
           IconComponent={<GroupWorkIcon />}
           tooltip={
             <div className="tooltip-span">
-              <div className="tooltip-title">Remove from Group</div>
+              <div className="tooltip-title">{t("canvas:contextMenu.removeFromGroup")}</div>
               <div className="tooltip-key">
-                <kbd>Right-Click</kbd>
+                <kbd>{t("canvas:contextMenu.selection.rightClick")}</kbd>
               </div>
             </div>
           }
@@ -364,17 +366,17 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
             padding: "0"
           }}
         >
-          CONNECTED
+          {t("canvas:contextMenu.selection.connected")}
         </Text>
       </MenuItem>
 
       <ContextMenuItem
         onClick={handleSelectConnectedAll}
-        label="Select All Connected"
+        label={t("canvas:contextMenu.selection.selectAllConnected")}
         IconComponent={<CallSplitIcon />}
         tooltip={
           <div className="tooltip-span">
-            <div className="tooltip-title">Select All Connected</div>
+            <div className="tooltip-title">{t("canvas:contextMenu.selection.selectAllConnected")}</div>
             <div className="tooltip-key">
               <kbd>SHIFT</kbd>+<kbd>C</kbd>
             </div>
@@ -386,11 +388,11 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
       />
       <ContextMenuItem
         onClick={handleSelectConnectedInputs}
-        label="Select Inputs"
+        label={t("canvas:contextMenu.selection.selectInputs")}
         IconComponent={<ArrowBackIcon />}
         tooltip={
           <div className="tooltip-span">
-            <div className="tooltip-title">Select Inputs</div>
+            <div className="tooltip-title">{t("canvas:contextMenu.selection.selectInputs")}</div>
             <div className="tooltip-key">
               <kbd>SHIFT</kbd>+<kbd>I</kbd>
             </div>
@@ -402,11 +404,11 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
       />
       <ContextMenuItem
         onClick={handleSelectConnectedOutputs}
-        label="Select Outputs"
+        label={t("canvas:contextMenu.selection.selectOutputs")}
         IconComponent={<ArrowForwardIcon />}
         tooltip={
           <div className="tooltip-span">
-            <div className="tooltip-title">Select Outputs</div>
+            <div className="tooltip-title">{t("canvas:contextMenu.selection.selectOutputs")}</div>
             <div className="tooltip-key">
               <kbd>SHIFT</kbd>+<kbd>O</kbd>
             </div>
@@ -420,11 +422,11 @@ const SelectionContextMenu: React.FC<SelectionContextMenuProps> = () => {
       <Divider />
       <ContextMenuItem
         onClick={handleDelete}
-        label="Delete"
+        label={t("common:button.delete")}
         IconComponent={<RemoveCircleIcon />}
         tooltip={
           <div className="tooltip-span">
-            <div className="tooltip-title">Delete</div>
+            <div className="tooltip-title">{t("common:button.delete")}</div>
             <div className="tooltip-key">
               <kbd>Backspace</kbd> / <kbd>Del</kbd>
             </div>

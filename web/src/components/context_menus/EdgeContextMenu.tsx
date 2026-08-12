@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { shallow } from "zustand/shallow";
 import { ContextMenu } from "../ui_primitives";
 import ContextMenuItem from "./ContextMenuItem";
@@ -16,6 +17,7 @@ interface EdgeContextMenuProps {
 }
 
 const EdgeContextMenuComponent: React.FC<EdgeContextMenuProps> = () => {
+  const { t } = useTranslation("canvas");
   const menuPosition = useContextMenuStore((state) => state.menuPosition);
   const closeContextMenu = useContextMenuStore(
     (state) => state.closeContextMenu
@@ -118,13 +120,13 @@ const EdgeContextMenuComponent: React.FC<EdgeContextMenuProps> = () => {
       <ContextMenuItem
         onClick={handleInsertReroute}
         IconComponent={<RouteIcon />}
-        label="Insert Reroute"
-        tooltip="Insert a reroute node at this position"
+        label={t("contextMenu.edge.insertReroute")}
+        tooltip={t("contextMenu.edge.insertRerouteTooltip")}
       />
       <ContextMenuItem
         onClick={handleDeleteEdge}
         IconComponent={<DeleteIcon />}
-        label="Delete Edge"
+        label={t("contextMenu.edge.deleteEdge")}
         tooltip={
           <span
             style={{
@@ -133,11 +135,14 @@ const EdgeContextMenuComponent: React.FC<EdgeContextMenuProps> = () => {
               alignItems: "center"
             }}
           >
-            <span>Delete this connection</span>
+            <span>{t("contextMenu.edge.deleteThisConnection")}</span>
             <span style={{ textAlign: "center" }}>
-              <kbd>Middle Mouse Button</kbd> or select the edge and press{" "}
-              <kbd>Delete</kbd> or <kbd>Backspace</kbd>. Select many edges by
-              holding <kbd>CTRL</kbd> or <kbd>Meta</kbd> while clicking.
+              <kbd>{t("contextMenu.edge.middleMouseButton")}</kbd>{" "}
+              {t("contextMenu.edge.deleteHintSelect")}{" "}
+              <kbd>Delete</kbd> {t("contextMenu.edge.deleteHintOr")}{" "}
+              <kbd>Backspace</kbd>. {t("contextMenu.edge.deleteHintMultiPre")}{" "}
+              <kbd>CTRL</kbd> {t("contextMenu.edge.deleteHintOr")}{" "}
+              <kbd>Meta</kbd> {t("contextMenu.edge.deleteHintMultiPost")}
             </span>
           </span>
         }
