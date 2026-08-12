@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import type { RouterOutputs } from "../../trpc/client";
 import {
@@ -33,9 +34,9 @@ type Version = RouterOutputs["applications"]["versions"][number];
 type BudgetPeriod = RouterOutputs["applications"]["setBudget"]["period"];
 
 const PERIOD_OPTIONS = [
-  { value: "day", label: "Per day" },
-  { value: "month", label: "Per month" },
-  { value: "total", label: "Lifetime" }
+  { value: "day", labelKey: "budget.periodDay" },
+  { value: "month", labelKey: "budget.periodMonth" },
+  { value: "total", labelKey: "budget.periodTotal" }
 ] as const;
 
 const isBudgetPeriod = (value: string): value is BudgetPeriod =>
@@ -57,13 +58,21 @@ const parseLimit = (raw: string): ParsedLimit => {
     : { ok: false };
 };
 
-const LIMIT_HINT = "Enter a number of 0 or more, or leave empty for no limit.";
+const LIMIT_HINT_KEY = "budget.limitHint";
 
 /** "2 workflows · asset (read, create)" — what a release is allowed to touch. */
-const capabilitySummary = (version: Version): string => {
+const capabilitySummary = (
+  version: Version,
+  t: (key: string, opts?: Record<string, unknown>) => string
+): string => {
   const workflows = version.capabilities.workflows.length;
   const parts = [
-    workflows === 1 ? "1 workflow" : `${workflows} workflows`,
+    t(
+      workflows === 1
+        ? "versions.workflowCount"
+        : "versions.workflowCountOther",
+      { count: workflows }
+    ),
     ...version.capabilities.resources.map(
       (resource) => `${resource.kind} (${resource.operations.join(", ")})`
     )
@@ -82,6 +91,7 @@ const VersionRow = memo(function VersionRow({
   onRelease,
   releasing
 }: VersionRowProps) {
+  const { t } = useTranslation("applications");
   const handleRelease = useCallback(
     () => onRelease(version.version),
     [onRelease, version.version]
@@ -90,10 +100,12 @@ const VersionRow = memo(function VersionRow({
     <FlexRow align="center" justify="space-between" gap={2} fullWidth>
       <FlexColumn gap={0.5} sx={{ minWidth: 0 }}>
         <FlexRow align="center" gap={1}>
-          <Text weight={600}>{`Version ${version.version}`}</Text>
-          {version.released && <Chip label="Released" size="small" />}
+          <Text weight={600}>{t("version.versionN", { n: version.version })}</Text>
+          {version.released && (
+            <Chip label={t("version.released")} size="small" />
+          )}
         </FlexRow>
-        <Caption>{capabilitySummary(version)}</Caption>
+        <Caption>{capabilitySummary(version, t)}</Caption>
         <Caption>{formatDate(version.createdAt)}</Caption>
       </FlexColumn>
       {!version.released && (
@@ -103,7 +115,7 @@ const VersionRow = memo(function VersionRow({
           disabled={releasing}
           onClick={handleRelease}
         >
-          {`Roll back to version ${version.version}`}
+          {t("version.rollbackTo", { n: version.version })}
         </Button>
       )}
     </FlexRow>
@@ -117,6 +129,15 @@ interface BudgetSectionProps {
 const BudgetSection = memo(function BudgetSection({
   applicationId
 }: BudgetSectionProps) {
+  const { t } = useTranslation("applications");
+  const periodOptions = useMemo(
+    () =>
+      PERIOD_OPTIONS.map((o) => ({
+        value: o.value,
+        label: t(o.labelKey as `budget.${string}`)
+      })),
+    [t]
+  );
   const {
     data: budget,
     isLoading,
@@ -160,44 +181,43 @@ const BudgetSection = memo(function BudgetSection({
     });
   }, [applicationId, maxInvocations, maxUsd, period, setBudget]);
 
-  if (isLoading) return <LoadingSpinner text="Loading budget" />;
+  if (isLoading) return <LoadingSpinner text={t("loading.budget")} />;
 
   if (isError) {
     return (
       <AlertBanner severity="error">
-        {`Could not load the budget: ${error?.message ?? "try again later."}`}
+        {error?.message
+          ? t("error.loadBudget", { message: error.message })
+          : t("error.loadBudgetFallback")}
       </AlertBanner>
     );
   }
 
   return (
     <FlexColumn gap={SPACING.md} fullWidth>
-      <SectionHeader title="Spend budget" />
-      <Caption>
-        Runs of the released app are checked against this ceiling before they
-        reach a provider. An empty field means no limit.
-      </Caption>
+      <SectionHeader title={t("budget.title")} />
+      <Caption>{t("budget.description")}</Caption>
       <SelectField
-        label="Period"
+        label={t("budget.period")}
         value={period}
         onChange={handlePeriodChange}
-        options={PERIOD_OPTIONS}
+        options={periodOptions}
         size="small"
       />
       <TextInput
-        label="Max spend (USD)"
+        label={t("budget.maxSpend")}
         size="small"
         inputMode="decimal"
         value={maxUsd}
-        errorMessage={parsedUsd.ok ? undefined : LIMIT_HINT}
+        errorMessage={parsedUsd.ok ? undefined : t(LIMIT_HINT_KEY)}
         onChange={(event) => setMaxUsd(event.target.value)}
       />
       <TextInput
-        label="Max invocations"
+        label={t("budget.maxInvocations")}
         size="small"
         inputMode="numeric"
         value={maxInvocations}
-        errorMessage={parsedInvocations.ok ? undefined : LIMIT_HINT}
+        errorMessage={parsedInvocations.ok ? undefined : t(LIMIT_HINT_KEY)}
         onChange={(event) => setMaxInvocations(event.target.value)}
       />
       <FlexRow gap={2} align="center">
@@ -207,19 +227,23 @@ const BudgetSection = memo(function BudgetSection({
           disabled={setBudget.isPending || !canSave}
           onClick={handleSave}
         >
-          Save budget
+          {t("budget.save")}
         </Button>
       </FlexRow>
       {setBudget.isError && (
         <AlertBanner severity="error">
-          {`Could not save the budget: ${setBudget.error.message}`}
+          {t("error.saveBudget", { message: setBudget.error.message })}
         </AlertBanner>
       )}
       {usage && (
         <Caption>
-          {`Used ${formatUsd(usage.spentUsd)} across ${usage.invocations} run${
-            usage.invocations === 1 ? "" : "s"
-          }${usage.since ? ` since ${formatDate(usage.since)}` : ""}.`}
+          {t("budget.usageSummary", {
+            spent: formatUsd(usage.spentUsd),
+            count: usage.invocations,
+            since: usage.since
+              ? t("budget.sinceDate", { date: formatDate(usage.since) })
+              : ""
+          })}
         </Caption>
       )}
     </FlexColumn>
@@ -233,15 +257,18 @@ interface InvocationsSectionProps {
 const InvocationsSection = memo(function InvocationsSection({
   applicationId
 }: InvocationsSectionProps) {
+  const { t } = useTranslation("applications");
   const { data, isLoading, isError, error } =
     useApplicationInvocations(applicationId);
 
-  if (isLoading) return <LoadingSpinner text="Loading invocations" />;
+  if (isLoading) return <LoadingSpinner text={t("loading.invocations")} />;
 
   if (isError) {
     return (
       <AlertBanner severity="error">
-        {`Could not load invocations: ${error?.message ?? "try again later."}`}
+        {error?.message
+          ? t("error.loadInvocations", { message: error.message })
+          : t("error.loadInvocationsFallback")}
       </AlertBanner>
     );
   }
@@ -250,11 +277,11 @@ const InvocationsSection = memo(function InvocationsSection({
 
   return (
     <FlexColumn gap={SPACING.md} fullWidth>
-      <SectionHeader title="Recent invocations" />
+      <SectionHeader title={t("invocations.title")} />
       {invocations.length === 0 ? (
         <EmptyState
-          title="No invocations yet"
-          description="Runs of the released app show up here with their cost."
+          title={t("empty.noInvocations")}
+          description={t("empty.noInvocationsDesc")}
         />
       ) : (
         <FlexColumn gap={SPACING.sm} fullWidth>
@@ -276,7 +303,7 @@ const InvocationsSection = memo(function InvocationsSection({
               </FlexColumn>
               <Text>
                 {formatUsd(record.actualUsd ?? record.estimatedUsd)}
-                {record.actualUsd === null ? " (est.)" : ""}
+                {record.actualUsd === null ? t("invocations.estimated") : ""}
               </Text>
             </FlexRow>
           ))}
@@ -298,6 +325,7 @@ export interface ApplicationGovernancePanelProps {
 const ApplicationGovernancePanel = ({
   applicationId
 }: ApplicationGovernancePanelProps) => {
+  const { t } = useTranslation("applications");
   const {
     data: versions,
     isLoading,
@@ -328,13 +356,14 @@ const ApplicationGovernancePanel = ({
     <FlexColumn gap={SPACING.lg} fullWidth>
       <FlexRow align="center" justify="space-between" gap={2} fullWidth>
         <FlexColumn gap={0.5}>
-          <SectionHeader title="Release" />
+          <SectionHeader title={t("release.title")} />
           <Caption>
             {released
-              ? `Serving version ${released.version} — ${capabilitySummary(
-                  released
-                )}`
-              : "Nothing released yet."}
+              ? t("release.serving", {
+                  n: released.version,
+                  summary: capabilitySummary(released, t)
+                })
+              : t("release.nothingReleased")}
           </Caption>
         </FlexColumn>
         <Button
@@ -343,34 +372,36 @@ const ApplicationGovernancePanel = ({
           disabled={publish.isPending}
           onClick={handlePublish}
         >
-          Publish new version
+          {t("release.publish")}
         </Button>
       </FlexRow>
       {publish.isError && (
         <AlertBanner severity="error">
-          {`Could not publish: ${publish.error.message}`}
+          {t("error.publish", { message: publish.error.message })}
         </AlertBanner>
       )}
       {release.isError && (
         <AlertBanner severity="error">
-          {`Could not change the release: ${release.error.message}`}
+          {t("error.release", { message: release.error.message })}
         </AlertBanner>
       )}
 
       <Divider />
 
       <FlexColumn gap={SPACING.md} fullWidth>
-        <SectionHeader title="Versions" />
+        <SectionHeader title={t("versions.title")} />
         {isLoading ? (
-          <LoadingSpinner text="Loading versions" />
+          <LoadingSpinner text={t("loading.versions")} />
         ) : isError ? (
           <AlertBanner severity="error">
-            {`Could not load versions: ${error?.message ?? "try again later."}`}
+            {error?.message
+              ? t("error.loadVersions", { message: error.message })
+              : t("error.loadVersionsFallback")}
           </AlertBanner>
         ) : sortedVersions.length === 0 ? (
           <EmptyState
-            title="No versions yet"
-            description="Publish the app to cut its first version."
+            title={t("empty.noVersions")}
+            description={t("empty.noVersionsDesc")}
           />
         ) : (
           <FlexColumn gap={SPACING.md} fullWidth>

@@ -1,0 +1,101 @@
+{
+  "common": {
+    "untitled": "Untitled app",
+    "untitledWorkflow": "Untitled workflow"
+  },
+  "operation": {
+    "one": "1 operation",
+    "other": "{{count}} operations"
+  },
+  "aria": {
+    "appName": "App name",
+    "newApp": "New app",
+    "createAppFromWorkflow": "Create app from workflow"
+  },
+  "tooltip": {
+    "newApp": "New app",
+    "createAppFromWorkflow": "Create app from workflow"
+  },
+  "dialog": {
+    "createAppFromWorkflow": "Create app from workflow",
+    "deleteTitle": "Delete app",
+    "deleteContent": "Delete \"{{name}}\"? This cannot be undone."
+  },
+  "loading": {
+    "workflows": "Loading workflows",
+    "apps": "Loading apps",
+    "budget": "Loading budget",
+    "invocations": "Loading invocations",
+    "versions": "Loading versions"
+  },
+  "empty": {
+    "noWorkflows": "No workflows",
+    "noWorkflowsDesc": "Create a workflow first, then build an app on top of it.",
+    "noAppsMatch": "No matching apps",
+    "noAppsYet": "No apps yet",
+    "noAppsMatchDesc": "Try a different search term.",
+    "noAppsYetDesc": "Create an app with the + button above, or scaffold one from a workflow.",
+    "noInvocations": "No invocations yet",
+    "noInvocationsDesc": "Runs of the released app show up here with their cost.",
+    "noVersions": "No versions yet",
+    "noVersionsDesc": "Publish the app to cut its first version."
+  },
+  "error": {
+    "loadApps": "Could not load apps",
+    "loadAppsFallback": "Try again later.",
+    "renameConflict": "\"{{old}}\" changed elsewhere — the rename to \"{{new}}\" was not saved.",
+    "renameFailed": "Could not rename \"{{name}}\": {{message}}",
+    "duplicateFailed": "Could not duplicate \"{{name}}\": {{message}}",
+    "deleteFailed": "Could not delete \"{{name}}\": {{message}}",
+    "loadBudget": "Could not load the budget: {{message}}",
+    "loadBudgetFallback": "Could not load the budget: try again later.",
+    "saveBudget": "Could not save the budget: {{message}}",
+    "loadInvocations": "Could not load invocations: {{message}}",
+    "loadInvocationsFallback": "Could not load invocations: try again later.",
+    "publish": "Could not publish: {{message}}",
+    "release": "Could not change the release: {{message}}",
+    "loadVersions": "Could not load versions: {{message}}",
+    "loadVersionsFallback": "Could not load versions: try again later."
+  },
+  "placeholder": {
+    "searchApps": "Search apps..."
+  },
+  "notification": {
+    "copySuffix": "(copy)",
+    "unknownError": "unknown error"
+  },
+  "version": {
+    "versionN": "Version {{n}}",
+    "released": "Released",
+    "rollbackTo": "Roll back to version {{n}}"
+  },
+  "budget": {
+    "title": "Spend budget",
+    "description": "Runs of the released app are checked against this ceiling before they reach a provider. An empty field means no limit.",
+    "period": "Period",
+    "maxSpend": "Max spend (USD)",
+    "maxInvocations": "Max invocations",
+    "save": "Save budget",
+    "limitHint": "Enter a number of 0 or more, or leave empty for no limit.",
+    "usageSummary": "Used {{spent}} across {{count}} run(s){{since}}.",
+    "sinceDate": " since {{date}}",
+    "periodDay": "Per day",
+    "periodMonth": "Per month",
+    "periodTotal": "Lifetime"
+  },
+  "invocations": {
+    "title": "Recent invocations",
+    "estimated": " (est.)"
+  },
+  "release": {
+    "title": "Release",
+    "serving": "Serving version {{n}} — {{summary}}",
+    "nothingReleased": "Nothing released yet.",
+    "publish": "Publish new version"
+  },
+  "versions": {
+    "title": "Versions",
+    "workflowCount": "1 workflow",
+    "workflowCountOther": "{{count}} workflows"
+  }
+}

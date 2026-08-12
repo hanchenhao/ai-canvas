@@ -1,0 +1,101 @@
+{
+  "common": {
+    "untitled": "未命名应用",
+    "untitledWorkflow": "未命名工作流"
+  },
+  "operation": {
+    "one": "1 个操作",
+    "other": "{{count}} 个操作"
+  },
+  "aria": {
+    "appName": "应用名称",
+    "newApp": "新建应用",
+    "createAppFromWorkflow": "从工作流创建应用"
+  },
+  "tooltip": {
+    "newApp": "新建应用",
+    "createAppFromWorkflow": "从工作流创建应用"
+  },
+  "dialog": {
+    "createAppFromWorkflow": "从工作流创建应用",
+    "deleteTitle": "删除应用",
+    "deleteContent": "确定删除“{{name}}”？此操作无法撤销。"
+  },
+  "loading": {
+    "workflows": "正在加载工作流",
+    "apps": "正在加载应用",
+    "budget": "正在加载预算",
+    "invocations": "正在加载调用记录",
+    "versions": "正在加载版本"
+  },
+  "empty": {
+    "noWorkflows": "没有工作流",
+    "noWorkflowsDesc": "请先创建一个工作流，再在其基础上构建应用。",
+    "noAppsMatch": "没有匹配的应用",
+    "noAppsYet": "还没有应用",
+    "noAppsMatchDesc": "请尝试其他搜索词。",
+    "noAppsYetDesc": "使用上方的 + 按钮创建应用，或从工作流生成一个。",
+    "noInvocations": "暂无调用记录",
+    "noInvocationsDesc": "已发布应用的运行记录及其花费会显示在这里。",
+    "noVersions": "还没有版本",
+    "noVersionsDesc": "发布该应用以生成第一个版本。"
+  },
+  "error": {
+    "loadApps": "无法加载应用",
+    "loadAppsFallback": "请稍后重试。",
+    "renameConflict": "“{{old}}”已在别处被修改 —— 重命名为“{{new}}”未保存。",
+    "renameFailed": "无法重命名“{{name}}”：{{message}}",
+    "duplicateFailed": "无法复制“{{name}}”：{{message}}",
+    "deleteFailed": "无法删除“{{name}}”：{{message}}",
+    "loadBudget": "无法加载预算：{{message}}",
+    "loadBudgetFallback": "无法加载预算：请稍后重试。",
+    "saveBudget": "无法保存预算：{{message}}",
+    "loadInvocations": "无法加载调用记录：{{message}}",
+    "loadInvocationsFallback": "无法加载调用记录：请稍后重试。",
+    "publish": "无法发布：{{message}}",
+    "release": "无法更改发布版本：{{message}}",
+    "loadVersions": "无法加载版本：{{message}}",
+    "loadVersionsFallback": "无法加载版本：请稍后重试。"
+  },
+  "placeholder": {
+    "searchApps": "搜索应用…"
+  },
+  "notification": {
+    "copySuffix": "（副本）",
+    "unknownError": "未知错误"
+  },
+  "version": {
+    "versionN": "版本 {{n}}",
+    "released": "已发布",
+    "rollbackTo": "回滚到版本 {{n}}"
+  },
+  "budget": {
+    "title": "花费预算",
+    "description": "已发布应用的运行在到达服务商之前会以此上限进行校验。留空表示不设上限。",
+    "period": "周期",
+    "maxSpend": "最大花费（USD）",
+    "maxInvocations": "最大调用次数",
+    "save": "保存预算",
+    "limitHint": "请输入 0 或更大的数字，或留空表示不设上限。",
+    "usageSummary": "已在 {{count}} 次运行中花费 {{spent}}{{since}}。",
+    "sinceDate": "（自 {{date}} 起）",
+    "periodDay": "每天",
+    "periodMonth": "每月",
+    "periodTotal": "全程"
+  },
+  "invocations": {
+    "title": "最近的调用",
+    "estimated": "（预估）"
+  },
+  "release": {
+    "title": "发布",
+    "serving": "正在提供版本 {{n}} —— {{summary}}",
+    "nothingReleased": "尚未发布任何内容。",
+    "publish": "发布新版本"
+  },
+  "versions": {
+    "title": "版本",
+    "workflowCount": "1 个工作流",
+    "workflowCountOther": "{{count}} 个工作流"
+  }
+}

@@ -16,6 +16,7 @@ import {
 } from "react";
 import type { FocusEvent, KeyboardEvent, MouseEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import {
   isConcurrencyConflict,
@@ -172,6 +173,7 @@ const ApplicationListItem = memo(function ApplicationListItem({
   onCommitRename,
   onCancelRename
 }: ApplicationListItemProps) {
+  const { t } = useTranslation("applications");
   const handleClick = useCallback(() => onOpen(id, name), [id, name, onOpen]);
   const handleContextMenu = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => onContextMenu(event, id, name),
@@ -214,7 +216,7 @@ const ApplicationListItem = memo(function ApplicationListItem({
               className="rename-input"
               type="text"
               defaultValue={name}
-              aria-label="App name"
+              aria-label={t("aria.appName")}
               autoFocus
               onFocus={(event) => event.currentTarget.select()}
               onKeyDown={handleRenameKeyDown}
@@ -242,10 +244,12 @@ const ApplicationListItem = memo(function ApplicationListItem({
             component="span"
             sx={{ fontSize: "var(--fontSizeSmall)", fontWeight: 600 }}
           >
-            {name || UNTITLED}
+            {name || t("common.untitled")}
           </TruncatedText>
           <Text size="small" color="secondary">
-            {operationCount === 1 ? "1 operation" : `${operationCount} operations`}
+            {t(operationCount === 1 ? "operation.one" : "operation.other", {
+              count: operationCount
+            })}
           </Text>
         </FlexColumn>
       </FlexRow>
@@ -278,6 +282,7 @@ const useOpenApplication = () => {
 };
 
 export const CreateApplicationButton = memo(function CreateApplicationButton() {
+  const { t } = useTranslation("applications");
   const createApplication = useCreateApplication();
   const openApplication = useOpenApplication();
 
@@ -295,9 +300,9 @@ export const CreateApplicationButton = memo(function CreateApplicationButton() {
   }, [createApplication, openApplication]);
 
   return (
-    <Tooltip title="New app" placement="right-start">
+    <Tooltip title={t("tooltip.newApp")} placement="right-start">
       <ToolbarIconButton
-        ariaLabel="New app"
+        ariaLabel={t("aria.newApp")}
         onClick={() => void handleCreate()}
         disabled={createApplication.isPending}
         tabIndex={-1}
@@ -314,6 +319,7 @@ export const CreateApplicationButton = memo(function CreateApplicationButton() {
  */
 export const CreateApplicationFromWorkflowButton = memo(
   function CreateApplicationFromWorkflowButton() {
+    const { t } = useTranslation("applications");
     const [open, setOpen] = useState(false);
     const createApplication = useCreateApplication();
     const openApplication = useOpenApplication();
@@ -344,9 +350,9 @@ export const CreateApplicationFromWorkflowButton = memo(
 
     return (
       <>
-        <Tooltip title="Create app from workflow" placement="right-start">
+        <Tooltip title={t("tooltip.createAppFromWorkflow")} placement="right-start">
           <ToolbarIconButton
-            ariaLabel="Create app from workflow"
+            ariaLabel={t("aria.createAppFromWorkflow")}
             onClick={() => setOpen(true)}
             tabIndex={-1}
             icon={<AccountTreeOutlinedIcon />}
@@ -355,15 +361,15 @@ export const CreateApplicationFromWorkflowButton = memo(
         <Dialog
           open={open}
           onClose={() => setOpen(false)}
-          title="Create app from workflow"
+          title={t("dialog.createAppFromWorkflow")}
         >
           <div css={pickerStyles()}>
             {isLoading ? (
-              <LoadingSpinner text="Loading workflows" />
+              <LoadingSpinner text={t("loading.workflows")} />
             ) : workflows.length === 0 ? (
               <EmptyState
-                title="No workflows"
-                description="Create a workflow first, then build an app on top of it."
+                title={t("empty.noWorkflows")}
+                description={t("empty.noWorkflowsDesc")}
               />
             ) : (
               <FlexColumn className="workflow-options" gap={0.5}>
@@ -377,7 +383,7 @@ export const CreateApplicationFromWorkflowButton = memo(
                     }
                   >
                     <TruncatedText component="span">
-                      {workflow.name || "Untitled workflow"}
+                      {workflow.name || t("common.untitledWorkflow")}
                     </TruncatedText>
                   </button>
                 ))}
@@ -391,6 +397,7 @@ export const CreateApplicationFromWorkflowButton = memo(
 );
 
 const ApplicationListPanel = () => {
+  const { t } = useTranslation("applications");
   const theme = useTheme();
   const [filterValue, setFilterValue] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
@@ -476,8 +483,11 @@ const ApplicationListPanel = () => {
               type: "error",
               alert: true,
               content: isConcurrencyConflict(error)
-                ? `"${current.name}" changed elsewhere — the rename to "${trimmed}" was not saved.`
-                : `Could not rename "${current.name}": ${error.message}`
+                ? t("error.renameConflict", { old: current.name, new: trimmed })
+                : t("error.renameFailed", {
+                    name: current.name,
+                    message: error.message
+                  })
             });
             void utils.applications.list.invalidate();
           }
@@ -492,7 +502,7 @@ const ApplicationListPanel = () => {
       try {
         const source = await utils.applications.get.fetch({ id: item.id });
         await createApplication.mutateAsync({
-          name: `${source.name} (copy)`.substring(0, 200),
+          name: `${source.name}${t("notification.copySuffix")}`.substring(0, 200),
           description: source.description,
           projectId: source.projectId,
           document: source.document
@@ -501,9 +511,13 @@ const ApplicationListPanel = () => {
         addNotification({
           type: "error",
           alert: true,
-          content: `Could not duplicate "${item.name}": ${
-            error instanceof Error ? error.message : "unknown error"
-          }`
+          content: t("error.duplicateFailed", {
+            name: item.name,
+            message:
+              error instanceof Error
+                ? error.message
+                : t("notification.unknownError")
+          })
         });
       }
     },
@@ -524,7 +538,7 @@ const ApplicationListPanel = () => {
           addNotification({
             type: "error",
             alert: true,
-            content: `Could not delete "${name}": ${error.message}`
+            content: t("error.deleteFailed", { name, message: error.message })
           });
           void utils.applications.list.invalidate();
         }
@@ -547,23 +561,23 @@ const ApplicationListPanel = () => {
         open={itemToDelete !== null}
         onClose={() => setItemToDelete(null)}
         onConfirm={handleConfirmDelete}
-        title="Delete app"
-        content={`Delete "${itemToDelete?.name ?? ""}"? This cannot be undone.`}
-        confirmText="Delete"
-        cancelText="Cancel"
+        title={t("dialog.deleteTitle")}
+        content={t("dialog.deleteContent", { name: itemToDelete?.name ?? "" })}
+        confirmText={t("common:button.delete")}
+        cancelText={t("common:button.cancel")}
       />
       <div className="application-search">
         <CategorySearchBar
           ref={searchRef}
           value={filterValue}
           onChange={setFilterValue}
-          placeholder="Search apps..."
+          placeholder={t("placeholder.searchApps")}
         />
       </div>
 
       {isLoading ? (
         <FlexColumn gap={2} justify="center" align="center" sx={{ flex: 1 }}>
-          <LoadingSpinner size="large" text="Loading apps" />
+          <LoadingSpinner size="large" text={t("loading.apps")} />
         </FlexColumn>
       ) : isError ? (
         <FlexColumn
@@ -574,8 +588,8 @@ const ApplicationListPanel = () => {
         >
           <EmptyState
             variant="error"
-            title="Could not load apps"
-            description={error?.message ?? "Try again later."}
+            title={t("error.loadApps")}
+            description={error?.message ?? t("error.loadAppsFallback")}
           />
         </FlexColumn>
       ) : applications.length === 0 ? (
@@ -586,11 +600,11 @@ const ApplicationListPanel = () => {
           sx={{ flex: 1, px: 2 }}
         >
           <EmptyState
-            title={filterValue ? "No matching apps" : "No apps yet"}
+            title={filterValue ? t("empty.noAppsMatch") : t("empty.noAppsYet")}
             description={
               filterValue
-                ? "Try a different search term."
-                : "Create an app with the + button above, or scaffold one from a workflow."
+                ? t("empty.noAppsMatchDesc")
+                : t("empty.noAppsYetDesc")
             }
           />
         </FlexColumn>
