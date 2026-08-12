@@ -70,19 +70,19 @@ function buildManifest(version) {
   return {
     manifest_version: "0.3",
     name: "nodetool",
-    display_name: "NodeTool",
+    display_name: "BrainVite-AI-Canvas",
     version,
     description:
-      "Run NodeTool workflows, browse assets, search nodes, and manage jobs from your agent.",
+      "Run BrainVite workflows, browse assets, search nodes, and manage jobs from your agent.",
     long_description:
-      "Connects Claude (or any MCPB-aware agent) to your local NodeTool " +
+      "Connects Claude (or any MCPB-aware agent) to your local BrainVite " +
       "server over MCP. Exposes workflow execution and validation, asset " +
       "and collection browsing, node search, job management, and agent " +
-      "tools. Requires a running NodeTool app or `nodetool serve`.",
-    author: { name: "NodeTool", url: "https://nodetool.ai" },
-    homepage: "https://nodetool.ai",
-    documentation: "https://github.com/nodetool-ai/nodetool",
-    repository: { type: "git", url: "https://github.com/nodetool-ai/nodetool" },
+      "tools. Requires a running BrainVite-AI-Canvas app.",
+    author: { name: "BrainVite", url: "https://www.brainvite.com" },
+    homepage: "https://www.brainvite.com",
+    documentation: "https://github.com/hanchenhao/ai-canvas",
+    repository: { type: "git", url: "https://github.com/hanchenhao/ai-canvas" },
     license: "AGPL-3.0",
     icon: "icon.png",
     keywords: ["nodetool", "workflows", "agents", "ai", "automation"],
@@ -101,9 +101,9 @@ function buildManifest(version) {
     user_config: {
       server_url: {
         type: "string",
-        title: "NodeTool server URL",
+        title: "BrainVite local server URL",
         description:
-          "The /mcp endpoint of your running NodeTool server. The default " +
+          "The /mcp endpoint of your running BrainVite local server. The default " +
           "matches the desktop app and `nodetool serve`.",
         default: "http://127.0.0.1:7777/mcp",
         required: true
@@ -382,7 +382,7 @@ async function main() {
   const opts = parseArgs(process.argv);
   const version = readVersion();
 
-  console.log(`Building NodeTool MCP bundle v${version} ...`);
+  console.log(`Building BrainVite MCP bundle v${version} ...`);
   const bridgePath = await stage(version);
   const { size } = await fsp.stat(bridgePath);
   console.log(
@@ -404,7 +404,7 @@ async function main() {
   );
   console.log(
     "Install: drag the .mcpb into Claude Desktop (Settings > Extensions), " +
-      "with NodeTool running on http://127.0.0.1:7777."
+      "with BrainVite-AI-Canvas running on http://127.0.0.1:7777."
   );
 }
 

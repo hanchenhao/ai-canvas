@@ -67,7 +67,7 @@ const buildMenu = () => {
   }
   const menu = Menu.buildFromTemplate([
     {
-      label: process.platform === "darwin" ? "NodeTool" : "",
+      label: process.platform === "darwin" ? "BrainVite-AI-Canvas" : "",
       submenu: [
         { role: "about" },
         { type: "separator" },
@@ -308,7 +308,7 @@ const buildMenu = () => {
         {
           label: "Learn More",
           click: async () => {
-            await shell.openExternal("https://nodetool.ai");
+            await shell.openExternal("https://www.brainvite.com");
           },
         },
         { type: "separator" },
@@ -331,7 +331,7 @@ async function showSystemInfoDialog(): Promise<void> {
   try {
     const info = await getSystemInfo();
     
-    const message = `NodeTool ${info.appVersion}
+    const message = `BrainVite-AI-Canvas ${info.appVersion}
 
 Application
   Electron: ${info.electronVersion}
@@ -356,7 +356,7 @@ Features & Versions
     const dialogOptions = {
       type: "info" as const,
       title: "System Information",
-      message: `NodeTool ${info.appVersion}`,
+      message: `BrainVite-AI-Canvas ${info.appVersion}`,
       detail: message,
       buttons: ["OK", "Copy to Clipboard"],
     };

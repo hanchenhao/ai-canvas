@@ -1,6 +1,14 @@
 {
-    "appId": "ai.nodetool.NodeTool",
-    "productName": "Nodetool",
+    "appId": "com.brainvite.aicanvas",
+    "productName": "BrainVite-AI-Canvas",
+    "protocols": [
+        {
+            "name": "BrainVite-AI-Canvas",
+            "schemes": [
+                "brainvite-ai-canvas"
+            ]
+        }
+    ],
     "directories": {
         "output": "dist",
         "buildResources": "resources"
@@ -54,8 +62,8 @@
     "publish": [
         {
             "provider": "github",
-            "owner": "nodetool-ai",
-            "repo": "nodetool"
+            "owner": "hanchenhao",
+            "repo": "ai-canvas"
         }
     ],
     "dmg": {
@@ -83,7 +91,7 @@
         "gatekeeperAssess": false,
         "entitlements": "entitlements.mac.plist",
         "entitlementsInherit": "entitlements.mac.plist",
-        "notarize": true,
+        "notarize": false,
         "extendInfo": {
             "NSMicrophoneUsageDescription": "Allow access to your microphone for audio recording",
             "NSCameraUsageDescription": "Allow access to your camera for video recording",
@@ -105,19 +113,19 @@
     "linux": {
         "target": [
             "AppImage",
-            "flatpak"
+            "tar.gz"
         ],
         "category": "Development",
-        "maintainer": "hello@nodetool.ai",
+        "maintainer": "BrainVite contributors",
         "desktop": {
             "entry": {
-                "Name": "Nodetool",
-                "Comment": "Visual Builder for AI Workflows and Agents",
-                "GenericName": "AI Workflow Editor",
-                "Keywords": "AI;Development;Workflow;Node;Editor;Machine Learning;",
-                "Categories": "Development;IDE;",
-                "MimeType": "x-scheme-handler/nodetool;",
-                "StartupWMClass": "Nodetool"
+                "Name": "BrainVite-AI-Canvas",
+                "Comment": "Local AI image and video canvas",
+                "GenericName": "AI Creative Canvas",
+                "Keywords": "AI;Image;Video;Workflow;Canvas;",
+                "Categories": "Graphics;AudioVideo;",
+                "MimeType": "x-scheme-handler/brainvite-ai-canvas;",
+                "StartupWMClass": "BrainVite-AI-Canvas"
             }
         }
     },

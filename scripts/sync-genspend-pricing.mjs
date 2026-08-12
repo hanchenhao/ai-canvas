@@ -230,7 +230,7 @@ async function fetchModels(url, { etag, attempts = 3 } = {}) {
     try {
       const res = await fetch(endpoint, {
         headers: {
-          "User-Agent": "nodetool-cost/1.0 (+https://nodetool.ai)",
+          "User-Agent": "brainvite-ai-canvas/1.0 (+https://www.brainvite.com)",
           Accept: "application/json",
           ...(etag ? { "If-None-Match": etag } : {})
         },

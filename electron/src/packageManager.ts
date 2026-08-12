@@ -48,7 +48,7 @@ interface RegistryPackageItem {
 
 const PACKAGE_DESCRIPTION_OVERRIDES: Record<string, string> = {
   "nodetool-ai/nodetool-core":
-    "Essential NodeTool core nodes and shared runtime components. Install this package in every NodeTool environment.",
+    "Essential BrainVite-AI-Canvas core nodes and shared runtime components. Install this package in every BrainVite-AI-Canvas environment.",
   "nunchaku-tech/nunchaku":
     "Accelerates FLUX and Qwen image models with Nunchaku quantization kernels. Install this only if you plan to run Nunchaku-optimized HuggingFace models.",
 };

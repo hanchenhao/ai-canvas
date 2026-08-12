@@ -20,8 +20,8 @@ let trayInstance: Electron.Tray | null = null;
 
 function formatNodeToolStatus(connected: boolean, port?: number): string {
   return connected
-    ? `NodeTool: Running${port ? ` on ${port}` : ""}`
-    : "NodeTool: Stopped";
+    ? `BrainVite-AI-Canvas: Running${port ? ` on ${port}` : ""}`
+    : "BrainVite-AI-Canvas: Stopped";
 }
 
 /**
@@ -111,7 +111,7 @@ async function createTray(): Promise<Electron.Tray> {
 
   if (isWindows) {
     logMessage("Setting Windows-specific app ID", "info");
-    app.setAppUserModelId("com.nodetool.desktop");
+    app.setAppUserModelId("com.brainvite.aicanvas");
   }
 
   try {
@@ -330,7 +330,7 @@ async function updateTrayMenu(): Promise<void> {
     },
     { type: "separator" },
     {
-      label: "Show NodeTool",
+      label: "Show BrainVite-AI-Canvas",
       enabled: true,
       click: async () => focusNodeTool(),
     },
@@ -364,11 +364,11 @@ async function updateTrayMenu(): Promise<void> {
     },
     ...getCloseBehaviorMenuItems(settings),
     { type: "separator" },
-    { label: "Quit NodeTool", role: "quit" },
+    { label: "Quit BrainVite-AI-Canvas", role: "quit" },
   ]);
 
   trayInstance.setContextMenu(contextMenu);
-  trayInstance.setToolTip("NodeTool Desktop");
+  trayInstance.setToolTip("BrainVite-AI-Canvas");
 }
 
 export { createTray, updateTrayMenu };

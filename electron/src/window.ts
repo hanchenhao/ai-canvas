@@ -67,7 +67,7 @@ function createWindow(): BrowserWindow {
 
   if (isElectronDevMode()) {
     window.loadURL(
-      "data:text/html,<html><body style='margin:0;background:#111;color:#ddd;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;'>Starting NodeTool...</body></html>",
+      "data:text/html,<html><body style='margin:0;background:#111;color:#ddd;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;'>Starting BrainVite-AI-Canvas...</body></html>",
     );
   } else {
     window.loadFile(path.join("dist-web", "index.html"));

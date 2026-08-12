@@ -147,7 +147,7 @@ describe("ReverseTextNode", () => {
 
   "README.md": `# ${name}
 
-A custom node pack for [NodeTool](https://nodetool.ai).
+A custom node pack for [BrainVite-AI-Canvas](https://www.brainvite.com).
 
 ## Develop
 
@@ -173,7 +173,7 @@ npm install ${name}   # or 'npm link' for local development
 2. Export it from \`ALL_NODES\` in \`src/index.ts\`.
 3. \`npm run build\`.
 
-See the [custom nodes guide](https://github.com/nodetool-ai/nodetool/blob/main/docs/developer/custom-nodes-guide.md).
+See the custom nodes guide in this repository under `docs/developer/custom-nodes-guide.md`.
 `
 };
 

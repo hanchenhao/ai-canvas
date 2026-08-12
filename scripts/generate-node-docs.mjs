@@ -458,8 +458,8 @@ function catalogEntry(meta) {
       name: output.name,
       type: typeToString(output.type),
     })),
-    documentation_url: `https://docs.nodetool.ai/nodes/${pathParts}/${slug}`,
-    markdown_url: `https://docs.nodetool.ai/nodes/${pathParts}/${slug}.md`,
+    documentation_url: `https://www.brainvite.com/nodes/${pathParts}/${slug}`,
+    markdown_url: `https://www.brainvite.com/nodes/${pathParts}/${slug}.md`,
   };
 }
 
