@@ -1,0 +1,77 @@
+{
+  "title": {
+    "explorer": "集合",
+    "subtitle": "用于 RAG 工作流的可搜索文档集合 —— 可拖入 PDF、Markdown、HTML 或转录文本。",
+    "vectorCollections": "向量集合"
+  },
+  "label": {
+    "collectionName": "集合名称",
+    "embeddingModel": "嵌入模型",
+    "workflow": "工作流"
+  },
+  "button": {
+    "create": "创建",
+    "creating": "创建中…",
+    "createCollection": "创建集合",
+    "delete": "删除",
+    "cancel": "取消",
+    "retry": "重试",
+    "close": "关闭"
+  },
+  "placeholder": {
+    "collectionName": "my-collection"
+  },
+  "header": {
+    "whatAreCollections": "什么是集合？",
+    "description": "集合用于存储和搜索文档。支持以下文件格式：",
+    "formatPdf": "PDF、PowerPoint、Word、Excel",
+    "formatText": "文本文件、Markdown、HTML",
+    "formatImages": "图像（通过 OCR 提取文字）"
+  },
+  "empty": {
+    "intro": "未找到集合。创建一个以开始。",
+    "withCollectionIntro": "创建集合后可以：",
+    "feature1": "把文本和图像索引为向量嵌入",
+    "feature2": "执行语义相似度搜索",
+    "feature3": "按元数据过滤搜索结果",
+    "feature4": "批量处理大量文档",
+    "description1": "集合把文本和图像的向量表示整理到本地 SQLite 数据库中。",
+    "description2": "创建集合后，工作流就能进行语义搜索，节点可基于概念含义（而非精确关键词匹配）查找并处理数据。",
+    "nodeList": "关键节点包括用于填充数据的 <strong>Index Image</strong> 和 <strong>Index Text Chunk</strong>，以及用于检索的 <strong>Query Image</strong>、<strong>Query Text</strong> 或 <strong>Hybrid Search</strong>。"
+  },
+  "item": {
+    "deleteTooltip": "删除此集合",
+    "dropFiles": "拖放文件以上传",
+    "collectionTooltip": "集合：{{name}}",
+    "docCount": "此集合中的文档数",
+    "itemOne": "{{count}} 项",
+    "itemOther": "{{count}} 项",
+    "embeddingTooltip": "用于生成文档嵌入的模型",
+    "workflowTooltip": "点击更改此集合的摄取工作流",
+    "noWorkflow": "无工作流"
+  },
+  "indexing": {
+    "progress": "正在索引 {{current}}/{{total}} 个文档",
+    "eta": "预计剩余：{{value}}"
+  },
+  "list": {
+    "countOne": "{{count}} 个集合",
+    "countOther": "{{count}} 个集合",
+    "loading": "正在加载集合",
+    "errorTitle": "无法加载集合",
+    "errorDesc": "请稍后重试。"
+  },
+  "deleteDialog": {
+    "title": "删除此集合？",
+    "content": "这将永久删除集合「{{name}}」。"
+  },
+  "indexReport": {
+    "title": "索引报告",
+    "intro": "以下文件在索引过程中遇到错误："
+  },
+  "error": {
+    "createFailed": "创建集合失败",
+    "updateSuccess": "集合更新成功",
+    "updateFailed": "更新集合失败：{{message}}"
+  }
+}

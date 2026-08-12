@@ -1,5 +1,6 @@
 import InfoIcon from "@mui/icons-material/Info";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   FlexRow,
   FlexColumn,
@@ -13,6 +14,7 @@ import {
 } from "../ui_primitives";
 
 const CollectionHeader = () => {
+  const { t } = useTranslation("collections");
   const [formatInfoAnchor, setFormatInfoAnchor] = useState<HTMLElement | null>(
     null
   );
@@ -37,7 +39,7 @@ const CollectionHeader = () => {
       >
         <InfoIcon sx={{ fontSize: "var(--fontSizeNormal)" }} />
         <Text size="small" weight={600}>
-          What are collections?
+          {t("header.whatAreCollections")}
         </Text>
       </FlexRow>
       <Popover
@@ -47,10 +49,7 @@ const CollectionHeader = () => {
         placement="bottom-left"
       >
         <FlexColumn gap={1} sx={{ p: 2, maxWidth: 400 }}>
-          <Caption color="secondary">
-            Collections are used to store and search documents. Following file
-            formats are supported:
-          </Caption>
+          <Caption color="secondary">{t("header.description")}</Caption>
           <ul
             style={{
               marginTop: getSpacingPx(SPACING.xs),
@@ -58,9 +57,9 @@ const CollectionHeader = () => {
               listStyle: "disc"
             }}
           >
-            <li>PDFs, PowerPoint, Word, Excel</li>
-            <li>Text files, Markdown, HTML</li>
-            <li>Images (text extraction with OCR)</li>
+            <li>{t("header.formatPdf")}</li>
+            <li>{t("header.formatText")}</li>
+            <li>{t("header.formatImages")}</li>
           </ul>
         </FlexColumn>
       </Popover>

@@ -1,4 +1,5 @@
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { DeleteButton, FlexRow, FlexColumn, Text, Caption, Tooltip, LoadingSpinner, EditorButton, ProgressBar, MOTION, BORDER_RADIUS, SPACING, Z_INDEX } from "../ui_primitives";
 import { CollectionResponse } from "../../stores/ApiTypes";
@@ -30,6 +31,7 @@ const IndexingProgress = memo(function IndexingProgress({
 }: {
   indexProgress: CollectionItemProps["indexProgress"];
 }) {
+  const { t } = useTranslation("collections");
   if (!indexProgress) { return null; }
 
   return (
@@ -47,24 +49,28 @@ const IndexingProgress = memo(function IndexingProgress({
       <br />
       <LoadingSpinner size={16} inline />
       <Caption sx={{ ml: 1 }}>
-        Indexing {indexProgress.current}&nbsp;of&nbsp;
-        {indexProgress.total} documents
+        {t("indexing.progress", {
+          current: indexProgress.current,
+          total: indexProgress.total
+        })}
         {indexProgress.current > 0 && (
           <>
             {" "}
-            • ETA:{" "}
-            {(() => {
-              const elapsed = Date.now() - indexProgress.startTime;
-              const avgTimePerItem = elapsed / indexProgress.current;
-              const remainingItems =
-                indexProgress.total - indexProgress.current;
-              const etaSeconds = Math.round(
-                (avgTimePerItem * remainingItems) / 1000
-              );
-              return etaSeconds < 60
-                ? `${etaSeconds}s`
-                : `${Math.round(etaSeconds / 60)}m ${etaSeconds % 60}s`;
-            })()}
+            •{" "}
+            {t("indexing.eta", {
+              value: (() => {
+                const elapsed = Date.now() - indexProgress.startTime;
+                const avgTimePerItem = elapsed / indexProgress.current;
+                const remainingItems =
+                  indexProgress.total - indexProgress.current;
+                const etaSeconds = Math.round(
+                  (avgTimePerItem * remainingItems) / 1000
+                );
+                return etaSeconds < 60
+                  ? `${etaSeconds}s`
+                  : `${Math.round(etaSeconds / 60)}m ${etaSeconds % 60}s`;
+              })()
+            })}
           </>
         )}
       </Caption>
@@ -82,6 +88,7 @@ const CollectionItem = ({
   onDragLeave,
   deletingCollection
 }: CollectionItemProps) => {
+  const { t } = useTranslation("collections");
   const isDeleting = deletingCollection !== null;
   const addNotification = useNotificationStore((state) => state.addNotification);
   const queryClient = useQueryClient();
@@ -98,7 +105,7 @@ const CollectionItem = ({
       addNotification({
         alert: true,
         type: "success",
-        content: "Collection updated successfully"
+        content: t("error.updateSuccess")
       });
       queryClient.invalidateQueries({ queryKey: ["collections"] });
     },
@@ -106,7 +113,7 @@ const CollectionItem = ({
       addNotification({
         alert: true,
         type: "error",
-        content: `Failed to update collection: ${error.message}`
+        content: t("error.updateFailed", { message: error.message })
       });
     }
   });
@@ -177,7 +184,7 @@ const CollectionItem = ({
         ) : (
           <DeleteButton
             onClick={handleDeleteClick}
-            tooltip="Delete this collection"
+            tooltip={t("item.deleteTooltip")}
             disabled={isDeleting}
             sx={{ mt: -10 }}
             nodrag={false}
@@ -210,12 +217,12 @@ const CollectionItem = ({
             }}
           >
             <UploadFileIcon sx={{ fontSize: "var(--fontSizeBig)" }} />
-            Drop files to upload
+            {t("item.dropFiles")}
           </Text>
         </FlexRow>
       )}
       <FlexRow align="center" gap={SPACING.lg} fullWidth>
-        <Tooltip title={`Collection: ${collection.name}`}>
+        <Tooltip title={t("item.collectionTooltip", { name: collection.name })}>
           <Text
             weight={600}
             truncate
@@ -235,7 +242,7 @@ const CollectionItem = ({
       </FlexRow>
 
       <FlexRow align="center" gap={SPACING.lg} fullWidth>
-        <Tooltip title="Number of documents in this collection">
+        <Tooltip title={t("item.docCount")}>
           <Text
             size="small"
             color="secondary"
@@ -244,10 +251,13 @@ const CollectionItem = ({
               flexShrink: 0
             }}
           >
-            {collection.count} item{collection.count === 1 ? "" : "s"}
+            {t(
+              collection.count === 1 ? "item.itemOne" : "item.itemOther",
+              { count: collection.count }
+            )}
           </Text>
         </Tooltip>
-        <Tooltip title="Model used for embedding documents">
+        <Tooltip title={t("item.embeddingTooltip")}>
           <Caption
             sx={{
               fontSize: "0.8em",
@@ -264,7 +274,7 @@ const CollectionItem = ({
         {isEditingWorkflow ? (
           <WorkflowSelect
             onChange={onWorkflowChange}
-            label="Workflow"
+            label={t("label.workflow")}
             value={
               collection.metadata?.workflow
                 ? { id: collection.metadata.workflow as string }
@@ -279,7 +289,7 @@ const CollectionItem = ({
             }}
           />
         ) : (
-          <Tooltip title="Click to change the ingestion workflow for this collection">
+          <Tooltip title={t("item.workflowTooltip")}>
             <EditorButton
               variant="text"
               sx={{
@@ -298,7 +308,7 @@ const CollectionItem = ({
               }}
               onClick={handleEditWorkflow}
             >
-              {collection.workflow_name || "No workflow"}
+              {collection.workflow_name || t("item.noWorkflow")}
             </EditorButton>
           </Tooltip>
         )}

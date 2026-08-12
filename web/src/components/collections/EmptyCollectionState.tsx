@@ -1,3 +1,4 @@
+import { useTranslation, Trans } from "react-i18next";
 import {
   Text,
   FlexColumn,
@@ -8,29 +9,21 @@ import {
 } from "../ui_primitives";
 
 const EmptyCollectionState = () => {
+  const { t } = useTranslation("collections");
   return (
     <Box sx={{ marginTop: 2, maxWidth: 600 }}>
       <Text size="big" sx={{ margin: "1em 0 .5em 0" }}>
-        Vector Collections
+        {t("title.vectorCollections")}
       </Text>
-      <Text sx={{ marginBottom: 1 }}>
-        Collections organize vector representations of your text and images in a
-        local SQLite database.
-      </Text>
-      <Text sx={{ marginBottom: 2 }}>
-        Creating a collection enables semantic search in your workflows,
-        allowing nodes to find and process data based on conceptual meaning
-        rather than exact keyword matches.
-      </Text>
+      <Text sx={{ marginBottom: 1 }}>{t("empty.description1")}</Text>
+      <Text sx={{ marginBottom: 2 }}>{t("empty.description2")}</Text>
 
       <Divider sx={{ my: 3 }} />
 
       <FlexColumn gap={2}>
-        <Text size="big">
-          No collections found. Create one to get started.
-        </Text>
+        <Text size="big">{t("empty.intro")}</Text>
 
-        <Text>With a collection, you can:</Text>
+        <Text>{t("empty.withCollectionIntro")}</Text>
         <ul
           style={{
             paddingLeft: getSpacingPx(SPACING.xl),
@@ -38,16 +31,17 @@ const EmptyCollectionState = () => {
             listStyle: "disc"
           }}
         >
-          <li>Index text and images as vector embeddings</li>
-          <li>Perform semantic similarity searches</li>
-          <li>Filter search results using metadata</li>
-          <li>Batch process large sets of documents</li>
+          <li>{t("empty.feature1")}</li>
+          <li>{t("empty.feature2")}</li>
+          <li>{t("empty.feature3")}</li>
+          <li>{t("empty.feature4")}</li>
         </ul>
         <Text>
-          Key nodes include <strong>Index Image</strong> and{" "}
-          <strong>Index Text Chunk</strong> for populating data, and{" "}
-          <strong>Query Image</strong>, <strong>Query Text</strong>, or{" "}
-          <strong>Hybrid Search</strong> for retrieval.
+          <Trans
+            i18nKey="collections:empty.nodeList"
+            components={{ strong: <strong /> }}
+            defaults="Key nodes include <strong>Index Image</strong> and <strong>Index Text Chunk</strong> for populating data, and <strong>Query Image</strong>, <strong>Query Text</strong>, or <strong>Hybrid Search</strong> for retrieval."
+          />
         </Text>
       </FlexColumn>
     </Box>

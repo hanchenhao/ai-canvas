@@ -2,6 +2,7 @@
 import { css, keyframes } from "@emotion/react";
 import React from "react";
 import { useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   FormField,
@@ -86,6 +87,7 @@ interface CollectionFormProps {
 }
 
 const CollectionForm = ({ onClose, onSuccess }: CollectionFormProps) => {
+  const { t } = useTranslation("collections");
   const theme = useTheme();
   const queryClient = useQueryClient();
   const [formData, setFormData] = useState<CollectionCreate>({
@@ -140,7 +142,7 @@ const CollectionForm = ({ onClose, onSuccess }: CollectionFormProps) => {
     >
       <FlexRow gap={2} align="center" wrap>
         <FormField
-          label="Collection Name"
+          label={t("label.collectionName")}
           required
           compact
           sx={{ flex: 1, minWidth: 180 }}
@@ -151,7 +153,7 @@ const CollectionForm = ({ onClose, onSuccess }: CollectionFormProps) => {
             onChange={(e) =>
               setFormData((prev: { name: string; embedding_model: string }) => ({ ...prev, name: e.target.value }))
             }
-            placeholder="my-collection"
+            placeholder={t("placeholder.collectionName")}
             required
             fullWidth
             size="small"
@@ -161,7 +163,7 @@ const CollectionForm = ({ onClose, onSuccess }: CollectionFormProps) => {
         </FormField>
 
         <FormField
-          label="Embedding Model"
+          label={t("label.embeddingModel")}
           compact
           className="model-select"
           sx={{ flex: 1, minWidth: 200 }}
@@ -186,7 +188,9 @@ const CollectionForm = ({ onClose, onSuccess }: CollectionFormProps) => {
             )
           }
         >
-          {createMutation.isPending ? "Creating..." : "Create"}
+          {createMutation.isPending
+            ? t("button.creating")
+            : t("button.create")}
         </EditorButton>
       </FlexRow>
 
@@ -195,7 +199,7 @@ const CollectionForm = ({ onClose, onSuccess }: CollectionFormProps) => {
           <Text size="small" color="error">
             {createMutation.error instanceof Error
               ? createMutation.error.message
-              : "Failed to create collection"}
+              : t("error.createFailed")}
           </Text>
         </Box>
       )}

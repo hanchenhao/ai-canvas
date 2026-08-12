@@ -1,4 +1,5 @@
 import { memo, useEffect, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import CollectionForm from "./CollectionForm";
 import AddIcon from "@mui/icons-material/Add";
 import CollectionHeader from "./CollectionHeader";
@@ -23,6 +24,7 @@ import {
 import { CollectionResponse } from "../../stores/ApiTypes";
 
 const CollectionList = () => {
+  const { t } = useTranslation("collections");
   const {
     collections,
     isLoading,
@@ -124,28 +126,31 @@ const CollectionList = () => {
             }}
           >
             <Text size="small" color="secondary">
-              {totalCount} {totalCount === 1 ? "collection" : "collections"}
+              {t(
+                totalCount === 1 ? "list.countOne" : "list.countOther",
+                { count: totalCount }
+              )}
             </Text>
             <CreateFab
               onClick={handleShowForm}
-              label="Create Collection"
+              label={t("button.createCollection")}
               icon={<AddIcon />}
-              aria-label="Create Collection"
+              aria-label={t("button.createCollection")}
             />
           </FlexRow>
 
           {collections?.collections.length ? <CollectionHeader /> : null}
           {isLoading ? (
             <FlexColumn gap={2} justify="center" align="center" sx={{ mt: 4 }}>
-              <LoadingSpinner size="large" text="Loading collections" />
+              <LoadingSpinner size="large" text={t("list.loading")} />
             </FlexColumn>
           ) : error ? (
             <FlexColumn gap={2} justify="center" align="center" sx={{ mt: 4, px: 2 }}>
               <EmptyState
                 variant="error"
-                title="Couldn't load collections"
-                description="Try again later."
-                actionText="Retry"
+                title={t("list.errorTitle")}
+                description={t("list.errorDesc")}
+                actionText={t("button.retry")}
                 onAction={() => fetchCollections()}
               />
             </FlexColumn>
@@ -186,22 +191,23 @@ const CollectionList = () => {
       <Dialog
         open={Boolean(deleteTarget)}
         onClose={cancelDelete}
-        title="Delete this collection?"
+        title={t("deleteDialog.title")}
         onConfirm={confirmDelete}
-        confirmText="Delete"
-        cancelText="Cancel"
+        confirmText={t("button.delete")}
+        cancelText={t("button.cancel")}
         destructive
       >
-        This will permanently delete the collection &quot;{deleteTarget}
-        &quot;.
+        {t("deleteDialog.content", { name: deleteTarget ?? "" })}
       </Dialog>
 
       {indexErrors.length > 0 && (
-        <Dialog open={true} onClose={handleClearIndexErrors} title="Indexing report">
+        <Dialog
+          open={true}
+          onClose={handleClearIndexErrors}
+          title={t("indexReport.title")}
+        >
           <FlexColumn gap={2}>
-            <Text>
-              The following files encountered errors during indexing:
-            </Text>
+            <Text>{t("indexReport.intro")}</Text>
             <ListGroup compact flush sx={{ pl: 2 }}>
               {indexErrors.map((error) => (
                 <ListItemRow
@@ -214,7 +220,7 @@ const CollectionList = () => {
             </ListGroup>
             <FlexRow justify="flex-end">
               <EditorButton onClick={handleClearIndexErrors}>
-                Close
+                {t("button.close")}
               </EditorButton>
             </FlexRow>
           </FlexColumn>

@@ -1,0 +1,77 @@
+{
+  "title": {
+    "explorer": "Collections",
+    "subtitle": "Searchable document collections for RAG workflows — drop in PDFs, Markdown, HTML, or transcripts.",
+    "vectorCollections": "Vector Collections"
+  },
+  "label": {
+    "collectionName": "Collection Name",
+    "embeddingModel": "Embedding Model",
+    "workflow": "Workflow"
+  },
+  "button": {
+    "create": "Create",
+    "creating": "Creating...",
+    "createCollection": "Create Collection",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "retry": "Retry",
+    "close": "Close"
+  },
+  "placeholder": {
+    "collectionName": "my-collection"
+  },
+  "header": {
+    "whatAreCollections": "What are collections?",
+    "description": "Collections are used to store and search documents. Following file formats are supported:",
+    "formatPdf": "PDFs, PowerPoint, Word, Excel",
+    "formatText": "Text files, Markdown, HTML",
+    "formatImages": "Images (text extraction with OCR)"
+  },
+  "empty": {
+    "intro": "No collections found. Create one to get started.",
+    "withCollectionIntro": "With a collection, you can:",
+    "feature1": "Index text and images as vector embeddings",
+    "feature2": "Perform semantic similarity searches",
+    "feature3": "Filter search results using metadata",
+    "feature4": "Batch process large sets of documents",
+    "description1": "Collections organize vector representations of your text and images in a local SQLite database.",
+    "description2": "Creating a collection enables semantic search in your workflows, allowing nodes to find and process data based on conceptual meaning rather than exact keyword matches.",
+    "nodeList": "Key nodes include <strong>Index Image</strong> and <strong>Index Text Chunk</strong> for populating data, and <strong>Query Image</strong>, <strong>Query Text</strong>, or <strong>Hybrid Search</strong> for retrieval."
+  },
+  "item": {
+    "deleteTooltip": "Delete this collection",
+    "dropFiles": "Drop files to upload",
+    "collectionTooltip": "Collection: {{name}}",
+    "docCount": "Number of documents in this collection",
+    "itemOne": "{{count}} item",
+    "itemOther": "{{count}} items",
+    "embeddingTooltip": "Model used for embedding documents",
+    "workflowTooltip": "Click to change the ingestion workflow for this collection",
+    "noWorkflow": "No workflow"
+  },
+  "indexing": {
+    "progress": "Indexing {{current}} of {{total}} documents",
+    "eta": "ETA: {{value}}"
+  },
+  "list": {
+    "countOne": "{{count}} collection",
+    "countOther": "{{count}} collections",
+    "loading": "Loading collections",
+    "errorTitle": "Couldn't load collections",
+    "errorDesc": "Try again later."
+  },
+  "deleteDialog": {
+    "title": "Delete this collection?",
+    "content": "This will permanently delete the collection \"{{name}}\"."
+  },
+  "indexReport": {
+    "title": "Indexing report",
+    "intro": "The following files encountered errors during indexing:"
+  },
+  "error": {
+    "createFailed": "Failed to create collection",
+    "updateSuccess": "Collection updated successfully",
+    "updateFailed": "Failed to update collection: {{message}}"
+  }
+}
