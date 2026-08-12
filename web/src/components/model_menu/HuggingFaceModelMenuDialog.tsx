@@ -1,4 +1,5 @@
 import { useMemo, memo } from "react";
+import { useTranslation } from "react-i18next";
 import ModelMenuDialogBase from "./shared/ModelMenuDialogBase";
 import type { ImageModel, ModelPack, UnifiedModel } from "../../stores/ApiTypes";
 import { useHuggingFaceImageModelMenuStore } from "../../stores/ModelMenuStore";
@@ -93,6 +94,8 @@ function HuggingFaceModelMenuDialog({
     };
   }, [modelData, recommendedModelIds, workerCachedIds]);
 
+  const { t } = useTranslation("models");
+
   return (
     <ModelMenuDialogBase<ImageModel>
       open={open}
@@ -100,8 +103,8 @@ function HuggingFaceModelMenuDialog({
       onClose={onClose}
       modelData={sortedModelData}
       onModelChange={onModelChange}
-      title="Select HuggingFace Model"
-      searchPlaceholder="Search HuggingFace models..."
+      title={t("dialog.selectHuggingface")}
+      searchPlaceholder={t("dialog.searchHuggingface")}
       storeHook={useHuggingFaceImageModelMenuStore}
       recommendedModels={recommendedModels}
       modelPacks={modelPacks}

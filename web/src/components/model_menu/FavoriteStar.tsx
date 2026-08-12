@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useCallback, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { FavoriteButton, MOTION } from "../ui_primitives";
 import useModelPreferencesStore from "../../stores/ModelPreferencesStore";
 
@@ -34,6 +35,7 @@ const FavoriteStar: React.FC<FavoriteStarProps> = memo(function FavoriteStar({
     s.favorites.has(`${provider}:${id}`)
   );
   const toggleFavorite = useModelPreferencesStore((s) => s.toggleFavorite);
+  const { t } = useTranslation("models");
 
   const handleToggle = useCallback(() => {
     toggleFavorite(provider, id);
@@ -52,8 +54,8 @@ const FavoriteStar: React.FC<FavoriteStarProps> = memo(function FavoriteStar({
         onToggle={handleToggle}
         variant="star"
         buttonSize={size}
-        addTooltip="Favorite"
-        removeTooltip="Unfavorite"
+        addTooltip={t("defaultModels.favorite.add")}
+        removeTooltip={t("defaultModels.favorite.remove")}
         stopPropagation={stopPropagation}
       />
     </span>

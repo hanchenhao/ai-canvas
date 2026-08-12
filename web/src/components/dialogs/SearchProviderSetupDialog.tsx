@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   Dialog,
@@ -20,13 +21,6 @@ import {
   type SerpProviderId
 } from "../../utils/searchProviders";
 
-const PROVIDER_OPTIONS: SelectOption[] = Object.values(
-  SEARCH_PROVIDER_CONFIGS
-).map((config) => ({
-  value: config.id,
-  label: config.free ? `${config.label} (Free)` : config.label
-}));
-
 /**
  * Pre-run prompt shown when a node uses a web-search tool but no search
  * provider is configured. Lets the user pick a provider and paste its API key
@@ -34,6 +28,7 @@ const PROVIDER_OPTIONS: SelectOption[] = Object.values(
  * Mounted once at the app root; driven by {@link useSearchProviderCalloutStore}.
  */
 const SearchProviderSetupDialog: React.FC = () => {
+  const { t } = useTranslation(["models"]);
   const open = useSearchProviderCalloutStore((s) => s.open);
   const nodes = useSearchProviderCalloutStore((s) => s.nodes);
   const dismiss = useSearchProviderCalloutStore((s) => s.dismiss);
@@ -49,6 +44,17 @@ const SearchProviderSetupDialog: React.FC = () => {
   const [saving, setSaving] = useState(false);
 
   const config = SEARCH_PROVIDER_CONFIGS[provider];
+
+  const providerOptions = useMemo<SelectOption[]>(
+    () =>
+      Object.values(SEARCH_PROVIDER_CONFIGS).map((cfg) => ({
+        value: cfg.id,
+        label: cfg.free
+          ? `${cfg.label} ${t("models:apiKey.searchProvider.freeSuffix")}`
+          : cfg.label
+      })),
+    [t]
+  );
 
   const handleProviderChange = useCallback((value: string) => {
     setProvider(value as SerpProviderId);
@@ -83,7 +89,9 @@ const SearchProviderSetupDialog: React.FC = () => {
       queryClient.invalidateQueries({ queryKey: ["settings"] });
       queryClient.invalidateQueries({ queryKey: ["secrets"] });
       addNotification({
-        content: `${config.label} configured — you can run the workflow now.`,
+        content: t("models:apiKey.searchProvider.setup.saveSuccess", {
+          name: config.label
+        }),
         type: "success",
         alert: true
       });
@@ -93,7 +101,7 @@ const SearchProviderSetupDialog: React.FC = () => {
         content:
           error instanceof Error
             ? error.message
-            : "Failed to save search provider",
+            : t("models:apiKey.searchProvider.setup.saveFailed"),
         type: "error",
         alert: true
       });
@@ -121,28 +129,32 @@ const SearchProviderSetupDialog: React.FC = () => {
     <Dialog
       open={open}
       onClose={dismiss}
-      title="Set up web search"
+      title={t("models:apiKey.searchProvider.setup.title")}
       onConfirm={handleSave}
       onCancel={dismiss}
-      confirmText="Save & continue"
-      cancelText="Cancel"
+      confirmText={t("models:apiKey.searchProvider.setup.confirm")}
+      cancelText={t("models:apiKey.searchProvider.setup.cancel")}
       confirmDisabled={!allFilled}
       isLoading={saving}
       content={
         <FlexColumn gap={2}>
           <Text>
             {nodeNames
-              ? `${nodeNames} uses a web-search tool, but no search provider is configured. `
-              : "This agent uses a web-search tool, but no search provider is configured. "}
-            Add one below to run the workflow.
+              ? t("models:apiKey.searchProvider.setup.introWithNodes", {
+                  nodes: nodeNames
+                })
+              : t("models:apiKey.searchProvider.setup.introGeneric")}
+            {t("models:apiKey.searchProvider.setup.addOneBelow")}
           </Text>
 
           <SelectField
-            label="Search provider"
+            label={t("models:apiKey.searchProvider.setup.selectLabel")}
             value={provider}
             onChange={handleProviderChange}
-            options={PROVIDER_OPTIONS}
-            description={config.description}
+            options={providerOptions}
+            description={t(
+              `models:apiKey.searchProvider.providers.${config.id}.description`
+            )}
             size="small"
           />
 
@@ -163,9 +175,14 @@ const SearchProviderSetupDialog: React.FC = () => {
 
           <ExternalLink
             href={config.getApiKeyUrl}
-            tooltipText={`Visit ${config.label} to get your API key`}
+            tooltipText={t(
+              "models:apiKey.searchProvider.setup.getKeyTooltip",
+              { name: config.label }
+            )}
           >
-            {config.getApiKeyLabel}
+            {t(
+              `models:apiKey.searchProvider.providers.${config.id}.getKeyLabel`
+            )}
           </ExternalLink>
         </FlexColumn>
       }

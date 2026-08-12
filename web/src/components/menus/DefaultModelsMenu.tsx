@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, FlexRow, EditorButton } from "../ui_primitives";
 import useModelPreferencesStore from "../../stores/ModelPreferencesStore";
 import LanguageModelSelect from "../properties/LanguageModelSelect";
@@ -12,33 +13,42 @@ import { CODE_MODEL_PREFERENCE } from "../../hooks/useCodeAuthoringModel";
 const MODEL_TYPE_CONFIG = [
   {
     type: "language_model",
-    label: "Language Model",
+    labelKey: "defaultModels.language",
     Select: LanguageModelSelect
   },
-  { type: "image_model", label: "Image Model", Select: ImageModelSelect },
+  {
+    type: "image_model",
+    labelKey: "defaultModels.image",
+    Select: ImageModelSelect
+  },
   {
     type: "embedding_model",
-    label: "Embedding Model",
+    labelKey: "defaultModels.embedding",
     Select: EmbeddingModelSelect
   },
   {
     type: "tts_model",
-    label: "Text-to-Speech Model",
+    labelKey: "defaultModels.tts",
     Select: TTSModelSelect
   },
   {
     type: "asr_model",
-    label: "Speech Recognition Model",
+    labelKey: "defaultModels.asr",
     Select: ASRModelSelect
   },
-  { type: "video_model", label: "Video Model", Select: VideoModelSelect },
+  {
+    type: "video_model",
+    labelKey: "defaultModels.video",
+    Select: VideoModelSelect
+  },
   {
     type: CODE_MODEL_PREFERENCE,
-    label: "Code Generation",
+    labelKey: "defaultModels.code",
     Select: LanguageModelSelect,
     // The submission is a tool call, so non-tool-capable models are hidden.
-    selectProps: { placeholder: "Use chat model", requireToolSupport: true },
-    hint: "Writes Code Node code. Falls back to the chat model when unset."
+    placeholderKey: "defaultModels.codePlaceholder",
+    requireToolSupport: true,
+    hintKey: "defaultModels.codeHint"
   }
 ] as const;
 
@@ -46,15 +56,15 @@ function DefaultModelsMenu() {
   const defaults = useModelPreferencesStore((s) => s.defaults);
   const setDefault = useModelPreferencesStore((s) => s.setDefault);
   const clearDefault = useModelPreferencesStore((s) => s.clearDefault);
+  const { t } = useTranslation("models");
 
   return (
     <div>
       <Text size="big" id="default-models" className="settings-heading">
-        Default Models
+        {t("defaultModels.title")}
       </Text>
       <Text className="description" sx={{ mb: 2 }}>
-        Set default models for each type. These will auto-fill when you create
-        new nodes.
+        {t("defaultModels.description")}
       </Text>
 
       <div className="default-models-list">
@@ -62,10 +72,20 @@ function DefaultModelsMenu() {
           <DefaultModelRow
             key={config.type}
             modelType={config.type}
-            label={config.label}
+            label={t(config.labelKey)}
             Select={config.Select}
-            selectProps={"selectProps" in config ? config.selectProps : undefined}
-            hint={"hint" in config ? config.hint : undefined}
+            selectProps={
+              "placeholderKey" in config && config.placeholderKey
+                ? {
+                    placeholder: t(config.placeholderKey),
+                    requireToolSupport:
+                      "requireToolSupport" in config
+                        ? config.requireToolSupport
+                        : undefined
+                  }
+                : undefined
+            }
+            hint={"hintKey" in config && config.hintKey ? t(config.hintKey) : undefined}
             current={defaults[config.type]}
             onSelect={setDefault}
             onClear={clearDefault}
@@ -110,6 +130,7 @@ function DefaultModelRow({
   onSelect,
   onClear
 }: DefaultModelRowProps) {
+  const { t } = useTranslation("models");
   const handleChange = useCallback(
     (value: unknown) => {
       const v = value as { provider?: string; id?: string; name?: string };
@@ -142,7 +163,7 @@ function DefaultModelRow({
         />
         {current && (
           <EditorButton size="small" onClick={handleClear}>
-            Clear
+            {t("defaultModels.clear")}
           </EditorButton>
         )}
       </FlexRow>

@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 
 import React, { useCallback, useEffect, useMemo, useRef, memo } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   FlexRow,
@@ -183,6 +184,7 @@ function ModelList<TModel extends ModelSelectorModel>({
   const theme = useTheme();
   const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation("models");
 
   const handleOpenSettings = useCallback(() => {
     navigate("/settings?tab=1");
@@ -288,11 +290,11 @@ function ModelList<TModel extends ModelSelectorModel>({
       const isActive = index === activeIndex;
       const tooltipTitle =
         !providerEnabled && !hasKey
-          ? "Enable provider and add API key in Settings to use this model"
+          ? t("modelList.enableProviderKeyHint")
           : !providerEnabled
-            ? "Enable provider in the left sidebar to use this model"
+            ? t("modelList.enableProviderHint")
             : !hasKey
-              ? "Add API key in Settings to use this model"
+              ? t("modelList.addKeyHint")
               : "";
       return (
         <div role="listitem" style={style}>
@@ -338,21 +340,21 @@ function ModelList<TModel extends ModelSelectorModel>({
                     </span>
                     {available && isLocalProvider(m.provider) && (
                       <Tooltip
-                        title="Runs locally on your device"
+                        title={t("modelList.localBadgeTooltip")}
                         placement="top"
                       >
                         <span
                           className="badge-local"
                           style={badgeStyle}
                         >
-                          Local
+                          {t("provider.local")}
                         </span>
                       </Tooltip>
                     )}
                     {available &&
                       isHuggingFaceInferenceProvider(m.provider) && (
                         <Tooltip
-                          title="Hugging Face Inference API (Paid)"
+                          title={t("modelList.hfApiBadgeTooltip")}
                           placement="top"
                         >
                           <span
@@ -370,7 +372,7 @@ function ModelList<TModel extends ModelSelectorModel>({
                       isCloudProvider(m.provider) &&
                       !isHuggingFaceInferenceProvider(m.provider) && (
                         <Tooltip
-                          title="Paid API service (Remote)"
+                          title={t("modelList.apiBadgeTooltip")}
                           placement="top"
                         >
                           <span
@@ -388,7 +390,7 @@ function ModelList<TModel extends ModelSelectorModel>({
                 }
                 secondary={
                   <span style={secondaryTextStyle}>
-                    {m.path ? m.name : m.provider ? `Provider: ${m.provider}` : ""}
+                    {m.path ? m.name : m.provider ? t("modelList.providerLabel", { provider: m.provider }) : ""}
                   </span>
                 }
                 primaryTypographyProps={PRIMARY_TYPOGRAPHY_PROPS}
@@ -409,7 +411,8 @@ function ModelList<TModel extends ModelSelectorModel>({
       secondaryTextStyle,
       searchTerm,
       theme.vars.palette.primary.main,
-      modelType
+      modelType,
+      t
     ]
   );
 
@@ -440,7 +443,7 @@ function ModelList<TModel extends ModelSelectorModel>({
                   letterSpacing: 0.5
                 }}
               >
-                Available to download
+                {t("modelList.availableToDownload")}
               </Text>
             </FlexRow>
           </div>
@@ -467,18 +470,18 @@ function ModelList<TModel extends ModelSelectorModel>({
           <EmptyState
             variant="no-results"
             size="small"
-            title="No models found"
-            description={`No models match "${searchTerm}". Try a different term or enable more providers.`}
+            title={t("modelList.noModelsFound")}
+            description={t("modelList.noModelsMatch", { term: searchTerm })}
           />
         ) : hasDownloads ? (
           <EmptyState
             variant="empty"
             size="small"
             icon={<DownloadIcon className="empty-icon" />}
-            title="No models yet — let's get started"
+            title={t("modelList.noModelsYet")}
             description={
               <>
-                Download a local model or add an API key for a cloud provider to get going.
+                {t("modelList.noModelsYetDesc")}
                 {" "}
                 <Box
                   component="button"
@@ -495,21 +498,21 @@ function ModelList<TModel extends ModelSelectorModel>({
                   }}
                   onClick={handleOpenSettings}
                 >
-                  Open Settings
+                  {t("modelList.openSettings")}
                 </Box>
               </>
             }
-            actionText="Open Settings"
+            actionText={t("modelList.openSettings")}
             onAction={handleOpenSettings}
           />
         ) : (
           <EmptyState
             variant="empty"
             size="small"
-            title="No models available"
+            title={t("modelList.noModelsAvailable")}
             description={
               <>
-                Enable a provider in the left sidebar or add an API key in{" "}
+                {t("modelList.noModelsAvailableDesc")}{" "}
                 <Box
                   component="button"
                   type="button"
@@ -525,12 +528,12 @@ function ModelList<TModel extends ModelSelectorModel>({
                   }}
                   onClick={handleOpenSettings}
                 >
-                  Settings
+                  {t("modelList.settings")}
                 </Box>
                 .
               </>
             }
-            actionText="Open Settings"
+            actionText={t("modelList.openSettings")}
             onAction={handleOpenSettings}
           />
         )

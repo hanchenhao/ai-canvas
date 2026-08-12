@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   ToolbarIconButton,
@@ -52,6 +53,7 @@ const ModelFiltersBar: React.FC<ModelFiltersBarProps> = () => {
   const sizeBucket = useModelFiltersStore((state) => state.sizeBucket);
   const toggleType = useModelFiltersStore((state) => state.toggleType);
   const setSizeBucket = useModelFiltersStore((state) => state.setSizeBucket);
+  const { t } = useTranslation("models");
 
   // Local anchors for persistent menus
   const [typeAnchor, setTypeAnchor] = React.useState<null | HTMLElement>(null);
@@ -65,7 +67,7 @@ const ModelFiltersBar: React.FC<ModelFiltersBarProps> = () => {
       {/* Type dropdown (multi) */}
       <ToolbarIconButton
         icon={<CategoryIcon fontSize="small" />}
-        tooltip={selectedTypes.length ? `Type: ${selectedTypes.join(", ")}` : "Filter by Type"}
+        tooltip={selectedTypes.length ? t("filters.typeSelected", { types: selectedTypes.join(", ") }) : t("filters.filterByType")}
         onClick={(e) => setTypeAnchor(e.currentTarget)}
         size="small"
         active={selectedTypes.length > 0 || openType}
@@ -94,7 +96,7 @@ const ModelFiltersBar: React.FC<ModelFiltersBarProps> = () => {
       {/* Size dropdown (single) */}
       <ToolbarIconButton
         icon={<StraightenIcon fontSize="small" />}
-        tooltip={sizeBucket ? `Size: ${sizeBucket}` : "Filter by Size"}
+        tooltip={sizeBucket ? t("filters.sizeSelected", { size: sizeBucket }) : t("filters.filterBySize")}
         onClick={(e) => setSizeAnchor(e.currentTarget)}
         size="small"
         active={!!sizeBucket || openSize}
@@ -112,7 +114,7 @@ const ModelFiltersBar: React.FC<ModelFiltersBarProps> = () => {
             setSizeBucket(null);
           }}
         >
-          <ListItemText primary="Any size" />
+          <ListItemText primary={t("filters.anySize")} />
         </EditorMenuItem>
         {sizeOptions.map((s) => (
           <EditorMenuItem

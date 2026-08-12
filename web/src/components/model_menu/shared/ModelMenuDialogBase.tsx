@@ -1,6 +1,7 @@
 import { useTheme } from "@mui/material/styles";
 
 import React, { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { isProduction } from "../../../lib/env";
 import type { PopoverOrigin } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
@@ -155,8 +156,8 @@ function ModelMenuDialogBase<TModel extends ModelSelectorModel>({
   anchorEl,
   modelData,
   onModelChange,
-  title = "Select Model",
-  searchPlaceholder = "Search models...",
+  title,
+  searchPlaceholder,
   storeHook,
   recommendedModels = [],
   modelPacks = [],
@@ -166,6 +167,9 @@ function ModelMenuDialogBase<TModel extends ModelSelectorModel>({
 
   const isError = !!fetchedError;
   const theme = useTheme();
+  const { t } = useTranslation("models");
+  const resolvedTitle = title ?? t("dialog.selectModel");
+  const resolvedSearchPlaceholder = searchPlaceholder ?? t("dialog.searchModels");
   // Below `sm` the 600x560 popover no longer fits, so the menu takes over the
   // whole viewport and the provider rail becomes a horizontal strip.
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -465,7 +469,7 @@ function ModelMenuDialogBase<TModel extends ModelSelectorModel>({
             sx={{ fontSize: "var(--fontSizeBig)", color: "inherit" }}
           />
         }
-        label="Favorites"
+        label={t("dialog.favorites")}
         active={customView === "favorites"}
         horizontal={isMobile}
         onClick={handleSetFavoritesView}
@@ -477,7 +481,7 @@ function ModelMenuDialogBase<TModel extends ModelSelectorModel>({
             sx={{ fontSize: "var(--fontSizeBig)", color: "inherit" }}
           />
         }
-        label="Recent"
+        label={t("dialog.recent")}
         active={customView === "recent"}
         horizontal={isMobile}
         onClick={handleSetRecentView}
@@ -645,11 +649,11 @@ function ModelMenuDialogBase<TModel extends ModelSelectorModel>({
           }}
         >
           <Text weight={600} truncate>
-            {title}
+            {resolvedTitle}
           </Text>
           <ToolbarIconButton
             icon={<CloseIcon fontSize="small" />}
-            tooltip="Close"
+            tooltip={t("dialog.close")}
             onClick={onClose}
             size="small"
             nodrag={false}
@@ -672,7 +676,7 @@ function ModelMenuDialogBase<TModel extends ModelSelectorModel>({
           <Box sx={{ flex: 1, minWidth: 0 }}>
             <SearchInput
               onSearchChange={setSearch}
-              placeholder={searchPlaceholder}
+              placeholder={resolvedSearchPlaceholder}
               debounceTime={150}
               // Autofocusing on mobile raises the keyboard over the list.
               focusSearchInput={!isMobile}
@@ -685,7 +689,7 @@ function ModelMenuDialogBase<TModel extends ModelSelectorModel>({
           </Box>
           <ToolbarIconButton
             icon={<RefreshIcon fontSize="small" />}
-            tooltip="Refresh models"
+            tooltip={t("dialog.refresh")}
             onClick={handleRefresh}
             disabled={!refetch || !!isFetching}
             size="small"
@@ -714,8 +718,8 @@ function ModelMenuDialogBase<TModel extends ModelSelectorModel>({
               <LoadingSpinner size="small" />
               <Caption sx={{ color: "text.secondary" }}>
                 {loadingProgress
-                  ? `Loading models: ${loadingProgress.loaded}/${loadingProgress.total} providers...`
-                  : "Loading models..."}
+                  ? t("modelList.loadingModelsProgress", { loaded: loadingProgress.loaded, total: loadingProgress.total })
+                  : t("modelList.loadingModels")}
               </Caption>
             </>
           )}
@@ -724,11 +728,11 @@ function ModelMenuDialogBase<TModel extends ModelSelectorModel>({
               title={
                 <Box sx={{ maxWidth: 300 }}>
                   <Caption sx={{ fontWeight: 600 }}>
-                    Failed to load models from:
+                    {t("modelList.failedToLoadFrom")}
                   </Caption>
                   {providerErrors.map((pe) => (
                     <Caption key={pe.provider} component="div" sx={{ mt: 0.5 }}>
-                      • {pe.provider}: {pe.error instanceof Error ? pe.error.message : "Unknown error"}
+                      • {pe.provider}: {pe.error instanceof Error ? pe.error.message : t("modelList.unknownError")}
                     </Caption>
                   ))}
                 </Box>
@@ -737,7 +741,9 @@ function ModelMenuDialogBase<TModel extends ModelSelectorModel>({
               <FlexRow gap={0.5} align="center" sx={{ cursor: "help" }}>
                 <WarningAmberIcon sx={{ fontSize: 16, color: "warning.main" }} />
                 <Caption sx={{ color: "warning.main" }}>
-                  {providerErrors.length} provider{providerErrors.length > 1 ? "s" : ""} failed to load
+                  {providerErrors.length > 1
+                    ? t("modelList.providersFailedMany", { count: providerErrors.length })
+                    : t("modelList.providersFailedOne", { count: providerErrors.length })}
                 </Caption>
               </FlexRow>
             </Tooltip>

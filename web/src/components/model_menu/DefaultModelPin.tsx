@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useCallback, memo } from "react";
+import { useTranslation } from "react-i18next";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import { StateIconButton, MOTION } from "../ui_primitives";
@@ -41,6 +42,7 @@ const DefaultModelPin: React.FC<DefaultModelPinProps> = memo(
     );
     const setDefault = useModelPreferencesStore((s) => s.setDefault);
     const clearDefault = useModelPreferencesStore((s) => s.clearDefault);
+    const { t } = useTranslation("models");
 
     const isDefault =
       !!current && current.provider === provider && current.id === id;
@@ -75,12 +77,14 @@ const DefaultModelPin: React.FC<DefaultModelPinProps> = memo(
           size={size}
           tooltip={
             isDefault
-              ? "Default for new nodes of this type — click to clear"
-              : "Set as default for new nodes of this type"
+              ? t("defaultModels.pin.clearTooltip")
+              : t("defaultModels.pin.setTooltip")
           }
           tooltipPlacement="top"
           ariaLabel={
-            isDefault ? "Clear default model" : "Set as default model"
+            isDefault
+              ? t("defaultModels.pin.clearAria")
+              : t("defaultModels.pin.setAria")
           }
         />
       </span>

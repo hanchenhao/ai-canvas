@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useState, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -105,6 +106,7 @@ export const ProviderCard = memo(function ProviderCard({
   onDelete
 }: ProviderCardProps) {
   const theme = useTheme();
+  const { t } = useTranslation("models");
   const oauth = useOAuthConnection(meta.oauth ?? null);
   const validateSecret = useSecretsStore((s) => s.validateSecret);
   const [testing, setTesting] = useState(false);
@@ -279,7 +281,7 @@ export const ProviderCard = memo(function ProviderCard({
                 whiteSpace: "nowrap"
               }}
             >
-              {isConnected ? "Connected" : "Not connected"}
+              {isConnected ? t("apiKey.connected") : t("apiKey.notConnected")}
             </Caption>
           </FlexRow>
           {oauth.isConnected && !meta.oauthOnly && (
@@ -301,14 +303,13 @@ export const ProviderCard = memo(function ProviderCard({
                   whiteSpace: "nowrap"
                 }}
               >
-                Connected via OAuth
+                {t("apiKey.connectedViaOAuth")}
               </Caption>
             </FlexRow>
           )}
           {isConnected && secret.updated_at && (
             <Caption size="smaller" sx={{ opacity: 0.45, whiteSpace: "nowrap" }}>
-              Last used{" "}
-              {new Date(secret.updated_at).toLocaleDateString()}
+              {t("apiKey.lastUsed", { date: new Date(secret.updated_at).toLocaleDateString() })}
             </Caption>
           )}
           {testResult && (
@@ -333,8 +334,8 @@ export const ProviderCard = memo(function ProviderCard({
           {!isConnected && (
             <Caption size="smaller" sx={{ opacity: 0.45, whiteSpace: "nowrap" }}>
               {meta.oauthOnly
-                ? "Sign in to get started."
-                : "Add your API key to get started."}
+                ? t("apiKey.signInToStart")
+                : t("apiKey.addKeyToStart")}
             </Caption>
           )}
         </FlexColumn>
@@ -347,7 +348,7 @@ export const ProviderCard = memo(function ProviderCard({
             endIcon={<OpenInNewIcon sx={{ fontSize: 14 }} />}
             onClick={() => window.open(meta.docsUrl, "_blank", "noopener,noreferrer")}
           >
-            Docs
+            {t("apiKey.docs")}
           </EditorButton>
 
           {meta.oauth &&
@@ -360,7 +361,7 @@ export const ProviderCard = memo(function ProviderCard({
                     startIcon={<LinkOffIcon sx={{ fontSize: 14 }} />}
                     onClick={oauth.disconnect}
                   >
-                    Disconnect
+                    {t("apiKey.disconnect")}
                   </EditorButton>
                 )
               : (
@@ -373,8 +374,8 @@ export const ProviderCard = memo(function ProviderCard({
                     disabled={oauth.isConnecting}
                   >
                     {oauth.isConnecting
-                      ? "Connecting…"
-                      : `Sign in with ${meta.name}`}
+                      ? t("apiKey.connecting")
+                      : t("apiKey.signInWith", { name: meta.name })}
                   </EditorButton>
                 ))}
 
@@ -387,7 +388,7 @@ export const ProviderCard = memo(function ProviderCard({
                 onClick={handleTest}
                 disabled={testing}
               >
-                {testing ? "Testing…" : "Test"}
+                {testing ? t("apiKey.testing") : t("apiKey.test")}
               </EditorButton>
               <EditorButton
                 density="compact"
@@ -395,15 +396,15 @@ export const ProviderCard = memo(function ProviderCard({
                 size="small"
                 onClick={handleManage}
               >
-                Manage
+                {t("apiKey.manage")}
               </EditorButton>
-              <Tooltip title="Delete key">
+              <Tooltip title={t("apiKey.deleteKey")}>
                 <ToolbarIconButton
                   icon={<DeleteIcon fontSize="small" />}
                   size="small"
                   color="error"
                   onClick={handleDelete}
-                  aria-label={`Delete ${meta.name} API key`}
+                  aria-label={t("apiKey.deleteKeyAria", { name: meta.name })}
                 />
               </Tooltip>
             </>
@@ -414,7 +415,7 @@ export const ProviderCard = memo(function ProviderCard({
               size="small"
               onClick={handleConnect}
             >
-              Connect
+              {t("apiKey.connect")}
             </EditorButton>
           )}
         </FlexRow>
@@ -445,6 +446,7 @@ const HERO_LOGOS: Array<{ name: string; icon: string; mono?: boolean }> = [
 ];
 
 const ProviderHero = memo(function ProviderHero({ theme }: { theme: Theme }) {
+  const { t } = useTranslation("models");
   return (
     <Card
       variant="outlined"
@@ -458,12 +460,10 @@ const ProviderHero = memo(function ProviderHero({ theme }: { theme: Theme }) {
     >
       <FlexColumn gap={2}>
         <Text size="big" weight={600}>
-          Models &amp; Providers
+          {t("apiKey.heroTitle")}
         </Text>
         <Caption sx={{ opacity: 0.65, lineHeight: 1.5, maxWidth: 520 }}>
-          Connect the AI providers you want to use. NodeTool unlocks their
-          language, image, video, audio, and embedding models across the editor
-          and your workflows.
+          {t("apiKey.heroDescription")}
         </Caption>
         <FlexRow gap={1.5} sx={{ flexWrap: "wrap", marginTop: theme.spacing(1) }}>
           {HERO_LOGOS.map((logo) => (
@@ -514,6 +514,24 @@ const GetStartedBanner = memo(function GetStartedBanner({
 }: {
   theme: Theme;
 }) {
+  const { t } = useTranslation("models");
+  const steps = [
+    {
+      num: 1,
+      title: t("apiKey.getStarted.step1Title"),
+      desc: t("apiKey.getStarted.step1Desc")
+    },
+    {
+      num: 2,
+      title: t("apiKey.getStarted.step2Title"),
+      desc: t("apiKey.getStarted.step2Desc")
+    },
+    {
+      num: 3,
+      title: t("apiKey.getStarted.step3Title"),
+      desc: t("apiKey.getStarted.step3Desc")
+    }
+  ];
   return (
     <Card
       variant="outlined"
@@ -528,31 +546,15 @@ const GetStartedBanner = memo(function GetStartedBanner({
       <FlexRow justify="space-between" align="flex-start" gap={2} wrap>
         <FlexColumn sx={{ maxWidth: 280 }}>
           <Text size="normal" weight={600} sx={{ marginBottom: theme.spacing(1) }}>
-            Get started
+            {t("apiKey.getStarted.title")}
           </Text>
           <Caption sx={{ opacity: 0.6, lineHeight: 1.5 }}>
-            Connect a provider to unlock powerful models and features.
+            {t("apiKey.getStarted.description")}
           </Caption>
         </FlexColumn>
 
         <FlexRow gap={2} align="flex-start" sx={{ flexWrap: "wrap" }}>
-          {[
-            {
-              num: 1,
-              title: "Choose a provider",
-              desc: "Select the provider you want to use."
-            },
-            {
-              num: 2,
-              title: "Add your API key",
-              desc: "Paste your key securely and test the connection."
-            },
-            {
-              num: 3,
-              title: "Start building",
-              desc: "Use models in the editor and build workflows."
-            }
-          ].map((step) => (
+          {steps.map((step) => (
             <FlexRow key={step.num} align="flex-start" gap={1}>
               <FlexRow
                 align="center"
@@ -630,14 +632,14 @@ const PROVIDER_ICON_GLYPH_PX = 28;
 const STATUS_DOT_PX = 6;
 
 const SECTION_ORDER = ["popular", "language", "media", "gateways", "search", "compute", "advanced"] as const;
-const SECTION_TITLES: Record<string, string> = {
-  popular: "Popular",
-  language: "Language Models",
-  media: "Media Generation",
-  gateways: "Gateways & Hubs",
-  search: "Web Search",
-  compute: "Compute & Local",
-  advanced: "Services & Advanced"
+const SECTION_TITLE_KEYS: Record<string, string> = {
+  popular: "apiKey.section.popular",
+  language: "apiKey.section.language",
+  media: "apiKey.section.media",
+  gateways: "apiKey.section.gateways",
+  search: "apiKey.section.search",
+  compute: "apiKey.section.compute",
+  advanced: "apiKey.section.advanced"
 };
 
 /* ------------------------------------------------------------------ */
@@ -652,6 +654,7 @@ export const APIKeysTabContent = memo(function APIKeysTabContent({
   searchTerm = ""
 }: APIKeysTabContentProps) {
   const theme = useTheme();
+  const { t } = useTranslation("models");
   const secrets = useSecretsStore((state) => state.secrets);
   const safeSecrets = useMemo(() => secrets ?? [], [secrets]);
 
@@ -801,7 +804,7 @@ export const APIKeysTabContent = memo(function APIKeysTabContent({
         if (!meta.fields.every((f) => formValues[f.key])) {
           addNotification({
             type: "error",
-            content: "All fields are required",
+            content: t("apiKey.allFieldsRequired"),
             dismissable: true
           });
           return;
@@ -814,7 +817,7 @@ export const APIKeysTabContent = memo(function APIKeysTabContent({
         if (!formValue) {
           addNotification({
             type: "error",
-            content: "Secret value is required",
+            content: t("apiKey.secretRequired"),
             dismissable: true
           });
           return;
@@ -824,7 +827,7 @@ export const APIKeysTabContent = memo(function APIKeysTabContent({
 
       addNotification({
         type: "success",
-        content: `${meta?.name || editingSecret.key} API key updated`,
+        content: t("apiKey.updateSuccess", { name: meta?.name || editingSecret.key }),
         alert: true
       });
       setDialogOpen(false);
@@ -834,11 +837,11 @@ export const APIKeysTabContent = memo(function APIKeysTabContent({
     } catch (err) {
       addNotification({
         type: "error",
-        content: `Failed to update secret: ${err instanceof Error ? err.message : String(err)}`,
+        content: t("apiKey.updateFailed", { error: err instanceof Error ? err.message : String(err) }),
         dismissable: true
       });
     }
-  }, [editingSecret, formValue, formValues, updateSecret, addNotification]);
+  }, [editingSecret, formValue, formValues, updateSecret, addNotification, t]);
 
   const confirmDelete = useCallback(async () => {
     if (!secretToDelete) return;
@@ -855,19 +858,19 @@ export const APIKeysTabContent = memo(function APIKeysTabContent({
       }
       addNotification({
         type: "success",
-        content: `${meta?.name || secretToDelete.key} API key deleted`,
+        content: t("apiKey.deleteSuccess", { name: meta?.name || secretToDelete.key }),
         alert: true
       });
     } catch (err) {
       addNotification({
         type: "error",
-        content: `Failed to delete secret: ${err instanceof Error ? err.message : String(err)}`,
+        content: t("apiKey.deleteFailed", { error: err instanceof Error ? err.message : String(err) }),
         dismissable: true
       });
     }
     setDeleteDialogOpen(false);
     setSecretToDelete(null);
-  }, [secretToDelete, deleteSecret, addNotification]);
+  }, [secretToDelete, deleteSecret, addNotification, t]);
 
   const handleCloseDialog = useCallback(() => {
     setDialogOpen(false);
@@ -910,15 +913,15 @@ export const APIKeysTabContent = memo(function APIKeysTabContent({
       {!hasContent && lowerSearch && (
         <EmptyState
           variant="no-results"
-          title="No providers found"
-          description={`No providers match "${searchTerm}"`}
+          title={t("apiKey.noProvidersFound")}
+          description={t("apiKey.noProvidersMatch", { term: searchTerm })}
         />
       )}
 
       {connected.length > 0 && (
         <div>
           <SectionTitle
-            title="Connected Providers"
+            title={t("apiKey.section.connectedProviders")}
             count={connected.length}
             theme={theme}
           />
@@ -957,7 +960,7 @@ export const APIKeysTabContent = memo(function APIKeysTabContent({
 
         if (allInSection.length === 0) return null;
 
-        const sectionTitle = SECTION_TITLES[sectionKey];
+        const sectionTitle = t(SECTION_TITLE_KEYS[sectionKey]);
         const isAdvanced = sectionKey === "advanced";
 
         const section = (
@@ -1032,15 +1035,16 @@ export const APIKeysTabContent = memo(function APIKeysTabContent({
               <FlexRow align="center" gap={1}>
                 <LockIcon sx={{ color: "var(--palette-primary-main)", fontSize: 20 }} />
                 <Text size="normal" weight={600}>
-                  {editingSecret?.is_configured ? "Update" : "Connect"}{" "}
-                  {meta?.name || editingSecret.key}
+                  {editingSecret?.is_configured
+                    ? t("apiKey.dialogTitleUpdate", { name: meta?.name || editingSecret.key })
+                    : t("apiKey.dialogTitleConnect", { name: meta?.name || editingSecret.key })}
                 </Text>
               </FlexRow>
             }
             onConfirm={handleSave}
             onCancel={handleCloseDialog}
-            confirmText={editingSecret?.is_configured ? "Update" : "Connect"}
-            cancelText="Cancel"
+            confirmText={editingSecret?.is_configured ? t("apiKey.update") : t("apiKey.connect")}
+            cancelText={t("apiKey.cancel")}
             confirmDisabled={!allFieldsFilled}
           >
             <FlexColumn sx={{ marginTop: theme.spacing(4), gap: theme.spacing(3) }}>
@@ -1059,31 +1063,31 @@ export const APIKeysTabContent = memo(function APIKeysTabContent({
                         }))
                       }
                       fullWidth
-                      placeholder={`Enter ${field.label.toLowerCase()}`}
+                      placeholder={t("apiKey.fieldPlaceholder", { label: field.label.toLowerCase() })}
                       autoFocus={field.key === meta.fields?.[0]?.key}
                       variant="outlined"
                       size="small"
                     />
                   ))}
                   <Caption sx={{ opacity: 0.6 }}>
-                    All fields will be encrypted and stored securely. Never share them publicly.
+                    {t("apiKey.multiFieldCaption")}
                   </Caption>
                 </>
               ) : (
                 <>
                   <TextInput
-                    label="API Key"
+                    label={t("apiKey.apiLabel")}
                     type="password"
                     value={formValue}
                     onChange={(e) => setFormValue(e.target.value)}
                     fullWidth
-                    placeholder="Paste your API key here"
+                    placeholder={t("apiKey.apiPlaceholder")}
                     autoFocus
                     variant="outlined"
                     size="small"
                   />
                   <Caption sx={{ opacity: 0.6 }}>
-                    Your key will be encrypted and stored securely. Never share it publicly.
+                    {t("apiKey.singleFieldCaption")}
                   </Caption>
                 </>
               )}
@@ -1097,10 +1101,10 @@ export const APIKeysTabContent = memo(function APIKeysTabContent({
         open={deleteDialogOpen}
         onClose={handleCloseDelete}
         onConfirm={confirmDelete}
-        title="Delete API Key"
-        content={`Are you sure you want to delete the ${secretToDelete ? getParentProviderMeta(secretToDelete.key)?.name || secretToDelete.key : ""} API key?`}
-        confirmText="Delete"
-        cancelText="Cancel"
+        title={t("apiKey.deleteTitle")}
+        content={t("apiKey.deleteConfirm", { name: secretToDelete ? getParentProviderMeta(secretToDelete.key)?.name || secretToDelete.key : "" })}
+        confirmText={t("apiKey.delete")}
+        cancelText={t("apiKey.cancel")}
       />
     </FlexColumn>
   );
@@ -1112,6 +1116,7 @@ export const APIKeysTabContent = memo(function APIKeysTabContent({
 
 export const SecurityNotice = memo(function SecurityNotice() {
   const theme = useTheme();
+  const { t } = useTranslation("models");
   return (
     <Card
       variant="outlined"
@@ -1133,10 +1138,10 @@ export const SecurityNotice = memo(function SecurityNotice() {
         />
         <FlexColumn sx={{ minWidth: 0 }}>
           <Text size="smaller" weight={600}>
-            Your secrets are safe
+            {t("apiKey.security.title")}
           </Text>
           <Caption size="smaller" sx={{ opacity: 0.6, lineHeight: 1.4, marginTop: theme.spacing(0.5) }}>
-            All API keys are encrypted in the database and never exposed.
+            {t("apiKey.security.description")}
           </Caption>
           <EditorButton
             density="compact"
@@ -1152,7 +1157,7 @@ export const SecurityNotice = memo(function SecurityNotice() {
             }
             sx={{ alignSelf: "flex-start", marginTop: theme.spacing(1) }}
           >
-            Learn more
+            {t("apiKey.security.learnMore")}
           </EditorButton>
         </FlexColumn>
       </FlexRow>
@@ -1166,24 +1171,25 @@ export const SecurityNotice = memo(function SecurityNotice() {
 
 export const APIKeysRightSidebar = memo(function APIKeysRightSidebar() {
   const theme = useTheme();
+  const { t } = useTranslation("models");
 
   const quickLinks = [
     {
       icon: <ModelTrainingIcon sx={{ fontSize: 18 }} />,
-      title: "Supported Models",
-      subtitle: "See models by provider",
+      title: t("apiKey.sidebar.supportedModelsTitle"),
+      subtitle: t("apiKey.sidebar.supportedModelsSubtitle"),
       href: docsLink("providers")
     },
     {
       icon: <MenuBookIcon sx={{ fontSize: 18 }} />,
-      title: "API Documentation",
-      subtitle: "Provider guides & links",
+      title: t("apiKey.sidebar.apiDocsTitle"),
+      subtitle: t("apiKey.sidebar.apiDocsSubtitle"),
       href: docsUrl("providers")
     },
     {
       icon: <HelpOutlineIcon sx={{ fontSize: 18 }} />,
-      title: "Troubleshooting",
-      subtitle: "Common issues & fixes",
+      title: t("apiKey.sidebar.troubleshootingTitle"),
+      subtitle: t("apiKey.sidebar.troubleshootingSubtitle"),
       href: docsLink("troubleshooting")
     }
   ];
@@ -1209,7 +1215,7 @@ export const APIKeysRightSidebar = memo(function APIKeysRightSidebar() {
         }}
       >
         <Text size="small" weight={600} sx={{ marginBottom: theme.spacing(3) }}>
-          Quick Links
+          {t("apiKey.sidebar.quickLinks")}
         </Text>
         <FlexColumn sx={{ gap: theme.spacing(0.5) }}>
           {quickLinks.map((link) => (
@@ -1282,11 +1288,11 @@ export const APIKeysRightSidebar = memo(function APIKeysRightSidebar() {
             sx={{ color: theme.vars.palette.primary.main, fontSize: 20 }}
           />
           <Text size="small" weight={600}>
-            Need API credits?
+            {t("apiKey.sidebar.creditsTitle")}
           </Text>
         </FlexRow>
         <Caption sx={{ opacity: 0.6, lineHeight: 1.5, marginBottom: theme.spacing(3) }}>
-          Get free credits and offers from our partner providers.
+          {t("apiKey.sidebar.creditsDesc")}
         </Caption>
         <EditorButton
           density="compact"
@@ -1302,7 +1308,7 @@ export const APIKeysRightSidebar = memo(function APIKeysRightSidebar() {
             )
           }
         >
-          View offers
+          {t("apiKey.sidebar.viewOffers")}
         </EditorButton>
       </Card>
     </FlexColumn>

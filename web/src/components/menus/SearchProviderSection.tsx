@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useMemo, useCallback, memo } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   FlexRow,
@@ -33,6 +34,7 @@ const SearchProviderSection = memo(function SearchProviderSection({
   settingValues,
   onChange
 }: SearchProviderSectionProps) {
+  const { t } = useTranslation(["models"]);
   const theme = useTheme();
   const selectedProvider = (settingValues["SERP_PROVIDER"] ||
     DEFAULT_SERP_PROVIDER) as SerpProviderId;
@@ -63,12 +65,14 @@ const SearchProviderSection = memo(function SearchProviderSection({
   return (
     <div className="settings-section">
       <Text size="big" id="search-provider" className="settings-heading">
-        Search Provider
+        {t("models:apiKey.searchProvider.heading")}
       </Text>
 
       <div className="settings-item large">
         <FormControl variant="standard" fullWidth sx={{ marginBottom: "1.5em" }}>
-          <InputLabel id="provider-select-label">Provider</InputLabel>
+          <InputLabel id="provider-select-label">
+            {t("models:apiKey.searchProvider.providerLabel")}
+          </InputLabel>
           <Select
             labelId="provider-select-label"
             id="provider-select"
@@ -115,12 +119,18 @@ const SearchProviderSection = memo(function SearchProviderSection({
             }}
           >
             {hasAllCredentials
-              ? "✓ Credentials configured"
-              : "✗ Missing credentials"}
+              ? t("models:apiKey.searchProvider.credentialsConfigured")
+              : t("models:apiKey.searchProvider.credentialsMissing")}
           </Text>
         </FlexRow>
 
-        <Text className="description">{config?.description}</Text>
+        <Text className="description">
+          {config
+            ? t(
+                `models:apiKey.searchProvider.providers.${config.id}.description`
+              )
+            : ""}
+        </Text>
       </div>
 
       {config && (
@@ -162,7 +172,7 @@ const SearchProviderSection = memo(function SearchProviderSection({
                   {isFilled && (
                     <Chip
                       icon={<CheckCircleIcon />}
-                      label="Configured"
+                      label={t("models:apiKey.searchProvider.configured")}
                       size="small"
                       sx={{
                         marginTop: "0.5em",
@@ -179,9 +189,14 @@ const SearchProviderSection = memo(function SearchProviderSection({
             <Box sx={{ marginTop: "1em" }}>
               <ExternalLink
                 href={config.getApiKeyUrl}
-                tooltipText={`Visit ${config.label} to get your credentials`}
+                tooltipText={t(
+                  "models:apiKey.searchProvider.getCredentialsTooltip",
+                  { name: config.label }
+                )}
               >
-                {config.getApiKeyLabel}
+                {t(
+                  `models:apiKey.searchProvider.providers.${config.id}.getKeyLabel`
+                )}
               </ExternalLink>
             </Box>
           </Stack>

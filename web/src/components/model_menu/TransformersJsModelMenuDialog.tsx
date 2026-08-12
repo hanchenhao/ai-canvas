@@ -1,4 +1,5 @@
 import { useMemo, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import ModelMenuDialogBase from "./shared/ModelMenuDialogBase";
 import type { ImageModel, UnifiedModel } from "../../stores/ApiTypes";
@@ -56,6 +57,8 @@ function TransformersJsModelMenuDialog({
     [models, isLoading, isFetching, error, refetch]
   );
 
+  const { t } = useTranslation("models");
+
   return (
     <ModelMenuDialogBase<ImageModel>
       open={open}
@@ -63,8 +66,8 @@ function TransformersJsModelMenuDialog({
       onClose={onClose}
       modelData={modelData}
       onModelChange={onModelChange}
-      title="Select Transformers.js Model"
-      searchPlaceholder="Search Transformers.js models..."
+      title={t("dialog.selectTransformersJs")}
+      searchPlaceholder={t("dialog.searchTransformersJs")}
       storeHook={useTransformersJsModelMenuStore}
       recommendedModels={recommendedModels}
     />

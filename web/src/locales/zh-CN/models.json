@@ -1,0 +1,375 @@
+{
+  "provider": {
+    "allProviders": "全部服务商",
+    "all": "全部",
+    "errorLoading": "加载服务商失败",
+    "api": "API",
+    "local": "本地",
+    "hf": "HF",
+    "addKey": "添加密钥",
+    "missingKeyTooltip": "需要 API 密钥",
+    "connectTooltip": "连接此服务商",
+    "disable": "禁用服务商",
+    "enable": "启用服务商",
+    "openWebsite": "打开服务商网站",
+    "badge": {
+      "hfTooltip": "HuggingFace:来自 Hugging Face Hub 的模型。",
+      "localTooltip": "Local:在本地机器上运行。",
+      "apiTooltip": "API:远程服务商,通过 API 调用,无需本地下载。需要 API 密钥。"
+    }
+  },
+  "modelList": {
+    "localBadgeTooltip": "在本地设备上运行",
+    "hfApiBadgeTooltip": "Hugging Face Inference API(付费)",
+    "apiBadgeTooltip": "付费 API 服务(远程)",
+    "providerLabel": "服务商:{{provider}}",
+    "availableToDownload": "可下载",
+    "noModelsFound": "未找到模型",
+    "noModelsMatch": "没有模型匹配“{{term}}”。请尝试其他关键词或启用更多服务商。",
+    "noModelsYet": "还没有模型 — 开始使用吧",
+    "noModelsYetDesc": "下载本地模型或添加云端服务商的 API 密钥以开始使用。",
+    "noModelsAvailable": "暂无可用模型",
+    "noModelsAvailableDesc": "在左侧栏启用服务商或在以下位置添加 API 密钥:",
+    "openSettings": "打开设置",
+    "settings": "设置",
+    "enableProviderKeyHint": "请在设置中启用服务商并添加 API 密钥以使用此模型",
+    "enableProviderHint": "请在左侧栏启用服务商以使用此模型",
+    "addKeyHint": "请在设置中添加 API 密钥以使用此模型",
+    "unknownError": "未知错误",
+    "providersFailedOne": "{{count}} 个服务商加载失败",
+    "providersFailedMany": "{{count}} 个服务商加载失败",
+    "failedToLoadFrom": "无法从以下服务商加载模型:",
+    "loadingModelsProgress": "正在加载模型:{{loaded}}/{{total}} 个服务商...",
+    "loadingModels": "正在加载模型..."
+  },
+  "filters": {
+    "filterByType": "按类型筛选",
+    "filterBySize": "按规模筛选",
+    "typeSelected": "类型:{{types}}",
+    "sizeSelected": "规模:{{size}}",
+    "anySize": "任意规模"
+  },
+  "defaultModels": {
+    "title": "默认模型",
+    "description": "为每种类型设置默认模型。创建新节点时会自动填充这些模型。",
+    "clear": "清除",
+    "language": "语言模型",
+    "image": "图像模型",
+    "embedding": "嵌入模型",
+    "tts": "文本转语音模型",
+    "asr": "语音识别模型",
+    "video": "视频模型",
+    "code": "代码生成",
+    "codePlaceholder": "使用聊天模型",
+    "codeHint": "编写代码节点代码。未设置时回退到聊天模型。",
+    "pin": {
+      "setTooltip": "设为此类型新节点的默认模型",
+      "clearTooltip": "已设为此类型新节点的默认模型 — 点击清除",
+      "setAria": "设为默认模型",
+      "clearAria": "清除默认模型"
+    },
+    "favorite": {
+      "add": "收藏",
+      "remove": "取消收藏"
+    }
+  },
+  "download": {
+    "use": "使用",
+    "useModel": "使用 {{name}}",
+    "useThisModel": "使用此模型",
+    "download": "下载",
+    "checking": "检查中…"
+  },
+  "dialog": {
+    "selectModel": "选择模型",
+    "selectLanguage": "选择语言模型",
+    "selectImage": "选择图像模型",
+    "selectVideo": "选择视频模型",
+    "selectTts": "选择 TTS 模型",
+    "selectAsr": "选择 ASR 模型",
+    "selectMusic": "选择音乐模型",
+    "selectEmbedding": "选择嵌入模型",
+    "selectHuggingface": "选择 HuggingFace 模型",
+    "selectTransformersJs": "选择 Transformers.js 模型",
+    "searchLanguage": "搜索语言模型...",
+    "searchImage": "搜索图像模型...",
+    "searchVideo": "搜索文生视频模型...",
+    "searchTts": "搜索文本转语音模型...",
+    "searchAsr": "搜索语音转文本模型...",
+    "searchMusic": "搜索文生音乐模型...",
+    "searchEmbedding": "搜索嵌入模型...",
+    "searchHuggingface": "搜索 HuggingFace 模型...",
+    "searchTransformersJs": "搜索 Transformers.js 模型...",
+    "searchModels": "搜索模型...",
+    "favorites": "收藏",
+    "recent": "最近使用",
+    "close": "关闭",
+    "refresh": "刷新模型"
+  },
+  "apiKey": {
+    "heroTitle": "模型与服务商",
+    "heroDescription": "连接你想使用的 AI 服务商。NodeTool 将在编辑器和工作流中解锁它们的语言、图像、视频、音频和嵌入模型。",
+    "getStarted": {
+      "title": "开始使用",
+      "description": "连接一个服务商以解锁强大的模型和功能。",
+      "step1Title": "选择服务商",
+      "step1Desc": "选择你要使用的服务商。",
+      "step2Title": "添加 API 密钥",
+      "step2Desc": "安全地粘贴你的密钥并测试连接。",
+      "step3Title": "开始构建",
+      "step3Desc": "在编辑器中使用模型并构建工作流。"
+    },
+    "connected": "已连接",
+    "notConnected": "未连接",
+    "connectedViaOAuth": "通过 OAuth 已连接",
+    "lastUsed": "上次使用 {{date}}",
+    "signInToStart": "登录以开始使用。",
+    "addKeyToStart": "添加 API 密钥以开始使用。",
+    "docs": "文档",
+    "disconnect": "断开连接",
+    "connecting": "连接中…",
+    "signInWith": "使用 {{name}} 登录",
+    "testing": "测试中…",
+    "test": "测试",
+    "manage": "管理",
+    "deleteKey": "删除密钥",
+    "deleteKeyAria": "删除 {{name}} API 密钥",
+    "connect": "连接",
+    "update": "更新",
+    "cancel": "取消",
+    "dialogTitleConnect": "连接 {{name}}",
+    "dialogTitleUpdate": "更新 {{name}}",
+    "apiLabel": "API 密钥",
+    "apiPlaceholder": "在此粘贴 API 密钥",
+    "fieldPlaceholder": "输入 {{label}}",
+    "multiFieldCaption": "所有字段都将被加密并安全存储。请勿公开分享。",
+    "singleFieldCaption": "你的密钥将被加密并安全存储。请勿公开分享。",
+    "deleteTitle": "删除 API 密钥",
+    "deleteConfirm": "确定要删除 {{name}} 的 API 密钥吗?",
+    "delete": "删除",
+    "allFieldsRequired": "所有字段均为必填",
+    "secretRequired": "密钥值不能为空",
+    "updateSuccess": "{{name}} API 密钥已更新",
+    "deleteSuccess": "{{name}} API 密钥已删除",
+    "updateFailed": "更新密钥失败:{{error}}",
+    "deleteFailed": "删除密钥失败:{{error}}",
+    "noProvidersFound": "未找到服务商",
+    "noProvidersMatch": "没有服务商匹配“{{term}}”",
+    "section": {
+      "connectedProviders": "已连接的服务商",
+      "popular": "热门",
+      "language": "语言模型",
+      "media": "媒体生成",
+      "gateways": "网关与中心",
+      "search": "网络搜索",
+      "compute": "算力与本地",
+      "advanced": "服务与高级"
+    },
+    "security": {
+      "title": "你的密钥很安全",
+      "description": "所有 API 密钥在数据库中加密存储,永不外泄。",
+      "learnMore": "了解更多"
+    },
+    "sidebar": {
+      "quickLinks": "快捷链接",
+      "supportedModelsTitle": "支持的模型",
+      "supportedModelsSubtitle": "按服务商查看模型",
+      "apiDocsTitle": "API 文档",
+      "apiDocsSubtitle": "服务商指南与链接",
+      "troubleshootingTitle": "故障排除",
+      "troubleshootingSubtitle": "常见问题与修复方法",
+      "creditsTitle": "需要 API 额度?",
+      "creditsDesc": "从我们的合作服务商获取免费额度和优惠。",
+      "viewOffers": "查看优惠"
+    },
+    "searchProvider": {
+      "heading": "搜索服务商",
+      "providerLabel": "服务商",
+      "credentialsConfigured": "✓ 凭证已配置",
+      "credentialsMissing": "✗ 缺少凭证",
+      "configured": "已配置",
+      "getCredentialsTooltip": "前往 {{name}} 获取凭证",
+      "freeSuffix": "(免费)",
+      "setup": {
+        "title": "设置网络搜索",
+        "confirm": "保存并继续",
+        "cancel": "取消",
+        "introWithNodes": "{{nodes}} 使用了网络搜索工具,但尚未配置搜索服务商。",
+        "introGeneric": "此智能体使用了网络搜索工具,但尚未配置搜索服务商。",
+        "addOneBelow": "在下方添加一个以运行工作流。",
+        "selectLabel": "搜索服务商",
+        "getKeyTooltip": "前往 {{name}} 获取 API 密钥",
+        "saveSuccess": "{{name}} 已配置 — 现在可以运行工作流了。",
+        "saveFailed": "保存搜索服务商失败"
+      },
+      "providers": {
+        "brave": {
+          "description": "注重隐私的搜索引擎,提供免费额度 — 一个不错的默认选择。",
+          "getKeyLabel": "免费获取 Brave API 密钥"
+        },
+        "serpapi": {
+          "description": "快速可靠的搜索 API,支持 Google、Bing 等搜索引擎。",
+          "getKeyLabel": "获取 SerpAPI 密钥"
+        },
+        "dataforseo": {
+          "description": "专业的 SEO 与搜索情报平台。",
+          "getKeyLabel": "获取 DataForSEO 凭证"
+        },
+        "apify": {
+          "description": "通过 Apify Actor 实现可靠的 Google 搜索抓取。",
+          "getKeyLabel": "获取 Apify API 密钥"
+        }
+      }
+    },
+    "googleWorkspace": {
+      "name": "Google Workspace",
+      "connected": "已连接",
+      "notConnected": "未连接",
+      "connectedDetail": "Drive、Gmail、Docs、Sheets 和 Calendar{{account}}",
+      "asAccount": "(账号 {{account}})",
+      "signInPrompt": "使用 Google 登录,授权智能体和节点访问 Drive、Gmail、Docs、Sheets 和 Calendar。",
+      "disconnect": "断开连接",
+      "disconnectSuccess": "已断开 Google Workspace 连接。请重新使用 Google 登录以恢复访问。",
+      "disconnectFailed": "断开 Google Workspace 连接失败"
+    }
+  },
+  "providerCatalog": {
+    "openai": {
+      "description": "GPT 模型、图像、嵌入等。"
+    },
+    "claudeSubscription": {
+      "description": "使用 Claude Pro 或 Max 订阅,无需 API 额度。",
+      "note": "通过 Claude Code 登录并共享其凭证。"
+    },
+    "anthropic": {
+      "description": "用于高级推理的 Claude 模型。"
+    },
+    "openrouter": {
+      "description": "通过一个 API 访问多种 AI 模型。"
+    },
+    "google": {
+      "description": "Google Gemini AI 模型与服务。"
+    },
+    "groq": {
+      "description": "基于 LPU 硬件的超高速 LLM 推理。"
+    },
+    "mistral": {
+      "description": "Mistral AI 模型与嵌入。"
+    },
+    "deepseek": {
+      "description": "业界领先的开放模型。"
+    },
+    "xai": {
+      "description": "通过 xAI API 使用 Grok 模型。"
+    },
+    "cerebras": {
+      "description": "基于 Cerebras 硬件的快速 LLM 推理。"
+    },
+    "together": {
+      "description": "通过 Together API 使用开源模型。"
+    },
+    "moonshot": {
+      "description": "通过 Kimi API 使用 Moonshot AI 模型。"
+    },
+    "zhipu": {
+      "description": "通过 Z.AI 的 OpenAI 兼容 API 使用 GLM 模型。"
+    },
+    "minimax": {
+      "description": "MiniMax AI 模型。"
+    },
+    "alibaba": {
+      "description": "通过阿里云百炼模型工作室使用通义千问模型。"
+    },
+    "huggingface": {
+      "description": "推理服务商与模型中心访问。"
+    },
+    "cohere": {
+      "description": "Embed v4 文本嵌入与重排序。"
+    },
+    "jina": {
+      "description": "Jina 嵌入与重排序模型。"
+    },
+    "voyage": {
+      "description": "高质量文本与多模态嵌入。"
+    },
+    "fal": {
+      "description": "无服务器 AI 图像与视频生成。",
+      "note": "如需精确成本追踪,请使用管理员密钥(fal.ai 控制台 → Keys → 范围选择“Admin”)。NodeTool 会从 FAL 读取每次请求的实际计费;标准密钥只能得到估算值。"
+    },
+    "replicate": {
+      "description": "在 Replicate 的云基础设施上运行模型。"
+    },
+    "elevenlabs": {
+      "description": "高质量文本转语音服务。"
+    },
+    "topazlabs": {
+      "description": "Topaz Labs 图像与视频增强。"
+    },
+    "atlascloud": {
+      "description": "一个密钥统一聊天、图像和视频模型。"
+    },
+    "ideogram": {
+      "description": "图像生成、编辑与混搭,提示词遵循度高。"
+    },
+    "meshy": {
+      "description": "3D 模型生成。"
+    },
+    "rodin": {
+      "description": "Rodin AI 3D 模型生成。"
+    },
+    "kie": {
+      "description": "通过一个网关使用 GPT、Claude、Gemini、DeepSeek 等。"
+    },
+    "gmi": {
+      "description": "通过 GMI 的 OpenAI 兼容 API 使用开放权重 LLM。"
+    },
+    "aki": {
+      "description": "AKI.IO AI 模型中心。"
+    },
+    "kieai": {
+      "description": "Kie.ai 统一模型访问。"
+    },
+    "serpapi": {
+      "description": "通过 SerpAPI 进行网络搜索。"
+    },
+    "apify": {
+      "description": "通过 Apify Google 搜索爬虫进行网络搜索。"
+    },
+    "brave": {
+      "description": "Brave Search 网络 API。"
+    },
+    "dataforseo": {
+      "description": "通过 DataForSEO 进行网络搜索。",
+      "loginLabel": "登录名",
+      "passwordLabel": "密码"
+    },
+    "runpod": {
+      "description": "租用 GPU Pod 运行 NodeTool worker。"
+    },
+    "vastai": {
+      "description": "在 GPU 市场租用算力运行 NodeTool worker。"
+    },
+    "llamaserver": {
+      "description": "用于本地 llama-server 实例的 Bearer 认证。"
+    },
+    "googlemail": {
+      "description": "用于 Google 邮件集成的电子邮件地址和应用密码。",
+      "emailLabel": "电子邮件地址",
+      "appPasswordLabel": "应用密码"
+    },
+    "github": {
+      "description": "用于 GitHub PKCE 流程的 OAuth App 凭证。",
+      "clientIdLabel": "Client ID",
+      "clientSecretLabel": "Client Secret"
+    },
+    "supabase": {
+      "description": "用于用户自定义节点的 Supabase 服务密钥。"
+    },
+    "traceloop": {
+      "description": "将 OpenLLMetry 链路追踪导出到 Traceloop。"
+    },
+    "nodetoolToken": {
+      "description": "用于保护 NodeTool 服务器端点的 Bearer 令牌。"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import ModelMenuDialogBase from "./shared/ModelMenuDialogBase";
 import type { ModelPack, TTSModel, UnifiedModel } from "../../stores/ApiTypes";
 import {
@@ -24,6 +25,7 @@ function TTSModelMenuDialog({
   modelPacks
 }: TTSModelMenuDialogProps) {
   const modelData = useTTSModelsByProvider();
+  const { t } = useTranslation("models");
   return (
     <ModelMenuDialogBase<TTSModel>
       open={open}
@@ -31,8 +33,8 @@ function TTSModelMenuDialog({
       onClose={onClose}
       modelData={modelData}
       onModelChange={onModelChange}
-      title="Select TTS Model"
-      searchPlaceholder="Search text-to-speech models..."
+      title={t("dialog.selectTts")}
+      searchPlaceholder={t("dialog.searchTts")}
       storeHook={useTTSModelMenuStore}
       modelType="tts_model"
       recommendedModels={recommendedModels}

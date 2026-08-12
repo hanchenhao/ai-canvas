@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import Check from "@mui/icons-material/Check";
 import DownloadIcon from "@mui/icons-material/Download";
@@ -39,6 +40,7 @@ const RecommendedDownloadRow: React.FC<RecommendedDownloadRowProps> = ({
   style
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("models");
 
   const downloadId = useMemo(() => {
     const baseId = model.repo_id || model.id;
@@ -87,7 +89,7 @@ const RecommendedDownloadRow: React.FC<RecommendedDownloadRowProps> = ({
         onKeyDown={downloaded ? activateOnKey(onSelect) : undefined}
         role={downloaded ? "button" : undefined}
         tabIndex={downloaded ? 0 : undefined}
-        aria-label={downloaded ? `Use ${model.id}` : undefined}
+        aria-label={downloaded ? t("download.useModel", { name: model.id }) : undefined}
         sx={{
           px: 1.5,
           height: "100%",
@@ -146,11 +148,11 @@ const RecommendedDownloadRow: React.FC<RecommendedDownloadRowProps> = ({
           <Box sx={{ flexShrink: 0, display: "inline-flex", alignItems: "center", gap: 0.5, color: "text.secondary" }}>
             <LoadingSpinner inline size={12} thickness={5} color="inherit" />
             <Text sx={{ fontSize: theme.vars.fontSizeSmall, color: "text.secondary" }}>
-              Checking…
+              {t("download.checking")}
             </Text>
           </Box>
         ) : downloaded ? (
-          <Tooltip title="Use this model">
+          <Tooltip title={t("download.useThisModel")}>
             <EditorButton
               variant="contained"
               onClick={(e) => {
@@ -160,7 +162,7 @@ const RecommendedDownloadRow: React.FC<RecommendedDownloadRowProps> = ({
               startIcon={<Check sx={{ fontSize: "1.1em" }} />}
               sx={{ flexShrink: 0 }}
             >
-              Use
+              {t("download.use")}
             </EditorButton>
           </Tooltip>
         ) : (
@@ -170,7 +172,7 @@ const RecommendedDownloadRow: React.FC<RecommendedDownloadRowProps> = ({
             startIcon={<DownloadIcon sx={{ fontSize: "1.1em" }} />}
             sx={{ flexShrink: 0 }}
           >
-            Download
+            {t("download.download")}
           </EditorButton>
         )}
       </FlexRow>

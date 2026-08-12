@@ -1,0 +1,375 @@
+{
+  "provider": {
+    "allProviders": "All providers",
+    "all": "All",
+    "errorLoading": "Error loading providers",
+    "api": "API",
+    "local": "Local",
+    "hf": "HF",
+    "addKey": "Add key",
+    "missingKeyTooltip": "API key required",
+    "connectTooltip": "Connect this provider",
+    "disable": "Disable provider",
+    "enable": "Enable provider",
+    "openWebsite": "Open provider website",
+    "badge": {
+      "hfTooltip": "HuggingFace: Models from the Hugging Face Hub.",
+      "localTooltip": "Local: Runs locally on your machine.",
+      "apiTooltip": "API: Remote provider; runs via API without local download. Requires API key."
+    }
+  },
+  "modelList": {
+    "localBadgeTooltip": "Runs locally on your device",
+    "hfApiBadgeTooltip": "Hugging Face Inference API (Paid)",
+    "apiBadgeTooltip": "Paid API service (Remote)",
+    "providerLabel": "Provider: {{provider}}",
+    "availableToDownload": "Available to download",
+    "noModelsFound": "No models found",
+    "noModelsMatch": "No models match \"{{term}}\". Try a different term or enable more providers.",
+    "noModelsYet": "No models yet — let's get started",
+    "noModelsYetDesc": "Download a local model or add an API key for a cloud provider to get going.",
+    "noModelsAvailable": "No models available",
+    "noModelsAvailableDesc": "Enable a provider in the left sidebar or add an API key in",
+    "openSettings": "Open Settings",
+    "settings": "Settings",
+    "enableProviderKeyHint": "Enable provider and add API key in Settings to use this model",
+    "enableProviderHint": "Enable provider in the left sidebar to use this model",
+    "addKeyHint": "Add API key in Settings to use this model",
+    "unknownError": "Unknown error",
+    "providersFailedOne": "{{count}} provider failed to load",
+    "providersFailedMany": "{{count}} providers failed to load",
+    "failedToLoadFrom": "Failed to load models from:",
+    "loadingModelsProgress": "Loading models: {{loaded}}/{{total}} providers...",
+    "loadingModels": "Loading models..."
+  },
+  "filters": {
+    "filterByType": "Filter by Type",
+    "filterBySize": "Filter by Size",
+    "typeSelected": "Type: {{types}}",
+    "sizeSelected": "Size: {{size}}",
+    "anySize": "Any size"
+  },
+  "defaultModels": {
+    "title": "Default Models",
+    "description": "Set default models for each type. These will auto-fill when you create new nodes.",
+    "clear": "Clear",
+    "language": "Language Model",
+    "image": "Image Model",
+    "embedding": "Embedding Model",
+    "tts": "Text-to-Speech Model",
+    "asr": "Speech Recognition Model",
+    "video": "Video Model",
+    "code": "Code Generation",
+    "codePlaceholder": "Use chat model",
+    "codeHint": "Writes Code Node code. Falls back to the chat model when unset.",
+    "pin": {
+      "setTooltip": "Set as default for new nodes of this type",
+      "clearTooltip": "Default for new nodes of this type — click to clear",
+      "setAria": "Set as default model",
+      "clearAria": "Clear default model"
+    },
+    "favorite": {
+      "add": "Favorite",
+      "remove": "Unfavorite"
+    }
+  },
+  "download": {
+    "use": "Use",
+    "useModel": "Use {{name}}",
+    "useThisModel": "Use this model",
+    "download": "Download",
+    "checking": "Checking…"
+  },
+  "dialog": {
+    "selectModel": "Select Model",
+    "selectLanguage": "Select Language Model",
+    "selectImage": "Select Image Model",
+    "selectVideo": "Select Video Model",
+    "selectTts": "Select TTS Model",
+    "selectAsr": "Select ASR Model",
+    "selectMusic": "Select Music Model",
+    "selectEmbedding": "Select Embedding Model",
+    "selectHuggingface": "Select HuggingFace Model",
+    "selectTransformersJs": "Select Transformers.js Model",
+    "searchLanguage": "Search language models...",
+    "searchImage": "Search image models...",
+    "searchVideo": "Search text-to-video models...",
+    "searchTts": "Search text-to-speech models...",
+    "searchAsr": "Search speech-to-text models...",
+    "searchMusic": "Search text-to-music models...",
+    "searchEmbedding": "Search embedding models...",
+    "searchHuggingface": "Search HuggingFace models...",
+    "searchTransformersJs": "Search Transformers.js models...",
+    "searchModels": "Search models...",
+    "favorites": "Favorites",
+    "recent": "Recent",
+    "close": "Close",
+    "refresh": "Refresh models"
+  },
+  "apiKey": {
+    "heroTitle": "Models & Providers",
+    "heroDescription": "Connect the AI providers you want to use. NodeTool unlocks their language, image, video, audio, and embedding models across the editor and your workflows.",
+    "getStarted": {
+      "title": "Get started",
+      "description": "Connect a provider to unlock powerful models and features.",
+      "step1Title": "Choose a provider",
+      "step1Desc": "Select the provider you want to use.",
+      "step2Title": "Add your API key",
+      "step2Desc": "Paste your key securely and test the connection.",
+      "step3Title": "Start building",
+      "step3Desc": "Use models in the editor and build workflows."
+    },
+    "connected": "Connected",
+    "notConnected": "Not connected",
+    "connectedViaOAuth": "Connected via OAuth",
+    "lastUsed": "Last used {{date}}",
+    "signInToStart": "Sign in to get started.",
+    "addKeyToStart": "Add your API key to get started.",
+    "docs": "Docs",
+    "disconnect": "Disconnect",
+    "connecting": "Connecting…",
+    "signInWith": "Sign in with {{name}}",
+    "testing": "Testing…",
+    "test": "Test",
+    "manage": "Manage",
+    "deleteKey": "Delete key",
+    "deleteKeyAria": "Delete {{name}} API key",
+    "connect": "Connect",
+    "update": "Update",
+    "cancel": "Cancel",
+    "dialogTitleConnect": "Connect {{name}}",
+    "dialogTitleUpdate": "Update {{name}}",
+    "apiLabel": "API Key",
+    "apiPlaceholder": "Paste your API key here",
+    "fieldPlaceholder": "Enter {{label}}",
+    "multiFieldCaption": "All fields will be encrypted and stored securely. Never share them publicly.",
+    "singleFieldCaption": "Your key will be encrypted and stored securely. Never share it publicly.",
+    "deleteTitle": "Delete API Key",
+    "deleteConfirm": "Are you sure you want to delete the {{name}} API key?",
+    "delete": "Delete",
+    "allFieldsRequired": "All fields are required",
+    "secretRequired": "Secret value is required",
+    "updateSuccess": "{{name}} API key updated",
+    "deleteSuccess": "{{name}} API key deleted",
+    "updateFailed": "Failed to update secret: {{error}}",
+    "deleteFailed": "Failed to delete secret: {{error}}",
+    "noProvidersFound": "No providers found",
+    "noProvidersMatch": "No providers match \"{{term}}\"",
+    "section": {
+      "connectedProviders": "Connected Providers",
+      "popular": "Popular",
+      "language": "Language Models",
+      "media": "Media Generation",
+      "gateways": "Gateways & Hubs",
+      "search": "Web Search",
+      "compute": "Compute & Local",
+      "advanced": "Services & Advanced"
+    },
+    "security": {
+      "title": "Your secrets are safe",
+      "description": "All API keys are encrypted in the database and never exposed.",
+      "learnMore": "Learn more"
+    },
+    "sidebar": {
+      "quickLinks": "Quick Links",
+      "supportedModelsTitle": "Supported Models",
+      "supportedModelsSubtitle": "See models by provider",
+      "apiDocsTitle": "API Documentation",
+      "apiDocsSubtitle": "Provider guides & links",
+      "troubleshootingTitle": "Troubleshooting",
+      "troubleshootingSubtitle": "Common issues & fixes",
+      "creditsTitle": "Need API credits?",
+      "creditsDesc": "Get free credits and offers from our partner providers.",
+      "viewOffers": "View offers"
+    },
+    "searchProvider": {
+      "heading": "Search Provider",
+      "providerLabel": "Provider",
+      "credentialsConfigured": "✓ Credentials configured",
+      "credentialsMissing": "✗ Missing credentials",
+      "configured": "Configured",
+      "getCredentialsTooltip": "Visit {{name}} to get your credentials",
+      "freeSuffix": "(Free)",
+      "setup": {
+        "title": "Set up web search",
+        "confirm": "Save & continue",
+        "cancel": "Cancel",
+        "introWithNodes": "{{nodes}} uses a web-search tool, but no search provider is configured. ",
+        "introGeneric": "This agent uses a web-search tool, but no search provider is configured. ",
+        "addOneBelow": "Add one below to run the workflow.",
+        "selectLabel": "Search provider",
+        "getKeyTooltip": "Visit {{name}} to get your API key",
+        "saveSuccess": "{{name}} configured — you can run the workflow now.",
+        "saveFailed": "Failed to save search provider"
+      },
+      "providers": {
+        "brave": {
+          "description": "Privacy-focused search with a free tier — a good default.",
+          "getKeyLabel": "Get a free Brave API key"
+        },
+        "serpapi": {
+          "description": "Fast and reliable search API with Google, Bing, and other engines.",
+          "getKeyLabel": "Get SerpAPI Key"
+        },
+        "dataforseo": {
+          "description": "Professional SEO and search intelligence platform.",
+          "getKeyLabel": "Get DataForSEO Credentials"
+        },
+        "apify": {
+          "description": "Reliable Google search scraping via Apify actors.",
+          "getKeyLabel": "Get Apify API Key"
+        }
+      }
+    },
+    "googleWorkspace": {
+      "name": "Google Workspace",
+      "connected": "Connected",
+      "notConnected": "Not connected",
+      "connectedDetail": "Drive, Gmail, Docs, Sheets and Calendar{{account}}",
+      "asAccount": " as {{account}}",
+      "signInPrompt": "Sign in with Google to give agents and nodes access to Drive, Gmail, Docs, Sheets and Calendar.",
+      "disconnect": "Disconnect",
+      "disconnectSuccess": "Disconnected Google Workspace. Sign in with Google again to restore access.",
+      "disconnectFailed": "Failed to disconnect Google Workspace"
+    }
+  },
+  "providerCatalog": {
+    "openai": {
+      "description": "GPT models, images, embeddings, and more."
+    },
+    "claudeSubscription": {
+      "description": "Use a Claude Pro or Max subscription instead of API credits.",
+      "note": "Signs in through Claude Code and shares its credentials."
+    },
+    "anthropic": {
+      "description": "Claude models for advanced reasoning."
+    },
+    "openrouter": {
+      "description": "Access multiple AI models through one API."
+    },
+    "google": {
+      "description": "Google Gemini AI models and services."
+    },
+    "groq": {
+      "description": "Ultra-fast LLM inference on LPU hardware."
+    },
+    "mistral": {
+      "description": "Mistral AI models and embeddings."
+    },
+    "deepseek": {
+      "description": "State-of-the-art open models."
+    },
+    "xai": {
+      "description": "Grok models via xAI's API."
+    },
+    "cerebras": {
+      "description": "Fast LLM inference on Cerebras hardware."
+    },
+    "together": {
+      "description": "Open-source models through Together API."
+    },
+    "moonshot": {
+      "description": "Moonshot AI models via Kimi API."
+    },
+    "zhipu": {
+      "description": "GLM models via Z.AI's OpenAI-compatible API."
+    },
+    "minimax": {
+      "description": "MiniMax AI models."
+    },
+    "alibaba": {
+      "description": "Qwen models via Alibaba Cloud Model Studio."
+    },
+    "huggingface": {
+      "description": "Inference providers and model hub access."
+    },
+    "cohere": {
+      "description": "Embed v4 text embeddings and reranking."
+    },
+    "jina": {
+      "description": "Jina embeddings and reranker models."
+    },
+    "voyage": {
+      "description": "High-quality text and multimodal embeddings."
+    },
+    "fal": {
+      "description": "Serverless AI image and video generation.",
+      "note": "For exact cost tracking, use an admin key (fal.ai dashboard → Keys → scope \"Admin\"). NodeTool reads each request's actual billing from FAL; a standard key only yields estimates."
+    },
+    "replicate": {
+      "description": "Run models on Replicate's cloud infrastructure."
+    },
+    "elevenlabs": {
+      "description": "High-quality text-to-speech services."
+    },
+    "topazlabs": {
+      "description": "Topaz Labs image and video enhancement."
+    },
+    "atlascloud": {
+      "description": "Chat, image, and video models behind one key."
+    },
+    "ideogram": {
+      "description": "Image creation, editing, and remix with strong prompt adherence."
+    },
+    "meshy": {
+      "description": "3D model generation."
+    },
+    "rodin": {
+      "description": "Rodin AI 3D model generation."
+    },
+    "kie": {
+      "description": "GPT, Claude, Gemini, DeepSeek and more through one gateway."
+    },
+    "gmi": {
+      "description": "Open-weight LLMs through GMI's OpenAI-compatible API."
+    },
+    "aki": {
+      "description": "AKI.IO AI Model Hub."
+    },
+    "kieai": {
+      "description": "Kie.ai unified model access."
+    },
+    "serpapi": {
+      "description": "Web search via SerpAPI."
+    },
+    "apify": {
+      "description": "Web search via Apify Google Search Scraper."
+    },
+    "brave": {
+      "description": "Brave Search web API."
+    },
+    "dataforseo": {
+      "description": "Web search via DataForSEO.",
+      "loginLabel": "Login",
+      "passwordLabel": "Password"
+    },
+    "runpod": {
+      "description": "Rent GPU pods to run NodeTool workers."
+    },
+    "vastai": {
+      "description": "Rent marketplace GPUs to run NodeTool workers."
+    },
+    "llamaserver": {
+      "description": "Bearer auth for a local llama-server instance."
+    },
+    "googlemail": {
+      "description": "Email address and app password for Google mail integration.",
+      "emailLabel": "Email address",
+      "appPasswordLabel": "App password"
+    },
+    "github": {
+      "description": "OAuth App credentials for GitHub PKCE flow.",
+      "clientIdLabel": "Client ID",
+      "clientSecretLabel": "Client Secret"
+    },
+    "supabase": {
+      "description": "Supabase service key for user-provided nodes."
+    },
+    "traceloop": {
+      "description": "OpenLLMetry trace export to Traceloop."
+    },
+    "nodetoolToken": {
+      "description": "Bearer token to secure NodeTool server endpoints."
+    }
+  }
+}
