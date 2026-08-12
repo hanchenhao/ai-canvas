@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useCallback, useMemo, useState } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useTheme, type Theme } from "@mui/material/styles";
 import {
   FlexColumn,
@@ -94,6 +95,7 @@ const ProvisionDialog: React.FC<ProvisionDialogProps> = ({
   onClose,
   isProvisioning
 }) => {
+  const { t } = useTranslation("workers");
   const [selected, setSelected] = useState<string>(profileNames[0] ?? "");
   const effective = profileNames.includes(selected)
     ? selected
@@ -114,19 +116,19 @@ const ProvisionDialog: React.FC<ProvisionDialogProps> = ({
     <Dialog
       open={open}
       onClose={onClose}
-      title="Start a worker"
+      title={t("title.startWorker")}
       minWidth={420}
       actions={
         <FlexRow gap={2}>
           <EditorButton variant="text" onClick={onClose}>
-            Cancel
+            {t("common:button.cancel")}
           </EditorButton>
           <EditorButton
             variant="outlined"
             onClick={handleProvision}
             disabled={!effective || isProvisioning}
           >
-            Provision
+            {t("button.provision")}
           </EditorButton>
         </FlexRow>
       }
@@ -134,12 +136,13 @@ const ProvisionDialog: React.FC<ProvisionDialogProps> = ({
       <FlexColumn gap={2} sx={{ pt: 1 }}>
         {profileNames.length === 0 ? (
           <Caption size="small">
-            No worker profiles yet. Open <strong>Manage Profiles</strong> to
-            create one.
+            {t("caption.noProfilesDialogPrefix")}
+            <strong>{t("button.manageProfiles")}</strong>
+            {t("caption.noProfilesDialogSuffix")}
           </Caption>
         ) : (
           <SelectField
-            label="Profile"
+            label={t("label.profile")}
             value={effective}
             onChange={setSelected}
             options={options}
@@ -173,6 +176,7 @@ const InstanceRow: React.FC<InstanceRowProps> = ({
   stopping,
   busy
 }) => {
+  const { t } = useTranslation("workers");
   const isAttached = instance.status === "attached";
   const isPaused = instance.status === "stopped";
   const isRunning = instance.status === "running";
@@ -188,18 +192,18 @@ const InstanceRow: React.FC<InstanceRowProps> = ({
   // shown as "booting" until it answers the probe, then "ready".
   const displayLabel = isRunning
     ? isHealthy
-      ? "ready"
-      : "booting"
-    : instance.status;
+      ? t("status.ready")
+      : t("status.booting")
+    : t(`status.${instance.status}`);
   const displayTone: StatusType = isRunning
     ? isHealthy
       ? "success"
       : "pending"
     : statusTone(instance.status);
   const statusHint = isBooting
-    ? "GPU up — worker still loading"
+    ? t("hint.booting")
     : isRunning && isHealthy
-      ? "Worker is answering — safe to attach"
+      ? t("hint.ready")
       : null;
 
   return (
@@ -229,42 +233,42 @@ const InstanceRow: React.FC<InstanceRowProps> = ({
         </FlexColumn>
         <FlexRow gap={3} align="center">
           <Caption size="small">
-            Uptime: {formatUptime(instance.created_at, now)}
+            {t("caption.uptime", { value: formatUptime(instance.created_at, now) })}
           </Caption>
           <Caption size="small">
-            Cost: {formatCost(instance.estimated_cost_usd)}
+            {t("caption.cost", { value: formatCost(instance.estimated_cost_usd) })}
           </Caption>
           {isAttached ? (
             <EditorButton
               density="compact"
               variant="outlined"
-              aria-label={`Detach worker ${instance.id}`}
+              aria-label={t("aria.detach", { id: instance.id })}
               disabled={busy}
               onClick={onDetach}
             >
-              Detach
+              {t("button.detach")}
             </EditorButton>
           ) : isPaused ? (
             <EditorButton
               density="compact"
               variant="outlined"
-              aria-label={`Resume worker ${instance.id}`}
+              aria-label={t("aria.resume", { id: instance.id })}
               disabled={stopping}
               onClick={() => onResume(instance.id)}
             >
-              Resume
+              {t("button.resume")}
             </EditorButton>
           ) : (
             <EditorButton
               density="compact"
               variant="outlined"
-              aria-label={`Attach worker ${instance.id}`}
+              aria-label={t("aria.attach", { id: instance.id })}
               // Only enable once the worker is actually answering — attaching
               // mid-boot just fails the handshake and rolls back.
               disabled={busy || !isRunning || !isHealthy}
               onClick={() => onAttach(instance.id)}
             >
-              {isBooting ? "Booting…" : "Attach"}
+              {isBooting ? t("button.booting") : t("button.attach")}
             </EditorButton>
           )}
           {/* Pause (keep the volume) — only meaningful while the pod runs. */}
@@ -272,22 +276,22 @@ const InstanceRow: React.FC<InstanceRowProps> = ({
             <EditorButton
               density="compact"
               variant="text"
-              aria-label={`Stop worker ${instance.id}`}
+              aria-label={t("aria.stop", { id: instance.id })}
               disabled={stopping}
               onClick={() => onStop(instance.id)}
             >
-              Stop
+              {t("button.stop")}
             </EditorButton>
           )}
           {/* Destroy the pod + volume. The real teardown. */}
           <EditorButton
             density="compact"
             variant="text"
-            aria-label={`Terminate worker ${instance.id}`}
+            aria-label={t("aria.terminate", { id: instance.id })}
             disabled={stopping}
             onClick={() => onTerminate(instance.id)}
           >
-            Terminate
+            {t("button.terminate")}
           </EditorButton>
         </FlexRow>
       </FlexRow>
@@ -322,6 +326,7 @@ interface OrphanWarning {
 }
 
 const WorkersPanel: React.FC = () => {
+  const { t } = useTranslation(["workers", "common"]);
   const theme = useTheme();
   const {
     profiles,
@@ -414,10 +419,7 @@ const WorkersPanel: React.FC = () => {
     async (id: string) => {
       // Destroying the volume loses the cached models — confirm first.
       if (
-        !window.confirm(
-          "Terminate this worker? Its volume and all cached models are " +
-            "permanently deleted. This stops all billing."
-        )
+        !window.confirm(t("confirm.terminate"))
       ) {
         return;
       }
@@ -478,7 +480,7 @@ const WorkersPanel: React.FC = () => {
       >
         <FlexRow gap={2} align="baseline">
           <Text size="big" weight={600}>
-            Workers
+            {t("title.workers")}
           </Text>
           {shownInstances.length > 0 && (
             <Caption size="small">{formatRate(totalCost)}</Caption>
@@ -489,35 +491,35 @@ const WorkersPanel: React.FC = () => {
             density="compact"
             variant="text"
             onClick={() => setProfilesOpen(true)}
-            aria-label="Manage profiles"
+            aria-label={t("aria.manageProfiles")}
           >
-            Manage Profiles
+            {t("button.manageProfiles")}
           </EditorButton>
           <EditorButton
             density="compact"
             variant="outlined"
             onClick={() => setDialogOpen(true)}
-            aria-label="Start worker"
+            aria-label={t("aria.startWorker")}
           >
-            Start Worker
+            {t("button.startWorker")}
           </EditorButton>
           <EditorButton
             density="compact"
             variant="text"
             onClick={handleReconcile}
             disabled={busy}
-            aria-label="Reconcile workers"
+            aria-label={t("aria.reconcile")}
           >
-            Reconcile
+            {t("button.reconcile")}
           </EditorButton>
           <EditorButton
             density="compact"
             variant="text"
             onClick={handleStopAll}
             disabled={shownInstances.length === 0}
-            aria-label="Stop all workers"
+            aria-label={t("aria.stopAll")}
           >
-            Stop All
+            {t("button.stopAll")}
           </EditorButton>
         </FlexRow>
       </FlexRow>
@@ -536,10 +538,11 @@ const WorkersPanel: React.FC = () => {
       {orphanWarning && (
         <WarningBanner
           variant="warning"
-          message={`${orphanWarning.count} orphaned worker(s) may still be billing — stop them in your provider console`}
-          description={`${orphanWarning.liveCount} live, ~${formatRate(
-            orphanWarning.estimatedCostUsd
-          )}`}
+          message={t("warning.orphan", { count: orphanWarning.count })}
+          description={t("warning.orphanDesc", {
+            liveCount: orphanWarning.liveCount,
+            rate: formatRate(orphanWarning.estimatedCostUsd)
+          })}
           dismissible
           onDismiss={() => setOrphanWarning(null)}
           className="nodrag"
@@ -553,9 +556,7 @@ const WorkersPanel: React.FC = () => {
             <LoadingSpinner size="small" />
           </FlexRow>
         ) : shownInstances.length === 0 ? (
-          <Caption size="small">
-            No workers running. Start one to rent a GPU for your graphs.
-          </Caption>
+          <Caption size="small">{t("caption.noWorkers")}</Caption>
         ) : (
           shownInstances.map((instance) => (
             <InstanceRow

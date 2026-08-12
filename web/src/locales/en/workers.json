@@ -1,0 +1,110 @@
+{
+  "title": {
+    "workers": "Workers",
+    "manageProfiles": "Manage worker profiles",
+    "startWorker": "Start a worker",
+    "existingProfiles": "Existing profiles",
+    "createProfile": "Create a profile",
+    "advanced": "Advanced"
+  },
+  "button": {
+    "manageProfiles": "Manage Profiles",
+    "startWorker": "Start Worker",
+    "reconcile": "Reconcile",
+    "stopAll": "Stop All",
+    "provision": "Provision",
+    "createProfile": "Create Profile",
+    "delete": "Delete",
+    "stop": "Stop",
+    "resume": "Resume",
+    "terminate": "Terminate",
+    "attach": "Attach",
+    "detach": "Detach",
+    "booting": "Booting…"
+  },
+  "label": {
+    "profile": "Profile",
+    "name": "Name",
+    "provider": "Provider",
+    "gpu": "GPU",
+    "vcpu": "vCPU",
+    "disk": "Disk (GB)",
+    "idleTimeout": "Idle timeout (minutes)",
+    "maxLifetime": "Max lifetime (minutes)",
+    "workerImagePreset": "Worker image preset",
+    "workerImage": "Worker image",
+    "tokenPolicy": "Token policy",
+    "gpuIdRunpod": "GPU id (RunPod gpuTypeId)",
+    "gpuIdVast": "GPU id (Vast gpu_name)"
+  },
+  "status": {
+    "provisioning": "provisioning",
+    "running": "running",
+    "attached": "attached",
+    "stopping": "stopping",
+    "stopped": "stopped",
+    "error": "error",
+    "ready": "ready",
+    "booting": "booting"
+  },
+  "caption": {
+    "uptime": "Uptime: {{value}}",
+    "cost": "Cost: {{value}}",
+    "noWorkers": "No workers running. Start one to rent a GPU for your graphs.",
+    "noProfiles": "No profiles yet. Create one below.",
+    "noProfilesDialogPrefix": "No worker profiles yet. Open ",
+    "noProfilesDialogSuffix": " to create one.",
+    "profileTemplate": "A profile is a saved template. Provisioning it rents one GPU box and connects this app to it."
+  },
+  "hint": {
+    "booting": "GPU up — worker still loading",
+    "ready": "Worker is answering — safe to attach"
+  },
+  "confirm": {
+    "terminate": "Terminate this worker? Its volume and all cached models are permanently deleted. This stops all billing."
+  },
+  "warning": {
+    "orphan": "{{count}} orphaned worker(s) may still be billing — stop them in your provider console",
+    "orphanDesc": "{{liveCount}} live, ~{{rate}}",
+    "apiKeyMissing": "No {{apiKeyName}} configured",
+    "apiKeyMissingDesc": "Add it in Settings → Models & Providers before provisioning a {{provider}} worker — provisioning fails without it."
+  },
+  "helper": {
+    "name": "A label to recognise this template, e.g. “A40 image worker”.",
+    "provider": "Where the GPU is rented. RunPod runs a dedicated pod; Vast picks the cheapest matching offer on its marketplace.",
+    "gpuRunpod": "Which machine to rent. Pick a GPU for model inference, or “CPU only” for a cheaper CPU pod (e.g. data/text nodes). More VRAM runs larger models.",
+    "gpuVast": "Which GPU to rent. More VRAM runs larger models; pick the smallest that fits to save money.",
+    "gpuIdRunpod": "Exact RunPod id, e.g. “NVIDIA RTX 6000 Ada Generation”.",
+    "gpuIdVast": "Exact Vast name, e.g. “RTX_6000Ada”.",
+    "vcpu": "Number of virtual CPUs for the CPU-only pod. RunPod picks a matching CPU flavor.",
+    "disk": "Persistent volume for the model cache. Models download here once and survive a stop/resume. HF models are large — keep this generous.",
+    "idleTimeout": "Idle this long → pause (GPU freed, volume + models kept). Your main guard against runaway GPU bills. Blank = never.",
+    "workerImagePreset": "ComfyUI worker fronts a co-located ComfyUI server for the “Run ComfyUI Workflow (Worker)” node.",
+    "workerImage": "Container image the provider runs. Pick a preset above, or set your own worker build.",
+    "tokenPolicy": "Generate issues a fresh auth token per worker (recommended). Fixed reuses a token you set elsewhere.",
+    "maxLifetime": "Hard cap: at this age the worker is TERMINATED — pod and volume destroyed (models lost) — to stop all billing. Blank = no cap."
+  },
+  "option": {
+    "cpuOnly": "CPU only (no GPU)",
+    "otherGpu": "Other (enter GPU id)…",
+    "anyCheapest": "Any (cheapest offer)",
+    "customImage": "Custom…",
+    "nodeToolWorker": "NodeTool Worker",
+    "nodeToolWorkerComfy": "NodeTool Worker + ComfyUI",
+    "tokenGenerate": "Generate (recommended)",
+    "tokenFixed": "Fixed"
+  },
+  "aria": {
+    "detach": "Detach worker {{id}}",
+    "resume": "Resume worker {{id}}",
+    "attach": "Attach worker {{id}}",
+    "stop": "Stop worker {{id}}",
+    "terminate": "Terminate worker {{id}}",
+    "manageProfiles": "Manage profiles",
+    "startWorker": "Start worker",
+    "reconcile": "Reconcile workers",
+    "stopAll": "Stop all workers",
+    "createProfile": "Create profile",
+    "deleteProfile": "Delete profile {{name}}"
+  }
+}
