@@ -6,7 +6,8 @@ import {
   imageRefFromBytes,
   MINIMAX_BASE_URL,
   MINIMAX_IMAGE_ASPECTS,
-  minimaxHeaders
+  minimaxHeaders,
+  minimaxFetch
 } from "../minimax-base.js";
 
 export class MinimaxTextToImageNode extends BaseNode {
@@ -88,7 +89,7 @@ export class MinimaxTextToImageNode extends BaseNode {
       prompt_optimizer: Boolean(this.prompt_optimizer ?? true)
     };
 
-    const res = await fetch(`${MINIMAX_BASE_URL}/v1/image_generation`, {
+    const res = await minimaxFetch(`${MINIMAX_BASE_URL}/v1/image_generation`, {
       method: "POST",
       headers: minimaxHeaders(apiKey),
       body: JSON.stringify(body)

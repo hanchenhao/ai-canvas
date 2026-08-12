@@ -28,7 +28,6 @@ import {
   getAdminClient,
   getDeploymentOrExit,
   getManager,
-  getUserManager,
   loadConfigOrExit,
   makeSyncerDeps,
   parseParamPairs,
@@ -124,7 +123,6 @@ export function registerDeployCommands(program: Command): void {
   registerWorkflows(deploy);
   registerDatabase(deploy);
   registerCollections(deploy);
-  registerUsers(deploy);
 }
 
 // ---------------------------------------------------------------------------
@@ -665,133 +663,3 @@ function registerCollections(deploy: Command): void {
 }
 
 // ---------------------------------------------------------------------------
-// users-* commands
-// ---------------------------------------------------------------------------
-
-function registerUsers(deploy: Command): void {
-  deploy
-    .command("users-add <deployment> <username>")
-    .description("Add an API user to the deployment")
-    .option("--role <role>", "User role (admin|user)", "user")
-    .option("--token <token>", "Admin bearer token")
-    .action(
-      runAction(
-        async (
-          deploymentName: string,
-          username: string,
-          opts: { role: string; token?: string }
-        ) => {
-          if (opts.role !== "admin" && opts.role !== "user") {
-            throw new Error(
-              `Invalid --role '${opts.role}'. Must be 'admin' or 'user'.`
-            );
-          }
-          const config = await loadConfigOrExit();
-          const dep = getDeploymentOrExit(config, deploymentName);
-          const mgr = await getUserManager(dep, deploymentName, opts);
-          const result = await mgr.addUser(username, opts.role);
-          console.log(
-            `Created user '${result.username}' (role: ${result.role}, id: ${result.user_id})`
-          );
-          if (result.token) {
-            console.log("");
-            console.log(`  Token: ${result.token}`);
-            console.log("");
-            console.log(
-              "  WARNING: save this token now — it will not be shown again."
-            );
-          }
-        }
-      )
-    );
-
-  deploy
-    .command("users-list <deployment>")
-    .description("List API users on the deployment")
-    .option("--token <token>", "Admin bearer token")
-    .option("--json", "Output as JSON")
-    .action(
-      runAction(
-        async (
-          deploymentName: string,
-          opts: { token?: string; json?: boolean }
-        ) => {
-          const config = await loadConfigOrExit();
-          const dep = getDeploymentOrExit(config, deploymentName);
-          const mgr = await getUserManager(dep, deploymentName, opts);
-          const users = await mgr.listUsers();
-          if (opts.json) {
-            asJson(users);
-            return;
-          }
-          printTable(
-            users.map((u) => ({
-              username: u.username,
-              user_id: u.user_id,
-              role: u.role,
-              token_hash_preview: u.token_hash
-                ? `${u.token_hash.slice(0, 16)}...`
-                : "",
-              created_at: (u.created_at ?? "").slice(0, 19)
-            })),
-            ["username", "user_id", "role", "token_hash_preview", "created_at"]
-          );
-        }
-      )
-    );
-
-  deploy
-    .command("users-remove <deployment> <username>")
-    .description("Remove an API user")
-    .option("--force", "Skip confirmation")
-    .option("--token <token>", "Admin bearer token")
-    .action(
-      runAction(
-        async (
-          deploymentName: string,
-          username: string,
-          opts: { force?: boolean; token?: string }
-        ) => {
-          const ok = await confirm(
-            `Remove user '${username}' from '${deploymentName}'?`,
-            { force: Boolean(opts.force) }
-          );
-          if (!ok) return;
-          const config = await loadConfigOrExit();
-          const dep = getDeploymentOrExit(config, deploymentName);
-          const mgr = await getUserManager(dep, deploymentName, opts);
-          await mgr.removeUser(username);
-          console.log(`removed '${username}'`);
-        }
-      )
-    );
-
-  deploy
-    .command("users-reset-token <deployment> <username>")
-    .description("Rotate a user's API token")
-    .option("--token <token>", "Admin bearer token")
-    .action(
-      runAction(
-        async (
-          deploymentName: string,
-          username: string,
-          opts: { token?: string }
-        ) => {
-          const config = await loadConfigOrExit();
-          const dep = getDeploymentOrExit(config, deploymentName);
-          const mgr = await getUserManager(dep, deploymentName, opts);
-          const result = await mgr.resetToken(username);
-          console.log(`Rotated token for '${result.username}'`);
-          if (result.token) {
-            console.log("");
-            console.log(`  New token: ${result.token}`);
-            console.log("");
-            console.log(
-              "  The previous token is now invalid. Save this token — it will not be shown again."
-            );
-          }
-        }
-      )
-    );
-}
-

@@ -30,7 +30,6 @@ export * from "./configure.js";
 // Authentication and users
 export * from "./auth.js";
 export * from "./remote-users.js";
-export * from "./api-user-manager.js";
 
 // Admin operations
 export * from "./admin-client.js";

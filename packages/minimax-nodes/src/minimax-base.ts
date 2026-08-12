@@ -12,6 +12,67 @@
 
 export const MINIMAX_BASE_URL = "https://api.minimax.io";
 
+// ── Bounded retry for transient failures ─────────────────────────────
+
+const MAX_RETRIES = 3;
+const BASE_DELAY_MS = 1000;
+const MAX_DELAY_MS = 30_000;
+
+const isRetryableStatus = (status: number): boolean =>
+  status === 429 || (status >= 500 && status <= 599);
+
+const isRetryableError = (err: unknown): boolean => {
+  if (err instanceof TypeError) return true;
+  if (err instanceof Error) {
+    const msg = err.message.toLowerCase();
+    return msg.includes("timeout") || msg.includes("econnreset") || msg.includes("fetch failed");
+  }
+  return false;
+};
+
+const parseRetryAfter = (res: Response): number | null => {
+  const value = res.headers.get("retry-after");
+  if (!value) return null;
+  const seconds = Number(value);
+  if (!Number.isNaN(seconds)) return seconds * 1000;
+  const date = new Date(value);
+  if (!Number.isNaN(date.getTime())) return Math.max(0, date.getTime() - Date.now());
+  return null;
+};
+
+const computeDelay = (attempt: number, retryAfterMs: number | null): number => {
+  if (retryAfterMs !== null) return Math.min(retryAfterMs, MAX_DELAY_MS);
+  const exponential = BASE_DELAY_MS * Math.pow(2, attempt);
+  const jitter = exponential * 0.2;
+  return Math.min(exponential - jitter + Math.random() * jitter * 2, MAX_DELAY_MS);
+};
+
+/**
+ * Wrap fetch with bounded exponential backoff for 429/5xx/network errors.
+ * Non-retryable responses (including 4xx other than 429) are returned as-is.
+ */
+export async function minimaxFetch(
+  input: string,
+  init: RequestInit
+): Promise<Response> {
+  let lastError: unknown;
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      const res = await fetch(input, init);
+      if (!isRetryableStatus(res.status) || attempt >= MAX_RETRIES) return res;
+      const delay = computeDelay(attempt, parseRetryAfter(res));
+      await new Promise((r) => setTimeout(r, delay));
+      continue;
+    } catch (err) {
+      lastError = err;
+      if (!isRetryableError(err) || attempt >= MAX_RETRIES) throw err;
+      const delay = computeDelay(attempt, null);
+      await new Promise((r) => setTimeout(r, delay));
+    }
+  }
+  throw lastError ?? new Error("Retry loop exhausted");
+}
+
 /** Resolve the MiniMax API key from injected secrets or the environment. */
 export function getMinimaxApiKey(secrets: Record<string, string>): string {
   const key = secrets?.MINIMAX_API_KEY || process.env.MINIMAX_API_KEY || "";
@@ -306,7 +367,7 @@ export async function generateVideo(
   body: Record<string, unknown>,
   options: VideoTaskOptions = {}
 ): Promise<Uint8Array> {
-  const submit = await fetch(`${MINIMAX_BASE_URL}/v1/video_generation`, {
+  const submit = await minimaxFetch(`${MINIMAX_BASE_URL}/v1/video_generation`, {
     method: "POST",
     headers: minimaxHeaders(apiKey),
     body: JSON.stringify(body)
@@ -341,7 +402,7 @@ async function pollVideoTask(
     taskId
   )}`;
   for (let i = 0; i < maxAttempts; i++) {
-    const res = await fetch(url, { headers: minimaxHeaders(apiKey) });
+    const res = await minimaxFetch(url, { headers: minimaxHeaders(apiKey) });
     if (!res.ok) {
       throw new Error(
         `MiniMax video status failed: ${res.status} ${await res.text()}`
@@ -378,7 +439,7 @@ async function downloadFile(
   const url = `${MINIMAX_BASE_URL}/v1/files/retrieve?file_id=${encodeURIComponent(
     fileId
   )}`;
-  const res = await fetch(url, { headers: minimaxHeaders(apiKey) });
+  const res = await minimaxFetch(url, { headers: minimaxHeaders(apiKey) });
   if (!res.ok) {
     throw new Error(
       `MiniMax files/retrieve failed: ${res.status} ${await res.text()}`

@@ -1453,6 +1453,13 @@ app.listen({ port, host }, (err) => {
 });
 
 // ---------------------------------------------------------------------------
+// Temp file cleanup — sweep orphaned temp files hourly
+// ---------------------------------------------------------------------------
+
+import { startTempCleanup } from "@nodetool-ai/storage";
+startTempCleanup();
+
+// ---------------------------------------------------------------------------
 // Triggers — durable wakeup service, dispatcher, and ingestion adapters
 // ---------------------------------------------------------------------------
 //
