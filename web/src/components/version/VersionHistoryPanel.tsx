@@ -3,6 +3,7 @@
  */
 
 import React, { useCallback, useMemo, useState, memo } from "react";
+import { useTranslation } from "react-i18next";
 import CompareIcon from "@mui/icons-material/Compare";
 import VersionListItem from "./VersionListItem";
 import { VersionDiff } from "./VersionDiff";
@@ -46,21 +47,6 @@ const getGraphSizeBytes = (graph: Graph): number => {
   }
 };
 
-const getSaveTypeLabel = (saveType: SaveType): string => {
-  switch (saveType) {
-    case "manual":
-      return "manual";
-    case "autosave":
-      return "auto";
-    case "restore":
-      return "restored";
-    case "checkpoint":
-      return "checkpoint";
-    default:
-      return saveType;
-  }
-};
-
 const formatBytes = (bytes: number): string => {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
@@ -84,6 +70,7 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
   onRestore,
   onClose
 }) => {
+  const { t } = useTranslation("workspace");
   const selectedVersionId = useVersionHistoryStore((state) => state.selectedVersionId);
   const compareVersionId = useVersionHistoryStore((state) => state.compareVersionId);
   const isCompareMode = useVersionHistoryStore((state) => state.isCompareMode);
@@ -91,6 +78,24 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
   const setCompareVersion = useVersionHistoryStore((state) => state.setCompareVersion);
   const setCompareMode = useVersionHistoryStore((state) => state.setCompareMode);
   const setHistoryPanelOpen = useVersionHistoryStore((state) => state.setHistoryPanelOpen);
+
+  const getSaveTypeLabel = useCallback(
+    (saveType: SaveType): string => {
+      switch (saveType) {
+        case "manual":
+          return t("workspace:version.saveTypeManual");
+        case "autosave":
+          return t("workspace:version.saveTypeAuto");
+        case "restore":
+          return t("workspace:version.saveTypeRestore");
+        case "checkpoint":
+          return t("workspace:version.saveTypeCheckpoint");
+        default:
+          return saveType;
+      }
+    },
+    [t]
+  );
 
   const {
     data: apiVersions,
@@ -247,7 +252,7 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
         }}
       >
         <FlexColumn align="center" justify="center" fullHeight>
-          <LoadingSpinner size="medium" text="Loading versions..." />
+          <LoadingSpinner size="medium" text={t("workspace:version.loadingVersions")} />
         </FlexColumn>
       </div>
     );
@@ -263,13 +268,13 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
         }}
       >
         <PanelToolbar
-          title="Version History"
+          title={t("workspace:version.historyTitle")}
           actions={
-            <CloseButton onClick={onClose} buttonSize="small" tooltip="Close" />
+            <CloseButton onClick={onClose} buttonSize="small" tooltip={t("common:button.close")} />
           }
         />
         <FlexColumn padding={3} gap={0.5}>
-          <Text color="error">Failed to load versions</Text>
+          <Text color="error">{t("workspace:version.loadFailed")}</Text>
           <Text size="smaller" color="secondary">{String(error)}</Text>
         </FlexColumn>
       </FlexColumn>
@@ -288,7 +293,7 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
       }}
     >
       <PanelToolbar
-        title="Versions"
+        title={t("workspace:version.versions")}
         count={versions.length}
         actions={
           <>
@@ -299,10 +304,10 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
                 onClick={handleClearComparison}
                 sx={{ fontSize: "var(--fontSizeSmaller)", py: 0.5, px: 0.5, minWidth: 0 }}
               >
-                Clear
+                {t("workspace:version.clear")}
               </EditorButton>
             )}
-            <Tooltip title="Compare two versions side by side">
+            <Tooltip title={t("workspace:version.compareTooltip")}>
               <EditorButton
                 density="compact"
                 variant={isCompareMode ? "contained" : "text"}
@@ -316,10 +321,10 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
                 }}
               >
                 <CompareIcon sx={{ fontSize: "14px !important", mr: 0.5 }} />
-                Compare
+                {t("workspace:version.compare")}
               </EditorButton>
             </Tooltip>
-            <CloseButton onClick={onClose} buttonSize="small" tooltip="Close" />
+            <CloseButton onClick={onClose} buttonSize="small" tooltip={t("common:button.close")} />
           </>
         }
       >
@@ -328,11 +333,11 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
           exclusive
           onChange={handleFilterChange}
           compact
-          aria-label="version filter"
+          aria-label={t("workspace:version.versions")}
         >
-          <ToggleOption value="all" aria-label="all">All</ToggleOption>
-          <ToggleOption value="manual" aria-label="manual">Manual</ToggleOption>
-          <ToggleOption value="autosave" aria-label="autosave">Auto</ToggleOption>
+          <ToggleOption value="all" aria-label={t("workspace:version.filterAll")}>{t("workspace:version.filterAll")}</ToggleOption>
+          <ToggleOption value="manual" aria-label={t("workspace:version.filterManual")}>{t("workspace:version.filterManual")}</ToggleOption>
+          <ToggleOption value="autosave" aria-label={t("workspace:version.filterAuto")}>{t("workspace:version.filterAuto")}</ToggleOption>
         </ToggleGroup>
       </PanelToolbar>
 
@@ -343,8 +348,8 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
         }}>
           <Caption size="smaller" color="primary">
             {!selectedVersionId
-              ? "Select the first version to compare"
-              : "Select the second version to compare"}
+              ? t("workspace:version.selectFirstToCompare")
+              : t("workspace:version.selectSecondToCompare")}
           </Caption>
         </div>
       )}
@@ -369,9 +374,9 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
         >
           {versions.length === 0 ? (
             <div style={{ padding: getSpacingPx(SPACING.xl), textAlign: "center" }}>
-              <Text color="secondary">No versions saved yet</Text>
+              <Text color="secondary">{t("workspace:version.noVersions")}</Text>
               <Caption size="smaller" color="muted">
-                Save your workflow to create a version
+                {t("workspace:version.noVersionsHint")}
               </Caption>
             </div>
           ) : (
@@ -407,9 +412,10 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
             <FlexColumn gap={2} fullHeight>
               <div>
                 <Caption size="smaller" color="muted" sx={{ textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                  Comparing v{Math.min(selectedVersion.version, compareVersion.version)}
-                  {" "}↔{" "}
-                  v{Math.max(selectedVersion.version, compareVersion.version)}
+                  {t("workspace:version.comparing", {
+                    old: Math.min(selectedVersion.version, compareVersion.version),
+                    new: Math.max(selectedVersion.version, compareVersion.version)
+                  })}
                 </Caption>
               </div>
               <GraphVisualDiff
@@ -499,7 +505,7 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
                   {isRestoringVersion ? (
                     <LoadingSpinner size="small" />
                   ) : (
-                    "Restore this version"
+                    t("workspace:version.restoreThisVersion")
                   )}
                 </EditorButton>
                 <EditorButton
@@ -508,7 +514,7 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
                   onClick={() => handleDelete(selectedVersion.id)}
                   sx={{ color: "text.secondary" }}
                 >
-                  Delete
+                  {t("workspace:version.delete")}
                 </EditorButton>
               </div>
             </FlexColumn>
@@ -521,12 +527,12 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
               sx={{ color: "text.secondary", textAlign: "center" }}
             >
               <Text color="secondary">
-                Select a version to preview
+                {t("workspace:version.selectToPreview")}
               </Text>
               <Caption size="smaller" color="muted">
                 {isCompareMode
-                  ? "Pick two versions to see what changed."
-                  : "Click any entry to see its graph and metadata here."}
+                  ? t("workspace:version.compareModeHint")
+                  : t("workspace:version.previewHint")}
               </Caption>
             </FlexColumn>
           )}
@@ -536,13 +542,13 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
       <Dialog
         open={deleteDialogOpen}
         onClose={handleCloseDeleteDialog}
-        title="Delete this version?"
+        title={t("workspace:version.deleteTitle")}
         onConfirm={handleConfirmDelete}
         onCancel={handleCloseDeleteDialog}
-        confirmText="Delete"
+        confirmText={t("workspace:version.delete")}
         destructive
       >
-        <Text color="secondary">This action cannot be undone.</Text>
+        <Text color="secondary">{t("workspace:version.deleteWarning")}</Text>
       </Dialog>
     </div>
   );

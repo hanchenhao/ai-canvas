@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { workflowListQueryKey } from "../../serverState/workflowQueryKeys";
@@ -132,6 +133,7 @@ const DashboardWorkflows: React.FC<DashboardWorkflowsProps> = ({
   onCreateNew
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("workspace");
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const copyWorkflow = useWorkflowManager((state) => state.copy);
@@ -174,11 +176,11 @@ const DashboardWorkflows: React.FC<DashboardWorkflowsProps> = ({
         addNotification({
           type: "error",
           alert: true,
-          content: `Failed to duplicate "${workflow.name}".`
+          content: t("workspace:dashboard.duplicateFailed", { name: workflow.name })
         });
       }
     },
-    [copyWorkflow, createWorkflow, navigate, addNotification]
+    [copyWorkflow, createWorkflow, navigate, addNotification, t]
   );
 
   const handleDelete = useCallback((workflow: Workflow) => {
@@ -210,11 +212,11 @@ const DashboardWorkflows: React.FC<DashboardWorkflowsProps> = ({
         addNotification({
           type: "error",
           alert: true,
-          content: `Failed to rename "${workflow.name}".`
+          content: t("workspace:dashboard.renameFailed", { name: workflow.name })
         });
       }
     },
-    [queryClient, addNotification]
+    [queryClient, addNotification, t]
   );
 
   const noop = useCallback(() => {}, []);
@@ -237,18 +239,18 @@ const DashboardWorkflows: React.FC<DashboardWorkflowsProps> = ({
         workflowsToDelete={workflowsToDelete}
       />
       <div css={wrapStyles(theme)}>
-        <SectionHeader title="Recent workflows" count={countLabel}>
+        <SectionHeader title={t("workspace:dashboard.recentWorkflows")} count={countLabel}>
           <DashboardSearchBox
             value={query}
             onChange={setQuery}
-            placeholder="Search workflows…"
-            aria-label="Search workflows"
+            placeholder={t("workspace:dashboard.searchPlaceholder")}
+            aria-label={t("workspace:dashboard.searchAriaLabel")}
           />
-          <div className="viewtog" role="group" aria-label="View mode">
+          <div className="viewtog" role="group" aria-label={t("workspace:dashboard.viewModeAriaLabel")}>
             <button
               type="button"
               className={view === "list" ? "on" : ""}
-              aria-label="List view"
+              aria-label={t("workspace:dashboard.listViewAriaLabel")}
               aria-pressed={view === "list"}
               onClick={() => setView("list")}
             >
@@ -259,7 +261,7 @@ const DashboardWorkflows: React.FC<DashboardWorkflowsProps> = ({
             <button
               type="button"
               className={view === "grid" ? "on" : ""}
-              aria-label="Grid view"
+              aria-label={t("workspace:dashboard.gridViewAriaLabel")}
               aria-pressed={view === "grid"}
               onClick={() => setView("grid")}
             >
@@ -285,8 +287,8 @@ const DashboardWorkflows: React.FC<DashboardWorkflowsProps> = ({
                   </span>
                 </div>
                 <div>
-                  <div className="rec-new-label">New workflow</div>
-                  <div className="rec-new-hint">Start from blank</div>
+                  <div className="rec-new-label">{t("workspace:dashboard.newWorkflow")}</div>
+                  <div className="rec-new-hint">{t("workspace:dashboard.startFromBlank")}</div>
                 </div>
               </button>
               {filtered.map((workflow) => (
@@ -301,9 +303,9 @@ const DashboardWorkflows: React.FC<DashboardWorkflowsProps> = ({
               <EmptyState
                 variant="no-results"
                 size="small"
-                title="No matching workflows"
-                description={`No workflows match “${query.trim()}”.`}
-                actionText="Clear search"
+                title={t("workspace:dashboard.noMatchesTitle")}
+                description={t("workspace:dashboard.noMatchesDescription", { query: query.trim() })}
+                actionText={t("workspace:dashboard.clearSearch")}
                 onAction={() => setQuery("")}
               />
             )}
@@ -312,16 +314,16 @@ const DashboardWorkflows: React.FC<DashboardWorkflowsProps> = ({
           <EmptyState
             variant="no-results"
             size="small"
-            title="No matching workflows"
-            description={`No workflows match “${query.trim()}”.`}
-            actionText="Clear search"
+            title={t("workspace:dashboard.noMatchesTitle")}
+            description={t("workspace:dashboard.noMatchesDescription", { query: query.trim() })}
+            actionText={t("workspace:dashboard.clearSearch")}
             onAction={() => setQuery("")}
           />
         ) : isEmpty ? (
           <EmptyState
-            title="No workflows yet"
-            description="Create your first workflow to get started."
-            actionText="New workflow"
+            title={t("workspace:dashboard.emptyTitle")}
+            description={t("workspace:dashboard.emptyDescription")}
+            actionText={t("workspace:dashboard.newWorkflow")}
             onAction={onCreateNew}
           />
         ) : (

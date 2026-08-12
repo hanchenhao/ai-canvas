@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -66,6 +67,7 @@ const styles = (theme: Theme) =>
   });
 
 const CsvTableView = ({ text, name }: { text: string; name: string }) => {
+  const { t } = useTranslation("workspace");
   const { columns, rows, truncated } = useMemo(() => {
     const df = parseCsvToDataframe(text, csvDelimiterFor(name));
     const cols = (df.columns ?? []).map((c, i) => ({
@@ -90,7 +92,7 @@ const CsvTableView = ({ text, name }: { text: string; name: string }) => {
   if (columns.length === 0) {
     return (
       <FlexColumn className="status">
-        <Caption>Empty table</Caption>
+        <Caption>{t("workspace:textPreview.emptyTable")}</Caption>
       </FlexColumn>
     );
   }
@@ -100,7 +102,7 @@ const CsvTableView = ({ text, name }: { text: string; name: string }) => {
       <DataTable columns={columns} rows={rows} compact bordered stickyHeader />
       {truncated && (
         <Caption className="csv-note">
-          Showing first {MAX_CSV_ROWS} rows.
+          {t("workspace:textPreview.rowsTruncated", { count: MAX_CSV_ROWS })}
         </Caption>
       )}
     </ScrollArea>
@@ -115,6 +117,7 @@ const CsvTableView = ({ text, name }: { text: string; name: string }) => {
  */
 const TextPreview = ({ asset }: TextPreviewProps) => {
   const theme = useTheme();
+  const { t } = useTranslation("workspace");
   const getUrl = asset.get_url ?? undefined;
   const language = useMemo(() => languageFromAsset(asset), [asset]);
   const kind = previewKind(asset);
@@ -143,7 +146,7 @@ const TextPreview = ({ asset }: TextPreviewProps) => {
       return (
         <FlexColumn className="status">
           <Text size="normal" weight={600} sx={{ color: "error.main" }}>
-            Failed to load text content
+            {t("workspace:textPreview.loadFailed")}
           </Text>
         </FlexColumn>
       );

@@ -5,7 +5,8 @@
  * lists collaborators who redeemed a link, and lets the owner change roles,
  * remove collaborators, or revoke links.
  */
-import { memo, useCallback } from "react";
+import { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Dialog,
   FlexColumn,
@@ -29,16 +30,6 @@ import {
 } from "../../serverState/useWorkflowSharing";
 import { useNotificationStore } from "../../stores/NotificationStore";
 
-const ROLE_LABELS: Record<ShareRole, string> = {
-  viewer: "Can view",
-  editor: "Can edit"
-};
-
-const ROLE_OPTIONS = [
-  { value: "viewer", label: ROLE_LABELS.viewer },
-  { value: "editor", label: ROLE_LABELS.editor }
-] as const;
-
 interface ShareWorkflowDialogProps {
   open: boolean;
   onClose: () => void;
@@ -52,10 +43,27 @@ const ShareWorkflowDialog = ({
   workflowId,
   workflowName
 }: ShareWorkflowDialogProps) => {
+  const { t } = useTranslation("workspace");
   const { query, createLink, revokeLink, setRole, removeCollaborator } =
     useWorkflowSharing(open ? workflowId : null);
   const addNotification = useNotificationStore(
     (state) => state.addNotification
+  );
+
+  const roleLabels = useMemo<Record<ShareRole, string>>(
+    () => ({
+      viewer: t("workspace:share.roleViewer"),
+      editor: t("workspace:share.roleEditor")
+    }),
+    [t]
+  );
+
+  const roleOptions = useMemo(
+    () => [
+      { value: "viewer", label: roleLabels.viewer },
+      { value: "editor", label: roleLabels.editor }
+    ] as const,
+    [roleLabels]
   );
 
   const activeShares = (query.data?.shares ?? []).filter(
@@ -71,7 +79,7 @@ const ShareWorkflowDialog = ({
       } catch {
         addNotification({
           type: "error",
-          content: "Failed to create share link",
+          content: t("workspace:share.createFailed"),
           alert: true
         });
         return;
@@ -82,19 +90,18 @@ const ShareWorkflowDialog = ({
         await navigator.clipboard.writeText(shareUrlForToken(share.token));
         addNotification({
           type: "success",
-          content: `${ROLE_LABELS[role]} link copied to clipboard`,
+          content: t("workspace:share.linkCopied", { role: roleLabels[role] }),
           alert: true
         });
       } catch {
         addNotification({
           type: "info",
-          content:
-            "Share link created — copy it from the Active links list below",
+          content: t("workspace:share.linkCreated"),
           alert: true
         });
       }
     },
-    [createLink, addNotification]
+    [createLink, addNotification, t, roleLabels]
   );
 
   return (
@@ -102,15 +109,13 @@ const ShareWorkflowDialog = ({
       className="share-workflow-dialog"
       open={open}
       onClose={onClose}
-      title={`Share "${workflowName}"`}
+      title={t("workspace:share.title", { name: workflowName })}
       maxWidth="sm"
       fullWidth
     >
       <FlexColumn gap={SPACING.md} sx={{ pb: 2 }}>
         <Caption>
-          Anyone signed in to this server who opens a share link gets the
-          link&apos;s role. Revoking a link stops new joins; people who
-          already joined stay listed below.
+          {t("workspace:share.description")}
         </Caption>
 
         <FlexRow gap={SPACING.sm}>
@@ -119,14 +124,14 @@ const ShareWorkflowDialog = ({
             disabled={createLink.isPending}
             onClick={() => void handleCreateLink("viewer")}
           >
-            Copy view link
+            {t("workspace:share.copyViewLink")}
           </EditorButton>
           <EditorButton
             variant="outlined"
             disabled={createLink.isPending}
             onClick={() => void handleCreateLink("editor")}
           >
-            Copy edit link
+            {t("workspace:share.copyEditLink")}
           </EditorButton>
         </FlexRow>
 
@@ -134,7 +139,7 @@ const ShareWorkflowDialog = ({
 
         {activeShares.length > 0 && (
           <FlexColumn gap={SPACING.xs}>
-            <Text size="small">Active links</Text>
+            <Text size="small">{t("workspace:share.activeLinks")}</Text>
             {activeShares.map((share) => (
               <FlexRow
                 key={share.id}
@@ -143,10 +148,10 @@ const ShareWorkflowDialog = ({
                 justify="space-between"
               >
                 <FlexRow gap={SPACING.sm} align="center">
-                  <Chip label={ROLE_LABELS[share.role]} size="small" />
+                  <Chip label={roleLabels[share.role]} size="small" />
                   <CopyButton
                     value={shareUrlForToken(share.token)}
-                    tooltip="Copy share link"
+                    tooltip={t("workspace:share.copyShareLink")}
                   />
                 </FlexRow>
                 <EditorButton
@@ -154,7 +159,7 @@ const ShareWorkflowDialog = ({
                   disabled={revokeLink.isPending}
                   onClick={() => revokeLink.mutate(share.id)}
                 >
-                  Revoke
+                  {t("workspace:share.revoke")}
                 </EditorButton>
               </FlexRow>
             ))}
@@ -163,12 +168,12 @@ const ShareWorkflowDialog = ({
 
         <Divider />
 
-        <Text size="small">People with access</Text>
+        <Text size="small">{t("workspace:share.peopleWithAccess")}</Text>
         {collaborators.length === 0 && !query.isLoading && (
           <EmptyState
             variant="empty"
-            title="No collaborators yet"
-            description="Copy a link above and send it to someone."
+            title={t("workspace:share.noCollaborators")}
+            description={t("workspace:share.noCollaboratorsHint")}
           />
         )}
         {collaborators.map((collaborator) => (
@@ -189,7 +194,7 @@ const ShareWorkflowDialog = ({
                 label=""
                 size="small"
                 value={collaborator.role}
-                options={ROLE_OPTIONS}
+                options={roleOptions}
                 disabled={setRole.isPending}
                 onChange={(value) =>
                   setRole.mutate({
@@ -199,7 +204,7 @@ const ShareWorkflowDialog = ({
                 }
               />
               <DeleteButton
-                tooltip="Remove access"
+                tooltip={t("workspace:share.removeAccess")}
                 disabled={removeCollaborator.isPending}
                 onClick={() => removeCollaborator.mutate(collaborator.user_id)}
               />
