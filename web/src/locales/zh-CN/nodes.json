@@ -54992,7 +54992,8 @@
         "description": "图像 whose channel becomes the 输出's alpha"
       },
       "alpha_channel": {
-        "title": "Alpha 通道"
+        "title": "Alpha 通道",
+        "description": ""
       },
       "image": {
         "title": "图像",
@@ -55005,20 +55006,24 @@
     "description": "Permute RGBA channels. Each 输出 channel picks any 输入 channel (0=R, 1=G, 2=B, 3=A). 图像, channels, swap, rgba",
     "properties": {
       "a_from": {
-        "title": "A 来自"
+        "title": "A 来自",
+        "description": ""
       },
       "b_from": {
-        "title": "B 来自"
+        "title": "B 来自",
+        "description": ""
       },
       "g_from": {
-        "title": "G 来自"
+        "title": "G 来自",
+        "description": ""
       },
       "image": {
         "title": "图像",
         "description": "输入图像"
       },
       "r_from": {
-        "title": "R 来自"
+        "title": "R 来自",
+        "description": ""
       }
     }
   },
@@ -55027,10 +55032,12 @@
     "description": "Additive 亮度, multiplicative 对比度 around mid-gray. 图像, 颜色, 亮度, 对比度, levels",
     "properties": {
       "brightness": {
-        "title": "亮度"
+        "title": "亮度",
+        "description": ""
       },
       "contrast": {
-        "title": "对比度"
+        "title": "对比度",
+        "description": ""
       },
       "image": {
         "title": "图像",
@@ -55069,7 +55076,8 @@
         "description": "可选 coverage 蒙版"
       },
       "stops": {
-        "title": "档位"
+        "title": "档位",
+        "description": ""
       }
     }
   },
@@ -55078,32 +55086,40 @@
     "description": "Full colour-grade pass: 亮度, 对比度, 饱和度, hue, 温度, tint, shadows, highlights. 图像, 颜色, grade, 颜色 correction",
     "properties": {
       "brightness": {
-        "title": "亮度"
+        "title": "亮度",
+        "description": ""
       },
       "contrast": {
-        "title": "对比度"
+        "title": "对比度",
+        "description": ""
       },
       "highlights": {
-        "title": "高光"
+        "title": "高光",
+        "description": ""
       },
       "hue": {
-        "title": "色相（°）"
+        "title": "色相（°）",
+        "description": ""
       },
       "image": {
         "title": "图像",
         "description": "输入图像"
       },
       "saturation": {
-        "title": "饱和度"
+        "title": "饱和度",
+        "description": ""
       },
       "shadows": {
-        "title": "阴影"
+        "title": "阴影",
+        "description": ""
       },
       "temperature": {
-        "title": "温度"
+        "title": "温度",
+        "description": ""
       },
       "tint": {
-        "title": "色调"
+        "title": "色调",
+        "description": ""
       }
     }
   },
@@ -55112,10 +55128,12 @@
     "description": "Hue rotation (degrees), 饱和度 and 亮度 multipliers. 图像, 颜色, hue, 饱和度, 亮度, hsb, hsv",
     "properties": {
       "brightness": {
-        "title": "亮度"
+        "title": "亮度",
+        "description": ""
       },
       "hue": {
-        "title": "色相（°）"
+        "title": "色相（°）",
+        "description": ""
       },
       "image": {
         "title": "图像",
@@ -55126,7 +55144,8 @@
         "description": "可选 coverage 蒙版"
       },
       "saturation": {
-        "title": "饱和度"
+        "title": "饱和度",
+        "description": ""
       }
     }
   },
@@ -55135,7 +55154,8 @@
     "description": "Invert RGB (1 - rgb), preserve alpha. 数量 fades between passthrough and full invert. 图像, 颜色, invert, negative",
     "properties": {
       "amount": {
-        "title": "数量"
+        "title": "数量",
+        "description": ""
       },
       "image": {
         "title": "图像",
@@ -55156,7 +55176,8 @@
         "description": "输入图像"
       },
       "levels": {
-        "title": "色阶"
+        "title": "色阶",
+        "description": ""
       },
       "mask": {
         "title": "蒙版",
@@ -55485,16 +55506,19 @@
     "description": "Sweep gradient around the canvas centre. 图像, gradient, angular, conic, draw",
     "properties": {
       "color_a": {
-        "title": "颜色 A"
+        "title": "颜色 A",
+        "description": ""
       },
       "color_b": {
-        "title": "颜色 B"
+        "title": "颜色 B",
+        "description": ""
       },
       "height": {
         "title": "高度"
       },
       "rotation": {
-        "title": "旋转（°）"
+        "title": "旋转（°）",
+        "description": ""
       },
       "width": {
         "title": "宽度"
@@ -55521,13 +55545,16 @@
     "description": "Two-颜色 checkerboard with configurable cell 尺寸. 图像, checkerboard, pattern, draw",
     "properties": {
       "cell_size": {
-        "title": "单元尺寸（px）"
+        "title": "单元尺寸（px）",
+        "description": ""
       },
       "color_a": {
-        "title": "颜色 A"
+        "title": "颜色 A",
+        "description": ""
       },
       "color_b": {
-        "title": "颜色 B"
+        "title": "颜色 B",
+        "description": ""
       },
       "height": {
         "title": "高度"
@@ -55542,16 +55569,19 @@
     "description": "Inner-to-outer diamond / square gradient. 图像, gradient, diamond, draw",
     "properties": {
       "color_inner": {
-        "title": "内部色"
+        "title": "内部色",
+        "description": ""
       },
       "color_outer": {
-        "title": "外部色"
+        "title": "外部色",
+        "description": ""
       },
       "height": {
         "title": "高度"
       },
       "radius": {
-        "title": "半径"
+        "title": "半径",
+        "description": ""
       },
       "width": {
         "title": "宽度"
@@ -55585,19 +55615,23 @@
     "description": "Two-stop linear gradient with angle and midpoint. 图像, gradient, linear, draw",
     "properties": {
       "angle": {
-        "title": "角度（°）"
+        "title": "角度（°）",
+        "description": ""
       },
       "color_a": {
-        "title": "颜色 A"
+        "title": "颜色 A",
+        "description": ""
       },
       "color_b": {
-        "title": "颜色 B"
+        "title": "颜色 B",
+        "description": ""
       },
       "height": {
         "title": "高度"
       },
       "midpoint": {
-        "title": "中点"
+        "title": "中点",
+        "description": ""
       },
       "width": {
         "title": "宽度"
@@ -55609,16 +55643,19 @@
     "description": "Inner-to-outer radial gradient centred on the canvas. 图像, gradient, radial, draw",
     "properties": {
       "color_inner": {
-        "title": "内部色"
+        "title": "内部色",
+        "description": ""
       },
       "color_outer": {
-        "title": "外部色"
+        "title": "外部色",
+        "description": ""
       },
       "height": {
         "title": "高度"
       },
       "radius": {
-        "title": "半径"
+        "title": "半径",
+        "description": ""
       },
       "width": {
         "title": "宽度"
@@ -55667,7 +55704,8 @@
     "description": "Additive composite of two 图像: out = source + over × gain. 图像, 添加, blend, composite",
     "properties": {
       "gain": {
-        "title": "增益"
+        "title": "增益",
+        "description": ""
       },
       "image": {
         "title": "图像",
@@ -55684,10 +55722,12 @@
     "description": "Tint an 图像（含 constant colour）while preserving source coverage. 图像, overlay, tint, layer 效果",
     "properties": {
       "amount": {
-        "title": "数量"
+        "title": "数量",
+        "description": ""
       },
       "color": {
-        "title": "叠加色"
+        "title": "叠加色",
+        "description": ""
       },
       "image": {
         "title": "图像",
@@ -55700,23 +55740,28 @@
     "description": "Cast a soft drop shadow behind the source silhouette. 图像, drop shadow, layer 效果, blur",
     "properties": {
       "color": {
-        "title": "阴影颜色"
+        "title": "阴影颜色",
+        "description": ""
       },
       "image": {
         "title": "图像",
         "description": "输入图像"
       },
       "intensity": {
-        "title": "强度"
+        "title": "强度",
+        "description": ""
       },
       "offset_x": {
-        "title": "偏移 X"
+        "title": "偏移 X",
+        "description": ""
       },
       "offset_y": {
-        "title": "偏移 Y"
+        "title": "偏移 Y",
+        "description": ""
       },
       "radius": {
-        "title": "半径（px）"
+        "title": "半径（px）",
+        "description": ""
       }
     }
   },
@@ -55729,16 +55774,20 @@
         "description": "输入图像"
       },
       "intensity": {
-        "title": "强度"
+        "title": "强度",
+        "description": ""
       },
       "radius": {
-        "title": "半径（px）"
+        "title": "半径（px）",
+        "description": ""
       },
       "softness": {
-        "title": "柔和度"
+        "title": "柔和度",
+        "description": ""
       },
       "threshold": {
-        "title": "阈值"
+        "title": "阈值",
+        "description": ""
       }
     }
   },
@@ -55747,17 +55796,20 @@
     "description": "Draw a flat outline / stroke around the source silhouette. 图像, outline, stroke, edge, layer 效果",
     "properties": {
       "color": {
-        "title": "描边色"
+        "title": "描边色",
+        "description": ""
       },
       "image": {
         "title": "图像",
         "description": "输入图像"
       },
       "threshold": {
-        "title": "Alpha 阈值"
+        "title": "Alpha 阈值",
+        "description": ""
       },
       "width": {
-        "title": "宽度（px）"
+        "title": "宽度（px）",
+        "description": ""
       }
     }
   },
@@ -55926,7 +55978,8 @@
         "description": "输入图像"
       },
       "radius": {
-        "title": "半径（px）"
+        "title": "半径（px）",
+        "description": ""
       },
       "sigma": {
         "title": "Sigma",
@@ -55949,7 +56002,8 @@
     "description": "Average each N×N block to a single colour. 图像, pixelate, mosaic, filter",
     "properties": {
       "cell_size": {
-        "title": "单元尺寸（px）"
+        "title": "单元尺寸（px）",
+        "description": ""
       },
       "image": {
         "title": "图像",
@@ -56008,10 +56062,12 @@
         "description": "输入图像"
       },
       "softness": {
-        "title": "柔和度"
+        "title": "柔和度",
+        "description": ""
       },
       "threshold": {
-        "title": "阈值"
+        "title": "阈值",
+        "description": ""
       }
     }
   },
@@ -56020,7 +56076,8 @@
     "description": "Sharpening via local-对比度 boost. 数量 控制 强度, 阈值 suppresses 噪声. 图像, sharpen, unsharp 蒙版, filter, 细节",
     "properties": {
       "amount": {
-        "title": "数量"
+        "title": "数量",
+        "description": ""
       },
       "image": {
         "title": "图像",
@@ -56031,7 +56088,8 @@
         "description": "可选 coverage 蒙版"
       },
       "threshold": {
-        "title": "阈值"
+        "title": "阈值",
+        "description": ""
       }
     }
   },
@@ -56044,17 +56102,20 @@
         "description": "输入图像"
       },
       "intensity": {
-        "title": "强度"
+        "title": "强度",
+        "description": ""
       },
       "mask": {
         "title": "蒙版",
         "description": "可选 coverage 蒙版"
       },
       "radius": {
-        "title": "半径"
+        "title": "半径",
+        "description": ""
       },
       "softness": {
-        "title": "柔和度"
+        "title": "柔和度",
+        "description": ""
       }
     }
   },
@@ -56067,16 +56128,20 @@
         "description": "输入图像"
       },
       "key_color": {
-        "title": "抠像色"
+        "title": "抠像色",
+        "description": ""
       },
       "softness": {
-        "title": "柔和度"
+        "title": "柔和度",
+        "description": ""
       },
       "spill": {
-        "title": "溢出抑制"
+        "title": "溢出抑制",
+        "description": ""
       },
       "tolerance": {
-        "title": "容差"
+        "title": "容差",
+        "description": ""
       }
     }
   },
@@ -56085,17 +56150,20 @@
     "description": "Keep pixels whose luminance falls inside [low, high] with smoothstep edges. 图像, luma key, keying, 亮度",
     "properties": {
       "high": {
-        "title": "高"
+        "title": "高",
+        "description": ""
       },
       "image": {
         "title": "图像",
         "description": "输入图像"
       },
       "low": {
-        "title": "低"
+        "title": "低",
+        "description": ""
       },
       "softness": {
-        "title": "柔和度"
+        "title": "柔和度",
+        "description": ""
       }
     }
   },
@@ -56108,7 +56176,8 @@
         "description": "输入图像"
       },
       "invert": {
-        "title": "反转蒙版"
+        "title": "反转蒙版",
+        "description": ""
       },
       "mask": {
         "title": "蒙版",
@@ -56125,10 +56194,12 @@
         "description": "输入图像"
       },
       "invert": {
-        "title": "反转"
+        "title": "反转",
+        "description": ""
       },
       "mode": {
-        "title": "源通道"
+        "title": "源通道",
+        "description": ""
       }
     }
   },
@@ -56151,16 +56222,20 @@
         "description": "输入图像"
       },
       "m00": {
-        "title": "m00"
+        "title": "m00",
+        "description": ""
       },
       "m01": {
-        "title": "m01"
+        "title": "m01",
+        "description": ""
       },
       "m10": {
-        "title": "m10"
+        "title": "m10",
+        "description": ""
       },
       "m11": {
-        "title": "m11"
+        "title": "m11",
+        "description": ""
       },
       "target_height": {
         "title": "目标高度",
@@ -56171,10 +56246,12 @@
         "description": "0 = match source"
       },
       "tx": {
-        "title": "tx"
+        "title": "tx",
+        "description": ""
       },
       "ty": {
-        "title": "ty"
+        "title": "ty",
+        "description": ""
       }
     }
   },
@@ -56183,28 +56260,36 @@
     "description": "Perspective warp via an inverse 3×3 homography (H22 fixed at 1). 图像, perspective, corner pin, homography, warp",
     "properties": {
       "h00": {
-        "title": "H00"
+        "title": "H00",
+        "description": ""
       },
       "h01": {
-        "title": "H01"
+        "title": "H01",
+        "description": ""
       },
       "h02": {
-        "title": "H02"
+        "title": "H02",
+        "description": ""
       },
       "h10": {
-        "title": "H10"
+        "title": "H10",
+        "description": ""
       },
       "h11": {
-        "title": "H11"
+        "title": "H11",
+        "description": ""
       },
       "h12": {
-        "title": "H12"
+        "title": "H12",
+        "description": ""
       },
       "h20": {
-        "title": "H20"
+        "title": "H20",
+        "description": ""
       },
       "h21": {
-        "title": "H21"
+        "title": "H21",
+        "description": ""
       },
       "image": {
         "title": "图像",
@@ -56217,10 +56302,12 @@
     "description": "Per-pixel UV 偏移 driven by a 置换贴图 (R+G channels). Useful for ripples and glass. 图像, displace, warp, ripple, distortion",
     "properties": {
       "amount_x": {
-        "title": "X 数量"
+        "title": "X 数量",
+        "description": ""
       },
       "amount_y": {
-        "title": "Y 数量"
+        "title": "Y 数量",
+        "description": ""
       },
       "displacement": {
         "title": "置换贴图",
@@ -56237,10 +56324,12 @@
     "description": "Translate the 图像 by (dx, dy) UV units with selectable wrap. 图像, 偏移, translate, shift",
     "properties": {
       "dx": {
-        "title": "偏移 X"
+        "title": "偏移 X",
+        "description": ""
       },
       "dy": {
-        "title": "偏移 Y"
+        "title": "偏移 Y",
+        "description": ""
       },
       "image": {
         "title": "图像",
@@ -56261,7 +56350,8 @@
         "description": "× source height"
       },
       "color": {
-        "title": "填充颜色"
+        "title": "填充颜色",
+        "description": ""
       },
       "image": {
         "title": "图像",
@@ -56290,7 +56380,8 @@
         "description": "输入图像"
       },
       "mode": {
-        "title": "模式"
+        "title": "模式",
+        "description": ""
       }
     }
   },
@@ -56317,10 +56408,12 @@
         "description": "输入图像"
       },
       "tiles_x": {
-        "title": "X 方向块数"
+        "title": "X 方向块数",
+        "description": ""
       },
       "tiles_y": {
-        "title": "Y 方向块数"
+        "title": "Y 方向块数",
+        "description": ""
       },
       "wrap": {
         "title": "环绕",
