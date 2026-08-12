@@ -45,6 +45,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github
+            chrome-extension
+            electron
+            packages
+            reliability
+            scripts
+            web
+            workflow_runner
+          sparse-checkout-cone-mode: true
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
