@@ -12,6 +12,8 @@
  */
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { TFunction } from "i18next";
 import { styled } from "@mui/material/styles";
 import {
   DecoratorNode,
@@ -33,21 +35,24 @@ import { FONT_SIZE_SANS, BORDER_RADIUS, SPACING, getSpacingPx, Z_INDEX } from ".
 
 interface SlashCommand {
   id: string;
-  label: string;
-  hint: string;
-  run: (doc: TimelineStoreApi, playback: TimelinePlaybackStoreApi) => void;
+  run: (
+    doc: TimelineStoreApi,
+    playback: TimelinePlaybackStoreApi,
+    t: TFunction
+  ) => void;
 }
 
 const COMMANDS: SlashCommand[] = [
   {
     id: "scene",
-    label: "New scene",
-    hint: "Marker + cut every clip at the playhead",
-    run: (doc, playback) => {
+    run: (doc, playback, t) => {
       const { currentTimeMs } = playback.getState();
       const { addScene, markers } = doc.getState();
       // Marker + split-all-at-playhead in one undo step.
-      addScene(currentTimeMs, `Scene ${markers.length + 1}`);
+      addScene(
+        currentTimeMs,
+        t("timeline:slashCommand.sceneName", { number: markers.length + 1 })
+      );
     }
   }
 ];
@@ -130,18 +135,35 @@ const Host = styled("span")(({ theme }) => ({
 
 const SlashCommandMenu: React.FC<{ nodeKey: NodeKey }> = ({ nodeKey }) => {
   const [editor] = useLexicalComposerContext();
+  const { t } = useTranslation(["timeline"]);
   const docApi = useTimelineStoreApi();
   const playbackApi = useTimelinePlaybackStoreApi();
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
 
+  const labelFor = useCallback(
+    (cmd: SlashCommand) => {
+      if (cmd.id === "scene") return t("timeline:slashCommand.newScene");
+      return cmd.id;
+    },
+    [t]
+  );
+
+  const hintFor = useCallback(
+    (cmd: SlashCommand) => {
+      if (cmd.id === "scene") return t("timeline:slashCommand.newSceneHint");
+      return "";
+    },
+    [t]
+  );
+
   const matches = useMemo(
     () =>
       COMMANDS.filter((c) =>
-        c.label.toLowerCase().includes(query.trim().toLowerCase())
+        labelFor(c).toLowerCase().includes(query.trim().toLowerCase())
       ),
-    [query]
+    [labelFor, query]
   );
 
   useEffect(() => {
@@ -156,10 +178,10 @@ const SlashCommandMenu: React.FC<{ nodeKey: NodeKey }> = ({ nodeKey }) => {
 
   const run = useCallback(
     (cmd: SlashCommand) => {
-      cmd.run(docApi, playbackApi);
+      cmd.run(docApi, playbackApi, t);
       remove();
     },
-    [docApi, playbackApi, remove]
+    [docApi, playbackApi, remove, t]
   );
 
   const onKeyDown = useCallback(
@@ -189,7 +211,7 @@ const SlashCommandMenu: React.FC<{ nodeKey: NodeKey }> = ({ nodeKey }) => {
         className="slash-input"
         value={query}
         spellCheck={false}
-        aria-label="Slash command"
+        aria-label={t("timeline:slashCommand.slashCommand")}
         onChange={(e) => {
           setQuery(e.target.value);
           setActive(0);
@@ -199,7 +221,7 @@ const SlashCommandMenu: React.FC<{ nodeKey: NodeKey }> = ({ nodeKey }) => {
       />
       <ul className="slash-menu">
         {matches.length === 0 ? (
-          <li className="slash-empty">No commands</li>
+          <li className="slash-empty">{t("timeline:slashCommand.noCommands")}</li>
         ) : (
           matches.map((c, i) => (
             <li
@@ -214,8 +236,8 @@ const SlashCommandMenu: React.FC<{ nodeKey: NodeKey }> = ({ nodeKey }) => {
               }}
               onMouseEnter={() => setActive(i)}
             >
-              <span className="cmd-label">{c.label}</span>
-              <span className="cmd-hint">{c.hint}</span>
+              <span className="cmd-label">{labelFor(c)}</span>
+              <span className="cmd-hint">{hintFor(c)}</span>
             </li>
           ))
         )}

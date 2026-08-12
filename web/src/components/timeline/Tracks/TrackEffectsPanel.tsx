@@ -19,6 +19,7 @@ import React, {
   useRef,
   useState
 } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -42,7 +43,6 @@ import { useTimelineStore } from "../../../stores/timeline/TimelineStore";
 import { useTimelineHistoryBatch } from "../../../stores/timeline/useTimelineHistoryBatch";
 import {
   DEVICE_WIDTHS,
-  EFFECT_LABELS,
   AUDIO_EFFECT_TYPES,
   VIDEO_EFFECT_TYPES
 } from "./trackEffectsConstants";
@@ -61,6 +61,19 @@ import {
   FONT_SIZE_SANS
 } from "../../ui_primitives";
 import { FX_PANEL_HEIGHT_PX } from "./trackHeight";
+
+/** Maps an effect type to its i18n key suffix under timeline:effects.effect* */
+const EFFECT_LABEL_KEYS: Record<TrackEffect["type"], string> = {
+  gain: "effectGain",
+  eq3: "effectEq3",
+  filter: "effectFilter",
+  compressor: "effectCompressor",
+  colorCorrection: "effectColorCorrection",
+  videoBlur: "effectVideoBlur",
+  sharpen: "effectSharpen",
+  vignette: "effectVignette",
+  chromaKey: "effectChromaKey"
+};
 
 const containerStyles = (theme: Theme) =>
   css({
@@ -314,19 +327,22 @@ const GainEditor: React.FC<EffectEditorProps<TrackGainEffect>> = ({
   effect,
   onPatch,
   disabled
-}) => (
-  <ParamRow
-    label="Gain"
-    value={effect.gainDb}
-    min={-24}
-    max={24}
-    step={0.1}
-    unit="dB"
-    format={(v) => v.toFixed(1)}
-    onChange={(v) => onPatch({ gainDb: v })}
-    disabled={disabled}
-  />
-);
+}) => {
+  const { t } = useTranslation(["timeline"]);
+  return (
+    <ParamRow
+      label={t("timeline:effects.paramGain")}
+      value={effect.gainDb}
+      min={-24}
+      max={24}
+      step={0.1}
+      unit="dB"
+      format={(v) => v.toFixed(1)}
+      onChange={(v) => onPatch({ gainDb: v })}
+      disabled={disabled}
+    />
+  );
+};
 
 // 3-Band EQ visualizer (Logic-style)
 const EQ_FS = 48000;
@@ -846,48 +862,49 @@ const Eq3Editor: React.FC<EffectEditorProps<TrackEq3Effect>> = ({
   disabled
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
   return (
     <FlexColumn gap={1}>
       <Eq3Curve effect={effect} onPatch={onPatch} disabled={disabled} />
       <FlexRow gap={0.5}>
         <div css={bandReadoutStyles(theme, BAND_COLORS.low)}>
           <div css={readoutRowStyles(theme)}>
-            <span>Low shelf</span>
+            <span>{t("timeline:effects.lowShelf")}</span>
             <b>{effect.lowGainDb >= 0 ? "+" : ""}{effect.lowGainDb.toFixed(1)} dB</b>
           </div>
           <div css={readoutRowStyles(theme)}>
-            <span>Freq</span>
+            <span>{t("timeline:effects.freq")}</span>
             <b>{formatHz(effect.lowFreq)}</b>
           </div>
         </div>
         <div css={bandReadoutStyles(theme, BAND_COLORS.mid)}>
           <div css={readoutRowStyles(theme)}>
-            <span>Mid peak</span>
+            <span>{t("timeline:effects.midPeak")}</span>
             <b>{effect.midGainDb >= 0 ? "+" : ""}{effect.midGainDb.toFixed(1)} dB</b>
           </div>
           <div css={readoutRowStyles(theme)}>
-            <span>Freq</span>
+            <span>{t("timeline:effects.freq")}</span>
             <b>{formatHz(effect.midFreq)}</b>
           </div>
           <div css={readoutRowStyles(theme)}>
-            <span>Q</span>
+            <span>{t("timeline:effects.paramQ")}</span>
             <b>{effect.midQ.toFixed(2)}</b>
           </div>
         </div>
         <div css={bandReadoutStyles(theme, BAND_COLORS.high)}>
           <div css={readoutRowStyles(theme)}>
-            <span>High shelf</span>
+            <span>{t("timeline:effects.highShelf")}</span>
             <b>{effect.highGainDb >= 0 ? "+" : ""}{effect.highGainDb.toFixed(1)} dB</b>
           </div>
           <div css={readoutRowStyles(theme)}>
-            <span>Freq</span>
+            <span>{t("timeline:effects.freq")}</span>
             <b>{formatHz(effect.highFreq)}</b>
           </div>
         </div>
       </FlexRow>
-      <Tooltip title="Drag handles to set frequency & gain. Scroll on the mid handle to change Q.">
+      <Tooltip title={t("timeline:effects.eqDragHint")}>
         <Text size="smaller" color="secondary">
-          Drag bands · scroll mid for Q
+          {t("timeline:effects.eqDragShort")}
         </Text>
       </Tooltip>
     </FlexColumn>
@@ -898,44 +915,47 @@ const FilterEditor: React.FC<EffectEditorProps<TrackFilterEffect>> = ({
   effect,
   onPatch,
   disabled
-}) => (
-  <FlexColumn gap={0.5}>
-    <SelectField
-      label="Mode"
-      value={effect.mode}
-      onChange={(v) =>
-        onPatch({ mode: v as TrackFilterEffect["mode"] })
-      }
-      options={[
-        { value: "lowpass", label: "Low-pass" },
-        { value: "highpass", label: "High-pass" },
-        { value: "bandpass", label: "Band-pass" }
-      ]}
-      size="small"
-      disabled={disabled}
-    />
-    <ParamRow
-      label="Frequency"
-      value={effect.frequency}
-      min={20}
-      max={20000}
-      step={10}
-      unit="Hz"
-      onChange={(v) => onPatch({ frequency: v })}
-      disabled={disabled}
-    />
-    <ParamRow
-      label="Q"
-      value={effect.q}
-      min={0.1}
-      max={20}
-      step={0.1}
-      format={(v) => v.toFixed(1)}
-      onChange={(v) => onPatch({ q: v })}
-      disabled={disabled}
-    />
-  </FlexColumn>
-);
+}) => {
+  const { t } = useTranslation(["timeline"]);
+  return (
+    <FlexColumn gap={0.5}>
+      <SelectField
+        label={t("timeline:effects.paramMode")}
+        value={effect.mode}
+        onChange={(v) =>
+          onPatch({ mode: v as TrackFilterEffect["mode"] })
+        }
+        options={[
+          { value: "lowpass", label: t("timeline:effects.modeLowpass") },
+          { value: "highpass", label: t("timeline:effects.modeHighpass") },
+          { value: "bandpass", label: t("timeline:effects.modeBandpass") }
+        ]}
+        size="small"
+        disabled={disabled}
+      />
+      <ParamRow
+        label={t("timeline:effects.paramFrequency")}
+        value={effect.frequency}
+        min={20}
+        max={20000}
+        step={10}
+        unit="Hz"
+        onChange={(v) => onPatch({ frequency: v })}
+        disabled={disabled}
+      />
+      <ParamRow
+        label={t("timeline:effects.paramQ")}
+        value={effect.q}
+        min={0.1}
+        max={20}
+        step={0.1}
+        format={(v) => v.toFixed(1)}
+        onChange={(v) => onPatch({ q: v })}
+        disabled={disabled}
+      />
+    </FlexColumn>
+  );
+};
 
 // Compressor visualizer (Logic-style transfer curve)
 const COMP_DB_MIN = -60;
@@ -1417,6 +1437,7 @@ const CompressorEditor: React.FC<EffectEditorProps<TrackCompressorEffect>> = ({
   disabled
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
   return (
     <FlexColumn gap={1}>
       <FlexRow gap={1} align="stretch">
@@ -1427,25 +1448,25 @@ const CompressorEditor: React.FC<EffectEditorProps<TrackCompressorEffect>> = ({
         />
         <div css={compReadoutGridStyles(theme)}>
           <div css={compTileStyles(theme, COMP_THRESH_COLOR)}>
-            <span css={compTileLabelStyles(theme)}>Threshold</span>
+            <span css={compTileLabelStyles(theme)}>{t("timeline:effects.paramThreshold")}</span>
             <span css={compTileValueStyles(theme)}>
               {effect.thresholdDb.toFixed(1)} dB
             </span>
           </div>
           <div css={compTileStyles(theme, COMP_ACCENT)}>
-            <span css={compTileLabelStyles(theme)}>Ratio</span>
+            <span css={compTileLabelStyles(theme)}>{t("timeline:effects.paramRatio")}</span>
             <span css={compTileValueStyles(theme)}>
               {effect.ratio.toFixed(1)}:1
             </span>
           </div>
           <div css={compTileStyles(theme)}>
-            <span css={compTileLabelStyles(theme)}>Knee</span>
+            <span css={compTileLabelStyles(theme)}>{t("timeline:effects.paramKnee")}</span>
             <span css={compTileValueStyles(theme)}>
               {effect.kneeDb.toFixed(1)} dB
             </span>
           </div>
           <div css={compTileStyles(theme)}>
-            <span css={compTileLabelStyles(theme)}>Attack</span>
+            <span css={compTileLabelStyles(theme)}>{t("timeline:effects.paramAttack")}</span>
             <span css={compTileValueStyles(theme)}>
               {formatMs(effect.attackMs)}
             </span>
@@ -1454,7 +1475,7 @@ const CompressorEditor: React.FC<EffectEditorProps<TrackCompressorEffect>> = ({
       </FlexRow>
       <FlexColumn gap={0.5}>
         <ParamRow
-          label="Attack"
+          label={t("timeline:effects.paramAttack")}
           value={effect.attackMs}
           min={0}
           max={500}
@@ -1464,7 +1485,7 @@ const CompressorEditor: React.FC<EffectEditorProps<TrackCompressorEffect>> = ({
           disabled={disabled}
         />
         <ParamRow
-          label="Release"
+          label={t("timeline:effects.paramRelease")}
           value={effect.releaseMs}
           min={0}
           max={2000}
@@ -1474,7 +1495,7 @@ const CompressorEditor: React.FC<EffectEditorProps<TrackCompressorEffect>> = ({
           disabled={disabled}
         />
         <ParamRow
-          label="Knee"
+          label={t("timeline:effects.paramKnee")}
           value={effect.kneeDb}
           min={0}
           max={40}
@@ -1485,9 +1506,9 @@ const CompressorEditor: React.FC<EffectEditorProps<TrackCompressorEffect>> = ({
           disabled={disabled}
         />
       </FlexColumn>
-      <Tooltip title="Drag T to set threshold, R to set ratio. Scroll on T to change knee width.">
+      <Tooltip title={t("timeline:effects.compDragHint")}>
         <Text size="smaller" color="secondary">
-          Drag T = threshold · R = ratio · scroll T = knee
+          {t("timeline:effects.compDragShort")}
         </Text>
       </Tooltip>
     </FlexColumn>
@@ -1496,90 +1517,93 @@ const CompressorEditor: React.FC<EffectEditorProps<TrackCompressorEffect>> = ({
 
 const ColorCorrectionEditor: React.FC<
   EffectEditorProps<TrackColorCorrectionEffect>
-> = ({ effect, onPatch, disabled }) => (
-  <FlexColumn gap={0.5}>
-    <ParamRow
-      label="Brightness"
-      value={effect.brightness}
-      min={-1}
-      max={1}
-      step={0.01}
-      format={(v) => v.toFixed(2)}
-      onChange={(v) => onPatch({ brightness: v })}
-      disabled={disabled}
-    />
-    <ParamRow
-      label="Contrast"
-      value={effect.contrast}
-      min={0}
-      max={4}
-      step={0.01}
-      format={(v) => v.toFixed(2)}
-      onChange={(v) => onPatch({ contrast: v })}
-      disabled={disabled}
-    />
-    <ParamRow
-      label="Saturation"
-      value={effect.saturation}
-      min={0}
-      max={4}
-      step={0.01}
-      format={(v) => v.toFixed(2)}
-      onChange={(v) => onPatch({ saturation: v })}
-      disabled={disabled}
-    />
-    <ParamRow
-      label="Hue"
-      value={effect.hue}
-      min={-180}
-      max={180}
-      step={1}
-      unit="°"
-      onChange={(v) => onPatch({ hue: v })}
-      disabled={disabled}
-    />
-    <ParamRow
-      label="Temp"
-      value={effect.temperature}
-      min={-1}
-      max={1}
-      step={0.01}
-      format={(v) => v.toFixed(2)}
-      onChange={(v) => onPatch({ temperature: v })}
-      disabled={disabled}
-    />
-    <ParamRow
-      label="Tint"
-      value={effect.tint}
-      min={-1}
-      max={1}
-      step={0.01}
-      format={(v) => v.toFixed(2)}
-      onChange={(v) => onPatch({ tint: v })}
-      disabled={disabled}
-    />
-    <ParamRow
-      label="Shadows"
-      value={effect.shadows}
-      min={-1}
-      max={1}
-      step={0.01}
-      format={(v) => v.toFixed(2)}
-      onChange={(v) => onPatch({ shadows: v })}
-      disabled={disabled}
-    />
-    <ParamRow
-      label="Highlights"
-      value={effect.highlights}
-      min={-1}
-      max={1}
-      step={0.01}
-      format={(v) => v.toFixed(2)}
-      onChange={(v) => onPatch({ highlights: v })}
-      disabled={disabled}
-    />
-  </FlexColumn>
-);
+> = ({ effect, onPatch, disabled }) => {
+  const { t } = useTranslation(["timeline"]);
+  return (
+    <FlexColumn gap={0.5}>
+      <ParamRow
+        label={t("timeline:effects.paramBrightness")}
+        value={effect.brightness}
+        min={-1}
+        max={1}
+        step={0.01}
+        format={(v) => v.toFixed(2)}
+        onChange={(v) => onPatch({ brightness: v })}
+        disabled={disabled}
+      />
+      <ParamRow
+        label={t("timeline:effects.paramContrast")}
+        value={effect.contrast}
+        min={0}
+        max={4}
+        step={0.01}
+        format={(v) => v.toFixed(2)}
+        onChange={(v) => onPatch({ contrast: v })}
+        disabled={disabled}
+      />
+      <ParamRow
+        label={t("timeline:effects.paramSaturation")}
+        value={effect.saturation}
+        min={0}
+        max={4}
+        step={0.01}
+        format={(v) => v.toFixed(2)}
+        onChange={(v) => onPatch({ saturation: v })}
+        disabled={disabled}
+      />
+      <ParamRow
+        label={t("timeline:effects.paramHue")}
+        value={effect.hue}
+        min={-180}
+        max={180}
+        step={1}
+        unit="°"
+        onChange={(v) => onPatch({ hue: v })}
+        disabled={disabled}
+      />
+      <ParamRow
+        label={t("timeline:effects.paramTemp")}
+        value={effect.temperature}
+        min={-1}
+        max={1}
+        step={0.01}
+        format={(v) => v.toFixed(2)}
+        onChange={(v) => onPatch({ temperature: v })}
+        disabled={disabled}
+      />
+      <ParamRow
+        label={t("timeline:effects.paramTint")}
+        value={effect.tint}
+        min={-1}
+        max={1}
+        step={0.01}
+        format={(v) => v.toFixed(2)}
+        onChange={(v) => onPatch({ tint: v })}
+        disabled={disabled}
+      />
+      <ParamRow
+        label={t("timeline:effects.paramShadows")}
+        value={effect.shadows}
+        min={-1}
+        max={1}
+        step={0.01}
+        format={(v) => v.toFixed(2)}
+        onChange={(v) => onPatch({ shadows: v })}
+        disabled={disabled}
+      />
+      <ParamRow
+        label={t("timeline:effects.paramHighlights")}
+        value={effect.highlights}
+        min={-1}
+        max={1}
+        step={0.01}
+        format={(v) => v.toFixed(2)}
+        onChange={(v) => onPatch({ highlights: v })}
+        disabled={disabled}
+      />
+    </FlexColumn>
+  );
+};
 
 const previewBoxStyles = (theme: Theme) =>
   css({
@@ -1596,6 +1620,7 @@ const VideoBlurEditor: React.FC<
   EffectEditorProps<TrackVideoBlurEffect>
 > = ({ effect, onPatch, disabled }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
   return (
     <FlexColumn gap={0.5}>
       <div css={previewBoxStyles(theme)}>
@@ -1611,7 +1636,7 @@ const VideoBlurEditor: React.FC<
         />
       </div>
       <ParamRow
-        label="Radius"
+        label={t("timeline:effects.paramRadius")}
         value={effect.radius}
         min={0}
         max={40}
@@ -1627,35 +1652,39 @@ const VideoBlurEditor: React.FC<
 
 const SharpenEditor: React.FC<
   EffectEditorProps<TrackSharpenEffect>
-> = ({ effect, onPatch, disabled }) => (
-  <FlexColumn gap={0.5}>
-    <ParamRow
-      label="Amount"
-      value={effect.amount}
-      min={0}
-      max={2}
-      step={0.01}
-      format={(v) => v.toFixed(2)}
-      onChange={(v) => onPatch({ amount: v })}
-      disabled={disabled}
-    />
-    <ParamRow
-      label="Threshold"
-      value={effect.threshold}
-      min={0}
-      max={1}
-      step={0.01}
-      format={(v) => v.toFixed(2)}
-      onChange={(v) => onPatch({ threshold: v })}
-      disabled={disabled}
-    />
-  </FlexColumn>
-);
+> = ({ effect, onPatch, disabled }) => {
+  const { t } = useTranslation(["timeline"]);
+  return (
+    <FlexColumn gap={0.5}>
+      <ParamRow
+        label={t("timeline:effects.paramAmount")}
+        value={effect.amount}
+        min={0}
+        max={2}
+        step={0.01}
+        format={(v) => v.toFixed(2)}
+        onChange={(v) => onPatch({ amount: v })}
+        disabled={disabled}
+      />
+      <ParamRow
+        label={t("timeline:effects.paramThreshold")}
+        value={effect.threshold}
+        min={0}
+        max={1}
+        step={0.01}
+        format={(v) => v.toFixed(2)}
+        onChange={(v) => onPatch({ threshold: v })}
+        disabled={disabled}
+      />
+    </FlexColumn>
+  );
+};
 
 const VignetteEditor: React.FC<
   EffectEditorProps<TrackVignetteEffect>
 > = ({ effect, onPatch, disabled }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
   // Visualize as a radial fade in a 16:9 box.
   const innerStop = Math.max(0, effect.radius - effect.softness);
   return (
@@ -1679,7 +1708,7 @@ const VignetteEditor: React.FC<
         />
       </div>
       <ParamRow
-        label="Intensity"
+        label={t("timeline:effects.paramIntensity")}
         value={effect.intensity}
         min={0}
         max={1}
@@ -1689,7 +1718,7 @@ const VignetteEditor: React.FC<
         disabled={disabled}
       />
       <ParamRow
-        label="Radius"
+        label={t("timeline:effects.paramRadius")}
         value={effect.radius}
         min={0.1}
         max={1.5}
@@ -1699,7 +1728,7 @@ const VignetteEditor: React.FC<
         disabled={disabled}
       />
       <ParamRow
-        label="Softness"
+        label={t("timeline:effects.paramSoftness")}
         value={effect.softness}
         min={0}
         max={1}
@@ -1730,6 +1759,7 @@ const ChromaKeyEditor: React.FC<
   EffectEditorProps<TrackChromaKeyEffect>
 > = ({ effect, onPatch, disabled }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
   return (
     <FlexColumn gap={0.5}>
       <FlexRow gap={1} align="center">
@@ -1740,7 +1770,7 @@ const ChromaKeyEditor: React.FC<
             width: 70
           }}
         >
-          Key color
+          {t("timeline:effects.keyColor")}
         </span>
         <input
           type="color"
@@ -1748,7 +1778,7 @@ const ChromaKeyEditor: React.FC<
           value={effect.keyColor}
           disabled={disabled}
           onChange={(e) => onPatch({ keyColor: e.target.value })}
-          aria-label="Chroma key color"
+          aria-label={t("timeline:effects.chromaKeyColorAria")}
         />
         <span
           css={{
@@ -1761,7 +1791,7 @@ const ChromaKeyEditor: React.FC<
         </span>
       </FlexRow>
       <ParamRow
-        label="Tolerance"
+        label={t("timeline:effects.paramTolerance")}
         value={effect.tolerance}
         min={0}
         max={1}
@@ -1771,7 +1801,7 @@ const ChromaKeyEditor: React.FC<
         disabled={disabled}
       />
       <ParamRow
-        label="Softness"
+        label={t("timeline:effects.paramSoftness")}
         value={effect.softness}
         min={0}
         max={1}
@@ -1781,7 +1811,7 @@ const ChromaKeyEditor: React.FC<
         disabled={disabled}
       />
       <ParamRow
-        label="Spill"
+        label={t("timeline:effects.paramSpill")}
         value={effect.spill}
         min={0}
         max={1}
@@ -1805,6 +1835,7 @@ const DRAG_MIME = "application/x-nodetool-effect-index";
 const EffectCard: React.FC<EffectCardProps> = memo(
   ({ trackId, effect, index }) => {
     const theme = useTheme();
+    const { t } = useTranslation(["timeline"]);
     const updateTrackEffect = useTimelineStore((s) => s.updateTrackEffect);
     const removeTrackEffect = useTimelineStore((s) => s.removeTrackEffect);
     const moveTrackEffect = useTimelineStore((s) => s.moveTrackEffect);
@@ -1895,13 +1926,13 @@ const EffectCard: React.FC<EffectCardProps> = memo(
       >
         <FlexRow css={effectHeaderStyles} sx={{ mb: 0.5 }}>
           <FlexRow gap={0.5} align="center">
-            <Tooltip title="Drag to reorder">
+            <Tooltip title={t("timeline:effects.dragToReorder")}>
               <div
                 css={dragHandleStyles(theme)}
                 draggable
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
-                aria-label="Drag to reorder effect"
+                aria-label={t("timeline:effects.dragToReorderAria")}
                 role="button"
                 tabIndex={0}
               >
@@ -1909,19 +1940,19 @@ const EffectCard: React.FC<EffectCardProps> = memo(
               </div>
             </Tooltip>
             <LabeledSwitch
-              label={EFFECT_LABELS[effect.type]}
+              label={t(`timeline:effects.${EFFECT_LABEL_KEYS[effect.type]}`)}
               checked={effect.enabled}
               onChange={handleEnabledChange}
               size="small"
             />
           </FlexRow>
           <FlexRow gap={0.5}>
-            <Tooltip title="Remove effect">
+            <Tooltip title={t("timeline:effects.removeEffect")}>
               <button
                 type="button"
                 css={iconButtonStyles(theme)}
                 onClick={handleRemove}
-                aria-label="Remove effect"
+                aria-label={t("timeline:effects.removeEffectAria")}
               >
                 <DeleteOutlineIcon />
               </button>
@@ -2001,6 +2032,7 @@ export interface TrackEffectsPanelProps {
 export const TrackEffectsPanel: React.FC<TrackEffectsPanelProps> = memo(
   ({ trackId }) => {
     const theme = useTheme();
+    const { t } = useTranslation(["timeline"]);
     const track = useTimelineStore((s) =>
       s.tracks.find((t) => t.id === trackId)
     );
@@ -2034,7 +2066,9 @@ export const TrackEffectsPanel: React.FC<TrackEffectsPanelProps> = memo(
     const availableTypes = isVideo
       ? VIDEO_EFFECT_TYPES
       : AUDIO_EFFECT_TYPES;
-    const chainLabel = isVideo ? "FX Chain" : "DSP Chain";
+    const chainLabel = isVideo
+      ? t("timeline:effects.fxChain")
+      : t("timeline:effects.dspChain");
 
     return (
       <div css={containerStyles(theme)} data-testid="track-effects-panel">
@@ -2047,7 +2081,7 @@ export const TrackEffectsPanel: React.FC<TrackEffectsPanelProps> = memo(
           </Text>
           <button type="button" css={addButtonStyles(theme)} onClick={handleOpenAdd}>
             <AddIcon />
-            Add
+            {t("timeline:effects.add")}
           </button>
           <EditorMenu
             anchorEl={addAnchor}
@@ -2056,9 +2090,9 @@ export const TrackEffectsPanel: React.FC<TrackEffectsPanelProps> = memo(
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
             transformOrigin={{ vertical: "top", horizontal: "right" }}
           >
-            {availableTypes.map((t) => (
-              <NodeMenuItem key={t} onClick={() => handleAdd(t)}>
-                {EFFECT_LABELS[t]}
+            {availableTypes.map((type) => (
+              <NodeMenuItem key={type} onClick={() => handleAdd(type)}>
+                {t(`timeline:effects.${EFFECT_LABEL_KEYS[type]}`)}
               </NodeMenuItem>
             ))}
           </EditorMenu>
@@ -2066,7 +2100,9 @@ export const TrackEffectsPanel: React.FC<TrackEffectsPanelProps> = memo(
 
         {effects.length === 0 ? (
           <Text size="small" color="secondary">
-            No effects. Click <strong>Add</strong> to insert one.
+            {t("timeline:effects.noEffectsHint")}{" "}
+            <strong>{t("timeline:effects.noEffectsHintAdd")}</strong>{" "}
+            {t("timeline:effects.noEffectsHintEnd")}
           </Text>
         ) : (
           <div css={deviceRackStyles(theme)}>

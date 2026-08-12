@@ -14,6 +14,7 @@
 
 import React, { memo, useCallback, useMemo, useRef, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -85,6 +86,7 @@ const AFFECTED_ENTRY_SEP = "\u0000";
 const ClipListPopover: React.FC<ClipListPopoverProps> = memo(
   ({ clipIds, title, anchorEl, onClose }) => {
     const theme = useTheme();
+    const { t } = useTranslation(["timeline"]);
     const selectClip = useTimelineUIStore((s) => s.selectClip);
 
     const handleSelectClip = useCallback(
@@ -133,7 +135,7 @@ const ClipListPopover: React.FC<ClipListPopoverProps> = memo(
           </Caption>
 
           {affectedClips.length === 0 ? (
-            <Caption color="secondary">No clips</Caption>
+            <Caption color="secondary">{t("timeline:activity.noClips")}</Caption>
           ) : (
             affectedClips.map((clip) => (
               <FlexRow
@@ -144,7 +146,7 @@ const ClipListPopover: React.FC<ClipListPopoverProps> = memo(
                 onClick={() => handleSelectClip(clip.id)}
                 role="button"
                 tabIndex={0}
-                aria-label={`Select clip: ${clip.name}`}
+                aria-label={t("timeline:activity.selectClip", { name: clip.name })}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
@@ -166,6 +168,7 @@ ClipListPopover.displayName = "ClipListPopover";
 
 export const ActivityIndicator: React.FC = memo(() => {
   const theme = useTheme();
+  const { t } = useTranslation(["timeline"]);
 
   const generatingIds = useGeneratingClipIds();
   const failedIds = useFailedClipIds();
@@ -212,7 +215,7 @@ export const ActivityIndicator: React.FC = memo(() => {
             onClick={handleGeneratingClick}
             aria-haspopup="true"
             aria-expanded={Boolean(generatingPopoverEl)}
-            aria-label={`${generatingCount} clip${generatingCount !== 1 ? "s" : ""} generating`}
+            aria-label={t("timeline:activity.clipsGenerating", { count: generatingCount })}
           >
             <StatusIndicator
               status="pending"
@@ -220,14 +223,14 @@ export const ActivityIndicator: React.FC = memo(() => {
               size="small"
             />
             <Caption>
-              {generatingCount} generating
+              {t("timeline:status.generating", { count: generatingCount })}
             </Caption>
           </button>
 
           {generatingPopoverEl && (
             <ClipListPopover
               clipIds={generatingIds}
-              title={`${generatingCount} clip${generatingCount !== 1 ? "s" : ""} generating`}
+              title={t("timeline:activity.clipsGenerating", { count: generatingCount })}
               anchorEl={generatingPopoverEl}
               onClose={handleGeneratingClose}
             />
@@ -244,21 +247,21 @@ export const ActivityIndicator: React.FC = memo(() => {
             onClick={handleFailedClick}
             aria-haspopup="true"
             aria-expanded={Boolean(failedPopoverEl)}
-            aria-label={`${failedCount} clip${failedCount !== 1 ? "s" : ""} failed`}
+            aria-label={t("timeline:activity.clipsFailed", { count: failedCount })}
           >
             <StatusIndicator
               status="error"
               size="small"
             />
             <Caption color="error">
-              {failedCount} failed
+              {t("timeline:status.failed", { count: failedCount })}
             </Caption>
           </button>
 
           {failedPopoverEl && (
             <ClipListPopover
               clipIds={failedIds}
-              title={`${failedCount} clip${failedCount !== 1 ? "s" : ""} failed`}
+              title={t("timeline:activity.clipsFailed", { count: failedCount })}
               anchorEl={failedPopoverEl}
               onClose={handleFailedClose}
             />
