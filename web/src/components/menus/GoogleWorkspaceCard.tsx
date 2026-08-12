@@ -1,5 +1,6 @@
 import React, { memo, useCallback } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
 import { restFetch } from "../../lib/rest-fetch";
@@ -35,6 +36,7 @@ const QUERY_KEY = ["oauth-token", "google"];
  * integration does not exist.
  */
 const GoogleWorkspaceCard = () => {
+  const { t } = useTranslation("settings");
   const queryClient = useQueryClient();
   const addNotification = useNotificationStore(
     (state) => state.addNotification
@@ -46,7 +48,7 @@ const GoogleWorkspaceCard = () => {
     queryFn: async () => {
       const response = await restFetch("/api/oauth/google/tokens");
       if (!response.ok) {
-        throw new Error("Failed to fetch Google connection");
+        throw new Error(t("googleWorkspace.fetchFailed"));
       }
       return (await response.json()) as GoogleTokensResponse;
     },
@@ -62,23 +64,22 @@ const GoogleWorkspaceCard = () => {
         method: "POST"
       });
       if (!response.ok) {
-        throw new Error("Failed to disconnect");
+        throw new Error(t("googleWorkspace.disconnectError"));
       }
       await queryClient.invalidateQueries({ queryKey: QUERY_KEY });
       addNotification({
-        content:
-          "Disconnected Google Workspace. Sign in with Google again to restore access.",
+        content: t("googleWorkspace.disconnectSuccess"),
         type: "success",
         alert: true
       });
     } catch {
       addNotification({
-        content: "Failed to disconnect Google Workspace",
+        content: t("googleWorkspace.disconnectFailed"),
         type: "error",
         alert: true
       });
     }
-  }, [queryClient, addNotification]);
+  }, [queryClient, addNotification, t]);
 
   if (!enabled) {
     return null;
@@ -96,19 +97,19 @@ const GoogleWorkspaceCard = () => {
           />
           <FlexColumn gap={SPACING.xs}>
             <FlexRow align="center" gap={SPACING.sm}>
-              <Text>Google Workspace</Text>
+              <Text>{t("googleWorkspace.title")}</Text>
               <Chip
-                label={isConnected ? "Connected" : "Not connected"}
+                label={isConnected ? t("googleWorkspace.connected") : t("googleWorkspace.notConnected")}
                 color={isConnected ? "success" : "default"}
                 size="small"
               />
             </FlexRow>
             <Caption>
               {isConnected
-                ? `Drive, Gmail, Docs, Sheets and Calendar${
-                    account ? ` as ${account}` : ""
-                  }`
-                : "Sign in with Google to give agents and nodes access to Drive, Gmail, Docs, Sheets and Calendar."}
+                ? (account
+                    ? t("googleWorkspace.connectedScopeWithAccount", { account })
+                    : t("googleWorkspace.connectedScope"))
+                : t("googleWorkspace.notConnectedDescription")}
             </Caption>
           </FlexColumn>
         </FlexRow>
@@ -121,7 +122,7 @@ const GoogleWorkspaceCard = () => {
             startIcon={<LinkOffIcon sx={{ fontSize: 14 }} />}
             onClick={disconnect}
           >
-            Disconnect
+            {t("googleWorkspace.disconnect")}
           </EditorButton>
         )}
       </FlexRow>

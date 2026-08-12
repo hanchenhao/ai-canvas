@@ -155,6 +155,37 @@
     "assets": "素材库",
     "modelSettings": "模型设置"
   },
+  "mobileMenu": {
+    "title": "Canvas Menu",
+    "ariaLabel": "Canvas actions and node insertion",
+    "section": {
+      "actions": "Actions",
+      "aiNodes": "AI Nodes",
+      "inputNodes": "Input Nodes",
+      "organization": "Organization"
+    },
+    "paste": "Paste",
+    "pasteInvalid": "No valid nodes in clipboard",
+    "pasteDescription": "Paste copied nodes",
+    "fitScreen": "Fit Screen",
+    "fitScreenDescription": "Center all nodes in view",
+    "addAgent": "Add Agent",
+    "addAgentDescription": "AI agent for processing",
+    "stringInput": "String Input",
+    "stringInputDescription": "Text input field",
+    "integerInput": "Integer Input",
+    "integerInputDescription": "Whole number input",
+    "floatInput": "Float Input",
+    "floatInputDescription": "Decimal number input",
+    "chatInput": "Chat Input",
+    "chatInputDescription": "Chat message input",
+    "imageInput": "Image Input",
+    "imageInputDescription": "Image file input",
+    "addComment": "Add Comment",
+    "addCommentDescription": "Text comment note",
+    "addGroup": "Add Group",
+    "addGroupDescription": "Group container for nodes"
+  },
   "language": {
     "label": "Language",
     "auto": "Follow system",

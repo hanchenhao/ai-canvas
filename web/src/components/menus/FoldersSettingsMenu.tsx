@@ -2,6 +2,7 @@
 import SaveIcon from "@mui/icons-material/Save";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import { useMemo, useState, useCallback, memo } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Text, FlexColumn, FlexRow } from "../ui_primitives";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
@@ -48,6 +49,7 @@ interface OpenFolderButtonProps {
 }
 
 const OpenFolderButton = memo(({ settingValue }: OpenFolderButtonProps) => {
+  const { t } = useTranslation("settings");
   const handleClick = useCallback(() => {
     if (settingValue) {
       openInExplorer(settingValue);
@@ -61,7 +63,7 @@ const OpenFolderButton = memo(({ settingValue }: OpenFolderButtonProps) => {
   return (
     <ToolbarIconButton
       icon={<FolderOutlinedIcon fontSize="small" />}
-      tooltip="Open folder in file explorer"
+      tooltip={t("folders.openFolderTooltip")}
       onClick={handleClick}
       sx={{ ml: 1 }}
     />
@@ -71,6 +73,7 @@ const OpenFolderButton = memo(({ settingValue }: OpenFolderButtonProps) => {
 OpenFolderButton.displayName = "OpenFolderButton";
 
 const FoldersSettings = () => {
+  const { t } = useTranslation("settings");
   const queryClient = useQueryClient();
   const updateSettings = useRemoteSettingsStore((state) => state.updateSettings);
   const fetchSettings = useRemoteSettingsStore((state) => state.fetchSettings);
@@ -133,7 +136,7 @@ const FoldersSettings = () => {
     },
     onError: (error: Error) => {
       addNotification({
-        content: `Could not save folder settings: ${error.message}`,
+        content: t("folders.saveFailed", { error: error.message }),
         type: "error",
         alert: true
       });
@@ -168,14 +171,14 @@ const FoldersSettings = () => {
       {
         onSuccess: () => {
           addNotification({
-            content: "Folder settings have been saved successfully",
+            content: t("folders.saveSuccess"),
             type: "success",
             alert: true
           });
         }
       }
     );
-  }, [addNotification, settingValues, updateSettingsMutation, data]);
+  }, [addNotification, settingValues, updateSettingsMutation, data, t]);
 
   const theme = useTheme();
 
@@ -186,7 +189,7 @@ const FoldersSettings = () => {
     <>
       {isLoading && (
         <Text sx={{ textAlign: "center", padding: "2em" }}>
-          Loading folder settings…
+          {t("folders.loading")}
         </Text>
       )}
       <div
@@ -194,27 +197,27 @@ const FoldersSettings = () => {
         css={getSharedSettingsStyles(theme)}
       >
         <div className="settings-main-content">
-          <Text size="giant">Folder Settings</Text>
+          <Text size="giant">{t("folders.title")}</Text>
 
           {canOpenSystemFolders && (
             <div className="settings-section">
               <Text size="big" id="system-folders">
-                System Folders
+                {t("folders.systemFolders")}
               </Text>
               <Text className="description" sx={{ mb: 2 }}>
-                Open important Nodetool directories in your file explorer.
+                {t("folders.systemFoldersDescription")}
               </Text>
               <FlexColumn gap={1.5}>
                 <FolderButton
-                  label="Nodetool Installation"
+                  label={t("folders.nodetoolInstallation")}
                   onClick={openInstallationPath}
                 />
                 <FolderButton
-                  label="Nodetool Logs"
+                  label={t("folders.nodetoolLogs")}
                   onClick={openLogsPath}
                 />
                 <FolderButton
-                  label="Assets Storage"
+                  label={t("folders.assetsStorage")}
                   onClick={openAssetsPath}
                 />
               </FlexColumn>
@@ -224,18 +227,18 @@ const FoldersSettings = () => {
           {canOpenFolders && (
             <div className="settings-section">
               <Text size="big" id="model-folders">
-                Model Folders
+                {t("folders.modelFolders")}
               </Text>
               <Text className="description" sx={{ mb: 2 }}>
-                Open model cache directories in your file explorer.
+                {t("folders.modelFoldersDescription")}
               </Text>
               <FlexColumn gap={1.5}>
                 <FolderButton
-                  label="HuggingFace Models"
+                  label={t("folders.huggingfaceModels")}
                   onClick={openHuggingfacePath}
                 />
                 <FolderButton
-                  label="Ollama Models"
+                  label={t("folders.ollamaModels")}
                   onClick={openOllamaPath}
                 />
               </FlexColumn>
@@ -248,8 +251,8 @@ const FoldersSettings = () => {
                 ([groupName, groupSettings]) => {
                   // "Custom" prefix disambiguates from the system/model folder sections above.
                   const showCustomPrefix = canOpenFolders || canOpenSystemFolders;
-                  const sectionTitle = showCustomPrefix ? `Custom ${groupName}` : groupName;
-                  
+                  const sectionTitle = showCustomPrefix ? t("folders.customPrefix", { name: groupName }) : groupName;
+
                   return (
                     <div key={groupName} className="settings-section">
                       <Text size="big" id={groupName.toLowerCase().replace(/\s+/g, "-")}>{sectionTitle}</Text>
@@ -285,7 +288,7 @@ const FoldersSettings = () => {
               <div className="save-button-container">
                 <NavButton
                   icon={<SaveIcon />}
-                  label="SAVE FOLDER SETTINGS"
+                  label={t("folders.saveButton")}
                   onClick={handleSave}
                   color="primary"
                   className="save-button"
@@ -294,16 +297,15 @@ const FoldersSettings = () => {
               </div>
             </>
           )}
-          
+
           {(() => {
             const hasNoSettings = isSuccess && (!settingsByGroup || settingsByGroup.size === 0);
             const hasNoFolderButtons = !canOpenFolders && !canOpenSystemFolders;
             const showNoSettingsMessage = hasNoSettings && hasNoFolderButtons;
-            
+
             return showNoSettingsMessage ? (
               <Text sx={{ textAlign: "center", padding: "2em" }}>
-                No folder settings available or defined in the &apos;Folders&apos;
-                group.
+                {t("folders.noSettings")}
               </Text>
             ) : null;
           })()}

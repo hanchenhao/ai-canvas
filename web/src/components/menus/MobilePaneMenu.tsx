@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback } from "react";
 import { useReactFlow } from "@xyflow/react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import {
   Divider,
@@ -87,6 +88,7 @@ interface MobilePaneMenuProps {
 }
 
 const MobilePaneMenu: React.FC<MobilePaneMenuProps> = ({ open, onClose }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const { handlePaste } = useCopyPaste();
   const reactFlowInstance = useReactFlow();
@@ -180,21 +182,21 @@ const MobilePaneMenu: React.FC<MobilePaneMenuProps> = ({ open, onClose }) => {
     <MobileBottomSheet
       open={open}
       onClose={onClose}
-      title="Canvas Menu"
-      ariaLabel="Canvas actions and node insertion"
+      title={t("mobileMenu.title")}
+      ariaLabel={t("mobileMenu.ariaLabel")}
     >
       <div className="menu-content" css={styles(theme)}>
         <List dense>
-          <div className="menu-section-title">Actions</div>
+          <div className="menu-section-title">{t("mobileMenu.section.actions")}</div>
           <ListItem className={`menu-item ${!isClipboardValid ? "disabled" : ""}`}>
             <ListItemButton onClick={handlePasteAction} disabled={!isClipboardValid}>
               <ListItemIcon className="menu-item-icon">
                 <SouthEastIcon />
               </ListItemIcon>
-              <ListItemText 
+              <ListItemText
                 className="menu-item-text"
-                primary="Paste" 
-                secondary={!isClipboardValid ? "No valid nodes in clipboard" : "Paste copied nodes"}
+                primary={t("mobileMenu.paste")}
+                secondary={!isClipboardValid ? t("mobileMenu.pasteInvalid") : t("mobileMenu.pasteDescription")}
               />
             </ListItemButton>
           </ListItem>
@@ -204,33 +206,33 @@ const MobilePaneMenu: React.FC<MobilePaneMenuProps> = ({ open, onClose }) => {
               <ListItemIcon className="menu-item-icon">
                 <FitScreenIcon />
               </ListItemIcon>
-              <ListItemText 
+              <ListItemText
                 className="menu-item-text"
-                primary="Fit Screen" 
-                secondary="Center all nodes in view"
+                primary={t("mobileMenu.fitScreen")}
+                secondary={t("mobileMenu.fitScreenDescription")}
               />
             </ListItemButton>
           </ListItem>
 
           <Divider sx={dividerSx} />
 
-          <div className="menu-section-title">AI Nodes</div>
+          <div className="menu-section-title">{t("mobileMenu.section.aiNodes")}</div>
           <ListItem className="menu-item">
             <ListItemButton onClick={addAgentNode}>
               <ListItemIcon className="menu-item-icon">
                 <SupportAgentIcon />
               </ListItemIcon>
-              <ListItemText 
+              <ListItemText
                 className="menu-item-text"
-                primary="Add Agent" 
-                secondary="AI agent for processing"
+                primary={t("mobileMenu.addAgent")}
+                secondary={t("mobileMenu.addAgentDescription")}
               />
             </ListItemButton>
           </ListItem>
 
           <Divider sx={dividerSx} />
 
-          <div className="menu-section-title">Input Nodes</div>
+          <div className="menu-section-title">{t("mobileMenu.section.inputNodes")}</div>
           <ListItem className="menu-item">
             <ListItemButton onClick={addInputNode} data-node-type="StringInput">
               <ListItemIcon className="menu-item-icon">
@@ -238,8 +240,8 @@ const MobilePaneMenu: React.FC<MobilePaneMenuProps> = ({ open, onClose }) => {
               </ListItemIcon>
               <ListItemText
                 className="menu-item-text"
-                primary="String Input"
-                secondary="Text input field"
+                primary={t("mobileMenu.stringInput")}
+                secondary={t("mobileMenu.stringInputDescription")}
               />
             </ListItemButton>
           </ListItem>
@@ -251,8 +253,8 @@ const MobilePaneMenu: React.FC<MobilePaneMenuProps> = ({ open, onClose }) => {
               </ListItemIcon>
               <ListItemText
                 className="menu-item-text"
-                primary="Integer Input"
-                secondary="Whole number input"
+                primary={t("mobileMenu.integerInput")}
+                secondary={t("mobileMenu.integerInputDescription")}
               />
             </ListItemButton>
           </ListItem>
@@ -264,8 +266,8 @@ const MobilePaneMenu: React.FC<MobilePaneMenuProps> = ({ open, onClose }) => {
               </ListItemIcon>
               <ListItemText
                 className="menu-item-text"
-                primary="Float Input"
-                secondary="Decimal number input"
+                primary={t("mobileMenu.floatInput")}
+                secondary={t("mobileMenu.floatInputDescription")}
               />
             </ListItemButton>
           </ListItem>
@@ -277,8 +279,8 @@ const MobilePaneMenu: React.FC<MobilePaneMenuProps> = ({ open, onClose }) => {
               </ListItemIcon>
               <ListItemText
                 className="menu-item-text"
-                primary="Chat Input"
-                secondary="Chat message input"
+                primary={t("mobileMenu.chatInput")}
+                secondary={t("mobileMenu.chatInputDescription")}
               />
             </ListItemButton>
           </ListItem>
@@ -290,24 +292,24 @@ const MobilePaneMenu: React.FC<MobilePaneMenuProps> = ({ open, onClose }) => {
               </ListItemIcon>
               <ListItemText
                 className="menu-item-text"
-                primary="Image Input"
-                secondary="Image file input"
+                primary={t("mobileMenu.imageInput")}
+                secondary={t("mobileMenu.imageInputDescription")}
               />
             </ListItemButton>
           </ListItem>
 
           <Divider sx={dividerSx} />
 
-          <div className="menu-section-title">Organization</div>
+          <div className="menu-section-title">{t("mobileMenu.section.organization")}</div>
           <ListItem className="menu-item">
             <ListItemButton onClick={addComment}>
               <ListItemIcon className="menu-item-icon">
                 <AddCommentIcon />
               </ListItemIcon>
-              <ListItemText 
+              <ListItemText
                 className="menu-item-text"
-                primary="Add Comment" 
-                secondary="Text comment note"
+                primary={t("mobileMenu.addComment")}
+                secondary={t("mobileMenu.addCommentDescription")}
               />
             </ListItemButton>
           </ListItem>
@@ -319,8 +321,8 @@ const MobilePaneMenu: React.FC<MobilePaneMenuProps> = ({ open, onClose }) => {
               </ListItemIcon>
               <ListItemText
                 className="menu-item-text"
-                primary="Add Group"
-                secondary="Group container for nodes"
+                primary={t("mobileMenu.addGroup")}
+                secondary={t("mobileMenu.addGroupDescription")}
               />
             </ListItemButton>
           </ListItem>

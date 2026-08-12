@@ -155,6 +155,37 @@
     "assets": "素材库",
     "modelSettings": "模型设置"
   },
+  "mobileMenu": {
+    "title": "画布菜单",
+    "ariaLabel": "画布操作与节点插入",
+    "section": {
+      "actions": "操作",
+      "aiNodes": "AI 节点",
+      "inputNodes": "输入节点",
+      "organization": "组织"
+    },
+    "paste": "粘贴",
+    "pasteInvalid": "剪贴板中没有有效节点",
+    "pasteDescription": "粘贴已复制的节点",
+    "fitScreen": "适应屏幕",
+    "fitScreenDescription": "将所有节点居中显示",
+    "addAgent": "添加 Agent",
+    "addAgentDescription": "用于处理的 AI Agent",
+    "stringInput": "字符串输入",
+    "stringInputDescription": "文本输入字段",
+    "integerInput": "整数输入",
+    "integerInputDescription": "整数输入字段",
+    "floatInput": "浮点数输入",
+    "floatInputDescription": "小数输入字段",
+    "chatInput": "对话输入",
+    "chatInputDescription": "对话消息输入",
+    "imageInput": "图像输入",
+    "imageInputDescription": "图像文件输入",
+    "addComment": "添加注释",
+    "addCommentDescription": "文本注释备注",
+    "addGroup": "添加分组",
+    "addGroupDescription": "节点分组容器"
+  },
   "language": {
     "label": "语言",
     "auto": "跟随系统",
