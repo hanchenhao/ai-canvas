@@ -1,0 +1,123 @@
+{
+  "title": {
+    "defaultName": "3D 模型",
+    "scene": "场景",
+    "properties": "属性",
+    "assistant": "助手",
+    "transform": "变换",
+    "light": "灯光"
+  },
+  "label": {
+    "name": "名称",
+    "visible": "可见",
+    "frustumCull": "视锥剔除",
+    "renderOrd": "渲染顺序",
+    "castShadow": "投射阴影",
+    "recvShadow": "接收阴影",
+    "position": "位置",
+    "rotation": "旋转",
+    "scale": "缩放",
+    "color": "颜色",
+    "intensity": "强度",
+    "distance": "距离",
+    "decay": "衰减",
+    "opacity": "不透明度",
+    "alphaTest": "Alpha 测试",
+    "side": "面",
+    "add": "添加"
+  },
+  "primitive": {
+    "box": "立方体",
+    "sphere": "球体",
+    "plane": "平面",
+    "cylinder": "圆柱",
+    "torus": "圆环",
+    "directionalLight": "方向光",
+    "pointLight": "点光源"
+  },
+  "material": {
+    "metalness": "金属度",
+    "roughness": "粗糙度",
+    "emissive": "自发光",
+    "ior": "折射率",
+    "reflectivity": "反射率",
+    "specular": "高光",
+    "clearcoat": "清漆层",
+    "ccRough": "清漆粗糙",
+    "sheen": "光泽",
+    "sheenRough": "光泽粗糙",
+    "transmission": "透射",
+    "thickness": "厚度",
+    "iridescence": "虹彩",
+    "iridIor": "虹彩折射率",
+    "dispersion": "色散",
+    "color": "颜色",
+    "emissiveColor": "自发光",
+    "sheenColor": "光泽色",
+    "specularColor": "高光色",
+    "attenuationColor": "衰减色",
+    "transparent": "透明",
+    "wireframe": "线框",
+    "flatShading": "平面着色",
+    "vertexColors": "顶点色",
+    "depthTest": "深度测试",
+    "depthWrite": "深度写入"
+  },
+  "side": {
+    "front": "正面",
+    "back": "背面",
+    "double": "双面"
+  },
+  "tab": {
+    "object": "对象",
+    "geometry": "几何体",
+    "material": "材质"
+  },
+  "tooltip": {
+    "deleteSelected": "删除所选（Del）",
+    "frameScene": "全览场景",
+    "toggleGrid": "切换网格",
+    "showAssistant": "显示助手",
+    "hideAssistant": "隐藏助手",
+    "saveToAsset": "保存为素材",
+    "closeEditor": "关闭编辑器"
+  },
+  "empty": {
+    "selectObject": "选择一个对象以编辑其属性",
+    "sceneEmpty": "场景为空"
+  },
+  "aria": {
+    "showObject": "显示对象",
+    "hideObject": "隐藏对象"
+  },
+  "status": {
+    "saving": "保存中…",
+    "loading": "正在加载模型…"
+  },
+  "chat": {
+    "assistantTitle": "3D 助手",
+    "welcome": "让我来构建并编辑场景 —— 例如「添加一个红色立方体，上方再放一个球体」、「把地板变成蓝色」或「列出场景中的所有内容」。"
+  },
+  "error": {
+    "notReady": "3D 视口尚未就绪，无法捕获。"
+  },
+  "geometry": {
+    "width": "宽度",
+    "height": "高度",
+    "depth": "深度",
+    "widthSegments": "宽分段",
+    "heightSegments": "高分段",
+    "depthSegments": "深分段",
+    "radius": "半径",
+    "phiStart": "Phi 起点",
+    "phiLength": "Phi 长度",
+    "thetaStart": "Theta 起点",
+    "thetaLength": "Theta 长度",
+    "radiusTop": "顶部半径",
+    "radiusBottom": "底部半径",
+    "radialSegments": "径向分段",
+    "tube": "管径",
+    "tubularSegments": "管分段",
+    "arc": "弧度"
+  }
+}

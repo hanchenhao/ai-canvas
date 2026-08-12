@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -84,6 +85,7 @@ const OutlinerRow = memo(({
   onSelect,
   onToggleVisible
 }: OutlinerRowProps) => {
+  const { t } = useTranslation("model3d");
   const handleSelect = useCallback(() => onSelect(node.uuid), [node.uuid, onSelect]);
   const handleToggle = useCallback(
     (e: React.MouseEvent) => {
@@ -111,7 +113,9 @@ const OutlinerRow = memo(({
           className="visibility-toggle"
           role="button"
           tabIndex={0}
-          aria-label={node.visible ? "Hide object" : "Show object"}
+          aria-label={
+            node.visible ? t("aria.hideObject") : t("aria.showObject")
+          }
           onClick={handleToggle}
           onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.stopPropagation(); onToggleVisible(node.uuid); } }}
         >
@@ -144,13 +148,14 @@ const SceneOutliner = ({
   onSelect,
   onToggleVisible
 }: SceneOutlinerProps) => {
+  const { t } = useTranslation("model3d");
   const theme = useTheme();
   return (
     <FlexColumn css={styles(theme)} className="scene-outliner" fullHeight>
       <ScrollArea>
         {nodes.length === 0 ? (
           <Text size="small" color="secondary" className="empty">
-            Scene is empty
+            {t("empty.sceneEmpty")}
           </Text>
         ) : (
           nodes.map((node) => (

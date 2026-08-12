@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useEffect, useMemo } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { useShallow } from "zustand/react/shallow";
@@ -42,6 +43,7 @@ const styles = (_theme: Theme) =>
  * frontend tools the editor registers on the tool bridge.
  */
 const Model3DChatPanel = () => {
+  const { t } = useTranslation("model3d");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -119,16 +121,14 @@ const Model3DChatPanel = () => {
       >
         <ViewInArIcon sx={{ fontSize: 40, mb: 1.5, opacity: 0.5 }} />
         <Text size="normal" weight={600} sx={{ mb: 1 }}>
-          3D Assistant
+          {t("chat.assistantTitle")}
         </Text>
         <Text size="small" color="secondary" sx={{ maxWidth: 280 }}>
-          Ask me to build and edit the scene — e.g. &quot;add a red box and a
-          sphere above it&quot;, &quot;make the floor blue&quot;, or &quot;list
-          everything in the scene&quot;.
+          {t("chat.welcome")}
         </Text>
       </FlexColumn>
     ),
-    []
+    [t]
   );
 
   return (

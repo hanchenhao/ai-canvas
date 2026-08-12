@@ -1,0 +1,123 @@
+{
+  "title": {
+    "defaultName": "3D Model",
+    "scene": "Scene",
+    "properties": "Properties",
+    "assistant": "Assistant",
+    "transform": "Transform",
+    "light": "Light"
+  },
+  "label": {
+    "name": "Name",
+    "visible": "Visible",
+    "frustumCull": "Frustum Cull",
+    "renderOrd": "Render Ord",
+    "castShadow": "Cast Shadow",
+    "recvShadow": "Recv Shadow",
+    "position": "Position",
+    "rotation": "Rotation",
+    "scale": "Scale",
+    "color": "Color",
+    "intensity": "Intensity",
+    "distance": "Distance",
+    "decay": "Decay",
+    "opacity": "Opacity",
+    "alphaTest": "Alpha Test",
+    "side": "Side",
+    "add": "Add"
+  },
+  "primitive": {
+    "box": "Box",
+    "sphere": "Sphere",
+    "plane": "Plane",
+    "cylinder": "Cylinder",
+    "torus": "Torus",
+    "directionalLight": "Directional Light",
+    "pointLight": "Point Light"
+  },
+  "material": {
+    "metalness": "Metalness",
+    "roughness": "Roughness",
+    "emissive": "Emissive",
+    "ior": "IOR",
+    "reflectivity": "Reflectivity",
+    "specular": "Specular",
+    "clearcoat": "Clearcoat",
+    "ccRough": "CC Rough",
+    "sheen": "Sheen",
+    "sheenRough": "Sheen Rough",
+    "transmission": "Transmission",
+    "thickness": "Thickness",
+    "iridescence": "Iridescence",
+    "iridIor": "Irid IOR",
+    "dispersion": "Dispersion",
+    "color": "Color",
+    "emissiveColor": "Emissive",
+    "sheenColor": "Sheen Col",
+    "specularColor": "Specular",
+    "attenuationColor": "Atten Col",
+    "transparent": "Transparent",
+    "wireframe": "Wireframe",
+    "flatShading": "Flat Shading",
+    "vertexColors": "Vertex Cols",
+    "depthTest": "Depth Test",
+    "depthWrite": "Depth Write"
+  },
+  "side": {
+    "front": "Front",
+    "back": "Back",
+    "double": "Double"
+  },
+  "tab": {
+    "object": "Object",
+    "geometry": "Geometry",
+    "material": "Material"
+  },
+  "tooltip": {
+    "deleteSelected": "Delete selected (Del)",
+    "frameScene": "Frame scene",
+    "toggleGrid": "Toggle grid",
+    "showAssistant": "Show assistant",
+    "hideAssistant": "Hide assistant",
+    "saveToAsset": "Save to asset",
+    "closeEditor": "Close editor"
+  },
+  "empty": {
+    "selectObject": "Select an object to edit its properties",
+    "sceneEmpty": "Scene is empty"
+  },
+  "aria": {
+    "showObject": "Show object",
+    "hideObject": "Hide object"
+  },
+  "status": {
+    "saving": "Saving...",
+    "loading": "Loading model..."
+  },
+  "chat": {
+    "assistantTitle": "3D Assistant",
+    "welcome": "Ask me to build and edit the scene — e.g. \"add a red box and a sphere above it\", \"make the floor blue\", or \"list everything in the scene\"."
+  },
+  "error": {
+    "notReady": "3D viewport is not ready to capture yet."
+  },
+  "geometry": {
+    "width": "Width",
+    "height": "Height",
+    "depth": "Depth",
+    "widthSegments": "W Segs",
+    "heightSegments": "H Segs",
+    "depthSegments": "D Segs",
+    "radius": "Radius",
+    "phiStart": "Phi Start",
+    "phiLength": "Phi Len",
+    "thetaStart": "Theta Start",
+    "thetaLength": "Theta Len",
+    "radiusTop": "Radius Top",
+    "radiusBottom": "Radius Bot",
+    "radialSegments": "Radial Segs",
+    "tube": "Tube",
+    "tubularSegments": "Tubular Segs",
+    "arc": "Arc"
+  }
+}

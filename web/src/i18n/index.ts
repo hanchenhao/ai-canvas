@@ -19,6 +19,7 @@ import enChat from "../locales/en/chat.json";
 import enWorkers from "../locales/en/workers.json";
 import enPackages from "../locales/en/packages.json";
 import enApplications from "../locales/en/applications.json";
+import enModel3d from "../locales/en/model3d.json";
 import zhCommon from "../locales/zh-CN/common.json";
 import zhSettings from "../locales/zh-CN/settings.json";
 import zhNodes from "../locales/zh-CN/nodes.json";
@@ -36,6 +37,7 @@ import zhChat from "../locales/zh-CN/chat.json";
 import zhWorkers from "../locales/zh-CN/workers.json";
 import zhPackages from "../locales/zh-CN/packages.json";
 import zhApplications from "../locales/zh-CN/applications.json";
+import zhModel3d from "../locales/zh-CN/model3d.json";
 
 export const SUPPORTED_LANGUAGES = ["auto", "en", "zh-CN"] as const;
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
@@ -64,7 +66,8 @@ void i18n
         chat: enChat,
         workers: enWorkers,
         packages: enPackages,
-        applications: enApplications
+        applications: enApplications,
+        model3d: enModel3d
       },
       "zh-CN": {
         common: zhCommon,
@@ -83,7 +86,8 @@ void i18n
         chat: zhChat,
         workers: zhWorkers,
         packages: zhPackages,
-        applications: zhApplications
+        applications: zhApplications,
+        model3d: zhModel3d
       }
     },
     fallbackLng: FALLBACK_LANGUAGE,

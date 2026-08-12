@@ -9,6 +9,7 @@ import {
   useState,
   type MutableRefObject
 } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import * as THREE from "three";
@@ -263,6 +264,7 @@ const PRIMITIVE_ORDER: PrimitiveKind[] = [
 ];
 
 const AddMenu = ({ onAdd }: AddMenuProps) => {
+  const { t } = useTranslation("model3d");
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -287,7 +289,7 @@ const AddMenu = ({ onAdd }: AddMenuProps) => {
         startIcon={<AddIcon />}
         onClick={() => setOpen((v) => !v)}
       >
-        Add
+        {t("label.add")}
       </EditorButton>
       {open && (
         <FlexColumn className="add-dropdown" gap={2}>
@@ -301,7 +303,7 @@ const AddMenu = ({ onAdd }: AddMenuProps) => {
                 setOpen(false);
               }}
             >
-              {PRIMITIVE_LABELS[kind]}
+              {t(`primitive.${kind}` as `primitive.${string}`)}
             </EditorButton>
           ))}
         </FlexColumn>
@@ -318,6 +320,7 @@ export interface Model3DEditorProps {
 }
 
 const Model3DEditor = ({ url, name, onSave, onClose }: Model3DEditorProps) => {
+  const { t } = useTranslation("model3d");
   const theme = useTheme();
 
   // Persistent group that owns all editable content and is exported on save.
@@ -713,7 +716,7 @@ const Model3DEditor = ({ url, name, onSave, onClose }: Model3DEditorProps) => {
     <FlexColumn css={styles(theme)} className="model-3d-editor" fullWidth fullHeight>
       <FlexRow className="editor-toolbar" fullWidth>
         <Text size="small" weight={600} className="editor-title" title={name}>
-          {name || "3D Model"}
+          {name || t("title.defaultName")}
         </Text>
         <Divider orientation="vertical" flexItem />
         <ToggleGroup
@@ -736,20 +739,20 @@ const Model3DEditor = ({ url, name, onSave, onClose }: Model3DEditorProps) => {
         <AddMenu onAdd={handleAdd} />
         <ToolbarIconButton
           icon={<DeleteOutlineIcon fontSize="small" />}
-          tooltip="Delete selected (Del)"
+          tooltip={t("tooltip.deleteSelected")}
           onClick={handleDelete}
           disabled={!selectedObject}
           size="small"
         />
         <ToolbarIconButton
           icon={<CenterFocusStrongIcon fontSize="small" />}
-          tooltip="Frame scene"
+          tooltip={t("tooltip.frameScene")}
           onClick={() => setFitTrigger((t) => t + 1)}
           size="small"
         />
         <ToolbarIconButton
           icon={<GridOnIcon fontSize="small" />}
-          tooltip="Toggle grid"
+          tooltip={t("tooltip.toggleGrid")}
           onClick={() => setShowGrid((v) => !v)}
           active={showGrid}
           size="small"
@@ -757,13 +760,17 @@ const Model3DEditor = ({ url, name, onSave, onClose }: Model3DEditorProps) => {
         <FlexRow style={{ marginLeft: "auto" }} gap={1} align="center">
           <ToolbarIconButton
             icon={<AutoAwesomeIcon fontSize="small" />}
-            tooltip={showAssistant ? "Hide assistant" : "Show assistant"}
+            tooltip={
+              showAssistant
+                ? t("tooltip.hideAssistant")
+                : t("tooltip.showAssistant")
+            }
             onClick={toggleAssistant}
             active={showAssistant}
             size="small"
           />
-          <DownloadButton onClick={handleSave} tooltip="Save to asset" />
-          <CloseButton onClick={onClose} tooltip="Close editor" />
+          <DownloadButton onClick={handleSave} tooltip={t("tooltip.saveToAsset")} />
+          <CloseButton onClick={onClose} tooltip={t("tooltip.closeEditor")} />
         </FlexRow>
       </FlexRow>
 
@@ -771,7 +778,7 @@ const Model3DEditor = ({ url, name, onSave, onClose }: Model3DEditorProps) => {
         <FlexColumn className="side-panel left" fullHeight>
           <FlexRow className="panel-header">
             <Text size="small" weight={600}>
-              Scene
+              {t("title.scene")}
             </Text>
           </FlexRow>
           <div className="panel-body">
@@ -832,7 +839,7 @@ const Model3DEditor = ({ url, name, onSave, onClose }: Model3DEditorProps) => {
         <FlexColumn className="side-panel right" fullHeight>
           <FlexRow className="panel-header">
             <Text size="small" weight={600}>
-              Properties
+              {t("title.properties")}
             </Text>
           </FlexRow>
           <PropertiesPanel object={selectedObject} tick={tick} onChanged={bump} />
@@ -849,12 +856,12 @@ const Model3DEditor = ({ url, name, onSave, onClose }: Model3DEditorProps) => {
             <FlexRow gap={1} align="center">
               <AutoAwesomeIcon fontSize="small" />
               <Text size="small" weight={600}>
-                Assistant
+                {t("title.assistant")}
               </Text>
             </FlexRow>
             <CloseButton
               onClick={() => toggleAssistant()}
-              tooltip="Hide assistant"
+              tooltip={t("tooltip.hideAssistant")}
             />
           </FlexRow>
           <div className="panel-body">
@@ -866,7 +873,9 @@ const Model3DEditor = ({ url, name, onSave, onClose }: Model3DEditorProps) => {
       {(isSaving || isLoading) && (
         <FlexColumn className="overlay" align="center" justify="center" gap={2}>
           <LoadingSpinner />
-          <Text color="primary">{isSaving ? "Saving..." : "Loading model..."}</Text>
+          <Text color="primary">
+            {isSaving ? t("status.saving") : t("status.loading")}
+          </Text>
         </FlexColumn>
       )}
     </FlexColumn>
