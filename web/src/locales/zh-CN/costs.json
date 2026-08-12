@@ -3,7 +3,6 @@
   "subtitle": "每次节点执行的花费",
   "subtitlePrefix": "跨",
   "subtitleWorkflows": "{{count}} 个工作流",
-  "subtitleSuffix": "的节点执行花费",
   "range": {
     "vsPrior": "对比上一个 {{range}}",
     "daily": "每日 · 最近 {{count}} 天"
