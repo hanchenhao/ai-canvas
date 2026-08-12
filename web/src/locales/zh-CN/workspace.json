@@ -1,0 +1,144 @@
+{
+  "tab": {
+    "new": "新建",
+    "openOrCreate": "打开或新建标签页",
+    "view": "查看",
+    "edit": "编辑",
+    "unsavedChanges": "未保存的更改",
+    "tabName": "标签页名称",
+    "closeTitle": "关闭 {{title}}",
+    "closeTab": "关闭标签页",
+    "closeOtherTabs": "关闭其他标签页",
+    "closeAllTabs": "关闭全部标签页"
+  },
+  "menu": {
+    "newWorkflow": "新建工作流",
+    "newChat": "新建对话",
+    "newTextFile": "新建文本文件…",
+    "newImage": "新建图像",
+    "newVideo": "新建视频",
+    "newStoryboard": "新建故事板",
+    "newApp": "新建应用",
+    "newScript": "新建脚本",
+    "new3dModel": "新建 3D 模型",
+    "openWorkflow": "打开工作流…",
+    "openAsset": "打开资产…",
+    "openChat": "打开对话…",
+    "back": "返回",
+    "filterWorkflows": "筛选工作流",
+    "filterChats": "筛选对话",
+    "searchAssets": "搜索资产（至少 2 个字符）",
+    "searchAssetsLabel": "搜索资产",
+    "noWorkflows": "未找到工作流。",
+    "noChats": "未找到对话。",
+    "typeToSearch": "请输入至少 2 个字符进行搜索。",
+    "noAssetsMatch": "没有可打开的匹配资产。",
+    "couldNotCreate": "无法创建 {{label}}：{{error}}",
+    "unknownError": "未知错误"
+  },
+  "template": {
+    "markdown": "Markdown (.md)",
+    "json": "JSON (.json)",
+    "yaml": "YAML (.yaml)",
+    "csv": "CSV (.csv)",
+    "tsv": "TSV (.tsv)",
+    "plainText": "纯文本 (.txt)"
+  },
+  "defaultName": {
+    "untitledImage": "未命名图像",
+    "untitledVideo": "未命名视频",
+    "untitledStoryboard": "未命名故事板",
+    "untitledApp": "未命名应用",
+    "untitledScript": "未命名脚本",
+    "untitledChat": "未命名对话",
+    "untitledModel": "未命名模型",
+    "untitled": "未命名",
+    "newChat": "新建对话"
+  },
+  "empty": {
+    "caption": "用自然语言描述一个工作流，智能体会替你搭好——或点 + 打开一个文档。",
+    "prompt1": "搭一个把提示词变成图像的工作流",
+    "prompt2": "搭一个把 PDF 摘要成要点的工作流",
+    "prompt3": "搭一个转录音频并翻译的工作流"
+  },
+  "mobile": {
+    "openDocument": "打开文档：{{title}}",
+    "openDocuments": "打开文档",
+    "noDocumentOpen": "没有打开的文档",
+    "sheetTitle": "打开的文档",
+    "sheetAriaLabel": "在打开的文档之间切换",
+    "noDocuments": "没有打开的文档——点 + 打开或新建一个。",
+    "closeTitle": "关闭 {{title}}",
+    "closeAll": "关闭全部文档"
+  },
+  "linkedWorkflows": {
+    "button": "关联工作流（{{count}}）",
+    "menuAria": "关联工作流",
+    "empty": "此应用尚未绑定任何工作流。",
+    "unavailable": "工作流不可用",
+    "loadError": "{{id}} —— {{error}}",
+    "couldNotLoad": "无法加载",
+    "pinned": "已固定",
+    "pinnedVersion": "已固定 v{{version}}",
+    "usedBy": "被 {{names}} 使用",
+    "boundToNone": "未绑定到任何操作"
+  },
+  "manager": {
+    "unableToLoad": "无法加载工作区",
+    "checkConnection": "请检查网络连接后重试",
+    "retry": "重试",
+    "inaccessible": "不可访问",
+    "defaultWorkspace": "默认工作区",
+    "setAsDefault": "设为默认",
+    "remove": "移除",
+    "noWorkspaces": "尚未配置工作区",
+    "addHint": "添加工作区以允许智能体访问本地文件夹",
+    "adding": "添加中…",
+    "addWorkspace": "添加工作区",
+    "added": "工作区已添加",
+    "removed": "工作区已移除",
+    "removeTitle": "移除此工作区？",
+    "removeContent": "该工作区将从 NodeTool 中移除，文件夹本身不会被删除。",
+    "removeConfirm": "移除",
+    "removeCancel": "取消"
+  },
+  "select": {
+    "loading": "加载中…",
+    "unableToLoad": "无法加载工作区",
+    "checkConnection": "请检查网络连接或稍后重试",
+    "noneSelected": "未选择工作区",
+    "none": "无",
+    "hint": "智能体在执行期间会在此读写文件——保存的图像、文本、数据和其他输出。可在工作区面板中浏览结果。智能体只能访问此文件夹内的文件。",
+    "createNew": "新建工作区",
+    "added": "工作区已添加",
+    "ariaLabel": "工作区"
+  },
+  "tree": {
+    "explorer": "工作区浏览器",
+    "refresh": "刷新",
+    "manage": "管理工作区",
+    "noWorkflow": "未选择工作流",
+    "openWorkflowHint": "打开一个工作流以访问其工作区文件",
+    "noWorkspace": "未选择工作区",
+    "createOrSelect": "在上方选择一个工作区或新建一个",
+    "createWorkspace": "新建工作区",
+    "empty": "工作区为空",
+    "emptyHint": "将文件加入工作区文件夹即可在此查看",
+    "accessDenied": "⚠️ 拒绝访问",
+    "loading": "加载中...",
+    "openInFolder": "在文件夹中打开",
+    "goToRoot": "前往工作区根目录",
+    "fileBrowserAria": "工作区文件浏览器"
+  },
+  "subgraph": {
+    "hostLabel": "工作流",
+    "subgraphFallback": "子图"
+  },
+  "graph": {
+    "errorPrefix": "错误：{{error}}",
+    "noWorkflowId": "未提供工作流 ID 或数据"
+  },
+  "canvas": {
+    "loadingWorkflow": "正在加载工作流…"
+  }
+}

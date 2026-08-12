@@ -10,6 +10,7 @@ import FolderIcon from "@mui/icons-material/Folder";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { trpcClient } from "../../trpc/client";
 import { WorkspaceResponse } from "../../stores/ApiTypes";
 import { useNotificationStore } from "../../stores/NotificationStore";
@@ -103,6 +104,7 @@ function nameFromPath(path: string): string {
 
 const WorkspacesManager: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation(["workspace"]);
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const queryClient = useQueryClient();
   const addNotification = useNotificationStore(
@@ -140,7 +142,7 @@ const WorkspacesManager: React.FC = () => {
       addNotification({
         type: "success",
         alert: true,
-        content: "Workspace added",
+        content: t("workspace:manager.added"),
         dismissable: true
       });
     },
@@ -180,7 +182,7 @@ const WorkspacesManager: React.FC = () => {
       addNotification({
         type: "success",
         alert: true,
-        content: "Workspace removed",
+        content: t("workspace:manager.removed"),
         dismissable: true
       });
     },
@@ -237,13 +239,13 @@ const WorkspacesManager: React.FC = () => {
           ) : error ? (
             <Box className="empty-state">
               <Text color="error" sx={{ mb: 1 }}>
-                Unable to load workspaces
+                {t("workspace:manager.unableToLoad")}
               </Text>
               <Text size="small" color="secondary" sx={{ mb: 2 }}>
-                Check your connection and try again
+                {t("workspace:manager.checkConnection")}
               </Text>
               <EditorButton variant="outlined" onClick={handleRetry}>
-                Retry
+                {t("workspace:manager.retry")}
               </EditorButton>
             </Box>
           ) : workspaces && workspaces.length > 0 ? (
@@ -259,7 +261,7 @@ const WorkspacesManager: React.FC = () => {
                       {!workspace.is_accessible && (
                         <Chip
                           size="small"
-                          label="Inaccessible"
+                          label={t("workspace:manager.inaccessible")}
                           color="error"
                           variant="outlined"
                         />
@@ -277,8 +279,8 @@ const WorkspacesManager: React.FC = () => {
                       }
                       tooltip={
                         workspace.is_default
-                          ? "Default workspace"
-                          : "Set as default"
+                          ? t("workspace:manager.defaultWorkspace")
+                          : t("workspace:manager.setAsDefault")
                       }
                       onClick={() => handleToggleDefault(workspace)}
                       sx={{
@@ -292,7 +294,7 @@ const WorkspacesManager: React.FC = () => {
                     />
                     <ToolbarIconButton
                       icon={<DeleteIcon fontSize="small" />}
-                      tooltip="Remove"
+                      tooltip={t("workspace:manager.remove")}
                       onClick={() => handleDeleteWorkspace(workspace.id)}
                     />
                   </ListItemSecondaryAction>
@@ -302,10 +304,8 @@ const WorkspacesManager: React.FC = () => {
           ) : (
             <Box className="empty-state">
               <FolderIcon sx={{ fontSize: 48, mb: 1, opacity: 0.5 }} />
-              <Text>No workspaces configured</Text>
-              <Text size="small">
-                Add a workspace to allow agents to access local folders
-              </Text>
+              <Text>{t("workspace:manager.noWorkspaces")}</Text>
+              <Text size="small">{t("workspace:manager.addHint")}</Text>
             </Box>
           )}
 
@@ -316,7 +316,9 @@ const WorkspacesManager: React.FC = () => {
               fullWidth
               disabled={createMutation.isPending}
             >
-              {createMutation.isPending ? "Adding…" : "Add Workspace"}
+              {createMutation.isPending
+                ? t("workspace:manager.adding")
+                : t("workspace:manager.addWorkspace")}
             </EditorButton>
           </div>
         </div>
@@ -328,15 +330,10 @@ const WorkspacesManager: React.FC = () => {
         open={deleteConfirmOpen}
         onClose={handleCancelDelete}
         onConfirm={handleConfirmDelete}
-        title="Remove this workspace?"
-        content={
-          <Text>
-            The workspace will be removed from NodeTool. The folder itself will
-            not be deleted.
-          </Text>
-        }
-        confirmText="Remove"
-        cancelText="Cancel"
+        title={t("workspace:manager.removeTitle")}
+        content={<Text>{t("workspace:manager.removeContent")}</Text>}
+        confirmText={t("workspace:manager.removeConfirm")}
+        cancelText={t("workspace:manager.removeCancel")}
       />
     </>
   );

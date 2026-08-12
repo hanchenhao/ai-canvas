@@ -80,6 +80,7 @@ import { useNodes } from "../../contexts/NodeContext";
 import { useWorkflowManager } from "../../contexts/WorkflowManagerContext";
 import { useWorkflow } from "../../serverState/useWorkflow";
 import { Text, LoadingSpinner } from "../ui_primitives";
+import { useTranslation } from "react-i18next";
 import { DATA_TYPES } from "../../config/data_types";
 import { useIsDarkMode } from "../../hooks/useIsDarkMode";
 import useResultsStore from "../../stores/ResultsStore";
@@ -165,6 +166,7 @@ const ReactFlowWrapper = ({
   const workflowManagerStore = useWorkflowManagerStore();
   const isDarkMode = useIsDarkMode();
   const theme = useTheme();
+  const { t } = useTranslation(["workspace"]);
   // Combine multiple store subscriptions into a single selector to reduce re-renders
   const {
     nodes,
@@ -654,7 +656,10 @@ const ReactFlowWrapper = ({
         nodeId: node.id,
         // Same fallback chain as the node's own header, so the tab is labelled
         // with what the user sees on the canvas.
-        label: data.title || getMetadata(SUBGRAPH_NODE_TYPE)?.title || "Subgraph",
+        label:
+          data.title ||
+          getMetadata(SUBGRAPH_NODE_TYPE)?.title ||
+          t("workspace:subgraph.subgraphFallback"),
         initialGraph: {
           nodes: Array.isArray(innerGraph.nodes) ? innerGraph.nodes : [],
           edges: Array.isArray(innerGraph.edges) ? innerGraph.edges : []
@@ -672,7 +677,7 @@ const ReactFlowWrapper = ({
         }));
       }
     },
-    [workflowManagerStore, workflowId, getMetadata]
+    [workflowManagerStore, workflowId, getMetadata, t]
   );
 
   const handlePaneClickWithSuppress = useCallback(
@@ -918,7 +923,7 @@ const ReactFlowWrapper = ({
   if (!workflowExistsLocally && isLoading) {
     return (
       <div className="loading-overlay">
-        <LoadingSpinner /> Loading workflow…
+        <LoadingSpinner /> {t("workspace:canvas.loadingWorkflow")}
       </div>
     );
   }

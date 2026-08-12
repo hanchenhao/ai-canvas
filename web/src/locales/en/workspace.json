@@ -1,0 +1,144 @@
+{
+  "tab": {
+    "new": "New",
+    "openOrCreate": "Open or create a tab",
+    "view": "View",
+    "edit": "Edit",
+    "unsavedChanges": "unsaved changes",
+    "tabName": "Tab name",
+    "closeTitle": "Close {{title}}",
+    "closeTab": "Close Tab",
+    "closeOtherTabs": "Close Other Tabs",
+    "closeAllTabs": "Close All Tabs"
+  },
+  "menu": {
+    "newWorkflow": "New workflow",
+    "newChat": "New chat",
+    "newTextFile": "New text file…",
+    "newImage": "New image",
+    "newVideo": "New video",
+    "newStoryboard": "New storyboard",
+    "newApp": "New app",
+    "newScript": "New script",
+    "new3dModel": "New 3D model",
+    "openWorkflow": "Open workflow…",
+    "openAsset": "Open asset…",
+    "openChat": "Open chat…",
+    "back": "Back",
+    "filterWorkflows": "Filter workflows",
+    "filterChats": "Filter chats",
+    "searchAssets": "Search assets (2+ chars)",
+    "searchAssetsLabel": "Search assets",
+    "noWorkflows": "No workflows found.",
+    "noChats": "No chats found.",
+    "typeToSearch": "Type at least 2 characters to search.",
+    "noAssetsMatch": "No openable assets match.",
+    "couldNotCreate": "Could not create {{label}}: {{error}}",
+    "unknownError": "unknown error"
+  },
+  "template": {
+    "markdown": "Markdown (.md)",
+    "json": "JSON (.json)",
+    "yaml": "YAML (.yaml)",
+    "csv": "CSV (.csv)",
+    "tsv": "TSV (.tsv)",
+    "plainText": "Plain text (.txt)"
+  },
+  "defaultName": {
+    "untitledImage": "Untitled image",
+    "untitledVideo": "Untitled video",
+    "untitledStoryboard": "Untitled storyboard",
+    "untitledApp": "Untitled app",
+    "untitledScript": "Untitled script",
+    "untitledChat": "Untitled chat",
+    "untitledModel": "Untitled model",
+    "untitled": "Untitled",
+    "newChat": "New chat"
+  },
+  "empty": {
+    "caption": "Describe a workflow in plain language and the agent builds it for you — or use + to open a document.",
+    "prompt1": "Build a workflow that turns a prompt into an image",
+    "prompt2": "Build a workflow that summarizes a PDF into bullet points",
+    "prompt3": "Build a workflow that transcribes an audio file and translates it"
+  },
+  "mobile": {
+    "openDocument": "Open document: {{title}}",
+    "openDocuments": "Open documents",
+    "noDocumentOpen": "No document open",
+    "sheetTitle": "Open documents",
+    "sheetAriaLabel": "Switch between open documents",
+    "noDocuments": "No documents open — use + to open or create one.",
+    "closeTitle": "Close {{title}}",
+    "closeAll": "Close all documents"
+  },
+  "linkedWorkflows": {
+    "button": "Linked workflows ({{count}})",
+    "menuAria": "Linked workflows",
+    "empty": "This app binds no workflow yet.",
+    "unavailable": "Workflow unavailable",
+    "loadError": "{{id}} — {{error}}",
+    "couldNotLoad": "could not be loaded",
+    "pinned": "Pinned",
+    "pinnedVersion": "Pinned v{{version}}",
+    "usedBy": "Used by {{names}}",
+    "boundToNone": "Bound to no operation"
+  },
+  "manager": {
+    "unableToLoad": "Unable to load workspaces",
+    "checkConnection": "Check your connection and try again",
+    "retry": "Retry",
+    "inaccessible": "Inaccessible",
+    "defaultWorkspace": "Default workspace",
+    "setAsDefault": "Set as default",
+    "remove": "Remove",
+    "noWorkspaces": "No workspaces configured",
+    "addHint": "Add a workspace to allow agents to access local folders",
+    "adding": "Adding…",
+    "addWorkspace": "Add Workspace",
+    "added": "Workspace added",
+    "removed": "Workspace removed",
+    "removeTitle": "Remove this workspace?",
+    "removeContent": "The workspace will be removed from NodeTool. The folder itself will not be deleted.",
+    "removeConfirm": "Remove",
+    "removeCancel": "Cancel"
+  },
+  "select": {
+    "loading": "Loading…",
+    "unableToLoad": "Unable to load workspaces",
+    "checkConnection": "Check your connection or try again later",
+    "noneSelected": "No workspace selected",
+    "none": "None",
+    "hint": "Agents read and write files here during execution - saved images, text, data, and other outputs. Browse the results in the Workspace panel. Agents can only access files inside this folder.",
+    "createNew": "Create New Workspace",
+    "added": "Workspace added",
+    "ariaLabel": "Workspace"
+  },
+  "tree": {
+    "explorer": "Workspace Explorer",
+    "refresh": "Refresh",
+    "manage": "Manage Workspaces",
+    "noWorkflow": "No workflow selected",
+    "openWorkflowHint": "Open a workflow to access its workspace files",
+    "noWorkspace": "No workspace selected",
+    "createOrSelect": "Select a workspace above or create one",
+    "createWorkspace": "Create Workspace",
+    "empty": "Workspace is empty",
+    "emptyHint": "Add files to your workspace folder to see them here",
+    "accessDenied": "⚠️ Access denied",
+    "loading": "loading...",
+    "openInFolder": "Open in Folder",
+    "goToRoot": "Go to workspace root",
+    "fileBrowserAria": "workspace file browser"
+  },
+  "subgraph": {
+    "hostLabel": "Workflow",
+    "subgraphFallback": "Subgraph"
+  },
+  "graph": {
+    "errorPrefix": "Error: {{error}}",
+    "noWorkflowId": "No workflow ID or data provided"
+  },
+  "canvas": {
+    "loadingWorkflow": "Loading workflow…"
+  }
+}

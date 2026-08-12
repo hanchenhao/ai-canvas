@@ -7,10 +7,12 @@ import { useQuery } from "@tanstack/react-query";
 import { FileInfo } from "../../stores/ApiTypes";
 import { trpcClient } from "../../trpc/client";
 import { Text, Caption, Box, EditorButton, Skeleton, BORDER_RADIUS, MOTION, SPACING, getSpacingPx } from "../ui_primitives";
+import i18next from "i18next";
 import { RichTreeView } from "@mui/x-tree-view/RichTreeView";
 import type { TreeViewBaseItem } from "@mui/x-tree-view/models";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import AddIcon from "@mui/icons-material/Add";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -188,7 +190,7 @@ const treeViewStyles = (theme: Theme) => ({
 
 const createErrorItem = (itemId: string): TreeViewItem => ({
   id: `${itemId}/error`,
-  label: "⚠️ Access denied",
+  label: i18next.t("workspace:tree.accessDenied"),
   children: undefined,
   className: "error-item"
 });
@@ -206,7 +208,7 @@ const fileToTreeItem = (file: FileInfo): TreeViewItem => {
     item.children = [
       {
         id: file.path + "/loading",
-        label: "loading...",
+        label: i18next.t("workspace:tree.loading"),
         className: "loading-item",
         children: []
       }
@@ -265,12 +267,14 @@ const updateTreeWithChildren = (
 
 const shouldLoadChildren = (item: TreeViewItem | undefined): boolean => {
   return Boolean(
-    item?.children?.length === 1 && item.children[0].label === "loading..."
+    item?.children?.length === 1 &&
+      item.children[0].id.endsWith("/loading")
   );
 };
 
 const WorkspaceTree: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation(["workspace"]);
   const [files, setFiles] = useState<TreeViewItem[]>([]);
   const filesRef = useRef<TreeViewItem[]>([]);
   filesRef.current = files;
@@ -404,16 +408,19 @@ const WorkspaceTree: React.FC = () => {
   if (!workflowId) {
     return (
       <Box css={workspaceTreeStyles(theme)}>
-        <PanelHeadline title="Workspace Explorer" docsTopic="workspaces" />
+        <PanelHeadline
+          title={t("workspace:tree.explorer")}
+          docsTopic="workspaces"
+        />
         <div className="empty-workspace">
           <FolderOpenIcon
             sx={{ fontSize: 40, opacity: 0.3, color: "text.secondary" }}
           />
           <Text size="small" color="secondary">
-            No workflow selected
+            {t("workspace:tree.noWorkflow")}
           </Text>
           <Caption color="secondary">
-            Open a workflow to access its workspace files
+            {t("workspace:tree.openWorkflowHint")}
           </Caption>
         </div>
       </Box>
@@ -423,12 +430,12 @@ const WorkspaceTree: React.FC = () => {
   return (
     <Box css={workspaceTreeStyles(theme)}>
       <PanelHeadline
-        title="Workspace Explorer"
+        title={t("workspace:tree.explorer")}
         docsTopic="workspaces"
         actions={
           <RefreshButton
             onClick={handleRefresh}
-            tooltip="Refresh"
+            tooltip={t("workspace:tree.refresh")}
             tooltipPlacement="bottom"
           />
         }
@@ -442,7 +449,7 @@ const WorkspaceTree: React.FC = () => {
         <SettingsButton
           className="settings-button"
           onClick={handleManageWorkspace}
-          tooltip="Manage Workspaces"
+          tooltip={t("workspace:tree.manage")}
         />
       </div>
 
@@ -451,7 +458,7 @@ const WorkspaceTree: React.FC = () => {
           <span
             className="breadcrumb-segment"
             role="button"
-            aria-label="Go to workspace root"
+            aria-label={t("workspace:tree.goToRoot")}
             tabIndex={0}
             onClick={() => setSelectedFilePath("")}
             onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { setSelectedFilePath(""); } }}
@@ -475,7 +482,7 @@ const WorkspaceTree: React.FC = () => {
             startIcon={<FolderOpenIcon />}
             onClick={handleOpenInFolder}
           >
-            Open in Folder
+            {t("workspace:tree.openInFolder")}
           </EditorButton>
         </div>
       )}
@@ -487,17 +494,17 @@ const WorkspaceTree: React.FC = () => {
               sx={{ fontSize: 40, opacity: 0.3, color: "text.secondary" }}
             />
             <Text size="small" color="secondary">
-              No workspace selected
+              {t("workspace:tree.noWorkspace")}
             </Text>
             <Caption color="secondary">
-              Select a workspace above or create one
+              {t("workspace:tree.createOrSelect")}
             </Caption>
             <EditorButton
               startIcon={<AddIcon />}
               onClick={handleManageWorkspace}
               sx={{ mt: 1 }}
             >
-              Create Workspace
+              {t("workspace:tree.createWorkspace")}
             </EditorButton>
           </div>
         ) : isLoadingFiles ? (
@@ -519,7 +526,7 @@ const WorkspaceTree: React.FC = () => {
                 }
               }}
               items={files as TreeViewBaseItem[]}
-              aria-label="workspace file browser"
+              aria-label={t("workspace:tree.fileBrowserAria")}
               selectedItems={selectedFilePath}
               sx={treeViewStyles(theme)}
               slotProps={{
@@ -537,10 +544,10 @@ const WorkspaceTree: React.FC = () => {
               sx={{ fontSize: 36, opacity: 0.3, color: "text.secondary" }}
             />
             <Text size="small" color="secondary">
-              Workspace is empty
+              {t("workspace:tree.empty")}
             </Text>
             <Caption color="secondary">
-              Add files to your workspace folder to see them here
+              {t("workspace:tree.emptyHint")}
             </Caption>
           </div>
         )}

@@ -78,11 +78,12 @@ const styles = (theme: Theme) =>
 /**
  * Starting points that show the agent builds workflows from plain language —
  * the graph tools are there, but nothing on this screen said so.
+ * i18n keys into workspace:empty.prompt{1,2,3}.
  */
-const SAMPLE_PROMPTS = [
-  "Build a workflow that turns a prompt into an image",
-  "Build a workflow that summarizes a PDF into bullet points",
-  "Build a workflow that transcribes an audio file and translates it"
+const SAMPLE_PROMPT_KEYS = [
+  "workspace:empty.prompt1",
+  "workspace:empty.prompt2",
+  "workspace:empty.prompt3"
 ] as const;
 
 /**
@@ -95,7 +96,7 @@ const SAMPLE_PROMPTS = [
  */
 const WorkspaceEmptyView = () => {
   const theme = useTheme();
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation(["common", "workspace"]);
   const emptyStyles = useMemo(() => styles(theme), [theme]);
 
   const openTab = useWorkspaceTabsStore((state) => state.openTab);
@@ -128,7 +129,7 @@ const WorkspaceEmptyView = () => {
           type: "chat",
           ref: threadId,
           mode: "view",
-          title: "New chat"
+          title: t("workspace:defaultName.newChat")
         });
         const message: Message = {
           type: "message",
@@ -143,7 +144,7 @@ const WorkspaceEmptyView = () => {
         console.error("Failed to start chat:", error);
       }
     },
-    [openTab]
+    [openTab, t]
   );
 
   const handleSendPrompt = useCallback(
@@ -199,20 +200,17 @@ const WorkspaceEmptyView = () => {
           onCreateWorkflow={() => void handleCreateWorkflow()}
         />
       </div>
-      <Caption color="secondary">
-        Describe a workflow in plain language and the agent builds it for you —
-        or use + to open a document.
-      </Caption>
+      <Caption color="secondary">{t("workspace:empty.caption")}</Caption>
       <div className="empty-prompts">
-        {SAMPLE_PROMPTS.map((prompt) => (
+        {SAMPLE_PROMPT_KEYS.map((promptKey) => (
           <button
-            key={prompt}
+            key={promptKey}
             type="button"
             className="empty-prompt"
             disabled={isBusy}
-            onClick={() => handleSendPrompt(prompt)}
+            onClick={() => handleSendPrompt(t(promptKey))}
           >
-            {prompt}
+            {t(promptKey)}
           </button>
         ))}
       </div>

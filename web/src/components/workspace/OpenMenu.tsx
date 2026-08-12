@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
@@ -92,7 +93,8 @@ interface OpenMenuProps {
 type MenuView = "root" | "texts" | "workflows" | "assets" | "chats";
 
 interface TextFileTemplate {
-  label: string;
+  /** i18n key suffix, e.g. "markdown" → workspace:template.markdown */
+  labelKey: string;
   filename: string;
   mimeType: string;
   content: string;
@@ -100,37 +102,37 @@ interface TextFileTemplate {
 
 const TEXT_FILE_TEMPLATES: readonly TextFileTemplate[] = [
   {
-    label: "Markdown (.md)",
+    labelKey: "markdown",
     filename: "Untitled.md",
     mimeType: "text/markdown",
     content: "# Untitled\n"
   },
   {
-    label: "JSON (.json)",
+    labelKey: "json",
     filename: "Untitled.json",
     mimeType: "application/json",
     content: "{}\n"
   },
   {
-    label: "YAML (.yaml)",
+    labelKey: "yaml",
     filename: "Untitled.yaml",
     mimeType: "application/x-yaml",
     content: "---\n"
   },
   {
-    label: "CSV (.csv)",
+    labelKey: "csv",
     filename: "Untitled.csv",
     mimeType: "text/csv",
     content: "Column 1\n"
   },
   {
-    label: "TSV (.tsv)",
+    labelKey: "tsv",
     filename: "Untitled.tsv",
     mimeType: "text/tab-separated-values",
     content: "Column 1\n"
   },
   {
-    label: "Plain text (.txt)",
+    labelKey: "plainText",
     filename: "Untitled.txt",
     mimeType: "text/plain",
     content: ""
@@ -148,6 +150,7 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
   const [assetQuery, setAssetQuery] = useState("");
   const [wfFilter, setWfFilter] = useState("");
   const [chatFilter, setChatFilter] = useState("");
+  const { t } = useTranslation(["workspace"]);
   /** Label of the "New X" creator currently in flight, if any. */
   const [creating, setCreating] = useState<string | null>(null);
 
@@ -187,9 +190,13 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
         addNotification({
           type: "error",
           alert: true,
-          content: `Could not create ${label}: ${
-            error instanceof Error ? error.message : "unknown error"
-          }`
+          content: t("workspace:menu.couldNotCreate", {
+            label,
+            error:
+              error instanceof Error
+                ? error.message
+                : t("workspace:menu.unknownError")
+          })
         });
       } finally {
         setCreating(null);
@@ -220,10 +227,10 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
           type: "image",
           ref: asset.id,
           mode: "edit",
-          title: asset.name || "Untitled image"
+          title: asset.name || t("workspace:defaultName.untitledImage")
         });
       }),
-    [runCreate, createAsset, openTab]
+    [runCreate, createAsset, openTab, t]
   );
 
   const handleNewText = useCallback(
@@ -248,24 +255,24 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
     () =>
       runCreate("video", async () => {
         const sequence = await createTimeline.mutateAsync({
-          name: "Untitled video",
+          name: t("workspace:defaultName.untitledVideo"),
           projectId: "default"
         });
         openTab({
           type: "timeline",
           ref: sequence.id,
           mode: "edit",
-          title: sequence.name || "Untitled video"
+          title: sequence.name || t("workspace:defaultName.untitledVideo")
         });
       }),
-    [runCreate, createTimeline, openTab]
+    [runCreate, createTimeline, openTab, t]
   );
 
   const handleNewStoryboard = useCallback(
     () =>
       runCreate("storyboard", async () => {
         const created = await createStoryboard.mutateAsync({
-          name: "Untitled storyboard",
+          name: t("workspace:defaultName.untitledStoryboard"),
           projectId: "default"
         });
         openTab({
@@ -275,14 +282,14 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
           title: created.name
         });
       }),
-    [runCreate, createStoryboard, openTab]
+    [runCreate, createStoryboard, openTab, t]
   );
 
   const handleNewApp = useCallback(
     () =>
       runCreate("app", async () => {
         const created = await createApplication.mutateAsync({
-          name: "Untitled app",
+          name: t("workspace:defaultName.untitledApp"),
           description: "",
           projectId: "default"
         });
@@ -293,14 +300,14 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
           title: created.name
         });
       }),
-    [runCreate, createApplication, openTab]
+    [runCreate, createApplication, openTab, t]
   );
 
   const handleNewScript = useCallback(
     () =>
       runCreate("script", async () => {
         const created = await createScript.mutateAsync({
-          name: "Untitled script",
+          name: t("workspace:defaultName.untitledScript"),
           projectId: "default"
         });
         openTab({
@@ -310,7 +317,7 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
           title: created.name
         });
       }),
-    [runCreate, createScript, openTab]
+    [runCreate, createScript, openTab, t]
   );
 
   const handleNewChat = useCallback(
@@ -321,10 +328,10 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
           type: "chat",
           ref: threadId,
           mode: "view",
-          title: "New chat"
+          title: t("workspace:defaultName.newChat")
         });
       }),
-    [runCreate, createNewThread, openTab]
+    [runCreate, createNewThread, openTab, t]
   );
 
   const handleNewModel = useCallback(
@@ -335,10 +342,10 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
           type: "model3d",
           ref: asset.id,
           mode: "edit",
-          title: asset.name || "Untitled model"
+          title: asset.name || t("workspace:defaultName.untitledModel")
         });
       }),
-    [runCreate, createAsset, openTab]
+    [runCreate, createAsset, openTab, t]
   );
 
   const { data: workflowList, isLoading: workflowsLoading } =
@@ -384,11 +391,11 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
         type: "chat",
         ref: thread.id,
         mode: "view",
-        title: thread.title || "Untitled chat"
+        title: thread.title || t("workspace:defaultName.untitledChat")
       });
       close();
     },
-    [openTab, close]
+    [openTab, close, t]
   );
 
   const trimmedAssetQuery = assetQuery.trim();
@@ -423,11 +430,11 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
         type,
         ref: asset.id,
         mode: "view",
-        title: asset.name || "Untitled"
+        title: asset.name || t("workspace:defaultName.untitled")
       });
       close();
     },
-    [openTab, close]
+    [openTab, close, t]
   );
 
   return (
@@ -443,73 +450,73 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
         {view === "root" && (
           <>
             <MenuItemPrimitive
-              label="New workflow"
+              label={t("workspace:menu.newWorkflow")}
               icon={<AddRoundedIcon fontSize="small" />}
               onClick={() => void handleNew()}
               disabled={creating !== null}
             />
             <MenuItemPrimitive
-              label="New chat"
+              label={t("workspace:menu.newChat")}
               icon={<ForumOutlinedIcon fontSize="small" />}
               onClick={() => void handleNewChat()}
               disabled={creating !== null}
             />
             <MenuItemPrimitive
-              label="New text file…"
+              label={t("workspace:menu.newTextFile")}
               icon={<ArticleOutlinedIcon fontSize="small" />}
               hasSubmenu
               onClick={() => setView("texts")}
               disabled={creating !== null}
             />
             <MenuItemPrimitive
-              label="New image"
+              label={t("workspace:menu.newImage")}
               icon={<ImageOutlinedIcon fontSize="small" />}
               onClick={() => void handleNewImage()}
               disabled={creating !== null}
             />
             <MenuItemPrimitive
-              label="New video"
+              label={t("workspace:menu.newVideo")}
               icon={<MovieOutlinedIcon fontSize="small" />}
               onClick={() => void handleNewVideo()}
               disabled={creating !== null}
             />
             <MenuItemPrimitive
-              label="New storyboard"
+              label={t("workspace:menu.newStoryboard")}
               icon={<DashboardOutlinedIcon fontSize="small" />}
               onClick={() => void handleNewStoryboard()}
               disabled={creating !== null}
             />
             <MenuItemPrimitive
-              label="New app"
+              label={t("workspace:menu.newApp")}
               icon={<DashboardCustomizeOutlinedIcon fontSize="small" />}
               onClick={() => void handleNewApp()}
               disabled={creating !== null}
             />
             <MenuItemPrimitive
-              label="New script"
+              label={t("workspace:menu.newScript")}
               icon={<RecordVoiceOverOutlinedIcon fontSize="small" />}
               onClick={() => void handleNewScript()}
               disabled={creating !== null}
             />
             <MenuItemPrimitive
-              label="New 3D model"
+              label={t("workspace:menu.new3dModel")}
               icon={<ViewInArOutlinedIcon fontSize="small" />}
               onClick={() => void handleNewModel()}
               disabled={creating !== null}
               dividerAfter
             />
             <MenuItemPrimitive
-              label="Open workflow…"
+              label={t("workspace:menu.openWorkflow")}
               hasSubmenu
               onClick={() => setView("workflows")}
             />
             <MenuItemPrimitive
-              label="Open asset…"
+              label={t("workspace:menu.openAsset")}
               hasSubmenu
               onClick={() => setView("assets")}
             />
             <MenuItemPrimitive
-              label="Open chat…"
+              label={t("workspace:menu.openChat")}
               hasSubmenu
               onClick={() => setView("chats")}
             />
@@ -519,7 +526,7 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
         {view === "texts" && (
           <>
             <MenuItemPrimitive
-              label="Back"
+              label={t("workspace:menu.back")}
               icon={<ArrowBackRoundedIcon fontSize="small" />}
               onClick={() => setView("root")}
               dividerAfter
@@ -527,7 +534,7 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
             {TEXT_FILE_TEMPLATES.map((template) => (
               <MenuItemPrimitive
                 key={template.filename}
-                label={template.label}
+                label={t(`workspace:template.${template.labelKey}`)}
                 onClick={() => void handleNewText(template)}
                 disabled={creating !== null}
               />
@@ -538,7 +545,7 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
         {view === "workflows" && (
           <>
             <MenuItemPrimitive
-              label="Back"
+              label={t("workspace:menu.back")}
               icon={<ArrowBackRoundedIcon fontSize="small" />}
               onClick={() => setView("root")}
               dividerAfter
@@ -547,8 +554,12 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
               <TextInput
                 autoFocus={autoFocusEnabled}
                 fullWidth
-                placeholder="Filter workflows"
-                slotProps={{ htmlInput: { "aria-label": "Filter workflows" } }}
+                placeholder={t("workspace:menu.filterWorkflows")}
+                slotProps={{
+                  htmlInput: {
+                    "aria-label": t("workspace:menu.filterWorkflows")
+                  }
+                }}
                 value={wfFilter}
                 onChange={(e) => setWfFilter(e.target.value)}
               />
@@ -560,14 +571,19 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
             )}
             {!workflowsLoading && workflows.length === 0 && (
               <Caption color="secondary" sx={{ px: 2, py: 1.5 }}>
-                No workflows found.
+                {t("workspace:menu.noWorkflows")}
               </Caption>
             )}
             {workflows.map((w) => (
               <MenuItemPrimitive
                 key={w.id}
-                label={w.name || "Untitled"}
-                onClick={() => openWorkflow(w.id, w.name || "Untitled")}
+                label={w.name || t("workspace:defaultName.untitled")}
+                onClick={() =>
+                  openWorkflow(
+                    w.id,
+                    w.name || t("workspace:defaultName.untitled")
+                  )
+                }
               />
             ))}
           </>
@@ -576,7 +592,7 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
         {view === "chats" && (
           <>
             <MenuItemPrimitive
-              label="Back"
+              label={t("workspace:menu.back")}
               icon={<ArrowBackRoundedIcon fontSize="small" />}
               onClick={() => setView("root")}
               dividerAfter
@@ -585,8 +601,10 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
               <TextInput
                 autoFocus={autoFocusEnabled}
                 fullWidth
-                placeholder="Filter chats"
-                slotProps={{ htmlInput: { "aria-label": "Filter chats" } }}
+                placeholder={t("workspace:menu.filterChats")}
+                slotProps={{
+                  htmlInput: { "aria-label": t("workspace:menu.filterChats") }
+                }}
                 value={chatFilter}
                 onChange={(e) => setChatFilter(e.target.value)}
               />
@@ -598,13 +616,15 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
             )}
             {!threadsLoading && chatThreads.length === 0 && (
               <Caption color="secondary" sx={{ px: 2, py: 1.5 }}>
-                No chats found.
+                {t("workspace:menu.noChats")}
               </Caption>
             )}
             {chatThreads.map((thread) => (
               <MenuItemPrimitive
                 key={thread.id}
-                label={thread.title || "Untitled chat"}
+                label={
+                  thread.title || t("workspace:defaultName.untitledChat")
+                }
                 onClick={() => openChat(thread)}
               />
             ))}
@@ -614,7 +634,7 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
         {view === "assets" && (
           <>
             <MenuItemPrimitive
-              label="Back"
+              label={t("workspace:menu.back")}
               icon={<ArrowBackRoundedIcon fontSize="small" />}
               onClick={() => setView("root")}
               dividerAfter
@@ -623,15 +643,17 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
               <TextInput
                 autoFocus={autoFocusEnabled}
                 fullWidth
-                placeholder="Search assets (2+ chars)"
-                slotProps={{ htmlInput: { "aria-label": "Search assets" } }}
+                placeholder={t("workspace:menu.searchAssets")}
+                slotProps={{
+                  htmlInput: { "aria-label": t("workspace:menu.searchAssetsLabel") }
+                }}
                 value={assetQuery}
                 onChange={(e) => setAssetQuery(e.target.value)}
               />
             </FlexRow>
             {trimmedAssetQuery.length < 2 && (
               <Caption color="secondary" sx={{ px: 2, py: 1.5 }}>
-                Type at least 2 characters to search.
+                {t("workspace:menu.typeToSearch")}
               </Caption>
             )}
             {trimmedAssetQuery.length >= 2 && assetsFetching && (
@@ -643,13 +665,13 @@ const OpenMenu = ({ anchorEl, open, onClose }: OpenMenuProps) => {
               !assetsFetching &&
               openableAssets.length === 0 && (
                 <Caption color="secondary" sx={{ px: 2, py: 1.5 }}>
-                  No openable assets match.
+                  {t("workspace:menu.noAssetsMatch")}
                 </Caption>
               )}
             {openableAssets.map(({ asset, type }) => (
               <MenuItemPrimitive
                 key={asset.id}
-                label={asset.name || "Untitled"}
+                label={asset.name || t("workspace:defaultName.untitled")}
                 secondary={type}
                 onClick={() => openAsset(asset, type)}
               />

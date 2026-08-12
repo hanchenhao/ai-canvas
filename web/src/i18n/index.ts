@@ -9,6 +9,7 @@ import enErrors from "../locales/en/errors.json";
 import enTimeline from "../locales/en/timeline.json";
 import enSketch from "../locales/en/sketch.json";
 import enStoryboard from "../locales/en/storyboard.json";
+import enWorkspace from "../locales/en/workspace.json";
 import zhCommon from "../locales/zh-CN/common.json";
 import zhSettings from "../locales/zh-CN/settings.json";
 import zhNodes from "../locales/zh-CN/nodes.json";
@@ -16,6 +17,7 @@ import zhErrors from "../locales/zh-CN/errors.json";
 import zhTimeline from "../locales/zh-CN/timeline.json";
 import zhSketch from "../locales/zh-CN/sketch.json";
 import zhStoryboard from "../locales/zh-CN/storyboard.json";
+import zhWorkspace from "../locales/zh-CN/workspace.json";
 
 export const SUPPORTED_LANGUAGES = ["auto", "en", "zh-CN"] as const;
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
@@ -34,7 +36,8 @@ void i18n
         errors: enErrors,
         timeline: enTimeline,
         sketch: enSketch,
-        storyboard: enStoryboard
+        storyboard: enStoryboard,
+        workspace: enWorkspace
       },
       "zh-CN": {
         common: zhCommon,
@@ -43,7 +46,8 @@ void i18n
         errors: zhErrors,
         timeline: zhTimeline,
         sketch: zhSketch,
-        storyboard: zhStoryboard
+        storyboard: zhStoryboard,
+        workspace: zhWorkspace
       }
     },
     fallbackLng: FALLBACK_LANGUAGE,

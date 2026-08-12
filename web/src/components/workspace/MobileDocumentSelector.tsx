@@ -27,6 +27,7 @@ import {
   SPACING,
   getSpacingPx
 } from "../ui_primitives";
+import { useTranslation } from "react-i18next";
 
 export interface MobileDocumentSelectorProps {
   tabs: WorkspaceTab[];
@@ -128,6 +129,7 @@ const DocumentStatus = memo(function DocumentStatus({
   const workflowId = tab.type === "workflow" ? tab.ref : undefined;
   const isDirty = useWorkflowDirty(workflowId);
   const isRunning = useIsWorkflowRunning(workflowId);
+  const { t } = useTranslation(["workspace"]);
   // Instant-update re-runs on every keystroke, which would strobe the spinner.
   const instantUpdate = useSettingsStore(
     (state) => state.settings.instantUpdate
@@ -145,7 +147,11 @@ const DocumentStatus = memo(function DocumentStatus({
         />
       )}
       {isDirty && (
-        <span className="dirty-dot" role="img" aria-label="unsaved changes" />
+        <span
+          className="dirty-dot"
+          role="img"
+          aria-label={t("workspace:tab.unsavedChanges")}
+        />
       )}
     </>
   );
@@ -167,6 +173,7 @@ const MobileDocumentSelector = ({
   onCloseAll
 }: MobileDocumentSelectorProps) => {
   const theme = useTheme();
+  const { t } = useTranslation(["workspace"]);
   const buttonStyles = useMemo(() => styles(theme), [theme]);
   const listStyles = useMemo(() => sheetStyles(theme), [theme]);
   const [open, setOpen] = useState(false);
@@ -200,7 +207,9 @@ const MobileDocumentSelector = ({
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-label={
-          activeTab ? `Open document: ${activeTab.title}` : "Open documents"
+          activeTab
+            ? t("workspace:mobile.openDocument", { title: activeTab.title })
+            : t("workspace:mobile.openDocuments")
         }
         onClick={() => setOpen(true)}
       >
@@ -210,7 +219,9 @@ const MobileDocumentSelector = ({
           </span>
         )}
         <span className="doc-title">
-          {activeTab ? activeTab.title : "No document open"}
+          {activeTab
+            ? activeTab.title
+            : t("workspace:mobile.noDocumentOpen")}
         </span>
         {activeTab && <DocumentStatus tab={activeTab} />}
         {tabs.length > 1 && <span className="doc-count">{tabs.length}</span>}
@@ -220,13 +231,13 @@ const MobileDocumentSelector = ({
       <MobileBottomSheet
         open={open}
         onClose={closeSheet}
-        title="Open documents"
-        ariaLabel="Switch between open documents"
+        title={t("workspace:mobile.sheetTitle")}
+        ariaLabel={t("workspace:mobile.sheetAriaLabel")}
       >
         <div css={listStyles}>
           {tabs.length === 0 && (
             <Caption color="secondary" sx={{ px: 2.5, py: 2 }}>
-              No documents open — use + to open or create one.
+              {t("workspace:mobile.noDocuments")}
             </Caption>
           )}
           <List dense disablePadding>
@@ -237,7 +248,9 @@ const MobileDocumentSelector = ({
                 secondaryAction={
                   <CloseButton
                     className="row-close"
-                    tooltip={`Close ${tab.title}`}
+                    tooltip={t("workspace:mobile.closeTitle", {
+                      title: tab.title
+                    })}
                     onClick={() => onClose(tab)}
                   />
                 }
@@ -269,7 +282,7 @@ const MobileDocumentSelector = ({
                     className="close-all"
                     onClick={handleCloseAll}
                   >
-                    <ListItemText primary="Close all documents" />
+                    <ListItemText primary={t("workspace:mobile.closeAll")} />
                   </ListItemButton>
                 </ListItem>
               </List>

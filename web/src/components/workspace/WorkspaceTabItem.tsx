@@ -12,6 +12,7 @@ import type { WorkspaceTab } from "../../stores/WorkspaceTabsStore";
 import { useIsWorkflowRunning } from "../../hooks/useWorkflowRunnerState";
 import { useWorkflowDirty } from "../../hooks/useWorkflowDirty";
 import { useSettingsStore } from "../../stores/SettingsStore";
+import { useTranslation } from "react-i18next";
 import {
   CloseButton,
   ContextMenu,
@@ -63,6 +64,7 @@ const WorkspaceTabItem = ({
   const workflowId = tab.type === "workflow" ? tab.ref : undefined;
   const isWorkflowDirty = useWorkflowDirty(workflowId);
   const isRunning = useIsWorkflowRunning(workflowId);
+  const { t } = useTranslation(["workspace"]);
   // Instant-update mode re-runs the graph on every keystroke, so the per-run
   // tab spinner would strobe on/off continuously — suppress it (and its
   // animation) while instant update is on.
@@ -149,7 +151,7 @@ const WorkspaceTabItem = ({
           <input
             type="text"
             className="tab-input"
-            aria-label="Tab name"
+            aria-label={t("workspace:tab.tabName")}
             defaultValue={tab.title}
             autoFocus
             onClick={(event) => event.stopPropagation()}
@@ -189,7 +191,7 @@ const WorkspaceTabItem = ({
               <span
                 className="dirty-dot"
                 role="img"
-                aria-label="unsaved changes"
+                aria-label={t("workspace:tab.unsavedChanges")}
               />
             )}
           </>
@@ -197,7 +199,7 @@ const WorkspaceTabItem = ({
         <CloseButton
           className="tab-close close-icon"
           buttonSize="small"
-          tooltip={`Close ${tab.title}`}
+          tooltip={t("workspace:tab.closeTitle", { title: tab.title })}
           onClick={(event) => {
             event.stopPropagation();
             onClose(tab);
@@ -212,7 +214,7 @@ const WorkspaceTabItem = ({
         compact
       >
         <MenuItemPrimitive
-          label="Close Tab"
+          label={t("workspace:tab.closeTab")}
           compact
           onClick={() => {
             closeContextMenu();
@@ -220,7 +222,7 @@ const WorkspaceTabItem = ({
           }}
         />
         <MenuItemPrimitive
-          label="Close Other Tabs"
+          label={t("workspace:tab.closeOtherTabs")}
           compact
           onClick={() => {
             closeContextMenu();
@@ -228,7 +230,7 @@ const WorkspaceTabItem = ({
           }}
         />
         <MenuItemPrimitive
-          label="Close All Tabs"
+          label={t("workspace:tab.closeAllTabs")}
           compact
           onClick={() => {
             closeContextMenu();

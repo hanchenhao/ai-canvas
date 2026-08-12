@@ -20,6 +20,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { trpcClient } from "../../trpc/client";
 import { WorkspaceResponse } from "../../stores/ApiTypes";
 import { useNotificationStore } from "../../stores/NotificationStore";
@@ -151,6 +152,7 @@ const WorkspaceSelect: React.FC<WorkspaceSelectProps> = memo(
     compact = false
   }) {
     const theme = useTheme();
+    const { t } = useTranslation(["workspace"]);
     const cssStyles = useMemo(() => styles(theme), [theme]);
     const queryClient = useQueryClient();
     const addNotification = useNotificationStore(
@@ -181,7 +183,7 @@ const WorkspaceSelect: React.FC<WorkspaceSelectProps> = memo(
         addNotification({
           type: "success",
           alert: true,
-          content: "Workspace added",
+          content: t("workspace:select.added"),
           dismissable: true
         });
       },
@@ -217,7 +219,7 @@ const WorkspaceSelect: React.FC<WorkspaceSelectProps> = memo(
         <FlexRow css={cssStyles} gap={1} align="center" sx={{ py: 1 }}>
           <LoadingSpinner size="small" />
           <Text size="small" color="secondary">
-            Loading…
+            {t("workspace:select.loading")}
           </Text>
         </FlexRow>
       );
@@ -227,10 +229,10 @@ const WorkspaceSelect: React.FC<WorkspaceSelectProps> = memo(
       return (
         <Box css={cssStyles}>
           <Text size="small" color="error" sx={{ mb: 1 }}>
-            Unable to load workspaces
+            {t("workspace:select.unableToLoad")}
           </Text>
           <Caption color="secondary">
-            Check your connection or try again later
+            {t("workspace:select.checkConnection")}
           </Caption>
         </Box>
       );
@@ -238,7 +240,11 @@ const WorkspaceSelect: React.FC<WorkspaceSelectProps> = memo(
 
     const renderSelectedValue = () => {
       if (!selectedWorkspace) {
-        return <span className="none-option">No workspace selected</span>;
+        return (
+          <span className="none-option">
+            {t("workspace:select.noneSelected")}
+          </span>
+        );
       }
       return (
         <div className="workspace-option">
@@ -260,7 +266,7 @@ const WorkspaceSelect: React.FC<WorkspaceSelectProps> = memo(
         <FormControl fullWidth={fullWidth} css={cssStyles}>
           <Select
             className={`workspace-select${compact ? " compact" : ""}`}
-            aria-label="Workspace"
+            aria-label={t("workspace:select.ariaLabel")}
             value={value || ""}
             onChange={handleChange}
             disabled={disabled || createMutation.isPending}
@@ -354,14 +360,12 @@ const WorkspaceSelect: React.FC<WorkspaceSelectProps> = memo(
                   wordBreak: "break-word"
                 }}
               >
-                Agents read and write files here during execution - saved images,
-                text, data, and other outputs. Browse the results in the Workspace
-                panel. Agents can only access files inside this folder.
+                {t("workspace:select.hint")}
               </Caption>
             </Box>
             <Divider sx={{ mb: 0.5 }} />
             <MenuItem value="">
-              <span className="none-option">None</span>
+              <span className="none-option">{t("workspace:select.none")}</span>
             </MenuItem>
             {workspaces?.map((workspace) => (
               <MenuItem key={workspace.id} value={workspace.id}>
@@ -380,7 +384,7 @@ const WorkspaceSelect: React.FC<WorkspaceSelectProps> = memo(
             <MenuItem value={CREATE_NEW_VALUE}>
               <span className="create-option">
                 <AddIcon fontSize="small" />
-                Create New Workspace
+                {t("workspace:select.createNew")}
               </span>
             </MenuItem>
           </Select>

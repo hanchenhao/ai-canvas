@@ -17,6 +17,7 @@
  */
 import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   ReactFlow,
   ReactFlowProvider,
@@ -97,6 +98,7 @@ function parseWorkflowJSON(raw: unknown): { workflow: Workflow } {
 function GraphInner() {
   const { workflowId } = useParams<{ workflowId: string }>();
   const [searchParams] = useSearchParams();
+  const { t } = useTranslation(["workspace"]);
   const bgColor = searchParams.get("bg") || "#1a1a2e";
   const padding = Number(searchParams.get("padding") || "60");
 
@@ -136,7 +138,7 @@ function GraphInner() {
         } else if (workflowId && workflowId !== "json") {
           workflow = await fetchWorkflowById(workflowId);
         } else {
-          setError("No workflow ID or data provided");
+          setError(t("workspace:graph.noWorkflowId"));
           return;
         }
 
@@ -192,7 +194,7 @@ function GraphInner() {
           fontSize: 18
         }}
       >
-        Error: {error}
+        {t("workspace:graph.errorPrefix", { error })}
       </div>
     );
   }

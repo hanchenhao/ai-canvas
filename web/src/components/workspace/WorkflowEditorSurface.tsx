@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from "react";
 import { ReactFlowProvider } from "@xyflow/react";
+import { useTranslation } from "react-i18next";
 
 import NodeEditor from "../node_editor/NodeEditor";
 import { NodeContext } from "../../contexts/NodeContext";
@@ -47,6 +48,7 @@ const WorkflowEditorSurface = ({
   const nodeStore = useWorkflowManager((state) => state.getNodeStore(workflowId));
   const fetchWorkflow = useWorkflowManager((state) => state.fetchWorkflow);
   const closeTab = useWorkspaceTabsStore((state) => state.closeTab);
+  const { t } = useTranslation(["workspace"]);
   const editorViewMode = useSettingsStore(
     (state) => state.settings.editorViewMode
   );
@@ -117,7 +119,7 @@ const WorkflowEditorSurface = ({
               <SubgraphTabStrip
                 hostId={workflowId}
                 hostActiveKey={null}
-                hostLabel="Workflow"
+                hostLabel={t("workspace:subgraph.hostLabel")}
               />
               <div
                 style={{
