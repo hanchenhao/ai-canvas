@@ -13,6 +13,11 @@ import type {
   TTSModelValue,
   VideoModelValue
 } from "../stores/ApiTypes";
+import {
+  studioVideoModel,
+  studioVideoModelName,
+  studioVideoProvider
+} from "./studioBuildTimeEnv";
 
 export interface CuratedOption<T> {
   id: string;
@@ -68,12 +73,9 @@ export const STUDIO_STILL_MODELS: CuratedOption<ImageModelValue>[] = [
  * Seedance is available through NodeTool's mature KIE adapter today. The
  * provider/model can be changed at build time without exposing its API key.
  */
-const configuredVideoProvider =
-  import.meta.env.VITE_STUDIO_VIDEO_PROVIDER?.trim() || "kie";
-const configuredVideoModel =
-  import.meta.env.VITE_STUDIO_VIDEO_MODEL?.trim() || "bytedance/seedance-2";
-const configuredVideoName =
-  import.meta.env.VITE_STUDIO_VIDEO_MODEL_NAME?.trim() || "Seedance 2.0";
+const configuredVideoProvider = studioVideoProvider || "kie";
+const configuredVideoModel = studioVideoModel || "bytedance/seedance-2";
+const configuredVideoName = studioVideoModelName || "Seedance 2.0";
 
 export const STUDIO_CLIP_MODELS: CuratedOption<VideoModelValue>[] = [
   {

@@ -95,6 +95,12 @@ export default {
       "<rootDir>/src/__mocks__/supabaseBuildTimeEnv.ts",
     "^.*lib/supabaseBuildTimeEnv$":
       "<rootDir>/src/__mocks__/supabaseBuildTimeEnv.ts",
+    // Studio build-time env (VITE_STUDIO_* / VITE_APP_NAME) — same
+    // import.meta limitation as supabaseBuildTimeEnv above.
+    "^\\./studioBuildTimeEnv$":
+      "<rootDir>/src/__mocks__/studioBuildTimeEnv.ts",
+    "^.*studio/studioBuildTimeEnv$":
+      "<rootDir>/src/__mocks__/studioBuildTimeEnv.ts",
     "^@google/model-viewer$": "<rootDir>/src/__mocks__/modelViewerMock.ts",
     "^react-markdown$": "<rootDir>/src/__mocks__/reactMarkdownMock.tsx",
     "^remark-gfm$": "<rootDir>/src/__mocks__/emptyModule.ts",

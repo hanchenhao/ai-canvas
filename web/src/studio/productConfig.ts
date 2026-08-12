@@ -1,4 +1,4 @@
-const configuredName = import.meta.env.VITE_APP_NAME?.trim();
+import { studioAppName } from "./studioBuildTimeEnv";
 
 /** Product-facing identity for the self-hosted creator experience. */
-export const PRODUCT_NAME = configuredName || "AI Canvas";
+export const PRODUCT_NAME = studioAppName || "AI Canvas";
