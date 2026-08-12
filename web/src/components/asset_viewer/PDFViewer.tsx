@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
+import { useTranslation } from "react-i18next";
 import { Asset } from "../../stores/ApiTypes";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -158,6 +159,7 @@ const styles = (theme: Theme) =>
 
 const PDFViewer: React.FC<PDFViewerProps> = ({ asset, url }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["common"]);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [, setError] = useState<Error | null>(null);
@@ -224,24 +226,24 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ asset, url }) => {
           onLoadSuccess={onDocumentLoadSuccess}
           onLoadError={onDocumentLoadError}
           loading={<LoadingSpinner />}
-          error={<Text color="error">Failed to load PDF</Text>}
+          error={<Text color="error">{t("common:pdfViewer.failedToLoad")}</Text>}
         >
           {pageComponent}
         </Document>
         <FlexRow className="page-controls" align="center" gap={SPACING.xs} sx={{ position: "sticky", bottom: "1em", background: theme.vars.palette.grey[600], padding: "0.8em 1em", borderRadius: BORDER_RADIUS.sm, zIndex: Z_INDEX.sticky, minWidth: "200px", userSelect: "none" }}>
           <ToolbarIconButton
             icon={<NavigateBefore />}
-            tooltip="Previous page"
+            tooltip={t("common:pdfViewer.previousPage")}
             onClick={goToPrevPage}
             disabled={pageNumber <= 1}
             size="small"
           />
           <Text>
-            Page {pageNumber} of {numPages}
+            {t("common:pdfViewer.pageOf", { current: pageNumber, total: numPages })}
           </Text>
           <ToolbarIconButton
             icon={<NavigateNext />}
-            tooltip="Next page"
+            tooltip={t("common:pdfViewer.nextPage")}
             onClick={goToNextPage}
             disabled={pageNumber >= (numPages || 1)}
             size="small"
@@ -251,24 +253,24 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ asset, url }) => {
       <ActionButtonGroup
         className="zoom-controls"
         spacing={0.25}
-        aria-label="Zoom controls"
+        aria-label={t("common:pdfViewer.zoomControlsAriaLabel")}
         nodrag={false}
       >
         <ToolbarIconButton
           icon={<ZoomIn fontSize="small" />}
-          tooltip="Zoom in"
+          tooltip={t("common:pdfViewer.zoomIn")}
           onClick={zoomIn}
           size="small"
         />
         <ToolbarIconButton
           icon={<ZoomOut fontSize="small" />}
-          tooltip="Zoom out"
+          tooltip={t("common:pdfViewer.zoomOut")}
           onClick={zoomOut}
           size="small"
         />
         <ToolbarIconButton
           icon={<RestartAlt fontSize="small" />}
-          tooltip="Reset zoom"
+          tooltip={t("common:pdfViewer.resetZoom")}
           onClick={resetZoom}
           size="small"
         />
@@ -283,7 +285,7 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ asset, url }) => {
           marks
           density="compact"
           orientation="vertical"
-          aria-label="Page navigation slider"
+          aria-label={t("common:pdfViewer.pageNavigationSliderAriaLabel")}
         />
       </FlexRow>
     </FlexRow>

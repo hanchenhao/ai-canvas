@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useCallback
 } from "react";
+import { useTranslation } from "react-i18next";
 import OnScreenKeyboard from "./OnScreenKeyboard";
 import { ToggleGroup, ToggleOption } from "../../ui_primitives";
 import { Tooltip } from "../../ui_primitives";
@@ -51,6 +52,7 @@ const KeyboardShortcutsView: React.FC<KeyboardShortcutsViewProps> = ({
   imageEditorShortcuts = false
 }) => {
   const [os, setOs] = useState<"mac" | "win">(isMac() ? "mac" : "win");
+  const { t } = useTranslation(["common"]);
   const [layoutName, setLayoutName] = useState<"english" | "german">(() => {
     if (typeof navigator !== "undefined") {
       return navigator.language.startsWith("de") ? "german" : "english";
@@ -355,8 +357,8 @@ const KeyboardShortcutsView: React.FC<KeyboardShortcutsViewProps> = ({
         size="small"
         sx={{ mb: 2 }}
       >
-        <ToggleOption value="mac">macOS</ToggleOption>
-        <ToggleOption value="win">Windows/Linux</ToggleOption>
+        <ToggleOption value="mac">{t("common:shortcuts.osMac")}</ToggleOption>
+        <ToggleOption value="win">{t("common:shortcuts.osWin")}</ToggleOption>
       </ToggleGroup>
 
       <ToggleGroup
@@ -378,13 +380,13 @@ const KeyboardShortcutsView: React.FC<KeyboardShortcutsViewProps> = ({
         sx={{ mb: 2, ml: imageEditorShortcuts ? 2 : 8 }}
       >
         {imageEditorShortcuts ? (
-          <ToggleOption value="image-editor">Image Editor</ToggleOption>
+          <ToggleOption value="image-editor">{t("common:shortcuts.categoryImageEditor")}</ToggleOption>
         ) : (
           <>
-            <ToggleOption value="editor">Editor</ToggleOption>
-            <ToggleOption value="workflow">Workflow</ToggleOption>
-            <ToggleOption value="panel">Panels</ToggleOption>
-            <ToggleOption value="assets">Assets</ToggleOption>
+            <ToggleOption value="editor">{t("common:shortcuts.categoryEditor")}</ToggleOption>
+            <ToggleOption value="workflow">{t("common:shortcuts.categoryWorkflow")}</ToggleOption>
+            <ToggleOption value="panel">{t("common:shortcuts.categoryPanels")}</ToggleOption>
+            <ToggleOption value="assets">{t("common:shortcuts.categoryAssets")}</ToggleOption>
           </>
         )}
       </ToggleGroup>
@@ -424,12 +426,12 @@ const KeyboardShortcutsView: React.FC<KeyboardShortcutsViewProps> = ({
                 <React.Fragment key={idx}>
                   {slug === "switchToTabGroup" ? (
                     <div className="tooltip-span">
-                      <div className="tooltip-title">Switch to Tab</div>
+                      <div className="tooltip-title">{t("common:shortcuts.switchToTabTitle")}</div>
                       <div className="tooltip-key">
                         <kbd>{os === "mac" ? "⌘" : "CTRL"}</kbd>+<kbd>1-9</kbd>
                       </div>
                       <div className="tooltip-description">
-                        Activate workflow tab 1-9
+                        {t("common:shortcuts.switchToTabDescription")}
                       </div>
                     </div>
                   ) : (

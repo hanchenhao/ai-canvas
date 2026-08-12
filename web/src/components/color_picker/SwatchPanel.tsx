@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 import React, { useCallback, useMemo, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import {
@@ -93,6 +94,7 @@ const SwatchPanel: React.FC<SwatchPanelProps> = ({
   onColorSelect
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["common"]);
   const swatchStyles = useMemo(() => styles(theme), [theme]);
   const [presetsMenuAnchor, setPresetsMenuAnchor] = useState<HTMLElement | null>(null);
   const [swatchMenuAnchor, setSwatchMenuAnchor] = useState<{
@@ -203,11 +205,11 @@ const SwatchPanel: React.FC<SwatchPanelProps> = ({
     <FlexColumn css={swatchStyles} gap={2}>
       <FlexColumn className="section" gap={1} fullWidth>
         <FlexRow className="section-header" align="center" justify="space-between" fullWidth>
-          <Text className="section-title">Recent</Text>
+          <Text className="section-title">{t("common:colorPicker.sectionRecent")}</Text>
           {recentColors.length > 0 && (
             <DeleteButton
               onClick={clearRecentColors}
-              tooltip="Clear recent colors"
+              tooltip={t("common:colorPicker.clearRecentTooltip")}
               iconVariant="clear"
               nodrag={false}
             />
@@ -225,14 +227,14 @@ const SwatchPanel: React.FC<SwatchPanelProps> = ({
               />
             ))
           ) : (
-            <Text className="empty-message">No recent colors</Text>
+            <Text className="empty-message">{t("common:colorPicker.noRecentColors")}</Text>
           )}
         </FlexRow>
       </FlexColumn>
 
       <FlexColumn className="section" gap={1} fullWidth>
         <FlexRow className="section-header" align="center" justify="space-between" fullWidth>
-          <Text className="section-title">Saved</Text>
+          <Text className="section-title">{t("common:colorPicker.sectionSaved")}</Text>
         </FlexRow>
         <FlexRow className="color-grid" gap={0.5} wrap fullWidth>
           {swatches.map((swatch) => (
@@ -245,7 +247,7 @@ const SwatchPanel: React.FC<SwatchPanelProps> = ({
               onContextMenu={(e: React.MouseEvent<HTMLDivElement>) => handleSwatchContextMenu(e, swatch.id)}
             />
           ))}
-          <Tooltip title="Save current color">
+          <Tooltip title={t("common:colorPicker.saveCurrentColorTooltip")}>
             <FlexRow
               className="add-swatch-button"
               align="center"
@@ -254,7 +256,7 @@ const SwatchPanel: React.FC<SwatchPanelProps> = ({
               onKeyDown={handleAddSwatchKeyDown}
               role="button"
               tabIndex={0}
-              aria-label="Save current color as swatch"
+              aria-label={t("common:colorPicker.saveCurrentColorAriaLabel")}
             >
               <AddIcon sx={{ fontSize: 16 }} />
             </FlexRow>
@@ -265,7 +267,7 @@ const SwatchPanel: React.FC<SwatchPanelProps> = ({
       {palettes.length > 0 && (
         <FlexColumn className="section" gap={1} fullWidth>
           <FlexRow className="section-header" align="center" justify="space-between" fullWidth>
-            <Text className="section-title">Palettes</Text>
+            <Text className="section-title">{t("common:colorPicker.sectionPalettes")}</Text>
           </FlexRow>
           {palettes.map((palette) => (
             <FlexColumn key={palette.id} className="palette-section" gap={1} fullWidth>
@@ -273,7 +275,7 @@ const SwatchPanel: React.FC<SwatchPanelProps> = ({
                 <Text className="palette-name">{palette.name}</Text>
                 <DeleteButton
                   onClick={handlePaletteRemove(palette.id)}
-                  tooltip={`Remove palette ${palette.name}`}
+                  tooltip={t("common:colorPicker.removePaletteTooltip", { name: palette.name })}
                   iconVariant="clear"
                   nodrag={false}
                 />
@@ -296,13 +298,13 @@ const SwatchPanel: React.FC<SwatchPanelProps> = ({
 
       <FlexColumn className="section" gap={1} fullWidth>
         <FlexRow className="section-header" align="center" justify="space-between" fullWidth>
-          <Text className="section-title">Presets</Text>
+          <Text className="section-title">{t("common:colorPicker.sectionPresets")}</Text>
           <EditorButton
             size="small"
             startIcon={<FolderOpenIcon />}
             onClick={handlePresetsMenuOpen}
           >
-            Load
+            {t("common:colorPicker.loadButton")}
           </EditorButton>
         </FlexRow>
         <EditorMenu
@@ -339,7 +341,7 @@ const SwatchPanel: React.FC<SwatchPanelProps> = ({
         onClose={handleSwatchMenuClose}
       >
         <EditorMenuItem onClick={handleDeleteSwatch}>
-          <DeleteIcon sx={{ fontSize: 16, mr: 1 }} /> Delete
+          <DeleteIcon sx={{ fontSize: 16, mr: 1 }} /> {t("common:button.delete")}
         </EditorMenuItem>
       </EditorMenu>
     </FlexColumn>
