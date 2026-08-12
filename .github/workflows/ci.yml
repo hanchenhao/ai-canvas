@@ -59,7 +59,7 @@ jobs:
         run: |
           npm run test --workspace=packages/config
           npm run test --workspace=packages/storage
-          npm run test --workspace=packages/websocket -- admin-auth.test.ts
+          npm run test --workspace=packages/websocket
 
       - name: Test web product
         run: npm run test --workspace=web -- --runInBand
@@ -67,13 +67,12 @@ jobs:
       - name: Test desktop shell
         run: npm run test --workspace=electron -- --runInBand
 
-      - name: Build creator and admin web apps
+      - name: Build web app
         run: npm run build --workspace=web
 
-      - name: Confirm both production entries exist
+      - name: Confirm production build exists
         run: |
           test -f web/dist/index.html
-          test -f web/dist/admin.html
           if grep -R -E "nodetool\\.ai|github\\.com/nodetool-ai|discord\\.gg/WmQTWZRcYE" web/dist --exclude='*.map'; then
             echo "Upstream product link found in the production build"
             exit 1

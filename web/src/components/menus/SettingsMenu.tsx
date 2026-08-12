@@ -32,6 +32,7 @@ import RemoteSettingsMenuComponent from "./RemoteSettingsMenu";
 import useRemoteSettingsStore from "../../stores/RemoteSettingStore";
 import FoldersSettings from "./FoldersSettingsMenu";
 import AboutMenu from "./AboutMenu";
+import DiagnosticsSection from "./DiagnosticsSection";
 import {
   APIKeysTabContent,
   APIKeysRightSidebar,
@@ -1215,6 +1216,12 @@ function SettingsPage() {
                 {/* About */}
                 <TabPanel value={settingsTab} index={aboutTabIndex}>
                   <AboutMenu />
+                  <Box sx={{ marginTop: theme.spacing(4) }}>
+                    <Text size="big" id="diagnostics" className="settings-heading">
+                      Diagnostics
+                    </Text>
+                    <DiagnosticsSection />
+                  </Box>
                 </TabPanel>
               </div>
 
