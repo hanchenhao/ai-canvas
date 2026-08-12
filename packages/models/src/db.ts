@@ -213,7 +213,7 @@ export async function backupSqliteDb(dbPath: string): Promise<string | null> {
     // Online backup API: consistent snapshot of a live database.
     const source = new Database(dbPath, { readonly: true });
     try {
-      source.backup(backupPath);
+      await source.backup(backupPath);
     } finally {
       source.close();
     }
