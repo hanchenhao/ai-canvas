@@ -28,21 +28,25 @@ export const capabilityForMode = (
   }
 };
 
-/** One-liner shown in the setup banner and passed to the onboarding dialog. */
-export const setupReasonForMode = (mode: MediaMode): string | null => {
+/**
+ * One-liner reason shown in the setup banner. Returns a `chat:` namespace
+ * translation key — callers translate via `useTranslation`. Null when the mode
+ * has no setup copy (modes that are not selectable yet).
+ */
+export const setupReasonKeyForMode = (mode: MediaMode): string | null => {
   switch (mode) {
     case "chat":
-      return "Chat needs a language model. Connect a provider to start.";
+      return "chat:composer.setupChat";
     case "image":
-      return "Generating images needs an image provider. Connect one to continue.";
+      return "chat:composer.setupImage";
     case "image_edit":
-      return "Editing images needs an image provider. Connect one to continue.";
+      return "chat:composer.setupImageEdit";
     case "video":
-      return "Generating videos needs a video provider. Connect one to continue.";
+      return "chat:composer.setupVideo";
     case "image_to_video":
-      return "Animating images needs a video provider. Connect one to continue.";
+      return "chat:composer.setupImageToVideo";
     case "audio":
-      return "Generating speech needs a text-to-speech provider. Connect one to continue.";
+      return "chat:composer.setupAudio";
     default:
       return null;
   }

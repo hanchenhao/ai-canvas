@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import SmartToyOutlinedIcon from "@mui/icons-material/SmartToyOutlined";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
@@ -31,6 +32,7 @@ const fetchWorkspaces = async (): Promise<WorkspaceResponse[]> => {
  * and the global chat share the same selection.
  */
 const PiComposerControls: React.FC<{ disabled?: boolean }> = ({ disabled }) => {
+  const { t } = useTranslation("chat");
   const {
     piModel,
     piModels,
@@ -101,10 +103,10 @@ const PiComposerControls: React.FC<{ disabled?: boolean }> = ({ disabled }) => {
 
   const workspaceLabel =
     workspaces?.find((w) => w.id === piWorkspaceId)?.path?.split("/").pop() ||
-    "Workspace";
+    t("chat:composer.workspace");
   const modelLabel =
     piModels.find((m) => m.id === piModel)?.label ||
-    (piModelsLoading ? "Loading…" : piModel || "Select model");
+    (piModelsLoading ? t("chat:composer.loading") : piModel || t("chat:composer.selectModel"));
 
   return (
     <>
@@ -121,7 +123,7 @@ const PiComposerControls: React.FC<{ disabled?: boolean }> = ({ disabled }) => {
         anchorEl={workspaceAnchor}
         open={!!workspaceAnchor}
         onClose={() => setWorkspaceAnchor(null)}
-        header="Workspace"
+        header={t("chat:composer.workspace")}
         value={piWorkspaceId ?? ""}
         options={workspaceOptions}
         onChange={(id) => {
@@ -143,7 +145,7 @@ const PiComposerControls: React.FC<{ disabled?: boolean }> = ({ disabled }) => {
         anchorEl={modelAnchor}
         open={!!modelAnchor}
         onClose={() => setModelAnchor(null)}
-        header="Pi Model"
+        header={t("chat:composer.piModel")}
         value={piModel}
         options={modelOptions}
         onChange={(id) => setPiModel(id)}

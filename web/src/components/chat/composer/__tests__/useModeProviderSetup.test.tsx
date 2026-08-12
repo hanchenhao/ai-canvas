@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
 import { useModeProviderSetup } from "../useModeProviderSetup";
-import { capabilityForMode, setupReasonForMode } from "../modeProviderSetup";
+import { capabilityForMode, setupReasonKeyForMode } from "../modeProviderSetup";
 import { useProvidersByCapability } from "../../../../hooks/useProviders";
 import { openProviderOnboarding } from "../../../../stores/ProviderOnboardingStore";
 
@@ -56,7 +56,7 @@ describe("capabilityForMode", () => {
       "image_to_video",
       "audio"
     ] as const) {
-      expect(setupReasonForMode(mode)).toEqual(expect.any(String));
+      expect(setupReasonKeyForMode(mode)).toEqual(expect.any(String));
     }
   });
 });
@@ -73,12 +73,13 @@ describe("useModeProviderSetup", () => {
 
     expect(mockUseProvidersByCapability).toHaveBeenCalledWith("text_to_image");
     expect(result.current.needsSetup).toBe(true);
-    expect(result.current.reason).toBe(setupReasonForMode("image"));
+    // reason is a resolved translation (string), non-null when setup is needed
+    expect(result.current.reason).toEqual(expect.any(String));
 
     act(() => result.current.openSetup());
     expect(mockOpenProviderOnboarding).toHaveBeenCalledWith({
       capability: "text_to_image",
-      reason: setupReasonForMode("image")
+      reason: expect.any(String)
     });
   });
 

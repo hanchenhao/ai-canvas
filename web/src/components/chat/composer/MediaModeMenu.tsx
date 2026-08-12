@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -43,7 +44,7 @@ interface MediaModeMenuProps {
 
 interface ModeItem {
   id: MediaMode;
-  label: string;
+  labelKey: string;
   description?: string;
   icon: React.ReactNode;
   enabled: boolean;
@@ -52,61 +53,61 @@ interface ModeItem {
 const MODES: ModeItem[] = [
   {
     id: "chat",
-    label: "Chat",
+    labelKey: "chat:composer.modeChat",
     icon: <ChatBubbleOutlineIcon fontSize="small" />,
     enabled: true
   },
   {
     id: "image",
-    label: "Generate Images",
+    labelKey: "chat:composer.modeGenerateImages",
     icon: <ImageIcon fontSize="small" />,
     enabled: true
   },
   {
     id: "image_edit",
-    label: "Edit Images",
+    labelKey: "chat:composer.modeEditImages",
     icon: <AutoFixHighIcon fontSize="small" />,
     enabled: true
   },
   {
     id: "video",
-    label: "Generate Videos",
+    labelKey: "chat:composer.modeGenerateVideos",
     icon: <MovieIcon fontSize="small" />,
     enabled: true
   },
   {
     id: "image_to_video",
-    label: "Animate Image",
+    labelKey: "chat:composer.modeAnimateImage",
     icon: <MovieFilterIcon fontSize="small" />,
     enabled: true
   },
   {
     id: "audio",
-    label: "Generate Speech",
+    labelKey: "chat:composer.modeGenerateSpeech",
     icon: <RecordVoiceOverIcon fontSize="small" />,
     enabled: true
   },
   {
     id: "audio_to_video",
-    label: "Audio to Video",
+    labelKey: "chat:composer.modeAudioToVideoLabel",
     icon: <GraphicEqIcon fontSize="small" />,
     enabled: false
   },
   {
     id: "retake",
-    label: "Retake",
+    labelKey: "chat:composer.modeRetake",
     icon: <ReplayIcon fontSize="small" />,
     enabled: false
   },
   {
     id: "extend",
-    label: "Extend",
+    labelKey: "chat:composer.modeExtend",
     icon: <TimelineIcon fontSize="small" />,
     enabled: false
   },
   {
     id: "motion_control",
-    label: "Motion Control",
+    labelKey: "chat:composer.modeMotionControl",
     icon: <TuneIcon fontSize="small" />,
     enabled: false
   }
@@ -169,6 +170,7 @@ const MediaModeMenu: React.FC<MediaModeMenuProps> = ({
   onSelectPi
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("chat");
   const cssStyles = useMemo(() => styles(theme), [theme]);
   return (
     <Popover
@@ -183,9 +185,9 @@ const MediaModeMenu: React.FC<MediaModeMenuProps> = ({
         boxShadow: `0 12px 40px ${theme.vars.palette.c_scrim}`
       }}
     >
-      <div css={cssStyles} role="menu" aria-label="Generation mode">
+      <div css={cssStyles} role="menu" aria-label={t("chat:composer.mode")}>
         <Caption className="mode-menu-header" size="small">
-          Mode
+          {t("chat:composer.mode")}
         </Caption>
         {MODES.map((m) => {
           const selected = !piSelected && m.id === value;
@@ -222,7 +224,7 @@ const MediaModeMenu: React.FC<MediaModeMenuProps> = ({
                 sx={{ flex: 1, minWidth: 0 }}
               >
                 <Text size="normal" weight={500} sx={{ color: "inherit" }}>
-                  {m.label}
+                  {t(m.labelKey)}
                 </Text>
                 {m.description && (
                   <Caption size="smaller" color="secondary">
@@ -231,7 +233,7 @@ const MediaModeMenu: React.FC<MediaModeMenuProps> = ({
                 )}
                 {!m.enabled && (
                   <Caption size="smaller" color="secondary">
-                    soon
+                    {t("chat:composer.modeSoon")}
                   </Caption>
                 )}
               </FlexRow>
@@ -247,7 +249,7 @@ const MediaModeMenu: React.FC<MediaModeMenuProps> = ({
         {showPi && onSelectPi && (
           <>
             <Caption className="mode-menu-header" size="small">
-              Agent
+              {t("chat:composer.agent")}
             </Caption>
             <div
               role="menuitemradio"
@@ -271,10 +273,10 @@ const MediaModeMenu: React.FC<MediaModeMenuProps> = ({
               </span>
               <FlexRow gap={0.5} align="center" sx={{ flex: 1, minWidth: 0 }}>
                 <Text size="normal" weight={500} sx={{ color: "inherit" }}>
-                  Pi Agent
+                  {t("chat:composer.piAgent")}
                 </Text>
                 <Caption size="smaller" color="secondary">
-                  workspace
+                  {t("chat:composer.piAgentWorkspace")}
                 </Caption>
               </FlexRow>
               {piSelected && (

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import FileIcon from "@mui/icons-material/InsertDriveFile";
 import { ResponsiveImage } from "../../ui_primitives";
 import { CloseButton } from "../../ui_primitives";
@@ -15,7 +16,9 @@ interface FilePreviewProps {
   onRemove: () => void;
 }
 
-export const FilePreview: React.FC<FilePreviewProps> = React.memo(({ file, onRemove }) => (
+export const FilePreview: React.FC<FilePreviewProps> = React.memo(({ file, onRemove }) => {
+  const { t } = useTranslation("chat");
+  return (
   <div className="file-preview">
     {file.type.startsWith("image/") && isDisplayableImage(file.dataUri) ? (
       <ResponsiveImage
@@ -34,7 +37,7 @@ export const FilePreview: React.FC<FilePreviewProps> = React.memo(({ file, onRem
     )}
     <CloseButton
       onClick={onRemove}
-      tooltip={`Remove ${file.name}`}
+      tooltip={t("chat:composer.removeFile", { name: file.name })}
       buttonSize="small"
       iconVariant="clear"
       nodrag={false}
@@ -54,6 +57,7 @@ export const FilePreview: React.FC<FilePreviewProps> = React.memo(({ file, onRem
       }}
     />
   </div>
-));
+  );
+});
 
 FilePreview.displayName = "FilePreview";

@@ -7,6 +7,7 @@ import React, {
   memo
 } from "react";
 import { useTheme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import { Collapse, BORDER_RADIUS } from "../../ui_primitives";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Caption, FlexRow, ToolbarIconButton } from "../../ui_primitives";
@@ -42,6 +43,7 @@ const ChatComposer: React.FC<ChatComposerProps> = memo(({
   toolbarNode
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("chat");
   const styles = useMemo(() => createStyles(theme), [theme]);
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -162,7 +164,7 @@ const ChatComposer: React.FC<ChatComposerProps> = memo(({
                   mb: 0.5
                 }}
               >
-                Message queued
+                {t("chat:composer.messageQueued")}
               </Caption>
               <Caption
                 sx={{
@@ -177,7 +179,7 @@ const ChatComposer: React.FC<ChatComposerProps> = memo(({
               </Caption>
             </div>
             <ToolbarIconButton
-              tooltip="Send now (interrupts current response)"
+              tooltip={t("chat:composer.sendNowInterrupt")}
               onClick={sendQueuedNow}
               disabled={!onStop}
               icon={<SendIcon sx={{ fontSize: 16 }} />}
@@ -187,7 +189,7 @@ const ChatComposer: React.FC<ChatComposerProps> = memo(({
               }}
             />
             <ToolbarIconButton
-              tooltip="Cancel queued message"
+              tooltip={t("chat:composer.cancelQueued")}
               onClick={cancelQueued}
               icon={<ClearIcon sx={{ fontSize: 16 }} />}
               sx={{
@@ -225,8 +227,8 @@ const ChatComposer: React.FC<ChatComposerProps> = memo(({
             disabled={isInputDisabled}
             placeholder={
               isMobile
-                ? "Type a message..."
-                : "Type a message... (Shift+Enter for new line)"
+                ? t("chat:composer.placeholderMessage")
+                : t("chat:composer.placeholderMessageDesktop")
             }
           />
           <div className="composer-footer">

@@ -80,8 +80,13 @@ export function buildImageModelOptions(
 /**
  * Menu options for the image-to-image edit controls (strength + inference
  * steps), shared by the media chat composer and the editor prompt panels.
+ * The `strengthDescription` / `stepsDescription` callbacks translate the
+ * per-value descriptors ("subtle" / "balanced" / "strong" etc.).
  */
-export function buildImageEditOptions(): {
+export function buildImageEditOptions(
+  strengthDescription?: (s: number) => string,
+  stepsDescription?: (n: number) => string
+): {
   strengthOptions: MediaOption<number>[];
   stepsOptions: MediaOption<number>[];
 } {
@@ -89,13 +94,17 @@ export function buildImageEditOptions(): {
     strengthOptions: IMAGE_EDIT_STRENGTHS.map((s) => ({
       id: s,
       label: s.toFixed(2),
-      description: s <= 0.35 ? "subtle" : s >= 0.85 ? "strong" : "balanced",
+      description:
+        (strengthDescription?.(s) ??
+          (s <= 0.35 ? "subtle" : s >= 0.85 ? "strong" : "balanced")),
       icon: <TuneIcon fontSize="small" />
     })),
     stepsOptions: INFERENCE_STEPS.map((n) => ({
       id: n,
       label: `${n}`,
-      description: n <= 15 ? "fast" : n >= 40 ? "high quality" : "balanced",
+      description:
+        stepsDescription?.(n) ??
+        (n <= 15 ? "fast" : n >= 40 ? "high quality" : "balanced"),
       icon: <LayersIcon fontSize="small" />
     }))
   };

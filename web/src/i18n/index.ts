@@ -15,6 +15,7 @@ import enCanvas from "../locales/en/canvas.json";
 import enJobs from "../locales/en/jobs.json";
 import enCosts from "../locales/en/costs.json";
 import enModels from "../locales/en/models.json";
+import enChat from "../locales/en/chat.json";
 import zhCommon from "../locales/zh-CN/common.json";
 import zhSettings from "../locales/zh-CN/settings.json";
 import zhNodes from "../locales/zh-CN/nodes.json";
@@ -28,6 +29,7 @@ import zhCanvas from "../locales/zh-CN/canvas.json";
 import zhJobs from "../locales/zh-CN/jobs.json";
 import zhCosts from "../locales/zh-CN/costs.json";
 import zhModels from "../locales/zh-CN/models.json";
+import zhChat from "../locales/zh-CN/chat.json";
 
 export const SUPPORTED_LANGUAGES = ["auto", "en", "zh-CN"] as const;
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
@@ -52,7 +54,8 @@ void i18n
         canvas: enCanvas,
         jobs: enJobs,
         costs: enCosts,
-        models: enModels
+        models: enModels,
+        chat: enChat
       },
       "zh-CN": {
         common: zhCommon,
@@ -67,7 +70,8 @@ void i18n
         canvas: zhCanvas,
         jobs: zhJobs,
         costs: zhCosts,
-        models: zhModels
+        models: zhModels,
+        chat: zhChat
       }
     },
     fallbackLng: FALLBACK_LANGUAGE,

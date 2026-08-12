@@ -5,6 +5,7 @@ import React, {
   memo,
   useLayoutEffect
 } from "react";
+import { useTranslation } from "react-i18next";
 import { useAutoFocusEnabled } from "../../../hooks/useAutoFocusEnabled";
 
 interface MessageInputProps {
@@ -24,9 +25,11 @@ export const MessageInput = memo(function MessageInput({
   onChange,
   onKeyDown,
   disabled,
-  placeholder = "Type your message...",
+  placeholder,
   ref
 }: MessageInputProps) {
+  const { t } = useTranslation("chat");
+  const resolvedPlaceholder = placeholder ?? t("chat:composer.placeholderPrompt");
   const internalRef = useRef<HTMLTextAreaElement>(null);
   const textareaRef =
     (ref as React.RefObject<HTMLTextAreaElement>) || internalRef;
@@ -70,13 +73,13 @@ export const MessageInput = memo(function MessageInput({
     <textarea
       className="chat-input"
       id="chat-prompt"
-      aria-label={placeholder}
+      aria-label={resolvedPlaceholder}
       ref={textareaRef}
       value={value}
       onChange={handleChange}
       onKeyDown={onKeyDown}
       disabled={disabled}
-      placeholder={placeholder}
+      placeholder={resolvedPlaceholder}
       autoCorrect="off"
       autoCapitalize="none"
       spellCheck="false"

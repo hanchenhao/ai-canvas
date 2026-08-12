@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import React, { useCallback, memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Tooltip, Text, SPACING, getSpacingPx } from "../../ui_primitives";
 import { SendMessageButton } from "./SendMessageButton";
 import { StopGenerationButton } from "./StopGenerationButton";
@@ -42,6 +43,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = memo(({
 }) => {
   const showStopButton = (isLoading || isStreaming) && onStop;
   const theme = useTheme();
+  const { t } = useTranslation("chat");
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
   const handleStop = useCallback(() => {
@@ -51,7 +53,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = memo(({
   return (
     <div className="chat-action-buttons" css={cssStyles}>
       {showStopButton && (
-        <Tooltip delay={TOOLTIP_ENTER_DELAY} title="Stop Generation">
+        <Tooltip delay={TOOLTIP_ENTER_DELAY} title={t("chat:composer.stopGenerationCaps")}>
           <span className="button-wrapper">
             <StopGenerationButton onClick={handleStop} />
           </span>
@@ -62,8 +64,8 @@ export const ActionButtons: React.FC<ActionButtonsProps> = memo(({
           delay={TOOLTIP_ENTER_DELAY}
           title={
             <div style={{ textAlign: "center" }}>
-              <Text>Send Message</Text>
-              <Text>[Enter]</Text>
+              <Text>{t("chat:composer.sendMessageEnter")}</Text>
+              <Text>{t("chat:composer.enterHint")}</Text>
             </div>
           }
         >

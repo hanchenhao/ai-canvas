@@ -1,4 +1,5 @@
 import type { Ref } from "react";
+import { useTranslation } from "react-i18next";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import { ToolbarIconButton, MOTION } from "../../ui_primitives";
 
@@ -15,12 +16,13 @@ export function SendMessageButton({
   hasContent = true,
   ref
 }: SendMessageButtonProps) {
+  const { t } = useTranslation("chat");
   const isDisabled = disabled || !hasContent;
   return (
     <ToolbarIconButton
       ref={ref}
       icon={<SendRoundedIcon fontSize="small" />}
-      tooltip="Send message"
+      tooltip={t("chat:composer.sendMessage")}
       onClick={onClick}
       disabled={isDisabled}
       nodrag={false}

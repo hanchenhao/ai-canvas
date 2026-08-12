@@ -1,8 +1,9 @@
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useProvidersByCapability } from "../../../hooks/useProviders";
 import { openProviderOnboarding } from "../../../stores/ProviderOnboardingStore";
 import type { MediaMode } from "../../../stores/MediaGenerationStore";
-import { capabilityForMode, setupReasonForMode } from "./modeProviderSetup";
+import { capabilityForMode, setupReasonKeyForMode } from "./modeProviderSetup";
 
 export interface ModeProviderSetup {
   /** True when the mode needs a capability no configured provider serves. */
@@ -24,13 +25,15 @@ export interface ModeProviderSetup {
 export const useModeProviderSetup = (
   mode: MediaMode | null
 ): ModeProviderSetup => {
+  const { t } = useTranslation("chat");
   const capability = mode ? capabilityForMode(mode) : null;
   const { providers, isLoading, error } = useProvidersByCapability(
     capability ?? "generate_message"
   );
   const needsSetup =
     capability !== null && !isLoading && !error && providers.length === 0;
-  const reason = needsSetup && mode ? setupReasonForMode(mode) : null;
+  const reasonKey = needsSetup && mode ? setupReasonKeyForMode(mode) : null;
+  const reason = reasonKey ? t(reasonKey) : null;
 
   const openSetup = useCallback(() => {
     if (!capability) {
@@ -38,9 +41,9 @@ export const useModeProviderSetup = (
     }
     openProviderOnboarding({
       capability,
-      reason: (mode && setupReasonForMode(mode)) ?? undefined
+      reason: (mode && setupReasonKeyForMode(mode) && t(setupReasonKeyForMode(mode)!)) || undefined
     });
-  }, [capability, mode]);
+  }, [capability, mode, t]);
 
   return { needsSetup, reason, openSetup };
 };

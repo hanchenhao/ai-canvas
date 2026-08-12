@@ -30,6 +30,7 @@ import LayersIcon from "@mui/icons-material/Layers";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
 import { FlexRow, Text } from "../../ui_primitives";
+import { useTranslation } from "react-i18next";
 import useGlobalChatStore from "../../../stores/GlobalChatStore";
 import useMediaGenerationStore, {
   IMAGE_VARIATIONS,
@@ -95,8 +96,8 @@ import PermissionSelector from "./PermissionSelector";
 import { useElapsedTime } from "../../../hooks/useElapsedTime";
 import { useAutoFocusEnabled } from "../../../hooks/useAutoFocusEnabled";
 
-function formatElapsed(seconds: number): string {
-  if (seconds < 5) return "Starting…";
+function formatElapsed(seconds: number, startingLabel: string): string {
+  if (seconds < 5) return startingLabel;
   if (seconds < 60) return `${seconds}s`;
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
@@ -185,6 +186,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
   threadId
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("chat");
   const styles = useMemo(() => createMediaComposerStyles(theme), [theme]);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const autoFocusEnabled = useAutoFocusEnabled();
@@ -494,37 +496,37 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
       return placeholderOverride;
     }
     if (isPi) {
-      return "Message the Pi agent — it works in your workspace…";
+      return t("chat:composer.placeholderPi");
     }
     if (mode === "image") {
-      return "Describe the image you want to generate…";
+      return t("chat:composer.placeholderImage");
     }
     if (mode === "image_edit") {
-      return "Describe the edits to apply to the dropped image…";
+      return t("chat:composer.placeholderImageEdit");
     }
     if (mode === "video") {
-      return "Describe your video… like a man drinking a cup of coffee…";
+      return t("chat:composer.placeholderVideo");
     }
     if (mode === "image_to_video") {
-      return "Describe how the dropped image should animate…";
+      return t("chat:composer.placeholderImageToVideo");
     }
     if (mode === "audio") {
-      return "Type the text you want spoken…";
+      return t("chat:composer.placeholderAudio");
     }
     if (mode === "audio_to_video") {
-      return "Describe a scene synced to audio…";
+      return t("chat:composer.placeholderAudioToVideo");
     }
     if (mode === "retake") {
-      return "Refine the last generation…";
+      return t("chat:composer.placeholderRetake");
     }
     if (mode === "extend") {
-      return "Describe how to extend…";
+      return t("chat:composer.placeholderExtend");
     }
     if (mode === "motion_control") {
-      return "Describe the motion…";
+      return t("chat:composer.placeholderMotionControl");
     }
-    return "Continue the thread — or type @ to add an asset…";
-  }, [mode, isPi, placeholderOverride]);
+    return t("chat:composer.placeholderChat");
+  }, [mode, isPi, placeholderOverride, t]);
 
   const isMediaMode =
     mode === "image" ||
@@ -703,17 +705,17 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
 
   const modeLabel = useMemo(() => {
     if (isPi) return "Pi";
-    if (mode === "image") return "Image";
-    if (mode === "image_edit") return "Image Edit";
-    if (mode === "video") return "Video";
-    if (mode === "image_to_video") return "Image→Video";
-    if (mode === "audio") return "Speech";
-    if (mode === "chat") return "Chat";
-    if (mode === "audio_to_video") return "Audio→Video";
-    if (mode === "retake") return "Retake";
-    if (mode === "extend") return "Extend";
-    return "Motion";
-  }, [mode, isPi]);
+    if (mode === "image") return t("chat:composer.modeImage");
+    if (mode === "image_edit") return t("chat:composer.modeImageEdit");
+    if (mode === "video") return t("chat:composer.modeVideo");
+    if (mode === "image_to_video") return t("chat:composer.modeImageToVideo");
+    if (mode === "audio") return t("chat:composer.modeAudio");
+    if (mode === "chat") return t("chat:composer.modeChat");
+    if (mode === "audio_to_video") return t("chat:composer.modeAudioToVideo");
+    if (mode === "retake") return t("chat:composer.modeRetake");
+    if (mode === "extend") return t("chat:composer.modeExtend");
+    return t("chat:composer.modeMotion");
+  }, [mode, isPi, t]);
 
   const handlePickImageModel = useCallback(
     (model: ImageModel) => {
@@ -909,10 +911,10 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
       IMAGE_VARIATIONS.map((n) => ({
         id: n,
         label: `${n}`,
-        description: n === 1 ? "variation" : "variations",
+        description: n === 1 ? t("chat:composer.variation") : t("chat:composer.variations"),
         icon: <AppsIcon fontSize="small" />
       })),
-    []
+    [t]
   );
 
   const voiceOptions = useMemo<MediaOption<string>[]>(() => {
@@ -947,12 +949,29 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
     []
   );
 
-  const { strengthOptions, stepsOptions } = useMemo(buildImageEditOptions, []);
+  const { strengthOptions, stepsOptions } = useMemo(
+    () =>
+      buildImageEditOptions(
+        (s) =>
+          s <= 0.35
+            ? t("chat:composer.strengthSubtle")
+            : s >= 0.85
+              ? t("chat:composer.strengthStrong")
+              : t("chat:composer.strengthBalanced"),
+        (n) =>
+          n <= 15
+            ? t("chat:composer.stepsFast")
+            : n >= 40
+              ? t("chat:composer.stepsHighQuality")
+              : t("chat:composer.stepsBalanced")
+      ),
+    [t]
+  );
 
   const chatProviderLabel = useMemo(() => {
-    if (!isModelSelected(chatModel)) return "Select model";
+    if (!isModelSelected(chatModel)) return t("chat:composer.selectModel");
     return chatModel.name || chatModel.id;
-  }, [chatModel]);
+  }, [chatModel, t]);
 
   const isBusy = isLoading || isStreaming;
   const isDisabled = disabled || isBusy;
@@ -986,7 +1005,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
         <textarea
           ref={textareaRef}
           className="media-compose-input"
-          aria-label="Message prompt"
+          aria-label={t("chat:composer.ariaMessagePrompt")}
           value={prompt}
           onChange={(e) => {
             resetHistoryNavigation();
@@ -1011,9 +1030,11 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
 
         {!providerSetup.needsSetup && needsModel && modelGate && (
           <SelectModelBanner
-            reason={`Pick a ${modelGate.label} model to ${
-              isMediaMode ? "generate" : "send"
-            }.`}
+            reason={
+              isMediaMode
+                ? t("chat:composer.pickModelToGenerate", { label: modelGate.label })
+                : t("chat:composer.pickModelToSend", { label: modelGate.label })
+            }
             onSelect={modelGate.open}
           />
         )}
@@ -1025,7 +1046,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
             sx={{ px: 1, color: "text.secondary" }}
           >
             <Text size="small" color="secondary">
-              Message queued - {queuedMessage.prompt.slice(0, 60)}
+              {t("chat:composer.messageQueuedPrefix")} {queuedMessage.prompt.slice(0, 60)}
             </Text>
             {onStop && (
               <Text
@@ -1042,7 +1063,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 }}
                 onClick={sendQueuedNow}
               >
-                Send now
+                {t("chat:composer.sendNow")}
               </Text>
             )}
             <Text
@@ -1059,7 +1080,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
               }}
               onClick={cancelQueued}
             >
-              Cancel
+              {t("chat:action.cancel")}
             </Text>
           </FlexRow>
         )}
@@ -1120,7 +1141,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
               {onMemoryToggle && (
                 <MediaControlChip
                   icon={<PsychologyOutlinedIcon fontSize="small" />}
-                  title={memoryEnabled ? "Memory: on" : "Memory: off"}
+                  title={memoryEnabled ? t("chat:composer.memoryOn") : t("chat:composer.memoryOff")}
                   active={!!memoryEnabled}
                   showChevron={false}
                   onClick={() => onMemoryToggle(!memoryEnabled)}
@@ -1146,7 +1167,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
               <MediaControlChip
                 ref={imageModelAnchorRef}
                 icon={<AutoAwesomeIcon fontSize="small" />}
-                label={imageParams.model?.name || "Select Model"}
+                label={imageParams.model?.name || t("chat:composer.selectImageModel")}
                 active={imageModelOpen}
                 onClick={() => setImageModelOpen(true)}
                 showChevron={false}
@@ -1171,7 +1192,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 anchorEl={resolutionAnchor}
                 open={!!resolutionAnchor}
                 onClose={() => setResolutionAnchor(null)}
-                header="Image Resolution"
+                header={t("chat:composer.imageResolution")}
                 value={imageParams.resolution}
                 options={imageResolutionOptions}
                 onChange={(r) => setImageParams({ resolution: r })}
@@ -1204,7 +1225,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 anchorEl={variationsAnchor}
                 open={!!variationsAnchor}
                 onClose={() => setVariationsAnchor(null)}
-                header="Number of Variations"
+                header={t("chat:composer.numberOfVariations")}
                 value={imageParams.variations}
                 options={variationsOptions}
                 onChange={(n) => setImageParams({ variations: n })}
@@ -1217,7 +1238,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
               <MediaControlChip
                 ref={videoModelAnchorRef}
                 icon={<MovieIcon fontSize="small" />}
-                label={videoParams.model?.name || "Select Video Model"}
+                label={videoParams.model?.name || t("chat:composer.selectVideoModel")}
                 active={videoModelOpen}
                 onClick={() => setVideoModelOpen(true)}
                 truncate
@@ -1233,7 +1254,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
 
               <MediaControlChip
                 icon={<AccessTimeIcon fontSize="small" />}
-                label={`${videoParams.duration} Sec`}
+                label={`${videoParams.duration} ${t("chat:composer.seconds")}`}
                 active={!!durationAnchor}
                 onClick={(e) => setDurationAnchor(e.currentTarget)}
                 showChevron={false}
@@ -1258,7 +1279,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 anchorEl={resolutionAnchor}
                 open={!!resolutionAnchor}
                 onClose={() => setResolutionAnchor(null)}
-                header="Video Resolution"
+                header={t("chat:composer.videoResolution")}
                 value={videoParams.resolution}
                 options={videoResolutionOptions}
                 onChange={(r) => setVideoParams({ resolution: r })}
@@ -1287,7 +1308,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
               <MediaControlChip
                 ref={imageModelAnchorRef}
                 icon={<AutoFixHighIcon fontSize="small" />}
-                label={imageEditParams.model?.name || "Select Edit Model"}
+                label={imageEditParams.model?.name || t("chat:composer.selectEditModel")}
                 active={imageModelOpen}
                 truncate
                 onClick={() => setImageModelOpen(true)}
@@ -1312,7 +1333,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 anchorEl={resolutionAnchor}
                 open={!!resolutionAnchor}
                 onClose={() => setResolutionAnchor(null)}
-                header="Image Resolution"
+                header={t("chat:composer.imageResolution")}
                 value={imageEditParams.resolution}
                 options={imageEditResolutionOptions}
                 onChange={(r) => setImageEditParams({ resolution: r })}
@@ -1336,7 +1357,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
 
               <MediaControlChip
                 icon={<TuneIcon fontSize="small" />}
-                label={`Strength ${imageEditParams.strength.toFixed(2)}`}
+                label={`${t("chat:composer.strength")} ${imageEditParams.strength.toFixed(2)}`}
                 active={!!strengthAnchor}
                 onClick={(e) => setStrengthAnchor(e.currentTarget)}
                 showChevron={false}
@@ -1345,7 +1366,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 anchorEl={strengthAnchor}
                 open={!!strengthAnchor}
                 onClose={() => setStrengthAnchor(null)}
-                header="Edit Strength"
+                header={t("chat:composer.editStrength")}
                 value={imageEditParams.strength}
                 options={strengthOptions}
                 onChange={(s) => setImageEditParams({ strength: s })}
@@ -1353,7 +1374,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
 
               <MediaControlChip
                 icon={<LayersIcon fontSize="small" />}
-                label={`${imageEditParams.numInferenceSteps} steps`}
+                label={`${imageEditParams.numInferenceSteps} ${t("chat:composer.steps")}`}
                 active={!!stepsAnchor}
                 onClick={(e) => setStepsAnchor(e.currentTarget)}
                 showChevron={false}
@@ -1362,7 +1383,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 anchorEl={stepsAnchor}
                 open={!!stepsAnchor}
                 onClose={() => setStepsAnchor(null)}
-                header="Inference Steps"
+                header={t("chat:composer.inferenceSteps")}
                 value={imageEditParams.numInferenceSteps}
                 options={stepsOptions}
                 onChange={(n) =>
@@ -1381,7 +1402,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 anchorEl={variationsAnchor}
                 open={!!variationsAnchor}
                 onClose={() => setVariationsAnchor(null)}
-                header="Number of Variations"
+                header={t("chat:composer.numberOfVariations")}
                 value={imageEditParams.variations}
                 options={variationsOptions}
                 onChange={(n) => setImageEditParams({ variations: n })}
@@ -1395,7 +1416,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 ref={videoModelAnchorRef}
                 icon={<MovieFilterIcon fontSize="small" />}
                 label={
-                  imageToVideoParams.model?.name || "Select I2V Model"
+                  imageToVideoParams.model?.name || t("chat:composer.selectI2vModel")
                 }
                 active={videoModelOpen}
                 onClick={() => setVideoModelOpen(true)}
@@ -1412,7 +1433,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
 
               <MediaControlChip
                 icon={<AccessTimeIcon fontSize="small" />}
-                label={`${imageToVideoParams.duration} Sec`}
+                label={`${imageToVideoParams.duration} ${t("chat:composer.seconds")}`}
                 active={!!durationAnchor}
                 onClick={(e) => setDurationAnchor(e.currentTarget)}
                 showChevron={false}
@@ -1421,7 +1442,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 anchorEl={durationAnchor}
                 open={!!durationAnchor}
                 onClose={() => setDurationAnchor(null)}
-                header="Clip Duration"
+                header={t("chat:composer.clipDuration")}
                 value={imageToVideoParams.duration}
                 options={durationOptions}
                 onChange={(d) => setImageToVideoParams({ duration: d })}
@@ -1438,7 +1459,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 anchorEl={resolutionAnchor}
                 open={!!resolutionAnchor}
                 onClose={() => setResolutionAnchor(null)}
-                header="Video Resolution"
+                header={t("chat:composer.videoResolution")}
                 value={imageToVideoParams.resolution}
                 options={videoResolutionOptions}
                 onChange={(r) => setImageToVideoParams({ resolution: r })}
@@ -1462,7 +1483,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
 
               <MediaControlChip
                 icon={<LayersIcon fontSize="small" />}
-                label={`${imageToVideoParams.numInferenceSteps} steps`}
+                label={`${imageToVideoParams.numInferenceSteps} ${t("chat:composer.steps")}`}
                 active={!!stepsAnchor}
                 onClick={(e) => setStepsAnchor(e.currentTarget)}
                 showChevron={false}
@@ -1471,7 +1492,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 anchorEl={stepsAnchor}
                 open={!!stepsAnchor}
                 onClose={() => setStepsAnchor(null)}
-                header="Inference Steps"
+                header={t("chat:composer.inferenceSteps")}
                 value={imageToVideoParams.numInferenceSteps}
                 options={stepsOptions}
                 onChange={(n) =>
@@ -1486,7 +1507,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
               <MediaControlChip
                 ref={ttsModelAnchorRef}
                 icon={<GraphicEqIcon fontSize="small" />}
-                label={audioParams.model?.name || "Select TTS Model"}
+                label={audioParams.model?.name || t("chat:composer.selectTtsModel")}
                 active={ttsModelOpen}
                 onClick={() => setTtsModelOpen(true)}
                 showChevron={false}
@@ -1505,7 +1526,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                   audioParams.voice
                     ? audioParams.voice.charAt(0).toUpperCase() +
                       audioParams.voice.slice(1)
-                    : "Voice"
+                    : t("chat:composer.voice")
                 }
                 active={!!voiceAnchor}
                 onClick={(e) => setVoiceAnchor(e.currentTarget)}
@@ -1515,7 +1536,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 anchorEl={voiceAnchor}
                 open={!!voiceAnchor}
                 onClose={() => setVoiceAnchor(null)}
-                header="Voice"
+                header={t("chat:composer.voice")}
                 value={audioParams.voice}
                 options={voiceOptions}
                 onChange={(v) => setAudioParams({ voice: v })}
@@ -1532,7 +1553,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 anchorEl={speedAnchor}
                 open={!!speedAnchor}
                 onClose={() => setSpeedAnchor(null)}
-                header="Speech Rate"
+                header={t("chat:composer.speechRate")}
                 value={audioParams.speed}
                 options={speedOptions}
                 onChange={(s) => setAudioParams({ speed: s })}
@@ -1549,7 +1570,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 anchorEl={audioFormatAnchor}
                 open={!!audioFormatAnchor}
                 onClose={() => setAudioFormatAnchor(null)}
-                header="Audio Format"
+                header={t("chat:composer.audioFormat")}
                 value={audioParams.format}
                 options={audioFormatOptions}
                 onChange={(f) => setAudioParams({ format: f })}
@@ -1576,7 +1597,7 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                     textAlign: "right"
                   }}
                 >
-                  {formatElapsed(elapsed)}
+                  {formatElapsed(elapsed, t("chat:composer.starting"))}
                 </Text>
                 {onStop && <StopGenerationButton onClick={onStop} />}
               </FlexRow>
@@ -1586,9 +1607,9 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
                 className={`media-generate-btn${isMediaMode ? "" : " chat-send"}`}
                 onClick={handleSend}
                 disabled={isDisabled || !canGenerate}
-                aria-label={isMediaMode ? "Generate" : "Send"}
+                aria-label={isMediaMode ? t("chat:composer.generate") : t("chat:composer.send")}
               >
-                {isMediaMode ? "Generate" : <ArrowUpwardIcon fontSize="small" />}
+                {isMediaMode ? t("chat:composer.generate") : <ArrowUpwardIcon fontSize="small" />}
               </button>
             )}
           </div>
