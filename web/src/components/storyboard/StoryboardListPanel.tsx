@@ -14,6 +14,7 @@ import {
   useState
 } from "react";
 import type { FocusEvent, KeyboardEvent, MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import {
@@ -141,6 +142,8 @@ const StoryboardListItem = memo(function StoryboardListItem({
   onCommitRename,
   onCancelRename
 }: StoryboardListItemProps) {
+  const { t } = useTranslation(["storyboard"]);
+  const untitled = t("storyboard:list.untitledStoryboard");
   const handleClick = useCallback(() => onOpen(id, name), [id, name, onOpen]);
   const handleContextMenu = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => onContextMenu(event, id, name),
@@ -211,7 +214,7 @@ const StoryboardListItem = memo(function StoryboardListItem({
             component="span"
             sx={{ fontSize: "var(--fontSizeSmall)", fontWeight: 600 }}
           >
-            {name || "Untitled storyboard"}
+            {name || untitled}
           </TruncatedText>
         </FlexColumn>
       </FlexRow>
@@ -225,18 +228,19 @@ export const CreateStoryboardButton = memo(function CreateStoryboardButton() {
   const setVisibility = usePanelStore((state) => state.setVisibility);
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation(["storyboard"]);
 
   const handleCreate = useCallback(async () => {
     try {
       const created = await createStoryboard.mutateAsync({
-        name: "Untitled storyboard",
+        name: t("storyboard:list.untitledStoryboard"),
         projectId: "default"
       });
       openTab({
         type: "storyboard",
         ref: created.id,
         mode: "edit",
-        title: created.name || "Untitled storyboard"
+        title: created.name || t("storyboard:list.untitledStoryboard")
       });
       if (!location.pathname.startsWith("/workspace")) {
         navigate("/workspace");
@@ -245,12 +249,12 @@ export const CreateStoryboardButton = memo(function CreateStoryboardButton() {
     } catch (error) {
       notifyMutationError("create the storyboard", error);
     }
-  }, [createStoryboard, location.pathname, navigate, openTab, setVisibility]);
+  }, [createStoryboard, location.pathname, navigate, openTab, setVisibility, t]);
 
   return (
-    <Tooltip title="New storyboard" placement="right-start">
+    <Tooltip title={t("storyboard:list.newStoryboard")} placement="right-start">
       <ToolbarIconButton
-        ariaLabel="New storyboard"
+        ariaLabel={t("storyboard:list.newStoryboard")}
         onClick={() => void handleCreate()}
         disabled={createStoryboard.isPending}
         tabIndex={-1}
@@ -262,6 +266,7 @@ export const CreateStoryboardButton = memo(function CreateStoryboardButton() {
 
 const StoryboardListPanel = () => {
   const theme = useTheme();
+  const { t } = useTranslation(["storyboard"]);
   const [filterValue, setFilterValue] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
   const autoFocusEnabled = useAutoFocusEnabled();
@@ -301,14 +306,14 @@ const StoryboardListPanel = () => {
         type: "storyboard",
         ref: id,
         mode: "edit",
-        title: name || "Untitled storyboard"
+        title: name || t("storyboard:list.untitledStoryboard")
       });
       if (!location.pathname.startsWith("/workspace")) {
         navigate("/workspace");
       }
       setVisibility(false);
     },
-    [location.pathname, navigate, openTab, setVisibility]
+    [location.pathname, navigate, openTab, setVisibility, t]
   );
 
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -410,23 +415,23 @@ const StoryboardListPanel = () => {
         open={itemToDelete !== null}
         onClose={() => setItemToDelete(null)}
         onConfirm={handleConfirmDelete}
-        title="Delete storyboard"
-        content={`Delete "${itemToDelete?.name ?? ""}"? This cannot be undone.`}
-        confirmText="Delete"
-        cancelText="Cancel"
+        title={t("storyboard:list.deleteTitle")}
+        content={t("storyboard:list.deleteConfirm", { name: itemToDelete?.name ?? "" })}
+        confirmText={t("storyboard:list.delete")}
+        cancelText={t("storyboard:list.cancel")}
       />
       <div className="storyboard-search">
         <CategorySearchBar
           ref={searchRef}
           value={filterValue}
           onChange={setFilterValue}
-          placeholder="Search storyboards..."
+          placeholder={t("storyboard:list.searchPlaceholder")}
         />
       </div>
 
       {isLoading ? (
         <FlexColumn gap={2} justify="center" align="center" sx={{ flex: 1 }}>
-          <LoadingSpinner size="large" text="Loading storyboards" />
+          <LoadingSpinner size="large" text={t("storyboard:list.loading")} />
         </FlexColumn>
       ) : isError ? (
         <FlexColumn
@@ -437,8 +442,8 @@ const StoryboardListPanel = () => {
         >
           <EmptyState
             variant="error"
-            title="Could not load storyboards"
-            description={error?.message ?? "Try again later."}
+            title={t("storyboard:list.loadFailed")}
+            description={error?.message ?? ""}
           />
         </FlexColumn>
       ) : storyboards.length === 0 ? (
@@ -450,12 +455,12 @@ const StoryboardListPanel = () => {
         >
           <EmptyState
             title={
-              filterValue ? "No matching storyboards" : "No storyboards yet"
+              filterValue ? t("storyboard:list.emptyFiltered") : t("storyboard:list.empty")
             }
             description={
               filterValue
-                ? "Try a different search term."
-                : "Create a new storyboard with the + button above."
+                ? t("storyboard:list.emptyFilteredHint")
+                : t("storyboard:list.emptyHint")
             }
           />
         </FlexColumn>

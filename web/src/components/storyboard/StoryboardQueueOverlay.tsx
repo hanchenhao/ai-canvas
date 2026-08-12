@@ -11,6 +11,7 @@
 import { css, keyframes } from "@emotion/react";
 import { useTheme, type Theme } from "@mui/material/styles";
 import { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Box,
   FlexColumn,
@@ -47,9 +48,9 @@ interface JobRow extends ShotJobState {
   index: number;
 }
 
-const KIND_LABEL: Record<ShotJobKind, string> = {
-  keyframe: "Still",
-  clip: "Clip"
+const KIND_LABEL_KEY: Record<ShotJobKind, string> = {
+  keyframe: "storyboard:queue.still",
+  clip: "storyboard:queue.clip"
 };
 
 const sweep = keyframes`
@@ -169,16 +170,19 @@ const IconButton = ({
   </Tooltip>
 );
 
-const KindTag = ({ kind }: { kind: ShotJobKind }) => (
-  <Text
-    size="smaller"
-    color="secondary"
-    family="secondary"
-    sx={{ flex: "0 0 auto", textTransform: "uppercase", letterSpacing: "0.05em" }}
-  >
-    {KIND_LABEL[kind]}
-  </Text>
-);
+const KindTag = ({ kind }: { kind: ShotJobKind }) => {
+  const { t } = useTranslation(["storyboard"]);
+  return (
+    <Text
+      size="smaller"
+      color="secondary"
+      family="secondary"
+      sx={{ flex: "0 0 auto", textTransform: "uppercase", letterSpacing: "0.05em" }}
+    >
+      {t(KIND_LABEL_KEY[kind])}
+    </Text>
+  );
+};
 
 const RenderingCard = memo(function RenderingCard({
   row,
@@ -187,6 +191,7 @@ const RenderingCard = memo(function RenderingCard({
   row: JobRow;
   onCancel: (shotId: string) => void;
 }) {
+  const { t } = useTranslation(["storyboard"]);
   return (
     <Box sx={cardSx}>
       <FlexRow align="center" gap={1} sx={{ minWidth: 0 }}>
@@ -197,7 +202,7 @@ const RenderingCard = memo(function RenderingCard({
         <KindTag kind={row.kind} />
         <IconButton
           icon={<CloseIcon sx={{ fontSize: 15 }} />}
-          label="Cancel render"
+          label={t("storyboard:queue.cancelRender")}
           onClick={() => onCancel(row.shotId)}
           hoverColor="error.main"
         />
@@ -218,6 +223,7 @@ const EnqueuedCard = memo(function EnqueuedCard({
   position: number;
   onCancel: (shotId: string) => void;
 }) {
+  const { t } = useTranslation(["storyboard"]);
   return (
     <Box sx={cardSx}>
       <FlexRow align="center" gap={1} sx={{ minWidth: 0 }}>
@@ -235,7 +241,7 @@ const EnqueuedCard = memo(function EnqueuedCard({
         <KindTag kind={row.kind} />
         <IconButton
           icon={<CloseIcon sx={{ fontSize: 15 }} />}
-          label="Remove from queue"
+          label={t("storyboard:queue.removeFromQueue")}
           onClick={() => onCancel(row.shotId)}
           hoverColor="error.main"
         />
@@ -305,6 +311,7 @@ const StoryboardQueueOverlay = memo(function StoryboardQueueOverlay({
   boardId
 }: StoryboardQueueOverlayProps) {
   const theme = useTheme();
+  const { t } = useTranslation(["storyboard"]);
   const [expanded, setExpanded] = useState(false);
 
   const shots = useStoryboardStore((state) => state.boards[boardId]?.shots);
@@ -319,8 +326,8 @@ const StoryboardQueueOverlay = memo(function StoryboardQueueOverlay({
         return {
           ...job,
           name: shot
-            ? `${shot.index + 1}. ${shot.slug ?? "Untitled shot"}`
-            : "Shot",
+            ? `${shot.index + 1}. ${shot.slug ?? t("storyboard:shot.untitled")}`
+            : t("storyboard:queue.shot"),
           index: shot?.index ?? Number.MAX_SAFE_INTEGER
         };
       })
@@ -329,7 +336,7 @@ const StoryboardQueueOverlay = memo(function StoryboardQueueOverlay({
       rendering: rows.filter((row) => row.status === "running"),
       queued: rows.filter((row) => row.status === "queued")
     };
-  }, [shotJobs, shots, boardId]);
+  }, [shotJobs, shots, boardId, t]);
 
   const handleCancel = useCallback(async (shotId: string) => {
     const job = useStoryboardGenerationStore.getState().shotJobs[shotId];
@@ -374,13 +381,13 @@ const StoryboardQueueOverlay = memo(function StoryboardQueueOverlay({
               {single
                 ? single.name
                 : rendering.length
-                  ? `${rendering.length} shots rendering`
-                  : "Render queue"}
+                  ? t("storyboard:queue.renderQueue")
+                  : t("storyboard:queue.renderQueue")}
             </Text>
             {single && <KindTag kind={single.kind} />}
             <IconButton
               icon={<KeyboardArrowUpIcon sx={{ fontSize: 18 }} />}
-              label="Expand render queue"
+              label={t("storyboard:queue.expandQueue")}
               onClick={() => setExpanded(true)}
             />
           </FlexRow>
@@ -405,7 +412,7 @@ const StoryboardQueueOverlay = memo(function StoryboardQueueOverlay({
       <FlexRow align="center" gap={1} sx={{ px: 2, py: 1.5, flex: "0 0 auto" }}>
         <TheatersIcon sx={{ fontSize: 17, color: "text.secondary" }} />
         <Text size="normal" weight={600} sx={{ flex: 1 }}>
-          Render queue
+          {t("storyboard:queue.renderQueue")}
         </Text>
         <FlexRow align="center" gap={1.25}>
           <HeaderCount
@@ -419,13 +426,13 @@ const StoryboardQueueOverlay = memo(function StoryboardQueueOverlay({
         </FlexRow>
         <IconButton
           icon={<CloseIcon sx={{ fontSize: 15 }} />}
-          label="Cancel all renders"
+          label={t("storyboard:queue.cancelAll")}
           onClick={handleCancelAll}
           hoverColor="error.main"
         />
         <IconButton
           icon={<RemoveIcon sx={{ fontSize: 16 }} />}
-          label="Collapse render queue"
+          label={t("storyboard:queue.collapseQueue")}
           onClick={() => setExpanded(false)}
         />
       </FlexRow>

@@ -8,12 +8,14 @@ import enNodes from "../locales/en/nodes.json";
 import enErrors from "../locales/en/errors.json";
 import enTimeline from "../locales/en/timeline.json";
 import enSketch from "../locales/en/sketch.json";
+import enStoryboard from "../locales/en/storyboard.json";
 import zhCommon from "../locales/zh-CN/common.json";
 import zhSettings from "../locales/zh-CN/settings.json";
 import zhNodes from "../locales/zh-CN/nodes.json";
 import zhErrors from "../locales/zh-CN/errors.json";
 import zhTimeline from "../locales/zh-CN/timeline.json";
 import zhSketch from "../locales/zh-CN/sketch.json";
+import zhStoryboard from "../locales/zh-CN/storyboard.json";
 
 export const SUPPORTED_LANGUAGES = ["auto", "en", "zh-CN"] as const;
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
@@ -31,7 +33,8 @@ void i18n
         nodes: enNodes,
         errors: enErrors,
         timeline: enTimeline,
-        sketch: enSketch
+        sketch: enSketch,
+        storyboard: enStoryboard
       },
       "zh-CN": {
         common: zhCommon,
@@ -39,7 +42,8 @@ void i18n
         nodes: zhNodes,
         errors: zhErrors,
         timeline: zhTimeline,
-        sketch: zhSketch
+        sketch: zhSketch,
+        storyboard: zhStoryboard
       }
     },
     fallbackLng: FALLBACK_LANGUAGE,

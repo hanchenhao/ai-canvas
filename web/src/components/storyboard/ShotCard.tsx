@@ -11,6 +11,7 @@
  */
 
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -57,15 +58,15 @@ interface ShotCardProps {
   isLast?: boolean;
 }
 
-const STATUS_META: Record<ShotStatus, { status: StatusType; label: string; pulse?: boolean }> = {
-  planned: { status: "default", label: "Planned" },
-  keyframe_generating: { status: "pending", label: "Generating still…", pulse: true },
-  keyframe_ready: { status: "info", label: "Still ready" },
+const STATUS_META: Record<ShotStatus, { status: StatusType; labelKey: string; pulse?: boolean }> = {
+  planned: { status: "default", labelKey: "storyboard:shot.planned" },
+  keyframe_generating: { status: "pending", labelKey: "storyboard:shot.keyframeGenerating", pulse: true },
+  keyframe_ready: { status: "info", labelKey: "storyboard:shot.keyframeReady" },
   // Legacy status from the removed approval step; same meaning as a ready still.
-  approved: { status: "info", label: "Still ready" },
-  clip_generating: { status: "pending", label: "Rendering…", pulse: true },
-  rendered: { status: "success", label: "Rendered" },
-  failed: { status: "error", label: "Failed" }
+  approved: { status: "info", labelKey: "storyboard:shot.keyframeReady" },
+  clip_generating: { status: "pending", labelKey: "storyboard:shot.clipGenerating", pulse: true },
+  rendered: { status: "success", labelKey: "storyboard:shot.rendered" },
+  failed: { status: "error", labelKey: "storyboard:shot.failed" }
 };
 
 const styles = (theme: Theme) =>
@@ -168,6 +169,7 @@ const ShotCardInner: React.FC<ShotCardProps> = ({
   isLast
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["storyboard"]);
   const cardStyles = useMemo(() => styles(theme), [theme]);
   const toggleShotEntity = useStoryboardStore((state) => state.toggleShotEntity);
   const moveShot = useStoryboardStore((state) => state.moveShot);
@@ -197,7 +199,7 @@ const ShotCardInner: React.FC<ShotCardProps> = ({
     shot.status === "keyframe_generating" || shot.status === "clip_generating";
   const camera = cameraLine(shot);
   const clipUri = shot.clip?.uri;
-  const shotName = `${shot.index + 1}. ${shot.slug ?? "Untitled shot"}`;
+  const shotName = `${shot.index + 1}. ${shot.slug ?? t("storyboard:shot.untitled")}`;
 
   const handleGenerateStill = useCallback(() => {
     void generateKeyframe(boardId, shot);
@@ -243,7 +245,7 @@ const ShotCardInner: React.FC<ShotCardProps> = ({
           <ImageRefPreview
             value={shot.keyframe}
             placeholder={
-              <Caption className="placeholder">No still yet</Caption>
+              <Caption className="placeholder">{t("storyboard:shot.noStillYet")}</Caption>
             }
           />
         )}
@@ -252,8 +254,8 @@ const ShotCardInner: React.FC<ShotCardProps> = ({
             <span className="spark">✦</span>
             <Caption className="conjure-label">
               {shot.status === "clip_generating"
-                ? "Rendering clip…"
-                : "Conjuring still…"}
+                ? t("storyboard:shot.renderingClip")
+                : t("storyboard:shot.conjuringStill")}
             </Caption>
           </div>
         )}
@@ -274,7 +276,7 @@ const ShotCardInner: React.FC<ShotCardProps> = ({
             )}
             <StatusIndicator
               status={meta.status}
-              label={meta.label}
+              label={t(meta.labelKey)}
               pulse={meta.pulse}
             />
             {!readOnly && (
@@ -287,22 +289,22 @@ const ShotCardInner: React.FC<ShotCardProps> = ({
               >
                 <ToolbarIconButton
                   icon={<ArrowUpwardIcon sx={{ fontSize: 16 }} />}
-                  tooltip="Move up"
-                  ariaLabel="Move shot up"
+                  tooltip={t("storyboard:shot.moveUp")}
+                  ariaLabel={t("storyboard:shot.moveShotUp")}
                   onClick={handleMoveUp}
                   disabled={isFirst}
                 />
                 <ToolbarIconButton
                   icon={<ArrowDownwardIcon sx={{ fontSize: 16 }} />}
-                  tooltip="Move down"
-                  ariaLabel="Move shot down"
+                  tooltip={t("storyboard:shot.moveDown")}
+                  ariaLabel={t("storyboard:shot.moveShotDown")}
                   onClick={handleMoveDown}
                   disabled={isLast}
                 />
                 <ToolbarIconButton
                   icon={<DeleteOutlineIcon sx={{ fontSize: 16 }} />}
-                  tooltip="Delete shot"
-                  ariaLabel="Delete shot"
+                  tooltip={t("storyboard:shot.deleteShot")}
+                  ariaLabel={t("storyboard:shot.deleteShot")}
                   variant="error"
                   onClick={() => setConfirmDelete(true)}
                   disabled={isGenerating}
@@ -330,7 +332,7 @@ const ShotCardInner: React.FC<ShotCardProps> = ({
                 <Chip
                   key={entity.id}
                   compact
-                  label={entity.name || "Untitled"}
+                  label={entity.name || t("storyboard:shot.untitledEntity")}
                   color={applied ? ENTITY_KIND_COLOR[entity.kind] : "default"}
                   variant={applied ? "filled" : "outlined"}
                   sx={{
@@ -339,8 +341,8 @@ const ShotCardInner: React.FC<ShotCardProps> = ({
                   }}
                   title={
                     applied
-                      ? `${entity.descriptor || entity.name} — click to exclude from this shot`
-                      : `Click to include ${entity.name} in this shot`
+                      ? t("storyboard:shot.entityExcludeTitle", { name: entity.descriptor || entity.name })
+                      : t("storyboard:shot.entityIncludeTitle", { name: entity.name })
                   }
                   onClick={
                     readOnly
@@ -362,25 +364,25 @@ const ShotCardInner: React.FC<ShotCardProps> = ({
               onClick={handleGenerateStill}
               disabled={isGenerating}
             >
-              {shot.keyframe ? "New still" : "Generate still"}
+              {shot.keyframe ? t("storyboard:shot.newStill") : t("storyboard:shot.generateStill")}
             </EditorButton>
             <EditorButton
               onClick={handleGenerateClip}
               disabled={isGenerating || !shot.keyframe}
               title={
                 shot.keyframe
-                  ? "Animate the selected still into a clip"
-                  : "Generate a still first"
+                  ? t("storyboard:shot.animateStillHint")
+                  : t("storyboard:shot.generateStillFirstHint")
               }
             >
-              {shot.clip ? "New clip" : "Generate clip"}
+              {shot.clip ? t("storyboard:shot.newClip") : t("storyboard:shot.generateClip")}
             </EditorButton>
             {shot.clip && (
               <EditorButton
                 onClick={() => setReviseOpen(true)}
                 disabled={isGenerating}
               >
-                Revise clip
+                {t("storyboard:shot.reviseClip")}
               </EditorButton>
             )}
           </FlexRow>
@@ -390,19 +392,18 @@ const ShotCardInner: React.FC<ShotCardProps> = ({
       <Dialog
         open={reviseOpen}
         onClose={() => setReviseOpen(false)}
-        title="Revise clip"
+        title={t("storyboard:shot.reviseClip")}
         onConfirm={handleReviseConfirm}
-        confirmText="Revise"
+        confirmText={t("storyboard:shot.revise")}
         confirmDisabled={reviseText.trim().length === 0}
       >
         <FlexColumn gap={1}>
           <Caption color="secondary">
-            Describe the change to make. The current clip is re-rendered with
-            your note applied.
+            {t("storyboard:shot.reviseCaption")}
           </Caption>
           <TextInput
             value={reviseText}
-            placeholder="e.g. make it darker, add rain"
+            placeholder={t("storyboard:shot.revisePlaceholder")}
             onChange={(e) => setReviseText(e.target.value)}
             multiline
             rows={3}
@@ -414,13 +415,13 @@ const ShotCardInner: React.FC<ShotCardProps> = ({
       <Dialog
         open={confirmDelete}
         onClose={() => setConfirmDelete(false)}
-        title="Delete shot?"
+        title={t("storyboard:shot.deleteTitle")}
         onConfirm={handleDelete}
-        confirmText="Delete"
+        confirmText={t("storyboard:shot.delete")}
         destructive
       >
         <Text size="small">
-          {`Remove “${shotName}” from the board. Generated stills and clips stay in your asset library.`}
+          {t("storyboard:shot.deleteConfirm", { name: shotName })}
         </Text>
       </Dialog>
     </Card>

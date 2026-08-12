@@ -12,6 +12,7 @@
  */
 
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -96,6 +97,7 @@ const ShotTakesGalleryInner: React.FC<ShotTakesGalleryProps> = ({
   readOnly
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["storyboard"]);
   const [expanded, setExpanded] = useState(false);
   const selectKeyframeVersion = useStoryboardStore(
     (state) => state.selectKeyframeVersion
@@ -149,8 +151,8 @@ const ShotTakesGalleryInner: React.FC<ShotTakesGalleryProps> = ({
   }
 
   const countLabel = [
-    stills.length > 1 ? `${stills.length} stills` : null,
-    clips.length > 1 ? `${clips.length} clips` : null
+    stills.length > 1 ? t("storyboard:shot.stillsCount", { count: stills.length }) : null,
+    clips.length > 1 ? t("storyboard:shot.clipsCount", { count: clips.length }) : null
   ]
     .filter((p): p is string => p !== null)
     .join(" · ");
@@ -158,9 +160,9 @@ const ShotTakesGalleryInner: React.FC<ShotTakesGalleryProps> = ({
   return (
     <div css={styles(theme)} className="takes">
       <FlexRow align="center" justify="space-between" gap={1}>
-        <Caption className="takes-label">{`Takes — ${countLabel}`}</Caption>
+        <Caption className="takes-label">{t("storyboard:shot.takes", { count: countLabel })}</Caption>
         <EditorButton onClick={handleToggle}>
-          {expanded ? "Hide takes" : "View takes"}
+          {expanded ? t("storyboard:shot.hideTakes") : t("storyboard:shot.viewTakes")}
         </EditorButton>
       </FlexRow>
 
@@ -171,7 +173,7 @@ const ShotTakesGalleryInner: React.FC<ShotTakesGalleryProps> = ({
               key={versionKey(still, i)}
               type="button"
               className="take-thumb"
-              aria-label={`Use still ${i + 1}`}
+              aria-label={t("storyboard:shot.useStill", { number: i + 1 })}
               aria-pressed={i === selectedStill}
               disabled={readOnly}
               onClick={() => handleSelectStill(i)}

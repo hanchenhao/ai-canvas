@@ -9,6 +9,7 @@
  */
 
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -83,6 +84,7 @@ const StoryboardSidebarInner: React.FC<StoryboardSidebarProps> = ({
   activeBoardId
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["storyboard"]);
   const { data: boards, isLoading } = useStoryboards();
   const createStoryboard = useCreateStoryboard();
   const deleteStoryboard = useDeleteStoryboard();
@@ -101,23 +103,23 @@ const StoryboardSidebarInner: React.FC<StoryboardSidebarProps> = ({
         type: "storyboard",
         ref: id,
         mode: "edit",
-        title: title || "Untitled storyboard"
+        title: title || t("storyboard:list.untitledStoryboard")
       });
     },
-    [openTab]
+    [openTab, t]
   );
 
   const newBoard = useCallback(async () => {
     try {
       const created = await createStoryboard.mutateAsync({
-        name: "Untitled storyboard",
+        name: t("storyboard:list.untitledStoryboard"),
         projectId: "default"
       });
       openBoard(created.id, created.name);
     } catch (error) {
       notifyMutationError("create the storyboard", error);
     }
-  }, [createStoryboard, openBoard]);
+  }, [createStoryboard, openBoard, t]);
 
   const confirmDelete = useCallback(() => {
     if (!pendingDelete) {
@@ -145,11 +147,11 @@ const StoryboardSidebarInner: React.FC<StoryboardSidebarProps> = ({
     <div css={styles(theme)} className="storyboard-sidebar">
       <FlexRow align="center" justify="space-between">
         <Text size="smaller" className="sidebar-title">
-          Storyboards
+          {t("storyboard:list.newStoryboard")}
         </Text>
         <ToolbarIconButton
           icon={<AddRoundedIcon fontSize="small" />}
-          tooltip="New storyboard"
+          tooltip={t("storyboard:list.newStoryboard")}
           onClick={() => void newBoard()}
         />
       </FlexRow>
@@ -178,7 +180,7 @@ const StoryboardSidebarInner: React.FC<StoryboardSidebarProps> = ({
             >
               <FlexColumn gap={0} sx={{ minWidth: 0 }}>
                 <Text size="small" truncate>
-                  {board.name || "Untitled storyboard"}
+                  {board.name || t("storyboard:list.untitledStoryboard")}
                 </Text>
                 <Caption size="smaller" color="secondary">
                   {board.shotCount > 0
@@ -189,12 +191,12 @@ const StoryboardSidebarInner: React.FC<StoryboardSidebarProps> = ({
               <ToolbarIconButton
                 className="delete-button"
                 icon={<DeleteOutlineRoundedIcon fontSize="small" />}
-                tooltip="Delete storyboard"
+                tooltip={t("storyboard:list.deleteTitle")}
                 onClick={(e) => {
                   e.stopPropagation();
                   setPendingDelete({
                     id: board.id,
-                    name: board.name || "Untitled storyboard"
+                    name: board.name || t("storyboard:list.untitledStoryboard")
                   });
                 }}
               />
@@ -202,7 +204,7 @@ const StoryboardSidebarInner: React.FC<StoryboardSidebarProps> = ({
           ))}
           {(boards ?? []).length === 0 && (
             <Caption size="smaller" color="secondary">
-              No storyboards yet.
+              {t("storyboard:list.empty")}
             </Caption>
           )}
         </FlexColumn>
@@ -211,13 +213,13 @@ const StoryboardSidebarInner: React.FC<StoryboardSidebarProps> = ({
       <Dialog
         open={pendingDelete !== null}
         onClose={() => setPendingDelete(null)}
-        title="Delete storyboard?"
+        title={t("storyboard:list.deleteTitle")}
         onConfirm={confirmDelete}
-        confirmText="Delete"
+        confirmText={t("storyboard:list.delete")}
         destructive
       >
         <Text size="small">
-          {`Delete “${pendingDelete?.name ?? ""}” and its shots. Generated stills and clips stay in your asset library.`}
+          {t("storyboard:list.deleteConfirm", { name: pendingDelete?.name ?? "" })}
         </Text>
       </Dialog>
     </div>

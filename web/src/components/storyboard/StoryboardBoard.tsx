@@ -9,6 +9,7 @@
  */
 
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -71,11 +72,11 @@ interface StoryboardBoardProps {
 }
 
 const ASPECT_OPTIONS = [
-  { value: "16:9", label: "16:9 — Widescreen" },
-  { value: "9:16", label: "9:16 — Vertical" },
-  { value: "1:1", label: "1:1 — Square" },
-  { value: "4:3", label: "4:3 — Classic" },
-  { value: "21:9", label: "21:9 — Cinematic" }
+  { value: "16:9", labelKey: "storyboard:aspect.widescreen" },
+  { value: "9:16", labelKey: "storyboard:aspect.vertical" },
+  { value: "1:1", labelKey: "storyboard:aspect.square" },
+  { value: "4:3", labelKey: "storyboard:aspect.classic" },
+  { value: "21:9", labelKey: "storyboard:aspect.cinematic" }
 ] as const;
 
 const SHOT_COUNT_OPTIONS = [3, 4, 5, 6, 8, 10, 12].map((n) => ({
@@ -210,7 +211,12 @@ const StoryboardBoardInner: React.FC<StoryboardBoardProps> = ({
   assembleError
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation(["storyboard"]);
   const boardStyles = useMemo(() => styles(theme), [theme]);
+  const aspectOptions = useMemo(
+    () => ASPECT_OPTIONS.map((o) => ({ value: o.value, label: t(o.labelKey) })),
+    [t]
+  );
   const {
     title,
     brief,
@@ -315,31 +321,31 @@ const StoryboardBoardInner: React.FC<StoryboardBoardProps> = ({
         <Panel padding="normal" className="header-fields">
           <FlexColumn gap={4}>
             <FormGrid>
-              <FormSection label="Screenplay">
-                <FormField label="Title">
+              <FormSection label={t("storyboard:board.screenplay")}>
+                <FormField label={t("storyboard:board.title")}>
                   <TextInput
                     value={title}
-                    placeholder="Untitled film"
+                    placeholder={t("storyboard:board.titlePlaceholder")}
                     onChange={(e) => setTitle(boardId, e.target.value)}
                   />
                 </FormField>
-                <FormField label="Brief">
+                <FormField label={t("storyboard:board.brief")}>
                   <TextInput
                     value={brief}
-                    placeholder="Your film in one or two sentences"
+                    placeholder={t("storyboard:board.briefPlaceholder")}
                     onChange={(e) => setBrief(boardId, e.target.value)}
                     multiline
                     rows={3}
                   />
                 </FormField>
-                <FormField label="Style">
+                <FormField label={t("storyboard:board.style")}>
                   <TextInput
                     value={style}
-                    placeholder="Palette, light, lens, texture"
+                    placeholder={t("storyboard:board.stylePlaceholder")}
                     onChange={(e) => setStyle(boardId, e.target.value)}
                   />
                 </FormField>
-                <FormField label="Entities">
+                <FormField label={t("storyboard:board.entities")}>
                   <StoryboardEntitiesField
                     boardId={boardId}
                     entityIds={entityIds}
@@ -347,18 +353,18 @@ const StoryboardBoardInner: React.FC<StoryboardBoardProps> = ({
                 </FormField>
               </FormSection>
 
-              <FormSection label="Direction" className="settings">
+              <FormSection label={t("storyboard:board.direction")} className="settings">
                 {/* The Studio shell pins the director model — a beginner
                     picks what the film looks like, not which LLM writes it. */}
                 {!inStudio && (
-                  <FormField label="Screenplay model" sx={modelFieldSx}>
+                  <FormField label={t("storyboard:board.screenplayModel")} sx={modelFieldSx}>
                     <LanguageModelSelect
                       value={directorModel?.id ?? ""}
                       onChange={(value) => setDirectorModel(boardId, value)}
                     />
                   </FormField>
                 )}
-                <FormField label="Still model" sx={modelFieldSx}>
+                <FormField label={t("storyboard:board.stillModel")} sx={modelFieldSx}>
                   <ImageModelSelect
                     value={imageModel?.id ?? ""}
                     task={STILL_MODEL_TASKS}
@@ -366,29 +372,28 @@ const StoryboardBoardInner: React.FC<StoryboardBoardProps> = ({
                   />
                   {entitiesNeedEditModel && (
                     <Text size="small" color="warning">
-                      Entities carry reference images, but this model only
-                      takes text. Pick an image-to-image model to use them.
+                      {t("storyboard:board.entitiesNeedEditModel")}
                     </Text>
                   )}
                 </FormField>
-                <FormField label="Clip model" sx={modelFieldSx}>
+                <FormField label={t("storyboard:board.clipModel")} sx={modelFieldSx}>
                   <VideoModelSelect
                     value={videoModel?.id ?? ""}
                     task="image_to_video"
                     onChange={(value) => setVideoModel(boardId, value)}
                   />
                 </FormField>
-                <FormField label="Aspect ratio">
+                <FormField label={t("storyboard:board.aspectRatio")}>
                   <SelectField
-                    label="Aspect ratio"
+                    label={t("storyboard:board.aspectRatio")}
                     value={aspectRatio}
                     onChange={(value) => setAspectRatio(boardId, value)}
-                    options={ASPECT_OPTIONS}
+                    options={aspectOptions}
                   />
                 </FormField>
-                <FormField label="Shots">
+                <FormField label={t("storyboard:board.shots")}>
                   <SelectField
-                    label="Shots"
+                    label={t("storyboard:board.shots")}
                     value={shotCount}
                     onChange={(value) => setShotCount(Number(value))}
                     options={SHOT_COUNT_OPTIONS}
@@ -404,8 +409,8 @@ const StoryboardBoardInner: React.FC<StoryboardBoardProps> = ({
                 {directError ??
                   assembleError ??
                   (hasShots
-                    ? "Re-directing rewrites the screenplay and replaces every shot."
-                    : "Direct writes the screenplay and seeds your shots.")}
+                    ? t("storyboard:board.redirectHint")
+                    : t("storyboard:board.directHint"))}
               </Text>
               <FlexRow gap={2} align="center">
                 <UndoRedoButtons
@@ -413,29 +418,33 @@ const StoryboardBoardInner: React.FC<StoryboardBoardProps> = ({
                   canRedo={canRedo}
                   onUndo={onUndo}
                   onRedo={onRedo}
-                  undoTooltip="Undo (⌘Z)"
-                  redoTooltip="Redo (⌘⇧Z)"
+                  undoTooltip={t("storyboard:board.undo")}
+                  redoTooltip={t("storyboard:board.redo")}
                 />
                 <EditorButton
                   variant="outlined"
                   onClick={handleGenerateAllStills}
                   disabled={pendingStills.length === 0 || directing}
                 >
-                  {`✦ Generate all stills${pendingStills.length > 0 ? ` (${pendingStills.length})` : ""}`}
+                  {pendingStills.length > 0
+                    ? t("storyboard:board.generateAllStillsCount", { count: pendingStills.length })
+                    : t("storyboard:board.generateAllStills")}
                 </EditorButton>
                 <EditorButton
                   variant="outlined"
                   onClick={handleGenerateAllClips}
                   disabled={pendingClips.length === 0 || directing}
                 >
-                  {`✦ Generate all clips${pendingClips.length > 0 ? ` (${pendingClips.length})` : ""}`}
+                  {pendingClips.length > 0
+                    ? t("storyboard:board.generateAllClipsCount", { count: pendingClips.length })
+                    : t("storyboard:board.generateAllClips")}
                 </EditorButton>
                 <EditorButton
                   variant="outlined"
                   onClick={onAssemble}
                   disabled={!onAssemble || assembling || !hasRenderedShot}
                 >
-                  {assembling ? "Assembling…" : "Assemble timeline"}
+                  {assembling ? t("storyboard:board.assembling") : t("storyboard:board.assembleTimeline")}
                 </EditorButton>
                 <EditorButton
                   variant="contained"
@@ -443,7 +452,7 @@ const StoryboardBoardInner: React.FC<StoryboardBoardProps> = ({
                   onClick={handleDirect}
                   disabled={!onDirect || directing}
                 >
-                  {directing ? "Directing…" : hasShots ? "Re-direct" : "Direct"}
+                  {directing ? t("storyboard:board.directing") : hasShots ? t("storyboard:board.reDirect") : t("storyboard:board.direct")}
                 </EditorButton>
               </FlexRow>
             </FlexRow>
@@ -454,18 +463,17 @@ const StoryboardBoardInner: React.FC<StoryboardBoardProps> = ({
       <Dialog
         open={confirmRedirect}
         onClose={() => setConfirmRedirect(false)}
-        title="Re-direct this storyboard?"
+        title={t("storyboard:board.redirectTitle")}
         onConfirm={handleConfirmRedirect}
-        confirmText="Re-direct"
+        confirmText={t("storyboard:board.redirectConfirm")}
         destructive
       >
         <FlexColumn gap={1}>
           <Text size="small">
-            {`Directing writes a new screenplay and replaces all ${shots.length} current shot${shots.length === 1 ? "" : "s"}.`}
+            {t("storyboard:board.redirectDescription", { count: shots.length })}
           </Text>
           <Caption color="secondary">
-            Generated stills and clips stay in your asset library, but the
-            shots on this board are rebuilt from scratch.
+            {t("storyboard:board.redirectNote")}
           </Caption>
         </FlexColumn>
       </Dialog>
@@ -473,7 +481,7 @@ const StoryboardBoardInner: React.FC<StoryboardBoardProps> = ({
       {directing ? (
         <>
           <Text size="small" className="directing-line">
-            ✦ The director is writing your screenplay…
+            {t("storyboard:board.directingLine")}
           </Text>
           <div className="shot-list">
             {Array.from({ length: shotCount }).map((_, i) => (
@@ -497,17 +505,17 @@ const StoryboardBoardInner: React.FC<StoryboardBoardProps> = ({
       ) : shots.length === 0 ? (
         <EmptyState
           variant="empty"
-          title="No shots yet"
+          title={t("storyboard:board.noShots")}
           description={
             readOnly
-              ? "This storyboard has no shots."
-              : "Write a brief and press Direct to generate a screenplay of shots."
+              ? t("storyboard:board.noShotsReadOnly")
+              : t("storyboard:board.noShotsHint")
           }
         />
       ) : (
         <>
           <Text size="small" color="secondary">
-            {`${shots.length} shot${shots.length === 1 ? "" : "s"}`}
+            {t("storyboard:board.shotsCount", { count: shots.length })}
           </Text>
           <div className="shot-list">
             {shots.map((shot, i) => (
