@@ -64174,7 +64174,7 @@
         "description": "控制 the 'conservativeness' of the sampling 处理. Higher 温度 means more diversity."
       },
       "top_k": {
-        "description": "Reduces sampling to the k most likely tokens."
+        "description": "将采样限制为最可能的 k 个 token"
       },
       "top_p": {
         "description": "Reduces sampling to tokens with cumulative probability of p. When set to `0` (默认), top_k sampling is used."
@@ -64237,7 +64237,7 @@
         "description": "音频 格式 for the 输出"
       },
       "audio_url": {
-        "description": "URL of the song to cover. Must be a publicly accessible MP3 or WAV file."
+        "description": "要翻唱的歌曲 URL。必须是可公开访问的 MP3 或 WAV 文件"
       },
       "bitrate": {
         "description": "Bitrate for the 生成 音乐"
@@ -64312,7 +64312,7 @@
         "description": "URL to download a custom RVC model. If provided, the model will be downloaded (if it doesn't already exist) and used for prediction, regardless of the 'rvc_model' 值."
       },
       "filter_radius": {
-        "description": "If >=3: apply median filtering median filtering to the harvested pitch results."
+        "description": "如果 >=3：对提取的音高结果应用中值滤波"
       },
       "index_rate": {
         "description": "控制 how much of the AI's accent to leave in the vocals."
@@ -64333,22 +64333,22 @@
         "description": "Change pitch/key of 背景音乐, backup vocals and AI vocals in semitones. Reduces sound 质量 slightly."
       },
       "pitch_detection_algorithm": {
-        "description": "Best option is rmvpe (clarity in vocals), then mangio-crepe (smoother vocals)."
+        "description": "最佳选项是 rmvpe（人声更清晰），其次是 mangio-crepe（人声更平滑）"
       },
       "protect": {
         "description": "控制 how much of the original vocals' breath and voiceless consonants to leave in the AI vocals. Set 0.5 to 禁用."
       },
       "reverb_damping": {
-        "description": "Absorption of high frequencies in the reverb."
+        "description": "混响中高频的吸收程度"
       },
       "reverb_dryness": {
-        "description": "Level of AI vocals without reverb."
+        "description": "不带混响的 AI 人声音量"
       },
       "reverb_size": {
-        "description": "The larger the room, the longer the reverb time."
+        "description": "房间越大，混响时间越长"
       },
       "reverb_wetness": {
-        "description": "Level of AI vocals with reverb."
+        "description": "带混响的 AI 人声音量"
       },
       "rms_mix_rate": {
         "description": "控制 how much to use the original vocal's loudness (0) or a fixed loudness (1)."
@@ -64393,13 +64393,13 @@
         "description": "File 格式 for the 生成 音频. Choose mp3 for general use, wav/flac for lossless, or pcm for raw bytes."
       },
       "bitrate": {
-        "description": "MP3 bitrate in bits per second. Only used when audio_format is mp3."
+        "description": "MP3 比特率（比特每秒）。仅在 audio_format 为 mp3 时使用"
       },
       "channel": {
         "description": "mono for 1 channel (默认), 立体声 for 2 channels."
       },
       "emotion": {
-        "description": "Desired delivery style. Use auto to let MiniMax choose, or pick a specific emotion."
+        "description": "所需的表达风格。使用 auto 让 MiniMax 选择，或指定具体情感"
       },
       "english_normalization": {
         "description": "Improve number/date reading for English 文本 (添加 a small 数量 of latency)."
@@ -64417,7 +64417,7 @@
         "description": "语音 速度 multiplier (0.5–2.0). Lower is slower, higher is faster."
       },
       "subtitle_enable": {
-        "description": "Return MiniMax subtitle metadata with sentence timestamps (non-streaming only)."
+        "description": "返回 MiniMax 字幕元数据，包含句子时间戳（仅限非流式模式）"
       },
       "text": {
         "description": "文本 to narrate (max 10,000 characters). Use markers like <#0.5#> to insert pauses in seconds."
@@ -64561,7 +64561,7 @@
         "description": "Choose the strategy for avoiding clipping. Rescale will rescale entire signal if necessary or clamp will 允许 hard clipping."
       },
       "jobs": {
-        "description": "Choose the number of parallel jobs to use for separation."
+        "description": "选择用于分离的并行任务数"
       },
       "model": {
         "description": "Choose the demucs 音频 that proccesses your 音频. The readme has more information on what to choose."
@@ -64588,7 +64588,7 @@
         "description": "Choose whether or not the 音频 should be split into chunks."
       },
       "stem": {
-        "description": "If you just want to isolate one stem, you can choose it here."
+        "description": "如果只需要分离一个音轨，可在此选择"
       },
       "wav_format": {
         "description": "Choose 格式 for the WAV 输出. If WAV is not selected as the 输出类型, this has no 效果."
@@ -64609,13 +64609,13 @@
         "description": "Guidance interval."
       },
       "guidance_interval_decay": {
-        "description": "Guidance interval decay."
+        "description": "引导间隔衰减"
       },
       "guidance_scale": {
         "description": "Overall 引导系数."
       },
       "guidance_type": {
-        "description": "Guidance type for CFG."
+        "description": "CFG 的引导类型"
       },
       "lyric_guidance_scale": {
         "description": "引导系数 for lyrics."
@@ -64693,7 +64693,7 @@
         "description": "控制 语音 expressiveness (0.25-2.0, neutral=0.5, extreme 值 may be unstable)"
       },
       "language": {
-        "description": "Language for synthesis"
+        "description": "合成语言"
       },
       "reference_audio": {
         "description": "参考音频 file for 语音 cloning (可选). If not provided, uses 默认 语音 for the selected language."
@@ -64756,7 +64756,7 @@
         "description": "文本 to synthesize into 语音 (maximum 500 characters). 支持 paralinguistic tags you can include in your 文本:\n[clear throat], [sigh], [sush], [cough], [groan], [sniff], [gasp], [chuckle], [laugh] Example: \"Oh, that's hilarious! [chuckle] Let me tell you more.\""
       },
       "top_k": {
-        "description": "Top-k sampling. Limits vocabulary to top k tokens at each step."
+        "description": "Top-k 采样。每步将词表限制为前 k 个 token"
       },
       "top_p": {
         "description": "Nucleus sampling 阈值. Lower 值 make 输出 more focused."
@@ -64810,7 +64810,7 @@
     "description": "ElevenLabs's fastest 语音 synthesis model\nreplicate, ai",
     "properties": {
       "language_code": {
-        "description": "Language code (e.g., 'en', 'es', 'fr')"
+        "description": "语言代码（例如 'en'、'es'、'fr'）"
       },
       "next_text": {
         "description": "Next 文本 for context"
@@ -64822,7 +64822,7 @@
         "description": "The 文本 to 转换 to 语音"
       },
       "similarity_boost": {
-        "description": "Similarity boost setting (0.0 to 1.0)"
+        "description": "相似度增强设置 (0.0 到 1.0)"
       },
       "speed": {
         "description": "速度 of 语音 (0.25 to 4.0)"
@@ -64831,7 +64831,7 @@
         "description": "Stability setting for 语音 生成 (0.0 to 1.0)"
       },
       "style": {
-        "description": "Style exaggeration (0.0 to 1.0)"
+        "description": "风格夸张度 (0.0 到 1.0)"
       },
       "voice": {
         "description": "语音 choice for 语音 生成"
@@ -64861,7 +64861,7 @@
     "description": "High 质量, low latency 文本转语音 in 32 languages\nreplicate, ai",
     "properties": {
       "language_code": {
-        "description": "Language code (e.g., 'en', 'es', 'fr')"
+        "description": "语言代码（例如 'en'、'es'、'fr'）"
       },
       "next_text": {
         "description": "Next 文本 for context"
@@ -64873,7 +64873,7 @@
         "description": "The 文本 to 转换 to 语音"
       },
       "similarity_boost": {
-        "description": "Similarity boost setting (0.0 to 1.0)"
+        "description": "相似度增强设置 (0.0 到 1.0)"
       },
       "speed": {
         "description": "速度 of 语音 (0.25 to 4.0)"
@@ -64882,7 +64882,7 @@
         "description": "Stability setting for 语音 生成 (0.0 to 1.0)"
       },
       "style": {
-        "description": "Style exaggeration (0.0 to 1.0)"
+        "description": "风格夸张度 (0.0 到 1.0)"
       },
       "voice": {
         "description": "语音 choice for 语音 生成"
@@ -64894,7 +64894,7 @@
     "description": "生成 multilingual 文本转语音 音频 in over 30 languages\nreplicate, ai",
     "properties": {
       "language_code": {
-        "description": "Language code (e.g., 'en', 'es', 'fr')"
+        "description": "语言代码（例如 'en'、'es'、'fr'）"
       },
       "next_text": {
         "description": "Next 文本 for context"
@@ -64906,7 +64906,7 @@
         "description": "The 文本 to 转换 to 语音"
       },
       "similarity_boost": {
-        "description": "Similarity boost setting (0.0 to 1.0)"
+        "description": "相似度增强设置 (0.0 到 1.0)"
       },
       "speed": {
         "description": "速度 of 语音 (0.25 to 4.0)"
@@ -64915,7 +64915,7 @@
         "description": "Stability setting for 语音 生成 (0.0 to 1.0)"
       },
       "style": {
-        "description": "Style exaggeration (0.0 to 1.0)"
+        "description": "风格夸张度 (0.0 到 1.0)"
       },
       "voice": {
         "description": "语音 choice for 语音 生成"
@@ -64927,7 +64927,7 @@
     "description": "The most expressive 文本转语音 model\nreplicate, ai",
     "properties": {
       "language_code": {
-        "description": "Language code (e.g., 'en', 'es', 'fr')"
+        "description": "语言代码（例如 'en'、'es'、'fr'）"
       },
       "next_text": {
         "description": "Next 文本 for context"
@@ -64939,7 +64939,7 @@
         "description": "The 文本 to 转换 to 语音"
       },
       "similarity_boost": {
-        "description": "Similarity boost setting (0.0 to 1.0)"
+        "description": "相似度增强设置 (0.0 到 1.0)"
       },
       "speed": {
         "description": "速度 of 语音 (0.25 to 4.0)"
@@ -64948,7 +64948,7 @@
         "description": "Stability setting for 语音 生成 (0.0 to 1.0)"
       },
       "style": {
-        "description": "Style exaggeration (0.0 to 1.0)"
+        "description": "风格夸张度 (0.0 到 1.0)"
       },
       "voice": {
         "description": "语音 choice for 语音 生成"
@@ -64960,7 +64960,7 @@
     "description": "F5-TTS, the new state-of-the-art in open source 语音 cloning\nreplicate, ai",
     "properties": {
       "custom_split_words": {
-        "description": "Custom split words, comma separated"
+        "description": "自定义分割词，逗号分隔"
       },
       "gen_text": {
         "description": "文本 to 生成"
@@ -64987,7 +64987,7 @@
         "description": "Classifier-free 引导系数"
       },
       "model_version": {
-        "description": "Select the model version to use"
+        "description": "选择要使用的模型版本"
       },
       "negative_prompt": {
         "description": "文本提示词 for negative guidance (unconditioned 提示词)"
@@ -65173,7 +65173,7 @@
         "description": "Min CFG coefficient"
       },
       "model": {
-        "description": "Model to use"
+        "description": "要使用的模型"
       },
       "prompt": {
         "description": "输入 文本"
@@ -65185,7 +65185,7 @@
         "description": "温度 for sampling"
       },
       "top_p": {
-        "description": "Top p for sampling"
+        "description": "采样的 top p 值"
       },
       "variations": {
         "description": "Number of variations to 生成"
@@ -65221,7 +65221,7 @@
         "description": "时长 of the 生成 音频 in seconds."
       },
       "multi_band_diffusion": {
-        "description": "If `True`, the EnCodec tokens will be decoded with MultiBand Diffusion."
+        "description": "如果为 `True`，EnCodec token 将使用 MultiBand Diffusion 解码"
       },
       "normalization_strategy": {
         "description": "Strategy for normalizing 音频."
@@ -65245,7 +65245,7 @@
         "description": "Time signature 值 for the 生成 输出. `text_chords` will be 处理 based on this 值. This will be appended at the end of `提示词`."
       },
       "top_k": {
-        "description": "Reduces sampling to the k most likely tokens."
+        "description": "将采样限制为最可能的 k 个 token"
       },
       "top_p": {
         "description": "Reduces sampling to tokens with cumulative probability of p. When set to `0` (默认), top_k sampling is used."
@@ -65257,7 +65257,7 @@
     "description": "生成 fixed-bpm loops from 文本 提示词\nreplicate, ai",
     "properties": {
       "bpm": {
-        "description": "Tempo in beats per minute"
+        "description": "节拍速度（每分钟拍数）"
       },
       "classifier_free_guidance": {
         "description": "Increases the influence of inputs on the 输出. Higher 值 产生 lower-varience outputs that adhere more closely to inputs."
@@ -65281,7 +65281,7 @@
         "description": "控制 the 'conservativeness' of the sampling 处理. Higher 温度 means more diversity."
       },
       "top_k": {
-        "description": "Reduces sampling to the k most likely tokens."
+        "description": "将采样限制为最可能的 k 个 token"
       },
       "top_p": {
         "description": "Reduces sampling to tokens with cumulative probability of p. When set to `0` (默认), top_k sampling is used."
@@ -65305,7 +65305,7 @@
         "description": "Increases the influence of inputs on the 输出. Higher 值 产生 lower-varience outputs that adhere more closely to inputs."
       },
       "large_chord_voca": {
-        "description": "If `True`, more chords like 7th, diminished and etc are used. If `False` only 12 major and 12 minor chords are used."
+        "description": "如果为 `True`，使用七和弦、减和弦等更多和弦类型。如果为 `False`，仅使用 12 个大调和弦和 12 个小调和弦"
       },
       "model_version": {
         "description": "Model type. Computations take longer when using `large` or `立体声` models."
@@ -65335,7 +65335,7 @@
         "description": "控制 the 'conservativeness' of the sampling 处理. Higher 温度 means more diversity."
       },
       "top_k": {
-        "description": "Reduces sampling to the k most likely tokens."
+        "description": "将采样限制为最可能的 k 个 token"
       },
       "top_p": {
         "description": "Reduces sampling to tokens with cumulative probability of p. When set to `0` (默认), top_k sampling is used."
@@ -65371,7 +65371,7 @@
         "description": "时长 of the 生成 音频 in seconds."
       },
       "model_version": {
-        "description": "Model type. Select `fine-tuned` if you trained the model into your own repository."
+        "description": "模型类型。如果将模型训练到自己的仓库中，请选择 `fine-tuned`"
       },
       "multi_band_diffusion": {
         "description": "If `True`, the EnCodec tokens will be decoded with MultiBand Diffusion. Not compatible with 立体声 models."
@@ -65398,7 +65398,7 @@
         "description": "Time signature 值 for the 生成 输出. `text_chords` will be 处理 based on this 值. This will be appended at the end of `提示词`."
       },
       "top_k": {
-        "description": "Reduces sampling to the k most likely tokens."
+        "description": "将采样限制为最可能的 k 个 token"
       },
       "top_p": {
         "description": "Reduces sampling to tokens with cumulative probability of p. When set to `0` (默认), top_k sampling is used."
@@ -65461,7 +65461,7 @@
         "description": "文本 to 转换 to 语音"
       },
       "top_p": {
-        "description": "Top P for nucleus sampling"
+        "description": "核采样的 Top P 值"
       },
       "voice": {
         "description": "语音 to use"
@@ -65566,10 +65566,10 @@
   },
   "replicate.audio.speech.Spanish_F5_TTS": {
     "title": "Spanish F5 TTS",
-    "description": "A F5-TTS fine-tuned for Spanish\nreplicate, ai",
+    "description": "针对西班牙语微调的 F5-TTS 模型\nreplicate, ai",
     "properties": {
       "custom_split_words": {
-        "description": "Custom split words, comma separated"
+        "description": "自定义分割词，逗号分隔"
       },
       "gen_text": {
         "description": "文本 to 生成"
@@ -65593,13 +65593,13 @@
         "description": "File 格式 for the 生成 音频. Choose mp3 for general use, wav/flac for lossless, or pcm for raw bytes."
       },
       "bitrate": {
-        "description": "MP3 bitrate in bits per second. Only used when audio_format is mp3."
+        "description": "MP3 比特率（比特每秒）。仅在 audio_format 为 mp3 时使用"
       },
       "channel": {
         "description": "mono for 1 channel (默认), 立体声 for 2 channels."
       },
       "emotion": {
-        "description": "Desired delivery style. Use auto to let MiniMax choose, or pick a specific emotion."
+        "description": "所需的表达风格。使用 auto 让 MiniMax 选择，或指定具体情感"
       },
       "english_normalization": {
         "description": "Improve number/date reading for English 文本 (添加 a small 数量 of latency)."
@@ -65617,7 +65617,7 @@
         "description": "语音 速度 multiplier (0.5–2.0). Lower is slower, higher is faster."
       },
       "subtitle_enable": {
-        "description": "Return MiniMax subtitle metadata with sentence timestamps (non-streaming only)."
+        "description": "返回 MiniMax 字幕元数据，包含句子时间戳（仅限非流式模式）"
       },
       "text": {
         "description": "文本 to narrate (max 10,000 characters). Use markers like <#0.5#> to insert pauses in seconds."
@@ -65638,13 +65638,13 @@
         "description": "File 格式 for the 生成 音频. Choose mp3 for general use, wav/flac for lossless, or pcm for raw bytes."
       },
       "bitrate": {
-        "description": "MP3 bitrate in bits per second. Only used when audio_format is mp3."
+        "description": "MP3 比特率（比特每秒）。仅在 audio_format 为 mp3 时使用"
       },
       "channel": {
         "description": "mono for 1 channel (默认), 立体声 for 2 channels."
       },
       "emotion": {
-        "description": "Desired delivery style. Use auto to let MiniMax choose, or pick a specific emotion."
+        "description": "所需的表达风格。使用 auto 让 MiniMax 选择，或指定具体情感"
       },
       "english_normalization": {
         "description": "Improve number/date reading for English 文本 (添加 a small 数量 of latency)."
@@ -65662,7 +65662,7 @@
         "description": "语音 速度 multiplier (0.5–2.0). Lower is slower, higher is faster."
       },
       "subtitle_enable": {
-        "description": "Return MiniMax subtitle metadata with sentence timestamps (non-streaming only)."
+        "description": "返回 MiniMax 字幕元数据，包含句子时间戳（仅限非流式模式）"
       },
       "text": {
         "description": "文本 to narrate (max 10,000 characters). Use markers like <#0.5#> to insert pauses in seconds."
@@ -65683,13 +65683,13 @@
         "description": "File 格式 for the 生成 音频. Choose mp3 for general use, wav/flac for lossless, or pcm for raw bytes."
       },
       "bitrate": {
-        "description": "MP3 bitrate in bits per second. Only used when audio_format is mp3."
+        "description": "MP3 比特率（比特每秒）。仅在 audio_format 为 mp3 时使用"
       },
       "channel": {
         "description": "mono for 1 channel (默认), 立体声 for 2 channels."
       },
       "emotion": {
-        "description": "Desired delivery style. Use auto to let MiniMax choose, or pick a specific emotion."
+        "description": "所需的表达风格。使用 auto 让 MiniMax 选择，或指定具体情感"
       },
       "english_normalization": {
         "description": "Improve number/date reading for English 文本 (添加 a small 数量 of latency)."
@@ -65707,7 +65707,7 @@
         "description": "语音 速度 multiplier (0.5–2.0). Lower is slower, higher is faster."
       },
       "subtitle_enable": {
-        "description": "Return MiniMax subtitle metadata with sentence timestamps (non-streaming only)."
+        "description": "返回 MiniMax 字幕元数据，包含句子时间戳（仅限非流式模式）"
       },
       "text": {
         "description": "文本 to narrate (max 10,000 characters). Use markers like <#0.5#> to insert pauses in seconds."
@@ -65728,13 +65728,13 @@
         "description": "File 格式 for the 生成 音频. Choose mp3 for general use, wav/flac for lossless, or pcm for raw bytes."
       },
       "bitrate": {
-        "description": "MP3 bitrate in bits per second. Only used when audio_format is mp3."
+        "description": "MP3 比特率（比特每秒）。仅在 audio_format 为 mp3 时使用"
       },
       "channel": {
         "description": "mono for 1 channel (默认), 立体声 for 2 channels."
       },
       "emotion": {
-        "description": "Desired delivery style. Use auto to let MiniMax choose, or pick a specific emotion."
+        "description": "所需的表达风格。使用 auto 让 MiniMax 选择，或指定具体情感"
       },
       "english_normalization": {
         "description": "Improve number/date reading for English 文本 (添加 a small 数量 of latency)."
@@ -65752,7 +65752,7 @@
         "description": "语音 速度 multiplier (0.5–2.0). Lower is slower, higher is faster."
       },
       "subtitle_enable": {
-        "description": "Return MiniMax subtitle metadata with sentence timestamps (non-streaming only)."
+        "description": "返回 MiniMax 字幕元数据，包含句子时间戳（仅限非流式模式）"
       },
       "text": {
         "description": "文本 to narrate (max 10,000 characters). Use markers like <#0.5#> to insert pauses in seconds."
@@ -65773,13 +65773,13 @@
         "description": "File 格式 for the 生成 音频. Choose mp3 for general use, wav/flac for lossless, or pcm for raw bytes."
       },
       "bitrate": {
-        "description": "MP3 bitrate in bits per second. Only used when audio_format is mp3."
+        "description": "MP3 比特率（比特每秒）。仅在 audio_format 为 mp3 时使用"
       },
       "channel": {
         "description": "mono for 1 channel (默认), 立体声 for 2 channels."
       },
       "emotion": {
-        "description": "Desired delivery style. Use auto to let MiniMax choose, or pick a specific emotion."
+        "description": "所需的表达风格。使用 auto 让 MiniMax 选择，或指定具体情感"
       },
       "english_normalization": {
         "description": "Improve number/date reading for English 文本 (添加 a small 数量 of latency)."
@@ -65797,7 +65797,7 @@
         "description": "语音 速度 multiplier (0.5–2.0). Lower is slower, higher is faster."
       },
       "subtitle_enable": {
-        "description": "Return MiniMax subtitle metadata with sentence timestamps (non-streaming only)."
+        "description": "返回 MiniMax 字幕元数据，包含句子时间戳（仅限非流式模式）"
       },
       "text": {
         "description": "文本 to narrate (max 10,000 characters). Use markers like <#0.5#> to insert pauses in seconds."
@@ -65863,7 +65863,7 @@
         "description": "Only used for for zero-shot 文本转语音 task. The first seconds of the original 音频 that are used for zero-shot 文本转语音. 3 sec of reference is generally enough for high 质量 语音 cloning, but longer is generally better, try e.g. 3~6 sec"
       },
       "kvcache": {
-        "description": "Set to 0 to use less VRAM, but with slower inference"
+        "description": "设为 0 可减少显存使用，但推理会更慢"
       },
       "left_margin": {
         "description": "Margin to the left of the editing 分割"
@@ -65890,7 +65890,7 @@
         "description": "Transcript of the target 音频 file"
       },
       "task": {
-        "description": "Choose a task"
+        "description": "选择任务"
       },
       "temperature": {
         "description": "调整 randomness of outputs, greater than 1 is random and 0 is deterministic. Do not recommend to change"
@@ -65899,7 +65899,7 @@
         "description": "默认值 for TTS is 0.9, and 0.8 for 语音 editing"
       },
       "voicecraft_model": {
-        "description": "Choose a model"
+        "description": "选择模型"
       },
       "whisperx_model": {
         "description": "If orig_transcript is not provided above, choose a WhisperX model for generating the transcript. Inaccurate transcription may lead to error TTS or 语音 editing. You can modify the 生成 transcript and provide it directly to orig_transcript above"
@@ -65956,7 +65956,7 @@
         "description": "识别 and label different speakers in the 音频. When enabled, each word in the 输出 includes a 'speaker_id'. 支持 up to 32 speakers."
       },
       "keyterms": {
-        "description": "Comma-separated list of words or phrases to bias transcription towards. Useful for product names, technical terms, or proper nouns. Up to 1000 terms, max 50 characters each."
+        "description": "用于引导转录方向的逗号分隔词或短语列表。适用于产品名、技术术语或专有名词。最多 1000 个词，每个最长 50 个字符"
       },
       "language_code": {
         "description": "Language of the 音频 as an ISO-639-1 (e.g. 'en') or ISO-639-3 (e.g. 'eng') code. Set to 'auto' to 检测 the language automatically. Setting a specific language can improve accuracy for noisy or unusual 音频."
@@ -66049,7 +66049,7 @@
         "description": "音频 file"
       },
       "batch_size": {
-        "description": "Number of parallel batches you want to compute. Reduce if you face OOMs."
+        "description": "要计算的并行批次数。遇到显存溢出 (OOM) 时请减小此值"
       },
       "diarise_audio": {
         "description": "Use Pyannote.音频 to diarise the 音频 clips. You will need to provide hf_token below too."
@@ -66061,7 +66061,7 @@
         "description": "Language spoken in the 音频, specify 'None' to perform language 检测."
       },
       "task": {
-        "description": "Task to perform: transcribe or translate to another language."
+        "description": "要执行的任务：转录或翻译为另一种语言"
       },
       "timestamp": {
         "description": "Whisper 支持 both chunked as well as word level timestamps."
@@ -66115,7 +66115,7 @@
   },
   "replicate.audio.transcribe.Speaker_Transcription": {
     "title": "Speaker Transcription",
-    "description": "Whisper transcription plus speaker diarization\nreplicate, ai",
+    "description": "Whisper 转录加说话人分离\nreplicate, ai",
     "properties": {
       "audio": {
         "description": "音频 file"
@@ -66154,7 +66154,7 @@
         "description": "可选 patience 值 to use in beam decoding, as in https://arxiv.org/abs/2204.05424, the 默认 (1.0) is equivalent to conventional beam search"
       },
       "suppress_tokens": {
-        "description": "comma-separated list of token ids to suppress during sampling; '-1' will suppress most special characters except common punctuations"
+        "description": "采样时要抑制的 token id 列表（逗号分隔）；'-1' 将抑制大多数特殊字符，但保留常见标点"
       },
       "temperature": {
         "description": "温度 to use for sampling"
@@ -66175,7 +66175,7 @@
     "description": "Accelerated transcription of 音频，使用 WhisperX\nreplicate, ai",
     "properties": {
       "align_output": {
-        "description": "Use if you need word-level timing and not just batched transcription. Only works for English atm"
+        "description": "如果需要单词级时间戳而非批量转录则使用此项。目前仅支持英语"
       },
       "audio": {
         "description": "音频 file"
@@ -66184,7 +66184,7 @@
         "description": "Parallelization of 输入 音频 transcription"
       },
       "debug": {
-        "description": "Print out memory usage information."
+        "description": "打印内存使用信息"
       },
       "only_text": {
         "description": "Set if you only want to return 文本; otherwise, 分割 metadata will be returned as well."
@@ -66211,10 +66211,10 @@
         "description": "Language of the spoken words as a language code like 'en'. Leave empty to auto 检测 language."
       },
       "num_speakers": {
-        "description": "Number of speakers, leave empty to autodetect."
+        "description": "说话人数量，留空则自动检测"
       },
       "prompt": {
-        "description": "Vocabulary: provide names, acronyms and loanwords in a list. Use punctuation for best accuracy."
+        "description": "词汇表：以列表形式提供名称、缩略词和外来词。使用标点符号可获得最佳准确率"
       },
       "translate": {
         "description": "Translate the 语音 into English."
@@ -66226,16 +66226,16 @@
     "description": "This is a language model that can be used to obtain document embeddings 适用，用于 downstream tasks like semantic search and clustering.\nreplicate, ai",
     "properties": {
       "text": {
-        "description": "A single string to encode."
+        "description": "要编码的单个字符串"
       },
       "text_batch": {
-        "description": "A JSON-formatted list of strings to encode."
+        "description": "要编码的 JSON 格式字符串列表"
       }
     }
   },
   "replicate.embedding.BGE_1_5_Query": {
     "title": "BGE 1.5 Query",
-    "description": "Query embedding generator for BAAI's bge-large-en v1.5 embedding model\nreplicate, ai",
+    "description": "BAAI bge-large-en v1.5 嵌入模型的查询嵌入生成器\nreplicate, ai",
     "properties": {
       "batchtoken_max": {
         "description": "You probably don't need to worry about this parameter if you're just getting the embeddings for a handful of queries. This parameter sets the maximumum number of kibiTokens (1 kibiToken = 1024 tokens) to try to stuff into a batch (to avoid out of memory errors but maximize throughput). If the total number of tokens across the flattened list of requested embeddings exceed this 值, the list will be split internally and run across multiple forward passes. This will not affect the shape of your 输出, just the time it takes to run."
@@ -66262,7 +66262,7 @@
         "description": "When true, return 输出 as npy file. By 默认, we return JSON"
       },
       "normalize_embeddings": {
-        "description": "Whether to normalize embeddings."
+        "description": "是否归一化嵌入向量"
       },
       "path": {
         "description": "Path to file containing 文本 as JSONL with '文本' field or valid JSON string list."
@@ -66286,7 +66286,7 @@
   },
   "replicate.embedding.CLIP_Features": {
     "title": "CLIP Features",
-    "description": "Return CLIP features for the clip-vit-large-patch14 model\nreplicate, ai",
+    "description": "返回 clip-vit-large-patch14 模型的 CLIP 特征\nreplicate, ai",
     "properties": {
       "inputs": {
         "description": "Newline-separated inputs. Can either be strings of 文本 or 图像 URIs starting with http[s]://"
@@ -66295,19 +66295,19 @@
   },
   "replicate.embedding.E5_Mistral_7B": {
     "title": "E5 Mistral 7B",
-    "description": "E5-mistral-7b-instruct language embedding model\nreplicate, ai",
+    "description": "E5-mistral-7b-instruct 语言嵌入模型\nreplicate, ai",
     "properties": {
       "document": {
-        "description": "The document to be used."
+        "description": "要使用的文档"
       },
       "normalize": {
         "description": "Whether to 输出 the normalized embeddings or not."
       },
       "query": {
-        "description": "The query to be used."
+        "description": "要使用的查询"
       },
       "task": {
-        "description": "The task description."
+        "description": "任务描述"
       }
     }
   },
@@ -66343,7 +66343,7 @@
     "description": "Granite-embedding-small-english-r2 is a 47M parameter dense biencoder embedding model from the Granite Embeddings collection that can be used to 生成 high 质量 文本 embeddings.\nreplicate, ai",
     "properties": {
       "normalize": {
-        "description": "Normalize the embeddings."
+        "description": "归一化嵌入向量"
       },
       "texts": {
         "description": "A list of 文本 strings to embed."
@@ -66403,7 +66403,7 @@
         "description": "Batch 尺寸 to use when 处理 文本 data."
       },
       "normalize_embeddings": {
-        "description": "Whether to normalize embeddings."
+        "description": "是否归一化嵌入向量"
       },
       "texts": {
         "description": "文本 to embed, formatted as JSON list of strings (e.g. [\"hello\", \"world\"])"
@@ -66463,7 +66463,7 @@
         "description": "文本 description of what you want to 生成, or the instruction on how to edit the given 图像."
       },
       "replicate_weights": {
-        "description": "Path to the lora weights"
+        "description": "LoRA 权重路径"
       },
       "seed": {
         "description": "随机种子 for 可复现 生成. Leave blank for random."
@@ -66472,16 +66472,16 @@
   },
   "replicate.image.3d.Create_Character_V1": {
     "title": "Create Character V1",
-    "description": "Rig any 3D bipedal character mesh\nreplicate, ai",
+    "description": "为任意 3D 双足角色网格自动绑定\nreplicate, ai",
     "properties": {
       "auto_rig": {
         "description": "If 输入 character has no bones, automatically 生成 them"
       },
       "character_file": {
-        "description": "fbx/glb character file"
+        "description": "fbx/glb 角色文件"
       },
       "front_facing": {
-        "description": "If true, the auto-rigged character will be front-facing"
+        "description": "如果为 true，自动绑定的角色将面朝前方"
       }
     }
   },
@@ -66499,10 +66499,10 @@
   },
   "replicate.image.3d.Hunyuan3D_2": {
     "title": "Hunyuan 3D 2",
-    "description": "hunyuan3d-2 optimised with the pruna toolkit: https://github.com/PrunaAI/pruna\nreplicate, ai",
+    "description": "使用 pruna 工具包优化的 hunyuan3d-2：https://github.com/PrunaAI/pruna\nreplicate, ai",
     "properties": {
       "face_count": {
-        "description": "Target number of faces for simplification"
+        "description": "简化的目标面数"
       },
       "file_type": {
         "description": "File type"
@@ -66514,7 +66514,7 @@
         "description": "输入图像 for hunyuan3d 控制"
       },
       "num_chunks": {
-        "description": "Number of chunks"
+        "description": "分块数量"
       },
       "num_inference_steps": {
         "description": "Number of 推理步数"
@@ -66547,7 +66547,7 @@
         "description": "Left view 图像"
       },
       "num_chunks": {
-        "description": "Number of chunks"
+        "description": "分块数量"
       },
       "octree_resolution": {
         "description": "Octree 分辨率"
@@ -66568,13 +66568,13 @@
         "description": "Number of 推理步数"
       },
       "target_face_num": {
-        "description": "Target number of faces for mesh simplification"
+        "description": "网格简化的目标面数"
       }
     }
   },
   "replicate.image.3d.Hunyuan_3d_3_1": {
     "title": "Hunyuan 3d 3.1",
-    "description": "3D models with texture fidelity and geometry precision\nreplicate, ai",
+    "description": "生成具有纹理保真度和几何精度的高质量 3D 模型\nreplicate, ai",
     "properties": {
       "enable_pbr": {
         "description": "启用 PBR (Physically Based 渲染) material 生成."
@@ -66601,7 +66601,7 @@
         "description": "Additional features"
       },
       "bbox_condition": {
-        "description": "Bounding box condition [Width, Height, Length]"
+        "description": "边界框条件 [宽度, 高度, 长度]"
       },
       "geometry_file_format": {
         "description": "输出 geometry 格式"
@@ -66613,7 +66613,7 @@
         "description": "Material type"
       },
       "mesh_mode": {
-        "description": "Mesh face type"
+        "description": "网格面类型"
       },
       "preview_render": {
         "description": "生成 preview 渲染"
@@ -66637,7 +66637,7 @@
         "description": "生成 tier"
       },
       "use_original_alpha": {
-        "description": "Use original transparency channel"
+        "description": "使用原始透明度通道"
       }
     }
   },
@@ -66673,13 +66673,13 @@
         "description": "随机种子. Leave blank for a 随机种子 each call."
       },
       "sp_size": {
-        "description": "Sequence-parallel shard heuristic (single-GPU build only accepts 1)."
+        "description": "序列并行分片启发式（单 GPU 构建仅接受 1）"
       }
     }
   },
   "replicate.image.3d.ShapE": {
     "title": "Shap E",
-    "description": "Generating Conditional 3D Implicit Functions\nreplicate, ai",
+    "description": "生成条件 3D 隐式函数\nreplicate, ai",
     "properties": {
       "batch_size": {
         "description": "Number of 输出"
@@ -66700,7 +66700,7 @@
         "description": "Set the 尺寸 of the a 渲染, higher 值 take longer to 渲染"
       },
       "save_mesh": {
-        "description": "Save the latents as meshes."
+        "description": "将潜空间表示保存为网格"
       }
     }
   },
@@ -66745,10 +66745,10 @@
         "description": "输出 帧率"
       },
       "internal_ik": {
-        "description": "Use internal IK to improve result"
+        "description": "使用内部 IK 改善结果"
       },
       "motion_length": {
-        "description": "Desired motion length (seconds)"
+        "description": "所需运动时长（秒）"
       },
       "no_mesh": {
         "description": "Should the 输出 contain animation only"
@@ -66757,7 +66757,7 @@
         "description": "输出 file type"
       },
       "prompt": {
-        "description": "Describe the desired motion"
+        "description": "描述所需的运动"
       },
       "seed": {
         "description": "种子 (0 indicates a 随机种子)"
@@ -66784,7 +66784,7 @@
         "description": "输出 file type"
       },
       "prompt": {
-        "description": "Describe the desired motion"
+        "description": "描述所需的运动"
       }
     }
   },
@@ -66814,7 +66814,7 @@
         "description": "Return the preprocessed 图像 without background"
       },
       "save_gaussian_ply": {
-        "description": "Save Gaussian point cloud as PLY file"
+        "description": "将高斯点云保存为 PLY 文件"
       },
       "seed": {
         "description": "随机种子 for 生成"
@@ -66841,7 +66841,7 @@
     "description": "TRELLIS.2: Native and Compact Structured Latents for 3D 生成\nreplicate, ai",
     "properties": {
       "decimation_target": {
-        "description": "Target number of faces for decimation (only used if generate_model=True)"
+        "description": "抽稀的目标面数（仅在 generate_model=True 时使用）"
       },
       "generate_model": {
         "description": "生成 3D model file (GLB)"
@@ -66868,37 +66868,37 @@
         "description": "随机种子 for 生成"
       },
       "shape_slat_guidance_rescale": {
-        "description": "Shape SLat guidance rescale"
+        "description": "形状 SLat 引导重缩放"
       },
       "shape_slat_guidance_strength": {
         "description": "Shape SLat guidance 强度"
       },
       "shape_slat_rescale_t": {
-        "description": "Shape SLat rescale T"
+        "description": "形状 SLat 重缩放 T"
       },
       "shape_slat_steps": {
         "description": "Shape SLat sampling 步数"
       },
       "sparse_structure_guidance_rescale": {
-        "description": "Sparse structure guidance rescale"
+        "description": "稀疏结构引导重缩放"
       },
       "sparse_structure_guidance_strength": {
         "description": "Sparse structure guidance 强度"
       },
       "sparse_structure_rescale_t": {
-        "description": "Sparse structure rescale T"
+        "description": "稀疏结构重缩放 T"
       },
       "sparse_structure_steps": {
         "description": "Sparse structure sampling 步数 (more 步数 = better 质量, slower)"
       },
       "tex_slat_guidance_rescale": {
-        "description": "Texture SLat guidance rescale"
+        "description": "纹理 SLat 引导重缩放"
       },
       "tex_slat_guidance_strength": {
         "description": "Texture SLat guidance 强度"
       },
       "tex_slat_rescale_t": {
-        "description": "Texture SLat rescale T"
+        "description": "纹理 SLat 重缩放 T"
       },
       "tex_slat_steps": {
         "description": "Texture SLat sampling 步数"
@@ -66922,7 +66922,7 @@
         "description": "Sampling 温度"
       },
       "top_p": {
-        "description": "Top-p sampling probability"
+        "description": "Top-p 采样概率"
       },
       "video": {
         "description": "输入视频 file"
@@ -66943,7 +66943,7 @@
         "description": "Sampling 温度"
       },
       "top_p": {
-        "description": "Top-p sampling probability"
+        "description": "Top-p 采样概率"
       },
       "video": {
         "description": "输入视频 file"
@@ -66964,7 +66964,7 @@
         "description": "Type question for the 输入 图像 for visual question answering task."
       },
       "task": {
-        "description": "Choose a task."
+        "description": "选择任务"
       }
     }
   },
@@ -66994,7 +66994,7 @@
   },
   "replicate.image.analyze.ClipFeatures": {
     "title": "Clip Features",
-    "description": "Return CLIP features for the clip-vit-large-patch14 model\nreplicate, ai",
+    "description": "返回 clip-vit-large-patch14 模型的 CLIP 特征\nreplicate, ai",
     "properties": {
       "inputs": {
         "description": "Newline-separated inputs. Can either be strings of 文本 or 图像 URIs starting with http[s]://"
@@ -67033,16 +67033,16 @@
         "description": "The 文本提示词 to send to the model"
       },
       "system_instruction": {
-        "description": "System instruction to guide the model's behavior"
+        "description": "引导模型行为的系统指令"
       },
       "temperature": {
         "description": "Sampling 温度 between 0 and 2"
       },
       "thinking_level": {
-        "description": "Thinking level for reasoning (low or high). Replaces thinking_budget for Gemini 3 models."
+        "description": "推理的思考级别（low 或 high）。替代 Gemini 3 模型的 thinking_budget"
       },
       "top_p": {
-        "description": "Nucleus sampling parameter - the model considers the results of the tokens with top_p probability mass"
+        "description": "核采样参数 - 模型考虑 top_p 概率质量内的 token 结果"
       },
       "videos": {
         "description": "输入视频 to send with the 提示词 (max 10 视频, each up to 45 minutes)"
@@ -67060,7 +67060,7 @@
   },
   "replicate.image.analyze.Llava13b": {
     "title": "Llava 13b",
-    "description": "Visual instruction tuning towards large language and vision models with GPT-4 level capabilities\nreplicate, ai",
+    "description": "面向 GPT-4 级别大型语言和视觉模型的视觉指令微调\nreplicate, ai",
     "properties": {
       "image": {
         "description": "输入图像"
@@ -67081,7 +67081,7 @@
   },
   "replicate.image.analyze.Llava_V1_6_Mistral": {
     "title": "Llava V1 6 Mistral",
-    "description": "LLaVA v1.6: Large Language and Vision Assistant (Mistral-7B)\nreplicate, ai",
+    "description": "LLaVA v1.6：大型语言和视觉助手 (Mistral-7B)\nreplicate, ai",
     "properties": {
       "history": {
         "description": "List of earlier chat messages, alternating roles, starting with user 输入. Include <图像> to specify which message to attach the 图像 to."
@@ -67105,7 +67105,7 @@
   },
   "replicate.image.analyze.Llava_V1_6_Vicuna": {
     "title": "Llava V1 6 Vicuna",
-    "description": "LLaVA v1.6: Large Language and Vision Assistant (Vicuna-13B)\nreplicate, ai",
+    "description": "LLaVA v1.6：大型语言和视觉助手 (Vicuna-13B)\nreplicate, ai",
     "properties": {
       "history": {
         "description": "List of earlier chat messages, alternating roles, starting with user 输入. Include <图像> to specify which message to attach the 图像 to."
@@ -67147,7 +67147,7 @@
   },
   "replicate.image.analyze.Moondream2": {
     "title": "Moondream 2",
-    "description": "moondream2 is a small vision language model designed to run efficiently on edge devices\nreplicate, ai",
+    "description": "moondream2 是专为边缘设备高效运行而设计的小型视觉语言模型\nreplicate, ai",
     "properties": {
       "image": {
         "description": "输入图像"
@@ -67402,7 +67402,7 @@
         "description": "Preserve alpha channel in 输出. When true, maintains original transparency. When false, 输出 is fully opaque."
       },
       "preserve_partial_alpha": {
-        "description": "[DEPRECATED] Preserve partial alpha. No longer used in V2 API - use preserve_alpha instead."
+        "description": "[已弃用] 保留部分 alpha。V2 API 不再使用 - 请改用 preserve_alpha"
       }
     }
   },
@@ -67465,7 +67465,7 @@
     "description": "Colorization using a Generative 颜色 Prior for 自然 图像\nreplicate, ai",
     "properties": {
       "classes": {
-        "description": "Specify classes for Multi-modal class vector c, separate the classes with space."
+        "description": "为多模态类向量 c 指定类别，用空格分隔"
       },
       "image": {
         "description": "输入图像."
@@ -67513,7 +67513,7 @@
   },
   "replicate.image.enhance.GPEN": {
     "title": "GPEN",
-    "description": "Blind Face Restoration in the Wild\nreplicate, ai",
+    "description": "真实场景下的盲人脸修复\nreplicate, ai",
     "properties": {
       "broken_image": {
         "description": "whether the 输入 图像 is broken, valid for Face 局部重绘. When set to True, the 输出 will be the 'fixed' 图像. When set to False, the 图像 will randomly 添加 brush strokes to simulate a broken 图像 and the 输出 will be broken + fixed 图像"
@@ -67525,7 +67525,7 @@
         "description": "whether outputs individual 增强 faces."
       },
       "task": {
-        "description": "Choose a task."
+        "description": "选择任务"
       }
     }
   },
@@ -67552,7 +67552,7 @@
         "description": "输入图像."
       },
       "model": {
-        "description": "Choose a model."
+        "description": "选择模型"
       }
     }
   },
@@ -67567,7 +67567,7 @@
         "description": "Right 输入图像 for 立体声 图像 Super-分辨率. 可选, only valid for 立体声 图像 Super-分辨率 task."
       },
       "task_type": {
-        "description": "Choose task type."
+        "description": "选择任务类型"
       }
     }
   },
@@ -67582,7 +67582,7 @@
   },
   "replicate.image.enhance.OldPhotosRestoration": {
     "title": "Old Photos Restoration",
-    "description": "Bringing Old Photos Back to Life\nreplicate, ai",
+    "description": "让老照片焕然一新\nreplicate, ai",
     "properties": {
       "HR": {
         "description": "whether the 输入 图像 is high-分辨率"
@@ -67612,10 +67612,10 @@
         "description": "Low 质量 输入 图像."
       },
       "linear_CFG": {
-        "description": "Linearly (with sigma) increase CFG from 'spt_linear_CFG' to s_cfg."
+        "description": "随 sigma 线性地将 CFG 从 'spt_linear_CFG' 增加到 s_cfg"
       },
       "linear_s_stage2": {
-        "description": "Linearly (with sigma) increase s_stage2 from 'spt_linear_s_stage2' to s_stage2."
+        "description": "随 sigma 线性地将 s_stage2 从 'spt_linear_s_stage2' 增加到 s_stage2"
       },
       "min_size": {
         "description": "Minimum 分辨率 of 输出 图像."
@@ -67630,7 +67630,7 @@
         "description": "Classifier-free 引导系数 for 提示词."
       },
       "s_churn": {
-        "description": "Original churn hy-param of EDM."
+        "description": "EDM 的原始 churn 超参数"
       },
       "s_noise": {
         "description": "Original 噪声 hy-param of EDM."
@@ -67645,16 +67645,16 @@
         "description": "随机种子. Leave blank to randomize the 种子"
       },
       "spt_linear_CFG": {
-        "description": "Start point of linearly increasing CFG."
+        "description": "线性增加 CFG 的起始点"
       },
       "spt_linear_s_stage2": {
-        "description": "Start point of linearly increasing s_stage2."
+        "description": "线性增加 s_stage2 的起始点"
       },
       "upscale": {
         "description": "Upsampling 比例 of given inputs."
       },
       "use_llava": {
-        "description": "Use LLaVA model to get captions."
+        "description": "使用 LLaVA 模型获取图像描述"
       }
     }
   },
@@ -67675,10 +67675,10 @@
         "description": "Low 质量 输入 图像."
       },
       "linear_CFG": {
-        "description": "Linearly (with sigma) increase CFG from 'spt_linear_CFG' to s_cfg."
+        "description": "随 sigma 线性地将 CFG 从 'spt_linear_CFG' 增加到 s_cfg"
       },
       "linear_s_stage2": {
-        "description": "Linearly (with sigma) increase s_stage2 from 'spt_linear_s_stage2' to s_stage2."
+        "description": "随 sigma 线性地将 s_stage2 从 'spt_linear_s_stage2' 增加到 s_stage2"
       },
       "min_size": {
         "description": "Minimum 分辨率 of 输出 图像."
@@ -67690,7 +67690,7 @@
         "description": "Classifier-free 引导系数 for 提示词."
       },
       "s_churn": {
-        "description": "Original churn hy-param of EDM."
+        "description": "EDM 的原始 churn 超参数"
       },
       "s_noise": {
         "description": "Original 噪声 hy-param of EDM."
@@ -67705,10 +67705,10 @@
         "description": "随机种子. Leave blank to randomize the 种子"
       },
       "spt_linear_CFG": {
-        "description": "Start point of linearly increasing CFG."
+        "description": "线性增加 CFG 的起始点"
       },
       "spt_linear_s_stage2": {
-        "description": "Start point of linearly increasing s_stage2."
+        "description": "线性增加 s_stage2 的起始点"
       },
       "upscale": {
         "description": "Upsampling 比例 of given inputs."
@@ -67732,10 +67732,10 @@
         "description": "Low 质量 输入 图像."
       },
       "linear_CFG": {
-        "description": "Linearly (with sigma) increase CFG from 'spt_linear_CFG' to s_cfg."
+        "description": "随 sigma 线性地将 CFG 从 'spt_linear_CFG' 增加到 s_cfg"
       },
       "linear_s_stage2": {
-        "description": "Linearly (with sigma) increase s_stage2 from 'spt_linear_s_stage2' to s_stage2."
+        "description": "随 sigma 线性地将 s_stage2 从 'spt_linear_s_stage2' 增加到 s_stage2"
       },
       "min_size": {
         "description": "Minimum 分辨率 of 输出 图像."
@@ -67747,7 +67747,7 @@
         "description": "Classifier-free 引导系数 for 提示词."
       },
       "s_churn": {
-        "description": "Original churn hy-param of EDM."
+        "description": "EDM 的原始 churn 超参数"
       },
       "s_noise": {
         "description": "Original 噪声 hy-param of EDM."
@@ -67762,10 +67762,10 @@
         "description": "随机种子. Leave blank to randomize the 种子"
       },
       "spt_linear_CFG": {
-        "description": "Start point of linearly increasing CFG."
+        "description": "线性增加 CFG 的起始点"
       },
       "spt_linear_s_stage2": {
-        "description": "Start point of linearly increasing s_stage2."
+        "description": "线性增加 s_stage2 的起始点"
       },
       "upscale": {
         "description": "Upsampling 比例 of given inputs."
@@ -67795,7 +67795,7 @@
         "description": "Apply film grain 效果 to the 输出"
       },
       "grain_density": {
-        "description": "Density of the grain particles from 0 to 60"
+        "description": "颗粒密度，范围 0 到 60"
       },
       "grain_model": {
         "description": "Type of grain to apply: silver rich (经典 film look), gaussian (uniform 噪声), or grey (monochromatic grain)"
@@ -67816,7 +67816,7 @@
   },
   "replicate.image.enhance.VQFR": {
     "title": "VQFR",
-    "description": "Blind Face Restoration with Vector-Quantized Dictionary and Parallel Decoder\nreplicate, ai",
+    "description": "基于向量量化字典和并行解码器的盲人脸修复\nreplicate, ai",
     "properties": {
       "aligned": {
         "description": "输入 are aligned faces."
@@ -67849,10 +67849,10 @@
         "description": "How much 噪声 to 添加 to the style 图像 before 处理. An alternative way of controlling stength."
       },
       "image_to_become_strength": {
-        "description": "How strong the style will be applied"
+        "description": "风格应用的强度"
       },
       "instant_id_strength": {
-        "description": "How strong the InstantID will be."
+        "description": "InstantID 的强度"
       },
       "negative_prompt": {
         "description": "Things you do not want in the 图像"
@@ -67886,10 +67886,10 @@
         "description": "An 图像 of a person to be 转换"
       },
       "instant_id_strength": {
-        "description": "How strong the InstantID will be."
+        "description": "InstantID 的强度"
       },
       "lora_scale": {
-        "description": "How strong the LoRA will be"
+        "description": "LoRA 的强度"
       },
       "negative_prompt": {
         "description": "Things you do not want in the 图像"
@@ -67908,14 +67908,14 @@
   },
   "replicate.image.face.FaceToSticker": {
     "title": "Face To Sticker",
-    "description": "Turn a face into a sticker\nreplicate, ai",
+    "description": "将人脸变成贴纸\nreplicate, ai",
     "properties": {
       "height": {},
       "image": {
         "description": "An 图像 of a person to be 转换 to a sticker"
       },
       "instant_id_strength": {
-        "description": "How strong the InstantID will be."
+        "description": "InstantID 的强度"
       },
       "ip_adapter_noise": {
         "description": "How much 噪声 is 添加 to the IP adapter 输入"
@@ -68020,7 +68020,7 @@
         "description": "Scheduler"
       },
       "sdxl_weights": {
-        "description": "Pick which base weights you want to use"
+        "description": "选择要使用的基础权重"
       },
       "seed": {
         "description": "随机种子. Leave blank to randomize the 种子"
@@ -68197,7 +68197,7 @@
         "description": "Manual 种子"
       },
       "negative_prompt": {
-        "description": "Anything you don't want in the photo"
+        "description": "照片中不希望出现的内容"
       },
       "num_inference_steps": {
         "description": "推理步数"
@@ -68251,7 +68251,7 @@
         "description": "文本 description of what you want to 生成, or the instruction on how to edit the given 图像."
       },
       "replicate_weights": {
-        "description": "Path to the lora weights"
+        "description": "LoRA 权重路径"
       },
       "seed": {
         "description": "随机种子 for 可复现 生成. Leave blank for random."
@@ -68269,7 +68269,7 @@
         "description": "Minimum CFG renorm 值"
       },
       "cfg_renorm_type": {
-        "description": "CFG renormalization method"
+        "description": "CFG 重归一化方法"
       },
       "cfg_text_scale": {
         "description": "文本 引导系数 for how closely to follow the 提示词"
@@ -68296,7 +68296,7 @@
         "description": "随机种子 for 可复现 results"
       },
       "task": {
-        "description": "Task to perform"
+        "description": "要执行的任务"
       },
       "timestep_shift": {
         "description": "Distribution of 降噪 步数 between composition and 细节"
@@ -68305,7 +68305,7 @@
   },
   "replicate.image.generate.Blueprint_Qwen": {
     "title": "Blueprint Qwen",
-    "description": "Blueprint_Qwen node\nreplicate, ai",
+    "description": "Blueprint_Qwen 节点\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -68320,7 +68320,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -68344,13 +68344,13 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
@@ -68449,7 +68449,7 @@
   },
   "replicate.image.generate.Buacat": {
     "title": "Buacat",
-    "description": "the grey tabby cat\nreplicate, ai",
+    "description": "灰色虎斑猫\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -68464,7 +68464,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -68488,13 +68488,13 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
@@ -68515,7 +68515,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -68539,13 +68539,13 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
@@ -68602,7 +68602,7 @@
         "description": "强度 of the 颜色 transfer 效果 (0.0 to 1.0)"
       },
       "white_balance_percentile": {
-        "description": "Percentile for white balance calculation (0.0 to 100.0)"
+        "description": "白平衡计算的百分位数 (0.0 到 100.0)"
       }
     }
   },
@@ -68629,10 +68629,10 @@
         "description": "质量 of the 输出 图像, from 0 to 100. 100 is best 质量, 0 is lowest 质量."
       },
       "prompt": {
-        "description": "Describe the subject. Include clothes and hairstyle for more consistency."
+        "description": "描述主体。包含服装和发型可获得更好的一致性"
       },
       "randomise_poses": {
-        "description": "Randomise the poses used."
+        "description": "随机化使用的姿势"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
@@ -68644,7 +68644,7 @@
   },
   "replicate.image.generate.ControlNet_Tile": {
     "title": "Control Net Tile",
-    "description": "Controlnet v1.1 - Tile Version\nreplicate, ai",
+    "description": "ControlNet v1.1 - Tile 版本\nreplicate, ai",
     "properties": {
       "image": {
         "description": "输入图像"
@@ -68695,7 +68695,7 @@
   },
   "replicate.image.generate.Depth_Of_Field": {
     "title": "Depth Of Field",
-    "description": "Bring your subjects into focus with FLUX.1 Kontext [pro]\nreplicate, ai",
+    "description": "使用 FLUX.1 Kontext [pro] 让主体聚焦\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "宽高比 of the 生成 图像. Use 'match_input_image' to match the 宽高比 of the 输入 图像."
@@ -68704,7 +68704,7 @@
         "description": "The professional blur 效果 to 添加 to the background"
       },
       "gender": {
-        "description": "The gender of the person"
+        "description": "人物的性别"
       },
       "input_image": {
         "description": "图像 to 添加 professional background blur 效果. Must be jpeg, png, gif, or webp."
@@ -68761,7 +68761,7 @@
   },
   "replicate.image.generate.Dwiss_Qwen_2": {
     "title": "Dwiss Qwen 2",
-    "description": "Dwiss_Qwen_2 node\nreplicate, ai",
+    "description": "Dwiss_Qwen_2 节点\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -68776,7 +68776,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -68800,13 +68800,13 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
@@ -68839,7 +68839,7 @@
   },
   "replicate.image.generate.Face_To_Many_Kontext": {
     "title": "Face To Many Kontext",
-    "description": "Become a character, in style\nreplicate, ai",
+    "description": "以风格化的方式化身角色\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "宽高比 of the 生成 图像. Use 'match_input_image' to match the 宽高比 of the 输入 图像."
@@ -68857,10 +68857,10 @@
         "description": "The persona to apply to the 图像"
       },
       "preserve_background": {
-        "description": "Whether to preserve the background"
+        "description": "是否保留背景"
       },
       "preserve_outfit": {
-        "description": "Whether to preserve the outfit"
+        "description": "是否保留服装"
       },
       "safety_tolerance": {
         "description": "安全容忍度, 0 is most strict and 2 is most permissive. 2 is currently the maximum allowed."
@@ -69001,7 +69001,7 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "height": {
         "description": "Height of the 生成 图像 in 文生图 模式. Only used when aspect_ratio=custom. Must be a multiple of 32 (if it's not, it will be rounded to nearest multiple of 32)."
@@ -69082,7 +69082,7 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "images": {
         "description": "List of 输入 图像 for 图生图 生成. Maximum 5 图像. Must be jpeg, png, gif, or webp."
@@ -69106,7 +69106,7 @@
   },
   "replicate.image.generate.Flux_2_Klein_4b_Base": {
     "title": "Flux 2 Klein 4b Base",
-    "description": "Un-distilled version of FLUX.2 [klein]. Optimized for fine-tuning, customization, and post-training workflows\nreplicate, ai",
+    "description": "FLUX.2 [klein] 的非蒸馏版本，针对微调、定制和后训练工作流优化\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Use 'match_input_image' to match the 宽高比 of the first 输入 图像."
@@ -69115,7 +69115,7 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "guidance": {
         "description": "Classifier-free 引导系数. Higher 值 产生 图像 more closely related to the 提示词."
@@ -69187,7 +69187,7 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "images": {
         "description": "List of 输入 图像 for 图生图 生成. Maximum 5 图像. Must be jpeg, png, gif, or webp."
@@ -69220,7 +69220,7 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "guidance": {
         "description": "Classifier-free 引导系数. Higher 值 产生 图像 more closely related to the 提示词."
@@ -69556,13 +69556,13 @@
         "description": "宽高比 of the 生成 图像. Use 'match_input_image' to match the 宽高比 of the 输入 图像."
       },
       "gender": {
-        "description": "The gender of the person"
+        "description": "人物的性别"
       },
       "hair_color": {
         "description": "The 颜色 of the person's hair"
       },
       "haircut": {
-        "description": "The haircut to give them"
+        "description": "为他们设计的发型"
       },
       "input_image": {
         "description": "图像 of the person's haircut you want to edit. Must be jpeg, png, gif, or webp."
@@ -69580,7 +69580,7 @@
   },
   "replicate.image.generate.Flux_Cinestill": {
     "title": "Flux Cinestill",
-    "description": "Flux lora, use \"CNSTLL\" to trigger\nreplicate, ai",
+    "description": "Flux LoRA，使用 \"CNSTLL\" 触发\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. If custom is selected, uses height and width below & will run in bf16 模式"
@@ -69646,7 +69646,7 @@
   },
   "replicate.image.generate.Flux_Content_Filter": {
     "title": "Flux Content Filter",
-    "description": "Flux Content Filter - Check for public figures and copyright concerns\nreplicate, ai",
+    "description": "Flux 内容过滤器 - 检查公众人物和版权问题\nreplicate, ai",
     "properties": {
       "image": {
         "description": "输入图像 to 分析 for content filtering"
@@ -69733,7 +69733,7 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "guidance": {
         "description": "Guidance for 生成 图像. Lower 值 can give more 逼真 图像. Good 值 to try are 2, 2.5, 3 and 3.5"
@@ -69772,7 +69772,7 @@
         "description": "生成图像的宽高比"
       },
       "civitai_api_token": {
-        "description": "Civitai API token. If you're using a civitai lora that needs authentication, you'll need to provide an API token."
+        "description": "Civitai API 令牌。如果使用需要认证的 Civitai LoRA，需要提供 API 令牌"
       },
       "disable_safety_checker": {
         "description": "禁用生成图像的安全检查器。"
@@ -69790,7 +69790,7 @@
         "description": "Guidance for 生成 图像"
       },
       "hf_api_token": {
-        "description": "HuggingFace API token. If you're using a hf lora that needs authentication, you'll need to provide an API token."
+        "description": "HuggingFace API 令牌。如果使用需要认证的 hf lora，需要提供 API 令牌"
       },
       "image": {
         "description": "输入图像 for 图生图 模式. The 宽高比 of your 输出 will match this 图像"
@@ -69826,7 +69826,7 @@
   },
   "replicate.image.generate.Flux_Fast": {
     "title": "Flux Fast",
-    "description": "This is the fastest Flux endpoint in the world.\nreplicate, ai",
+    "description": "这是世界上最快的 Flux 端点\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "宽高比 of the 输出图像"
@@ -69937,7 +69937,7 @@
   },
   "replicate.image.generate.Flux_Kontext_Dev": {
     "title": "Flux Kontext Dev",
-    "description": "Open-weight version of FLUX.1 Kontext\nreplicate, ai",
+    "description": "FLUX.1 Kontext 的开源权重版本\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "宽高比 of the 生成 图像. Use 'match_input_image' to match the 宽高比 of the 输入 图像."
@@ -69994,7 +69994,7 @@
         "description": "强度 of the lora"
       },
       "lora_weights": {
-        "description": "Path to the lora weights"
+        "description": "LoRA 权重路径"
       },
       "megapixels": {
         "description": "Approximate number of megapixels for 生成 图像"
@@ -70141,7 +70141,7 @@
         "description": "文本 description of what you want to 生成, or the instruction on how to edit the given 图像."
       },
       "replicate_weights": {
-        "description": "Path to the lora weights"
+        "description": "LoRA 权重路径"
       },
       "seed": {
         "description": "随机种子 for 可复现 生成. Leave blank for random."
@@ -70159,7 +70159,7 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "guidance": {
         "description": "Guidance for 生成 图像. Lower 值 can give more 逼真 图像. Good 值 to try are 2, 2.5, 3 and 3.5"
@@ -70303,7 +70303,7 @@
   },
   "replicate.image.generate.Flux_Pro_Finetuned": {
     "title": "Flux Pro Finetuned",
-    "description": "Inference model for FLUX.1 [pro] using custom `finetune_id`\nreplicate, ai",
+    "description": "使用自定义 `finetune_id` 的 FLUX.1 [pro] 推理模型\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比"
@@ -70354,10 +70354,10 @@
         "description": "宽高比 of the 生成 图像. Use 'match_input_image' to match the 宽高比 of the 输入 图像."
       },
       "background": {
-        "description": "The background of the headshot"
+        "description": "头像的背景"
       },
       "gender": {
-        "description": "The gender of the person"
+        "description": "人物的性别"
       },
       "input_image": {
         "description": "图像 of the person to 创建 a professional headshot for. Must be jpeg, png, gif, or webp."
@@ -70375,7 +70375,7 @@
   },
   "replicate.image.generate.Flux_PuLID": {
     "title": "Flux Pu LID",
-    "description": "⚡️FLUX PuLID: FLUX-dev based Pure and Lightning ID Customization via Contrastive Alignment🎭\nreplicate, ai",
+    "description": "⚡️FLUX PuLID：基于 FLUX-dev 的纯闪电式 ID 定制，通过对比对齐实现🎭\nreplicate, ai",
     "properties": {
       "guidance_scale": {
         "description": "Set the 引导系数 for 文本提示词 influence (1.0-10.0)"
@@ -70411,7 +70411,7 @@
         "description": "Set a 随机种子 for 生成 (leave blank or -1 for random)"
       },
       "start_step": {
-        "description": "Set the timestep to start inserting ID (0-4 recommended, 0 for highest fidelity, 4 for more editability)"
+        "description": "设置开始插入 ID 的时间步（推荐 0-4，0 保真度最高，4 可编辑性更强）"
       },
       "true_cfg": {
         "description": "Set the Classifier-Free Guidance (CFG) 缩放. 1.0 uses standard CFG, while 值 >1.0 启用 True CFG for more 精确 控制 over 生成. Higher 值 increase adherence to the 提示词 at the cost of 图像 质量."
@@ -70486,7 +70486,7 @@
   },
   "replicate.image.generate.Flux_Restore_Image": {
     "title": "Flux Restore Image",
-    "description": "Use FLUX Kontext to restore, fix scratches and damage, and colorize old photos\nreplicate, ai",
+    "description": "使用 FLUX Kontext 修复、去除划痕和损伤，并为老照片上色\nreplicate, ai",
     "properties": {
       "input_image": {
         "description": "图像 to restore. Must be jpeg, png, gif, or webp."
@@ -70582,7 +70582,7 @@
         "description": "The 宽高比 of the 生成 图像"
       },
       "background": {
-        "description": "Set whether the background is transparent or opaque or choose automatically"
+        "description": "设置背景为透明、不透明或自动选择"
       },
       "input_fidelity": {
         "description": "控制 how much effort the model will exert to match the style and features, especially facial features, of 输入 图像"
@@ -70600,7 +70600,7 @@
         "description": "Your OpenAI API key (可选 - uses proxy if not provided)"
       },
       "output_compression": {
-        "description": "Compression level (0-100%)"
+        "description": "压缩级别 (0-100%)"
       },
       "output_format": {
         "description": "输出格式"
@@ -70624,7 +70624,7 @@
         "description": "生成图像的尺寸。 Use 'auto' to let the model pick. 尺寸 above 2560x1440 are experimental and may give more variable results."
       },
       "background": {
-        "description": "Set whether the background is transparent or opaque or choose automatically"
+        "description": "设置背景为透明、不透明或自动选择"
       },
       "input_images": {
         "description": "A list of 图像 to use as 输入 for the 生成"
@@ -70639,7 +70639,7 @@
         "description": "Your OpenAI API key (可选 - uses proxy if not provided)"
       },
       "output_compression": {
-        "description": "Compression level (0-100%)"
+        "description": "压缩级别 (0-100%)"
       },
       "output_format": {
         "description": "输出格式"
@@ -70729,7 +70729,7 @@
         "description": "The 宽高比 of the 生成 图像"
       },
       "background": {
-        "description": "Set whether the background is transparent or opaque or choose automatically"
+        "description": "设置背景为透明、不透明或自动选择"
       },
       "input_fidelity": {
         "description": "控制 how much effort the model will exert to match the style and features, especially facial features, of 输入 图像"
@@ -70747,7 +70747,7 @@
         "description": "Your OpenAI API key"
       },
       "output_compression": {
-        "description": "Compression level (0-100%)"
+        "description": "压缩级别 (0-100%)"
       },
       "output_format": {
         "description": "输出格式"
@@ -70771,7 +70771,7 @@
         "description": "The 宽高比 of the 生成 图像"
       },
       "background": {
-        "description": "Set whether the background is transparent or opaque or choose automatically"
+        "description": "设置背景为透明、不透明或自动选择"
       },
       "input_fidelity": {
         "description": "控制 how much effort the model will exert to match the style and features, especially facial features, of 输入 图像"
@@ -70789,7 +70789,7 @@
         "description": "Your OpenAI API key"
       },
       "output_compression": {
-        "description": "Compression level (0-100%)"
+        "description": "压缩级别 (0-100%)"
       },
       "output_format": {
         "description": "输出格式"
@@ -70828,13 +70828,13 @@
         "description": "Sampling 温度 (0 for greedy decoding)"
       },
       "top_p": {
-        "description": "Nucleus sampling top-p"
+        "description": "核采样 top-p"
       }
     }
   },
   "replicate.image.generate.Granite_4_0_H_Small": {
     "title": "Granite 4.0 H Small",
-    "description": "Granite-4.0-H-Small is a 32B parameter long-context instruct model finetuned from Granite-4.0-H-Small-Base using a combination of open source instruction datasets with permissive license and internally collected synthetic datasets.\nreplicate, ai",
+    "description": "Granite-4.0-H-Small 是 32B 参数的长上下文指令模型，基于 Granite-4.0-H-Small-Base 使用开源指令数据集和内部合成数据集微调而成\nreplicate, ai",
     "properties": {
       "add_generation_prompt": {
         "description": "添加 生成 提示词. Passed to the chat template. Defaults to True."
@@ -70843,10 +70843,10 @@
         "description": "A template to 格式 the 提示词 with. If not specified, the chat template provided by the model will be used."
       },
       "chat_template_kwargs": {
-        "description": "Additional arguments to be passed to the chat template."
+        "description": "传递给聊天模板的额外参数"
       },
       "documents": {
-        "description": "Documents for request. Passed to the chat template."
+        "description": "请求的文档，传递给聊天模板"
       },
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -70855,10 +70855,10 @@
         "description": "An upper bound for the number of tokens that can be 生成 for a completion, including visible 输出 tokens and reasoning tokens."
       },
       "max_tokens": {
-        "description": "max_tokens is deprecated in favor of the max_completion_tokens field."
+        "description": "max_tokens 已弃用，请改用 max_completion_tokens 字段"
       },
       "messages": {
-        "description": "Chat completion API messages."
+        "description": "对话补全 API 消息"
       },
       "min_tokens": {
         "description": "The minimum number of tokens the model should 生成 as 输出."
@@ -70882,7 +70882,7 @@
         "description": "A list of sequences to stop 生成 at. For example, [\"<end>\",\"<stop>\"] will stop 生成 at the first instance of \"<end>\" or \"<stop>\"."
       },
       "stream": {
-        "description": "Request streaming response. Defaults to False."
+        "description": "请求流式响应。默认为 False"
       },
       "system_prompt": {
         "description": "Completion API system 提示词. The chat template provides a good 默认."
@@ -70891,10 +70891,10 @@
         "description": "The 值 used to modulate the next token probabilities."
       },
       "tool_choice": {
-        "description": "Tool choice for request. If the choice is a specific function, this should be specified as a JSON string."
+        "description": "请求的工具选择。如果选择特定函数，应指定为 JSON 字符串"
       },
       "tools": {
-        "description": "Tools for request. Passed to the chat template."
+        "description": "请求的工具，传递给聊天模板"
       },
       "top_k": {
         "description": "The number of highest probability tokens to consider for generating the 输出. If > 0, only keep the top k tokens with highest probability (top-k filtering)."
@@ -70939,7 +70939,7 @@
   },
   "replicate.image.generate.Happycat": {
     "title": "Happycat",
-    "description": "Happycat node\nreplicate, ai",
+    "description": "Happycat 节点\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -70954,7 +70954,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -70978,19 +70978,19 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
   "replicate.image.generate.Hidream_L1_Dev": {
     "title": "Hidream L1 Dev",
-    "description": "This is an optimised version of the hidream-l1-dev model using the pruna ai optimisation toolkit!\nreplicate, ai",
+    "description": "这是使用 pruna ai 优化工具包优化的 hidream-l1-dev 模型版本\nreplicate, ai",
     "properties": {
       "model_type": {
         "description": "Model type"
@@ -71017,7 +71017,7 @@
   },
   "replicate.image.generate.Hidream_L1_Fast": {
     "title": "Hidream L1 Fast",
-    "description": "This is an optimised version of the hidream-l1 model using the pruna ai optimisation toolkit!\nreplicate, ai",
+    "description": "这是使用 pruna ai 优化工具包优化的 hidream-l1 模型版本\nreplicate, ai",
     "properties": {
       "model_type": {
         "description": "Model type"
@@ -71047,7 +71047,7 @@
   },
   "replicate.image.generate.Hidream_L1_Full": {
     "title": "Hidream L1 Full",
-    "description": "This is an optimised version of the hidream-full model using the pruna ai optimisation toolkit!\nreplicate, ai",
+    "description": "这是使用 pruna ai 优化工具包优化的 hidream-full 模型版本\nreplicate, ai",
     "properties": {
       "model_type": {
         "description": "Model type"
@@ -71074,7 +71074,7 @@
   },
   "replicate.image.generate.Html_To_Image": {
     "title": "Html To Image",
-    "description": "Html_To_Image node\nreplicate, ai",
+    "description": "Html_To_Image 节点\nreplicate, ai",
     "properties": {
       "file_type": {
         "description": "输出格式"
@@ -71101,7 +71101,7 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "output_format": {
         "description": "输出图像的格式"
@@ -71128,7 +71128,7 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "output_format": {
         "description": "输出图像的格式"
@@ -71146,7 +71146,7 @@
   },
   "replicate.image.generate.Hyper_Flux_8Step": {
     "title": "Hyper Flux 8Step",
-    "description": "Hyper FLUX 8-step by ByteDance\nreplicate, ai",
+    "description": "ByteDance 的 Hyper FLUX 8 步模型\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. The 尺寸 will always be 1 megapixel, i.e. 1024x1024 if 宽高比 is 1:1. To use arbitrary width and height, set 宽高比 to 'custom'."
@@ -71206,7 +71206,7 @@
         "description": "The multiplier for the final 输出 分辨率 relative to the initial latent 分辨率"
       },
       "light_source": {
-        "description": "The type and position of lighting to apply to the initial background latent"
+        "description": "应用于初始背景潜空间的灯光类型和位置"
       },
       "negative_prompt": {
         "description": "A 文本 description of attributes to avoid in the 生成 图像"
@@ -71242,7 +71242,7 @@
     "description": "(Research only) IP-Adapter-FaceID can 生成 various style 图像 conditioned on a face with only 文本 提示词\nreplicate, ai",
     "properties": {
       "agree_to_research_only": {
-        "description": "You must agree to use this model only for research. It is not for commercial use."
+        "description": "你必须同意仅将此模型用于研究用途。不可用于商业用途"
       },
       "face_image": {
         "description": "输入 face 图像"
@@ -71323,10 +71323,10 @@
         "description": "宽高比 of the 生成 图像. Use 'match_input_image' to match the 宽高比 of the 输入 图像."
       },
       "gender": {
-        "description": "The gender of the person"
+        "description": "人物的性别"
       },
       "iconic_location": {
-        "description": "The iconic location to place the person in"
+        "description": "将人物放置在的标志性场景"
       },
       "input_image": {
         "description": "图像 of the person to transport to an iconic location. Must be jpeg, png, gif, or webp."
@@ -71413,7 +71413,7 @@
   },
   "replicate.image.generate.Ideogram_V2A": {
     "title": "Ideogram V2A",
-    "description": "Like Ideogram v2, but faster and cheaper\nreplicate, ai",
+    "description": "类似于 Ideogram v2，但更快更便宜\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "宽高比. Ignored if a 分辨率 or 局部重绘 图像 is given."
@@ -71437,7 +71437,7 @@
   },
   "replicate.image.generate.Ideogram_V2A_Turbo": {
     "title": "Ideogram V2A Turbo",
-    "description": "Like Ideogram v2 turbo, but now faster and cheaper\nreplicate, ai",
+    "description": "类似于 Ideogram v2 turbo，但更快更便宜\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "宽高比. Ignored if a 分辨率 or 局部重绘 图像 is given."
@@ -71644,13 +71644,13 @@
         "description": "控制 图像"
       },
       "controlnet_conditioning_scale": {
-        "description": "How strong the controlnet conditioning is"
+        "description": "ControlNet 条件化的强度"
       },
       "controlnet_end": {
-        "description": "When controlnet conditioning ends"
+        "description": "ControlNet 条件化结束时间"
       },
       "controlnet_start": {
-        "description": "When controlnet conditioning starts"
+        "description": "ControlNet 条件化开始时间"
       },
       "guidance_scale": {
         "description": "缩放 for classifier-free guidance"
@@ -71717,7 +71717,7 @@
   },
   "replicate.image.generate.Imagen_4": {
     "title": "Imagen 4",
-    "description": "Google's Imagen 4 flagship model\nreplicate, ai",
+    "description": "Google 的 Imagen 4 旗舰模型\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "宽高比 of the 生成 图像"
@@ -71783,10 +71783,10 @@
         "description": "宽高比 of the 生成 图像. Use 'match_input_image' to match the 宽高比 of the 输入 图像."
       },
       "gender": {
-        "description": "The gender of the person"
+        "description": "人物的性别"
       },
       "impossible_scenario": {
-        "description": "The impossible scenario to place the person in"
+        "description": "将人物放置在的不可能场景"
       },
       "input_image": {
         "description": "图像 of the person to place in an impossible scenario. Must be jpeg, png, gif, or webp."
@@ -71804,7 +71804,7 @@
   },
   "replicate.image.generate.Isaac_0_1": {
     "title": "Isaac 0.1",
-    "description": "an open-source, 2B-parameter model built for real-world applications\nreplicate, ai",
+    "description": "专为实际应用打造的开源 2B 参数模型\nreplicate, ai",
     "properties": {
       "image": {
         "description": "输入图像 for analysis"
@@ -71822,7 +71822,7 @@
   },
   "replicate.image.generate.Kandinsky": {
     "title": "Kandinsky",
-    "description": "multilingual text2image latent diffusion model\nreplicate, ai",
+    "description": "多语言文生图潜空间扩散模型\nreplicate, ai",
     "properties": {
       "height": {
         "description": "Height of 输出图像. Lower the setting if hits memory limits."
@@ -71852,7 +71852,7 @@
   },
   "replicate.image.generate.Kimi_K2_Thinking": {
     "title": "Kimi K2 Thinking",
-    "description": "Kimi K2 Thinking is the latest, most capable version of an open-source thinking model.\nreplicate, ai",
+    "description": "Kimi K2 Thinking 是开源思考模型的最新、最强大版本\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -71876,7 +71876,7 @@
   },
   "replicate.image.generate.Kontext_0_1_Webp": {
     "title": "Kontext 0.1 Webp",
-    "description": "Kontext_0_1_Webp node\nreplicate, ai",
+    "description": "Kontext_0_1_Webp 节点\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "宽高比 of the 生成 图像. Use 'match_input_image' to match the 宽高比 of the 输入 图像."
@@ -71909,7 +71909,7 @@
         "description": "文本 description of what you want to 生成, or the instruction on how to edit the given 图像."
       },
       "replicate_weights": {
-        "description": "Path to the lora weights"
+        "description": "LoRA 权重路径"
       },
       "seed": {
         "description": "随机种子 for 可复现 生成. Leave blank for random."
@@ -71951,7 +71951,7 @@
         "description": "文本 description of what you want to 生成, or the instruction on how to edit the given 图像."
       },
       "replicate_weights": {
-        "description": "Path to the lora weights"
+        "description": "LoRA 权重路径"
       },
       "seed": {
         "description": "随机种子 for 可复现 生成. Leave blank for random."
@@ -71960,7 +71960,7 @@
   },
   "replicate.image.generate.Kontext_Long_Exposure_For_Water": {
     "title": "Kontext Long Exposure For Water",
-    "description": "Edit photos of water to be a long exposure using this kontext fine-tune\nreplicate, ai",
+    "description": "使用此 kontext 微调模型将水面照片处理为长曝光效果\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "宽高比 of the 生成 图像. Use 'match_input_image' to match the 宽高比 of the 输入 图像."
@@ -71993,7 +71993,7 @@
         "description": "文本 description of what you want to 生成, or the instruction on how to edit the given 图像."
       },
       "replicate_weights": {
-        "description": "Path to the lora weights"
+        "description": "LoRA 权重路径"
       },
       "seed": {
         "description": "随机种子 for 可复现 生成. Leave blank for random."
@@ -72002,7 +72002,7 @@
   },
   "replicate.image.generate.Kontext_Make_Person_Real": {
     "title": "Kontext Make Person Real",
-    "description": "A FLUX Kontext fine-tune to fix plastic AI skin textures\nreplicate, ai",
+    "description": "用于修复 AI 塑料感皮肤纹理的 FLUX Kontext 微调模型\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "宽高比 of the 生成 图像. Use 'match_input_image' to match the 宽高比 of the 输入 图像."
@@ -72035,7 +72035,7 @@
         "description": "文本 description of what you want to 生成, or the instruction on how to edit the given 图像."
       },
       "replicate_weights": {
-        "description": "Path to the lora weights"
+        "description": "LoRA 权重路径"
       },
       "seed": {
         "description": "随机种子 for 可复现 生成. Leave blank for random."
@@ -72044,7 +72044,7 @@
   },
   "replicate.image.generate.Kontext_Meta_Cars": {
     "title": "Kontext Meta Cars",
-    "description": "Change your car into a CDMX Meta Car\nreplicate, ai",
+    "description": "将你的车变成 CDMX 元车\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "宽高比 of the 生成 图像. Use 'match_input_image' to match the 宽高比 of the 输入 图像."
@@ -72077,7 +72077,7 @@
         "description": "文本 description of what you want to 生成, or the instruction on how to edit the given 图像."
       },
       "replicate_weights": {
-        "description": "Path to the lora weights"
+        "description": "LoRA 权重路径"
       },
       "seed": {
         "description": "随机种子 for 可复现 生成. Leave blank for random."
@@ -72086,7 +72086,7 @@
   },
   "replicate.image.generate.Kontext_Old_And_Damaged": {
     "title": "Kontext Old And Damaged",
-    "description": "Use this kontext fine-tune to turn any photo into an old and damaged photo\nreplicate, ai",
+    "description": "使用此 kontext 微调模型将任意照片变成老旧损坏的照片\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "宽高比 of the 生成 图像. Use 'match_input_image' to match the 宽高比 of the 输入 图像."
@@ -72119,7 +72119,7 @@
         "description": "文本 description of what you want to 生成, or the instruction on how to edit the given 图像."
       },
       "replicate_weights": {
-        "description": "Path to the lora weights"
+        "description": "LoRA 权重路径"
       },
       "seed": {
         "description": "随机种子 for 可复现 生成. Leave blank for random."
@@ -72161,7 +72161,7 @@
         "description": "文本 description of what you want to 生成, or the instruction on how to edit the given 图像."
       },
       "replicate_weights": {
-        "description": "Path to the lora weights"
+        "description": "LoRA 权重路径"
       },
       "seed": {
         "description": "随机种子 for 可复现 生成. Leave blank for random."
@@ -72257,7 +72257,7 @@
   },
   "replicate.image.generate.Llama_Guard_4_12b": {
     "title": "Llama Guard 4 12b",
-    "description": "Llama_Guard_4_12b node\nreplicate, ai",
+    "description": "Llama_Guard_4_12b 节点\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty parameter - positive 值 penalize the repetition of tokens."
@@ -72281,7 +72281,7 @@
         "description": "Sampling 温度 between 0 and 2"
       },
       "top_p": {
-        "description": "Nucleus sampling parameter - the model considers the results of the tokens with top_p probability mass. (0.1 means only the tokens comprising the top 10% probability mass are considered.)"
+        "description": "核采样参数 - 模型考虑 top_p 概率质量内的 token 结果（0.1 表示仅考虑构成前 10% 概率质量的 token）"
       }
     }
   },
@@ -72314,7 +72314,7 @@
   },
   "replicate.image.generate.Mamav": {
     "title": "Mamav",
-    "description": "Mamav node\nreplicate, ai",
+    "description": "Mamav 节点\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -72329,7 +72329,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -72353,13 +72353,13 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
@@ -72470,7 +72470,7 @@
   },
   "replicate.image.generate.Moneycat": {
     "title": "Moneycat",
-    "description": "a cute and young orange British Shorthair cat\nreplicate, ai",
+    "description": "一只可爱年轻的橙色英国短毛猫\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -72485,7 +72485,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -72509,13 +72509,13 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
@@ -72647,7 +72647,7 @@
     "description": "Google's state of the art 图像 生成 and editing model 🍌🍌\nreplicate, ai",
     "properties": {
       "allow_fallback_model": {
-        "description": "Fallback to another model (currently bytedance/seedream-5) if Nano Banana Pro is at capacity."
+        "description": "当 Nano Banana Pro 满载时回退到其他模型（目前为 bytedance/seedream-5）"
       },
       "aspect_ratio": {
         "description": "宽高比 of the 生成 图像"
@@ -72674,10 +72674,10 @@
     "description": "OmniGen2: a 强大 and 高效 unified multimodal model\nreplicate, ai",
     "properties": {
       "cfg_range_end": {
-        "description": "CFG range end"
+        "description": "CFG 范围结束值"
       },
       "cfg_range_start": {
-        "description": "CFG range start"
+        "description": "CFG 范围起始值"
       },
       "height": {
         "description": "Height of 输出图像"
@@ -72710,7 +72710,7 @@
         "description": "文本提示词 describing the desired 图像 edit"
       },
       "scheduler": {
-        "description": "Scheduler to use"
+        "description": "要使用的调度器"
       },
       "seed": {
         "description": "随机种子. Set to -1 for 随机种子"
@@ -72737,10 +72737,10 @@
         "description": "Height of the 生成 图像. Only used when aspect_ratio=custom. Must be a multiple of 16."
       },
       "hf_api_token": {
-        "description": "HuggingFace API token. If you're using a HuggingFace LoRAs that needs authentication, you'll need to provide an API token."
+        "description": "HuggingFace API 令牌。如果使用需要认证的 HuggingFace LoRA，需要提供 API 令牌"
       },
       "lora_scale": {
-        "description": "Determines how strongly the main LoRA should be applied. 0.5 usually works well for most LoRAs."
+        "description": "决定主 LoRA 的应用强度。0.5 通常适用于大多数 LoRA"
       },
       "lora_weights": {
         "description": "Load LoRA weights. 支持 HuggingFace URLs in the 格式 huggingface.co/<owner>/<model-name>[/<lora-weights-file.safetensors>]. HuggingFace LoRAs may require an API token to access, which you can provide in the `hf_api_token` 输入."
@@ -72776,13 +72776,13 @@
         "description": "图像生成的文本提示词. Make sure to describe your edit task clearly. You can refer to the 图像 as '图像 1' and '图像 2' and so on."
       },
       "replicate_weights": {
-        "description": "Task to perform with P-Edit."
+        "description": "使用 P-Edit 执行的任务"
       },
       "seed": {
         "description": "随机种子。设置后生成可复现."
       },
       "turbo": {
-        "description": "If turned on, the model will run faster with additional optimizations. For complicated tasks, it is recommended to turn this off."
+        "description": "开启后模型将通过额外优化更快运行。对于复杂任务，建议关闭此项"
       }
     }
   },
@@ -72797,13 +72797,13 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "hf_api_token": {
-        "description": "HuggingFace API token. If you're using a HuggingFace LoRAs that needs authentication, you'll need to provide an API token."
+        "description": "HuggingFace API 令牌。如果使用需要认证的 HuggingFace LoRA，需要提供 API 令牌"
       },
       "images": {
         "description": "图像 to use as a reference. For editing task, provide the main 图像 as the first 图像."
       },
       "lora_scale": {
-        "description": "Determines how strongly the main LoRA should be applied."
+        "description": "决定主 LoRA 的应用强度"
       },
       "lora_weights": {
         "description": "Load LoRA weights. 支持 HuggingFace URLs in the 格式 huggingface.co/<owner>/<model-name>[/<lora-weights-file.safetensors>]. HuggingFace LoRAs may require an API token to access, which you can provide in the `hf_api_token` 输入."
@@ -72815,7 +72815,7 @@
         "description": "随机种子。设置后生成可复现."
       },
       "turbo": {
-        "description": "If turned on, the model will run faster with additional optimizations. For complicated tasks, it is recommended to turn this off."
+        "description": "开启后模型将通过额外优化更快运行。对于复杂任务，建议关闭此项"
       }
     }
   },
@@ -72833,10 +72833,10 @@
         "description": "Height of the 生成 图像. Only used when aspect_ratio=custom. Must be a multiple of 16."
       },
       "hf_api_token": {
-        "description": "HuggingFace API token. If you're using a HuggingFace LoRAs that needs authentication, you'll need to provide an API token."
+        "description": "HuggingFace API 令牌。如果使用需要认证的 HuggingFace LoRA，需要提供 API 令牌"
       },
       "lora_scale": {
-        "description": "Determines how strongly the main LoRA should be applied. 0.5 usually works well for most LoRAs."
+        "description": "决定主 LoRA 的应用强度。0.5 通常适用于大多数 LoRA"
       },
       "lora_weights": {
         "description": "Load LoRA weights. 支持 HuggingFace URLs in the 格式 huggingface.co/<owner>/<model-name>[/<lora-weights-file.safetensors>]. HuggingFace LoRAs may require an API token to access, which you can provide in the `hf_api_token` 输入."
@@ -72866,19 +72866,19 @@
         "description": "Zip archive with 图像 of a consistent style. Use at least 10 图像. The zip can also contain a 文本 file for each 图像 (e.g., photo.txt for photo.jpg) to specify edit instructions for the 图像 pair. You can also pass a URL pointing to the zip file instead of uploading a file directly."
       },
       "learning_rate": {
-        "description": "Learning rate applied to trainable parameters"
+        "description": "应用于可训练参数的学习率"
       },
       "steps": {
         "description": "Total number of training 步数"
       },
       "training_type": {
-        "description": "Type of training to perform"
+        "description": "要执行的训练类型"
       }
     }
   },
   "replicate.image.generate.P_Image_Try_On": {
     "title": "P Image Try On",
-    "description": "Virtual try-on. Put one or more garments onto a person photo while keeping their face, pose, and body.\nreplicate, ai",
+    "description": "虚拟试衣。将一件或多件服装穿到人物照片上，同时保持面部、姿势和身体不变\nreplicate, ai",
     "properties": {
       "garment_images": {
         "description": "Garment reference 图像. Up to 6 recommended, up to 11 支持."
@@ -72908,13 +72908,13 @@
         "description": "随机种子. Leave blank for a 随机种子."
       },
       "turbo": {
-        "description": "If turned on, the model will run faster with additional optimizations. Not recommended for more than 4 garments."
+        "description": "开启后模型将通过额外优化更快运行。不建议用于超过 4 件服装的情况"
       }
     }
   },
   "replicate.image.generate.Pai_Qwen_21102568": {
     "title": "Pai Qwen 21102568",
-    "description": "a young lady name Pai\nreplicate, ai",
+    "description": "一位名叫 Pai 的年轻女士\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -72929,7 +72929,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -72953,13 +72953,13 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
@@ -73001,13 +73001,13 @@
         "description": "Character 参考图像 to guide 生成"
       },
       "character_reference_url": {
-        "description": "Deprecated: Use character_reference instead"
+        "description": "已弃用：请改用 character_reference"
       },
       "image_reference": {
         "description": "参考图像 to guide 生成"
       },
       "image_reference_url": {
-        "description": "Deprecated: Use image_reference instead"
+        "description": "已弃用：请改用 image_reference"
       },
       "image_reference_weight": {
         "description": "Weight of the 参考图像. Larger 值 will make the 参考图像 have a stronger influence on the 生成 图像."
@@ -73022,7 +73022,7 @@
         "description": "风格参考 图像 to guide 生成"
       },
       "style_reference_url": {
-        "description": "Deprecated: Use style_reference instead"
+        "description": "已弃用：请改用 style_reference"
       },
       "style_reference_weight": {
         "description": "Weight of the 风格参考 图像"
@@ -73064,7 +73064,7 @@
         "description": "提示词 强度 when using img2img / 局部重绘. 1.0 corresponds to full destruction of information in 图像"
       },
       "scheduler": {
-        "description": "Scheduler. DPMSolver++ or DPM++2MKarras is recommended for most cases"
+        "description": "调度器。大多数情况下推荐使用 DPMSolver++ 或 DPM++2MKarras"
       },
       "seed": {
         "description": "随机种子. Leave blank to randomize the 种子"
@@ -73079,7 +73079,7 @@
     "description": "创建 series of 人像 photos from a single 图像\nreplicate, ai",
     "properties": {
       "background": {
-        "description": "The background of the photo"
+        "description": "照片的背景"
       },
       "input_image": {
         "description": "图像 of the person to 创建 a series of photos for. Must be jpeg, png, gif, or webp."
@@ -73091,7 +73091,7 @@
         "description": "输出格式 for the 生成 图像"
       },
       "randomize_images": {
-        "description": "Whether to randomize the poses"
+        "description": "是否随机化姿势"
       },
       "safety_tolerance": {
         "description": "安全容忍度, 0 is most strict and 2 is most permissive. 2 is currently the maximum allowed."
@@ -73133,7 +73133,7 @@
         "description": "文本 description of what you want to 生成, or the instruction on how to edit the given 图像."
       },
       "replicate_weights": {
-        "description": "Path to the lora weights"
+        "description": "LoRA 权重路径"
       },
       "seed": {
         "description": "随机种子 for 可复现 生成. Leave blank for random."
@@ -73214,7 +73214,7 @@
         "description": "Vertical shadow 偏移 in pixels"
       },
       "shadow_type": {
-        "description": "Type of shadow to apply: regular or float"
+        "description": "应用的阴影类型：常规或悬浮"
       },
       "shadow_width": {
         "description": "控制 the width of the elliptical shadow in pixels (for floating shadows)"
@@ -73268,7 +73268,7 @@
   },
   "replicate.image.generate.Proteus_V_03": {
     "title": "Proteus V 03",
-    "description": "ProteusV0.3: The Anime Update\nreplicate, ai",
+    "description": "ProteusV0.3：动漫风格更新\nreplicate, ai",
     "properties": {
       "apply_watermark": {
         "description": "Applies a 水印 to 启用 determining if an 图像 is 生成 in downstream applications. If you have other provisions for generating or deploying 图像 safely, you can use this to 禁用 watermarking."
@@ -73313,7 +73313,7 @@
   },
   "replicate.image.generate.PuLID": {
     "title": "Pu LID",
-    "description": "📖 PuLID: Pure and Lightning ID Customization via Contrastive Alignment\nreplicate, ai",
+    "description": "📖 PuLID：通过对比对齐实现的纯闪电式 ID 定制\nreplicate, ai",
     "properties": {
       "auxiliary_face_image1": {
         "description": "Additional ID 图像 (auxiliary)"
@@ -73379,7 +73379,7 @@
         "description": "The face 图像 to use for the 生成"
       },
       "face_style": {
-        "description": "Style of the face"
+        "description": "面部风格"
       },
       "height": {
         "description": "Height of the 输出图像 (ignored if structure 图像 given)"
@@ -73409,7 +73409,7 @@
   },
   "replicate.image.generate.Qwen_2004": {
     "title": "Qwen 2004",
-    "description": "Qwen fine-tuned on bad photos from 2004\nreplicate, ai",
+    "description": "基于 2004 年劣质照片微调的 Qwen 模型\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -73424,7 +73424,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -73448,19 +73448,19 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
   "replicate.image.generate.Qwen_Bad_70s_Food": {
     "title": "Qwen Bad 70s Food",
-    "description": "Qwen fine-tuned on photos of bad 70s food\nreplicate, ai",
+    "description": "基于 70 年代糟糕食物照片微调的 Qwen 模型\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -73475,7 +73475,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -73499,19 +73499,19 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
   "replicate.image.generate.Qwen_Black_Sclera": {
     "title": "Qwen Black Sclera",
-    "description": "Qwen_Black_Sclera node\nreplicate, ai",
+    "description": "Qwen_Black_Sclera 节点\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -73526,7 +73526,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -73550,19 +73550,19 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
   "replicate.image.generate.Qwen_Dark_Art": {
     "title": "Qwen Dark Art",
-    "description": "Qwen fine-tuned on classical dark artwork\nreplicate, ai",
+    "description": "基于经典暗黑艺术微调的 Qwen 模型\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -73577,7 +73577,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -73601,13 +73601,13 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
@@ -73628,7 +73628,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -73652,13 +73652,13 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
@@ -73700,7 +73700,7 @@
         "description": "可选 文本 instruction appended after the camera directive."
       },
       "rotate_degrees": {
-        "description": "Camera rotation in degrees. Positive rotates left, negative rotates right."
+        "description": "摄像机旋转角度（度）。正值向左旋转，负值向右旋转"
       },
       "seed": {
         "description": "随机种子。设置后生成可复现."
@@ -73709,16 +73709,16 @@
         "description": "True classifier-free 引导系数 passed to the pipeline."
       },
       "use_wide_angle": {
-        "description": "Switch to a wide-angle lens instruction."
+        "description": "切换到广角镜头指令"
       },
       "vertical_tilt": {
-        "description": "Vertical camera tilt. -1 = bird's-eye, 0 = level, 1 = worm's-eye."
+        "description": "垂直摄像机俯仰角。-1 = 鸟瞰，0 = 平视，1 = 仰视"
       }
     }
   },
   "replicate.image.generate.Qwen_Fantasy_Art": {
     "title": "Qwen Fantasy Art",
-    "description": "Qwen fine-tuned on fantasy art\nreplicate, ai",
+    "description": "基于奇幻艺术微调的 Qwen 模型\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -73733,7 +73733,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -73757,13 +73757,13 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
@@ -73787,7 +73787,7 @@
         "description": "Additional LoRA weights as an array of URLs. Same 格式 支持 as lora_weights (e.g., ['https://huggingface.co/flymy-ai/qwen-图像-lora/resolve/main/pytorch_lora_weights.safetensors', 'https://huggingface.co/flymy-ai/qwen-图像-真实感-lora/resolve/main/flymy_realism.safetensors'])"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "guidance": {
         "description": "Guidance for 生成 图像. Lower 值 can give more 逼真 图像. Good 值 to try are 2, 2.5, 3 and 3.5"
@@ -73799,7 +73799,7 @@
         "description": "图像 尺寸 for the 生成 图像"
       },
       "lora_scale": {
-        "description": "Determines how strongly the main LoRA should be applied."
+        "description": "决定主 LoRA 的应用强度"
       },
       "lora_weights": {
         "description": "Load LoRA weights. Only works with 文生图 pipeline. 支持 arbitrary .safetensors URLs, tar files, and zip files from the Internet (for example, 'https://huggingface.co/flymy-ai/qwen-图像-lora/resolve/main/pytorch_lora_weights.safetensors', 'https://example.com/lora_weights.tar.gz', or 'https://example.com/lora_weights.zip')"
@@ -73943,7 +73943,7 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "image": {
         "description": "图像 to use as reference. Must be jpeg, png, gif, or webp."
@@ -73973,7 +73973,7 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "image": {
         "description": "图像 to use as reference. Must be jpeg, png, gif, or webp."
@@ -73982,7 +73982,7 @@
         "description": "强度 applied to the selected LoRA."
       },
       "lora_weights": {
-        "description": "LoRA weights to apply. Pass a Hugging Face repo slug (for example 'owner/model') or a direct .safetensors URL. Leave blank to run without a LoRA."
+        "description": "要应用的 LoRA 权重。传入 Hugging Face 仓库标识（例如 'owner/model'）或直接的 .safetensors URL。留空则不使用 LoRA"
       },
       "output_format": {
         "description": "输出图像的格式."
@@ -74009,7 +74009,7 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "image": {
         "description": "图像 to use as reference. Must be jpeg, png, gif, or webp."
@@ -74039,7 +74039,7 @@
         "description": "禁用生成图像的安全检查器。"
       },
       "go_fast": {
-        "description": "Run faster predictions with additional optimizations."
+        "description": "通过额外优化实现更快预测"
       },
       "image": {
         "description": "图像 to use as reference. Must be jpeg, png, gif, or webp."
@@ -74066,7 +74066,7 @@
   },
   "replicate.image.generate.Qwen_Image_Edit_Plus_Lora_Fusion": {
     "title": "Qwen Image Edit Plus Lora Fusion",
-    "description": "Fusion – Product/object blending that fixes perspective and lighting so the subject melts into a new background via the Fusion LoRA.\nreplicate, ai",
+    "description": "Fusion - 产品/物体融合，通过 Fusion LoRA 修正透视和光照，使主体自然融入新背景\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比"
@@ -74192,7 +74192,7 @@
   },
   "replicate.image.generate.Qwen_Image_Edit_Plus_Lora_Relight": {
     "title": "Qwen Image Edit Plus Lora Relight",
-    "description": "Relight – Soft, curtain-filtered relighting that repaints the scene with golden-hour or moody tones using the Relight LoRA.\nreplicate, ai",
+    "description": "Relight - 柔和的窗帘滤光重新打光，使用 Relight LoRA 以黄金时刻或情绪化色调重新渲染场景\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比"
@@ -74291,7 +74291,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -74315,13 +74315,13 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
@@ -74342,7 +74342,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -74366,19 +74366,19 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
   "replicate.image.generate.Qwen_My_Subconscious": {
     "title": "Qwen My Subconscious",
-    "description": "Qwen fine-tuned on trippy and vibrant FLUX Pro outputs\nreplicate, ai",
+    "description": "基于迷幻鲜艳的 FLUX Pro 输出微调的 Qwen 模型\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -74393,7 +74393,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -74417,19 +74417,19 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
   "replicate.image.generate.Qwen_N74": {
     "title": "Qwen N74",
-    "description": "Qwen_N74 node\nreplicate, ai",
+    "description": "Qwen_N74 节点\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -74444,7 +74444,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -74468,19 +74468,19 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
   "replicate.image.generate.Qwen_Tron_Ares": {
     "title": "Qwen Tron Ares",
-    "description": "Qwen fine-tuned on TRON: ARES trailer\nreplicate, ai",
+    "description": "基于 TRON: ARES 预告片微调的 Qwen 模型\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -74495,7 +74495,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -74519,19 +74519,19 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
   "replicate.image.generate.Qwen_William_Blake": {
     "title": "Qwen William Blake",
-    "description": "Qwen fine-tuned on the art of William Blake\nreplicate, ai",
+    "description": "基于 William Blake 艺术作品微调的 Qwen 模型\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -74546,7 +74546,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -74570,19 +74570,19 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
   "replicate.image.generate.Ra2": {
     "title": "Ra 2",
-    "description": "Ra2 node\nreplicate, ai",
+    "description": "Ra2 节点\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "生成图像的宽高比. Ignored if width and height are both provided."
@@ -74597,7 +74597,7 @@
         "description": "引导系数 for 图像 生成. Defaults to 1 if go_fast, else 3.5."
       },
       "height": {
-        "description": "Custom height in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义高度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       },
       "image_size": {
         "description": "图像 尺寸 preset (质量 = larger, 速度 = faster). Ignored if width and height are both provided."
@@ -74621,13 +74621,13 @@
         "description": "The main 提示词 for 图像 生成"
       },
       "replicate_weights": {
-        "description": "Path to LoRA weights file. Leave blank to use base model."
+        "description": "LoRA 权重文件路径。留空则使用基础模型"
       },
       "seed": {
         "description": "Set a 种子 for 可复现. Random by 默认."
       },
       "width": {
-        "description": "Custom width in pixels. Provide both width and height for custom dimensions (overrides aspect_ratio/image_size)."
+        "description": "自定义宽度（像素）。同时提供宽度和高度以使用自定义尺寸（覆盖 aspect_ratio/image_size）"
       }
     }
   },
@@ -74723,7 +74723,7 @@
   },
   "replicate.image.generate.Rd_Tile": {
     "title": "Rd Tile",
-    "description": "All the tools you need for generating pixel art tilesets\nreplicate, ai",
+    "description": "生成像素艺术图块集所需的全部工具\nreplicate, ai",
     "properties": {
       "bypass_prompt_expansion": {
         "description": "禁用 automatic 提示词扩展"
@@ -75092,7 +75092,7 @@
         "description": "生成 instruction (文生图 or edit). Minimum 2 characters."
       },
       "max_iterations": {
-        "description": "Number of internal reasoning iterations (1-3)."
+        "description": "内部推理迭代次数 (1-3)"
       },
       "output_format": {
         "description": "输出图像 格式. API returns webp; png will be 转换 in Python."
@@ -75134,7 +75134,7 @@
         "description": "生成 instruction (文生图 or edit). Minimum 2 characters."
       },
       "max_iterations": {
-        "description": "Number of internal reasoning iterations (1-3)."
+        "description": "内部推理迭代次数 (1-3)"
       },
       "output_format": {
         "description": "输出图像 格式. API returns webp; png will be 转换 in Python."
@@ -75161,7 +75161,7 @@
         "description": "宽高比 for 输出. auto uses model choice."
       },
       "background": {
-        "description": "Final background handling."
+        "description": "最终背景处理方式"
       },
       "background_color": {
         "description": "6-digit hex 颜色 used when background is solid."
@@ -75212,7 +75212,7 @@
         "description": "宽高比 for 输出. auto uses model choice."
       },
       "background": {
-        "description": "Final background handling."
+        "description": "最终背景处理方式"
       },
       "background_color": {
         "description": "6-digit hex 颜色 used when background is solid."
@@ -75251,7 +75251,7 @@
         "description": "可选 RF2.5 scoring rubric, encoded as a JSON array string. Provide 1-8 dimensions, each with key, label, description, weight, 可选 passingScore, and 可选 scoreGuidance."
       },
       "thinking_level": {
-        "description": "RF2.5 thinking budget for pro."
+        "description": "RF2.5 pro 版本的思考预算"
       }
     }
   },
@@ -75275,7 +75275,7 @@
         "description": "Possible SDXL 图像 尺寸"
       },
       "negative_prompt": {
-        "description": "Describe what you do not want in your setting"
+        "description": "描述设置中不希望出现的内容"
       },
       "num_inference_steps": {
         "description": "推理步数"
@@ -75287,7 +75287,7 @@
         "description": "What percentage of the 图像 width to fill with product"
       },
       "prompt": {
-        "description": "Describe the new setting for your product"
+        "description": "描述产品的新设置"
       },
       "scheduler": {
         "description": "scheduler"
@@ -75323,7 +75323,7 @@
   },
   "replicate.image.generate.SDXL_Emoji": {
     "title": "SDXL Emoji",
-    "description": "An SDXL fine-tune based on Apple Emojis\nreplicate, ai",
+    "description": "基于 Apple 表情的 SDXL 微调模型\nreplicate, ai",
     "properties": {
       "apply_watermark": {
         "description": "Applies a 水印 to 启用 determining if an 图像 is 生成 in downstream applications. If you have other provisions for generating or deploying 图像 safely, you can use this to 禁用 watermarking."
@@ -75362,7 +75362,7 @@
         "description": "提示词 强度 when using img2img / 局部重绘. 1.0 corresponds to full destruction of information in 图像"
       },
       "refine": {
-        "description": "Which refine style to use"
+        "description": "使用哪种精修风格"
       },
       "refine_steps": {
         "description": "For base_image_refiner, the 步数 to refine, defaults to num_inference_steps"
@@ -75422,7 +75422,7 @@
         "description": "提示词 强度 when using img2img / 局部重绘. 1.0 corresponds to full destruction of information in 图像"
       },
       "refine": {
-        "description": "Which refine style to use"
+        "description": "使用哪种精修风格"
       },
       "refine_steps": {
         "description": "For base_image_refiner, the 步数 to refine, defaults to num_inference_steps"
@@ -75443,7 +75443,7 @@
   },
   "replicate.image.generate.Sana_Sprint_1_6b": {
     "title": "Sana Sprint 1 6b",
-    "description": "SANA-Sprint: One-Step Diffusion with Continuous-Time Consistency Distillation\nreplicate, ai",
+    "description": "SANA-Sprint：基于连续时间一致性蒸馏的单步扩散模型\nreplicate, ai",
     "properties": {
       "guidance_scale": {
         "description": "CFG 引导系数"
@@ -75476,7 +75476,7 @@
   },
   "replicate.image.generate.Sdxl_Lightning": {
     "title": "Sdxl Lightning",
-    "description": "This is the fastest sdxl-lightning endpoint in the world on A100, contact us for more at pruna.ai\nreplicate, ai",
+    "description": "这是 A100 上世界上最快的 sdxl-lightning 端点，详情请联系 pruna.ai\nreplicate, ai",
     "properties": {
       "guidance_scale": {
         "description": "引导系数"
@@ -75665,7 +75665,7 @@
         "description": "输入提示词"
       },
       "scheduler": {
-        "description": "Choose a scheduler."
+        "description": "选择调度器"
       },
       "seed": {
         "description": "随机种子. Leave blank to randomize the 种子"
@@ -75794,7 +75794,7 @@
         "description": "输入提示词"
       },
       "scheduler": {
-        "description": "Choose a scheduler."
+        "description": "选择调度器"
       },
       "seed": {
         "description": "随机种子. Leave blank to randomize the 种子"
@@ -75845,7 +75845,7 @@
         "description": "提示词 强度 when using img2img / 局部重绘. 1.0 corresponds to full destruction of information in 图像"
       },
       "refine": {
-        "description": "Which refine style to use"
+        "description": "使用哪种精修风格"
       },
       "refine_steps": {
         "description": "For base_image_refiner, the 步数 to refine, defaults to num_inference_steps"
@@ -76035,13 +76035,13 @@
         "description": "生成图像的宽高比"
       },
       "juiced": {
-        "description": "Faster inference with additional optimizations."
+        "description": "通过额外优化实现更快推理"
       },
       "lora_scale_transformer": {
-        "description": "Determines how strongly the transformer LoRA should be applied."
+        "description": "决定 transformer LoRA 的应用强度"
       },
       "lora_scale_transformer_2": {
-        "description": "Determines how strongly the transformer_2 LoRA should be applied."
+        "description": "决定 transformer_2 LoRA 的应用强度"
       },
       "lora_weights_transformer": {
         "description": "Load LoRA weights for transformer. 支持 arbitrary .safetensors URLs from the Internet (for example, 'https://huggingface.co/TheRaf7/instagirl-v2/resolve/main/Instagirlv2.0_hinoise.safetensors')"
@@ -76197,7 +76197,7 @@
         "description": "Model 分辨率 尺寸 - affects 速度 and accuracy trade-off"
       },
       "task_type": {
-        "description": "Type of OCR task to perform"
+        "description": "要执行的 OCR 任务类型"
       }
     }
   },
@@ -76272,7 +76272,7 @@
   },
   "replicate.image.ocr.OCR_Surya": {
     "title": "OCR Surya",
-    "description": "Surya is a document OCR toolkit that does:\nreplicate, ai",
+    "description": "Surya 是一个文档 OCR 工具包，功能包括：\nreplicate, ai",
     "properties": {
       "action": {
         "description": "Action"
@@ -76284,7 +76284,7 @@
         "description": "Languages"
       },
       "languages_input": {
-        "description": "Languages (comma-separated list)"
+        "description": "语言（逗号分隔列表）"
       },
       "page_number": {
         "description": "Page Number"
@@ -76365,10 +76365,10 @@
         "description": "When passing an 图像 with alpha channel, it will be replaced with this 颜色"
       },
       "condition_canny_scale": {
-        "description": "The bigger this number is, the more ControlNet interferes"
+        "description": "此值越大，ControlNet 的干预程度越高"
       },
       "condition_depth_scale": {
-        "description": "The bigger this number is, the more ControlNet interferes"
+        "description": "此值越大，ControlNet 的干预程度越高"
       },
       "guidance_scale": {
         "description": "缩放 for classifier-free guidance"
@@ -76440,7 +76440,7 @@
   },
   "replicate.image.process.ObjectRemover": {
     "title": "Object Remover",
-    "description": "ObjectRemover node\nreplicate, ai",
+    "description": "ObjectRemover 节点\nreplicate, ai",
     "properties": {
       "mask_image": {
         "description": "蒙版 图像"
@@ -76461,7 +76461,7 @@
   },
   "replicate.image.upscale.Alexgenovese_Upscaler": {
     "title": "Alexgenovese 放大",
-    "description": "GFPGAN aims at developing Practical Algorithms for Real-world Face and Object Restoration\nreplicate, ai",
+    "description": "GFPGAN 致力于开发用于真实世界人脸和物体修复的实用算法\nreplicate, ai",
     "properties": {
       "face_enhance": {
         "description": "Face 增强"
@@ -76570,7 +76570,7 @@
         "description": "Downscaling 分辨率"
       },
       "dynamic": {
-        "description": "HDR, try from 3 - 9"
+        "description": "HDR 值，建议范围 3 - 9"
       },
       "handfix": {
         "description": "Use clarity to fix hands in the 图像"
@@ -76600,7 +76600,7 @@
         "description": "提示词"
       },
       "resemblance": {
-        "description": "Resemblance, try from 0.3 - 1.6"
+        "description": "相似度，建议范围 0.3 - 1.6"
       },
       "scale_factor": {
         "description": "缩放 factor"
@@ -76609,7 +76609,7 @@
         "description": "scheduler"
       },
       "sd_model": {
-        "description": "Stable Diffusion model checkpoint"
+        "description": "Stable Diffusion 模型检查点"
       },
       "seed": {
         "description": "随机种子. Leave blank to randomize the 种子"
@@ -76618,10 +76618,10 @@
         "description": "Sharpen the 图像 after 超分放大. The higher the 值, the more sharpening is applied. 0 for no sharpening"
       },
       "tiling_height": {
-        "description": "Fractality, set lower tile height for a high Fractality"
+        "description": "分形度，设置较低的图块高度可获得高分形效果"
       },
       "tiling_width": {
-        "description": "Fractality, set lower tile width for a high Fractality"
+        "description": "分形度，设置较低的图块宽度可获得高分形效果"
       }
     }
   },
@@ -76666,7 +76666,7 @@
         "description": "输入图像"
       },
       "multi_decoder": {
-        "description": "Use multiple decoders"
+        "description": "使用多个解码器"
       },
       "negative_prompt": {
         "description": "输入 负向提示词"
@@ -76687,7 +76687,7 @@
         "description": "The standard 值 of the Gaussian filter"
       },
       "stride": {
-        "description": "The stride of moving local patches"
+        "description": "移动局部图块的步幅"
       },
       "view_batch_size": {
         "description": "The batch 尺寸 for multiple 降噪 paths"
@@ -76723,7 +76723,7 @@
         "description": "For 'general_scenes': 缩放 factor for the guidance mechanism. 调整 the influence of guidance on the 增强 处理."
       },
       "guidance_space": {
-        "description": "For 'general_scenes': Determines in which space (RGB or latent) the guidance operates. 'latent' can often provide more subtle and context-aware enhancements."
+        "description": "对于 'general_scenes'：决定引导在哪个空间（RGB 或潜空间）生效。'latent' 通常能提供更精细和上下文感知的增强效果"
       },
       "guidance_time_start": {
         "description": "For 'general_scenes': Specifies when (at which step) the guidance mechanism starts influencing the 增强."
@@ -76855,7 +76855,7 @@
         "description": "图像 分辨率"
       },
       "scheduler": {
-        "description": "Choose a scheduler."
+        "description": "选择调度器"
       },
       "seed": {
         "description": "种子"
@@ -76918,7 +76918,7 @@
         "description": "图像 分辨率"
       },
       "scheduler": {
-        "description": "Choose a scheduler."
+        "description": "选择调度器"
       },
       "seed": {
         "description": "种子"
@@ -76993,7 +76993,7 @@
         "description": "输入图像 to 放大."
       },
       "no_op": {
-        "description": "Deprecated and ignored. Predictions always run normally."
+        "description": "已弃用且忽略。预测始终正常运行"
       },
       "output_format": {
         "description": "输出图像的格式"
@@ -77119,7 +77119,7 @@
         "description": "输入图像"
       },
       "task": {
-        "description": "Choose a task"
+        "description": "选择任务"
       }
     }
   },
@@ -77137,7 +77137,7 @@
         "description": "噪声 level, activated for Grayscale 图像 降噪 and 颜色 图像 降噪. Leave it as 默认 or arbitrary if other tasks are selected"
       },
       "task_type": {
-        "description": "Choose a task"
+        "description": "选择任务"
       }
     }
   },
@@ -77257,13 +77257,13 @@
         "description": "输入图像"
       },
       "scale": {
-        "description": "Choose up-scaling factor"
+        "description": "选择放大系数"
       }
     }
   },
   "replicate.text.generate.Claude_3_5_Haiku": {
     "title": "Claude 3.5 Haiku",
-    "description": "Anthropic's fastest, most cost-effective model, with a 200K token context window (claude-3-5-haiku-20241022)\nreplicate, ai",
+    "description": "Anthropic 最快、最具性价比的模型，支持 200K token 上下文窗口 (claude-3-5-haiku-20241022)\nreplicate, ai",
     "properties": {
       "max_tokens": {
         "description": "Maximum number of 输出 tokens"
@@ -77278,7 +77278,7 @@
   },
   "replicate.text.generate.Claude_3_7_Sonnet": {
     "title": "Claude 3.7 Sonnet",
-    "description": "The most intelligent Claude model and the first hybrid reasoning model on the market (claude-3-7-sonnet-20250219)\nreplicate, ai",
+    "description": "最智能的 Claude 模型，也是市场上首个混合推理模型 (claude-3-7-sonnet-20250219)\nreplicate, ai",
     "properties": {
       "extended_thinking": {
         "description": "Whether to 启用 extended thinking 模式 (only 支持 for Sonnet 3.7 and Sonnet 4)"
@@ -77326,7 +77326,7 @@
   },
   "replicate.text.generate.Claude_4_5_Sonnet": {
     "title": "Claude 4.5 Sonnet",
-    "description": "Claude Sonnet 4.5 is the best coding model to date, with significant improvements across the entire development lifecycle\nreplicate, ai",
+    "description": "Claude Sonnet 4.5 是迄今最佳的编程模型，在整个开发生命周期中都有显著提升\nreplicate, ai",
     "properties": {
       "image": {
         "description": "可选 输入 图像. 图像 are priced as (width px * height px)/750 输入 tokens"
@@ -77347,7 +77347,7 @@
   },
   "replicate.text.generate.Claude_4_Sonnet": {
     "title": "Claude 4 Sonnet",
-    "description": "Claude Sonnet 4 is a significant upgrade to 3.7, delivering superior coding and reasoning while responding more precisely to your instructions\nreplicate, ai",
+    "description": "Claude Sonnet 4 是对 3.7 的重大升级，提供更强大的编程和推理能力，同时更精准地响应你的指令\nreplicate, ai",
     "properties": {
       "extended_thinking": {
         "description": "Whether to 启用 extended thinking 模式 (only 支持 for Sonnet 3.7 and Sonnet 4)"
@@ -77395,7 +77395,7 @@
   },
   "replicate.text.generate.Claude_Opus_4_6": {
     "title": "Claude Opus 4.6",
-    "description": "Anthropic's most intelligent model with state-of-the-art coding, reasoning, and agentic capabilities\nreplicate, ai",
+    "description": "Anthropic 最智能的模型，具备最先进的编程、推理和智能体能力\nreplicate, ai",
     "properties": {
       "image": {
         "description": "可选 输入 图像. 图像 are priced as (width px * height px)/750 输入 tokens"
@@ -77416,7 +77416,7 @@
   },
   "replicate.text.generate.Claude_Opus_4_7": {
     "title": "Claude Opus 4.7",
-    "description": "Anthropic's most capable model with a step-change improvement in agentic coding, better vision, and stronger multi-step reasoning\nreplicate, ai",
+    "description": "Anthropic 最强大的模型，在智能体编程、视觉能力和多步推理方面实现飞跃式提升\nreplicate, ai",
     "properties": {
       "image": {
         "description": "可选 输入 图像. 图像 are priced as (width px * height px)/750 输入 tokens"
@@ -77437,7 +77437,7 @@
   },
   "replicate.text.generate.Claude_Sonnet_4_6": {
     "title": "Claude Sonnet 4.6",
-    "description": "Claude Sonnet 4.6 from Anthropic: a full upgrade to coding, computer use, long-context reasoning, agent planning, knowledge work, and design, with a 1 million token context window in beta.\nreplicate, ai",
+    "description": "Anthropic 的 Claude Sonnet 4.6：在编程、计算机操作、长上下文推理、智能体规划、知识工作和设计方面的全面升级，测试版支持 100 万 token 上下文窗口\nreplicate, ai",
     "properties": {
       "image": {
         "description": "可选 输入 图像. 图像 are priced as (width px * height px)/750 输入 tokens"
@@ -77482,7 +77482,7 @@
   },
   "replicate.text.generate.Deepseek_R1": {
     "title": "Deepseek R1",
-    "description": "A reasoning model trained with reinforcement learning, on par with OpenAI o1\nreplicate, ai",
+    "description": "通过强化学习训练的推理模型，性能与 OpenAI o1 相当\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -77506,7 +77506,7 @@
   },
   "replicate.text.generate.Deepseek_V3": {
     "title": "Deepseek V3",
-    "description": "DeepSeek-V3-0324 is the leading non-reasoning model, a milestone for open source\nreplicate, ai",
+    "description": "DeepSeek-V3-0324 是领先的非推理模型，开源领域的里程碑\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -77530,7 +77530,7 @@
   },
   "replicate.text.generate.Deepseek_V3_1": {
     "title": "Deepseek V3 1",
-    "description": "Latest hybrid thinking model from Deepseek\nreplicate, ai",
+    "description": "Deepseek 最新的混合思考模型\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -77584,7 +77584,7 @@
         "description": "Sampling 温度 between 0 and 2"
       },
       "top_p": {
-        "description": "Nucleus sampling parameter - the model considers the results of the tokens with top_p probability mass. (0.1 means only the tokens comprising the top 10% probability mass are considered.)"
+        "description": "核采样参数 - 模型考虑 top_p 概率质量内的 token 结果（0.1 表示仅考虑构成前 10% 概率质量的 token）"
       }
     }
   },
@@ -77617,13 +77617,13 @@
         "description": "Sampling 温度 between 0 and 2"
       },
       "top_p": {
-        "description": "Nucleus sampling parameter - the model considers the results of the tokens with top_p probability mass. (0.1 means only the tokens comprising the top 10% probability mass are considered.)"
+        "description": "核采样参数 - 模型考虑 top_p 概率质量内的 token 结果（0.1 表示仅考虑构成前 10% 概率质量的 token）"
       }
     }
   },
   "replicate.text.generate.GPT_4_1_Nano": {
     "title": "GPT 4.1 Nano",
-    "description": "Fastest, most cost-effective GPT-4.1 model from OpenAI\nreplicate, ai",
+    "description": "OpenAI 最快、最具性价比的 GPT-4.1 模型\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty parameter - positive 值 penalize the repetition of tokens."
@@ -77650,13 +77650,13 @@
         "description": "Sampling 温度 between 0 and 2"
       },
       "top_p": {
-        "description": "Nucleus sampling parameter - the model considers the results of the tokens with top_p probability mass. (0.1 means only the tokens comprising the top 10% probability mass are considered.)"
+        "description": "核采样参数 - 模型考虑 top_p 概率质量内的 token 结果（0.1 表示仅考虑构成前 10% 概率质量的 token）"
       }
     }
   },
   "replicate.text.generate.GPT_4o": {
     "title": "GPT 4o",
-    "description": "OpenAI's high-intelligence chat model\nreplicate, ai",
+    "description": "OpenAI 的高智能对话模型\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty parameter - positive 值 penalize the repetition of tokens."
@@ -77683,13 +77683,13 @@
         "description": "Sampling 温度 between 0 and 2"
       },
       "top_p": {
-        "description": "Nucleus sampling parameter - the model considers the results of the tokens with top_p probability mass. (0.1 means only the tokens comprising the top 10% probability mass are considered.)"
+        "description": "核采样参数 - 模型考虑 top_p 概率质量内的 token 结果（0.1 表示仅考虑构成前 10% 概率质量的 token）"
       }
     }
   },
   "replicate.text.generate.GPT_4o_Mini": {
     "title": "GPT 4o Mini",
-    "description": "Low latency, low cost version of OpenAI's GPT-4o model\nreplicate, ai",
+    "description": "OpenAI GPT-4o 模型的低延迟、低成本版本\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty parameter - positive 值 penalize the repetition of tokens."
@@ -77716,13 +77716,13 @@
         "description": "Sampling 温度 between 0 and 2"
       },
       "top_p": {
-        "description": "Nucleus sampling parameter - the model considers the results of the tokens with top_p probability mass. (0.1 means only the tokens comprising the top 10% probability mass are considered.)"
+        "description": "核采样参数 - 模型考虑 top_p 概率质量内的 token 结果（0.1 表示仅考虑构成前 10% 概率质量的 token）"
       }
     }
   },
   "replicate.text.generate.GPT_5": {
     "title": "GPT 5",
-    "description": "OpenAI's new model excelling at coding, writing, and reasoning.\nreplicate, ai",
+    "description": "OpenAI 的新模型，在编程、写作和推理方面表现出色\nreplicate, ai",
     "properties": {
       "image_input": {
         "description": "List of 图像 to send to the model"
@@ -77749,7 +77749,7 @@
   },
   "replicate.text.generate.GPT_5_2": {
     "title": "GPT 5.2",
-    "description": "The best model for coding and agentic tasks across industries\nreplicate, ai",
+    "description": "各行业编程和智能体任务的最佳模型\nreplicate, ai",
     "properties": {
       "image_input": {
         "description": "List of 图像 to send to the model"
@@ -77776,7 +77776,7 @@
   },
   "replicate.text.generate.GPT_5_Mini": {
     "title": "GPT 5 Mini",
-    "description": "Faster version of OpenAI's flagship GPT-5 model\nreplicate, ai",
+    "description": "OpenAI 旗舰 GPT-5 模型的更快版本\nreplicate, ai",
     "properties": {
       "image_input": {
         "description": "List of 图像 to send to the model"
@@ -77803,7 +77803,7 @@
   },
   "replicate.text.generate.GPT_5_Nano": {
     "title": "GPT 5 Nano",
-    "description": "Fastest, most cost-effective GPT-5 model from OpenAI\nreplicate, ai",
+    "description": "OpenAI 最快、最具性价比的 GPT-5 模型\nreplicate, ai",
     "properties": {
       "image_input": {
         "description": "List of 图像 to send to the model"
@@ -77851,10 +77851,10 @@
         "description": "Maximum number of completion tokens to 生成. For higher reasoning efforts you may need to increase your max_completion_tokens to avoid empty responses (where all the tokens are used on reasoning)."
       },
       "model": {
-        "description": "GPT-5 model to use."
+        "description": "要使用的 GPT-5 模型"
       },
       "previous_response_id": {
-        "description": "The ID of a previous response to continue from."
+        "description": "要继续的上一个响应的 ID"
       },
       "prompt": {
         "description": "A 简单 文本 输入 to the model, equivalent to a 文本 输入 with the user role. Ignored if input_item_list is provided."
@@ -77866,7 +77866,7 @@
         "description": "创建 a JSON schema for the 输出 to conform to. The schema will be 创建 from a 简单 list of field specifications. Strings: 'thing' (defaults to string), 'thing:str', 'thing:string'. Booleans: 'is_a_thing:bool' or 'is_a_thing:boolean'. Numbers: 'count:number', 'count:int'. Lists: 'things:list' (defaults to list of strings), 'things:list:str', 'number_things:list:number', etc. Nested objects are not 支持, use `json_schema` instead."
       },
       "tools": {
-        "description": "Tools to make available to the model. Should be a JSON object containing a list of tool definitions."
+        "description": "提供给模型使用的工具。应为包含工具定义列表的 JSON 对象"
       },
       "verbosity": {
         "description": "Constrains the verbosity of the model's response. Lower 值 will result in more concise responses, while higher 值 will result in more verbose responses. Currently 支持 值 are low, medium, and high. GPT-5 支持 this parameter to help 控制 whether answers are short and to the point or long and comprehensive."
@@ -77890,7 +77890,7 @@
         "description": "The 文本提示词 to send to the model"
       },
       "system_instruction": {
-        "description": "System instruction to guide the model's behavior"
+        "description": "引导模型行为的系统指令"
       },
       "temperature": {
         "description": "Sampling 温度 between 0 and 2"
@@ -77899,7 +77899,7 @@
         "description": "Thinking budget for reasoning (0 to 禁用 thinking, higher 值 允许 more reasoning)"
       },
       "top_p": {
-        "description": "Nucleus sampling parameter - the model considers the results of the tokens with top_p probability mass"
+        "description": "核采样参数 - 模型考虑 top_p 概率质量内的 token 结果"
       },
       "videos": {
         "description": "输入视频 to send with the 提示词 (max 10 视频, each up to 45 minutes)"
@@ -77908,7 +77908,7 @@
   },
   "replicate.text.generate.Gemini_3_1_Pro": {
     "title": "Gemini 3.1 Pro",
-    "description": "Google's most intelligent model, with improved reasoning and a new medium thinking level\nreplicate, ai",
+    "description": "Google 最智能的模型，改进了推理能力并新增中等思考级别\nreplicate, ai",
     "properties": {
       "audio": {
         "description": "输入音频 to send with the 提示词 (max 1 音频 file, up to 8.4 hours)"
@@ -77923,7 +77923,7 @@
         "description": "The 文本提示词 to send to the model"
       },
       "system_instruction": {
-        "description": "System instruction to guide the model's behavior"
+        "description": "引导模型行为的系统指令"
       },
       "temperature": {
         "description": "Sampling 温度 between 0 and 2"
@@ -77932,7 +77932,7 @@
         "description": "Thinking level for reasoning. 控制 the maximum depth of the model's internal reasoning 处理."
       },
       "top_p": {
-        "description": "Nucleus sampling parameter - the model considers the results of the tokens with top_p probability mass"
+        "description": "核采样参数 - 模型考虑 top_p 概率质量内的 token 结果"
       },
       "videos": {
         "description": "输入视频 to send with the 提示词 (max 10 视频, each up to 45 minutes)"
@@ -77956,16 +77956,16 @@
         "description": "The 文本提示词 to send to the model"
       },
       "system_instruction": {
-        "description": "System instruction to guide the model's behavior"
+        "description": "引导模型行为的系统指令"
       },
       "temperature": {
         "description": "Sampling 温度 between 0 and 2"
       },
       "thinking_level": {
-        "description": "Thinking level for reasoning (low or high). Replaces thinking_budget for Gemini 3 models."
+        "description": "推理的思考级别（low 或 high）。替代 Gemini 3 模型的 thinking_budget"
       },
       "top_p": {
-        "description": "Nucleus sampling parameter - the model considers the results of the tokens with top_p probability mass"
+        "description": "核采样参数 - 模型考虑 top_p 概率质量内的 token 结果"
       },
       "video_fps": {
         "description": "帧率 (帧率) at which to sample 输入 视频. Higher 值 give the model more 帧 to reason over (useful for 快速-moving footage) but consume more tokens. Omit to use the 默认 sampling rate (1 fps)."
@@ -77992,16 +77992,16 @@
         "description": "The 文本提示词 to send to the model"
       },
       "system_instruction": {
-        "description": "System instruction to guide the model's behavior"
+        "description": "引导模型行为的系统指令"
       },
       "temperature": {
         "description": "Sampling 温度 between 0 and 2"
       },
       "thinking_level": {
-        "description": "Thinking level for reasoning (low or high). Replaces thinking_budget for Gemini 3 models."
+        "description": "推理的思考级别（low 或 high）。替代 Gemini 3 模型的 thinking_budget"
       },
       "top_p": {
-        "description": "Nucleus sampling parameter - the model considers the results of the tokens with top_p probability mass"
+        "description": "核采样参数 - 模型考虑 top_p 概率质量内的 token 结果"
       },
       "videos": {
         "description": "输入视频 to send with the 提示词 (max 10 视频, each up to 45 minutes)"
@@ -78010,7 +78010,7 @@
   },
   "replicate.text.generate.Gpt_5_1": {
     "title": "Gpt 5.1",
-    "description": "The best model for coding and agentic tasks with configurable reasoning effort.\nreplicate, ai",
+    "description": "编程和智能体任务的最佳模型，支持可配置的推理力度\nreplicate, ai",
     "properties": {
       "image_input": {
         "description": "List of 图像 to send to the model"
@@ -78118,7 +78118,7 @@
   },
   "replicate.text.generate.Gpt_5_6_Terra": {
     "title": "Gpt 5.6 Terra",
-    "description": "OpenAI's GPT-5.6 balanced tier, tuned for everyday production work at roughly half the cost of the flagship.\nreplicate, ai",
+    "description": "OpenAI 的 GPT-5.6 均衡版，专为日常生产工作调优，成本约为旗舰版的一半\nreplicate, ai",
     "properties": {
       "image_input": {
         "description": "List of 图像 to send to the model"
@@ -78145,7 +78145,7 @@
   },
   "replicate.text.generate.Gpt_5_Pro": {
     "title": "Gpt 5 Pro",
-    "description": "The smartest, fastest, most useful model yet, with built-in thinking that puts expert-level intelligence in everyone’s hands\nreplicate, ai",
+    "description": "迄今最智能、最快、最实用的模型，内置思考能力让每个人都能获得专家级智能\nreplicate, ai",
     "properties": {
       "image_input": {
         "description": "List of 图像 to send to the model"
@@ -78169,7 +78169,7 @@
   },
   "replicate.text.generate.Gpt_Oss_120b": {
     "title": "Gpt Oss 120b",
-    "description": "120b open-weight language model from OpenAI\nreplicate, ai",
+    "description": "OpenAI 的 120B 开源权重语言模型\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -78193,7 +78193,7 @@
   },
   "replicate.text.generate.Gpt_Oss_20b": {
     "title": "Gpt Oss 20b",
-    "description": "20b open-weight language model from OpenAI\nreplicate, ai",
+    "description": "OpenAI 的 20B 开源权重语言模型\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -78217,7 +78217,7 @@
   },
   "replicate.text.generate.Granite_3_2_8b_Instruct": {
     "title": "Granite 3.2 8b Instruct",
-    "description": "Granite-3.2-8B-Instruct is a 8-billion parameter 128K context length language model fine-tuned for reasoning and instruction-following capabilities.\nreplicate, ai",
+    "description": "Granite-3.2-8B-Instruct 是 80 亿参数、128K 上下文长度的语言模型，专为推理和指令跟随能力微调\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -78253,7 +78253,7 @@
   },
   "replicate.text.generate.Granite_3_3_8b_Instruct": {
     "title": "Granite 3.3 8b Instruct",
-    "description": "Granite-3.3-8B-Instruct is a 8-billion parameter 128K context length language model fine-tuned for improved reasoning and instruction-following capabilities.\nreplicate, ai",
+    "description": "Granite-3.3-8B-Instruct 是 80 亿参数、128K 上下文长度的语言模型，专为增强的推理和指令跟随能力微调\nreplicate, ai",
     "properties": {
       "add_generation_prompt": {
         "description": "添加 生成 提示词. Passed to the chat template. Defaults to True."
@@ -78262,10 +78262,10 @@
         "description": "A template to 格式 the 提示词 with. If not specified, the chat template provided by the model will be used."
       },
       "chat_template_kwargs": {
-        "description": "Additional arguments to be passed to the chat template."
+        "description": "传递给聊天模板的额外参数"
       },
       "documents": {
-        "description": "Documents for request. Passed to the chat template."
+        "description": "请求的文档，传递给聊天模板"
       },
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -78274,10 +78274,10 @@
         "description": "An upper bound for the number of tokens that can be 生成 for a completion, including visible 输出 tokens and reasoning tokens."
       },
       "max_tokens": {
-        "description": "max_tokens is deprecated in favor of the max_completion_tokens field."
+        "description": "max_tokens 已弃用，请改用 max_completion_tokens 字段"
       },
       "messages": {
-        "description": "Chat completion API messages."
+        "description": "对话补全 API 消息"
       },
       "min_tokens": {
         "description": "The minimum number of tokens the model should 生成 as 输出."
@@ -78298,7 +78298,7 @@
         "description": "A list of sequences to stop 生成 at. For example, [\"<end>\",\"<stop>\"] will stop 生成 at the first instance of \"<end>\" or \"<stop>\"."
       },
       "stream": {
-        "description": "Request streaming response. Defaults to False."
+        "description": "请求流式响应。默认为 False"
       },
       "system_prompt": {
         "description": "Completion API system 提示词. The chat template provides a good 默认."
@@ -78307,10 +78307,10 @@
         "description": "The 值 used to modulate the next token probabilities."
       },
       "tool_choice": {
-        "description": "Tool choice for request. If the choice is a specific function, this should be specified as a JSON string."
+        "description": "请求的工具选择。如果选择特定函数，应指定为 JSON 字符串"
       },
       "tools": {
-        "description": "Tools for request. Passed to the chat template."
+        "description": "请求的工具，传递给聊天模板"
       },
       "top_k": {
         "description": "The number of highest probability tokens to consider for generating the 输出. If > 0, only keep the top k tokens with highest probability (top-k filtering)."
@@ -78322,7 +78322,7 @@
   },
   "replicate.text.generate.Granite_4_1_8B": {
     "title": "Granite 4.1 8B",
-    "description": "Granite-4.1-8B is a 8B parameter long-context instruct model finetuned from Granite-4.1-8B-Base using a combination of open source instruction datasets with permissive license and internally collected synthetic datasets.\nreplicate, ai",
+    "description": "Granite-4.1-8B 是 8B 参数的长上下文指令模型，基于 Granite-4.1-8B-Base 使用开源指令数据集和内部合成数据集微调而成\nreplicate, ai",
     "properties": {
       "add_generation_prompt": {
         "description": "添加 生成 提示词. Passed to the chat template. Defaults to True."
@@ -78331,10 +78331,10 @@
         "description": "A template to 格式 the 提示词 with. If not specified, the chat template provided by the model will be used."
       },
       "chat_template_kwargs": {
-        "description": "Additional arguments to be passed to the chat template."
+        "description": "传递给聊天模板的额外参数"
       },
       "documents": {
-        "description": "Documents for request. Passed to the chat template."
+        "description": "请求的文档，传递给聊天模板"
       },
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -78343,10 +78343,10 @@
         "description": "An upper bound for the number of tokens that can be 生成 for a completion, including visible 输出 tokens and reasoning tokens."
       },
       "max_tokens": {
-        "description": "max_tokens is deprecated in favor of the max_completion_tokens field."
+        "description": "max_tokens 已弃用，请改用 max_completion_tokens 字段"
       },
       "messages": {
-        "description": "Chat completion API messages."
+        "description": "对话补全 API 消息"
       },
       "min_tokens": {
         "description": "The minimum number of tokens the model should 生成 as 输出."
@@ -78370,7 +78370,7 @@
         "description": "A list of sequences to stop 生成 at. For example, [\"<end>\",\"<stop>\"] will stop 生成 at the first instance of \"<end>\" or \"<stop>\"."
       },
       "stream": {
-        "description": "Request streaming response."
+        "description": "请求流式响应"
       },
       "system_prompt": {
         "description": "Completion API system 提示词. The chat template provides a good 默认."
@@ -78379,10 +78379,10 @@
         "description": "The 值 used to modulate the next token probabilities."
       },
       "tool_choice": {
-        "description": "Tool choice for request. If the choice is a specific function, this should be specified as a JSON string."
+        "description": "请求的工具选择。如果选择特定函数，应指定为 JSON 字符串"
       },
       "tools": {
-        "description": "Tools for request. Passed to the chat template."
+        "description": "请求的工具，传递给聊天模板"
       },
       "top_k": {
         "description": "The number of highest probability tokens to consider for generating the 输出. If > 0, only keep the top k tokens with highest probability (top-k filtering)."
@@ -78451,7 +78451,7 @@
         "description": "A template to 格式 the 提示词 with. If not specified, the chat template provided by the model will be used."
       },
       "chat_template_kwargs": {
-        "description": "Additional arguments to be passed to the chat template."
+        "description": "传递给聊天模板的额外参数"
       },
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -78460,10 +78460,10 @@
         "description": "An upper bound for the number of tokens that can be 生成 for a completion, including visible 输出 tokens and reasoning tokens."
       },
       "max_tokens": {
-        "description": "max_tokens is deprecated in favor of the max_completion_tokens field."
+        "description": "max_tokens 已弃用，请改用 max_completion_tokens 字段"
       },
       "messages": {
-        "description": "Chat completion API messages."
+        "description": "对话补全 API 消息"
       },
       "min_tokens": {
         "description": "The minimum number of tokens the model should 生成 as 输出."
@@ -78484,7 +78484,7 @@
         "description": "A list of sequences to stop 生成 at. For example, [\"<end>\",\"<stop>\"] will stop 生成 at the first instance of \"<end>\" or \"<stop>\"."
       },
       "stream": {
-        "description": "Request streaming response."
+        "description": "请求流式响应"
       },
       "system_prompt": {
         "description": "Completion API system 提示词. The chat template provides a good 默认."
@@ -78559,7 +78559,7 @@
         "description": "A template to 格式 the 提示词 with. If not specified, the chat template provided by the model will be used."
       },
       "chat_template_kwargs": {
-        "description": "Additional arguments to be passed to the chat template."
+        "description": "传递给聊天模板的额外参数"
       },
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -78571,10 +78571,10 @@
         "description": "An upper bound for the number of tokens that can be 生成 for a completion, including visible 输出 tokens and reasoning tokens."
       },
       "max_tokens": {
-        "description": "max_tokens is deprecated in favor of the max_completion_tokens field."
+        "description": "max_tokens 已弃用，请改用 max_completion_tokens 字段"
       },
       "messages": {
-        "description": "Chat completion API messages."
+        "description": "对话补全 API 消息"
       },
       "min_tokens": {
         "description": "The minimum number of tokens the model should 生成 as 输出."
@@ -78595,7 +78595,7 @@
         "description": "A list of sequences to stop 生成 at. For example, [\"<end>\",\"<stop>\"] will stop 生成 at the first instance of \"<end>\" or \"<stop>\"."
       },
       "stream": {
-        "description": "Request streaming response."
+        "description": "请求流式响应"
       },
       "system_prompt": {
         "description": "Completion API system 提示词. The chat template provides a good 默认."
@@ -78664,7 +78664,7 @@
   },
   "replicate.text.generate.Kimi_K2_6": {
     "title": "Kimi K2 6",
-    "description": "Moonshot AI's frontier open model, built for long-horizon coding, agent swarms, and autonomous software engineering. 1 trillion parameters, 262k context window, vision and tool use.\nreplicate, ai",
+    "description": "Moonshot AI 的前沿开源模型，专为长程编程、智能体集群和自主软件工程打造。1 万亿参数，262K 上下文窗口，支持视觉和工具调用\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Penalizes new tokens based on their existing frequency in the 文本 so far."
@@ -78697,7 +78697,7 @@
   },
   "replicate.text.generate.Llama3_1_405B_Instruct": {
     "title": "Llama 3.1 405B Instruct",
-    "description": "Meta's flagship 405 billion parameter language model, fine-tuned for chat completions\nreplicate, ai",
+    "description": "Meta 的旗舰 4050 亿参数语言模型，专为对话补全微调\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -78736,20 +78736,20 @@
   },
   "replicate.text.generate.Llama3_70B": {
     "title": "Llama 3 70B",
-    "description": "Base version of Llama 3, a 70 billion parameter language model from Meta.\nreplicate, ai",
+    "description": "Llama 3 基础版本，Meta 的 700 亿参数语言模型\nreplicate, ai",
     "properties": {
       "length_penalty": {
         "description": "A parameter that 控制 how long the outputs are. If < 1, the model will tend to 生成 shorter outputs, and > 1 will tend to 生成 longer outputs."
       },
       "log_performance_metrics": {},
       "max_new_tokens": {
-        "description": "This parameter has been renamed to max_tokens. max_new_tokens only exists for backwards compatibility purposes. We recommend you use max_tokens instead. Both may not be specified."
+        "description": "此参数已更名为 max_tokens。max_new_tokens 仅为向后兼容保留。建议改用 max_tokens。两者不可同时指定"
       },
       "max_tokens": {
         "description": "Maximum number of tokens to 生成. A word is generally 2-3 tokens."
       },
       "min_new_tokens": {
-        "description": "This parameter has been renamed to min_tokens. min_new_tokens only exists for backwards compatibility purposes. We recommend you use min_tokens instead. Both may not be specified."
+        "description": "此参数已更名为 min_tokens。min_new_tokens 仅为向后兼容保留。建议改用 min_tokens。两者不可同时指定"
       },
       "min_tokens": {
         "description": "Minimum number of tokens to 生成. To 禁用, set to -1. A word is generally 2-3 tokens."
@@ -78782,20 +78782,20 @@
   },
   "replicate.text.generate.Llama3_70B_Instruct": {
     "title": "Llama 3 70B Instruct",
-    "description": "A 70 billion parameter language model from Meta, fine tuned for chat completions\nreplicate, ai",
+    "description": "Meta 的 700 亿参数语言模型，专为对话补全微调\nreplicate, ai",
     "properties": {
       "length_penalty": {
         "description": "A parameter that 控制 how long the outputs are. If < 1, the model will tend to 生成 shorter outputs, and > 1 will tend to 生成 longer outputs."
       },
       "log_performance_metrics": {},
       "max_new_tokens": {
-        "description": "This parameter has been renamed to max_tokens. max_new_tokens only exists for backwards compatibility purposes. We recommend you use max_tokens instead. Both may not be specified."
+        "description": "此参数已更名为 max_tokens。max_new_tokens 仅为向后兼容保留。建议改用 max_tokens。两者不可同时指定"
       },
       "max_tokens": {
         "description": "Maximum number of tokens to 生成. A word is generally 2-3 tokens."
       },
       "min_new_tokens": {
-        "description": "This parameter has been renamed to min_tokens. min_new_tokens only exists for backwards compatibility purposes. We recommend you use min_tokens instead. Both may not be specified."
+        "description": "此参数已更名为 min_tokens。min_new_tokens 仅为向后兼容保留。建议改用 min_tokens。两者不可同时指定"
       },
       "min_tokens": {
         "description": "Minimum number of tokens to 生成. To 禁用, set to -1. A word is generally 2-3 tokens."
@@ -78831,20 +78831,20 @@
   },
   "replicate.text.generate.Llama3_8B": {
     "title": "Llama 3 8B",
-    "description": "Base version of Llama 3, an 8 billion parameter language model from Meta.\nreplicate, ai",
+    "description": "Llama 3 基础版本，Meta 的 80 亿参数语言模型\nreplicate, ai",
     "properties": {
       "length_penalty": {
         "description": "A parameter that 控制 how long the outputs are. If < 1, the model will tend to 生成 shorter outputs, and > 1 will tend to 生成 longer outputs."
       },
       "log_performance_metrics": {},
       "max_new_tokens": {
-        "description": "This parameter has been renamed to max_tokens. max_new_tokens only exists for backwards compatibility purposes. We recommend you use max_tokens instead. Both may not be specified."
+        "description": "此参数已更名为 max_tokens。max_new_tokens 仅为向后兼容保留。建议改用 max_tokens。两者不可同时指定"
       },
       "max_tokens": {
         "description": "Maximum number of tokens to 生成. A word is generally 2-3 tokens."
       },
       "min_new_tokens": {
-        "description": "This parameter has been renamed to min_tokens. min_new_tokens only exists for backwards compatibility purposes. We recommend you use min_tokens instead. Both may not be specified."
+        "description": "此参数已更名为 min_tokens。min_new_tokens 仅为向后兼容保留。建议改用 min_tokens。两者不可同时指定"
       },
       "min_tokens": {
         "description": "Minimum number of tokens to 生成. To 禁用, set to -1. A word is generally 2-3 tokens."
@@ -78877,20 +78877,20 @@
   },
   "replicate.text.generate.Llama3_8B_Instruct": {
     "title": "Llama 3 8B Instruct",
-    "description": "An 8 billion parameter language model from Meta, fine tuned for chat completions\nreplicate, ai",
+    "description": "Meta 的 80 亿参数语言模型，专为对话补全微调\nreplicate, ai",
     "properties": {
       "length_penalty": {
         "description": "A parameter that 控制 how long the outputs are. If < 1, the model will tend to 生成 shorter outputs, and > 1 will tend to 生成 longer outputs."
       },
       "log_performance_metrics": {},
       "max_new_tokens": {
-        "description": "This parameter has been renamed to max_tokens. max_new_tokens only exists for backwards compatibility purposes. We recommend you use max_tokens instead. Both may not be specified."
+        "description": "此参数已更名为 max_tokens。max_new_tokens 仅为向后兼容保留。建议改用 max_tokens。两者不可同时指定"
       },
       "max_tokens": {
         "description": "Maximum number of tokens to 生成. A word is generally 2-3 tokens."
       },
       "min_new_tokens": {
-        "description": "This parameter has been renamed to min_tokens. min_new_tokens only exists for backwards compatibility purposes. We recommend you use min_tokens instead. Both may not be specified."
+        "description": "此参数已更名为 min_tokens。min_new_tokens 仅为向后兼容保留。建议改用 min_tokens。两者不可同时指定"
       },
       "min_tokens": {
         "description": "Minimum number of tokens to 生成. To 禁用, set to -1. A word is generally 2-3 tokens."
@@ -78932,7 +78932,7 @@
         "description": "图像 to moderate"
       },
       "prompt": {
-        "description": "User message to moderate"
+        "description": "要审核的用户消息"
       }
     }
   },
@@ -78944,13 +78944,13 @@
         "description": "Assistant response to 分类"
       },
       "prompt": {
-        "description": "User message to moderate"
+        "description": "要审核的用户消息"
       }
     }
   },
   "replicate.text.generate.Llama_4_Maverick_Instruct": {
     "title": "Llama 4 Maverick Instruct",
-    "description": "A 17 billion parameter model with 128 experts\nreplicate, ai",
+    "description": "170 亿参数、128 个专家的模型\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -78989,7 +78989,7 @@
   },
   "replicate.text.generate.Llama_4_Scout_Instruct": {
     "title": "Llama 4 Scout Instruct",
-    "description": "A 17 billion parameter model with 16 experts\nreplicate, ai",
+    "description": "170 亿参数、16 个专家的模型\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -79028,7 +79028,7 @@
   },
   "replicate.text.generate.O1": {
     "title": "O1",
-    "description": "OpenAI's first o-series reasoning model\nreplicate, ai",
+    "description": "OpenAI 首个 o 系列推理模型\nreplicate, ai",
     "properties": {
       "image_input": {
         "description": "List of 图像 to send to the model"
@@ -79052,7 +79052,7 @@
   },
   "replicate.text.generate.O1_Mini": {
     "title": "O1 Mini",
-    "description": "A small model alternative to o1\nreplicate, ai",
+    "description": "o1 的小型替代模型\nreplicate, ai",
     "properties": {
       "max_completion_tokens": {
         "description": "Maximum number of completion tokens to 生成"
@@ -79121,7 +79121,7 @@
   },
   "replicate.text.generate.Qwen3_235B": {
     "title": "Qwen 3 235B",
-    "description": "Updated Qwen3 model for instruction following\nreplicate, ai",
+    "description": "更新的 Qwen3 模型，针对指令跟随优化\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty"
@@ -79145,7 +79145,7 @@
   },
   "replicate.text.generate.Qwen3_7_Plus": {
     "title": "Qwen 3.7 Plus",
-    "description": "Qwen3.7-Plus is Alibaba's cost-effective multimodal model with vision-language understanding, a 1 million token context window, and strong agentic coding and tool use.\nreplicate, ai",
+    "description": "Qwen3.7-Plus 是阿里巴巴的高性价比多模态模型，具备视觉语言理解、100 万 token 上下文窗口以及强大的智能体编程和工具调用能力\nreplicate, ai",
     "properties": {
       "frequency_penalty": {
         "description": "Frequency penalty. Positive 值 penalize tokens proportionally to how often they have appeared, reducing repetition."
@@ -79221,19 +79221,19 @@
         "description": "Direct URL to 音频"
       },
       "highpass_freq": {
-        "description": "Highpass filter frequency (Hz)"
+        "description": "高通滤波器频率 (Hz)"
       },
       "language": {
-        "description": "Language code (e.g., 'en', 'pt')"
+        "description": "语言代码（例如 'en'、'pt'）"
       },
       "lowpass_freq": {
-        "description": "Lowpass filter frequency (Hz)"
+        "description": "低通滤波器频率 (Hz)"
       },
       "num_speakers": {
         "description": "Number of speakers (leave empty to auto-检测)"
       },
       "preprocess": {
-        "description": "Preprocessing level: 0=None, 1=Sanitize, 2=+Filter, 3=+ReduceNoise, 4=+Normalize"
+        "description": "预处理级别：0=无, 1=清理, 2=+滤波, 3=+降噪, 4=+归一化"
       },
       "prompt": {
         "description": "Custom 提示词 with names/acronyms separated by punctuation"
@@ -79245,10 +79245,10 @@
         "description": "Use stationary 噪声 reduction"
       },
       "target_dBFS": {
-        "description": "Target loudness in dBFS"
+        "description": "目标响度 (dBFS)"
       },
       "translate": {
-        "description": "Translate to English"
+        "description": "翻译为英语"
       }
     }
   },
@@ -79257,7 +79257,7 @@
     "description": "视频 超分放大，从 Topaz Labs\nreplicate, ai",
     "properties": {
       "target_fps": {
-        "description": "Target FPS (choose from 15-60fps)"
+        "description": "目标帧率（从 15-60fps 中选择）"
       },
       "target_resolution": {
         "description": "Target 分辨率"
@@ -79413,7 +79413,7 @@
   },
   "replicate.video.face.FaceSwap": {
     "title": "Face Swap",
-    "description": "Advance Face Swap powered by pixalto.app\nreplicate, ai",
+    "description": "由 pixalto.app 驱动的高级换脸工具\nreplicate, ai",
     "properties": {
       "input_image": {
         "description": "Target 图像"
@@ -79473,7 +79473,7 @@
         "description": "随机种子. Leave blank to randomize the 种子"
       },
       "step_to_launch_face_guidance": {
-        "description": "Step index to launch reference guidance"
+        "description": "启动参考引导的步索引"
       },
       "steps": {
         "description": "步数"
@@ -79695,7 +79695,7 @@
         "description": "Use GFPGAN as Face 增强"
       },
       "use_eyeblink": {
-        "description": "Use eye blink"
+        "description": "使用眨眼效果"
       }
     }
   },
@@ -79725,10 +79725,10 @@
         "description": "A 提示词 describing the scene to put the user(s) in"
       },
       "user_b_gender": {
-        "description": "Gender of the second user (if using user_b)"
+        "description": "第二位用户的性别（如果使用 user_b）"
       },
       "user_gender": {
-        "description": "Gender of the first user"
+        "description": "第一位用户的性别"
       },
       "workflow_type": {
         "description": "The 输出 style to use"
@@ -79764,10 +79764,10 @@
         "description": "音频 file to 创建 waveform from"
       },
       "bar_count": {
-        "description": "Number of bars in waveform"
+        "description": "波形中的柱状条数"
       },
       "bar_width": {
-        "description": "Width of bars in waveform. 1 represents full width, 0.5 represents half width, etc."
+        "description": "波形中柱条的宽度。1 表示满宽，0.5 表示半宽，以此类推"
       },
       "bars_color": {
         "description": "颜色 of waveform bars"
@@ -79779,7 +79779,7 @@
         "description": "Caption 文本 for the 视频"
       },
       "fg_alpha": {
-        "description": "Opacity of foreground waveform"
+        "description": "前景波形的不透明度"
       }
     }
   },
@@ -79806,10 +79806,10 @@
     "description": "创建 逼真 talking avatar 视频，从 文本（含 HeyGen's Avatar IV engine）\nreplicate, ai",
     "properties": {
       "avatar_id": {
-        "description": "Unique identifier of the avatar. Get available avatar IDs from the HeyGen List All Avatars API."
+        "description": "头像的唯一标识符。可从 HeyGen List All Avatars API 获取可用头像 ID"
       },
       "avatar_style": {
-        "description": "Visual style of the avatar."
+        "description": "头像的视觉风格"
       },
       "caption": {
         "description": "Whether to 启用 captions in the 视频."
@@ -79980,7 +79980,7 @@
         "description": "Higher guide 缩放 makes 提示词 adherence better, but can reduce variation"
       },
       "sample_shift": {
-        "description": "Sample shift factor"
+        "description": "采样偏移因子"
       },
       "sample_steps": {
         "description": "Number of 生成 步数. Fewer 步数 means faster 生成, at the expensive of 输出 质量. 30 步数 is sufficient for most 提示词"
@@ -80061,7 +80061,7 @@
     "description": "Extend 视频（含 xAI's Grok Imagine 视频 model）. Provide a source 视频 and describe what happens next.\nreplicate, ai",
     "properties": {
       "duration": {
-        "description": "Length of the extension in seconds"
+        "description": "延长部分的长度（秒）"
       },
       "prompt": {
         "description": "文本 description of what should happen next in the 视频"
@@ -80220,7 +80220,7 @@
         "description": "Height of the 输出"
       },
       "mp4": {
-        "description": "Save as mp4, False for GIF"
+        "description": "保存为 mp4，False 则保存为 GIF"
       },
       "negative_prompt": {
         "description": "负向提示词"
@@ -80229,7 +80229,7 @@
         "description": "输入提示词"
       },
       "scheduler": {
-        "description": "Select a Scheduler"
+        "description": "选择调度器"
       },
       "seed": {
         "description": "随机种子. Leave blank to randomize the 种子"
@@ -80523,7 +80523,7 @@
         "description": "Last 帧 of the 视频"
       },
       "image": {
-        "description": "Deprecated: Use start_image instead."
+        "description": "已弃用：请改用 start_image"
       },
       "negative_prompt": {
         "description": "Things you do not want to see in the 视频"
@@ -80718,7 +80718,7 @@
         "description": "文本 description of what you want to 生成, or the instruction on how to edit the given 图像."
       },
       "replicate_weights": {
-        "description": "Path to the lora weights"
+        "description": "LoRA 权重路径"
       },
       "seed": {
         "description": "随机种子 for 可复现 生成. Leave blank for random."
@@ -80745,7 +80745,7 @@
         "description": "Length of the 输出视频 in 帧"
       },
       "model": {
-        "description": "Model version to use"
+        "description": "要使用的模型版本"
       },
       "negative_prompt": {
         "description": "Things you do not want to see in your 视频"
@@ -80778,7 +80778,7 @@
         "description": "Lipsync 模式 when 音频 and 视频 durations are out of sync"
       },
       "temperature": {
-        "description": "How expressive lipsync can be (0-1)"
+        "description": "口型同步的表现力 (0-1)"
       },
       "video": {
         "description": "输入视频 file (.mp4)"
@@ -80787,7 +80787,7 @@
   },
   "replicate.video.generate.Lipsync_2_Pro": {
     "title": "Lipsync 2 Pro",
-    "description": "Studio-grade lipsync in minutes, not weeks\nreplicate, ai",
+    "description": "数分钟而非数周完成工作室级口型同步\nreplicate, ai",
     "properties": {
       "active_speaker": {
         "description": "Whether to 检测 active speaker (i.e. whoever is speaking in the clip will be used for lipsync)"
@@ -80799,7 +80799,7 @@
         "description": "Lipsync 模式 when 音频 and 视频 durations are out of sync"
       },
       "temperature": {
-        "description": "How expressive lipsync can be (0-1)"
+        "description": "口型同步的表现力 (0-1)"
       },
       "video": {
         "description": "输入视频 file (.mp4)"
@@ -80880,10 +80880,10 @@
         "description": "时长 in seconds of the section to edit. Must be at least 2 seconds. Used for retake task."
       },
       "retake_mode": {
-        "description": "What to replace in the retake section. Used for retake task."
+        "description": "在重录片段中要替换的内容。用于重录任务"
       },
       "retake_start_time": {
-        "description": "Start time in seconds of the section to edit. Used for retake task."
+        "description": "要编辑片段的起始时间（秒）。用于重录任务"
       },
       "task": {
         "description": "The 生成 task to perform"
@@ -80964,7 +80964,7 @@
   },
   "replicate.video.generate.Ltx_2_Retake": {
     "title": "Ltx 2 Retake",
-    "description": "Take any shot and edit specific sections. Rephrase, change the action, camera angles and more\nreplicate, ai",
+    "description": "对任意镜头的特定片段进行编辑。可重新表述、更改动作、摄像机角度等\nreplicate, ai",
     "properties": {
       "duration": {
         "description": "时长 of the edited section in seconds"
@@ -80976,7 +80976,7 @@
         "description": "文本提示词 describing the edit"
       },
       "start_time": {
-        "description": "Start time of the edit in seconds"
+        "description": "编辑的起始时间（秒）"
       },
       "video": {
         "description": "输入视频 to edit"
@@ -81141,7 +81141,7 @@
         "description": "Instrumental reference. Must be a .wav or .mp3 file longer than 15 seconds. If only an instrumental reference is given, a 追踪 without vocals will be 生成."
       },
       "instrumental_id": {
-        "description": "Reuse a previously uploaded instrumental ID"
+        "description": "复用之前上传的伴奏 ID"
       },
       "lyrics": {
         "description": "Lyrics with 可选 formatting. You can use a newline to separate each line of lyrics. You can use two newlines to 添加 a pause between lines. You can use double hash marks (##) at the beginning and end of the lyrics to 添加 accompaniment. Maximum 350 to 400 characters."
@@ -81641,7 +81641,7 @@
         "description": "An 可选 last 帧 of the 视频 to use as the ending 帧."
       },
       "end_image_url": {
-        "description": "Deprecated: Use end_image instead"
+        "description": "已弃用：请改用 end_image"
       },
       "loop": {
         "description": "Whether the 视频 should loop, with the last 帧 matching the first 帧 for 平滑, continuous playback."
@@ -81653,7 +81653,7 @@
         "description": "An 可选 first 帧 of the 视频 to use as the starting 帧."
       },
       "start_image_url": {
-        "description": "Deprecated: Use start_image instead"
+        "description": "已弃用：请改用 start_image"
       }
     }
   },
@@ -81674,7 +81674,7 @@
         "description": "An 可选 last 帧 of the 视频 to use as the ending 帧."
       },
       "end_image_url": {
-        "description": "Deprecated: Use end_image instead"
+        "description": "已弃用：请改用 end_image"
       },
       "loop": {
         "description": "Whether the 视频 should loop, with the last 帧 matching the first 帧 for 平滑, continuous playback."
@@ -81686,7 +81686,7 @@
         "description": "An 可选 first 帧 of the 视频 to use as the starting 帧."
       },
       "start_image_url": {
-        "description": "Deprecated: Use start_image instead"
+        "description": "已弃用：请改用 start_image"
       }
     }
   },
@@ -81704,7 +81704,7 @@
         "description": "可选 last 帧 of the 视频. Only valid with 5s 时长; not 支持 with loop."
       },
       "exr_export": {
-        "description": "Export an EXR file alongside the MP4 for professional colour-grading workflows. Requires hdr=true."
+        "description": "在 MP4 之外导出 EXR 文件，用于专业调色工作流。需要 hdr=true"
       },
       "hdr": {
         "description": "生成 HDR-encoded MP4. Requires 720p or 1080p, 5s 时长, and no loop."
@@ -81740,7 +81740,7 @@
         "description": "An 可选 last 帧 of the 视频 to use as the ending 帧."
       },
       "end_image_url": {
-        "description": "Deprecated: Use end_image instead"
+        "description": "已弃用：请改用 end_image"
       },
       "loop": {
         "description": "Whether the 视频 should loop, with the last 帧 matching the first 帧 for 平滑, continuous playback."
@@ -81752,7 +81752,7 @@
         "description": "An 可选 first 帧 of the 视频 to use as the starting 帧."
       },
       "start_image_url": {
-        "description": "Deprecated: Use start_image instead"
+        "description": "已弃用：请改用 start_image"
       }
     }
   },
@@ -81773,7 +81773,7 @@
         "description": "An 可选 last 帧 of the 视频 to use as the ending 帧."
       },
       "end_image_url": {
-        "description": "Deprecated: Use end_image instead"
+        "description": "已弃用：请改用 end_image"
       },
       "loop": {
         "description": "Whether the 视频 should loop, with the last 帧 matching the first 帧 for 平滑, continuous playback."
@@ -81785,7 +81785,7 @@
         "description": "An 可选 first 帧 of the 视频 to use as the starting 帧."
       },
       "start_image_url": {
-        "description": "Deprecated: Use start_image instead"
+        "description": "已弃用：请改用 start_image"
       }
     }
   },
@@ -81806,7 +81806,7 @@
         "description": "文本提示词 for 生成"
       },
       "return_spritesheet": {
-        "description": "Return animation as a spritesheet PNG instead of animated GIF"
+        "description": "以精灵图 PNG 而非动画 GIF 的形式返回动画"
       },
       "seed": {
         "description": "随机种子。设置后生成可复现"
@@ -81836,7 +81836,7 @@
         "description": "Lipsync 模式 when 音频 and 视频 durations are out of sync"
       },
       "temperature": {
-        "description": "How expressive lipsync can be (0-1)"
+        "description": "口型同步的表现力 (0-1)"
       },
       "video": {
         "description": "输入视频 file (.mp4)"
@@ -81887,7 +81887,7 @@
         "description": "视频 宽高比. Ignored if an 图像 is used."
       },
       "camera_fixed": {
-        "description": "Whether to fix camera position"
+        "description": "是否固定摄像机位置"
       },
       "duration": {
         "description": "视频 时长 in seconds"
@@ -81923,7 +81923,7 @@
         "description": "视频 宽高比. Ignored if an 图像 is used."
       },
       "camera_fixed": {
-        "description": "Whether to fix camera position"
+        "description": "是否固定摄像机位置"
       },
       "duration": {
         "description": "视频 时长 in seconds"
@@ -81959,7 +81959,7 @@
         "description": "视频 宽高比. Ignored if an 图像 is used."
       },
       "camera_fixed": {
-        "description": "Whether to fix camera position"
+        "description": "是否固定摄像机位置"
       },
       "duration": {
         "description": "视频 时长 in seconds"
@@ -81986,13 +81986,13 @@
   },
   "replicate.video.generate.Seedance_1_Pro_Fast": {
     "title": "Seedance 1 Pro Fast",
-    "description": "A faster and cheaper version of Seedance 1 Pro\nreplicate, ai",
+    "description": "Seedance 1 Pro 的更快更便宜版本\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "视频 宽高比. Ignored if an 图像 is used."
       },
       "camera_fixed": {
-        "description": "Whether to fix camera position"
+        "description": "是否固定摄像机位置"
       },
       "duration": {
         "description": "视频 时长 in seconds"
@@ -82232,7 +82232,7 @@
   },
   "replicate.video.generate.Vace_14b": {
     "title": "Vace 14b",
-    "description": "This is a faster VACE-14B model, optimised with pruna, contact us for more at pruna.ai\nreplicate, ai",
+    "description": "这是使用 pruna 优化的更快版 VACE-14B 模型，详情请联系 pruna.ai\nreplicate, ai",
     "properties": {
       "frame_num": {
         "description": "帧数 to 生成."
@@ -82652,7 +82652,7 @@
   },
   "replicate.video.generate.Video_Utils": {
     "title": "Video Utils",
-    "description": "Video_Utils node\nreplicate, ai",
+    "description": "Video_Utils 节点\nreplicate, ai",
     "properties": {
       "fps": {
         "description": "帧率, if relevant. Use 0 to keep original fps (or use 默认). 转换 to GIF defaults to 12fps"
@@ -82661,13 +82661,13 @@
         "description": "File – zip, 图像 or 视频 to 处理"
       },
       "task": {
-        "description": "Task to perform"
+        "description": "要执行的任务"
       }
     }
   },
   "replicate.video.generate.Wan2_1_With_Lora": {
     "title": "Wan 2.1 With Lora",
-    "description": "Run Wan2.1 14b or 1.3b with a lora\nreplicate, ai",
+    "description": "使用 LoRA 运行 Wan2.1 14b 或 1.3b 模型\nreplicate, ai",
     "properties": {
       "aspect_ratio": {
         "description": "The 宽高比 of the 视频. 16:9, 9:16, 1:1, etc."
@@ -82706,7 +82706,7 @@
         "description": "Higher guide 缩放 makes 提示词 adherence better, but can reduce variation"
       },
       "sample_shift": {
-        "description": "Sample shift factor"
+        "description": "采样偏移因子"
       },
       "sample_steps": {
         "description": "Number of 生成 步数. Fewer 步数 means faster 生成, at the expensive of 输出 质量. 30 步数 is sufficient for most 提示词"
@@ -82814,7 +82814,7 @@
         "description": "Classifier free 引导系数 (higher 值 strengthen 提示词 adherence)"
       },
       "sample_shift": {
-        "description": "Sampling shift factor for flow matching (recommended range: 8-12)"
+        "description": "流匹配的采样偏移因子（推荐范围：8-12）"
       },
       "sample_steps": {
         "description": "Number of sampling 步数 (higher = better 质量 but slower)"
@@ -83060,7 +83060,7 @@
         "description": "分辨率 of 视频. 16:9 corresponds to 832x480px, and 9:16 is 480x832px"
       },
       "sample_shift": {
-        "description": "Sample shift factor"
+        "description": "采样偏移因子"
       },
       "seed": {
         "description": "随机种子. Leave blank for random"
@@ -83150,10 +83150,10 @@
         "description": "可选 last 图像 to condition the 视频 生成. If provided, 创建 smoother transitions between 帧."
       },
       "lora_scale_transformer": {
-        "description": "Determines how strongly the transformer LoRA should be applied."
+        "description": "决定 transformer LoRA 的应用强度"
       },
       "lora_scale_transformer_2": {
-        "description": "Determines how strongly the transformer_2 LoRA should be applied."
+        "description": "决定 transformer_2 LoRA 的应用强度"
       },
       "lora_weights_transformer": {
         "description": "Load LoRA weights for the HIGH transformer. 支持 arbitrary .safetensors URLs from the Internet (for example, 'https://huggingface.co/TheRaf7/instagirl-v2/resolve/main/Instagirlv2.0_hinoise.safetensors')"
@@ -83171,7 +83171,7 @@
         "description": "分辨率 of 视频. 16:9 corresponds to 832x480px, and 9:16 is 480x832px"
       },
       "sample_shift": {
-        "description": "Sample shift factor"
+        "description": "采样偏移因子"
       },
       "seed": {
         "description": "随机种子. Leave blank for random"
@@ -83201,7 +83201,7 @@
         "description": "分辨率 of 视频. 832x480px corresponds to 16:9 宽高比, and 480x832px is 9:16"
       },
       "sample_shift": {
-        "description": "Sample shift factor"
+        "description": "采样偏移因子"
       },
       "sample_steps": {
         "description": "Number of 生成 步数. Fewer 步数 means faster 生成, at the expensive of 输出 质量. 30 步数 is sufficient for most 提示词"
@@ -83231,10 +83231,10 @@
         "description": "插值 the 生成 视频 to 30 FPS using ffmpeg"
       },
       "lora_scale_transformer": {
-        "description": "Determines how strongly the transformer LoRA should be applied."
+        "description": "决定 transformer LoRA 的应用强度"
       },
       "lora_scale_transformer_2": {
-        "description": "Determines how strongly the transformer_2 LoRA should be applied."
+        "description": "决定 transformer_2 LoRA 的应用强度"
       },
       "lora_weights_transformer": {
         "description": "Load LoRA weights for transformer. 支持 arbitrary .safetensors URLs from the Internet (for example, 'https://huggingface.co/Viktor1717/scandinavian-interior-style1/resolve/main/my_first_flux_lora_v1.safetensors')"
@@ -83255,7 +83255,7 @@
         "description": "分辨率 of 视频. 16:9 corresponds to 832x480px, and 9:16 is 480x832px"
       },
       "sample_shift": {
-        "description": "Sample shift factor"
+        "description": "采样偏移因子"
       },
       "seed": {
         "description": "随机种子. Leave blank for random"
@@ -83552,7 +83552,7 @@
         "description": "时长 of the 输出视频 in seconds. If not set, matches 输入 视频 时长. Use this to truncate."
       },
       "prompt": {
-        "description": "Editing instructions or style transfer description"
+        "description": "编辑指令或风格迁移描述"
       },
       "reference_image": {
         "description": "参考图像 for reference-based editing (jpg/png/bmp/webp)"
@@ -83591,7 +83591,7 @@
         "description": "强度 of init_video"
       },
       "model": {
-        "description": "Model to use"
+        "description": "要使用的模型"
       },
       "negative_prompt": {
         "description": "负向提示词"
@@ -83660,7 +83660,7 @@
         "description": "字幕 position"
       },
       "transcript_file_input": {
-        "description": "Transcript file, if provided will use this for words rather than whisper."
+        "description": "转录文本文件。如果提供，将使用此文件的文字而非 whisper 识别结果"
       },
       "translate": {
         "description": "Translate the 字幕 to English"
@@ -83702,7 +83702,7 @@
         "description": "An 可选 first 帧 of the 视频 to modify. This should be a modified version of the original first 帧, it will be used to guide the 视频 modification."
       },
       "first_frame_url": {
-        "description": "Deprecated: Use first_frame instead."
+        "description": "已弃用：请改用 first_frame"
       },
       "mode": {
         "description": "How closely the 输出 should follow the source 视频. Adhere: very close, for subtle enhancements. Flex: 允许 more stylistic change while keeping recognizable elements. Reimagine: loosely follows the source, for dramatic or transformative changes."
@@ -83810,7 +83810,7 @@
         "description": "随机种子. Leave blank to randomize."
       },
       "tasks": {
-        "description": "Which restoration tasks to apply."
+        "description": "要应用哪些修复任务"
       },
       "video": {
         "description": "输入视频 file (e.g. MP4)."
