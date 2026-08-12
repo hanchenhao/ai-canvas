@@ -43,7 +43,7 @@ import { useCodeGenFromHandle } from "../../hooks/useCodeGenFromHandle";
 const NODE_ROW_HEIGHT = 28;
 
 const OutputContextMenu: React.FC = () => {
-  const { t } = useTranslation("canvas");
+  const { t, i18n } = useTranslation("canvas");
   const theme = useTheme();
   const {
     nodeId,
@@ -480,15 +480,21 @@ const OutputContextMenu: React.FC = () => {
     return () => window.clearTimeout(timeout);
   }, [menuPosition, autoFocusEnabled]);
 
-  const saveLabel = t("contextMenu.output.save", {
-    type:
-      sourceType?.type === "string"
-        ? "Text"
-        : sourceType?.type_name
-        ? sourceType.type_name?.charAt(0).toUpperCase() +
-          sourceType.type_name?.slice(1)
-        : ""
-  });
+  // English fallback preserves the pre-i18n rendering exactly; when the type
+  // has an entry in contextMenu.pane.type.* the translated name is used instead.
+  const rawSaveTypeName =
+    sourceType?.type === "string"
+      ? "Text"
+      : sourceType?.type_name
+        ? sourceType.type_name.charAt(0).toUpperCase() +
+          sourceType.type_name.slice(1)
+        : "";
+  const saveTypeKey = `contextMenu.pane.type.${rawSaveTypeName.toLowerCase()}`;
+  const saveTypeName =
+    rawSaveTypeName !== "" && i18n.exists(saveTypeKey, { ns: "canvas" })
+      ? t(saveTypeKey)
+      : rawSaveTypeName;
+  const saveLabel = t("contextMenu.output.save", { type: saveTypeName });
   const showStaticActions = searchTerm.trim().length === 0;
 
   // Shared by every action row: serialize the sx object once, not once per row per render.

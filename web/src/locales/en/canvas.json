@@ -111,6 +111,7 @@
         "model3d": "Model 3D",
         "select": "Select",
         "string": "String",
+        "text": "Text",
         "video": "Video"
       }
     },
