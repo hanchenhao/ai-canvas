@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { memo, useCallback, useImperativeHandle, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import type { KeyboardEvent, Ref } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -64,6 +65,7 @@ const CategorySearchBar = memo(function CategorySearchBar({
   placeholder = "Filter...",
   ref
 }: CategorySearchBarProps) {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const inputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(ref, () => inputRef.current as HTMLInputElement, []);
@@ -94,12 +96,12 @@ const CategorySearchBar = memo(function CategorySearchBar({
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        aria-label="Filter category"
+        aria-label={t("canvas:categorySearch.filterCategory")}
       />
       {value && (
         <ToolbarIconButton
           tabIndex={-1}
-          tooltip="Clear filter"
+          tooltip={t("canvas:categorySearch.clearFilter")}
           ariaLabel="Clear filter"
           onClick={handleClear}
           icon={<ClearIcon />}

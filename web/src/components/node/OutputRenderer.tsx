@@ -7,6 +7,7 @@ import React, {
   useRef,
   useEffect
 } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   Asset,
@@ -384,6 +385,7 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
   value,
   showTextActions = true
 }) => {
+  const { t } = useTranslation("canvas");
   const shouldRender = !(
     value === undefined ||
     value === null ||
@@ -620,7 +622,7 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
               src={uri}
               sandbox=""
               style={IFRAME_STYLE}
-              title="HTML output"
+              title={t("canvas:node.htmlOutput")}
             />
           );
         }
@@ -643,7 +645,7 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
             srcDoc={html}
             sandbox=""
             style={IFRAME_STYLE}
-            title="HTML output"
+            title={t("canvas:node.htmlOutput")}
           />
         );
       }
@@ -665,7 +667,7 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
             <iframe
               src={uri}
               style={IFRAME_PDF_STYLE}
-              title="PDF output"
+              title={t("canvas:node.pdfOutput")}
             />
           );
         }
@@ -690,7 +692,7 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
             // nodrag/nopan stop ReactFlow's drag from capturing the pointer so
             // the native controls (scrub, volume) get the mouse events.
             className="nodrag nopan"
-            aria-label="Video output"
+            aria-label={t("canvas:node.videoOutput")}
             style={FULL_SIZE_STYLE}
           />
         );
@@ -736,14 +738,14 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
           return (
             <EmptyState
               variant="error"
-              title="Could not load sketch"
+              title={t("canvas:node.couldNotLoadSketch")}
               description={sketchQuery.error.message}
             />
           );
         }
         return (
           <EmptyState
-            title="No sketch selected"
+            title={t("canvas:node.noSketchSelected")}
             description="Choose a sketch document to preview it here."
           />
         );
@@ -767,14 +769,14 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
           return (
             <EmptyState
               variant="error"
-              title="Could not load timeline"
+              title={t("canvas:node.couldNotLoadTimeline")}
               description={timelineQuery.error.message}
             />
           );
         }
         return (
           <EmptyState
-            title="No timeline selected"
+            title={t("canvas:node.noTimelineSelected")}
             description="Choose a timeline sequence to preview it here."
           />
         );

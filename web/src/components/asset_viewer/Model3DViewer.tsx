@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import React, {
   Component,
   Suspense,
@@ -489,6 +490,7 @@ const Model3DViewer: React.FC<Model3DViewerProps> = ({
   onClick,
   onDoubleClick
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -781,7 +783,7 @@ const Model3DViewer: React.FC<Model3DViewerProps> = ({
           <FlexRow className="controls-toolbar" gap={SPACING.micro} align="center">
             <ToolbarIconButton
               icon={<GridOnIcon fontSize="small" />}
-              tooltip="Toggle Grid"
+              tooltip={t("canvas:model3d.toggleGrid")}
               onClick={handleToggleGrid}
               active={showGrid}
               size="small"
@@ -789,7 +791,7 @@ const Model3DViewer: React.FC<Model3DViewerProps> = ({
 
             <ToolbarIconButton
               icon={<ViewInArIcon fontSize="small" />}
-              tooltip="Toggle Axes"
+              tooltip={t("canvas:model3d.toggleAxes")}
               onClick={handleToggleAxes}
               active={showAxes}
               size="small"
@@ -814,7 +816,7 @@ const Model3DViewer: React.FC<Model3DViewerProps> = ({
                 value={lightingPreset}
                 onChange={handleLightingChange}
                 variant="outlined"
-                aria-label="Lighting preset"
+                aria-label={t("canvas:model3d.lightingPreset")}
                 IconComponent={LightModeIcon}
               >
                 {LIGHTING_PRESETS.map((preset) => (
@@ -830,7 +832,7 @@ const Model3DViewer: React.FC<Model3DViewerProps> = ({
                 value={backgroundColor}
                 onChange={handleBackgroundChange}
                 variant="outlined"
-                aria-label="Background color"
+                aria-label={t("canvas:model3d.backgroundColor")}
               >
                 {BACKGROUND_COLORS.map((bg) => (
                   <MenuItem key={bg.value} value={bg.value}>
@@ -842,14 +844,14 @@ const Model3DViewer: React.FC<Model3DViewerProps> = ({
 
             <ToolbarIconButton
               icon={<RestartAltIcon fontSize="small" />}
-              tooltip="Reset Camera"
+              tooltip={t("canvas:model3d.resetCamera")}
               onClick={handleResetCamera}
               size="small"
             />
 
             <ToolbarIconButton
               icon={<CameraAltIcon fontSize="small" />}
-              tooltip="Take Screenshot"
+              tooltip={t("canvas:model3d.takeScreenshot")}
               onClick={handleScreenshot}
               size="small"
             />

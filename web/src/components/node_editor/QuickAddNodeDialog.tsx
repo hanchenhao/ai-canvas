@@ -23,6 +23,7 @@
  */
 
 import { memo, useCallback, useEffect, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Command, CommandInput } from "cmdk";
 import { Dialog, MOTION, BORDER_RADIUS, SPACING, getSpacingPx } from "../ui_primitives";
 import { Caption, Text, Chip } from "../ui_primitives";
@@ -144,6 +145,7 @@ const QuickAddNodeDialog: React.FC<QuickAddNodeDialogProps> = ({
   setOpen,
   reactFlowWrapper
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -277,7 +279,7 @@ const QuickAddNodeDialog: React.FC<QuickAddNodeDialogProps> = ({
       open={open}
       onClose={handleClose}
       className="quick-add-node-dialog"
-      aria-label="Quick add node"
+      aria-label={t("canvas:quickAddDialog.ariaLabel")}
     >
       <div css={cssStyles}>
         <Command label="Quick Add Node" className="command-menu" shouldFilter={false}>

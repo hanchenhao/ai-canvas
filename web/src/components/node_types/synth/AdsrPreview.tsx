@@ -7,6 +7,7 @@
  */
 
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 
 const W = 120;
@@ -35,6 +36,7 @@ const AdsrPreviewInner: React.FC<AdsrPreviewProps> = ({
   release,
   accentColor
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const a = seg(attack);
   const d = seg(decay);
@@ -62,7 +64,7 @@ const AdsrPreviewInner: React.FC<AdsrPreviewProps> = ({
       viewBox={`0 0 ${W} ${H}`}
       preserveAspectRatio="none"
       style={{ display: "block", height: H }}
-      aria-label="Envelope shape"
+      aria-label={t("canvas:imageEditing.envelopeShape")}
       role="img"
     >
       <path

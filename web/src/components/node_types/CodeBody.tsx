@@ -19,6 +19,7 @@ import React, {
   useState
 } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { shallow } from "zustand/shallow";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -173,6 +174,7 @@ const CodeBodyInner: React.FC<CodeBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -378,8 +380,8 @@ const CodeBodyInner: React.FC<CodeBodyProps> = ({
           <div className="code-actions">
             {supportsCodeGen && (
               <ToolbarIconButton
-                tooltip="Ask AI"
-                aria-label="Ask AI"
+                tooltip={t("canvas:codeBody.askAi")}
+                aria-label={t("canvas:codeBody.askAi")}
                 icon={
                   <AutoAwesomeIcon
                     sx={{ fontSize: "var(--fontSizeNormal)" }}
@@ -390,7 +392,7 @@ const CodeBodyInner: React.FC<CodeBodyProps> = ({
               />
             )}
             <ToolbarIconButton
-              tooltip="Open Editor"
+              tooltip={t("canvas:node.openEditor")}
               icon={<OpenInFullIcon sx={{ fontSize: "var(--fontSizeNormal)" }} />}
               onClick={toggleExpand}
               size="small"

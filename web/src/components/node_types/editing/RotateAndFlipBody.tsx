@@ -7,6 +7,7 @@
  */
 
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -131,6 +132,7 @@ const RotateAndFlipBodyInner: React.FC<RotateAndFlipBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -198,7 +200,7 @@ const RotateAndFlipBodyInner: React.FC<RotateAndFlipBodyProps> = ({
             value={angle}
             onChange={handleAngleChange}
             onChangeCommitted={handleAngleCommitted}
-            aria-label="Rotation angle"
+            aria-label={t("canvas:imageEditing.rotationAngle")}
           />
           <span className="angle-readout">{Math.round(angle)}°</span>
         </FlexRow>
@@ -209,7 +211,7 @@ const RotateAndFlipBodyInner: React.FC<RotateAndFlipBodyProps> = ({
               isActive={flipH}
               icon={<FlipIcon fontSize="small" />}
               activeIcon={<FlipIcon fontSize="small" />}
-              tooltip="Flip horizontally"
+              tooltip={t("canvas:imageEditing.flipHorizontally")}
               ariaLabel="Flip horizontally"
               onClick={toggleFlipH}
             />
@@ -228,7 +230,7 @@ const RotateAndFlipBodyInner: React.FC<RotateAndFlipBodyProps> = ({
                   style={{ transform: "rotate(90deg)" }}
                 />
               }
-              tooltip="Flip vertically"
+              tooltip={t("canvas:imageEditing.flipVertically")}
               ariaLabel="Flip vertically"
               onClick={toggleFlipV}
             />
@@ -236,7 +238,7 @@ const RotateAndFlipBodyInner: React.FC<RotateAndFlipBodyProps> = ({
           <StateIconButton
             size="small"
             icon={<RestartAltIcon fontSize="small" />}
-            tooltip="Reset rotation and flips"
+            tooltip={t("canvas:imageEditing.resetRotationFlips")}
             ariaLabel="Reset rotation and flips"
             onClick={handleReset}
           />

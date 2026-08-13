@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { NodeProps } from "@xyflow/react";
 import { getCopySource, getOutputFromResult } from "../outputResult";
 import { Text, Container, MOTION, BORDER_RADIUS, Z_INDEX } from "../../ui_primitives";
@@ -220,6 +221,7 @@ const CONTENT_DIV_STYLE = {
  * This displays streaming outputs accumulated via output_update messages.
  */
 const OutputNode: React.FC<OutputNodeProps> = (props) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const addNotification = useNotificationStore(
@@ -432,7 +434,7 @@ const OutputNode: React.FC<OutputNodeProps> = (props) => {
           className={`content ${isScrollable ? "scrollable nowheel" : "noscroll"
             }`}
           role="region"
-          aria-label="Node output"
+          aria-label={t("canvas:node.nodeOutput")}
           style={CONTENT_DIV_STYLE}
           tabIndex={0}
           onFocus={handleContentFocus}

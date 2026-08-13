@@ -25,6 +25,7 @@ import React, {
   useState
 } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import ImageIcon from "@mui/icons-material/Image";
@@ -288,6 +289,7 @@ const CropBodyInner: React.FC<CropBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -704,7 +706,7 @@ const CropBodyInner: React.FC<CropBodyProps> = ({
           variant="standard"
           value={aspect}
           onChange={handleAspectChange}
-          aria-label="Aspect ratio"
+          aria-label={t("canvas:imageEditing.aspectRatio")}
           disableUnderline
         >
           {ASPECT_OPTIONS.map((o) => (
@@ -758,8 +760,8 @@ const CropBodyInner: React.FC<CropBodyProps> = ({
           type="button"
           className="reset-btn"
           onClick={handleReset}
-          aria-label="Reset crop"
-          title="Reset crop"
+          aria-label={t("canvas:imageEditing.resetCrop")}
+          title={t("canvas:imageEditing.resetCrop")}
         >
           <RestartAltIcon fontSize="small" />
         </button>

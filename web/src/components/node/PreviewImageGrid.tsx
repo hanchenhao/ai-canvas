@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useRef, useEffect, useState, useCallback, useMemo, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -324,6 +325,7 @@ const PreviewImageGrid: React.FC<PreviewImageGridProps> = ({
   enableSelection = true,
   showActions = true
 }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -552,7 +554,7 @@ const PreviewImageGrid: React.FC<PreviewImageGridProps> = ({
       {/* Action bar when items are selected */}
       {selectionMode && selectedIndices.size > 0 && (
         <Box className="action-bar">
-          <Tooltip title="Compare the two selected images">
+          <Tooltip title={t("canvas:node.compareTwoImages")}>
             <span>
               <EditorButton
                 className="action-button"
@@ -561,12 +563,12 @@ const PreviewImageGrid: React.FC<PreviewImageGridProps> = ({
                 onClick={handleCompare}
                 disabled={selectedIndices.size !== 2}
               >
-                Compare
+                {t("canvas:node.compare")}
               </EditorButton>
             </span>
           </Tooltip>
           <ToolbarIconButton
-            title="Clear selection"
+            title={t("canvas:node.clearSelection")}
             size="small"
             onClick={clearSelection}
             sx={{ color: theme.vars.palette.common.white }}
@@ -574,7 +576,7 @@ const PreviewImageGrid: React.FC<PreviewImageGridProps> = ({
             <ClearIcon fontSize="small" />
           </ToolbarIconButton>
           <Box sx={{ fontSize: "var(--fontSizeSmall)", color: "grey.400", ml: 1 }}>
-            {selectedIndices.size} selected
+            {t("canvas:node.selectedCount", { count: selectedIndices.size })}
           </Box>
         </Box>
       )}
@@ -586,11 +588,11 @@ const PreviewImageGrid: React.FC<PreviewImageGridProps> = ({
           open={compareDialogOpen}
           onClose={handleCloseCompare}
           maxWidth={false}
-          aria-label="Compare outputs"
+          aria-label={t("canvas:node.compareOutputs")}
         >
           <Box sx={{ width: "90vw", height: "90vh", position: "relative" }}>
             <ToolbarIconButton
-              title="Close image comparison dialog"
+              title={t("canvas:node.closeImageComparison")}
               onClick={handleCloseCompare}
               sx={{
                 position: "absolute",

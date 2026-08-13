@@ -12,6 +12,7 @@
  */
 
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -129,6 +130,7 @@ const LayerRowImpl: React.FC<LayerRowProps> = ({
   onToggleVisible,
   onDelete
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const thumbnail = useImageUrl(image);
@@ -210,7 +212,7 @@ const LayerRowImpl: React.FC<LayerRowProps> = ({
         icon={<DeleteOutlineIcon fontSize="small" />}
         onClick={handleDelete}
         ariaLabel="Delete layer"
-        tooltip="Delete layer"
+        tooltip={t("canvas:imageEditing.deleteLayer")}
       />
     </div>
   );

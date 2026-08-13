@@ -1,4 +1,5 @@
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   BORDER_RADIUS,
   Caption,
@@ -86,6 +87,7 @@ const ActionButton: React.FC<{
 
 const SelectionActionToolbar: React.FC<SelectionActionToolbarProps> = memo(
   ({ visible, onClose }) => {
+    const { t } = useTranslation("canvas");
     // getSelectedNodeCount avoids re-renders on node move (getSelectedNodes
     // returns a fresh array each time a node is dragged).
     const selectedCount = useNodes((state) => state.getSelectedNodeCount());
@@ -250,7 +252,7 @@ const SelectionActionToolbar: React.FC<SelectionActionToolbarProps> = memo(
       <FlexRow
         className="selection-action-toolbar"
         role="region"
-        aria-label="Selection Action Toolbar"
+        aria-label={t("canvas:selectionToolbar.ariaLabel")}
         onKeyDown={handleKeyDown}
         gap={0.5}
         align="center"

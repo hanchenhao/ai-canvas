@@ -8,6 +8,7 @@
  */
 
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -139,6 +140,7 @@ const BlurBodyInner: React.FC<BlurBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -197,7 +199,7 @@ const BlurBodyInner: React.FC<BlurBodyProps> = ({
           variant="standard"
           value={blurType}
           onChange={handleTypeChange}
-          aria-label="Blur type"
+          aria-label={t("canvas:imageEditing.blurType")}
           disableUnderline
         >
           {BLUR_TYPES.map((t) => (
@@ -215,7 +217,7 @@ const BlurBodyInner: React.FC<BlurBodyProps> = ({
           value={size}
           onChange={handleSizeChange}
           onChangeCommitted={handleSizeCommitted}
-          aria-label="Blur size"
+          aria-label={t("canvas:imageEditing.blurSize")}
         />
         <span className="ctrl-value">{Math.round(size)}</span>
       </div>

@@ -8,6 +8,7 @@
  */
 
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -146,6 +147,7 @@ const ScaleBodyInner: React.FC<ScaleBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -203,7 +205,7 @@ const ScaleBodyInner: React.FC<ScaleBodyProps> = ({
           value={scale}
           onChange={handleScaleChange}
           onChangeCommitted={handleScaleCommitted}
-          aria-label="Scale factor"
+          aria-label={t("canvas:imageEditing.scaleFactor")}
         />
         <span className="ctrl-value">{scale.toFixed(2)}×</span>
       </div>

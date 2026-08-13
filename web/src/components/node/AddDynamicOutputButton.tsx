@@ -1,4 +1,5 @@
 import React, { memo, useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { DynamicInputButton } from "../ui_primitives";
 import { useDynamicOutput } from "../../hooks/nodes/useDynamicOutput";
 import { TypeMetadata } from "../../stores/ApiTypes";
@@ -22,13 +23,14 @@ const AddDynamicOutputButton: React.FC<AddDynamicOutputButtonProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const { handleAddOutput } = useDynamicOutput(id, dynamicOutputs);
+  const { t } = useTranslation("canvas");
 
   const handleOpen = useCallback(() => setOpen(true), []);
   const handleClose = useCallback(() => setOpen(false), []);
 
   return (
     <>
-      <DynamicInputButton label="Add output" onAdd={handleOpen} />
+      <DynamicInputButton label={t("canvas:node.addOutput")} onAdd={handleOpen} />
       <AddDynamicOutputDialog
         open={open}
         onClose={handleClose}

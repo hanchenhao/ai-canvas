@@ -9,6 +9,7 @@
  * IPC is unavailable or an install fails.
  */
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import {
   Dialog,
@@ -104,6 +105,7 @@ const RuntimeInstallDialog: React.FC<RuntimeInstallDialogProps> = ({
   open,
   onClose,
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const openPackageManager = useOpenPackageManager();
   const [installing, setInstalling] = useState(false);
@@ -181,7 +183,7 @@ const RuntimeInstallDialog: React.FC<RuntimeInstallDialogProps> = ({
     <Dialog
       open={open}
       onClose={handleDialogClose}
-      title="Install required runtimes"
+      title={t("canvas:runtimeInstall.title")}
       minWidth="min(440px, 100vw - 32px)"
       onConfirm={allInstalled ? onClose : handleInstall}
       onCancel={onClose}

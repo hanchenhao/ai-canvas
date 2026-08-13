@@ -7,6 +7,7 @@ import React, {
   useState
 } from "react";
 import { shallow } from "zustand/shallow";
+import { useTranslation } from "react-i18next";
 
 import { useVirtualizer } from "@tanstack/react-virtual";
 import {
@@ -174,6 +175,7 @@ const getListConstantPathForElementType = (
   LIST_CONSTANT_PATHS[elementTypeName] ?? null;
 
 const InputContextMenu: React.FC = () => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const getMetadata = useMetadataStore((state) => state.getMetadata);
   const allMetadata = useMetadataStore((state) => state.metadata);
@@ -937,7 +939,7 @@ const InputContextMenu: React.FC = () => {
           onChange={handleSearchChange}
           onClick={(event) => event.stopPropagation()}
           onKeyDown={handleSearchKeyDown}
-          aria-label="Search connectable nodes"
+          aria-label={t("canvas:inputContextMenu.searchConnectableNodes")}
           sx={{
             "& .MuiOutlinedInput-root": {
               backgroundColor: "action.disabledBackground",
@@ -1070,7 +1072,7 @@ const InputContextMenu: React.FC = () => {
               <span className="icon-bg">
                 <AutoAwesomeIcon />
               </span>
-              <Text size="small">Create value with AI…</Text>
+              <Text size="small">{t("canvas:inputContextMenu.createValueWithAi")}</Text>
             </Box>
           )}
         </Box>

@@ -7,6 +7,7 @@
  */
 
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -143,6 +144,7 @@ const OffsetBodyInner: React.FC<OffsetBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(
     () => [styles(theme), adjustmentSliderStyles(theme)],
@@ -213,7 +215,7 @@ const OffsetBodyInner: React.FC<OffsetBodyProps> = ({
             exclusive
             onChange={handleWrapChange}
             size="small"
-            aria-label="Wrap mode"
+            aria-label={t("canvas:imageEditing.wrapMode")}
           >
             {WRAP_LABELS.map((label, i) => (
               <ToggleButton key={i} value={String(i)} aria-label={label}>

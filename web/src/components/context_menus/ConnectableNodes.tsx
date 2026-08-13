@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { shallow } from "zustand/shallow";
 
@@ -156,6 +157,7 @@ const getPreferredConnectableInput = (
 };
 
 const ConnectableNodes: React.FC = React.memo(function ConnectableNodes() {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const [searchTerm, setSearchTerm] = useState("");
   const reactFlowInstance = useReactFlow();
@@ -354,14 +356,14 @@ const ConnectableNodes: React.FC = React.memo(function ConnectableNodes() {
             className="connectable-nodes-search"
             size="small"
             fullWidth
-            placeholder="Search nodes..."
+            placeholder={t("canvas:inputContextMenu.searchNodes")}
             value={searchTerm}
             onChange={handleSearchChange}
             onClick={(e) => e.stopPropagation()}
             onKeyDown={handleSearchKeyDown}
             autoFocus={isVisible && autoFocusEnabled}
             inputRef={searchInputRef}
-            aria-label="Search nodes"
+            aria-label={t("canvas:inputContextMenu.searchNodes")}
             sx={{
                 "& .MuiOutlinedInput-root": {
                     backgroundColor: "action.disabledBackground",

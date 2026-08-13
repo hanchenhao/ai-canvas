@@ -5,6 +5,7 @@
  * credits on open). Mirrors FalPricingFooter where kie exposes pricing data.
  */
 
+import { useTranslation } from "react-i18next";
 import React, {
   memo,
   useCallback,
@@ -93,6 +94,7 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
   variant = "nodeFooter",
   popoverResetDep,
 }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const lastRunCost = useNodeProviderCost(workflowId ?? "", nodeId ?? "");
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -392,7 +394,7 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
         />
 
         <MenuItemPrimitive
-          label="Top up credits"
+          label={t("canvas:node.topUpCredits")}
           icon={<LaunchIcon sx={{ fontSize: 14 }} />}
           compact
           onClick={() => {

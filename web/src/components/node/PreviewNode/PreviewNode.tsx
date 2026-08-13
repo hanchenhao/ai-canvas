@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Handle, NodeProps, Position, useReactFlow } from "@xyflow/react";
 import { getCopySource, getOutputFromResult } from "../outputResult";
 import {
@@ -227,6 +228,7 @@ interface PreviewNodeProps extends NodeProps {
 }
 
 const PreviewNode: React.FC<PreviewNodeProps> = (props) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const addNotification = useNotificationStore(
@@ -484,7 +486,7 @@ const PreviewNode: React.FC<PreviewNodeProps> = (props) => {
             isScrollable ? "scrollable nowheel" : "noscroll"
           } nodrag`}
           role="region"
-          aria-label="Preview output"
+          aria-label={t("canvas:node.previewOutput")}
           style={{ width: "100%", height: "100%" }}
           tabIndex={0}
           onFocus={handleContentFocus}

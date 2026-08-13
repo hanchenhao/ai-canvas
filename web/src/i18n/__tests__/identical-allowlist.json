@@ -1,6 +1,8 @@
 {
   "canvas": [
-    "contextMenu.pane.type.json"
+    "contextMenu.pane.type.json",
+    "imageEditing.alpha",
+    "typeFilter.api"
   ],
   "chat": [
     "progress.percent"

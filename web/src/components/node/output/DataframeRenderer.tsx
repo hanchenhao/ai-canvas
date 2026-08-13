@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ToolbarIconButton, MOTION, BORDER_RADIUS, Z_INDEX } from "../../ui_primitives";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import isEqual from "../../../utils/isEqual";
@@ -92,6 +93,7 @@ const styles = (theme: Theme) =>
   });
 
 const DataframeRenderer: React.FC<DataframeRendererProps> = ({ dataframe }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
   const normalized = useMemo(
@@ -118,7 +120,7 @@ const DataframeRenderer: React.FC<DataframeRendererProps> = ({ dataframe }) => {
   return (
     <div css={memoizedStyles} className="dataframe-renderer">
       <div className="dataframe-action-buttons">
-        <ToolbarIconButton title="Open in Full View" size="small" onClick={toggleExpand}>
+        <ToolbarIconButton title={t("canvas:node.openInFullView")} size="small" onClick={toggleExpand}>
           <OpenInFullIcon />
         </ToolbarIconButton>
       </div>

@@ -1,4 +1,5 @@
 import React, { useCallback, useState, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { Tooltip, Caption, LoadingSpinner, ToolbarIconButton, Box, SPACING, getSpacingPx } from "../../ui_primitives";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { useNodes } from "../../../contexts/NodeContext";
@@ -24,6 +25,7 @@ export const FalSchemaLoader: React.FC<FalSchemaLoaderProps> = memo(({
   nodeId,
   data
 }) => {
+  const { t } = useTranslation("canvas");
   const updateNodeData = useNodes((state) => state.updateNodeData);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -136,9 +138,9 @@ export const FalSchemaLoader: React.FC<FalSchemaLoaderProps> = memo(({
 
   return (
     <Box sx={{ display: "inline-flex", alignItems: "center" }}>
-      <Tooltip title="Reload Schema" arrow delay={TOOLTIP_ENTER_DELAY}>
+      <Tooltip title={t("canvas:schemaLoader.reloadSchema")} arrow delay={TOOLTIP_ENTER_DELAY}>
         <ToolbarIconButton
-          title="Reload Schema"
+          title={t("canvas:schemaLoader.reloadSchema")}
           size="small"
           disabled={loading}
           onClick={() => void handleLoad(true)}

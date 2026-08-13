@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from "@emotion/react";
 import { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNodes } from "../../contexts/NodeContext";
 import { useTheme } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
@@ -69,6 +70,7 @@ const EditableTitle = memo(function EditableTitle({
   const [isEditing, setIsEditing] = useState(false);
   const updateNodeData = useNodes((state) => state.updateNodeData);
   const theme = useTheme();
+  const { t } = useTranslation("canvas");
 
   const styles = useMemo(() => css({
     position: "absolute",
@@ -256,8 +258,8 @@ const EditableTitle = memo(function EditableTitle({
         <textarea
           defaultValue={title}
           autoFocus
-          aria-label="Note text"
-          placeholder="Add your note..."
+          aria-label={t("canvas:node.noteText")}
+          placeholder={t("canvas:node.notePlaceholder")}
           onKeyDown={handleKeyDown}
           onInput={handleInput}
           onBlur={handleBlur}
@@ -270,8 +272,8 @@ const EditableTitle = memo(function EditableTitle({
             type="button"
             className="remove-title"
             onClick={handleRemoveTitle}
-            title="Remove note"
-            aria-label="Remove note"
+            title={t("canvas:node.removeNote")}
+            aria-label={t("canvas:node.removeNote")}
           >
             <CloseIcon className="icon" />
           </button>

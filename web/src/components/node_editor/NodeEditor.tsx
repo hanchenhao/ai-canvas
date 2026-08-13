@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useMemo, useState, useRef, useEffect } from "react";
 
+import { useTranslation } from "react-i18next";
 import {
   LoadingSpinner,
   Dialog,
@@ -63,6 +64,7 @@ interface NodeEditorProps {
 }
 
 const NodeEditor: React.FC<NodeEditorProps> = ({ workflowId, active }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const editorBgStyle = useMemo<React.CSSProperties>(
     () => ({ backgroundColor: theme.vars.palette.c_editor_bg_color }),
@@ -242,7 +244,7 @@ const NodeEditor: React.FC<NodeEditorProps> = ({ workflowId, active }) => {
                   }
                 }}
                 closeAfterTransition
-                aria-label="Keyboard shortcuts"
+                aria-label={t("canvas:nodeEditor.keyboardShortcuts")}
               >
                 <Box
                   sx={shortcutsModalSx}
@@ -261,7 +263,7 @@ const NodeEditor: React.FC<NodeEditorProps> = ({ workflowId, active }) => {
         onClose={handleSaveExampleCancel}
         maxWidth="sm"
         fullWidth
-        title="Save example"
+        title={t("canvas:nodeEditor.saveExample")}
         onConfirm={handleSaveExampleConfirm}
         onCancel={handleSaveExampleCancel}
         confirmText="Save"
@@ -270,7 +272,7 @@ const NodeEditor: React.FC<NodeEditorProps> = ({ workflowId, active }) => {
         <TextInput
           autoFocus
           margin="dense"
-          label="Package Name"
+          label={t("canvas:nodeEditor.packageName")}
           fullWidth
           variant="outlined"
           value={packageNameInput}

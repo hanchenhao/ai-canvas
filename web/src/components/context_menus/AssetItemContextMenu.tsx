@@ -1,4 +1,5 @@
 import type { MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { useCallback, memo } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -31,6 +32,7 @@ import AssetInfoPanel from "./AssetInfoPanel";
 import { useShallow } from "zustand/react/shallow";
 
 const AssetItemContextMenu = () => {
+  const { t } = useTranslation("canvas");
   const menuPosition = useContextMenuStore((state) => state.menuPosition);
   const closeContextMenu = useContextMenuStore((state) => state.closeContextMenu);
 
@@ -221,14 +223,14 @@ const AssetItemContextMenu = () => {
           onClick={openRenameDialog}
           label="Rename"
           IconComponent={<DriveFileRenameOutlineIcon />}
-          tooltip="Rename selected assets"
+          tooltip={t("canvas:assetItemContextMenu.renameSelected")}
         />
         {openableTabType && (
           <ContextMenuItem
             onClick={handleOpenAsTab}
-            label="Open as Tab"
+            label={t("canvas:assetItemContextMenu.openAsTab")}
             IconComponent={<TabIcon />}
-            tooltip="Open this asset in a new editor tab"
+            tooltip={t("canvas:assetItemContextMenu.openAsTabTooltip")}
           />
         )}
         {singleVideo && (
@@ -246,9 +248,9 @@ const AssetItemContextMenu = () => {
         <Divider />
         <ContextMenuItem
           onClick={openMoveDialog}
-          label="Move to existing folder"
+          label={t("canvas:assetItemContextMenu.moveToFolder")}
           IconComponent={<DriveFileMoveIcon />}
-          tooltip="Move selected assets to an existing folder"
+          tooltip={t("canvas:assetItemContextMenu.moveToFolderTooltip")}
         />
         <ContextMenuItem
           onClick={openCreateFolderDialog}
@@ -263,9 +265,9 @@ const AssetItemContextMenu = () => {
         <Divider />
         <ContextMenuItem
           onClick={downloadSelected}
-          label="Download Selected Assets"
+          label={t("canvas:assetItemContextMenu.downloadSelected")}
           IconComponent={<FileDownloadIcon />}
-          tooltip="Download selected assets to your Downloads folder"
+          tooltip={t("canvas:assetItemContextMenu.downloadSelectedTooltip")}
         />
         {isElectron && isSingleClipboardSupported && (
           <ContextMenuItem
@@ -294,7 +296,7 @@ const AssetItemContextMenu = () => {
         {isTwoImages && (
           <ContextMenuItem
             onClick={handleCompareImages}
-            label="Compare Images"
+            label={t("canvas:assetItemContextMenu.compareImages")}
             IconComponent={<CompareIcon />}
             tooltip="Compare the two selected images side-by-side"
           />
@@ -306,7 +308,7 @@ const AssetItemContextMenu = () => {
           label="Delete"
           addButtonClassName="delete"
           IconComponent={<RemoveCircleIcon />}
-          tooltip="Delete selected assets"
+          tooltip={t("canvas:assetItemContextMenu.deleteSelected")}
         />
         {singleAsset && <AssetInfoPanel asset={singleAsset} />}
       </ContextMenu>

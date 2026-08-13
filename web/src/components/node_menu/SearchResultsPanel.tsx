@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { NodeMetadata } from "../../stores/ApiTypes";
@@ -27,6 +28,7 @@ const SearchResultsPanel: React.FC<SearchResultsPanelProps> = ({
   compact = false
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("canvas");
   // Route click-to-add via PendingNodeCreateStore (safe outside the editor's
   // ReactFlowProvider, e.g. inside the left-panel Search view).
   const requestCreate = usePendingNodeCreateStore((s) => s.requestCreate);
@@ -77,8 +79,8 @@ const SearchResultsPanel: React.FC<SearchResultsPanelProps> = ({
     return (
       <EmptyState
         variant="no-results"
-        title="No matching nodes"
-        description="Try a different search term or adjust your filters."
+        title={t("canvas:searchResults.noMatchingNodes")}
+        description={t("canvas:searchResults.noMatchDescription")}
         size="small"
       />
     );

@@ -22,6 +22,7 @@ import React, {
   useState
 } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { ToggleGroup, ToggleOption, BORDER_RADIUS } from "../../ui_primitives";
@@ -273,6 +274,7 @@ const LevelsBodyInner: React.FC<LevelsBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -482,7 +484,7 @@ const LevelsBodyInner: React.FC<LevelsBodyProps> = ({
           value={histView}
           exclusive
           onChange={handleHistViewChange}
-          aria-label="Histogram channel"
+          aria-label={t("canvas:imageEditing.histogramChannel")}
         >
           {HIST_VIEW_OPTIONS.map((o) => (
             <ToggleOption key={o.value} value={o.value} aria-label={o.label}>
@@ -519,7 +521,7 @@ const LevelsBodyInner: React.FC<LevelsBodyProps> = ({
             value={channelProps.black}
             onChange={handleBlackChange}
             onChangeCommitted={commit}
-            aria-label="Black point"
+            aria-label={t("canvas:imageEditing.blackPoint")}
           />
           <span className="slider-readout">{channelProps.black}</span>
         </FlexRow>
@@ -545,7 +547,7 @@ const LevelsBodyInner: React.FC<LevelsBodyProps> = ({
             value={channelProps.white}
             onChange={handleWhiteChange}
             onChangeCommitted={commit}
-            aria-label="White point"
+            aria-label={t("canvas:imageEditing.whitePoint")}
           />
           <span className="slider-readout">{channelProps.white}</span>
         </FlexRow>
@@ -554,7 +556,7 @@ const LevelsBodyInner: React.FC<LevelsBodyProps> = ({
           <StateIconButton
             size="small"
             icon={<RestartAltIcon fontSize="small" />}
-            tooltip="Reset levels"
+            tooltip={t("canvas:imageEditing.resetLevels")}
             ariaLabel="Reset levels"
             onClick={handleReset}
           />

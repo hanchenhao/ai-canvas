@@ -6,6 +6,7 @@
  */
 
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -157,6 +158,7 @@ const styles = (theme: Theme) =>
   });
 
 const ImagePreview: React.FC<{ value: unknown }> = ({ value }) => {
+    const { t } = useTranslation("canvas");
   if (typeof value === "string" && value) {
     return <ImageView source={value} />;
   }
@@ -195,6 +197,7 @@ const ResizeImageBodyInner: React.FC<ResizeImageBodyProps> = ({
   isOutputNode
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("canvas");
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
   const properties = nodeMetadata.properties ?? [];
@@ -311,7 +314,7 @@ const ResizeImageBodyInner: React.FC<ResizeImageBodyProps> = ({
           value={mode}
           exclusive
           onChange={handleModeChange}
-          aria-label="Resize mode"
+          aria-label={t("canvas:imageEditing.resizeMode")}
         >
           <ToggleOption value="scale">Scale</ToggleOption>
           <ToggleOption value="dimensions">Dimensions</ToggleOption>
@@ -329,7 +332,7 @@ const ResizeImageBodyInner: React.FC<ResizeImageBodyProps> = ({
             value={scale}
             onChange={handleScaleChange}
             onChangeCommitted={setPropertyComplete}
-            aria-label="Scale factor"
+            aria-label={t("canvas:imageEditing.scaleFactor")}
           />
           <span className="ctrl-value">{scale.toFixed(2)}×</span>
         </div>

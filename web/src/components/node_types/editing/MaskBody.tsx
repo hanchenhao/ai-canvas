@@ -8,6 +8,7 @@
  */
 
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -122,6 +123,7 @@ const MaskBodyInner: React.FC<MaskBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -185,7 +187,7 @@ const MaskBodyInner: React.FC<MaskBodyProps> = ({
             value={tab}
             exclusive
             onChange={handleTabChange}
-            aria-label="Preview tab"
+            aria-label={t("canvas:imageEditing.previewTab")}
           >
             <ToggleOption value="image1" aria-label="Image 1">
               Img 1

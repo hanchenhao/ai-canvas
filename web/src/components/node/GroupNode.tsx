@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import {
@@ -228,6 +229,7 @@ const styles = (theme: Theme, minWidth: number, minHeight: number) =>
   });
 
 const GroupNode: React.FC<NodeProps<Node<NodeData>>> = (props) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme, MIN_WIDTH, MIN_HEIGHT), [theme]);
   const controlKeyPressed = useKeyPressed((state) =>
@@ -577,11 +579,11 @@ const GroupNode: React.FC<NodeProps<Node<NodeData>>> = (props) => {
         nextDelay={TOOLTIP_ENTER_DELAY * 5}
         title={
           <span>
-            <b>SELECT GROUP NODE:</b> <br />
-            Hold CTRL or ⌘ key + click <br />
+            <b>{t("canvas:nodeGroup.selectGroupNode")}</b> <br />
+            {t("canvas:nodeGroup.holdCtrlClick")} <br />
             <br />
-            <b>EDIT GROUP TITLE:</b> <br />
-            Double click the label
+            <b>{t("canvas:nodeGroup.editGroupTitle")}</b> <br />
+            {t("canvas:nodeGroup.editGroupTitleHint")}
           </span>
         }
       >
@@ -595,10 +597,10 @@ const GroupNode: React.FC<NodeProps<Node<NodeData>>> = (props) => {
             spellCheck={false}
             className="nodrag"
             type="text"
-            aria-label="Group headline"
+            aria-label={t("canvas:nodeGroup.groupHeadline")}
             value={headline}
             onChange={handleHeadlineChange}
-            placeholder="Group"
+            placeholder={t("canvas:nodeGroup.groupPlaceholder")}
             style={inputStyle}
           />
           <span
@@ -606,7 +608,7 @@ const GroupNode: React.FC<NodeProps<Node<NodeData>>> = (props) => {
             aria-hidden
             className="title-sizer"
           >
-            {headline || "Group"}
+            {headline || t("canvas:nodeGroup.groupPlaceholder")}
           </span>
         </div>
       </Tooltip>
@@ -615,7 +617,7 @@ const GroupNode: React.FC<NodeProps<Node<NodeData>>> = (props) => {
         className="group-actions nodrag"
         style={actionsStyle}
       >
-        <Tooltip title="Group options" delay={TOOLTIP_ENTER_DELAY}>
+        <Tooltip title={t("canvas:nodeGroup.optionsTooltip")} delay={TOOLTIP_ENTER_DELAY}>
           <ToolbarIconButton
             ref={menuButtonRef}
             title=""
@@ -644,7 +646,7 @@ const GroupNode: React.FC<NodeProps<Node<NodeData>>> = (props) => {
           {hasChildren && (
             <div style={POPOVER_ROW_STYLE}>
               <span style={menuTextStyle}>
-                {someChildrenBypassed ? "Enable all nodes" : "Bypass all nodes"}
+                {someChildrenBypassed ? t("canvas:nodeGroup.enableAllNodes") : t("canvas:nodeGroup.bypassAllNodes")}
               </span>
               <BypassGroupButton
                 isBypassed={someChildrenBypassed}
@@ -654,7 +656,7 @@ const GroupNode: React.FC<NodeProps<Node<NodeData>>> = (props) => {
           )}
           <div style={POPOVER_ROW_STYLE}>
             <span style={menuTextStyle}>
-              Group color
+              {t("canvas:nodeGroup.groupColor")}
             </span>
             <ColorPicker
               buttonSize={24}
@@ -670,11 +672,11 @@ const GroupNode: React.FC<NodeProps<Node<NodeData>>> = (props) => {
           nodes hovering over it, not every group on the canvas. */}
       <div className={`help-text ${nodeHovered ? "visible" : "none"}`}>
         <div>
-          <b>REMOVE NODES FROM GROUP</b>
+          <b>{t("canvas:nodeGroup.removeNodesFromGroup")}</b>
         </div>
         <ul>
-          <li>Drag out while holding CTRL | ⌘ key</li>
-          <li>Shake rapidly, then drag out</li>
+          <li>{t("canvas:nodeGroup.dragOutHint")}</li>
+          <li>{t("canvas:nodeGroup.shakeHint")}</li>
         </ul>
       </div>
 

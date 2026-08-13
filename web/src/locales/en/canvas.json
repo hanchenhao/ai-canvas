@@ -20,7 +20,13 @@
   },
   "minimap": {
     "nodeTypeLegend": "Node Type Legend",
-    "colorModeSettings": "Color Mode Settings"
+    "colorModeSettings": "Color Mode Settings",
+    "inputNodes": "Input Nodes",
+    "constantNodes": "Constant Nodes",
+    "processingNodes": "Processing Nodes",
+    "groupNodes": "Group Nodes",
+    "commentNodes": "Comment Nodes",
+    "outputNodes": "Output Nodes"
   },
   "queue": {
     "stopRun": "Stop run",
@@ -34,13 +40,66 @@
   "node": {
     "agentTask": "Agent Task",
     "moreActions": "More Actions",
+    "copyLogs": "Copy logs",
+    "topUpCredits": "Top up credits",
+    "openEditor": "Open Editor",
+    "stringValue": "String value",
+    "compareTwoImages": "Compare the two selected images",
+    "clearSelection": "Clear selection",
+    "compareOutputs": "Compare outputs",
+    "closeImageComparison": "Close image comparison dialog",
+    "compare": "Compare",
+    "selectedCount": "{{count}} selected",
+    "nodeTitle": "Node title",
+    "toggleView": "Toggle view",
+    "showGrid": "Show grid",
+    "showSingle": "Show single",
+    "previous": "Previous",
+    "next": "Next",
+    "previousOutput": "Previous output",
+    "nextOutput": "Next output",
+    "openFullText": "Open full text",
+    "openInViewer": "Open in Viewer (double-click)",
+    "download": "Download",
+    "downloadCurrentOutput": "Download current output",
+    "downstreamCaption": "{{count}} → downstream",
+    "generatedText": "Generated text",
+    "copyText": "Copy text",
+    "addOutputLabel": "Add output",
+    "noteText": "Note text",
+    "removeNote": "Remove note",
+    "htmlOutput": "HTML output",
+    "pdfOutput": "PDF output",
+    "videoOutput": "Video output",
+    "couldNotLoadSketch": "Could not load sketch",
+    "noSketchSelected": "No sketch selected",
+    "couldNotLoadTimeline": "Could not load timeline",
+    "noTimelineSelected": "No timeline selected",
+    "rerouteLabel": "Reroute label",
+    "reportOnGithub": "Report this issue on GitHub",
+    "copyToClipboard": "Copy to clipboard",
+    "nodeOutput": "Node output",
+    "deleteColumn": "Delete column",
+    "htmlChunkOutput": "HTML chunk output",
+    "openInFullView": "Open in Full View",
+    "addToAssets": "Add to Assets",
+    "copyAssetToClipboard": "Copy asset to clipboard",
+    "previewOutput": "Preview output",
+    "addNewRow": "Add new row",
+    "deleteSelectedRows": "Delete selected rows",
+    "duplicateSelectedRows": "Duplicate selected rows",
+    "resetTableSorting": "Reset table sorting",
+    "pasteFromClipboard": "Paste from clipboard",
+    "exportAsCsv": "Export as CSV",
+    "showSelectColumn": "Show Select column",
+    "showRowNumbers": "Show Row Numbers",
+    "copyTableData": "Copy table data to clipboard",
     "selectAllSameType": "Select All Same Type",
     "convertToInput": "Convert to Input",
     "convertToConstant": "Convert to Constant",
     "runGroup": "Run Group",
     "groupRunning": "Group is currently running...",
     "noImageFound": "No Image found",
-    "openInViewer": "Open in Viewer (double-click)",
     "generatedImageOutput": "Generated image output",
     "missingComparisonImages": "Missing image data for comparison",
     "invalidPlotlyConfig": "Invalid Plotly config",
@@ -75,7 +134,10 @@
       "editSketch": "Edit Sketch",
       "clickToOpen": "Click to open sketch editor",
       "layers": "Layers"
-    }
+    },
+    "notePlaceholder": "Add your note...",
+    "copyItem": "Copy item",
+    "reportButton": "Report"
   },
   "nodeMenu": {
     "library": {
@@ -405,5 +467,255 @@
     "cost": "Cost: ${{cost}}",
     "duration": "Duration: {{ms}}ms",
     "error": "Error"
+  },
+  "nodeGroup": {
+    "selectGroupNode": "SELECT GROUP NODE:",
+    "holdCtrlClick": "Hold CTRL or ⌘ key + click",
+    "editGroupTitle": "EDIT GROUP TITLE:",
+    "editGroupTitleHint": "Double click the label",
+    "groupHeadline": "Group headline",
+    "groupPlaceholder": "Group",
+    "optionsTooltip": "Group options",
+    "enableAllNodes": "Enable all nodes",
+    "bypassAllNodes": "Bypass all nodes",
+    "groupColor": "Group color",
+    "removeNodesFromGroup": "REMOVE NODES FROM GROUP",
+    "dragOutHint": "Drag out while holding CTRL | ⌘ key",
+    "shakeHint": "Shake rapidly, then drag out"
+  },
+  "ghostNode": {
+    "placeHint": "Click to place · Esc to cancel"
+  },
+  "codeBody": {
+    "askAi": "Ask AI"
+  },
+  "codeAssistant": {
+    "title": "Code assistant",
+    "codeDraft": "Code draft",
+    "cancel": "Cancel",
+    "packages": "Packages"
+  },
+  "schemaLoader": {
+    "reloadSchema": "Reload Schema",
+    "loadWorkflow": "Load Workflow",
+    "loadComfyWorkflow": "Load ComfyUI Workflow",
+    "workflowJson": "Workflow JSON",
+    "chooseFile": "Choose file",
+    "exposeParams": "Expose additional parameters as inputs:"
+  },
+  "workflowLoader": {
+    "selectWorkflow": "Select Workflow"
+  },
+  "quickActions": {
+    "aiNodes": "AI Nodes",
+    "constants": "Constants",
+    "clickToPlaceHint": "Click to place · Shift-click to auto add",
+    "clickToPlace": "Click to place",
+    "constantSuffix": "Constant"
+  },
+  "typeFilter": {
+    "allInputTypes": "All input types",
+    "allOutputTypes": "All output types",
+    "local": "Local",
+    "api": "API",
+    "outputLabel": "Output:",
+    "filterBy": "Filter by {{label}}",
+    "filters": "Filters",
+    "node_one": "node",
+    "node_other": "nodes",
+    "filterHint": "Filter nodes by input and output data types",
+    "inputType": "Input Type",
+    "outputType": "Output Type",
+    "searchInputType": "Search input type…",
+    "searchOutputType": "Search output type…",
+    "searchInputTypeAria": "Search input type",
+    "searchOutputTypeAria": "Search output type"
+  },
+  "selectionToolbar": {
+    "alignLeft": "Align Left",
+    "alignCenter": "Align Center",
+    "alignRight": "Align Right",
+    "alignTop": "Align Top",
+    "alignMiddle": "Align Middle",
+    "alignBottom": "Align Bottom",
+    "distributeHorizontally": "Distribute Horizontally",
+    "distributeVertically": "Distribute Vertically",
+    "runSelected": "Run Selected",
+    "duplicate": "Duplicate",
+    "group": "Group",
+    "bypass": "Bypass",
+    "delete": "Delete",
+    "ariaLabel": "Selection Action Toolbar"
+  },
+  "quickAddDialog": {
+    "ariaLabel": "Quick add node",
+    "enterSelect": "Select",
+    "escClose": "Close"
+  },
+  "nodeEditor": {
+    "keyboardShortcuts": "Keyboard shortcuts",
+    "saveExample": "Save example",
+    "packageName": "Package Name"
+  },
+  "runtimeInstall": {
+    "title": "Install required runtimes"
+  },
+  "nodeInfo": {
+    "inputs": "Inputs",
+    "outputs": "Outputs"
+  },
+  "favorites": {
+    "noFavoritesYet": "No favorites yet",
+    "clearAllFavorites": "Clear all favorites"
+  },
+  "historyPanel": {
+    "noRecentNodesYet": "No recent nodes yet",
+    "emptyDescription": "Nodes you use will appear here."
+  },
+  "searchResults": {
+    "noMatchingNodes": "No matching nodes",
+    "noMatchDescription": "Try a different search term or adjust your filters."
+  },
+  "categorySearch": {
+    "filterCategory": "Filter category",
+    "clearFilter": "Clear filter"
+  },
+  "workflowContextMenu": {
+    "openAsApp": "Open as App"
+  },
+  "assetGridContextMenu": {
+    "createNewFolder": "Create new folder",
+    "sortByName": "Sort assets by name",
+    "sortByCreated": "Sort assets by creation date",
+    "sortBySize": "Sort assets by file size"
+  },
+  "assetItemContextMenu": {
+    "renameSelected": "Rename selected assets",
+    "openAsTab": "Open as Tab",
+    "openAsTabTooltip": "Open this asset in a new editor tab",
+    "moveToFolder": "Move to existing folder",
+    "moveToFolderTooltip": "Move selected assets to an existing folder",
+    "downloadSelected": "Download Selected Assets",
+    "downloadSelectedTooltip": "Download selected assets to your Downloads folder",
+    "compareImages": "Compare Images",
+    "deleteSelected": "Delete selected assets"
+  },
+  "compositorEditor": {
+    "webGpuUnavailable": "WebGPU unavailable",
+    "close": "Close compositor editor",
+    "transform": "Transform",
+    "openLayoutEditor": "Open layout editor"
+  },
+  "emailRenderer": {
+    "from": "From:",
+    "subject": "Subject:"
+  },
+  "realtimeAudio": {
+    "restart": "Restart"
+  },
+  "model3d": {
+    "toggleGrid": "Toggle Grid",
+    "toggleAxes": "Toggle Axes",
+    "lightingPreset": "Lighting preset",
+    "backgroundColor": "Background color",
+    "resetCamera": "Reset Camera",
+    "takeScreenshot": "Take Screenshot",
+    "compositedOutput": "Composited output"
+  },
+  "imageEditing": {
+    "colorRange": "Color range",
+    "connectAnImage": "Connect an image",
+    "runToExtractMask": "Run the node to extract a mask",
+    "previewTab": "Preview tab",
+    "recalculateMask": "Recalculate Mask",
+    "envelopeShape": "Envelope shape",
+    "runToPreview": "Run to preview",
+    "histogramChannel": "Histogram channel",
+    "blackPoint": "Black point",
+    "whitePoint": "White point",
+    "shadows": "Shadows",
+    "midtones": "Midtones",
+    "highlights": "Highlights",
+    "resetLevels": "Reset levels",
+    "scaleFactor": "Scale factor",
+    "runToSeeResult": "Run the node to see the result",
+    "canvasScaleFactor": "Canvas scale factor",
+    "wrapMode": "Wrap mode",
+    "rotationAngle": "Rotation angle",
+    "flipHorizontally": "Flip horizontally",
+    "flipVertically": "Flip vertically",
+    "resetRotationFlips": "Reset rotation and flips",
+    "deleteLayer": "Delete layer",
+    "resetAllCurves": "Reset all curves",
+    "videoFramePreview": "Video frame preview",
+    "connectVideo": "Connect a video",
+    "seekVideo": "Seek video",
+    "previousFrame": "Previous frame",
+    "nextFrame": "Next frame",
+    "downloadFrame": "Download frame",
+    "resizeMode": "Resize mode",
+    "blurType": "Blur type",
+    "blurSize": "Blur size",
+    "aspectRatio": "Aspect ratio",
+    "resetCrop": "Reset crop",
+    "paintTool": "Paint tool",
+    "brushColor": "Brush color",
+    "clearPaintedMask": "Clear painted mask",
+    "assetName": "Asset name",
+    "tonalSection": "Tonal",
+    "rgbMidtonesSection": "RGB Midtones",
+    "hue": "Hue",
+    "saturation": "Sat",
+    "luminance": "Lum",
+    "red": "Red",
+    "green": "Green",
+    "blue": "Blue",
+    "alpha": "Alpha",
+    "luminanceLabel": "Luminance",
+    "offsetX": "Offset X",
+    "offsetY": "Offset Y",
+    "radius": "Radius (px)",
+    "intensity": "Intensity",
+    "amount": "Amount",
+    "tolerance": "Tolerance",
+    "softness": "Softness",
+    "spill": "Spill",
+    "width": "Width (px)",
+    "alphaThreshold": "Alpha threshold",
+    "blurGaussian": "Gaussian",
+    "blurBox": "Box",
+    "blurMotion": "Motion",
+    "cropFree": "Free",
+    "left": "Left",
+    "top": "Top",
+    "right": "Right",
+    "bottom": "Bottom",
+    "fixed": "Fixed",
+    "scale": "Scale",
+    "padding": "Padding",
+    "dimensions": "Dimensions",
+    "fit": "Fit"
+  },
+  "mentionAsset": {
+    "assetName": "Asset name"
+  },
+  "inputContextMenu": {
+    "createValueWithAi": "Create value with AI…",
+    "prompt": "Prompt",
+    "imageList": "Image List",
+    "videoList": "Video List",
+    "audioList": "Audio List",
+    "textList": "Text List",
+    "searchConnectableNodes": "Search connectable nodes",
+    "searchNodes": "Search nodes"
+  },
+  "nodeLogs": {
+    "title": "Node Logs",
+    "close": "Close",
+    "logs": "Logs",
+    "copyLogs": "Copy logs",
+    "severityInfo": "Info",
+    "severityWarnings": "Warnings",
+    "severityErrors": "Errors"
   }
 }

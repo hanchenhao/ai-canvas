@@ -1,4 +1,5 @@
 import React, { useCallback, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { TabulatorFull as Tabulator, RowComponent } from "tabulator-tables";
 import { useClipboard } from "../../../hooks/browser/useClipboard";
 import { useNotificationStore } from "../../../stores/NotificationStore";
@@ -73,6 +74,7 @@ const TableActions: React.FC<TableActionsProps> = memo(({
   onHistoryChange,
   children
 }) => {
+  const { t } = useTranslation("canvas");
   TableActions.displayName = 'TableActions';
   const { writeClipboard } = useClipboard();
   const addNotification = useNotificationStore(
@@ -416,13 +418,13 @@ const TableActions: React.FC<TableActionsProps> = memo(({
     <div className="table-actions">
       {editable && (
         <>
-          <ToolbarIconButton title="Add new row" onClick={handleAddRow}>
+          <ToolbarIconButton title={t("canvas:node.addNewRow")} onClick={handleAddRow}>
             <AddIcon sx={{ fontSize: 12 }} />
           </ToolbarIconButton>
 
           <DeleteButton
             onClick={handleDeleteRowsClick}
-            tooltip="Delete selected rows"
+            tooltip={t("canvas:node.deleteSelectedRows")}
             disabled={selectedRows.length === 0}
             iconVariant="clear"
             nodrag={false}
@@ -430,7 +432,7 @@ const TableActions: React.FC<TableActionsProps> = memo(({
 
           {isModalMode && (
             <ToolbarIconButton
-              title="Duplicate selected rows"
+              title={t("canvas:node.duplicateSelectedRows")}
               className={selectedRows.length === 0 ? "disabled" : ""}
               onClick={handleDuplicateRows}
             >
@@ -443,7 +445,7 @@ const TableActions: React.FC<TableActionsProps> = memo(({
       {showSortingButton && (
         <RefreshButton
           onClick={handleResetSorting}
-          tooltip="Reset table sorting"
+          tooltip={t("canvas:node.resetTableSorting")}
           iconVariant="reset"
           nodrag={false}
         />
@@ -469,7 +471,7 @@ const TableActions: React.FC<TableActionsProps> = memo(({
             <RedoIcon sx={{ fontSize: 12 }} />
           </ToolbarIconButton>
           <Divider orientation="vertical" flexItem sx={{ mx: 0.5 }} />
-          <ToolbarIconButton title="Paste from clipboard" onClick={handlePaste}>
+          <ToolbarIconButton title={t("canvas:node.pasteFromClipboard")} onClick={handlePaste}>
             <ContentPasteIcon sx={{ fontSize: 12 }} />
           </ToolbarIconButton>
         </>
@@ -480,14 +482,14 @@ const TableActions: React.FC<TableActionsProps> = memo(({
           <Divider orientation="vertical" flexItem sx={{ mx: 0.5 }} />
           <DownloadButton
             onClick={handleExportCSV}
-            tooltip="Export as CSV"
+            tooltip={t("canvas:node.exportAsCsv")}
             nodrag={false}
           />
         </>
       )}
 
       <ToolbarIconButton
-        title="Show Select column"
+        title={t("canvas:node.showSelectColumn")}
         onClick={handleToggleSelect}
         color={showSelect ? "primary" : "default"}
       >
@@ -496,7 +498,7 @@ const TableActions: React.FC<TableActionsProps> = memo(({
 
       {showRowNumbersButton && Array.isArray(data) && setShowRowNumbers && (
         <ToolbarIconButton
-          title="Show Row Numbers"
+          title={t("canvas:node.showRowNumbers")}
           onClick={handleToggleRowNumbers}
           color={showRowNumbers ? "primary" : "default"}
         >
@@ -504,7 +506,7 @@ const TableActions: React.FC<TableActionsProps> = memo(({
         </ToolbarIconButton>
       )}
 
-      <ToolbarIconButton title="Copy table data to clipboard" onClick={handleCopyData}>
+      <ToolbarIconButton title={t("canvas:node.copyTableData")} onClick={handleCopyData}>
         <ContentCopyIcon sx={{ fontSize: 12 }} />
       </ToolbarIconButton>
 

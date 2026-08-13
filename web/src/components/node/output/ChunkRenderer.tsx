@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Chunk } from "../../../stores/ApiTypes";
 import Actions from "./Actions";
 import { MaybeMarkdown } from "./markdown";
@@ -15,6 +16,7 @@ type Props = {
 };
 
 export const ChunkRenderer: React.FC<Props> = memo(({ chunk }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const memoizedStyles = useMemo(() => outputStyles(theme), [theme]);
   const contentType = chunk.content_type;
@@ -25,7 +27,7 @@ export const ChunkRenderer: React.FC<Props> = memo(({ chunk }) => {
         srcDoc={(chunk.content as string) ?? ""}
         sandbox=""
         style={{ width: "100%", minHeight: 320, border: "none" }}
-        title="HTML chunk output"
+        title={t("canvas:node.htmlChunkOutput")}
       />
     );
   }
@@ -60,7 +62,7 @@ export const ChunkRenderer: React.FC<Props> = memo(({ chunk }) => {
           // nodrag/nopan stop ReactFlow's drag from capturing the pointer so
           // the native controls (scrub, volume) get the mouse events.
           className="nodrag nopan"
-          aria-label="Video output"
+          aria-label={t("canvas:node.videoOutput")}
           style={{ width: "100%" }}
         />
       );

@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import React, {
   memo,
   useCallback,
@@ -295,6 +296,7 @@ const NodeHistoryViewerInternal: React.FC<NodeHistoryViewerProps> = ({
   liveResult,
   renderSingle
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   // Generation timeline drives selection (oldest→newest, current = selected ?? latest).
@@ -851,7 +853,7 @@ const NodeHistoryViewerInternal: React.FC<NodeHistoryViewerProps> = ({
             size="small"
             onClick={handleToggleView}
             className="overlay-icon-btn"
-            aria-label="Toggle view"
+            aria-label={t("canvas:node.toggleView")}
           >
             {effectiveView === "single" ? <GridViewIcon /> : <CropSquareIcon />}
           </ToolbarIconButton>
@@ -862,7 +864,7 @@ const NodeHistoryViewerInternal: React.FC<NodeHistoryViewerProps> = ({
                 size="small"
                 onClick={handlePrev}
                 className="overlay-icon-btn"
-                aria-label="Previous output"
+                aria-label={t("canvas:node.previousOutput")}
               >
                 <KeyboardArrowLeftIcon />
               </ToolbarIconButton>
@@ -874,7 +876,7 @@ const NodeHistoryViewerInternal: React.FC<NodeHistoryViewerProps> = ({
                 size="small"
                 onClick={handleNext}
                 className="overlay-icon-btn"
-                aria-label="Next output"
+                aria-label={t("canvas:node.nextOutput")}
               >
                 <KeyboardArrowRightIcon />
               </ToolbarIconButton>
@@ -902,7 +904,7 @@ const NodeHistoryViewerInternal: React.FC<NodeHistoryViewerProps> = ({
             onClick={handleDownload}
             disabled={!currentAsset || showingLive}
             className="overlay-icon-btn"
-            aria-label="Download current output"
+            aria-label={t("canvas:node.downloadCurrentOutput")}
           >
             <DownloadIcon />
           </ToolbarIconButton>
@@ -945,9 +947,9 @@ const NodeHistoryViewerInternal: React.FC<NodeHistoryViewerProps> = ({
         <Dialog
           open={viewerOpen}
           onClose={handleCloseViewer}
-          title="Generated text"
+          title={t("canvas:node.generatedText")}
           minWidth="min(720px, 90vw)"
-          titleActions={<CopyButton value={currentText} tooltip="Copy text" />}
+          titleActions={<CopyButton value={currentText} tooltip={t("canvas:node.copyText")} />}
         >
           <div
             className="text-popup nowheel"

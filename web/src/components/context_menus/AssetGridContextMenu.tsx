@@ -1,5 +1,6 @@
 import type { MouseEvent } from "react";
 
+import { useTranslation } from "react-i18next";
 import {
   Text,
   Divider,
@@ -16,6 +17,7 @@ import { useAssetGridStore } from "../../stores/AssetGridStore";
 import { useSettingsStore } from "../../stores/SettingsStore";
 
 const AssetGridContextMenu = () => {
+  const { t } = useTranslation("canvas");
   const currentFolder = useAssetGridStore((state) => state.currentFolder);
   const menuPosition = useContextMenuStore((state) => state.menuPosition);
   const closeContextMenu = useContextMenuStore(
@@ -59,7 +61,7 @@ const AssetGridContextMenu = () => {
       <Divider />
       <ContextMenuItem
         onClick={handleCreateFolder}
-        label="Create new folder"
+        label={t("canvas:assetGridContextMenu.createNewFolder")}
         IconComponent={<CreateNewFolderIcon />}
         tooltip={`Create a new folder in '${currentFolder?.name || "ASSETS"}' `}
       />
@@ -68,19 +70,19 @@ const AssetGridContextMenu = () => {
         onClick={handleSortByName}
         label={`Sort by name ${assetsOrder === "name" ? "✓" : ""}`}
         IconComponent={<SortByAlphaIcon />}
-        tooltip="Sort assets by name"
+        tooltip={t("canvas:assetGridContextMenu.sortByName")}
       />
       <ContextMenuItem
         onClick={handleSortByDate}
         label={`Sort by date ${assetsOrder === "date" ? "✓" : ""}`}
         IconComponent={<AccessTimeIcon />}
-        tooltip="Sort assets by creation date"
+        tooltip={t("canvas:assetGridContextMenu.sortByCreated")}
       />
       <ContextMenuItem
         onClick={handleSortBySize}
         label={`Sort by size ${assetsOrder === "size" ? "✓" : ""}`}
         IconComponent={<StorageIcon />}
-        tooltip="Sort assets by file size"
+        tooltip={t("canvas:assetGridContextMenu.sortBySize")}
       />
     </ContextMenu>
   );

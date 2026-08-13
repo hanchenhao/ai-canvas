@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 
+import { useTranslation } from "react-i18next";
 import {
   Text,
   ContextMenu,
@@ -20,6 +21,7 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 
 const WorkflowContextMenu: React.FC = () => {
+    const { t } = useTranslation("canvas");
   const menuPosition = useContextMenuStore((state) => state.menuPosition);
   const closeContextMenu = useContextMenuStore((state) => state.closeContextMenu);
   const nodeId = useContextMenuStore((state) => state.nodeId);
@@ -97,7 +99,7 @@ const WorkflowContextMenu: React.FC = () => {
       {onOpenAsApp && (
         <ContextMenuItem
           onClick={handleOpenAsApp}
-          label="Open as App"
+          label={t("canvas:workflowContextMenu.openAsApp")}
           IconComponent={<StarIcon />}
         />
       )}

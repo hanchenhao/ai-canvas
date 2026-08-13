@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useMemo } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import BugReportIcon from "@mui/icons-material/BugReport";
@@ -125,6 +126,7 @@ const NodeErrorsImpl: React.FC<{
   const memoizedErrorStyles = useMemo(() => errorStyles(theme), [theme]);
   const error = useNodeError(workflow_id, id);
   const nodeStore = useNodeStoreRef();
+  const { t } = useTranslation("canvas");
 
   const logs = useLogsStore(
     (state) => state.logsByNode[nodeLogKey(workflow_id, id)]
@@ -165,21 +167,21 @@ const NodeErrorsImpl: React.FC<{
   return (
     <div css={memoizedErrorStyles} className="node-error nodrag nowheel">
       <div className="error-actions">
-        <Tooltip title="Report this issue on GitHub">
+        <Tooltip title={t("canvas:node.reportOnGithub")}>
           <button
             type="button"
             className="report-button nodrag"
             onClick={handleReport}
             tabIndex={-1}
-            aria-label="Report this issue on GitHub"
+            aria-label={t("canvas:node.reportOnGithub")}
           >
             <BugReportIcon sx={{ fontSize: "0.9em" }} />
-            Report
+            {t("canvas:node.reportButton")}
           </button>
         </Tooltip>
         <CopyButton
           value={errorDisplay}
-          tooltip="Copy to clipboard"
+          tooltip={t("canvas:node.copyToClipboard")}
           tabIndex={-1}
         />
       </div>

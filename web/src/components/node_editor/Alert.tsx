@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useEffect, useState, useRef, createRef, memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import type { AlertColor } from "@mui/material";
 import { AlertBanner, EditorButton, SPACING, getSpacingPx } from "../ui_primitives";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -132,6 +133,7 @@ const NotificationItem = memo(function NotificationItem({
   in: inProp,
   onExited
 }: NotificationItemProps) {
+  const { t } = useTranslation("canvas");
   const handleClose = useCallback(() => {
     onClose(notification.id);
   }, [notification.id, onClose]);
@@ -172,7 +174,7 @@ const NotificationItem = memo(function NotificationItem({
           <CopyButton
             value={notification.content}
             className={`copy-button ${notification.action ? "has-action" : ""}`}
-            tooltip="Copy to clipboard"
+            tooltip={t("canvas:node.copyToClipboard")}
           />
         )}
       </li>

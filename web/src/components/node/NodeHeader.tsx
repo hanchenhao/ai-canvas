@@ -4,6 +4,7 @@ import { useContextMenuActions } from "../../stores/ContextMenuStore";
 import useLogsStore, { nodeLogKey } from "../../stores/LogStore";
 import { shallow } from "zustand/shallow";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import { NodeData } from "../../stores/NodeData";
 import { useToggleCollapse } from "../../hooks/nodes/useToggleCollapse";
@@ -54,6 +55,7 @@ const NodeHeaderImpl: React.FC<NodeHeaderProps> = ({
   showCodeBadge = false,
   codeBadgeTooltip = "Code node"
 }: NodeHeaderProps) => {
+    const { t } = useTranslation("canvas");
   const { openContextMenu } = useContextMenuActions();
   // Combine multiple useNodes subscriptions into a single selector with shallow equality
   // to reduce unnecessary re-renders when other parts of the node state change
@@ -312,7 +314,7 @@ const NodeHeaderImpl: React.FC<NodeHeaderProps> = ({
           {isEditingTitle ? (
             <input
               className="node-title-input nodrag nopan"
-              aria-label="Node title"
+              aria-label={t("canvas:node.nodeTitle")}
               autoFocus
               value={draftTitle}
               onBlur={commitTitleEdit}

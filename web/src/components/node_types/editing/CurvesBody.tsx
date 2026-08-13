@@ -9,6 +9,7 @@
  */
 
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -36,21 +37,35 @@ import {
   type SliderSpec
 } from "./AdjustmentSlider";
 
-const TONAL_SLIDERS: ReadonlyArray<SliderSpec> = [
-  { name: "black_point", label: "Black Point", min: 0, max: 0.5, step: 0.01, default: 0, bipolar: false },
-  { name: "white_point", label: "White Point", min: 0.5, max: 1, step: 0.01, default: 1, bipolar: false },
-  { name: "shadows", label: "Shadows", min: -0.5, max: 0.5, step: 0.01, default: 0, bipolar: true },
-  { name: "midtones", label: "Midtones", min: -0.5, max: 0.5, step: 0.01, default: 0, bipolar: true },
-  { name: "highlights", label: "Highlights", min: -0.5, max: 0.5, step: 0.01, default: 0, bipolar: true }
+const TONAL_SLIDERS: ReadonlyArray<Omit<SliderSpec, "label">> = [
+  { name: "black_point", min: 0, max: 0.5, step: 0.01, default: 0, bipolar: false },
+  { name: "white_point", min: 0.5, max: 1, step: 0.01, default: 1, bipolar: false },
+  { name: "shadows", min: -0.5, max: 0.5, step: 0.01, default: 0, bipolar: true },
+  { name: "midtones", min: -0.5, max: 0.5, step: 0.01, default: 0, bipolar: true },
+  { name: "highlights", min: -0.5, max: 0.5, step: 0.01, default: 0, bipolar: true }
 ];
 
-const RGB_SLIDERS: ReadonlyArray<SliderSpec> = [
-  { name: "red_midtones", label: "Red", min: -0.5, max: 0.5, step: 0.01, default: 0, bipolar: true },
-  { name: "green_midtones", label: "Green", min: -0.5, max: 0.5, step: 0.01, default: 0, bipolar: true },
-  { name: "blue_midtones", label: "Blue", min: -0.5, max: 0.5, step: 0.01, default: 0, bipolar: true }
+const RGB_SLIDERS: ReadonlyArray<Omit<SliderSpec, "label">> = [
+  { name: "red_midtones", min: -0.5, max: 0.5, step: 0.01, default: 0, bipolar: true },
+  { name: "green_midtones", min: -0.5, max: 0.5, step: 0.01, default: 0, bipolar: true },
+  { name: "blue_midtones", min: -0.5, max: 0.5, step: 0.01, default: 0, bipolar: true }
 ];
 
-const ALL_SLIDERS: ReadonlyArray<SliderSpec> = [...TONAL_SLIDERS, ...RGB_SLIDERS];
+const ALL_SLIDER_NAMES = [...TONAL_SLIDERS, ...RGB_SLIDERS];
+
+const TONAL_LABEL_KEYS: Record<string, string> = {
+  black_point: "canvas:imageEditing.blackPoint",
+  white_point: "canvas:imageEditing.whitePoint",
+  shadows: "canvas:imageEditing.shadows",
+  midtones: "canvas:imageEditing.midtones",
+  highlights: "canvas:imageEditing.highlights"
+};
+
+const RGB_LABEL_KEYS: Record<string, string> = {
+  red_midtones: "canvas:imageEditing.red",
+  green_midtones: "canvas:imageEditing.green",
+  blue_midtones: "canvas:imageEditing.blue"
+};
 
 const styles = (theme: Theme) =>
   css({
@@ -158,9 +173,23 @@ const CurvesBodyInner: React.FC<CurvesBodyProps> = ({
   isOutputNode
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("canvas");
   const cssStyles = useMemo(
     () => [styles(theme), adjustmentSliderStyles(theme)],
     [theme]
+  );
+
+  const tonalSliders = useMemo<ReadonlyArray<SliderSpec>>(
+    () => TONAL_SLIDERS.map((s) => ({ ...s, label: t(TONAL_LABEL_KEYS[s.name]) })),
+    [t]
+  );
+  const rgbSliders = useMemo<ReadonlyArray<SliderSpec>>(
+    () => RGB_SLIDERS.map((s) => ({ ...s, label: t(RGB_LABEL_KEYS[s.name]) })),
+    [t]
+  );
+  const allSliders = useMemo<ReadonlyArray<SliderSpec>>(
+    () => [...tonalSliders, ...rgbSliders],
+    [tonalSliders, rgbSliders]
   );
 
   const properties = nodeMetadata.properties ?? [];
@@ -177,16 +206,16 @@ const CurvesBodyInner: React.FC<CurvesBodyProps> = ({
 
   const handleChange = useCallback(
     (name: string, v: number) => {
-      const spec = ALL_SLIDERS.find((s) => s.name === name);
+      const spec = allSliders.find((s) => s.name === name);
       if (!spec) return;
       setProperty(name, clamp(v, spec.min, spec.max));
     },
-    [setProperty]
+    [setProperty, allSliders]
   );
 
   const handleReset = useCallback(() => {
     const defaults: Record<string, unknown> = {};
-    for (const s of ALL_SLIDERS) defaults[s.name] = s.default;
+    for (const s of ALL_SLIDER_NAMES) defaults[s.name] = s.default;
     setProperties(defaults);
     setPropertyComplete();
   }, [setProperties, setPropertyComplete]);
@@ -200,17 +229,17 @@ const CurvesBodyInner: React.FC<CurvesBodyProps> = ({
 
       <div className="section">
         <FlexRow className="section-header" align="center" justify="space-between">
-          <span className="section-title">Tonal</span>
+          <span className="section-title">{t("canvas:imageEditing.tonalSection")}</span>
           <StateIconButton
             size="small"
             icon={<RestartAltIcon fontSize="small" />}
-            tooltip="Reset all curves"
-            ariaLabel="Reset all curves"
+            tooltip={t("canvas:imageEditing.resetAllCurves")}
+            ariaLabel={t("canvas:imageEditing.resetAllCurves")}
             onClick={handleReset}
           />
         </FlexRow>
         <div className="controls">
-          {TONAL_SLIDERS.map((spec) => {
+          {tonalSliders.map((spec) => {
             const raw = Number(props[spec.name] ?? spec.default);
             const value = clamp(raw, spec.min, spec.max);
             return (
@@ -228,10 +257,10 @@ const CurvesBodyInner: React.FC<CurvesBodyProps> = ({
 
       <div className="section">
         <FlexRow className="section-header" align="center" justify="space-between">
-          <span className="section-title">RGB Midtones</span>
+          <span className="section-title">{t("canvas:imageEditing.rgbMidtonesSection")}</span>
         </FlexRow>
         <div className="controls">
-          {RGB_SLIDERS.map((spec) => {
+          {rgbSliders.map((spec) => {
             const raw = Number(props[spec.name] ?? spec.default);
             const value = clamp(raw, spec.min, spec.max);
             return (

@@ -11,6 +11,7 @@
  */
 
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -160,6 +161,7 @@ const SimpleFilterBodyInner: React.FC<SimpleFilterBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -199,13 +201,13 @@ const SimpleFilterBodyInner: React.FC<SimpleFilterBodyProps> = ({
           <ImagePreview
             tab="before"
             value={beforeValue}
-            placeholder="Connect an image"
+            placeholder={t("canvas:imageEditing.connectAnImage")}
           />
         ) : (
           <ImagePreview
             tab="after"
             value={afterValue}
-            placeholder="Run the node to see the result"
+            placeholder={t("canvas:imageEditing.runToSeeResult")}
           />
         )}
       </div>
@@ -218,7 +220,7 @@ const SimpleFilterBodyInner: React.FC<SimpleFilterBodyProps> = ({
             value={tab}
             exclusive
             onChange={handleTabChange}
-            aria-label="Preview tab"
+            aria-label={t("canvas:imageEditing.previewTab")}
           >
             <ToggleOption
               className="tab-option tab-option-before"

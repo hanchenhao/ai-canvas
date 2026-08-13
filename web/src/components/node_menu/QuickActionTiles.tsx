@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { memo, useCallback, useMemo } from "react";
@@ -156,6 +157,7 @@ const tileStyles = (theme: Theme) =>
   });
 
 const QuickActionTiles = memo(function QuickActionTiles() {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const memoizedStyles = useMemo(() => tileStyles(theme), [theme]);
 
@@ -284,7 +286,7 @@ const QuickActionTiles = memo(function QuickActionTiles() {
   return (
     <div css={memoizedStyles}>
       <div className="tiles-header">
-        <Text size="normal" weight={600}>AI Nodes</Text>
+        <Text size="normal" weight={600}>{t("canvas:quickActions.aiNodes")}</Text>
       </div>
       <div className="tiles-container">
         {QUICK_ACTION_BUTTONS.map((definition) => {
@@ -306,7 +308,7 @@ const QuickActionTiles = memo(function QuickActionTiles() {
                 <div>
                   <div>{label}</div>
                   <div style={tooltipSubtitleStyle}>
-                    Click to place · Shift-click to auto add
+                    {t("canvas:quickActions.clickToPlaceHint")}
                   </div>
                 </div>
               }
@@ -353,7 +355,7 @@ const QuickActionTiles = memo(function QuickActionTiles() {
         })}
       </div>
       <div className="tiles-header" style={constantsHeaderStyle}>
-        <Text size="normal" weight={600}>Constants</Text>
+        <Text size="normal" weight={600}>{t("canvas:quickActions.constants")}</Text>
       </div>
       <div className="constants-container">
         {CONSTANT_NODES.map((definition) => {
@@ -373,9 +375,9 @@ const QuickActionTiles = memo(function QuickActionTiles() {
               key={key}
               title={
                 <div>
-                  <div>{label} Constant</div>
+                  <div>{label} {t("canvas:quickActions.constantSuffix")}</div>
                   <div style={tooltipSubtitleStyle}>
-                    Click to place
+                    {t("canvas:quickActions.clickToPlace")}
                   </div>
                 </div>
               }

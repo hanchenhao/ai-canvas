@@ -20,7 +20,13 @@
   },
   "minimap": {
     "nodeTypeLegend": "节点类型图例",
-    "colorModeSettings": "配色模式设置"
+    "colorModeSettings": "配色模式设置",
+    "inputNodes": "输入节点",
+    "constantNodes": "常量节点",
+    "processingNodes": "处理节点",
+    "groupNodes": "分组节点",
+    "commentNodes": "评论节点",
+    "outputNodes": "输出节点"
   },
   "queue": {
     "stopRun": "停止运行",
@@ -34,13 +40,66 @@
   "node": {
     "agentTask": "智能体任务",
     "moreActions": "更多操作",
+    "copyLogs": "复制日志",
+    "topUpCredits": "充值额度",
+    "openEditor": "打开编辑器",
+    "stringValue": "字符串值",
+    "compareTwoImages": "对比选中的两张图片",
+    "clearSelection": "清除选择",
+    "compareOutputs": "对比输出",
+    "closeImageComparison": "关闭图片对比对话框",
+    "compare": "对比",
+    "selectedCount": "已选 {{count}} 项",
+    "nodeTitle": "节点标题",
+    "toggleView": "切换视图",
+    "showGrid": "显示网格",
+    "showSingle": "显示单个",
+    "previous": "上一个",
+    "next": "下一个",
+    "previousOutput": "上一个输出",
+    "nextOutput": "下一个输出",
+    "openFullText": "打开全文",
+    "openInViewer": "在查看器中打开（双击）",
+    "download": "下载",
+    "downloadCurrentOutput": "下载当前输出",
+    "downstreamCaption": "{{count}} → 下游",
+    "generatedText": "生成的文本",
+    "copyText": "复制文本",
+    "addOutputLabel": "添加输出",
+    "noteText": "备注文本",
+    "removeNote": "删除备注",
+    "htmlOutput": "HTML 输出",
+    "pdfOutput": "PDF 输出",
+    "videoOutput": "视频输出",
+    "couldNotLoadSketch": "无法加载草图",
+    "noSketchSelected": "未选择草图",
+    "couldNotLoadTimeline": "无法加载时间线",
+    "noTimelineSelected": "未选择时间线",
+    "rerouteLabel": "重定向标签",
+    "reportOnGithub": "在 GitHub 上反馈此问题",
+    "copyToClipboard": "复制到剪贴板",
+    "nodeOutput": "节点输出",
+    "deleteColumn": "删除列",
+    "htmlChunkOutput": "HTML 片段输出",
+    "openInFullView": "在全屏视图中打开",
+    "addToAssets": "添加到素材库",
+    "copyAssetToClipboard": "复制素材到剪贴板",
+    "previewOutput": "预览输出",
+    "addNewRow": "新增行",
+    "deleteSelectedRows": "删除选中行",
+    "duplicateSelectedRows": "复制选中行",
+    "resetTableSorting": "重置表格排序",
+    "pasteFromClipboard": "从剪贴板粘贴",
+    "exportAsCsv": "导出为 CSV",
+    "showSelectColumn": "显示选择列",
+    "showRowNumbers": "显示行号",
+    "copyTableData": "复制表格数据到剪贴板",
     "selectAllSameType": "选中所有同类型节点",
     "convertToInput": "转换为输入",
     "convertToConstant": "转换为常量",
     "runGroup": "运行分组",
     "groupRunning": "分组正在运行中…",
     "noImageFound": "未找到图像",
-    "openInViewer": "在查看器中打开（双击）",
     "generatedImageOutput": "生成的图像输出",
     "missingComparisonImages": "缺少用于对比的图像数据",
     "invalidPlotlyConfig": "Plotly 配置无效",
@@ -75,7 +134,10 @@
       "editSketch": "编辑草图",
       "clickToOpen": "点击打开草图编辑器",
       "layers": "图层"
-    }
+    },
+    "notePlaceholder": "添加备注...",
+    "copyItem": "复制项",
+    "reportButton": "反馈"
   },
   "nodeMenu": {
     "library": {
@@ -405,5 +467,255 @@
     "cost": "费用:${{cost}}",
     "duration": "耗时:{{ms}}ms",
     "error": "错误"
+  },
+  "nodeGroup": {
+    "selectGroupNode": "选中分组节点:",
+    "holdCtrlClick": "按住 CTRL 或 ⌘ 键 + 点击",
+    "editGroupTitle": "编辑分组标题:",
+    "editGroupTitleHint": "双击标签",
+    "groupHeadline": "分组标题",
+    "groupPlaceholder": "分组",
+    "optionsTooltip": "分组选项",
+    "enableAllNodes": "启用所有节点",
+    "bypassAllNodes": "旁路所有节点",
+    "groupColor": "分组颜色",
+    "removeNodesFromGroup": "从分组中移除节点",
+    "dragOutHint": "按住 CTRL | ⌘ 键拖出",
+    "shakeHint": "快速摇晃,然后拖出"
+  },
+  "ghostNode": {
+    "placeHint": "点击放置 · Esc 取消"
+  },
+  "codeBody": {
+    "askAi": "问 AI"
+  },
+  "codeAssistant": {
+    "title": "代码助手",
+    "codeDraft": "代码草稿",
+    "cancel": "取消",
+    "packages": "依赖包"
+  },
+  "schemaLoader": {
+    "reloadSchema": "重新加载 Schema",
+    "loadWorkflow": "加载工作流",
+    "loadComfyWorkflow": "加载 ComfyUI 工作流",
+    "workflowJson": "工作流 JSON",
+    "chooseFile": "选择文件",
+    "exposeParams": "将额外参数暴露为输入:"
+  },
+  "workflowLoader": {
+    "selectWorkflow": "选择工作流"
+  },
+  "quickActions": {
+    "aiNodes": "AI 节点",
+    "constants": "常量",
+    "clickToPlaceHint": "点击放置 · Shift+点击自动添加",
+    "clickToPlace": "点击放置",
+    "constantSuffix": "常量"
+  },
+  "typeFilter": {
+    "allInputTypes": "所有输入类型",
+    "allOutputTypes": "所有输出类型",
+    "local": "本地",
+    "api": "API",
+    "outputLabel": "输出:",
+    "filterBy": "按 {{label}} 筛选",
+    "filters": "筛选",
+    "node_one": "个节点",
+    "node_other": "个节点",
+    "filterHint": "按输入和输出数据类型筛选节点",
+    "inputType": "输入类型",
+    "outputType": "输出类型",
+    "searchInputType": "搜索输入类型…",
+    "searchOutputType": "搜索输出类型…",
+    "searchInputTypeAria": "搜索输入类型",
+    "searchOutputTypeAria": "搜索输出类型"
+  },
+  "selectionToolbar": {
+    "alignLeft": "左对齐",
+    "alignCenter": "水平居中",
+    "alignRight": "右对齐",
+    "alignTop": "顶对齐",
+    "alignMiddle": "垂直居中",
+    "alignBottom": "底对齐",
+    "distributeHorizontally": "水平分布",
+    "distributeVertically": "垂直分布",
+    "runSelected": "运行选中",
+    "duplicate": "复制",
+    "group": "分组",
+    "bypass": "旁路",
+    "delete": "删除",
+    "ariaLabel": "选中操作工具栏"
+  },
+  "quickAddDialog": {
+    "ariaLabel": "快速添加节点",
+    "enterSelect": "选择",
+    "escClose": "关闭"
+  },
+  "nodeEditor": {
+    "keyboardShortcuts": "键盘快捷键",
+    "saveExample": "保存示例",
+    "packageName": "包名"
+  },
+  "runtimeInstall": {
+    "title": "安装所需运行时"
+  },
+  "nodeInfo": {
+    "inputs": "输入",
+    "outputs": "输出"
+  },
+  "favorites": {
+    "noFavoritesYet": "暂无收藏",
+    "clearAllFavorites": "清除所有收藏"
+  },
+  "historyPanel": {
+    "noRecentNodesYet": "暂无最近使用的节点",
+    "emptyDescription": "你使用过的节点会显示在这里。"
+  },
+  "searchResults": {
+    "noMatchingNodes": "没有匹配的节点",
+    "noMatchDescription": "尝试其他关键词或调整筛选条件。"
+  },
+  "categorySearch": {
+    "filterCategory": "筛选分类",
+    "clearFilter": "清除筛选"
+  },
+  "workflowContextMenu": {
+    "openAsApp": "作为应用打开"
+  },
+  "assetGridContextMenu": {
+    "createNewFolder": "新建文件夹",
+    "sortByName": "按名称排序",
+    "sortByCreated": "按创建时间排序",
+    "sortBySize": "按文件大小排序"
+  },
+  "assetItemContextMenu": {
+    "renameSelected": "重命名选中素材",
+    "openAsTab": "在新标签页打开",
+    "openAsTabTooltip": "在新编辑器标签页中打开此素材",
+    "moveToFolder": "移至已有文件夹",
+    "moveToFolderTooltip": "将选中素材移至已有文件夹",
+    "downloadSelected": "下载选中素材",
+    "downloadSelectedTooltip": "下载选中素材到下载文件夹",
+    "compareImages": "对比图片",
+    "deleteSelected": "删除选中素材"
+  },
+  "compositorEditor": {
+    "webGpuUnavailable": "WebGPU 不可用",
+    "close": "关闭合成编辑器",
+    "transform": "变换",
+    "openLayoutEditor": "打开布局编辑器"
+  },
+  "emailRenderer": {
+    "from": "发件人:",
+    "subject": "主题:"
+  },
+  "realtimeAudio": {
+    "restart": "重新开始"
+  },
+  "model3d": {
+    "toggleGrid": "切换网格",
+    "toggleAxes": "切换坐标轴",
+    "lightingPreset": "光照预设",
+    "backgroundColor": "背景颜色",
+    "resetCamera": "重置视角",
+    "takeScreenshot": "截图",
+    "compositedOutput": "合成输出"
+  },
+  "imageEditing": {
+    "colorRange": "颜色范围",
+    "connectAnImage": "连接一张图片",
+    "runToExtractMask": "运行节点以提取蒙版",
+    "previewTab": "预览标签",
+    "recalculateMask": "重新计算蒙版",
+    "envelopeShape": "包络形状",
+    "runToPreview": "运行以预览",
+    "histogramChannel": "直方图通道",
+    "blackPoint": "黑场",
+    "whitePoint": "白场",
+    "shadows": "阴影",
+    "midtones": "中间调",
+    "highlights": "高光",
+    "resetLevels": "重置色阶",
+    "scaleFactor": "缩放比例",
+    "runToSeeResult": "运行节点查看结果",
+    "canvasScaleFactor": "画布缩放比例",
+    "wrapMode": "包裹方式",
+    "rotationAngle": "旋转角度",
+    "flipHorizontally": "水平翻转",
+    "flipVertically": "垂直翻转",
+    "resetRotationFlips": "重置旋转和翻转",
+    "deleteLayer": "删除图层",
+    "resetAllCurves": "重置所有曲线",
+    "videoFramePreview": "视频帧预览",
+    "connectVideo": "连接视频",
+    "seekVideo": "视频定位",
+    "previousFrame": "上一帧",
+    "nextFrame": "下一帧",
+    "downloadFrame": "下载帧",
+    "resizeMode": "缩放方式",
+    "blurType": "模糊类型",
+    "blurSize": "模糊大小",
+    "aspectRatio": "宽高比",
+    "resetCrop": "重置裁剪",
+    "paintTool": "绘画工具",
+    "brushColor": "画笔颜色",
+    "clearPaintedMask": "清除绘制蒙版",
+    "assetName": "素材名称",
+    "tonalSection": "色调",
+    "rgbMidtonesSection": "RGB 中间调",
+    "hue": "色相",
+    "saturation": "饱和度",
+    "luminance": "亮度",
+    "red": "红",
+    "green": "绿",
+    "blue": "蓝",
+    "alpha": "Alpha",
+    "luminanceLabel": "亮度",
+    "offsetX": "X 偏移",
+    "offsetY": "Y 偏移",
+    "radius": "半径(px)",
+    "intensity": "强度",
+    "amount": "数量",
+    "tolerance": "容差",
+    "softness": "柔和度",
+    "spill": "溢出",
+    "width": "宽度(px)",
+    "alphaThreshold": "Alpha 阈值",
+    "blurGaussian": "高斯",
+    "blurBox": "方形",
+    "blurMotion": "运动",
+    "cropFree": "自由",
+    "left": "左",
+    "top": "上",
+    "right": "右",
+    "bottom": "下",
+    "fixed": "固定",
+    "scale": "缩放",
+    "padding": "填充",
+    "dimensions": "尺寸",
+    "fit": "适配"
+  },
+  "mentionAsset": {
+    "assetName": "素材名称"
+  },
+  "inputContextMenu": {
+    "createValueWithAi": "用 AI 创建值…",
+    "prompt": "提示词",
+    "imageList": "图片列表",
+    "videoList": "视频列表",
+    "audioList": "音频列表",
+    "textList": "文本列表",
+    "searchConnectableNodes": "搜索可连接节点",
+    "searchNodes": "搜索节点"
+  },
+  "nodeLogs": {
+    "title": "节点日志",
+    "close": "关闭",
+    "logs": "日志",
+    "copyLogs": "复制日志",
+    "severityInfo": "信息",
+    "severityWarnings": "警告",
+    "severityErrors": "错误"
   }
 }

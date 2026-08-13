@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import {
   memo,
@@ -139,6 +140,7 @@ const styles = (theme: Theme) =>
 
 const ConstantStringNode: React.FC<NodeProps<Node<NodeData>>> = (props) => {
   const { id, type, data, selected } = props;
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -326,7 +328,7 @@ const ConstantStringNode: React.FC<NodeProps<Node<NodeData>>> = (props) => {
           </HandleTooltip>
         </div>
         <div className="header-actions nodrag nopan">
-          <ToolbarIconButton title="Open Editor" size="small" onClick={toggleExpand}>
+          <ToolbarIconButton title={t("canvas:node.openEditor")} size="small" onClick={toggleExpand}>
             <OpenInFullIcon />
           </ToolbarIconButton>
           <CopyButton value={localValue} buttonSize="small" />
@@ -345,7 +347,7 @@ const ConstantStringNode: React.FC<NodeProps<Node<NodeData>>> = (props) => {
         <textarea
           ref={textareaRef}
           className="constant-string-textarea"
-          aria-label="String value"
+          aria-label={t("canvas:node.stringValue")}
           value={localValue}
           onChange={handleChange}
           readOnly={isConnected}

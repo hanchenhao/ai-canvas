@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { memo, useCallback, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { NodeProps, Handle, Position } from "@xyflow/react";
 import type { NodeStoreState } from "../../stores/NodeStore";
 import { NodeData } from "../../stores/NodeData";
@@ -89,6 +90,7 @@ interface RerouteNodeProps extends NodeProps {
 }
 
 const RerouteNode: React.FC<RerouteNodeProps> = (props) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const { selected, id, data } = props;
@@ -260,7 +262,7 @@ const RerouteNode: React.FC<RerouteNodeProps> = (props) => {
                 ref={inputRef}
                 defaultValue={title}
                 autoFocus
-                aria-label="Reroute label"
+                aria-label={t("canvas:node.rerouteLabel")}
                 placeholder="label"
                 onKeyDown={handleKeyDown}
                 onBlur={handleBlur}

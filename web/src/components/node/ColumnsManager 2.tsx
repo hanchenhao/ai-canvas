@@ -1,0 +1,262 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+import { useTheme } from "@mui/material/styles";
+import type { Theme } from "@mui/material/styles";
+import React, { useState, useEffect, useRef, memo, useCallback, useMemo } from "react";
+import { Label, BORDER_RADIUS } from "../ui_primitives";
+import { ColumnDef } from "../../stores/ApiTypes";
+import isEqual from "../../utils/isEqual";
+import Column from "./Column";
+
+const styles = (theme: Theme) =>
+  css({
+    "&": {
+      display: "flex",
+      flexDirection: "row",
+      gap: "0.15em",
+      padding: "0",
+      backgroundColor: "transparent"
+    },
+    ".labels": {
+      display: "flex",
+      flexDirection: "row",
+      gap: "0.5em",
+      width: "100%",
+      padding: "0 0 0.15em 0",
+      margin: "0",
+      alignItems: "center"
+    },
+    ".label-name": {
+      flexGrow: 1,
+      flexBasis: 0,
+      fontSize: "var(--fontSizeSmall)",
+      color: theme.vars.palette.grey[400]
+    },
+    ".label-description": {
+      flexGrow: 1,
+      flexBasis: 0
+    },
+    ".label-datatype": {
+      width: "auto",
+      minWidth: "70px",
+      flexGrow: 0,
+      fontSize: "var(--fontSizeSmall)",
+      color: theme.vars.palette.grey[400],
+      marginRight: "1.5em" // Account for delete button width
+    },
+    ".column": {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      gap: "0.5em",
+      padding: "0",
+      margin: "0 0 0.15em 0",
+      width: "100%"
+    },
+    ".item-name": {
+      flexGrow: 1,
+      flexBasis: 0
+    },
+    ".item-description": {
+      flexGrow: 1,
+      flexBasis: 0
+    },
+    ".item-datatype": {
+      flexGrow: 0,
+      width: "auto",
+      minWidth: "70px",
+      display: "flex",
+      flexDirection: "row",
+      gap: "0.25em",
+      alignItems: "center"
+    },
+    ".textfield": {
+      margin: "0",
+      padding: "0",
+      height: "1.75em"
+    },
+    ".textfield .MuiInputBase-root": {
+      borderRadius: BORDER_RADIUS.sm,
+      height: "1.75em"
+    },
+    ".textfield input": {
+      margin: "0",
+      padding: "0.25em 0.5em",
+      height: "1.25em",
+      fontSize: "var(--fontSizeSmaller)"
+    },
+    ".select": {
+      margin: "0",
+      padding: "0",
+      border: 0,
+      borderRadius: BORDER_RADIUS.sm
+    },
+    ".select .MuiSelect-select": {
+      borderRadius: BORDER_RADIUS.lg,
+      height: "1.75em",
+      margin: "0",
+      padding: "0.25em 0.5em",
+      fontSize: "var(--fontSizeSmaller)"
+    },
+    ".select svg": {
+      right: "0"
+    },
+    ".select .MuiOutlinedInput-notchedOutline": {
+      border: "0"
+    },
+    ".delete": {
+      margin: "0",
+      padding: "0",
+      width: "1em",
+      minWidth: "1em",
+      height: "1em",
+      borderRadius: BORDER_RADIUS.sm,
+      backgroundColor: "transparent",
+      color: theme.vars.palette.grey[400],
+      "&:hover": {
+        backgroundColor: theme.vars.palette.grey[600],
+        color: theme.vars.palette.c_delete
+      },
+      "& svg": {
+        width: ".7em",
+        height: ".7em"
+      }
+    },
+    ".delete-button": {
+      padding: "0.1em",
+      fontSize: "var(--fontSizeNormal)",
+      backgroundColor: "transparent",
+      color: theme.vars.palette.grey[400],
+      flexShrink: 0,
+      "& svg": {
+        fontSize: "var(--fontSizeBig)"
+      },
+      "&:hover": {
+        color: theme.vars.palette.c_delete,
+        backgroundColor: "transparent"
+      }
+    }
+  });
+
+const validDataTypes = ["string", "float", "int", "datetime"];
+
+interface ColumnsManagerProps {
+  columns: ColumnDef[];
+  allData: Record<string, unknown>[];
+  onChange: (
+    newColumns: ColumnDef[],
+    newData: Record<string, unknown>[]
+  ) => void;
+}
+
+const ColumnsManager: React.FC<ColumnsManagerProps> = ({
+  columns,
+  allData,
+  onChange
+}: ColumnsManagerProps) => {
+  const theme = useTheme();
+  const cssStyles = useMemo(() => styles(theme), [theme]);
+  const [localColumns, setLocalColumns] = useState(columns);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  useEffect(() => {
+    setLocalColumns(columns);
+  }, [columns]);
+
+  const handleNameChange = useCallback((index: number, newName: string) => {
+    if (
+      newName.trim() === "" ||
+      localColumns.some((col) => col.name === newName)
+    ) {
+      console.warn(
+        "Invalid column name. Column names must be unique and non-empty."
+      );
+    }
+    const newColumns = localColumns.map((col, i) =>
+      i === index ? { ...col, name: newName } : col
+    );
+
+    const oldName = columns[index].name;
+    const newData = allData.map((row) => {
+      const newRow = { ...row };
+      if (newName !== oldName && oldName in newRow) {
+        newRow[newName] = newRow[oldName];
+        delete newRow[oldName];
+      }
+      return newRow;
+    });
+
+    setLocalColumns(newColumns);
+    onChange(newColumns, newData);
+
+    setTimeout(() => {
+      inputRefs.current[index]?.focus();
+    }, 0);
+  }, [localColumns, columns, allData, onChange]);
+
+  const handleDescriptionChange = useCallback((index: number, newDescription: string) => {
+    const newColumns = localColumns.map((col, i) =>
+      i === index ? { ...col, description: newDescription } : col
+    );
+
+    setLocalColumns(newColumns);
+    onChange(newColumns, allData);
+  }, [localColumns, allData, onChange]);
+
+  const handleDataTypeChange = useCallback((index: number, newType: string) => {
+    if (!validDataTypes.includes(newType)) {
+      return;
+    }
+    const validatedType = newType as "string" | "float" | "int" | "datetime";
+
+    const newColumns = localColumns.map((col, i) =>
+      i === index ? { ...col, data_type: validatedType } : col
+    );
+
+    setLocalColumns(newColumns);
+    onChange(newColumns, allData);
+  }, [localColumns, allData, onChange]);
+
+  const handleDelete = useCallback((index: number) => {
+    const newColumns = localColumns.filter((_, i) => i !== index);
+    const newData = allData.map((row) => {
+      const newRow = { ...row };
+      delete newRow[localColumns[index].name];
+      return newRow;
+    });
+
+    setLocalColumns(newColumns);
+    onChange(newColumns, newData);
+  }, [localColumns, allData, onChange]);
+
+  const deleteHandlers = useMemo(
+    () => localColumns.map((_, i) => () => handleDelete(i)),
+    [localColumns, handleDelete]
+  );
+
+  return (
+    <div css={cssStyles}>
+      <div className="labels">
+        <Label className="label-name">Name</Label>
+        <Label className="label-datatype">Data Type</Label>
+      </div>
+      {localColumns.map((field, index) => (
+        <Column
+          key={field.name}
+          index={index}
+          field={field}
+          inputRef={(el: HTMLInputElement | null) =>
+            (inputRefs.current[index] = el)
+          }
+          handleNameChange={handleNameChange}
+          handleDataTypeChange={handleDataTypeChange}
+          handleDescriptionChange={handleDescriptionChange}
+          onDelete={deleteHandlers[index]}
+          validDataTypes={validDataTypes}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default memo(ColumnsManager, isEqual);

@@ -29,6 +29,7 @@ import React, {
   useState
 } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import BrushIcon from "@mui/icons-material/Brush";
@@ -342,6 +343,7 @@ const PainterBodyInner: React.FC<PainterBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -1050,7 +1052,7 @@ const PainterBodyInner: React.FC<PainterBodyProps> = ({
             exclusive
             onChange={onToolChange}
             size="small"
-            aria-label="Paint tool"
+            aria-label={t("canvas:imageEditing.paintTool")}
           >
             <ToggleOption value="brush" aria-label="Brush">
               <BrushIcon />
@@ -1065,7 +1067,7 @@ const PainterBodyInner: React.FC<PainterBodyProps> = ({
             type="color"
             value={color}
             onChange={onColorChange}
-            aria-label="Brush color"
+            aria-label={t("canvas:imageEditing.brushColor")}
           />
           <div className="row-spacer" />
           <ToolbarIconButton
@@ -1088,7 +1090,7 @@ const PainterBodyInner: React.FC<PainterBodyProps> = ({
             className="nodrag"
             size="small"
             onClick={onClear}
-            tooltip="Clear painted mask"
+            tooltip={t("canvas:imageEditing.clearPaintedMask")}
             icon={<RestartAltIcon fontSize="small" />}
           />
         </FlexRow>

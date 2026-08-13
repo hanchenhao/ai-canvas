@@ -27,6 +27,7 @@ import React, {
   useState
 } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 
@@ -220,6 +221,7 @@ const ListGeneratorBodyInner: React.FC<BespokeBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const isRunning = status === "running";
 
@@ -313,7 +315,7 @@ const ListGeneratorBodyInner: React.FC<BespokeBodyProps> = ({
                   >
                     <CopyButton
                       value={item}
-                      tooltip="Copy item"
+                      tooltip={t("canvas:node.copyItem")}
                       buttonSize="small"
                     />
                   </span>

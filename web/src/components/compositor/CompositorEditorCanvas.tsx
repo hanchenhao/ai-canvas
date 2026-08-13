@@ -17,6 +17,7 @@ import React, {
   useState
 } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import {
@@ -141,6 +142,7 @@ const CompositorEditorCanvasInner: React.FC<CompositorEditorCanvasProps> = ({
   onTransformPreview,
   onTransformCommit
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -450,7 +452,7 @@ const CompositorEditorCanvasInner: React.FC<CompositorEditorCanvasProps> = ({
       {status === "unavailable" && (
         <div className="unavailable">
           <EmptyState
-            title="WebGPU unavailable"
+            title={t("canvas:compositorEditor.webGpuUnavailable")}
             description="This browser can't render the compositor preview. The node still composites server-side."
           />
         </div>

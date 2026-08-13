@@ -26,6 +26,7 @@ import React, {
   useState
 } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import MovieIcon from "@mui/icons-material/Movie";
@@ -244,6 +245,7 @@ const ExtractVideoFrameBodyInner: React.FC<ExtractVideoFrameBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -494,7 +496,7 @@ const ExtractVideoFrameBodyInner: React.FC<ExtractVideoFrameBodyProps> = ({
             crossOrigin="anonymous"
             muted={muted}
             playsInline
-            aria-label="Video frame preview"
+            aria-label={t("canvas:imageEditing.videoFramePreview")}
             onLoadedMetadata={handleLoadedMetadata}
             onTimeUpdate={handleTimeUpdate}
             onPlay={handlePlay}
@@ -503,7 +505,7 @@ const ExtractVideoFrameBodyInner: React.FC<ExtractVideoFrameBodyProps> = ({
           />
         ) : (
           <CheckerDropzone
-            message="Connect a video"
+            message={t("canvas:imageEditing.connectVideo")}
             icon={<MovieIcon />}
           />
         )}
@@ -519,7 +521,7 @@ const ExtractVideoFrameBodyInner: React.FC<ExtractVideoFrameBodyProps> = ({
         onChange={handleScrub}
         onPointerUp={commitCurrent}
         disabled={!videoSrc}
-        aria-label="Seek video"
+        aria-label={t("canvas:imageEditing.seekVideo")}
       />
 
       <div className="transport">
@@ -529,7 +531,7 @@ const ExtractVideoFrameBodyInner: React.FC<ExtractVideoFrameBodyProps> = ({
         <div className="transport-buttons">
           <ToolbarIconButton
             icon={<SkipPreviousIcon />}
-            tooltip="Previous frame"
+            tooltip={t("canvas:imageEditing.previousFrame")}
             ariaLabel="Previous frame"
             disabled={!videoSrc}
             onClick={() => stepFrame(-1)}
@@ -543,7 +545,7 @@ const ExtractVideoFrameBodyInner: React.FC<ExtractVideoFrameBodyProps> = ({
           />
           <ToolbarIconButton
             icon={<SkipNextIcon />}
-            tooltip="Next frame"
+            tooltip={t("canvas:imageEditing.nextFrame")}
             ariaLabel="Next frame"
             disabled={!videoSrc}
             onClick={() => stepFrame(1)}
@@ -559,7 +561,7 @@ const ExtractVideoFrameBodyInner: React.FC<ExtractVideoFrameBodyProps> = ({
           />
           <ToolbarIconButton
             icon={<DownloadIcon />}
-            tooltip="Download frame"
+            tooltip={t("canvas:imageEditing.downloadFrame")}
             ariaLabel="Download frame"
             disabled={!videoSrc}
             onClick={handleDownloadFrame}

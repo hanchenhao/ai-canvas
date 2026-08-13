@@ -8,6 +8,7 @@
  */
 
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -158,6 +159,7 @@ const HSLAdjustBodyInner: React.FC<HSLAdjustBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -216,7 +218,7 @@ const HSLAdjustBodyInner: React.FC<HSLAdjustBodyProps> = ({
           variant="standard"
           value={colorRange}
           onChange={handleRangeChange}
-          aria-label="Color range"
+          aria-label={t("canvas:imageEditing.colorRange")}
           disableUnderline
         >
           {COLOR_RANGES.map((r) => (

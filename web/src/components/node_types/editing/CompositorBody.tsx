@@ -18,6 +18,7 @@
  */
 
 import React, { memo, useCallback, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -170,6 +171,7 @@ const CompositorBodyInner: React.FC<CompositorBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const nodeStoreRef = useNodeStoreRef();
@@ -399,7 +401,7 @@ const CompositorBodyInner: React.FC<CompositorBodyProps> = ({
       <HandleColumn id={id} properties={handleProperties} />
       <div className="preview-area">
         {previewSrc ? (
-          <img src={previewSrc} alt="Composited output" />
+          <img src={previewSrc} alt={t("canvas:model3d.compositedOutput")} />
         ) : (
           <CheckerDropzone
             message="Add layers, then run"
@@ -436,7 +438,7 @@ const CompositorBodyInner: React.FC<CompositorBodyProps> = ({
         />
         <EditButton
           onClick={() => setEditorOpen(true)}
-          tooltip="Open layout editor"
+          tooltip={t("canvas:compositorEditor.openLayoutEditor")}
         />
       </FlexRow>
 

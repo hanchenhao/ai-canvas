@@ -1,4 +1,5 @@
 import React, { useCallback, useState, memo, useMemo, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
 import {
   Caption,
@@ -29,6 +30,7 @@ interface WorkflowLoaderProps {
 
 export const WorkflowLoader: React.FC<WorkflowLoaderProps> = memo(
   ({ nodeId, data }) => {
+    const { t } = useTranslation("canvas");
     const selectedWorkflowId = useMemo(
       () =>
         (data.properties?.workflow_id as string | undefined) ??
@@ -221,7 +223,7 @@ export const WorkflowLoader: React.FC<WorkflowLoaderProps> = memo(
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Select Workflow"
+              label={t("canvas:workflowLoader.selectWorkflow")}
               variant="outlined"
               size="small"
               slotProps={{

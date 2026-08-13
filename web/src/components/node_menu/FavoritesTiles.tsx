@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
 import type { CSSProperties, DragEvent as ReactDragEvent, KeyboardEvent as ReactKeyboardEvent } from "react";
 import { EmptyState, Tooltip, Text, ToolbarIconButton, thinScrollbarStyles, Box, MOTION, BORDER_RADIUS, FONT_WEIGHT, SPACING, getSpacingPx } from "../ui_primitives";
@@ -147,6 +148,7 @@ const FavoritesTiles = memo(function FavoritesTiles({
   showEmpty = false,
   hideHeader = false
 }: FavoritesTilesProps = {}) {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const memoizedStyles = useMemo(() => tileStyles(theme), [theme]);
 
@@ -304,7 +306,7 @@ const FavoritesTiles = memo(function FavoritesTiles({
         )}
         <EmptyState
           size="small"
-          title="No favorites yet"
+          title={t("canvas:favorites.noFavoritesYet")}
           description="Click the star next to any node to add it here."
         />
       </Box>
@@ -320,12 +322,12 @@ const FavoritesTiles = memo(function FavoritesTiles({
           </Text>
           <ToolbarIconButton
             icon={<ClearIcon fontSize="small" />}
-            tooltip="Clear all favorites"
+            tooltip={t("canvas:favorites.clearAllFavorites")}
             tooltipPlacement="top"
             size="small"
             className="clear-button"
             onClick={() => setClearConfirmOpen(true)}
-            aria-label="Clear all favorites"
+            aria-label={t("canvas:favorites.clearAllFavorites")}
           />
         </div>
       )}

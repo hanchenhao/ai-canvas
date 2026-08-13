@@ -1,4 +1,5 @@
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import type { Theme } from "@mui/material/styles";
 import { Tooltip, EditorButton, FlexRow } from "../../ui_primitives";
 import AddIcon from "@mui/icons-material/Add";
@@ -69,6 +70,7 @@ const PreviewActions: React.FC<PreviewActionsProps> = memo(({
   onAddToAssets,
   copyValue
 }) => {
+  const { t } = useTranslation("canvas");
   const addNotification = useNotificationStore(
     (state) => state.addNotification
   );
@@ -100,11 +102,11 @@ const PreviewActions: React.FC<PreviewActionsProps> = memo(({
           <FileDownloadIcon />
         </EditorButton>
       </Tooltip>
-      <Tooltip title="Add to Assets">
+      <Tooltip title={t("canvas:node.addToAssets")}>
         <EditorButton
           onClick={onAddToAssets}
           className="action-button"
-          aria-label="Add to Assets"
+          aria-label={t("canvas:node.addToAssets")}
         >
           <AddIcon />
         </EditorButton>
@@ -116,7 +118,7 @@ const PreviewActions: React.FC<PreviewActionsProps> = memo(({
           onCopyError={handleCopyError}
           className="action-button copy"
           sx={COPY_BUTTON_SX}
-          aria-label="Copy asset to clipboard"
+          aria-label={t("canvas:node.copyAssetToClipboard")}
         />
       ) : (
         <CopyButton
@@ -124,7 +126,7 @@ const PreviewActions: React.FC<PreviewActionsProps> = memo(({
           onCopyError={handleCopyError}
           className="action-button copy"
           sx={COPY_BUTTON_SX}
-          aria-label="Copy to clipboard"
+          aria-label={t("canvas:node.copyToClipboard")}
         />
       )}
     </FlexRow>

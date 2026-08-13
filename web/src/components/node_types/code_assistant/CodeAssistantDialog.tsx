@@ -20,6 +20,7 @@ import {
   useState
 } from "react";
 import { shallow } from "zustand/shallow";
+import { useTranslation } from "react-i18next";
 import type { codeGen } from "@nodetool-ai/protocol/api-schemas";
 
 import {
@@ -106,6 +107,7 @@ const CodeAssistantDialogInner = ({
   inputs,
   expectedOutput
 }: CodeAssistantDialogProps) => {
+  const { t } = useTranslation("canvas");
   const { findNode, updateNodeData } = useNodes(
     (state) => ({
       findNode: state.findNode,
@@ -284,7 +286,7 @@ const CodeAssistantDialogInner = ({
     <Dialog
       open={open}
       onClose={onClose}
-      title="Code assistant"
+      title={t("canvas:codeAssistant.title")}
       minWidth="min(1100px, 100vw - 32px)"
       actions={
         <FlexRow gap={SPACING.md}>
@@ -341,7 +343,7 @@ const CodeAssistantDialogInner = ({
             ) : (
               <Box
                 component="pre"
-                aria-label="Code draft"
+                aria-label={t("canvas:codeAssistant.codeDraft")}
                 sx={{
                   ...TYPOGRAPHY.mono.code,
                   margin: 0,

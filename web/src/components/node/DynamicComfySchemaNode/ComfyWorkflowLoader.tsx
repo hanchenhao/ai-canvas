@@ -1,4 +1,5 @@
 import React, { memo, useCallback, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import {
   Dialog,
@@ -42,6 +43,7 @@ interface ComfyWorkflowLoaderProps {
  */
 export const ComfyWorkflowLoader: React.FC<ComfyWorkflowLoaderProps> = memo(
   ({ nodeId, data }) => {
+    const { t } = useTranslation("canvas");
     const updateNodeData = useNodes((state) => state.updateNodeData);
     const [open, setOpen] = useState(false);
     const [text, setText] = useState("");
@@ -152,9 +154,9 @@ export const ComfyWorkflowLoader: React.FC<ComfyWorkflowLoaderProps> = memo(
 
     return (
       <>
-        <Tooltip title="Load Workflow" arrow delay={TOOLTIP_ENTER_DELAY}>
+        <Tooltip title={t("canvas:schemaLoader.loadWorkflow")} arrow delay={TOOLTIP_ENTER_DELAY}>
           <ToolbarIconButton
-            title="Load Workflow"
+            title={t("canvas:schemaLoader.loadWorkflow")}
             size="small"
             onClick={() => setOpen(true)}
             sx={{
@@ -172,7 +174,7 @@ export const ComfyWorkflowLoader: React.FC<ComfyWorkflowLoaderProps> = memo(
         <Dialog
           open={open}
           onClose={() => setOpen(false)}
-          title="Load ComfyUI Workflow"
+          title={t("canvas:schemaLoader.loadComfyWorkflow")}
           maxWidth="sm"
           fullWidth
           showActions
@@ -197,7 +199,7 @@ export const ComfyWorkflowLoader: React.FC<ComfyWorkflowLoaderProps> = memo(
               }}
             >
               <TextInput
-                label="Workflow JSON"
+                label={t("canvas:schemaLoader.workflowJson")}
                 value={text}
                 onChange={(e) => parseText(e.target.value)}
                 multiline
@@ -207,7 +209,7 @@ export const ComfyWorkflowLoader: React.FC<ComfyWorkflowLoaderProps> = memo(
               />
               <FlexRow gap={1} align="center" sx={{ mt: 1 }}>
                 <ToolbarIconButton
-                  title="Choose file"
+                  title={t("canvas:schemaLoader.chooseFile")}
                   size="small"
                   onClick={() => fileInputRef.current?.click()}
                 >
@@ -239,7 +241,7 @@ export const ComfyWorkflowLoader: React.FC<ComfyWorkflowLoaderProps> = memo(
                 <Text size="small">{summary}</Text>
                 {schema.availableParams.length > 0 && (
                   <>
-                    <Caption>Expose additional parameters as inputs:</Caption>
+                    <Caption>{t("canvas:schemaLoader.exposeParams")}</Caption>
                     <ScrollArea style={{ maxHeight: 180 }}>
                       <FlexColumn gap={0}>
                         {schema.availableParams.map((param) => (

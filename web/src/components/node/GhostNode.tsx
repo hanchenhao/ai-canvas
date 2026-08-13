@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 import { BORDER_RADIUS, SPACING, getSpacingPx } from "../ui_primitives";
 interface GhostNodeProps {
@@ -24,6 +25,7 @@ const GhostNode = memo(function GhostNode({
   nodeType,
   theme
 }: GhostNodeProps) {
+  const { t } = useTranslation("canvas");
   const styles = useMemo(
     () => ({
       container: {
@@ -80,7 +82,7 @@ const GhostNode = memo(function GhostNode({
       <div style={styles.labelContainer}>
         {label ?? nodeType.split(".").pop()}
       </div>
-      <div style={styles.hint}>Click to place · Esc to cancel</div>
+      <div style={styles.hint}>{t("canvas:ghostNode.placeHint")}</div>
     </div>
   );
 });

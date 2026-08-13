@@ -18,6 +18,7 @@ import React, {
   useState
 } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import ImageIcon from "@mui/icons-material/Image";
@@ -231,6 +232,7 @@ export const MentionAssetTile: React.FC<MentionAssetTileProps> = React.memo(({
   onMouseEnter,
   onRename
 }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const tileStyles = useMemo(() => styles(theme), [theme]);
   const kind = mediaKindOf(asset);
@@ -323,7 +325,7 @@ export const MentionAssetTile: React.FC<MentionAssetTileProps> = React.memo(({
             ref={inputRef}
             className={`name-input${error ? " error" : ""}`}
             value={draft}
-            aria-label="Asset name"
+            aria-label={t("canvas:mentionAsset.assetName")}
             aria-invalid={error}
             onChange={(e) => {
               setDraft(e.target.value);

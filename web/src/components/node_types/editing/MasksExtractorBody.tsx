@@ -14,6 +14,7 @@
  */
 
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -140,6 +141,7 @@ const MasksExtractorBodyInner: React.FC<MasksExtractorBodyProps> = ({
   status,
   isOutputNode
 }) => {
+    const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -188,12 +190,12 @@ const MasksExtractorBodyInner: React.FC<MasksExtractorBodyProps> = ({
         {tab === "image" ? (
           <ImagePreview
             value={imageTabValue}
-            placeholder="Connect an image"
+            placeholder={t("canvas:imageEditing.connectAnImage")}
           />
         ) : (
           <ImagePreview
             value={maskTabValue}
-            placeholder="Run the node to extract a mask"
+            placeholder={t("canvas:imageEditing.runToExtractMask")}
           />
         )}
       </div>
@@ -206,7 +208,7 @@ const MasksExtractorBodyInner: React.FC<MasksExtractorBodyProps> = ({
             value={tab}
             exclusive
             onChange={handleTabChange}
-            aria-label="Preview tab"
+            aria-label={t("canvas:imageEditing.previewTab")}
           >
             <ToggleOption value="image" aria-label="Image">
               Image
@@ -218,7 +220,7 @@ const MasksExtractorBodyInner: React.FC<MasksExtractorBodyProps> = ({
         </FlexRow>
         <div className="action-row">
           <RunModelButton
-            label="Recalculate Mask"
+            label={t("canvas:imageEditing.recalculateMask")}
             isRunning={isRunning}
             onClick={runSingleNode}
           />
