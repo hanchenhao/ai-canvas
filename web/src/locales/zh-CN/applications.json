@@ -58,7 +58,8 @@
     "loadVersionsFallback": "无法加载版本：请稍后重试。",
     "loadApp": "无法加载应用",
     "savedElsewhere": "已在别处保存",
-    "appNotFound": "应用不存在"
+    "appNotFound": "应用不存在",
+    "noAppHint": "此工作流上没有构建应用。打开「应用」面板创建一个。"
   },
   "placeholder": {
     "searchApps": "搜索应用…"
@@ -125,7 +126,8 @@
   },
   "run": {
     "nothingToRun": "暂无可运行内容",
-    "workflowUnavailable": "工作流不可用"
+    "workflowUnavailable": "工作流不可用",
+    "addWidgetsHint": "在「设计」视图中添加组件，再在此处运行应用。"
   },
   "dataPanel": {
     "whileRunning": "运行期间",

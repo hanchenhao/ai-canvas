@@ -105,7 +105,8 @@
   },
   "run": {
     "nothingToRun": "Nothing to run yet",
-    "workflowUnavailable": "Workflow unavailable"
+    "workflowUnavailable": "Workflow unavailable",
+    "addWidgetsHint": "Add widgets in the Design view, then run the app here."
   },
   "dataPanel": {
     "whileRunning": "While one is running",
@@ -131,6 +132,7 @@
     "loadVersionsFallback": "Could not load versions: try again later.",
     "loadApp": "Could not load app",
     "savedElsewhere": "Saved elsewhere",
-    "appNotFound": "App not found"
+    "appNotFound": "App not found",
+    "noAppHint": "No app is built on this workflow. Open the Apps panel to create one."
   }
 }

@@ -746,7 +746,7 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
         return (
           <EmptyState
             title={t("canvas:node.noSketchSelected")}
-            description="Choose a sketch document to preview it here."
+            description={t("canvas:node.chooseSketchHint")}
           />
         );
       }
@@ -777,7 +777,7 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
         return (
           <EmptyState
             title={t("canvas:node.noTimelineSelected")}
-            description="Choose a timeline sequence to preview it here."
+            description={t("canvas:node.chooseTimelineHint")}
           />
         );
       }

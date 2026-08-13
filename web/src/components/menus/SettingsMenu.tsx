@@ -592,14 +592,14 @@ function SettingsPage() {
                 value={settingsTab}
                 onChange={handleTabChange}
                 className="settings-tabs"
-                aria-label="settings tabs"
+                aria-label={t("settings:tabs.ariaLabel")}
                 variant={isMobile ? "scrollable" : "standard"}
                 scrollButtons={false}
               >
-                <Tab label="General" id="settings-tab-0" />
-                <Tab label="Models & Providers" id="settings-tab-1" />
-                <Tab label="Integrations" id="settings-tab-2" />
-                <Tab label="About" id={`settings-tab-${aboutTabIndex}`} />
+                <Tab label={t("settings:tabs.general")} id="settings-tab-0" />
+                <Tab label={t("settings:tabs.modelsProviders")} id="settings-tab-1" />
+                <Tab label={t("settings:tabs.integrations")} id="settings-tab-2" />
+                <Tab label={t("settings:tabs.about")} id={`settings-tab-${aboutTabIndex}`} />
               </Tabs>
             </div>
 
@@ -632,7 +632,7 @@ function SettingsPage() {
                 <TabPanel value={settingsTab} index={TAB_GENERAL}>
                   <Box sx={{ marginBottom: theme.spacing(SPACING.xxl) }}>
                     <SearchInput
-                      placeholder="Search settings..."
+                      placeholder={t("settings:searchSettings")}
                       value={generalSearchTerm}
                       onChange={setGeneralSearchTerm}
                       size="small"
@@ -652,7 +652,7 @@ function SettingsPage() {
                           label={t("common:menus.showWelcomeScreen")}
                           checked={!!settings.showWelcomeOnStartup}
                           onChange={handleShowWelcomeChange}
-                          description="Start on the dashboard, with the welcome screen and templates, until getting started is finished. When off, the app opens straight into the workspace."
+                          description={t("settings:descriptions.showWelcome")}
                         />
                       </SearchItem>
 
@@ -683,7 +683,7 @@ function SettingsPage() {
                             label={t("common:menus.soundNotifications")}
                             checked={!!settings.soundNotifications}
                             onChange={handleSoundNotificationsChange}
-                            description="Play a system beep sound when workflows complete, exports finish, or other important events occur."
+                            description={t("settings:descriptions.soundNotifications")}
                           />
                         </SearchItem>
                       )}
@@ -697,7 +697,7 @@ function SettingsPage() {
                             label={t("common:menus.automaticUpdates")}
                             checked={autoUpdatesEnabled}
                             onChange={handleAutoUpdatesChange}
-                            description="Check for and download desktop app updates from the selected release channel."
+                            description={t("settings:descriptions.automaticUpdates")}
                           />
                         </SearchItem>
                       )}
@@ -737,14 +737,13 @@ function SettingsPage() {
                             options={CLOSE_BEHAVIOR_OPTIONS}
                           />
                           <Text className="description">
-                            Choose what happens when you close the main window.
+                            {t("settings:descriptions.closeBehaviorIntro")}
                             <br />
-                            <b>{t("common:menus.askEveryTime")}</b> Shows a dialog with options.
+                            <b>{t("common:menus.askEveryTime")}</b> {t("common:menus.askEveryTimeHint")}
                             <br />
-                            <b>Quit:</b> Closes the application completely.
+                            <b>{t("common:menus.quit")}:</b> {t("settings:descriptions.closeBehaviorQuitHint")}
                             <br />
-                            <b>Background:</b> Keeps the app running in the system
-                            tray.
+                            <b>{t("common:menus.background")}:</b> {t("settings:descriptions.closeBehaviorBackgroundHint")}
                           </Text>
                         </SearchItem>
                       )}
@@ -778,7 +777,7 @@ function SettingsPage() {
                           onChange={(checked) =>
                             updateSettings({ confirmLargeRun: checked })
                           }
-                          description="Running a workflow executes every node at once. Show a confirmation when a run would launch many model/provider nodes that could overload an API."
+                          description={t("settings:descriptions.warnBeforeLargeRuns")}
                         />
                       </SearchItem>
 
@@ -791,7 +790,7 @@ function SettingsPage() {
                           autoComplete="off"
                           slotProps={{ htmlInput: { min: 1, max: 100 } }}
                           id="large-run-threshold-input"
-                          label="Large-Run Threshold"
+                          label={t("settings:labels.largeRunThreshold")}
                           value={settings.largeRunThreshold ?? 5}
                           onChange={(e) =>
                             updateSettings({
@@ -820,7 +819,7 @@ function SettingsPage() {
                           autoComplete="off"
                           slotProps={{ htmlInput: { min: 20, max: 1000, step: 10 } }}
                           id="audio-buffer-ms-input"
-                          label="Audio Buffer (ms)"
+                          label={t("settings:labels.audioBuffer")}
                           value={settings.audioBufferMs ?? 100}
                           onChange={(e) =>
                             updateSettings({
@@ -851,7 +850,7 @@ function SettingsPage() {
                           defaultValue={4}
                           min={1}
                           max={64}
-                          description="Maximum number of workflow runs you can execute at once. Additional runs queue and start automatically as running ones finish."
+                          description={t("settings:descriptions.maxConcurrentRuns")}
                         />
                       </SearchItem>
 
@@ -865,7 +864,7 @@ function SettingsPage() {
                           defaultValue={4}
                           min={1}
                           max={64}
-                          description="How many runs of the same workflow may run at once before further runs queue. Applies to concurrent generation (timeline, sketch); canvas runs always stay sequential."
+                          description={t("settings:descriptions.maxConcurrentRunsPerWorkflow")}
                         />
                       </SearchItem>
                     </div>
@@ -883,7 +882,7 @@ function SettingsPage() {
                         keywords="canvas navigation pan controls mouse select left click drag"
                       >
                         <SelectField
-                          label="Left-Click Drag"
+                          label={t("settings:labels.leftClickDrag")}
                           value={settings.panControls}
                           onChange={handlePanControlsChange}
                           options={PAN_CONTROLS_OPTIONS}
@@ -914,11 +913,11 @@ function SettingsPage() {
                           options={SELECTION_MODE_OPTIONS}
                         />
                         <Text className="description">
-                          When drawing a selection box for node selections:
+                          {t("settings:descriptions.nodeSelectionModeIntro")}
                           <br />
-                          <b>Full:</b> nodes have to be fully enclosed.
+                          <b>{t("common:menus.full")}:</b> {t("settings:descriptions.nodeSelectionModeFullHint")}
                           <br />
-                          <b>Partial:</b> intersecting nodes will be selected.
+                          <b>{t("common:menus.partial")}:</b> {t("settings:descriptions.nodeSelectionModePartialHint")}
                         </Text>
                       </SearchItem>
 
@@ -985,7 +984,7 @@ function SettingsPage() {
                           onChange={(checked) =>
                             updateAutosaveSettings({ enabled: checked })
                           }
-                          description="Automatically save your workflow at regular intervals."
+                          description={t("settings:descriptions.enableAutosave")}
                         />
                       </SearchItem>
 
@@ -994,7 +993,7 @@ function SettingsPage() {
                         keywords="autosave version history interval minutes"
                       >
                         <SelectField
-                          label="Autosave Interval (minutes)"
+                          label={t("settings:labels.autosaveInterval")}
                           value={settings.autosave?.intervalMinutes ?? 10}
                           onChange={(v) =>
                             updateAutosaveSettings({
@@ -1003,7 +1002,7 @@ function SettingsPage() {
                           }
                           options={AUTOSAVE_INTERVAL_OPTIONS}
                           disabled={!settings.autosave?.enabled}
-                          description="How often to automatically save your workflow."
+                          description={t("settings:descriptions.autosaveInterval")}
                         />
                       </SearchItem>
 
@@ -1019,7 +1018,7 @@ function SettingsPage() {
                               saveBeforeRun: checked
                             })
                           }
-                          description="Create a checkpoint version before executing workflow."
+                          description={t("settings:descriptions.saveBeforeRunning")}
                         />
                       </SearchItem>
 
@@ -1035,7 +1034,7 @@ function SettingsPage() {
                               saveOnClose: checked
                             })
                           }
-                          description="Automatically save when closing the tab or window."
+                          description={t("settings:descriptions.saveOnWindowClose")}
                         />
                       </SearchItem>
 
@@ -1054,7 +1053,7 @@ function SettingsPage() {
                             })
                           }
                           options={MAX_VERSIONS_OPTIONS}
-                          description="Maximum number of versions to keep per workflow."
+                          description={t("settings:descriptions.maxVersionsPerWorkflow")}
                         />
                       </SearchItem>
                     </div>
@@ -1076,7 +1075,7 @@ function SettingsPage() {
                           value={settings.timeFormat}
                           onChange={handleTimeFormatChange}
                           options={TIME_FORMAT_OPTIONS}
-                          description="Display time in 12h or 24h format."
+                          description={t("settings:descriptions.timeFormat")}
                         />
                       </SearchItem>
                     </div>
@@ -1087,7 +1086,7 @@ function SettingsPage() {
                 <TabPanel value={settingsTab} index={TAB_API_KEYS}>
                   <Box sx={{ marginBottom: theme.spacing(SPACING.xxl) }}>
                     <SearchInput
-                      placeholder="Search providers..."
+                      placeholder={t("settings:searchProviders")}
                       value={apiSearchTerm}
                       onChange={setApiSearchTerm}
                       size="small"

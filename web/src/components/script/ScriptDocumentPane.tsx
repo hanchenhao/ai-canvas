@@ -84,7 +84,9 @@ const InsertLineGap = ({
   onDrop: (e: DragEvent<HTMLElement>) => void;
   active: boolean;
   inset: number;
-}) => (
+}) => {
+  const { t } = useTranslation("common");
+  return (
   <Box
     onDragOver={onDragOver}
     onDrop={onDrop}
@@ -130,7 +132,8 @@ const InsertLineGap = ({
       />
     </Box>
   </Box>
-);
+  );
+};
 
 /**
  * One line: the insert/drop gap above it plus the row itself. Owns the per-line
@@ -718,7 +721,7 @@ const ScriptDocumentPane = ({
         {isEmpty && (
           <EmptyState
             title={t("common:script.emptyScript")}
-            description="Add a line to start writing. Assign speakers and voices in the Cast panel, then voice each line into a take."
+            description={t("common:script.addLineHint")}
             actionText={readOnly ? undefined : "Add first line"}
             onAction={readOnly ? undefined : () => addLine(scriptId)}
           />

@@ -9,6 +9,7 @@
  */
 
 import React, { memo, useCallback, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -90,6 +91,7 @@ const inputsContainerStyles = (theme: Theme) =>
 
 export const GeneratedClipPanel: React.FC<GeneratedClipPanelProps> = memo(
   ({ clipId }) => {
+    const { t } = useTranslation("timeline");
     const theme = useTheme();
     const clip = useTimelineStore((s) => findClipById(s.clips, clipId));
     const setParamOverride = useTimelineStore((s) => s.setParamOverride);
@@ -173,7 +175,7 @@ export const GeneratedClipPanel: React.FC<GeneratedClipPanelProps> = memo(
             <EmptyState
               variant="empty"
               size="small"
-              description="No workflow is bound to this clip."
+              description={t("timeline:generatedClip.noBinding")}
             />
           )}
 
@@ -192,7 +194,7 @@ export const GeneratedClipPanel: React.FC<GeneratedClipPanelProps> = memo(
                 <EmptyState
                   variant="error"
                   size="small"
-                  description="Failed to load workflow inputs."
+                  description={t("timeline:generatedClip.loadInputsFailed")}
                 />
               )}
               {!isLoading && !isError && workflow && (
@@ -201,7 +203,7 @@ export const GeneratedClipPanel: React.FC<GeneratedClipPanelProps> = memo(
                     <EmptyState
                       variant="empty"
                       size="small"
-                      description="This workflow has no editable input parameters."
+                      description={t("timeline:generatedClip.noEditableInputs")}
                     />
                   ) : nodeStoreForForm ? (
                     <NodeContext.Provider value={nodeStoreForForm}>

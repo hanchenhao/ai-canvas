@@ -338,7 +338,8 @@
     "exportImage": "Export Image",
     "closeKeyboardShortcuts": "Close keyboard shortcuts",
     "imageEditorShortcuts": "Image editor shortcuts",
-    "noDocumentId": "No document id"
+    "noDocumentId": "No document id",
+    "routeMissingDocId": "The sketch route requires a documentId path parameter."
   },
   "canvasContextMenu": {
     "swapFgBgColors": "Swap foreground and background colors",
@@ -359,12 +360,23 @@
     "restoreVersion": "Restore version",
     "deleteVersion": "Delete version",
     "failedToLoad": "Failed to load versions",
-    "noVersionsYet": "No versions yet"
+    "noVersionsYet": "No versions yet",
+    "successfulGenerations": "Successful generations will appear here"
   },
   "generatedLayer": {
     "createTitle": "Create generated layer",
     "noMatchingWorkflows": "No matching workflows",
     "noWorkflowBinding": "No workflow binding",
-    "generationFailed": "Generation failed"
+    "generationFailed": "Generation failed",
+    "couldNotLoadWorkflows": "Could not load workflows.",
+    "noImageOutput": "None of your workflows have an image output. Add an ImageOutput, MaskOutput, or Output node to a workflow to use it here.",
+    "noBinding": "This layer does not have a generated-layer binding yet."
+  },
+  "favorites": {
+    "clickStarHint": "Click the star next to any node to add it here."
+  },
+  "inspector": {
+    "selectSingleLayer": "Select a single layer to inspect.",
+    "selectLayer": "Select a layer to inspect."
   }
 }

@@ -453,7 +453,7 @@ const CompositorEditorCanvasInner: React.FC<CompositorEditorCanvasProps> = ({
         <div className="unavailable">
           <EmptyState
             title={t("canvas:compositorEditor.webGpuUnavailable")}
-            description="This browser can't render the compositor preview. The node still composites server-side."
+            description={t("canvas:compositorEditor.webgpuDescription")}
           />
         </div>
       )}

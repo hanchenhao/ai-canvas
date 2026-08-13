@@ -149,7 +149,7 @@ export const LayerVersionList: React.FC<LayerVersionListProps> = memo(
                 variant="empty"
                 size="small"
                 title={t("sketch:layerVersion.noVersionsYet")}
-                description="Successful generations will appear here"
+                description={t("sketch:layerVersion.successfulGenerations")}
               />
             )}
 

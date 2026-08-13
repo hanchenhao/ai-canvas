@@ -150,7 +150,7 @@ const ScriptTakeGallery = ({
       <Box sx={{ minWidth: 260, padding: SPACING.md }}>
         <EmptyState
           title={t("common:script.noTakesYet")}
-          description="Voice this line to create the first take."
+          description={t("common:script.voiceFirstTake")}
         />
       </Box>
     );

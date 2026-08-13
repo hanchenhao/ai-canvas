@@ -266,7 +266,7 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
             <EmptyState
               variant="error"
               title="Couldn't load templates"
-              description="Try again in a moment."
+              description={t("common:dashboard.tryAgainLater")}
               actionText="Retry"
               onAction={() => refetch()}
             />
@@ -277,7 +277,7 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
               <EmptyState
                 variant="no-results"
                 title={t("common:dashboard.noTemplatesMatch")}
-                description="Try a different search term."
+                description={t("common:dashboard.tryDifferentSearch")}
                 actionText="Clear search"
                 onAction={() => setQuery("")}
               />
@@ -292,7 +292,7 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
               <EmptyState
                 variant="no-data"
                 title={t("common:dashboard.noTemplatesAvailable")}
-                description="Templates will appear here when available."
+                description={t("common:dashboard.templatesWillAppear")}
               />
             )}
           </div>

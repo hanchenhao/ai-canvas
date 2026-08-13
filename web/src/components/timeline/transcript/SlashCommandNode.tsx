@@ -46,7 +46,6 @@ const COMMANDS: SlashCommand[] = [
   {
     id: "scene",
     run: (doc, playback, t) => {
-      const { t } = useTranslation("timeline");
       const { currentTimeMs } = playback.getState();
       const { addScene, markers } = doc.getState();
       // Marker + split-all-at-playhead in one undo step.

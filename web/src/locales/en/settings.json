@@ -127,5 +127,40 @@
       "copySuccess": "Diagnostics copied.",
       "copyFailed": "Copy failed."
     }
+  },
+  "tabs": {
+    "ariaLabel": "settings tabs",
+    "general": "General",
+    "modelsProviders": "Models & Providers",
+    "integrations": "Integrations",
+    "about": "About"
+  },
+  "searchSettings": "Search settings...",
+  "searchProviders": "Search providers...",
+  "descriptions": {
+    "showWelcome": "Start on the dashboard, with the welcome screen and templates, until getting started is finished. When off, the app opens straight into the workspace.",
+    "soundNotifications": "Play a system beep sound when workflows complete, exports finish, or other important events occur.",
+    "automaticUpdates": "Check for and download desktop app updates from the selected release channel.",
+    "warnBeforeLargeRuns": "Running a workflow executes every node at once. Show a confirmation when a run would launch many model/provider nodes that could overload an API.",
+    "maxConcurrentRuns": "Maximum number of workflow runs you can execute at once. Additional runs queue and start automatically as running ones finish.",
+    "maxConcurrentRunsPerWorkflow": "How many runs of the same workflow may run at once before further runs queue. Applies to concurrent generation (timeline, sketch); canvas runs always stay sequential.",
+    "enableAutosave": "Automatically save your workflow at regular intervals.",
+    "autosaveInterval": "How often to automatically save your workflow.",
+    "saveBeforeRunning": "Create a checkpoint version before executing workflow.",
+    "saveOnWindowClose": "Automatically save when closing the tab or window.",
+    "maxVersionsPerWorkflow": "Maximum number of versions to keep per workflow.",
+    "timeFormat": "Display time in 12h or 24h format.",
+    "closeBehaviorIntro": "Choose what happens when you close the main window.",
+    "closeBehaviorQuitHint": "Closes the application completely.",
+    "closeBehaviorBackgroundHint": "Keeps the app running in the system tray.",
+    "nodeSelectionModeIntro": "When drawing a selection box for node selections:",
+    "nodeSelectionModeFullHint": "nodes have to be fully enclosed.",
+    "nodeSelectionModePartialHint": "intersecting nodes will be selected."
+  },
+  "labels": {
+    "largeRunThreshold": "Large-Run Threshold",
+    "audioBuffer": "Audio Buffer (ms)",
+    "leftClickDrag": "Left-Click Drag",
+    "autosaveInterval": "Autosave Interval (minutes)"
   }
 }

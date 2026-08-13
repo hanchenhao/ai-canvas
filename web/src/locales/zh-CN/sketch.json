@@ -338,7 +338,8 @@
     "exportImage": "导出图片",
     "closeKeyboardShortcuts": "关闭键盘快捷键",
     "imageEditorShortcuts": "图像编辑器快捷键",
-    "noDocumentId": "没有文档 ID"
+    "noDocumentId": "没有文档 ID",
+    "routeMissingDocId": "草图路由需要 documentId 路径参数。"
   },
   "canvasContextMenu": {
     "swapFgBgColors": "交换前景色和背景色",
@@ -359,12 +360,23 @@
     "restoreVersion": "恢复版本",
     "deleteVersion": "删除版本",
     "failedToLoad": "加载版本失败",
-    "noVersionsYet": "暂无版本"
+    "noVersionsYet": "暂无版本",
+    "successfulGenerations": "生成成功的结果会显示在这里"
   },
   "generatedLayer": {
     "createTitle": "创建生成图层",
     "noMatchingWorkflows": "没有匹配的工作流",
     "noWorkflowBinding": "未绑定工作流",
-    "generationFailed": "生成失败"
+    "generationFailed": "生成失败",
+    "couldNotLoadWorkflows": "无法加载工作流。",
+    "noImageOutput": "你的工作流都没有图像输出。在工作流中加入 ImageOutput、MaskOutput 或 Output 节点才能在此使用。",
+    "noBinding": "此图层尚未绑定生成图层。"
+  },
+  "favorites": {
+    "clickStarHint": "点击任意节点旁的星标即可加入收藏。"
+  },
+  "inspector": {
+    "selectSingleLayer": "选择单个图层以检查。",
+    "selectLayer": "选择一个图层以检查。"
   }
 }

@@ -14,6 +14,7 @@
  */
 
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { useSketchStore } from "../state/useSketchStore";
 import { useLayerBinding } from "../../../stores/sketch/SketchSessionStore";
@@ -25,6 +26,7 @@ import { PaintedLayerPanel } from "./PaintedLayerPanel";
 import { DirectGenLayerPanel } from "./DirectGenLayerPanel";
 
 const SketchInspectorInner: React.FC = () => {
+  const { t } = useTranslation("sketch");
   const theme = useTheme();
   const panelsHidden = useSketchStore((s) => s.panelsHidden);
   const activeLayerId = useSketchStore((s) => s.document.activeLayerId);
@@ -40,21 +42,23 @@ const SketchInspectorInner: React.FC = () => {
 
   let body: React.ReactNode;
   if (selectedLayerIds.length > 1) {
+    const { t } = useTranslation("sketch");
     body = (
       <EmptyState
         variant="empty"
         size="small"
         title={`${selectedLayerIds.length} layers selected`}
-        description="Select a single layer to inspect."
+        description={t("sketch:inspector.selectSingleLayer")}
       />
     );
   } else if (!layer) {
+    const { t } = useTranslation("sketch");
     body = (
       <EmptyState
         variant="empty"
         size="small"
         title="Inspector"
-        description="Select a layer to inspect."
+        description={t("sketch:inspector.selectLayer")}
       />
     );
   } else if (

@@ -391,5 +391,10 @@
     "replaceClip": "Replace Clip",
     "assetIdPlaceholder": "Asset ID",
     "scrollHorizontally": "Scroll timeline horizontally"
+  },
+  "generatedClip": {
+    "noBinding": "No workflow is bound to this clip.",
+    "loadInputsFailed": "Failed to load workflow inputs.",
+    "noEditableInputs": "This workflow has no editable input parameters."
   }
 }

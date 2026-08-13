@@ -28,7 +28,7 @@ const SketchEditorPage: React.FC = memo(function SketchEditorPage() {
         <EmptyState
           variant="error"
           title={t("sketch:sketchModal.noDocumentId")}
-          description="The sketch route requires a documentId path parameter."
+          description={t("sketch:sketchModal.routeMissingDocId")}
         />
       </FlexColumn>
     );

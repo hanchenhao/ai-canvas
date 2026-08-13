@@ -137,7 +137,9 @@
     },
     "notePlaceholder": "Add your note...",
     "copyItem": "Copy item",
-    "reportButton": "Report"
+    "reportButton": "Report",
+    "chooseSketchHint": "Choose a sketch document to preview it here.",
+    "chooseTimelineHint": "Choose a timeline sequence to preview it here."
   },
   "nodeMenu": {
     "library": {
@@ -604,7 +606,8 @@
     "webGpuUnavailable": "WebGPU unavailable",
     "close": "Close compositor editor",
     "transform": "Transform",
-    "openLayoutEditor": "Open layout editor"
+    "openLayoutEditor": "Open layout editor",
+    "webgpuDescription": "This browser can't render the compositor preview. The node still composites server-side."
   },
   "emailRenderer": {
     "from": "From:",
@@ -694,7 +697,16 @@
     "scale": "Scale",
     "padding": "Padding",
     "dimensions": "Dimensions",
-    "fit": "Fit"
+    "fit": "Fit",
+    "targetCanvasWidth": "Target canvas width",
+    "targetCanvasHeight": "Target canvas height",
+    "frameToExtract": "Frame to extract",
+    "brushSize": "Brush size in pixels",
+    "brushOpacity": "Brush opacity (0-1)",
+    "canvasWidthPx": "Canvas width in pixels",
+    "canvasHeightPx": "Canvas height in pixels",
+    "bgImageOpacity": "Background image opacity (0 = hide, 1 = full)",
+    "layerOpacity": "Layer opacity (0 - 1)"
   },
   "mentionAsset": {
     "assetName": "Asset name"

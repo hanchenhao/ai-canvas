@@ -127,5 +127,40 @@
       "copySuccess": "诊断信息已复制。",
       "copyFailed": "复制失败。"
     }
+  },
+  "tabs": {
+    "ariaLabel": "设置标签页",
+    "general": "通用",
+    "modelsProviders": "模型与提供商",
+    "integrations": "集成",
+    "about": "关于"
+  },
+  "searchSettings": "搜索设置…",
+  "searchProviders": "搜索提供商…",
+  "descriptions": {
+    "showWelcome": "在引导完成前，应用从仪表盘启动（含欢迎页和模板）。关闭后，应用直接进入工作区。",
+    "soundNotifications": "工作流完成、导出结束或发生其他重要事件时播放系统提示音。",
+    "automaticUpdates": "从指定发布通道检查并下载桌面应用更新。",
+    "warnBeforeLargeRuns": "运行工作流会同时执行所有节点。当某次运行会触发大量模型/提供商节点、可能压垮 API 时弹出确认。",
+    "maxConcurrentRuns": "可同时执行的工作流运行数上限。超出部分自动排队，运行结束后自动开始。",
+    "maxConcurrentRunsPerWorkflow": "同一工作流可同时运行的实例数上限，超出则排队。适用于并发生成（时间线、草图）；画布运行始终串行。",
+    "enableAutosave": "按固定间隔自动保存工作流。",
+    "autosaveInterval": "自动保存工作流的间隔。",
+    "saveBeforeRunning": "执行工作流前创建一个检查点版本。",
+    "saveOnWindowClose": "关闭标签页或窗口时自动保存。",
+    "maxVersionsPerWorkflow": "每个工作流保留的最大版本数。",
+    "timeFormat": "以 12 小时或 24 小时格式显示时间。",
+    "closeBehaviorIntro": "选择关闭主窗口时的行为。",
+    "closeBehaviorQuitHint": "完全退出应用。",
+    "closeBehaviorBackgroundHint": "将应用保留在系统托盘中运行。",
+    "nodeSelectionModeIntro": "框选节点时:",
+    "nodeSelectionModeFullHint": "节点需完全位于框内才被选中。",
+    "nodeSelectionModePartialHint": "与框相交的节点都会被选中。"
+  },
+  "labels": {
+    "largeRunThreshold": "大规模运行阈值",
+    "audioBuffer": "音频缓冲 (ms)",
+    "leftClickDrag": "左键拖动",
+    "autosaveInterval": "自动保存间隔（分钟）"
   }
 }

@@ -307,7 +307,7 @@ const FavoritesTiles = memo(function FavoritesTiles({
         <EmptyState
           size="small"
           title={t("canvas:favorites.noFavoritesYet")}
-          description="Click the star next to any node to add it here."
+          description={t("sketch:favorites.clickStarHint")}
         />
       </Box>
     );

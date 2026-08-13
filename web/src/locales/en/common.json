@@ -269,7 +269,10 @@
     "dismissGettingStartedChecklist": "Dismiss getting started checklist",
     "runSandboxToStart": "Run a sandbox node to start a sandbox.",
     "noToolCalls": "No tool calls yet.",
-    "killSandbox": "Kill sandbox"
+    "killSandbox": "Kill sandbox",
+    "tryAgainLater": "Try again in a moment.",
+    "tryDifferentSearch": "Try a different search term.",
+    "templatesWillAppear": "Templates will appear here when available."
   },
   "providerOnboarding": {
     "fastestWayToStart": "Fastest way to start",
@@ -313,7 +316,10 @@
     "untitledSection": "Untitled section",
     "sectionTitle": "Section title",
     "removeSection": "Remove section",
-    "emptyScript": "Empty script"
+    "emptyScript": "Empty script",
+    "addSpeakerHint": "Add a speaker and assign a voice to start voicing lines.",
+    "voiceFirstTake": "Voice this line to create the first take.",
+    "addLineHint": "Add a line to start writing. Assign speakers and voices in the Cast panel, then voice each line into a take."
   },
   "chainEditor": {
     "addNode": "Add node",
@@ -394,7 +400,11 @@
     "importAppBundleFile": "Import app bundle file",
     "commandMenu": "Command menu",
     "commandMenuSearch": "Command menu search",
-    "noResultsFound": "No results found."
+    "noResultsFound": "No results found.",
+    "quit": "Quit",
+    "background": "Background",
+    "full": "Full",
+    "partial": "Partial"
   },
   "inputs": {
     "editValue": "Edit value",
@@ -415,7 +425,9 @@
     "noEntitiesYet": "No entities yet",
     "entitiesCaption": "Reusable characters, locations, styles, and props",
     "editEntity": "Edit entity",
-    "removeEntity": "Remove entity"
+    "removeEntity": "Remove entity",
+    "generateFirst": "Generate or upload an image first.",
+    "tagHint": "Tag an image as a character, location, style, or prop to reuse it across shots."
   },
   "colorPicker2": {
     "copyAllColors": "Copy all colors",

@@ -181,7 +181,7 @@ const ScriptCastPanel = ({
       {cast.length === 0 ? (
         <EmptyState
           title={t("common:script.noSpeakers")}
-          description="Add a speaker and assign a voice to start voicing lines."
+          description={t("common:script.addSpeakerHint")}
         />
       ) : (
         cast.map((speaker) => (

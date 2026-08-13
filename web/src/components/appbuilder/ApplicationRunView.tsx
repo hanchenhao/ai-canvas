@@ -98,7 +98,7 @@ const ApplicationRunView: React.FC<ApplicationRunViewProps> = ({
       <EmptyState
         variant="empty"
         title={t("applications:run.nothingToRun")}
-        description="Add widgets in the Design view, then run the app here."
+        description={t("applications:run.addWidgetsHint")}
       />
     );
   }

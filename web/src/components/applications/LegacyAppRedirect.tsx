@@ -80,7 +80,7 @@ const LegacyAppRedirect = () => {
         <EmptyState
           variant="error"
           title={t("applications:error.appNotFound")}
-          description="No app is built on this workflow. Open the Apps panel to create one."
+          description={t("applications:error.noAppHint")}
         />
       </FlexColumn>
     );

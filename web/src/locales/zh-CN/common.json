@@ -269,7 +269,10 @@
     "dismissGettingStartedChecklist": "关闭新手引导清单",
     "runSandboxToStart": "运行一个沙箱节点以启动沙箱。",
     "noToolCalls": "暂无工具调用。",
-    "killSandbox": "终止沙箱"
+    "killSandbox": "终止沙箱",
+    "tryAgainLater": "稍后再试。",
+    "tryDifferentSearch": "换个搜索词试试。",
+    "templatesWillAppear": "模板可用时会显示在这里。"
   },
   "providerOnboarding": {
     "fastestWayToStart": "最快的上手方式",
@@ -313,7 +316,10 @@
     "untitledSection": "未命名段落",
     "sectionTitle": "段落标题",
     "removeSection": "移除段落",
-    "emptyScript": "空脚本"
+    "emptyScript": "空脚本",
+    "addSpeakerHint": "添加说话人并分配音色，即可开始录制台词。",
+    "voiceFirstTake": "为这行台词配音以创建第一条录音。",
+    "addLineHint": "添加一行开始写作。在「演员」面板中分配说话人和音色，再为每行台词配音。"
   },
   "chainEditor": {
     "addNode": "添加节点",
@@ -394,7 +400,11 @@
     "importAppBundleFile": "导入应用 bundle 文件",
     "commandMenu": "命令菜单",
     "commandMenuSearch": "命令菜单搜索",
-    "noResultsFound": "未找到结果。"
+    "noResultsFound": "未找到结果。",
+    "quit": "退出",
+    "background": "后台",
+    "full": "完全",
+    "partial": "部分"
   },
   "inputs": {
     "editValue": "编辑值",
@@ -415,7 +425,9 @@
     "noEntitiesYet": "暂无实体",
     "entitiesCaption": "可复用的角色、场景、风格和道具",
     "editEntity": "编辑实体",
-    "removeEntity": "移除实体"
+    "removeEntity": "移除实体",
+    "generateFirst": "请先生成或上传一张图片。",
+    "tagHint": "将图片标记为角色、场景、风格或道具，可在不同镜头中复用。"
   },
   "colorPicker2": {
     "copyAllColors": "复制全部颜色",

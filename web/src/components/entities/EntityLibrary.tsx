@@ -73,7 +73,7 @@ const AssetPickerDialog: React.FC<{
         <EmptyState
           variant="no-data"
           title={t("common:entities.noImages")}
-          description="Generate or upload an image first."
+          description={t("common:entities.generateFirst")}
           size="small"
         />
       ) : (
@@ -165,7 +165,7 @@ const EntityLibraryInternal: React.FC = () => {
         <EmptyState
           variant="empty"
           title={t("common:entities.noEntitiesYet")}
-          description="Tag an image as a character, location, style, or prop to reuse it across shots."
+          description={t("common:entities.tagHint")}
           actionText="Add entity"
           onAction={handleAdd}
         />

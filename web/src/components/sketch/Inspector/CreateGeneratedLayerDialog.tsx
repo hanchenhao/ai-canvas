@@ -272,7 +272,7 @@ const CreateGeneratedLayerDialogBody: React.FC<{
               <EmptyState
                 variant="error"
                 size="small"
-                description="Could not load workflows."
+                description={t("sketch:generatedLayer.couldNotLoadWorkflows")}
               />
             )}
 
@@ -281,7 +281,7 @@ const CreateGeneratedLayerDialogBody: React.FC<{
                 variant="empty"
                 size="small"
                 title={t("sketch:generatedLayer.noMatchingWorkflows")}
-                description="None of your workflows have an image output. Add an ImageOutput, MaskOutput, or Output node to a workflow to use it here."
+                description={t("sketch:generatedLayer.noImageOutput")}
               />
             )}
 

@@ -137,7 +137,9 @@
     },
     "notePlaceholder": "添加备注...",
     "copyItem": "复制项",
-    "reportButton": "反馈"
+    "reportButton": "反馈",
+    "chooseSketchHint": "选择一个草图文档以在此预览。",
+    "chooseTimelineHint": "选择一个时间线序列以在此预览。"
   },
   "nodeMenu": {
     "library": {
@@ -604,7 +606,8 @@
     "webGpuUnavailable": "WebGPU 不可用",
     "close": "关闭合成编辑器",
     "transform": "变换",
-    "openLayoutEditor": "打开布局编辑器"
+    "openLayoutEditor": "打开布局编辑器",
+    "webgpuDescription": "此浏览器无法渲染合成器预览。节点仍在服务端进行合成。"
   },
   "emailRenderer": {
     "from": "发件人:",
@@ -694,7 +697,16 @@
     "scale": "缩放",
     "padding": "填充",
     "dimensions": "尺寸",
-    "fit": "适配"
+    "fit": "适配",
+    "targetCanvasWidth": "目标画布宽度",
+    "targetCanvasHeight": "目标画布高度",
+    "frameToExtract": "要提取的帧",
+    "brushSize": "笔刷大小（像素）",
+    "brushOpacity": "笔刷不透明度 (0-1)",
+    "canvasWidthPx": "画布宽度（像素）",
+    "canvasHeightPx": "画布高度（像素）",
+    "bgImageOpacity": "背景图不透明度（0 = 隐藏，1 = 完全显示）",
+    "layerOpacity": "图层不透明度 (0 - 1)"
   },
   "mentionAsset": {
     "assetName": "素材名称"
