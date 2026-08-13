@@ -1,4 +1,5 @@
 import { memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import { useLocation, useNavigate } from "react-router-dom";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
@@ -16,6 +17,7 @@ import { FlexRow, ToolbarIconButton } from "../ui_primitives";
  * straight into the script editor to edit it.
  */
 const ScriptProperty = (props: PropertyProps) => {
+  const { t } = useTranslation("properties");
   const { property, value, onChange } = props;
   const id = `script-${property.name}-${props.propertyIndex}`;
   const { data, error, isLoading } = useScripts();
@@ -79,7 +81,7 @@ const ScriptProperty = (props: PropertyProps) => {
         <ToolbarIconButton
           size="small"
           ariaLabel="Open in script editor"
-          tooltip="Open in script editor"
+          tooltip={t("properties:openScriptEditor")}
           disabled={!selectedId}
           onClick={handleOpenEditor}
           icon={<DescriptionOutlinedIcon fontSize="inherit" />}

@@ -1,4 +1,5 @@
 import { memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import { useLocation, useNavigate } from "react-router-dom";
 import MovieOutlinedIcon from "@mui/icons-material/MovieOutlined";
@@ -16,6 +17,7 @@ import { FlexRow, ToolbarIconButton } from "../ui_primitives";
  * sequence and jump straight into the timeline editor to edit it.
  */
 const TimelineProperty = (props: PropertyProps) => {
+  const { t } = useTranslation("properties");
   const { property, value, onChange } = props;
   const id = `timeline-${property.name}-${props.propertyIndex}`;
   const { data, error, isLoading } = useTimelines();
@@ -78,7 +80,7 @@ const TimelineProperty = (props: PropertyProps) => {
         <ToolbarIconButton
           size="small"
           ariaLabel="Open in timeline editor"
-          tooltip="Open in timeline editor"
+          tooltip={t("properties:openTimelineEditor")}
           disabled={!selectedId}
           onClick={handleOpenEditor}
           icon={<MovieOutlinedIcon fontSize="inherit" />}

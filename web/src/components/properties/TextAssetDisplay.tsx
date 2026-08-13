@@ -1,4 +1,5 @@
 import { useState, useCallback, useMemo, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { useAssetStore } from "../../stores/AssetStore";
 import TextEditorModal from "./TextEditorModal";
@@ -14,6 +15,7 @@ interface TextAssetDisplayProps {
 }
 
 const TextAssetDisplay = ({ assetId }: TextAssetDisplayProps) => {
+  const { t } = useTranslation("properties");
   const getAsset = useAssetStore((state) => state.get);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -49,7 +51,7 @@ const TextAssetDisplay = ({ assetId }: TextAssetDisplayProps) => {
         overflow: "auto"
       }}
     >
-      <Tooltip title="Open Editor" delay={TOOLTIP_ENTER_DELAY}>
+      <Tooltip title={t("properties:openEditor")} delay={TOOLTIP_ENTER_DELAY}>
         <button type="button" className="button-expand" onClick={toggleExpand}>
           {isExpanded ? "↙" : "↗"}
         </button>

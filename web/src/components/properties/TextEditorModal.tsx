@@ -3,6 +3,7 @@
 import ReactDOM from "react-dom";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import CloseIcon from "@mui/icons-material/Close";
 import CodeIcon from "@mui/icons-material/Code";
@@ -754,6 +755,7 @@ const TextEditorModal = ({
   showStatusBar = true,
   showFindReplace = true
 }: TextEditorModalProps) => {
+  const { t } = useTranslation("properties");
   const theme = useTheme();
   const modalOverlayRef = useRef<HTMLDivElement>(null);
 
@@ -1235,12 +1237,12 @@ const TextEditorModal = ({
             </div>
             <div className="actions">
               {!readOnly && (
-                <Tooltip delay={TOOLTIP_ENTER_DELAY} title="Revert to original">
+                <Tooltip delay={TOOLTIP_ENTER_DELAY} title={t("properties:revertToOriginal")}>
                   <button
                     type="button"
                     className="button"
                     onClick={handleRevert}
-                    aria-label="Revert to original"
+                    aria-label={t("properties:revertToOriginal")}
                   >
                     <HistoryIcon />
                   </button>
@@ -1306,7 +1308,7 @@ const TextEditorModal = ({
                   type="button"
                   className="button button-close"
                   onClick={onClose}
-                  aria-label="Close Editor"
+                  aria-label={t("properties:closeEditor")}
                 >
                   <CloseIcon />
                 </button>
@@ -1401,23 +1403,23 @@ const TextEditorModal = ({
               </div>
               <div className="toolbar-side">
                 <div className="font-controls">
-                  <Tooltip delay={TOOLTIP_ENTER_DELAY} title="Decrease font size">
+                  <Tooltip delay={TOOLTIP_ENTER_DELAY} title={t("properties:decreaseFontSize")}>
                     <button
                       type="button"
                       className="button-ghost"
                       onClick={() => changeFontSize(-1)}
-                      aria-label="Decrease font size"
+                      aria-label={t("properties:decreaseFontSize")}
                     >
                       <TextDecreaseIcon />
                     </button>
                   </Tooltip>
                   <span className="font-size-value">{fontSize}</span>
-                  <Tooltip delay={TOOLTIP_ENTER_DELAY} title="Increase font size">
+                  <Tooltip delay={TOOLTIP_ENTER_DELAY} title={t("properties:increaseFontSize")}>
                     <button
                       type="button"
                       className="button-ghost"
                       onClick={() => changeFontSize(1)}
-                      aria-label="Increase font size"
+                      aria-label={t("properties:increaseFontSize")}
                     >
                       <TextIncreaseIcon />
                     </button>

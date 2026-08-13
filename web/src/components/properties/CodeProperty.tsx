@@ -9,6 +9,7 @@
  */
 import { css } from "@emotion/react";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type * as monaco from "monaco-editor";
 import { useTheme } from "@mui/material/styles";
 
@@ -64,6 +65,7 @@ const CodeProperty = ({
   isInspector,
   onPropertyContextMenu
 }: PropertyProps) => {
+  const { t } = useTranslation("properties");
   const theme = useTheme();
   const id = `code-${property.name}-${propertyIndex}`;
   const storeValue = typeof value === "string" ? value : "";
@@ -161,7 +163,7 @@ const CodeProperty = ({
       <>
         <ToolbarIconButton
           className="inspector-supplemental-action"
-          tooltip="Open Editor"
+          tooltip={t("properties:openEditor")}
           icon={<OpenInFullIcon />}
           onClick={toggleExpand}
           size="small"
@@ -266,7 +268,7 @@ const CodeProperty = ({
         {!isInspector && isHovered ? (
           <div className="code-action-buttons">
             <ToolbarIconButton
-              tooltip="Open Editor"
+              tooltip={t("properties:openEditor")}
               icon={<OpenInFullIcon />}
               onClick={toggleExpand}
               size="small"

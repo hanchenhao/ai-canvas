@@ -3,6 +3,7 @@
 import ReactDOM from "react-dom";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import CloseIcon from "@mui/icons-material/Close";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
@@ -432,6 +433,7 @@ const DataframeEditorModal = ({
   propertyDescription,
   readOnly = false
 }: DataframeEditorModalProps) => {
+  const { t } = useTranslation("properties");
   const theme = useTheme();
   const modalOverlayRef = useRef<HTMLDivElement>(null);
 
@@ -567,7 +569,7 @@ const DataframeEditorModal = ({
                     type="button"
                     className="button button-close"
                     onClick={onClose}
-                    aria-label="Close Editor"
+                    aria-label={t("properties:closeEditor")}
                   >
                     <CloseIcon />
                   </button>
@@ -585,7 +587,7 @@ const DataframeEditorModal = ({
                       className="add-column" 
                       onClick={addColumn}
                       icon={<TableRowsIcon style={{ rotate: "90deg" }} />}
-                      label="Add Column"
+                      label={t("properties:addColumn")}
                     />
                   </div>
                   <ColumnsManager
@@ -612,7 +614,7 @@ const DataframeEditorModal = ({
                           <CloseButtonPrimitive
                             buttonSize="small"
                             onClick={handleClearSearch}
-                            tooltip="Clear search"
+                            tooltip={t("properties:clearSearch")}
                           />
                         </InputAdornment>
                       )

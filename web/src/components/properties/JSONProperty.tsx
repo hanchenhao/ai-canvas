@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type * as monaco from "monaco-editor";
 import { PropertyProps } from "../node/PropertyInput";
 import PropertyLabel from "../node/PropertyLabel";
@@ -13,6 +14,7 @@ import { useMonacoEditor } from "../../hooks/editor/useMonacoEditor";
 import { useInspectorHeaderSupplementalRegistration } from "../../hooks/useInspectorHeaderSupplemental";
 
 const JSONProperty = (props: PropertyProps) => {
+  const { t } = useTranslation("properties");
   const theme = useTheme();
   const id = `json-${props.property.name}-${props.propertyIndex}`;
   const inspectorToolbarActionSx = useMemo(
@@ -118,7 +120,7 @@ const JSONProperty = (props: PropertyProps) => {
       <>
         <ToolbarIconButton
           className="inspector-supplemental-action"
-          tooltip="Open Editor"
+          tooltip={t("properties:openEditor")}
           icon={<OpenInFullIcon />}
           onClick={toggleExpand}
           size="small"
@@ -217,7 +219,7 @@ const JSONProperty = (props: PropertyProps) => {
         {!props.isInspector && isHovered ? (
           <div className="json-action-buttons">
             <ToolbarIconButton
-              tooltip="Open Editor"
+              tooltip={t("properties:openEditor")}
               icon={<OpenInFullIcon />}
               onClick={toggleExpand}
               size="small"

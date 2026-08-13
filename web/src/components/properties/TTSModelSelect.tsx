@@ -1,4 +1,5 @@
 import React, { memo, useState, useCallback, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import TTSModelMenuDialog from "../model_menu/TTSModelMenuDialog";
 import useModelPreferencesStore from "../../stores/ModelPreferencesStore";
@@ -30,6 +31,7 @@ const TTSModelSelect: React.FC<TTSModelSelectProps> = ({
   recommendedModels,
   modelPacks
 }) => {
+  const { t } = useTranslation("properties");
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const addRecent = useModelPreferencesStore((s) => s.addRecent);
@@ -182,7 +184,7 @@ const TTSModelSelect: React.FC<TTSModelSelectProps> = ({
           options={voiceOptions}
           value={selectedVoice || availableVoices[0] || ""}
           onChange={handleVoiceChange}
-          placeholder="Select voice"
+          placeholder={t("properties:selectVoice")}
           label="Voice"
         />
       )}

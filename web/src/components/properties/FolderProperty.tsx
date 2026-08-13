@@ -16,12 +16,14 @@ import PropertyLabel from "../node/PropertyLabel";
 import { useQuery } from "@tanstack/react-query";
 import { PropertyProps } from "../node/PropertyInput";
 import { memo, useState, useRef, useEffect, useMemo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import dialogStyles from "../../styles/DialogStyles";
 import isEqual from "../../utils/isEqual";
 import Select from "../inputs/Select";
 import { FlexRow, DialogActionButtons } from "../ui_primitives";
 
 const FolderProperty = (props: PropertyProps) => {
+  const { t } = useTranslation("properties");
   const id = `folder-${props.property.name}-${props.propertyIndex}`;
   const load = useAssetStore((state) => state.load);
   const createFolder = useAssetStore((state) => state.createFolder);
@@ -133,7 +135,7 @@ const FolderProperty = (props: PropertyProps) => {
           options={folderOptions}
           value={selectValue}
           onChange={handleFolderSelect}
-          placeholder="Select a folder"
+          placeholder={t("properties:selectFolder")}
         />
         <EditorButton
           onClick={handleOpenMenu}
@@ -162,7 +164,7 @@ const FolderProperty = (props: PropertyProps) => {
           <TextInput
             className="input-field"
             inputRef={inputRef}
-            placeholder="Folder Name"
+            placeholder={t("properties:folderName")}
             autoFocus
             spellCheck={false}
             autoComplete="off"

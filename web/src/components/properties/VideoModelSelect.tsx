@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import VideoModelMenuDialog from "../model_menu/VideoModelMenuDialog";
 import useModelPreferencesStore from "../../stores/ModelPreferencesStore";
@@ -76,9 +77,10 @@ const VideoModelSelect: React.FC<VideoModelSelectProps> = ({
   );
 
   if (inStudio) {
+    const { t } = useTranslation("properties");
     return (
       <CuratedModelSelect
-        label="Video model"
+        label={t("properties:videoModel")}
         options={forTasks(STUDIO_CLIP_MODELS, task)}
         value={value}
         onChange={onChange}

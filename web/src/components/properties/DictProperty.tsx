@@ -1,5 +1,6 @@
 import { PropertyProps } from "../node/PropertyInput";
 import { memo, useCallback, useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import Select from "../inputs/Select";
 import DictTable, { DictDataType } from "../node/DataTable/DictTable";
 import PropertyLabel from "../node/PropertyLabel";
@@ -25,6 +26,7 @@ const detectTypeFromDict = (dict: unknown) => {
 };
 
 const DictProperty = (props: PropertyProps) => {
+  const { t } = useTranslation("properties");
   const id = `list-${props.property.name}-${props.propertyIndex}`;
   const dataTypes = useMemo(() => ["int", "string", "datetime", "float"], []);
 
@@ -70,7 +72,7 @@ const DictProperty = (props: PropertyProps) => {
           value={dataType}
           onChange={handleDataTypeChange}
           options={options}
-          label="Data Type"
+          label={t("properties:dataType")}
           placeholder="Select type..."
         />
       </div>

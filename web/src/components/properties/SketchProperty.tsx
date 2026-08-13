@@ -1,4 +1,5 @@
 import { memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import { useLocation, useNavigate } from "react-router-dom";
 import BrushOutlinedIcon from "@mui/icons-material/BrushOutlined";
@@ -16,6 +17,7 @@ import { FlexRow, ToolbarIconButton } from "../ui_primitives";
  * and jump straight into the sketch editor to edit it.
  */
 const SketchProperty = (props: PropertyProps) => {
+  const { t } = useTranslation("properties");
   const { property, value, onChange } = props;
   const id = `sketch-${property.name}-${props.propertyIndex}`;
   const { data, error, isLoading } = trpc.sketch.list.useQuery(
@@ -81,7 +83,7 @@ const SketchProperty = (props: PropertyProps) => {
         <ToolbarIconButton
           size="small"
           ariaLabel="Open in sketch editor"
-          tooltip="Open in sketch editor"
+          tooltip={t("properties:openSketchEditor")}
           disabled={!selectedId}
           onClick={handleOpenEditor}
           icon={<BrushOutlinedIcon fontSize="inherit" />}

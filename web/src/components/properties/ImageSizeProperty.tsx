@@ -1,4 +1,5 @@
 import { memo, useCallback, useMemo, useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import NumberInput from "../inputs/NumberInput";
 import { PropertyProps } from "../node/PropertyInput";
 import PropertyLabel from "../node/PropertyLabel";
@@ -21,6 +22,7 @@ type ImageSizeValue = {
 };
 
 const ImageSizeProperty = (props: PropertyProps<ImageSizeValue>) => {
+  const { t } = useTranslation("properties");
   const { property, nodeId, value, onChange, tabIndex } = props;
 
   const isConnectedSelector = useIsConnectedSelector(nodeId, property.name);
@@ -164,7 +166,7 @@ const ImageSizeProperty = (props: PropertyProps<ImageSizeValue>) => {
         <Box className="spacer" sx={{ flex: 1 }} />
         <FlexRow className="icon-container" align="center" gap={0} sx={{ mt: -2 }}>
           <ToolbarIconButton
-            tooltip="Swap Width and Height"
+            tooltip={t("properties:swapWidthHeight")}
             icon={<SwapHoriz sx={{ fontSize: "var(--fontSizeBig)" }} />}
             className="aspect-swap-button"
             onClick={handleSwap}

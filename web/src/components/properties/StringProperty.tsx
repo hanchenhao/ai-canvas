@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useState, useCallback, memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import PropertyLabel from "../node/PropertyLabel";
 import { PropertyProps } from "../node/PropertyInput";
 import TextEditorModal from "./TextEditorModal";
@@ -58,6 +59,7 @@ const StringProperty = ({
   isInspector,
   onPropertyContextMenu
 }: PropertyProps) => {
+  const { t } = useTranslation("properties");
   const id = `textfield-${property.name}-${propertyIndex}`;
   const [isExpanded, setIsExpanded] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -92,7 +94,7 @@ const StringProperty = ({
       <>
         <ToolbarIconButton
           className="inspector-supplemental-action"
-          tooltip="Open Editor"
+          tooltip={t("properties:openEditor")}
           icon={<OpenInFullIcon />}
           onClick={toggleExpand}
           size="small"
@@ -143,7 +145,7 @@ const StringProperty = ({
         {!isInspector && isHovered ? (
           <div className="string-action-buttons">
             <ToolbarIconButton
-              tooltip="Open Editor"
+              tooltip={t("properties:openEditor")}
               icon={<OpenInFullIcon />}
               onClick={toggleExpand}
               size="small"

@@ -6,6 +6,7 @@ import PropertyLabel from "../node/PropertyLabel";
 import { PropertyProps } from "../node/PropertyInput";
 import PropertyDropzone from "./PropertyDropzone";
 import { memo, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -69,6 +70,7 @@ const styles = (theme: Theme) =>
   });
 
 const AudioProperty = (props: PropertyProps) => {
+  const { t } = useTranslation("properties");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const id = `audio-${props.property.name}-${props.propertyIndex}`;
@@ -87,13 +89,14 @@ const AudioProperty = (props: PropertyProps) => {
     useRealtimeAudioStream(inputNodeName, sampleRate);
 
   if (isRealtime) {
+    const { t } = useTranslation("properties");
     return (
       <div className="audio-property" css={cssStyles}>
         <div className="realtime-audio-controls">
           {isStreaming ? (
             <div
               className="realtime-visualizer"
-              aria-label="Realtime audio visualizer"
+              aria-label={t("properties:realtimeAudioVisualizer")}
             >
               <AudioVisualizer
                 stream={stream}

@@ -1,6 +1,7 @@
 import { Text, FlexColumn } from "../ui_primitives";
 import { InferenceProvider, InferenceProviderModelValue } from "../../stores/ApiTypes";
 import { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import isEqual from "../../utils/isEqual";
 import Select from "../inputs/Select";
@@ -53,6 +54,7 @@ const InferenceProviderModelSelect = ({
   onChange,
   value: rawValue
 }: PropertyProps) => {
+  const { t } = useTranslation("properties");
     const value = rawValue as { provider: InferenceProvider; model_id: string };
     const [provider, setProvider] = useState<InferenceProvider>(value.provider);
     const pipelineTag = useMemo(() => {
@@ -131,7 +133,7 @@ const InferenceProviderModelSelect = ({
                     options={providerOptions}
                     value={value.provider}
                     onChange={handleChangeProvider}
-                    placeholder="Select an inference provider"
+                    placeholder={t("properties:selectInferenceProvider")}
                 />
             </div>
 
