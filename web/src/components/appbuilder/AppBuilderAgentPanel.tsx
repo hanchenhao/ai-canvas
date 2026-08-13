@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
 import type { BuildUiContextOptions } from "../../lib/chat/uiContext";
 
@@ -78,6 +79,7 @@ const AppBuilderAgentPanel: React.FC<AppBuilderAgentPanelProps> = ({
   applicationId,
   workflowId
 }) => {
+  const { t } = useTranslation("applications");
   const {
     status,
     progress,

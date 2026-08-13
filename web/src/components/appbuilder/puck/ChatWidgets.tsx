@@ -11,6 +11,7 @@
  * every run, so a reply that stayed there alone would vanish on send.
  */
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   composeUserMessage,
   messagesFrom,
@@ -122,6 +123,7 @@ export const ChatThreadWidget: React.FC<ChatThreadWidgetProps> = ({
   maxHeight,
   placeholder
 }) => {
+  const { t } = useTranslation("applications");
   const { write, designMode } = useAppRuntimeContext();
   const historyRef = useBindingRef(binding, "read");
   const historyValue = useBindingValue(historyRef);
@@ -404,7 +406,7 @@ export const ChatComposerWidget: React.FC<ChatComposerWidgetProps> = ({
               variant="outlined"
               size="small"
               disabled={disabled}
-              aria-label="Attach image"
+              aria-label={t("applications:widget.attachImage")}
               onClick={() => fileInputRef.current?.click()}
             >
               Attach

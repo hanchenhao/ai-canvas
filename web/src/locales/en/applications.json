@@ -40,23 +40,6 @@
     "noVersions": "No versions yet",
     "noVersionsDesc": "Publish the app to cut its first version."
   },
-  "error": {
-    "loadApps": "Could not load apps",
-    "loadAppsFallback": "Try again later.",
-    "renameConflict": "\"{{old}}\" changed elsewhere — the rename to \"{{new}}\" was not saved.",
-    "renameFailed": "Could not rename \"{{name}}\": {{message}}",
-    "duplicateFailed": "Could not duplicate \"{{name}}\": {{message}}",
-    "deleteFailed": "Could not delete \"{{name}}\": {{message}}",
-    "loadBudget": "Could not load the budget: {{message}}",
-    "loadBudgetFallback": "Could not load the budget: try again later.",
-    "saveBudget": "Could not save the budget: {{message}}",
-    "loadInvocations": "Could not load invocations: {{message}}",
-    "loadInvocationsFallback": "Could not load invocations: try again later.",
-    "publish": "Could not publish: {{message}}",
-    "release": "Could not change the release: {{message}}",
-    "loadVersions": "Could not load versions: {{message}}",
-    "loadVersionsFallback": "Could not load versions: try again later."
-  },
   "placeholder": {
     "searchApps": "Search apps..."
   },
@@ -113,6 +96,41 @@
     "download": "Download",
     "button": "Button",
     "section": "Section",
-    "running": "Running"
+    "running": "Running",
+    "attachImage": "Attach image",
+    "couldNotLoadSketch": "Could not load sketch",
+    "couldNotLoadTimeline": "Could not load timeline",
+    "selectStoryboard": "Select a storyboard to edit its scenes.",
+    "storyboardNoScenes": "This storyboard has no scenes yet."
+  },
+  "run": {
+    "nothingToRun": "Nothing to run yet",
+    "workflowUnavailable": "Workflow unavailable"
+  },
+  "dataPanel": {
+    "whileRunning": "While one is running",
+    "rememberBetweenVisits": "Remember between visits",
+    "rememberHint": "Only per-user variables can be remembered.",
+    "projectId": "Project id"
+  },
+  "error": {
+    "loadApps": "Could not load apps",
+    "loadAppsFallback": "Try again later.",
+    "renameConflict": "\"{{old}}\" changed elsewhere — the rename to \"{{new}}\" was not saved.",
+    "renameFailed": "Could not rename \"{{name}}\": {{message}}",
+    "duplicateFailed": "Could not duplicate \"{{name}}\": {{message}}",
+    "deleteFailed": "Could not delete \"{{name}}\": {{message}}",
+    "loadBudget": "Could not load the budget: {{message}}",
+    "loadBudgetFallback": "Could not load the budget: try again later.",
+    "saveBudget": "Could not save the budget: {{message}}",
+    "loadInvocations": "Could not load invocations: {{message}}",
+    "loadInvocationsFallback": "Could not load invocations: try again later.",
+    "publish": "Could not publish: {{message}}",
+    "release": "Could not change the release: {{message}}",
+    "loadVersions": "Could not load versions: {{message}}",
+    "loadVersionsFallback": "Could not load versions: try again later.",
+    "loadApp": "Could not load app",
+    "savedElsewhere": "Saved elsewhere",
+    "appNotFound": "App not found"
   }
 }

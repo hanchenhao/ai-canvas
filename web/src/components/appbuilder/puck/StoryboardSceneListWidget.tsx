@@ -13,6 +13,7 @@
  */
 import React, { useCallback, useMemo, useState } from "react";
 
+import { useTranslation } from "react-i18next";
 import {
   AlertBanner,
   Box,
@@ -77,6 +78,7 @@ export const StoryboardSceneListWidget: React.FC<StoryboardSceneListProps> = ({
   allowRemove = true,
   disabled
 }) => {
+  const { t } = useTranslation("applications");
   const { binding, designMode, selected } = useBoundResource(
     resourceBindingId,
     true
@@ -181,13 +183,13 @@ export const StoryboardSceneListWidget: React.FC<StoryboardSceneListProps> = ({
       ) : null}
 
       {!targetId ? (
-        <Caption color="secondary">Select a storyboard to edit its scenes.</Caption>
+        <Caption color="secondary">{t("applications:widget.selectStoryboard")}</Caption>
       ) : shots === null ? (
         <Caption color="secondary">
           {isLoading ? "Loading…" : "This resource has no scenes."}
         </Caption>
       ) : shots.length === 0 ? (
-        <Caption color="secondary">This storyboard has no scenes yet.</Caption>
+        <Caption color="secondary">{t("applications:widget.storyboardNoScenes")}</Caption>
       ) : (
         <Box
           component="ul"

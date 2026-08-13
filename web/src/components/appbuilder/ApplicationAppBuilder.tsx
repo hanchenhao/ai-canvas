@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQueries } from "@tanstack/react-query";
 
 import {
@@ -56,6 +57,7 @@ const placeholderWorkflow = (id: string, name: string): Workflow => ({
 const ApplicationAppBuilder: React.FC<ApplicationAppBuilderProps> = ({
   applicationId
 }) => {
+  const { t } = useTranslation("applications");
   const { data: application, isLoading, isError, error } =
     useApplication(applicationId);
   const updateApplication = useUpdateApplication();
@@ -203,7 +205,7 @@ const ApplicationAppBuilder: React.FC<ApplicationAppBuilderProps> = ({
     return (
       <EmptyState
         variant="error"
-        title="Could not load app"
+        title={t("applications:error.loadApp")}
         description={error?.message ?? "The app may have been deleted."}
       />
     );
@@ -223,7 +225,7 @@ const ApplicationAppBuilder: React.FC<ApplicationAppBuilderProps> = ({
           <FlexColumn sx={{ px: SPACING.lg, py: SPACING.md }}>
             <AlertBanner
               severity="warning"
-              title="Saved elsewhere"
+              title={t("applications:error.savedElsewhere")}
               action={
                 <EditorButton
                   size="small"

@@ -55,7 +55,10 @@
     "publish": "无法发布：{{message}}",
     "release": "无法更改发布版本：{{message}}",
     "loadVersions": "无法加载版本：{{message}}",
-    "loadVersionsFallback": "无法加载版本：请稍后重试。"
+    "loadVersionsFallback": "无法加载版本：请稍后重试。",
+    "loadApp": "无法加载应用",
+    "savedElsewhere": "已在别处保存",
+    "appNotFound": "应用不存在"
   },
   "placeholder": {
     "searchApps": "搜索应用…"
@@ -113,6 +116,21 @@
     "download": "下载",
     "button": "按钮",
     "section": "分区",
-    "running": "运行中"
+    "running": "运行中",
+    "attachImage": "添加图片",
+    "couldNotLoadSketch": "无法加载草图",
+    "couldNotLoadTimeline": "无法加载时间线",
+    "selectStoryboard": "选择一个故事板来编辑它的场景。",
+    "storyboardNoScenes": "这个故事板还没有场景。"
+  },
+  "run": {
+    "nothingToRun": "暂无可运行内容",
+    "workflowUnavailable": "工作流不可用"
+  },
+  "dataPanel": {
+    "whileRunning": "运行期间",
+    "rememberBetweenVisits": "跨访问保留",
+    "rememberHint": "只有按用户存储的变量才能被保留。",
+    "projectId": "项目 ID"
   }
 }

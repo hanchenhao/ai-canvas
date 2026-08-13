@@ -9,6 +9,7 @@
  * paths produce identical documents.
  */
 import React, { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import AddIcon from "@mui/icons-material/Add";
 import {
@@ -155,7 +156,7 @@ const OperationRow: React.FC<{
         onChange={(value) => onPatch({ workflowId: value })}
       />
       <SelectField
-        label="While one is running"
+        label={t("applications:dataPanel.whileRunning")}
         value={operation.policy}
         options={POLICY_OPTIONS}
         onChange={(value) => onPatch({ policy: value as OperationPolicy })}
@@ -218,7 +219,7 @@ const VariableRow: React.FC<{
     <LabeledSwitch
       // The label associates through `htmlFor`, so the control needs an id.
       id={`persist-${variable.id}`}
-      label="Remember between visits"
+      label={t("applications:dataPanel.rememberBetweenVisits")}
       checked={variable.persist}
       // doc-ops downgrades persist on an instance-scoped variable, so the
       // control says why it will not stick rather than letting it flip back.
@@ -226,7 +227,7 @@ const VariableRow: React.FC<{
       onChange={(checked) => onPatch({ persist: checked })}
     />
     {variable.scope !== "user" ? (
-      <Caption color="secondary">Only per-user variables can be remembered.</Caption>
+      <Caption color="secondary">{t("applications:dataPanel.rememberHint")}</Caption>
     ) : null}
   </EntryCard>
 );
@@ -284,7 +285,7 @@ const AddResourceForm: React.FC<{ onAdd: (input: {
         onChange={(value) => setKind(value as ResourceKind)}
       />
       <TextInput
-        label="Project id"
+        label={t("applications:dataPanel.projectId")}
         value={projectId}
         size="small"
         fullWidth
@@ -309,6 +310,7 @@ const AppDataPanel: React.FC<AppDataPanelProps> = ({
   workflowId,
   workflowName
 }) => {
+  const { t } = useTranslation("applications");
   const { data: workflows } = useQuery({
     queryKey: workflowListQueryKey(200),
     queryFn: () => trpcClient.workflows.list.query({ limit: 200 }),

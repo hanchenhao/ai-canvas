@@ -8,6 +8,7 @@
  * the draft runs instead, which is what makes an unpublished app testable.
  */
 import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import type { Data } from "@puckeditor/core";
 
@@ -49,6 +50,7 @@ const pinnedWorkflow = (
 const ApplicationRunView: React.FC<ApplicationRunViewProps> = ({
   applicationId
 }) => {
+  const { t } = useTranslation("applications");
   const { data: application, isLoading } = useApplication(applicationId);
   const { data: release, isLoading: releaseLoading } =
     useReleasedApplicationDocument(applicationId);
@@ -95,7 +97,7 @@ const ApplicationRunView: React.FC<ApplicationRunViewProps> = ({
     return (
       <EmptyState
         variant="empty"
-        title="Nothing to run yet"
+        title={t("applications:run.nothingToRun")}
         description="Add widgets in the Design view, then run the app here."
       />
     );
@@ -105,7 +107,7 @@ const ApplicationRunView: React.FC<ApplicationRunViewProps> = ({
     return (
       <EmptyState
         variant="error"
-        title="Workflow unavailable"
+        title={t("applications:run.workflowUnavailable")}
         description={`This app runs workflow ${hostWorkflowId || "(none)"}, which could not be loaded.`}
       />
     );

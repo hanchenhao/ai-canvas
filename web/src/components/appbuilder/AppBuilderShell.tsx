@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { Data } from "@puckeditor/core";
 import { type AppDocMeta } from "@nodetool-ai/app-runtime";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
@@ -102,6 +103,7 @@ const AppBuilderShell: React.FC<AppBuilderShellProps> = ({
   onSave,
   onClose
 }) => {
+  const { t } = useTranslation("applications");
   const setCurrentWorkflowId = useWorkflowManager((s) => s.setCurrentWorkflowId);
   // Puck owns the layout after mount, so this is the seed only. The document's
   // theme is seeded onto the root so the author edits it as a root field, and

@@ -13,6 +13,7 @@
  */
 import React from "react";
 
+import { useTranslation } from "react-i18next";
 import {
   Caption,
   EmptyState,
@@ -104,7 +105,7 @@ export const SketchWidget: React.FC<
     return (
       <EmptyState
         variant="error"
-        title="Could not load sketch"
+        title={t("applications:widget.couldNotLoadSketch")}
         description={query.error.message}
       />
     );
@@ -165,7 +166,7 @@ export const TimelineWidget: React.FC<
     return (
       <EmptyState
         variant="error"
-        title="Could not load timeline"
+        title={t("applications:widget.couldNotLoadTimeline")}
         description={query.error.message}
       />
     );

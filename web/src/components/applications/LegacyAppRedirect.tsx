@@ -1,4 +1,5 @@
 import { memo, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Navigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
@@ -36,6 +37,7 @@ const findApplicationForWorkflow = async (
  * workflow we open that app's workspace tab, otherwise the link is dead.
  */
 const LegacyAppRedirect = () => {
+  const { t } = useTranslation("applications");
   const { workflowId } = useParams<{ workflowId?: string }>();
   const openTab = useWorkspaceTabsStore((state) => state.openTab);
 
@@ -77,7 +79,7 @@ const LegacyAppRedirect = () => {
       >
         <EmptyState
           variant="error"
-          title="App not found"
+          title={t("applications:error.appNotFound")}
           description="No app is built on this workflow. Open the Apps panel to create one."
         />
       </FlexColumn>
