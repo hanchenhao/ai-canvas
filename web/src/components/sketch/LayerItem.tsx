@@ -9,6 +9,7 @@
 
 import React, { memo } from "react";
 
+import { useTranslation } from "react-i18next";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import CenterFocusStrongIcon from "@mui/icons-material/CenterFocusStrong";
@@ -147,6 +148,7 @@ const LayerItem: React.FC<LayerItemProps> = ({
   onToggleGroupCollapsed,
   bindingStatus
 }) => {
+  const { t } = useTranslation("sketch");
   const isGroup = layer.type === "group";
   // Resolve the image ref to a fetchable URL — a raw `asset://` scheme is
   // blocked by the page CSP when set directly as an <img src>.
@@ -331,7 +333,7 @@ const LayerItem: React.FC<LayerItemProps> = ({
 
         {isEditing ? (
           <input
-            aria-label="Layer name"
+            aria-label={t("sketch:layerItem.layerName")}
             value={editName}
             onChange={(e) => onEditNameChange(e.target.value)}
             onBlur={() => onFinishRename(layer.id)}
@@ -382,7 +384,7 @@ const LayerItem: React.FC<LayerItemProps> = ({
               ) : null}
               {layer.alphaLock ? (
                 <Tooltip
-                  title="Lock transparency"
+                  title={t("sketch:layerItem.lockTransparency")}
                   placement="top"
                   enterDelay={SKETCH_TOOLTIP_DELAY_MS}
                   enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}

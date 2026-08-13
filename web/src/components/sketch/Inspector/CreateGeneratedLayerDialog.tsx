@@ -8,6 +8,7 @@
  */
 
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -131,6 +132,7 @@ const CreateGeneratedLayerDialogBody: React.FC<{
   onClose: () => void;
   onCreated?: (layerId: string) => void;
 }> = ({ onClose, onCreated }) => {
+  const { t } = useTranslation("sketch");
     const theme = useTheme();
     const [filter, setFilter] = useState("");
     const autoFocusEnabled = useAutoFocusEnabled();
@@ -235,7 +237,7 @@ const CreateGeneratedLayerDialogBody: React.FC<{
         <Dialog
           open
           onClose={handleClose}
-          title="Create generated layer"
+          title={t("sketch:generatedLayer.createTitle")}
           showActions
           onConfirm={() => void handleConfirm()}
           onCancel={handleClose}
@@ -278,7 +280,7 @@ const CreateGeneratedLayerDialogBody: React.FC<{
               <EmptyState
                 variant="empty"
                 size="small"
-                title="No matching workflows"
+                title={t("sketch:generatedLayer.noMatchingWorkflows")}
                 description="None of your workflows have an image output. Add an ImageOutput, MaskOutput, or Output node to a workflow to use it here."
               />
             )}

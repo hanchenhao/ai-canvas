@@ -289,6 +289,7 @@ function SketchEditor({
   const setCanvasGetters = useSketchCanvasRefStore((s) => s.setGetters);
   const clearCanvasGetters = useSketchCanvasRefStore((s) => s.clearGetters);
   useEffect(() => {
+    const { t } = useTranslation("sketch");
     const canvasRef = session.canvasRef;
     const pushHistory = session.historyStore.pushHistory;
     setCanvasGetters({

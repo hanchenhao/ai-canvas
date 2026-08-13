@@ -2,6 +2,7 @@
 /** Collapsible version history list for a single generated layer. */
 
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -48,6 +49,7 @@ export interface LayerVersionListProps {
 
 export const LayerVersionList: React.FC<LayerVersionListProps> = memo(
   ({ documentId, layerId }) => {
+    const { t } = useTranslation("sketch");
     const theme = useTheme();
     const [expanded, setExpanded] = useState(false);
 
@@ -138,7 +140,7 @@ export const LayerVersionList: React.FC<LayerVersionListProps> = memo(
               <EmptyState
                 variant="error"
                 size="small"
-                title="Failed to load versions"
+                title={t("sketch:layerVersion.failedToLoad")}
               />
             )}
 
@@ -146,7 +148,7 @@ export const LayerVersionList: React.FC<LayerVersionListProps> = memo(
               <EmptyState
                 variant="empty"
                 size="small"
-                title="No versions yet"
+                title={t("sketch:layerVersion.noVersionsYet")}
                 description="Successful generations will appear here"
               />
             )}

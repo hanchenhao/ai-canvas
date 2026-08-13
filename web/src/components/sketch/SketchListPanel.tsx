@@ -198,6 +198,7 @@ const SketchListItem = memo(function SketchListItem({
   onCommitRename,
   onCancelRename
 }: SketchListItemProps) {
+  const { t } = useTranslation("sketch");
   const setActiveDrag = useDragDropStore((state) => state.setActiveDrag);
   const clearDrag = useDragDropStore((state) => state.clearDrag);
   const handleClick = useCallback(() => onOpen(id, name), [id, name, onOpen]);
@@ -260,6 +261,7 @@ const SketchListItem = memo(function SketchListItem({
   }, [clearDrag]);
 
   if (editing) {
+    const { t } = useTranslation("sketch");
     return (
       <div className={`sketch-item ${active ? "active" : ""}`}>
         <FlexRow align="center" gap={1} fullWidth>
@@ -269,7 +271,7 @@ const SketchListItem = memo(function SketchListItem({
               className="rename-input"
               type="text"
               defaultValue={name}
-              aria-label="Sketch name"
+              aria-label={t("sketch:sketchName.ariaLabel")}
               autoFocus
               onFocus={(event) => event.currentTarget.select()}
               onKeyDown={handleRenameKeyDown}
@@ -322,6 +324,7 @@ export const CreateSketchButton = memo(function CreateSketchButton() {
   const { t } = useTranslation(["sketch"]);
 
   const handleCreate = useCallback(async () => {
+    const { t } = useTranslation("sketch");
     try {
       const sketch = await createSketch.mutateAsync({
         id: newDocumentId(),

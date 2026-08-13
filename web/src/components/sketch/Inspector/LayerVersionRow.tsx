@@ -2,6 +2,7 @@
 /** One row in the generated-layer version history list. */
 
 import React, { memo, useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -85,6 +86,7 @@ export const LayerVersionRow: React.FC<LayerVersionRowProps> = memo(
     isFavoriting = false,
     isDeleting = false
   }) => {
+    const { t } = useTranslation("sketch");
     const theme = useTheme();
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
@@ -149,18 +151,18 @@ export const LayerVersionRow: React.FC<LayerVersionRowProps> = memo(
             {canRestore && (
               <ToolbarIconButton
                 icon={<RestoreIcon fontSize="small" />}
-                tooltip="Restore this version"
+                tooltip={t("sketch:layerVersion.restoreThisVersion")}
                 onClick={handleRestoreClick}
                 disabled={isRestoring}
-                aria-label="Restore version"
+                aria-label={t("sketch:layerVersion.restoreVersion")}
               />
             )}
             <ToolbarIconButton
               icon={<DeleteIcon fontSize="small" />}
-              tooltip="Delete version"
+              tooltip={t("sketch:layerVersion.deleteVersion")}
               onClick={handleDeleteClick}
               disabled={isDeleting}
-              aria-label="Delete version"
+              aria-label={t("sketch:layerVersion.deleteVersion")}
             />
           </FlexRow>
         </FlexRow>

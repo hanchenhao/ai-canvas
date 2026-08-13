@@ -11,6 +11,7 @@
 
 /** @jsxImportSource @emotion/react */
 import React, { memo, useState, useRef, useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   FlexColumn,
   FlexRow,
@@ -66,6 +67,7 @@ const ColorPickerPopover: React.FC<ColorPickerPopoverProps> = ({
   onColorChange,
   onClose
 }) => {
+  const { t } = useTranslation("sketch");
   const open = Boolean(anchorEl);
   const [mode, setMode] = useState<ColorMode>("hex");
 
@@ -208,7 +210,7 @@ const ColorPickerPopover: React.FC<ColorPickerPopoverProps> = ({
           <IconButton
             size="small"
             onClick={handleCancel}
-            aria-label="Cancel color change"
+            aria-label={t("sketch:colorPicker.cancelChange")}
             sx={{ p: SKETCH_SPACING.xs, color: SKETCH_COLORS.textSecondary, "&:hover": { color: SKETCH_COLORS.textPrimary, bgcolor: "rgba(255,255,255,0.06)" } }}
           >
             <CloseIcon sx={{ fontSize: "var(--fontSizeNormal)" }} />

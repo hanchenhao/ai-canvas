@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { sketchToolSettingsContainerSx, SKETCH_FONT } from "./sketchStyles";
 import { alpha, useTheme } from "@mui/material/styles";
 import {
@@ -358,6 +359,7 @@ const SketchCanvasContextMenu: React.FC<SketchCanvasContextMenuProps> = ({
   onCheckSegmentModel,
   onSwapColors
 }) => {
+  const { t } = useTranslation("sketch");
   const theme = useTheme();
   const activeDefinition = getToolDefinition(activeTool);
   const activeShortcutActionId = getToolShortcutActionId(
@@ -391,6 +393,7 @@ const SketchCanvasContextMenu: React.FC<SketchCanvasContextMenuProps> = ({
   }, [open, onClose]);
 
   const renderColorContext = () => {
+    const { t } = useTranslation("sketch");
     if (isShapeTool(activeTool)) {
       return (
         <FlexRow gap={1}>
@@ -416,7 +419,7 @@ const SketchCanvasContextMenu: React.FC<SketchCanvasContextMenuProps> = ({
         <ToolbarIconButton
           icon={<SwapHorizIcon sx={{ fontSize: 18 }} />}
           onClick={onSwapColors}
-          aria-label="Swap foreground and background colors"
+          aria-label={t("sketch:canvasContextMenu.swapFgBgColors")}
           sx={{
             mt: 0,
             border: "1px solid",
@@ -651,21 +654,21 @@ const SketchCanvasContextMenu: React.FC<SketchCanvasContextMenuProps> = ({
                   />
                   <SelectionMenuItem
                     icon={<CropIcon sx={{ fontSize: 16 }} />}
-                    label="Crop to Selection"
+                    label={t("sketch:canvasContextMenu.cropToSelection")}
                     disabled={!hasActiveSelection}
                     onClick={() => { onCropCanvasToSelection(); onClose(); }}
                   />
                   <Divider sx={{ my: 0.5, borderColor: surfaceSoft }} />
                   <SelectionMenuItem
                     icon={<ContentCopyIcon sx={{ fontSize: 16 }} />}
-                    label="Layer via Copy"
+                    label={t("sketch:canvasContextMenu.layerViaCopy")}
                     shortcut={displayCombo("layer-via-copy")}
                     disabled={!hasActiveSelection}
                     onClick={() => { onLayerViaCopy(); onClose(); }}
                   />
                   <SelectionMenuItem
                     icon={<ContentCutIcon sx={{ fontSize: 16 }} />}
-                    label="Layer via Cut"
+                    label={t("sketch:canvasContextMenu.layerViaCut")}
                     shortcut={displayCombo("layer-via-cut")}
                     disabled={!hasActiveSelection}
                     onClick={() => { onLayerViaCut(); onClose(); }}

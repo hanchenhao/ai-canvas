@@ -59,11 +59,12 @@
     "generate": "Generate"
   },
   "layerItem": {
-    "visible": "Visible",
-    "hidden": "Hidden",
-    "maskMode": "Mask mode",
-    "alphaLockOn": "Alpha lock on",
-    "alphaLockOff": "Alpha lock off"
+    "layerName": "Layer name",
+    "lockTransparency": "Lock transparency",
+    "duplicateLayer": "Duplicate layer",
+    "revertLayerToDraft": "Revert layer to draft",
+    "openInNodeEditor": "Open in Node Editor",
+    "openLayerWorkflow": "Open layer workflow in node editor"
   },
   "selection": {
     "edit": "Edit",
@@ -320,5 +321,50 @@
     "exportPng": "Export PNG",
     "notFoundTitle": "Sketch document not found",
     "notFoundDescription": "The image document you requested does not exist or you do not have access to it."
+  },
+  "colorPicker": {
+    "cancelChange": "Cancel color change"
+  },
+  "sketchName": {
+    "ariaLabel": "Sketch name"
+  },
+  "sketchModal": {
+    "togglePenPressure": "Toggle pen pressure",
+    "keyboardShortcuts": "Keyboard shortcuts",
+    "symmetryMenu": "Symmetry menu",
+    "confirmDiscard": "Confirm discard",
+    "cancelDiscard": "Cancel discard",
+    "discardAllAndClose": "Discard all changes and close",
+    "exportImage": "Export Image",
+    "closeKeyboardShortcuts": "Close keyboard shortcuts",
+    "imageEditorShortcuts": "Image editor shortcuts",
+    "noDocumentId": "No document id"
+  },
+  "canvasContextMenu": {
+    "swapFgBgColors": "Swap foreground and background colors",
+    "cropToSelection": "Crop to Selection",
+    "layerViaCopy": "Layer via Copy",
+    "layerViaCut": "Layer via Cut",
+    "flipHorizontal": "Flip Horizontal",
+    "flipVertical": "Flip Vertical"
+  },
+  "colorSwatch": {
+    "background": "Background Color",
+    "foreground": "Foreground Color",
+    "backgroundAria": "Background color",
+    "foregroundAria": "Foreground color"
+  },
+  "layerVersion": {
+    "restoreThisVersion": "Restore this version",
+    "restoreVersion": "Restore version",
+    "deleteVersion": "Delete version",
+    "failedToLoad": "Failed to load versions",
+    "noVersionsYet": "No versions yet"
+  },
+  "generatedLayer": {
+    "createTitle": "Create generated layer",
+    "noMatchingWorkflows": "No matching workflows",
+    "noWorkflowBinding": "No workflow binding",
+    "generationFailed": "Generation failed"
   }
 }

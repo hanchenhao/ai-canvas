@@ -7,6 +7,7 @@
  */
 
 import React, { memo, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import {
   Box,
@@ -52,6 +53,7 @@ const ColorSwatchPair: React.FC<ColorSwatchPairProps> = ({
   onSwapColors,
   onResetColors
 }) => {
+  const { t } = useTranslation("sketch");
   const [fgAnchor, setFgAnchor] = useState<HTMLElement | null>(null);
   const [bgAnchor, setBgAnchor] = useState<HTMLElement | null>(null);
   const [fgInitialColor, setFgInitialColor] = useState(foregroundColor);
@@ -91,7 +93,7 @@ const ColorSwatchPair: React.FC<ColorSwatchPairProps> = ({
         }}
       >
         <Tooltip
-          title="Background Color"
+          title={t("sketch:colorSwatch.background")}
           placement="right"
           enterDelay={SKETCH_TOOLTIP_DELAY_MS}
           enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}
@@ -100,7 +102,7 @@ const ColorSwatchPair: React.FC<ColorSwatchPairProps> = ({
             className="color-swatch-pair__bg"
             padding="none"
             onClick={handleBgClick}
-            aria-label="Background color"
+            aria-label={t("sketch:colorSwatch.backgroundAria")}
             sx={{
               ...colorSwatchSx,
               position: "absolute",
@@ -117,7 +119,7 @@ const ColorSwatchPair: React.FC<ColorSwatchPairProps> = ({
         </Tooltip>
 
         <Tooltip
-          title="Foreground Color"
+          title={t("sketch:colorSwatch.foreground")}
           placement="right"
           enterDelay={SKETCH_TOOLTIP_DELAY_MS}
           enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}
@@ -126,7 +128,7 @@ const ColorSwatchPair: React.FC<ColorSwatchPairProps> = ({
             className="color-swatch-pair__fg"
             padding="none"
             onClick={handleFgClick}
-            aria-label="Foreground color"
+            aria-label={t("sketch:colorSwatch.foregroundAria")}
             sx={{
               ...colorSwatchSx,
               position: "absolute",

@@ -1,4 +1,5 @@
 import React, { memo, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
@@ -45,6 +46,7 @@ const TransformContextMenu: React.FC<TransformContextMenuProps> = ({
   onFlipHorizontal,
   onFlipVertical
 }) => {
+  const { t } = useTranslation("sketch");
   const theme = useTheme();
 
   useEffect(() => {
@@ -177,7 +179,7 @@ const TransformContextMenu: React.FC<TransformContextMenuProps> = ({
       <Divider sx={{ mx: 1, my: 0.5, borderColor: theme.vars.palette.grey[800] }} />
 
       <MenuItemPrimitive
-        label="Flip Horizontal"
+        label={t("sketch:canvasContextMenu.flipHorizontal")}
         icon={<FlipIcon sx={{ fontSize: 16 }} />}
         compact
         onClick={() => {
@@ -186,7 +188,7 @@ const TransformContextMenu: React.FC<TransformContextMenuProps> = ({
         }}
       />
       <MenuItemPrimitive
-        label="Flip Vertical"
+        label={t("sketch:canvasContextMenu.flipVertical")}
         icon={<FlipIcon sx={{ fontSize: 16, transform: "rotate(90deg)" }} />}
         compact
         onClick={() => {

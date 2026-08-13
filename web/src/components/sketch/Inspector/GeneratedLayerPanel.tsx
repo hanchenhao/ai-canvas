@@ -2,6 +2,7 @@
 /** Inspector panel for generated sketch layers — header, inputs form, actions, and version history. */
 
 import React, { memo, useCallback, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -86,6 +87,7 @@ const inputsContainerStyles = (theme: Theme) =>
 
 export const GeneratedLayerPanel: React.FC<GeneratedLayerPanelProps> = memo(
   ({ layer }) => {
+    const { t } = useTranslation("sketch");
     const theme = useTheme();
     const binding = useLayerBinding(layer.id);
     const documentId = useSketchSessionStore((s) => s.documentId);
@@ -158,6 +160,7 @@ export const GeneratedLayerPanel: React.FC<GeneratedLayerPanelProps> = memo(
     );
 
     if (!binding) {
+      const { t } = useTranslation("sketch");
       return (
         <Panel
           background="default"
@@ -167,7 +170,7 @@ export const GeneratedLayerPanel: React.FC<GeneratedLayerPanelProps> = memo(
           <EmptyState
             variant="empty"
             size="small"
-            title="No workflow binding"
+            title={t("sketch:generatedLayer.noWorkflowBinding")}
             description="This layer does not have a generated-layer binding yet."
           />
         </Panel>
@@ -193,7 +196,7 @@ export const GeneratedLayerPanel: React.FC<GeneratedLayerPanelProps> = memo(
               <AlertBanner
                 severity="error"
                 compact
-                title="Generation failed"
+                title={t("sketch:generatedLayer.generationFailed")}
                 onClose={() => clearJob(layer.id)}
               >
                 {jobErrorMessage}

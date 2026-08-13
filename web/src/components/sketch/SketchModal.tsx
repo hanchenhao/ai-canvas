@@ -8,6 +8,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import ReactDOM from "react-dom";
 import { alpha, useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -127,6 +128,7 @@ const SketchModal: React.FC<SketchModalProps> = ({
   onExportImage,
   onExportMask
 }) => {
+  const { t } = useTranslation("sketch");
   const theme = useTheme();
   const modalStyles = useMemo(() => styles(theme), [theme]);
   const editorRef = useRef<SketchEditorHandle>(null);
@@ -250,7 +252,7 @@ const SketchModal: React.FC<SketchModalProps> = ({
                   setPenPressure({ pressureSensitivity: !headerPenPressureOn })
                 }
                 color={headerPenPressureOn ? "primary" : "default"}
-                aria-label="Toggle pen pressure"
+                aria-label={t("sketch:sketchModal.togglePenPressure")}
                 aria-expanded={headerPenPressureOn}
                 aria-controls="sketch-modal-pen-pressure-panel"
                 sx={{
@@ -303,7 +305,7 @@ const SketchModal: React.FC<SketchModalProps> = ({
             </span>
           </Tooltip>
 
-          <Tooltip title="Keyboard shortcuts" enterDelay={SKETCH_TOOLTIP_DELAY_MS} enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}>
+          <Tooltip title={t("sketch:sketchModal.keyboardShortcuts")} enterDelay={SKETCH_TOOLTIP_DELAY_MS} enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}>
             <IconButton
               size="small"
               onClick={() => setShortcutsPaneOpen((open) => !open)}
@@ -320,7 +322,7 @@ const SketchModal: React.FC<SketchModalProps> = ({
           <Tooltip title={`Symmetry: ${symmetryLabel}`} enterDelay={SKETCH_TOOLTIP_DELAY_MS} enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}>
             <IconButton
               size="small"
-              aria-label="Symmetry menu"
+              aria-label={t("sketch:sketchModal.symmetryMenu")}
               aria-haspopup="true"
               aria-expanded={Boolean(symmetryAnchorEl)}
               onClick={(e) => setSymmetryAnchorEl(e.currentTarget)}
@@ -373,23 +375,23 @@ const SketchModal: React.FC<SketchModalProps> = ({
               <Caption sx={{ color: "warning.main", whiteSpace: "nowrap" }}>
                 Discard changes?
               </Caption>
-              <IconButton size="small" aria-label="Confirm discard" color="error" onClick={() => { editorRef.current?.discardToInitial(); onClose(); }}>
+              <IconButton size="small" aria-label={t("sketch:sketchModal.confirmDiscard")} color="error" onClick={() => { editorRef.current?.discardToInitial(); onClose(); }}>
                 <TrashIcon width={16} height={16} />
               </IconButton>
-              <IconButton size="small" aria-label="Cancel discard" onClick={() => setConfirmDiscard(false)}>
+              <IconButton size="small" aria-label={t("sketch:sketchModal.cancelDiscard")} onClick={() => setConfirmDiscard(false)}>
                 <CloseIcon sx={{ fontSize: "var(--fontSizeNormal)" }} />
               </IconButton>
             </>
           ) : (
-            <Tooltip title="Discard all changes and close" enterDelay={SKETCH_TOOLTIP_DELAY_MS} enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}>
+            <Tooltip title={t("sketch:sketchModal.discardAllAndClose")} enterDelay={SKETCH_TOOLTIP_DELAY_MS} enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}>
               <IconButton size="small" aria-label="Discard changes" onClick={() => setConfirmDiscard(true)} sx={{ color: "error.light" }}>
                 <CloseIcon fontSize="small" />
               </IconButton>
             </Tooltip>
           )}
 
-          <Tooltip title="Export Image" enterDelay={SKETCH_TOOLTIP_DELAY_MS} enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}>
-            <IconButton size="small" aria-label="Export Image" onClick={() => editorRef.current?.exportPng()}>
+          <Tooltip title={t("sketch:sketchModal.exportImage")} enterDelay={SKETCH_TOOLTIP_DELAY_MS} enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}>
+            <IconButton size="small" aria-label={t("sketch:sketchModal.exportImage")} onClick={() => editorRef.current?.exportPng()}>
               <SaveAltIcon sx={{ fontSize: "var(--fontSizeBig)" }} />
             </IconButton>
           </Tooltip>
@@ -472,7 +474,7 @@ const SketchModal: React.FC<SketchModalProps> = ({
                   <IconButton
                     size="small"
                     onClick={() => setShortcutsPaneOpen(false)}
-                    aria-label="Close keyboard shortcuts"
+                    aria-label={t("sketch:sketchModal.closeKeyboardShortcuts")}
                   >
                     <CloseIcon sx={{ fontSize: "var(--fontSizeBig)" }} />
                   </IconButton>
@@ -486,7 +488,7 @@ const SketchModal: React.FC<SketchModalProps> = ({
                 }}
               >
                 <TabGroup
-                  aria-label="Image editor shortcuts"
+                  aria-label={t("sketch:sketchModal.imageEditorShortcuts")}
                   tabs={[
                     { value: "shortcuts", label: "Shortcuts" },
                     { value: "keyboard", label: "Keyboard" }

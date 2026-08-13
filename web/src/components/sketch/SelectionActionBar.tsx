@@ -215,6 +215,7 @@ const SelectionActionBarInner: React.FC<SelectionActionBarProps> = ({
   );
 
   const handleGenerate = useCallback(async () => {
+    const { t } = useTranslation("sketch");
     setGenerating(true);
     try {
       const result = await inpaintHere({
@@ -245,6 +246,7 @@ const SelectionActionBarInner: React.FC<SelectionActionBarProps> = ({
       await start(result.layerId);
       setPrompt("");
     } catch (e) {
+      const { t } = useTranslation("sketch");
       setError(e instanceof Error ? e.message : t("sketch:selection.generateFailed"));
     } finally {
       setGenerating(false);

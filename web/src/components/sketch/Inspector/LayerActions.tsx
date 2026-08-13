@@ -2,6 +2,7 @@
 /** Generated-layer inspector action toolbar. */
 
 import React, { memo, useCallback, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -126,6 +127,7 @@ export interface LayerActionsProps {
 
 export const LayerActions: React.FC<LayerActionsProps> = memo(
   ({ layerId, binding }) => {
+    const { t } = useTranslation("sketch");
     const theme = useTheme();
     const navigate = useNavigate();
 
@@ -296,7 +298,7 @@ export const LayerActions: React.FC<LayerActionsProps> = memo(
             tooltip="Duplicate — copies overrides; tweak params for a variation"
             onClick={() => void handleDuplicate()}
             disabled={duplicateBusy || !documentId}
-            aria-label="Duplicate layer"
+            aria-label={t("sketch:layerItem.duplicateLayer")}
             data-testid="layer-action-duplicate"
           />
 
@@ -324,16 +326,16 @@ export const LayerActions: React.FC<LayerActionsProps> = memo(
             tooltip="Revert — clear the current generation back to draft"
             onClick={handleRevert}
             disabled={!binding.lastGeneratedHash}
-            aria-label="Revert layer to draft"
+            aria-label={t("sketch:layerItem.revertLayerToDraft")}
             data-testid="layer-action-revert"
           />
 
           {binding.workflowId && documentId && (
             <ToolbarIconButton
               icon={<OpenInNewIcon fontSize="small" />}
-              tooltip="Open in Node Editor"
+              tooltip={t("sketch:layerItem.openInNodeEditor")}
               onClick={handleOpenInNodeEditor}
-              aria-label="Open layer workflow in node editor"
+              aria-label={t("sketch:layerItem.openLayerWorkflow")}
               data-testid="layer-action-open-in-editor"
             />
           )}

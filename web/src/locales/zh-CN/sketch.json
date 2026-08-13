@@ -59,11 +59,12 @@
     "generate": "生成"
   },
   "layerItem": {
-    "visible": "可见",
-    "hidden": "隐藏",
-    "maskMode": "蒙版模式",
-    "alphaLockOn": "Alpha 锁定已开启",
-    "alphaLockOff": "Alpha 锁定已关闭"
+    "layerName": "图层名称",
+    "lockTransparency": "锁定透明度",
+    "duplicateLayer": "复制图层",
+    "revertLayerToDraft": "将图层恢复为草稿",
+    "openInNodeEditor": "在节点编辑器中打开",
+    "openLayerWorkflow": "在节点编辑器中打开图层工作流"
   },
   "selection": {
     "edit": "编辑",
@@ -320,5 +321,50 @@
     "exportPng": "导出 PNG",
     "notFoundTitle": "未找到草图文档",
     "notFoundDescription": "您请求的图像文档不存在，或您没有访问权限。"
+  },
+  "colorPicker": {
+    "cancelChange": "取消颜色更改"
+  },
+  "sketchName": {
+    "ariaLabel": "草图名称"
+  },
+  "sketchModal": {
+    "togglePenPressure": "切换压感",
+    "keyboardShortcuts": "键盘快捷键",
+    "symmetryMenu": "对称菜单",
+    "confirmDiscard": "确认丢弃",
+    "cancelDiscard": "取消丢弃",
+    "discardAllAndClose": "丢弃所有更改并关闭",
+    "exportImage": "导出图片",
+    "closeKeyboardShortcuts": "关闭键盘快捷键",
+    "imageEditorShortcuts": "图像编辑器快捷键",
+    "noDocumentId": "没有文档 ID"
+  },
+  "canvasContextMenu": {
+    "swapFgBgColors": "交换前景色和背景色",
+    "cropToSelection": "裁剪到选区",
+    "layerViaCopy": "通过复制新建图层",
+    "layerViaCut": "通过剪切新建图层",
+    "flipHorizontal": "水平翻转",
+    "flipVertical": "垂直翻转"
+  },
+  "colorSwatch": {
+    "background": "背景色",
+    "foreground": "前景色",
+    "backgroundAria": "背景色",
+    "foregroundAria": "前景色"
+  },
+  "layerVersion": {
+    "restoreThisVersion": "恢复此版本",
+    "restoreVersion": "恢复版本",
+    "deleteVersion": "删除版本",
+    "failedToLoad": "加载版本失败",
+    "noVersionsYet": "暂无版本"
+  },
+  "generatedLayer": {
+    "createTitle": "创建生成图层",
+    "noMatchingWorkflows": "没有匹配的工作流",
+    "noWorkflowBinding": "未绑定工作流",
+    "generationFailed": "生成失败"
   }
 }

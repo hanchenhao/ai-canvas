@@ -219,6 +219,7 @@ const StandaloneSketchEditorBody: React.FC<StandaloneSketchEditorProps> = memo(
     // Using `seed` (not the live query state) keeps the canvas mounted across
     // any future background query state changes.
     if (!seed || seed.id !== documentId) {
+      const { t } = useTranslation("sketch");
       if (documentQuery.isError) {
         return (
           <FlexColumn align="center" justify="center" sx={centered}>
