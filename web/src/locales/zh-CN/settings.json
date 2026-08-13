@@ -226,5 +226,14 @@
   "selectionModeOption": {
     "full": "完全",
     "partial": "部分"
-  }
+  },
+  "metaSection": {
+    "localModelServers": "本地模型服务器",
+    "providerOptions": "提供商选项",
+    "observability": "可观测性",
+    "dataAndStorage": "数据与存储",
+    "other": "其他"
+  },
+  "searchProvider": "搜索提供商",
+  "getYourApiKey": "获取你的 API 密钥"
 }

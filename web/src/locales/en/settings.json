@@ -226,5 +226,14 @@
   "selectionModeOption": {
     "full": "Full",
     "partial": "Partial"
-  }
+  },
+  "metaSection": {
+    "localModelServers": "Local Model Servers",
+    "providerOptions": "Provider Options",
+    "observability": "Observability",
+    "dataAndStorage": "Data & Storage",
+    "other": "Other"
+  },
+  "searchProvider": "Search Provider",
+  "getYourApiKey": "GET YOUR API KEY"
 }

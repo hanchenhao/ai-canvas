@@ -2,6 +2,7 @@
 import SaveIcon from "@mui/icons-material/Save";
 
 import { useMemo, useState, useCallback, useEffect, memo, Fragment } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   TextInput,
@@ -57,29 +58,34 @@ const SEARCH_RELATED_SETTINGS = new Set([
 const META_SECTION_GROUPS: ReadonlyArray<{
   key: string;
   label: string;
+  labelKey: string;
   groups: ReadonlyArray<string>;
 }> = [
   {
     key: "local-model-servers",
     label: "Local Model Servers",
+    labelKey: "settings:metaSection.localModelServers",
     groups: ["vLLM", "Ollama", "LlamaCpp", "NodeLlamaCpp", "LMStudio", "TransformersJs"]
   },
   {
     key: "provider-options",
     label: "Provider Options",
+    labelKey: "settings:metaSection.providerOptions",
     groups: ["ZAI", "KIE"]
   },
   {
     key: "observability",
     label: "Observability",
+    labelKey: "settings:metaSection.observability",
     groups: ["Observability", "Traceloop"]
   },
   {
     key: "data-and-storage",
     label: "Data & Storage",
+    labelKey: "settings:metaSection.dataAndStorage",
     groups: ["NodeSupabase", "Supabase"]
   },
-  { key: "other", label: "Other", groups: [] }
+  { key: "other", label: "Other", labelKey: "settings:metaSection.other", groups: [] }
 ];
 
 /** Inverted, lowercased lookup: registry group (lowercase) → meta-section key. */
@@ -101,6 +107,7 @@ export interface MetaSectionEntry {
 export interface MetaSection {
   key: string;
   label: string;
+  labelKey: string;
   entries: MetaSectionEntry[];
 }
 
@@ -137,7 +144,7 @@ const partitionByMetaSection = (
       }
     }
     if (entries.length > 0) {
-      sections.push({ key: section.key, label: section.label, entries });
+      sections.push({ key: section.key, label: section.label, labelKey: section.labelKey, entries });
     }
   }
   return sections;
@@ -150,7 +157,8 @@ const partitionByMetaSection = (
  * Servers, matching the panel layout.
  */
 export const getDisplayedSettingGroups = (
-  settings: SettingWithValue[]
+  settings: SettingWithValue[],
+  t?: (key: string) => string
 ): DisplayedGroup[] => {
   const visibleGroups = new Map<string, SettingWithValue[]>();
   for (const setting of settings) {
@@ -175,12 +183,12 @@ export const getDisplayedSettingGroups = (
   const result: DisplayedGroup[] = [];
   for (const section of META_SECTION_GROUPS) {
     if (presentKeys.has(section.key)) {
-      result.push({ id: section.key, label: section.label });
+      result.push({ id: section.key, label: t ? t(section.labelKey) : section.label });
     }
     // SearchProviderSection always renders alongside the registry list, so
     // the sidebar always lists it at this slot (after Local Model Servers).
     if (section.key === "local-model-servers") {
-      result.push({ id: "search-provider", label: "Search Provider" });
+      result.push({ id: "search-provider", label: t ? t("settings:searchProvider") : "Search Provider" });
     }
   }
   return result;
@@ -255,6 +263,7 @@ const SettingItem = memo(function SettingItem({
   value,
   onChange
 }: SettingItemProps) {
+  const { t } = useTranslation(["settings", "common"]);
   const handleChange = useCallback((e: unknown) => {
     const target = e as { target: { value: string } };
     onChange(setting.env_var, target.target.value);
@@ -314,7 +323,7 @@ const SettingItem = memo(function SettingItem({
             }
           >
             {SETTING_BUTTON_TITLES[setting.env_var] ||
-              "GET YOUR API KEY"}
+              t("settings:getYourApiKey")}
           </ExternalLink>
         </div>
       )}
@@ -325,6 +334,7 @@ const SettingItem = memo(function SettingItem({
 SettingItem.displayName = "SettingItem";
 
 const RemoteSettings = () => {
+  const { t } = useTranslation(["settings", "common"]);
   const queryClient = useQueryClient();
   const updateSettings = useRemoteSettingsStore((state) => state.updateSettings);
   const fetchSettings = useRemoteSettingsStore((state) => state.fetchSettings);
@@ -515,7 +525,7 @@ const RemoteSettings = () => {
                         id={sec.key}
                         className="settings-heading"
                       >
-                        {sec.label}
+                        {t(sec.labelKey)}
                       </Text>
                       {sec.entries.flatMap(({ settings }) =>
                         settings.map((setting) => (

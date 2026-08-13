@@ -540,7 +540,7 @@ function SettingsPage() {
   // (hosted) follow.
   const integrationsSidebarSections = useMemo(() => {
     const configItems = [
-      ...getDisplayedSettingGroups(remoteSettings ?? []),
+      ...getDisplayedSettingGroups(remoteSettings ?? [], t),
       { id: "folders", label: t("settings:sidebarItem.folders") }
     ];
     return [
