@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import { memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { TutorialCard } from "../tutorials/TutorialCard";
 import { useTutorials } from "../tutorials/tutorialsData";
@@ -28,6 +29,7 @@ const gridStyles = (theme: Theme) =>
 /** Dashboard section: the beginner tutorials, opening the Tutorials page. */
 const DashboardTutorials: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation("common");
   const navigate = useNavigate();
   const tutorials = useTutorials();
 
@@ -39,7 +41,7 @@ const DashboardTutorials: React.FC = () => {
   return (
     <section css={gridStyles(theme)}>
       <div css={wrapStyles(theme)}>
-        <SectionHeader title="Learn the basics" count="new here? start here">
+        <SectionHeader title={t("common:dashboard.learnBasics")} count="new here? start here">
           <SectionLink onClick={() => navigate("/tutorials")}>
             All tutorials
           </SectionLink>

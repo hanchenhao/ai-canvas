@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import { memo, type ReactNode, type Ref } from "react";
+import { useTranslation } from "react-i18next";
 import { MOTION, BORDER_RADIUS, SPACING, getSpacingPx } from "../ui_primitives";
 
 /** Shared horizontal rhythm for the dashboard: a centered column that the hero
@@ -150,6 +151,7 @@ export const DashboardSearchBox = memo(function DashboardSearchBox({
   ref
 }: DashboardSearchBoxProps) {
   const theme = useTheme();
+  const { t } = useTranslation("common");
   const hasValue = value.length > 0;
   return (
     <label css={searchStyles(theme)}>
@@ -181,7 +183,7 @@ export const DashboardSearchBox = memo(function DashboardSearchBox({
         <button
           type="button"
           className="search-clear"
-          aria-label="Clear search"
+          aria-label={t("common:dashboard.clearSearch")}
           // Keep focus in the input so typing can continue immediately.
           onMouseDown={(e) => e.preventDefault()}
           onClick={() => onChange("")}

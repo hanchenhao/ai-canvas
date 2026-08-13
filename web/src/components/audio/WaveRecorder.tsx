@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 
@@ -14,6 +15,7 @@ import Select from "../inputs/Select";
 
 const WaveRecorder = (props: WaveRecorderProps) => {
   const theme = useTheme();
+  const { t } = useTranslation("common");
   const {
     error,
     micRef,
@@ -154,8 +156,8 @@ const WaveRecorder = (props: WaveRecorderProps) => {
                   options={deviceOptions}
                   value={selectedInputDeviceId}
                   onChange={handleInputDeviceChange}
-                  placeholder="System default input"
-                  label="Input Device"
+                  placeholder={t("common:audio.systemDefaultInput")}
+                  label={t("common:audio.inputDevice")}
                   tabIndex={isRecording || isLoading ? -1 : 0}
                 />
               </div>

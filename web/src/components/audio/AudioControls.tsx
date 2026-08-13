@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 
 import React, { useCallback, useMemo, ReactElement, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, ToolbarIconButton, MOTION } from "../ui_primitives";
 import { TOOLTIP_ENTER_DELAY } from "../../config/constants";
 import SliderBasic from "../inputs/SliderBasic";
@@ -170,6 +171,7 @@ const AudioControls: React.FC<AudioControlsProps> = memo(({
   onZoomChange
 }): ReactElement => {
   const theme = useTheme();
+  const { t } = useTranslation("common");
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const handleSliderChange = useCallback(
     (event: Event, newValue: number | number[], _activeThumb: number): void => {
@@ -212,7 +214,7 @@ const AudioControls: React.FC<AudioControlsProps> = memo(({
           <ActionButtonGroup
             className="buttons"
             spacing={0}
-            aria-label="Playback controls"
+            aria-label={t("common:audio.playbackControls")}
           >
             <PlaybackButton
               state={isPlaying ? "playing" : "stopped"}

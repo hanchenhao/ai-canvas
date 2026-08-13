@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
 import useOnboardingStore, {
   type OnboardingStepId
@@ -120,6 +121,7 @@ const GettingStartedChecklist: React.FC<GettingStartedChecklistProps> = ({
   variant = "dashboard"
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("common");
   const { completedSteps, dismissed, dismiss } = useOnboardingStore(
     useShallow((s) => ({
       completedSteps: s.completedSteps,
@@ -166,7 +168,7 @@ const GettingStartedChecklist: React.FC<GettingStartedChecklistProps> = ({
   return (
     <section
       css={styles(theme, inline)}
-      aria-label="Getting started checklist"
+      aria-label={t("common:dashboard.gettingStartedChecklist")}
     >
       <div css={inline ? undefined : wrapStyles(theme)}>
         <div className="checklist-inner">
@@ -202,7 +204,7 @@ const GettingStartedChecklist: React.FC<GettingStartedChecklistProps> = ({
             type="button"
             className="checklist-dismiss"
             onClick={dismiss}
-            aria-label="Dismiss getting started checklist"
+            aria-label={t("common:dashboard.dismissGettingStartedChecklist")}
           >
             Dismiss
           </button>

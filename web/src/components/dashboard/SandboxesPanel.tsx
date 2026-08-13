@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect, useRef, useCallback, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import {
@@ -87,6 +88,7 @@ function isSafeVncUrl(url: string): boolean {
 
 const SandboxesPanel: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation("common");
   const [selectedSandboxId, setSelectedSandboxId] = useState<string | null>(null);
   const [sandboxToKill, setSandboxToKill] = useState<SandboxStatus | null>(null);
   const vncIframeRef = useRef<HTMLIFrameElement | null>(null);
@@ -198,7 +200,7 @@ const SandboxesPanel: React.FC = () => {
         ) : (
           <FlexColumn gap={2}>
             {sandboxes.length === 0 && (
-              <Caption size="small">Run a sandbox node to start a sandbox.</Caption>
+              <Caption size="small">{t("common:dashboard.runSandboxToStart")}</Caption>
             )}
             {sandboxes.map((sandbox) => {
               const isSelected = sandbox.container_id === selectedSandboxId;
@@ -351,7 +353,7 @@ const SandboxesPanel: React.FC = () => {
                     {toolCallsQuery.isLoading ? (
                       <LoadingSpinner size="small" />
                     ) : toolCalls.length === 0 ? (
-                      <Caption size="small">No tool calls yet.</Caption>
+                      <Caption size="small">{t("common:dashboard.noToolCalls")}</Caption>
                     ) : (
                       <FlexColumn
                         sx={{
@@ -388,7 +390,7 @@ const SandboxesPanel: React.FC = () => {
             killSandbox.mutate({ container_id: sandboxToKill.container_id });
           }
         }}
-        title="Kill sandbox"
+        title={t("common:dashboard.killSandbox")}
         content={`Kill "${sandboxToKill?.name ?? ""}"? The container is destroyed and cannot be resumed.`}
         confirmText="Kill"
         cancelText="Cancel"

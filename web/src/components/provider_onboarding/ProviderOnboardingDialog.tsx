@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { useShallow } from "zustand/react/shallow";
 import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
@@ -70,6 +71,7 @@ const SectionHeading = ({
  */
 const ProviderOnboardingDialog: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation("common");
   const { open, capability, reason, highlightSecretKey, dismiss } =
     useProviderOnboardingStore(
       useShallow((s) => ({
@@ -141,7 +143,7 @@ const ProviderOnboardingDialog: React.FC = () => {
           <FlexColumn gap={SPACING.sm}>
             <SectionHeading
               icon={<BoltRoundedIcon sx={{ fontSize: 18 }} />}
-              title="Fastest way to start"
+              title={t("common:providerOnboarding.fastestWayToStart")}
               subtitle="Sign in with one click — no key to copy."
             />
             {oauthProviders.map((provider) => (
@@ -159,7 +161,7 @@ const ProviderOnboardingDialog: React.FC = () => {
           <FlexColumn gap={SPACING.sm}>
             <SectionHeading
               icon={<KeyRoundedIcon sx={{ fontSize: 18 }} />}
-              title="Connect with an API key"
+              title={t("common:providerOnboarding.connectWithApiKey")}
               subtitle="Create a key on the provider's site and paste it here."
             />
             {keyProviders.map((provider) => (

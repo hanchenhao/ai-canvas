@@ -255,5 +255,40 @@
     "categoryAssets": "Assets",
     "switchToTabTitle": "Switch to Tab",
     "switchToTabDescription": "Activate workflow tab 1-9"
+  },
+  "dashboard": {
+    "startFromTemplate": "Start from a template",
+    "searchTemplates": "Search templates",
+    "noTemplatesMatch": "No templates match your search",
+    "noTemplatesInCategory": "No templates in this category",
+    "noTemplatesAvailable": "No templates available",
+    "clearSearch": "Clear search",
+    "learnBasics": "Learn the basics",
+    "learnBasicsHint": "new here? start here",
+    "gettingStartedChecklist": "Getting started checklist",
+    "dismissGettingStartedChecklist": "Dismiss getting started checklist",
+    "runSandboxToStart": "Run a sandbox node to start a sandbox.",
+    "noToolCalls": "No tool calls yet.",
+    "killSandbox": "Kill sandbox"
+  },
+  "providerOnboarding": {
+    "fastestWayToStart": "Fastest way to start",
+    "connectWithApiKey": "Connect with an API key"
+  },
+  "audio": {
+    "playbackControls": "Playback controls",
+    "zoomOut": "Zoom out",
+    "zoomIn": "Zoom in",
+    "fitToWindow": "Fit to window",
+    "waveformZoom": "Waveform zoom",
+    "systemDefaultInput": "System default input",
+    "inputDevice": "Input Device",
+    "couldNotOpenEditor": "Could not open audio editor"
+  },
+  "video": {
+    "toggleDeviceList": "Toggle device list",
+    "cameraPreview": "Camera preview",
+    "systemDefaultCamera": "System default camera",
+    "systemDefaultInput": "System default input"
   }
 }

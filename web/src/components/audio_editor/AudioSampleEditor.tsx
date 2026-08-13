@@ -6,6 +6,7 @@ import {
   useState,
   useSyncExternalStore
 } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   Box,
@@ -102,6 +103,7 @@ const PlaybackClock = memo(function PlaybackClock({
  * per frame.
  */
 const AudioSampleEditor = ({ asset, onClose }: AudioSampleEditorProps) => {
+  const { t } = useTranslation("common");
   const history = useEditHistory<AudioSample>();
   const sample = history.present;
   const sampleRef = useRef<AudioSample | null>(null);
@@ -412,7 +414,7 @@ const AudioSampleEditor = ({ asset, onClose }: AudioSampleEditorProps) => {
       <FlexColumn fullWidth fullHeight align="center" justify="center">
         <EmptyState
           variant="error"
-          title="Could not open audio editor"
+          title={t("common:audio.couldNotOpenEditor")}
           description={error ?? "Audio could not be decoded."}
           actionText="Done"
           onAction={onClose}

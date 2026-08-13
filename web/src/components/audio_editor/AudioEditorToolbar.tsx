@@ -1,4 +1,5 @@
 import { memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
@@ -129,6 +130,7 @@ const AudioEditorToolbar = memo(function AudioEditorToolbar({
   onSave,
   onDone
 }: AudioEditorToolbarProps) {
+  const { t } = useTranslation("common");
   const zoomSliderValue = zoomToSliderValue(zoom, minZoom, maxZoom);
   const handleZoomSliderChange = useCallback(
     (_event: Event, value: number | number[]) => {
@@ -168,24 +170,24 @@ const AudioEditorToolbar = memo(function AudioEditorToolbar({
 
       <ToolbarIconButton
         icon={<ZoomOutIcon />}
-        tooltip="Zoom out"
+        tooltip={t("common:audio.zoomOut")}
         onClick={onZoomOut}
         disabled={!canZoomOut}
       />
       <ToolbarIconButton
         icon={<ZoomInIcon />}
-        tooltip="Zoom in"
+        tooltip={t("common:audio.zoomIn")}
         onClick={onZoomIn}
         disabled={!canZoomIn}
       />
       <ToolbarIconButton
         icon={<FitScreenIcon />}
-        tooltip="Fit to window"
+        tooltip={t("common:audio.fitToWindow")}
         onClick={onZoomFit}
       />
       <FlexRow align="center" gap={1} sx={{ width: 160, mx: 0.5 }}>
         <NodeSlider
-          aria-label="Waveform zoom"
+          aria-label={t("common:audio.waveformZoom")}
           value={zoomSliderValue}
           min={ZOOM_SLIDER_MIN}
           max={ZOOM_SLIDER_MAX}

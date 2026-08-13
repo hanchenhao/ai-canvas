@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 
@@ -14,6 +15,7 @@ import Select from "../inputs/Select";
 
 const VideoRecorder = (props: VideoRecorderProps) => {
   const theme = useTheme();
+  const { t } = useTranslation("common");
   const {
     error,
     videoRef,
@@ -172,7 +174,7 @@ const VideoRecorder = (props: VideoRecorderProps) => {
         onClick={toggleDeviceListVisibility}
         variant="text"
         density="compact"
-        aria-label="Toggle device list"
+        aria-label={t("common:video.toggleDeviceList")}
       >
         {isDeviceListVisible ? (
           <SettingsInputComponentIcon className="toggle-on" />
@@ -186,7 +188,7 @@ const VideoRecorder = (props: VideoRecorderProps) => {
         <video
           ref={videoRef}
           className="video-preview"
-          aria-label="Camera preview"
+          aria-label={t("common:video.cameraPreview")}
           autoPlay
           playsInline
           muted
@@ -212,7 +214,7 @@ const VideoRecorder = (props: VideoRecorderProps) => {
                   options={videoDeviceOptions}
                   value={selectedVideoDeviceId}
                   onChange={handleVideoDeviceChange}
-                  placeholder="System default camera"
+                  placeholder={t("common:video.systemDefaultCamera")}
                   label="Camera"
                   tabIndex={isRecording || isLoading ? -1 : 0}
                 />
@@ -254,7 +256,7 @@ const VideoRecorder = (props: VideoRecorderProps) => {
                   options={audioDeviceOptions}
                   value={selectedAudioDeviceId}
                   onChange={handleAudioDeviceChange}
-                  placeholder="System default input"
+                  placeholder={t("common:audio.systemDefaultInput")}
                   label="Microphone"
                   tabIndex={isRecording || isLoading ? -1 : 0}
                 />

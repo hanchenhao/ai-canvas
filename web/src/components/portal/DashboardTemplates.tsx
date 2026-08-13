@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { Workflow, WorkflowList as WorkflowListType } from "../../stores/ApiTypes";
 import { useWorkflowManager } from "../../contexts/WorkflowManagerContext";
@@ -118,6 +119,7 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
   fullPage = false
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("common");
   const loadTemplates = useWorkflowManager((state) => state.loadTemplates);
   const { handleExampleClick, handleViewAllTemplates, loadingExampleId } =
     useWorkflowActions();
@@ -195,14 +197,14 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
       css={fullPage ? [styles(theme), fullPageStyles] : styles(theme)}
     >
       <div css={wrapStyles(theme)}>
-        <SectionHeader title="Start from a template" count={countLabel}>
+        <SectionHeader title={t("common:dashboard.startFromTemplate")} count={countLabel}>
           <DashboardSearchBox
             ref={searchRef}
             value={query}
             onChange={setQuery}
             placeholder="Search templates by name, tag…"
             kbd="/"
-            aria-label="Search templates"
+            aria-label={t("common:dashboard.searchTemplates")}
           />
           {!fullPage && (
             <SectionLink onClick={handleViewAllTemplates}>
@@ -274,7 +276,7 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
             {query.trim() ? (
               <EmptyState
                 variant="no-results"
-                title="No templates match your search"
+                title={t("common:dashboard.noTemplatesMatch")}
                 description="Try a different search term."
                 actionText="Clear search"
                 onAction={() => setQuery("")}
@@ -282,14 +284,14 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
             ) : category !== "all" ? (
               <EmptyState
                 variant="no-results"
-                title="No templates in this category"
+                title={t("common:dashboard.noTemplatesInCategory")}
                 actionText="Show all templates"
                 onAction={() => setCategory("all")}
               />
             ) : (
               <EmptyState
                 variant="no-data"
-                title="No templates available"
+                title={t("common:dashboard.noTemplatesAvailable")}
                 description="Templates will appear here when available."
               />
             )}

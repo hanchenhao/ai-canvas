@@ -255,5 +255,40 @@
     "categoryAssets": "素材",
     "switchToTabTitle": "切换到标签页",
     "switchToTabDescription": "激活工作流标签页 1-9"
+  },
+  "dashboard": {
+    "startFromTemplate": "从模板开始",
+    "searchTemplates": "搜索模板",
+    "noTemplatesMatch": "没有模板匹配你的搜索",
+    "noTemplatesInCategory": "此分类下没有模板",
+    "noTemplatesAvailable": "暂无可用模板",
+    "clearSearch": "清除搜索",
+    "learnBasics": "学习基础",
+    "learnBasicsHint": "新手? 从这里开始",
+    "gettingStartedChecklist": "新手引导清单",
+    "dismissGettingStartedChecklist": "关闭新手引导清单",
+    "runSandboxToStart": "运行一个沙箱节点以启动沙箱。",
+    "noToolCalls": "暂无工具调用。",
+    "killSandbox": "终止沙箱"
+  },
+  "providerOnboarding": {
+    "fastestWayToStart": "最快的上手方式",
+    "connectWithApiKey": "使用 API 密钥连接"
+  },
+  "audio": {
+    "playbackControls": "播放控制",
+    "zoomOut": "缩小",
+    "zoomIn": "放大",
+    "fitToWindow": "适应窗口",
+    "waveformZoom": "波形缩放",
+    "systemDefaultInput": "系统默认输入",
+    "inputDevice": "输入设备",
+    "couldNotOpenEditor": "无法打开音频编辑器"
+  },
+  "video": {
+    "toggleDeviceList": "切换设备列表",
+    "cameraPreview": "摄像头预览",
+    "systemDefaultCamera": "系统默认摄像头",
+    "systemDefaultInput": "系统默认输入"
   }
 }
