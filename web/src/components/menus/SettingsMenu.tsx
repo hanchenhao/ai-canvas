@@ -88,6 +88,25 @@ const SELECTION_MODE_OPTIONS = [
   { value: "partial", label: "Partial" }
 ] as const;
 
+// Translation keys for the option labels above (keyed by option.value).
+const UPDATE_CHANNEL_LABELS: Record<string, string> = {
+  latest: "settings:updateChannelOption.stable",
+  nightly: "settings:updateChannelOption.nightly"
+};
+const CLOSE_BEHAVIOR_LABELS: Record<string, string> = {
+  ask: "settings:closeBehaviorOption.ask",
+  quit: "settings:closeBehaviorOption.quit",
+  background: "settings:closeBehaviorOption.background"
+};
+const PAN_CONTROLS_LABELS: Record<string, string> = {
+  LMB: "settings:leftClickDragOption.panCanvas",
+  RMB: "settings:leftClickDragOption.selectNodes"
+};
+const SELECTION_MODE_LABELS: Record<string, string> = {
+  full: "settings:selectionModeOption.full",
+  partial: "settings:selectionModeOption.partial"
+};
+
 const AUTOSAVE_INTERVAL_OPTIONS = [
   { value: 1, label: "1 minute" },
   { value: 5, label: "5 minutes" },
@@ -522,17 +541,17 @@ function SettingsPage() {
   const integrationsSidebarSections = useMemo(() => {
     const configItems = [
       ...getDisplayedSettingGroups(remoteSettings ?? []),
-      { id: "folders", label: "Folders" }
+      { id: "folders", label: t("settings:sidebarItem.folders") }
     ];
     return [
-      { category: "Configuration", items: configItems },
+      { category: t("settings:sidebarCategory.configuration"), items: configItems },
       ...(isLocalhost
         ? [
             {
-              category: "Servers",
+              category: t("settings:sidebarCategory.servers"),
               items: [
-                { id: "mcp-integration", label: "MCP Servers" },
-                { id: "browser-extension", label: "Browser Extension" }
+                { id: "mcp-integration", label: t("settings:sidebarItem.mcpServers") },
+                { id: "browser-extension", label: t("settings:sidebarItem.browserExtension") }
               ]
             }
           ]
@@ -540,15 +559,15 @@ function SettingsPage() {
       ...(session?.access_token && !isLocalhost
         ? [
             {
-              category: "Credentials",
+              category: t("settings:sidebarCategory.credentials"),
               items: [
-                { id: "nodetool-api-token", label: "Nodetool API Token" }
+                { id: "nodetool-api-token", label: t("settings:sidebarItem.nodetoolApiToken") }
               ]
             }
           ]
         : [])
     ];
-  }, [remoteSettings, session?.access_token]);
+  }, [remoteSettings, session?.access_token, t]);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -617,7 +636,29 @@ function SettingsPage() {
                         : settingsTab === TAB_INTEGRATIONS
                           ? integrationsSidebarSections
                           : settingsTab === aboutTabIndex
-                            ? getAboutSidebarSections()
+                            ? [
+                                {
+                                  category: t("settings:sidebarCategory.application"),
+                                  items: [
+                                    { id: "application", label: t("settings:sidebarItem.application") },
+                                    { id: "operating-system", label: t("settings:sidebarItem.operatingSystem") },
+                                    { id: "features", label: t("settings:sidebarItem.featuresVersions") }
+                                  ]
+                                },
+                                {
+                                  category: t("settings:sidebarCategory.system"),
+                                  items: [{ id: "diagnostics", label: t("settings:sidebarItem.diagnostics") }]
+                                },
+                                {
+                                  category: t("settings:sidebarCategory.resources"),
+                                  items: [
+                                    ...(!isProduction
+                                      ? [{ id: "installation-paths", label: t("settings:sidebarItem.installationPaths") }]
+                                      : []),
+                                    { id: "links", label: t("settings:sidebarItem.links") }
+                                  ]
+                                }
+                              ]
                             : []
                     }
                     onSectionClick={scrollToSection}
@@ -712,7 +753,7 @@ function SettingsPage() {
                             label={t("common:menus.updateChannel")}
                             value={updateChannel}
                             onChange={handleUpdateChannelChange}
-                            options={UPDATE_CHANNEL_OPTIONS}
+                            options={UPDATE_CHANNEL_OPTIONS.map(o => ({ ...o, label: t(UPDATE_CHANNEL_LABELS[o.value]) }))}
                           />
                           <Text className="description">
                             Stable follows full releases. Nightly follows prerelease nightly builds.
@@ -734,7 +775,7 @@ function SettingsPage() {
                                 v as "ask" | "quit" | "background"
                               )
                             }
-                            options={CLOSE_BEHAVIOR_OPTIONS}
+                            options={CLOSE_BEHAVIOR_OPTIONS.map(o => ({ ...o, label: t(CLOSE_BEHAVIOR_LABELS[o.value]) }))}
                           />
                           <Text className="description">
                             {t("settings:descriptions.closeBehaviorIntro")}
@@ -885,7 +926,7 @@ function SettingsPage() {
                           label={t("settings:labels.leftClickDrag")}
                           value={settings.panControls}
                           onChange={handlePanControlsChange}
-                          options={PAN_CONTROLS_OPTIONS}
+                          options={PAN_CONTROLS_OPTIONS.map(o => ({ ...o, label: t(PAN_CONTROLS_LABELS[o.value]) }))}
                         />
                         <div className="description">
                           <Text>
@@ -910,7 +951,7 @@ function SettingsPage() {
                           label={t("common:menus.nodeSelectionMode")}
                           value={settings.selectionMode}
                           onChange={handleSelectionModeChange}
-                          options={SELECTION_MODE_OPTIONS}
+                          options={SELECTION_MODE_OPTIONS.map(o => ({ ...o, label: t(SELECTION_MODE_LABELS[o.value]) }))}
                         />
                         <Text className="description">
                           {t("settings:descriptions.nodeSelectionModeIntro")}

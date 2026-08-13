@@ -282,19 +282,19 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
         Application
       </Text>
       <div className="settings-section">
-        <InfoRow label="Version" value={VERSION} />
+        <InfoRow label={t("settings:about.version")} value={VERSION} />
         <InfoRow
           label={t("common:menus.gitCommit")}
           value={GIT_COMMIT_HASH}
           copyable
           onCopy={handleCopy}
         />
-        <InfoRow label="Build" value={BUILD_NUMBER} />
+        <InfoRow label={t("settings:about.build")} value={BUILD_NUMBER} />
         {systemInfo && (
           <>
-            <InfoRow label="Electron" value={systemInfo.electronVersion} />
-            <InfoRow label="Chrome" value={systemInfo.chromeVersion} />
-            <InfoRow label="Node.js" value={systemInfo.nodeVersion} />
+            <InfoRow label={t("settings:about.electron")} value={systemInfo.electronVersion} />
+            <InfoRow label={t("settings:about.chrome")} value={systemInfo.chromeVersion} />
+            <InfoRow label={t("settings:about.nodeJs")} value={systemInfo.nodeVersion} />
           </>
         )}
       </div>
@@ -305,13 +305,13 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
       <div className="settings-section">
         {systemInfo ? (
           <>
-            <InfoRow label="OS" value={systemInfo.os} />
-            <InfoRow label="Version" value={systemInfo.osVersion} />
-            <InfoRow label="Architecture" value={systemInfo.arch} />
+            <InfoRow label={t("settings:about.operatingSystem")} value={systemInfo.os} />
+            <InfoRow label={t("settings:about.version")} value={systemInfo.osVersion} />
+            <InfoRow label={t("settings:about.architecture")} value={systemInfo.arch} />
           </>
         ) : (
           <>
-            <InfoRow label="Platform" value={navigator.platform} />
+            <InfoRow label={t("settings:about.platform")} value={navigator.platform} />
             <InfoRow label={t("common:menus.userAgent")} value={navigator.userAgent} />
           </>
         )}
@@ -320,11 +320,11 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
       {systemInfo && !isProduction && (
         <>
           <Text size="big" id="installation-paths">
-            Installation Paths
+            {t("settings:sidebarItem.installationPaths")}
           </Text>
           <div className="settings-section">
             <InfoRow
-              label="Application"
+              label={t("settings:about.application")}
               value={systemInfo.installPath}
               copyable
               onCopy={handleCopy}
@@ -363,14 +363,14 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
             Features & Versions
           </Text>
           <div className="settings-section">
-            <InfoRow label="Python" value={systemInfo.pythonVersion} />
+            <InfoRow label={t("settings:about.python")} value={systemInfo.pythonVersion} />
             <FeatureStatus
-              label="CUDA (GPU)"
+              label={t("settings:about.cuda")}
               available={systemInfo.cudaAvailable}
               version={systemInfo.cudaVersion}
             />
             <FeatureStatus
-              label="Ollama"
+              label={t("settings:about.ollama")}
               available={systemInfo.ollamaInstalled}
               version={systemInfo.ollamaVersion}
             />

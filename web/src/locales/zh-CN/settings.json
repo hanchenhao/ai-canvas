@@ -162,5 +162,69 @@
     "audioBuffer": "音频缓冲 (ms)",
     "leftClickDrag": "左键拖动",
     "autosaveInterval": "自动保存间隔（分钟）"
+  },
+  "sidebarCategory": {
+    "configuration": "配置",
+    "servers": "服务器",
+    "credentials": "凭证",
+    "application": "应用",
+    "system": "系统",
+    "resources": "资源"
+  },
+  "sidebarItem": {
+    "folders": "文件夹",
+    "mcpServers": "MCP 服务器",
+    "browserExtension": "浏览器扩展",
+    "nodetoolApiToken": "Nodetool API 令牌",
+    "application": "应用",
+    "operatingSystem": "操作系统",
+    "featuresVersions": "功能与版本",
+    "diagnostics": "诊断",
+    "installationPaths": "安装路径",
+    "links": "链接"
+  },
+  "about": {
+    "version": "版本",
+    "build": "构建号",
+    "electron": "Electron",
+    "chrome": "Chrome",
+    "nodeJs": "Node.js",
+    "architecture": "架构",
+    "platform": "平台",
+    "application": "应用",
+    "python": "Python",
+    "cuda": "CUDA (GPU)",
+    "ollama": "Ollama",
+    "available": "可用",
+    "notAvailable": "不可用",
+    "installed": "已安装",
+    "notInstalled": "未安装",
+    "copiedToClipboard": "已复制到剪贴板!",
+    "failedToCopy": "无法复制到剪贴板",
+    "systemInfoCopied": "系统信息已复制到剪贴板!",
+    "failedToCopySystemInfo": "无法复制系统信息到剪贴板",
+    "failedToLoad": "无法加载系统信息"
+  },
+  "tabDescription": {
+    "general": "编辑器与工作区偏好设置。",
+    "apiKeys": "提供商 API 密钥与凭证。",
+    "integrations": "关于此应用。"
+  },
+  "updateChannelOption": {
+    "stable": "稳定版",
+    "nightly": "每日构建"
+  },
+  "closeBehaviorOption": {
+    "ask": "每次询问",
+    "quit": "退出应用",
+    "background": "在后台保持运行"
+  },
+  "leftClickDragOption": {
+    "panCanvas": "平移画布",
+    "selectNodes": "框选节点"
+  },
+  "selectionModeOption": {
+    "full": "完全",
+    "partial": "部分"
   }
 }

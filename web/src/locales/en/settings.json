@@ -162,5 +162,69 @@
     "audioBuffer": "Audio Buffer (ms)",
     "leftClickDrag": "Left-Click Drag",
     "autosaveInterval": "Autosave Interval (minutes)"
+  },
+  "sidebarCategory": {
+    "configuration": "Configuration",
+    "servers": "Servers",
+    "credentials": "Credentials",
+    "application": "Application",
+    "system": "System",
+    "resources": "Resources"
+  },
+  "sidebarItem": {
+    "folders": "Folders",
+    "mcpServers": "MCP Servers",
+    "browserExtension": "Browser Extension",
+    "nodetoolApiToken": "Nodetool API Token",
+    "application": "Application",
+    "operatingSystem": "Operating System",
+    "featuresVersions": "Features & Versions",
+    "diagnostics": "Diagnostics",
+    "installationPaths": "Installation Paths",
+    "links": "Links"
+  },
+  "about": {
+    "version": "Version",
+    "build": "Build",
+    "electron": "Electron",
+    "chrome": "Chrome",
+    "nodeJs": "Node.js",
+    "architecture": "Architecture",
+    "platform": "Platform",
+    "application": "Application",
+    "python": "Python",
+    "cuda": "CUDA (GPU)",
+    "ollama": "Ollama",
+    "available": "Available",
+    "notAvailable": "Not available",
+    "installed": "Installed",
+    "notInstalled": "Not installed",
+    "copiedToClipboard": "Copied to clipboard!",
+    "failedToCopy": "Failed to copy to clipboard",
+    "systemInfoCopied": "System information copied to clipboard!",
+    "failedToCopySystemInfo": "Failed to copy system information to clipboard",
+    "failedToLoad": "Failed to load system information"
+  },
+  "tabDescription": {
+    "general": "Editor and workspace preferences.",
+    "apiKeys": "Provider API keys and credentials.",
+    "integrations": "About this application."
+  },
+  "updateChannelOption": {
+    "stable": "Stable",
+    "nightly": "Nightly"
+  },
+  "closeBehaviorOption": {
+    "ask": "Ask Every Time",
+    "quit": "Quit Application",
+    "background": "Keep Running in Background"
+  },
+  "leftClickDragOption": {
+    "panCanvas": "Pan canvas",
+    "selectNodes": "Select nodes (box)"
+  },
+  "selectionModeOption": {
+    "full": "Full",
+    "partial": "Partial"
   }
 }

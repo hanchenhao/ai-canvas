@@ -2195,6 +2195,12 @@
     "vector.IndexImage.properties.upsert.title"
   ],
   "settings": [
+    "about.chrome",
+    "about.cuda",
+    "about.electron",
+    "about.nodeJs",
+    "about.ollama",
+    "about.python",
     "googleWorkspace.title",
     "mcp.claudeDesktop",
     "sidebar.category.ai"
