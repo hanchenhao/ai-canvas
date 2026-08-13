@@ -57,5 +57,23 @@
     "searchPlaceholder": "搜索预设...",
     "noPresetsFound": "未找到预设",
     "other": "其他"
-  }
+  },
+  "openEditor": "打开编辑器",
+  "openScriptEditor": "在脚本编辑器中打开",
+  "openSketchEditor": "在草图编辑器中打开",
+  "openTimelineEditor": "在时间线编辑器中打开",
+  "closeEditor": "关闭编辑器",
+  "revertToOriginal": "恢复到原始内容",
+  "decreaseFontSize": "减小字号",
+  "increaseFontSize": "增大字号",
+  "dataType": "数据类型",
+  "addColumn": "新增列",
+  "clearSearch": "清除搜索",
+  "swapWidthHeight": "交换宽高",
+  "selectInferenceProvider": "选择推理提供商",
+  "selectVoice": "选择音色",
+  "videoModel": "视频模型",
+  "selectFolder": "选择文件夹",
+  "folderName": "文件夹名称",
+  "realtimeAudioVisualizer": "实时音频可视化"
 }

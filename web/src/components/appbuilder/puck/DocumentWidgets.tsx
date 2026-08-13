@@ -132,7 +132,6 @@ export const TimelineWidget: React.FC<
 
   const inlineSequence = React.useMemo(
     () => resolveTimelineSequence(bound),
-    () => resolveTimelineSequence(bound),
     [bound]
   );
   const timelineId = React.useMemo(() => getTimelineId(bound), [bound]);

@@ -57,5 +57,23 @@
     "searchPlaceholder": "Search presets...",
     "noPresetsFound": "No presets found",
     "other": "Other"
-  }
+  },
+  "openEditor": "Open Editor",
+  "openScriptEditor": "Open in script editor",
+  "openSketchEditor": "Open in sketch editor",
+  "openTimelineEditor": "Open in timeline editor",
+  "closeEditor": "Close Editor",
+  "revertToOriginal": "Revert to original",
+  "decreaseFontSize": "Decrease font size",
+  "increaseFontSize": "Increase font size",
+  "dataType": "Data Type",
+  "addColumn": "Add Column",
+  "clearSearch": "Clear search",
+  "swapWidthHeight": "Swap Width and Height",
+  "selectInferenceProvider": "Select an inference provider",
+  "selectVoice": "Select voice",
+  "videoModel": "Video model",
+  "selectFolder": "Select a folder",
+  "folderName": "Folder Name",
+  "realtimeAudioVisualizer": "Realtime audio visualizer"
 }
