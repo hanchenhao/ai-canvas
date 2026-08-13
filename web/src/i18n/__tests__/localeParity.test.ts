@@ -83,3 +83,34 @@ describe("locale parity (en vs zh-CN)", () => {
     expect(violations).toEqual([]);
   });
 });
+
+describe("identical-sentence guard", () => {
+  const files = fs
+    .readdirSync(enDir)
+    .filter((f) => f.endsWith(".json"))
+    .sort();
+
+  test("no new en==zh sentences appear outside the allowlist", () => {
+    const allow = new Map(
+      Object.entries(allowlist as Record<string, string[]>),
+    );
+    const violations: string[] = [];
+    for (const file of files) {
+      const ns = file.replace(".json", "");
+      const allowed = new Set(allow.get(ns) ?? []);
+      const en = flattenValues(loadJson(enDir, file));
+      const zh = flattenValues(loadJson(zhDir, file));
+      for (const [key, value] of Object.entries(en)) {
+        if (
+          typeof value === "string" &&
+          /\s/.test(value) &&
+          zh[key] === value &&
+          !allowed.has(key)
+        ) {
+          violations.push(`${ns}:${key}`);
+        }
+      }
+    }
+    expect(violations).toEqual([]);
+  });
+});
