@@ -170,7 +170,7 @@ const WebhookDeliveryDetails: React.FC<WebhookDeliveryDetailsProps> = ({
         />
         <CopyButton value={webhookSecret} tooltip={t("common:panels.copyWebhookSecret")} />
       </FlexRow>
-      <Caption>Send this value as the x-webhook-secret header.</Caption>
+      <Caption>{t("common:panels.sendWebhookHeader")}</Caption>
     </FlexColumn>
   );
 };

@@ -1,4 +1,5 @@
 import React, { memo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   Box,
@@ -60,13 +61,15 @@ const RowBreak = () => (
 const AdvancedToggleButton: React.FC<{
   open: boolean;
   onToggle: () => void;
-}> = ({ open, onToggle }) => (
+}> = ({ open, onToggle }) => {
+  const { t } = useTranslation("common");
+  return (
   <EditorButton
     size="small"
     variant="text"
     onClick={onToggle}
     aria-pressed={open}
-    aria-label="Toggle advanced stroke options"
+    aria-label={t("common:sketchExtra.toggleAdvancedStroke")}
     sx={{
       minWidth: 0,
       padding: `${SKETCH_SPACING.xs} ${SKETCH_SPACING.sm}`,
@@ -80,7 +83,8 @@ const AdvancedToggleButton: React.FC<{
   >
     Advanced
   </EditorButton>
-);
+  );
+};
 
 interface BrushSettingsPanelProps {
   settings: BrushSettings;

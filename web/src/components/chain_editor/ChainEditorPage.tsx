@@ -5,6 +5,7 @@
  */
 
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { LoadingSpinner, Text, FlexColumn } from "../ui_primitives";
 import { ChainEditor } from "./ChainEditor";
@@ -13,6 +14,7 @@ import { trpcClient } from "../../trpc/client";
 import type { Workflow } from "../../stores/ApiTypes";
 
 const ChainEditorPage: React.FC = () => {
+  const { t } = useTranslation("common");
   const { workflowId } = useParams<{ workflowId?: string }>();
   const [loading, setLoading] = useState(!!workflowId);
   const [error, setError] = useState<string | null>(null);
@@ -43,10 +45,11 @@ const ChainEditorPage: React.FC = () => {
   }, [workflowId, loadWorkflow, newWorkflow]);
 
   if (loading) {
+    const { t } = useTranslation("common");
     return (
       <FlexColumn align="center" justify="center" fullHeight fullWidth gap={2}>
         <LoadingSpinner size="large" />
-        <Text color="secondary">Loading workflow…</Text>
+        <Text color="secondary">{t("common:chainEditorExtra.loadingWorkflow")}</Text>
       </FlexColumn>
     );
   }

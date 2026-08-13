@@ -1570,25 +1570,25 @@ const TextEditorModal = ({
                         </div>
                       </div>
                       <div className="assistant-head-actions">
-                        <Tooltip delay={TOOLTIP_ENTER_DELAY} title="New chat">
+                        <Tooltip delay={TOOLTIP_ENTER_DELAY} title={t("common:propertiesExtra.newChat")}>
                           <button
                             type="button"
                             className="button-ghost"
                             onClick={() => void createNewThread()}
-                            aria-label="New chat"
+                            aria-label={t("common:propertiesExtra.newChat")}
                           >
                             <AddIcon />
                           </button>
                         </Tooltip>
                         <Tooltip
                           delay={TOOLTIP_ENTER_DELAY}
-                          title="Hide Assistant"
+                          title={t("common:propertiesExtra.hideAssistant")}
                         >
                           <button
                             type="button"
                             className="button-ghost"
                             onClick={toggleAssistantVisible}
-                            aria-label="Hide Assistant"
+                            aria-label={t("common:propertiesExtra.hideAssistant")}
                           >
                             <ChevronRightIcon />
                           </button>

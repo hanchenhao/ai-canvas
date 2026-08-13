@@ -6,6 +6,7 @@
  * an error state instead of a redirect.
  */
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   AlertBanner,
@@ -18,6 +19,7 @@ import {
 import { useAcceptShare } from "../../serverState/useWorkflowSharing";
 
 const AcceptSharePage = () => {
+  const { t } = useTranslation("common");
   const { token } = useParams<{ token: string }>();
   const navigate = useNavigate();
   const accept = useAcceptShare();
@@ -56,7 +58,7 @@ const AcceptSharePage = () => {
       ) : (
         <>
           <LoadingSpinner />
-          <Text size="small">Opening shared workflow…</Text>
+          <Text size="small">{t("common:workflowsExtra.openingSharedWorkflow")}</Text>
         </>
       )}
     </FlexColumn>

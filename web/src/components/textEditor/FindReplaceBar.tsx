@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { memo, useState, useEffect, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ReplaceIcon from "@mui/icons-material/FindReplace";
@@ -127,6 +128,7 @@ const FindReplaceBar = ({
   totalMatches = 0,
   isVisible = true
 }: FindReplaceBarProps) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const [searchTerm, setSearchTerm] = useState("");
   const [replaceTerm, setReplaceTerm] = useState("");
@@ -239,7 +241,7 @@ const FindReplaceBar = ({
 
         <ToolbarIconButton
           icon={<ReplaceIcon fontSize="small" />}
-          tooltip="Toggle Replace"
+          tooltip={t("common:textEditorExtra.toggleReplace")}
           onClick={handleToggleReplace}
           className="toolbar-button"
         />
@@ -274,7 +276,7 @@ const FindReplaceBar = ({
           <span>
             <ToolbarIconButton
               icon={<span style={{ fontSize: 'var(--fontSizeSmaller)', fontWeight: 600 }}>All</span>}
-              tooltip="Replace All"
+              tooltip={t("common:textEditorExtra.replaceAll")}
               onClick={handleReplaceAll}
               disabled={!isValidSearch || totalMatches === 0}
               className="toolbar-button"

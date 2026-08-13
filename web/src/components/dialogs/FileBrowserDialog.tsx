@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import React, {
   useCallback,
   useEffect,
@@ -140,6 +141,7 @@ function FileBrowserDialog({
   initialPath = "~",
   selectionMode = "file"
 }: FileBrowserDialogProps) {
+  const { t } = useTranslation("common");
   const theme = useTheme();
 
   const [currentPath, setCurrentPath] = useState(initialPath);
@@ -653,7 +655,7 @@ function FileBrowserDialog({
         >
           <ToolbarIconButton
             icon={<ArrowUpwardIcon fontSize="small" />}
-            tooltip="Up one level"
+            tooltip={t("common:dialogs.upOneLevel")}
             onClick={handleUp}
             disabled={currentPath === "~" || currentPath === "/"}
             size="small"
@@ -834,7 +836,7 @@ function FileBrowserDialog({
           {selectedPath && (
             <CopyButton
               value={selectedPath}
-              tooltip="Copy path"
+              tooltip={t("common:dialogs.copyPath")}
               buttonSize="small"
             />
           )}

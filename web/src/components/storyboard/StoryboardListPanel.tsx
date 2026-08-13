@@ -177,6 +177,7 @@ const StoryboardListItem = memo(function StoryboardListItem({
   );
 
   if (editing) {
+    const { t } = useTranslation("common");
     return (
       <div className={`storyboard-item ${active ? "active" : ""}`}>
         <FlexRow align="center" gap={1} fullWidth>
@@ -186,7 +187,7 @@ const StoryboardListItem = memo(function StoryboardListItem({
               className="rename-input"
               type="text"
               defaultValue={name}
-              aria-label="Storyboard name"
+              aria-label={t("common:storyboard.storyboardNameAria")}
               autoFocus
               onFocus={(event) => event.currentTarget.select()}
               onKeyDown={handleRenameKeyDown}

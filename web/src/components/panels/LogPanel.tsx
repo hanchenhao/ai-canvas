@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useMemo, useState, useCallback, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { ToggleGroup, ToggleOption, ToolbarIconButton, Box, SPACING, getSpacingPx } from "../ui_primitives";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
@@ -43,6 +44,7 @@ const SEVERITY_LABELS: Record<Severity, string> = {
 };
 
 const LogPanel: React.FC = memo(function LogPanel() {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const currentWorkflowId = useWorkflowManager((s) => s.currentWorkflowId);
   const openWorkflows = useWorkflowManager((s) => s.openWorkflows);
@@ -127,7 +129,7 @@ const LogPanel: React.FC = memo(function LogPanel() {
           value={selectedSeverities}
           onChange={handleSeverityChange}
           compact
-          aria-label="Filter by severity"
+          aria-label={t("common:panelsExtra.filterBySeverity")}
         >
           {SEVERITIES.map((s) => (
             <ToggleOption key={s} value={s} aria-label={s}>

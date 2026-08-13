@@ -447,5 +447,36 @@
   "help": {
     "openBrainviteWebsite": "打开 BrainVite 网站",
     "nodetoolDataTypes": "Nodetool 数据类型"
+  },
+  "storyboard": {
+    "storyboardNameAria": "故事板名称"
+  },
+  "panelsExtra": {
+    "filterBySeverity": "按严重程度筛选"
+  },
+  "workflowsExtra": {
+    "openingSharedWorkflow": "正在打开共享的工作流…"
+  },
+  "textEditorExtra": {
+    "toggleReplace": "切换替换",
+    "replaceAll": "全部替换"
+  },
+  "chainEditorExtra": {
+    "loadingWorkflow": "正在加载工作流…"
+  },
+  "propertiesExtra": {
+    "newChat": "新建对话",
+    "hideAssistant": "隐藏助手",
+    "imageModel": "图像模型"
+  },
+  "dialogs": {
+    "upOneLevel": "上一级",
+    "copyPath": "复制路径"
+  },
+  "sketchExtra": {
+    "toggleAdvancedStroke": "切换高级笔触选项"
+  },
+  "entitiesExtra": {
+    "entitiesCaption": "可复用的角色、场景、风格和道具"
   }
 }

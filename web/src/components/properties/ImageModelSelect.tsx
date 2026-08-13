@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import ImageModelMenuDialog from "../model_menu/ImageModelMenuDialog";
 import useModelPreferencesStore from "../../stores/ModelPreferencesStore";
@@ -32,6 +33,7 @@ const ImageModelSelect: React.FC<ImageModelSelectProps> = ({
   recommendedModels,
   modelPacks
 }) => {
+  const { t } = useTranslation("common");
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const addRecent = useModelPreferencesStore((s) => s.addRecent);
@@ -127,9 +129,10 @@ const ImageModelSelect: React.FC<ImageModelSelectProps> = ({
   );
 
   if (inStudio) {
+    const { t } = useTranslation("common");
     return (
       <CuratedModelSelect
-        label="Image model"
+        label={t("common:propertiesExtra.imageModel")}
         options={forTasks(STUDIO_STILL_MODELS, task)}
         value={value}
         onChange={onChange}

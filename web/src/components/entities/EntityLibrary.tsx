@@ -192,7 +192,7 @@ const EntityLibraryInternal: React.FC = () => {
           <Text sx={{ fontWeight: 700, fontSize: "var(--fontSizeBig)" }}>
             Entities
           </Text>
-          <Caption>Reusable characters, locations, styles, and props</Caption>
+          <Caption>{t("common:entitiesExtra.entitiesCaption")}</Caption>
         </FlexColumn>
         <EditorButton
           variant="contained"

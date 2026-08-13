@@ -447,5 +447,36 @@
   "help": {
     "openBrainviteWebsite": "Open BrainVite Website",
     "nodetoolDataTypes": "Nodetool Data Types"
+  },
+  "storyboard": {
+    "storyboardNameAria": "Storyboard name"
+  },
+  "panelsExtra": {
+    "filterBySeverity": "Filter by severity"
+  },
+  "workflowsExtra": {
+    "openingSharedWorkflow": "Opening shared workflow…"
+  },
+  "textEditorExtra": {
+    "toggleReplace": "Toggle Replace",
+    "replaceAll": "Replace All"
+  },
+  "chainEditorExtra": {
+    "loadingWorkflow": "Loading workflow…"
+  },
+  "propertiesExtra": {
+    "newChat": "New chat",
+    "hideAssistant": "Hide Assistant",
+    "imageModel": "Image model"
+  },
+  "dialogs": {
+    "upOneLevel": "Up one level",
+    "copyPath": "Copy path"
+  },
+  "sketchExtra": {
+    "toggleAdvancedStroke": "Toggle advanced stroke options"
+  },
+  "entitiesExtra": {
+    "entitiesCaption": "Reusable characters, locations, styles, and props"
   }
 }
