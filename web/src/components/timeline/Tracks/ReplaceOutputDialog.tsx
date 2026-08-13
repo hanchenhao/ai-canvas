@@ -5,6 +5,7 @@
  */
 
 import React, { memo, useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTimelineStore } from "../../../stores/timeline/TimelineStore";
 import { Dialog, Text, TextInput } from "../../ui_primitives";
 
@@ -17,6 +18,7 @@ export interface ReplaceOutputDialogProps {
 
 export const ReplaceOutputDialog: React.FC<ReplaceOutputDialogProps> = memo(
   ({ clipId, initialAssetId, onClose }) => {
+    const { t } = useTranslation("timeline");
     const replaceClipOutput = useTimelineStore((s) => s.replaceClipOutput);
     const [assetId, setAssetId] = useState(initialAssetId);
 
@@ -32,7 +34,7 @@ export const ReplaceOutputDialog: React.FC<ReplaceOutputDialogProps> = memo(
       <Dialog
         open
         onClose={onClose}
-        title="Replace Clip"
+        title={t("timeline:clip.replaceClip")}
         onConfirm={handleConfirm}
         onCancel={onClose}
         confirmText="Replace"
@@ -51,7 +53,7 @@ export const ReplaceOutputDialog: React.FC<ReplaceOutputDialogProps> = memo(
               handleConfirm();
             }
           }}
-          placeholder="Asset ID"
+          placeholder={t("timeline:clip.assetIdPlaceholder")}
           inputProps={{ "aria-label": "Asset ID" }}
           // The dialog's only field, prefilled — focus it and select the old id
           // so typing a replacement does not mean clearing it first.

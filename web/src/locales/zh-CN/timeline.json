@@ -249,20 +249,7 @@
     "untitled": "未命名序列"
   },
   "list": {
-    "newTimeline": "新建时间线",
-    "searchPlaceholder": "搜索时间线...",
-    "loading": "加载时间线中",
-    "loadFailed": "无法加载时间线",
-    "emptyFiltered": "无匹配的时间线",
-    "empty": "暂无时间线",
-    "emptyFilteredHint": "请尝试其他搜索词。",
-    "emptyHint": "点击上方的 + 按钮创建新的视频时间线。",
-    "untitledVideo": "未命名视频",
-    "deleteTitle": "删除时间线",
-    "deleteContent": "删除\"{{name}}\"？此操作无法撤销。",
-    "delete": "删除",
-    "cancel": "取消",
-    "timelineName": "时间线名称"
+    "timelineNameAria": "时间线名称"
   },
   "versionHistory": {
     "history": "历史",
@@ -379,5 +366,30 @@
     "compDragShort": "拖动 T = 阈值 · R = 比率 · T 滚轮 = 拐点",
     "keyColor": "键控色",
     "chromaKeyColorAria": "色度键颜色"
+  },
+  "clip": {
+    "blendMode": "混合模式",
+    "fadeIn": "淡入",
+    "fadeOut": "淡出",
+    "anchorX": "锚点 X",
+    "anchorY": "锚点 Y",
+    "transitionType": "转场类型",
+    "staggerWords": "逐字错开",
+    "wordOffset": "字词偏移",
+    "newAnimationRole": "新增动画角色",
+    "newAnimationPreset": "新增动画预设",
+    "sourceClip": "源片段",
+    "openEntranceAnimation": "打开入场动画控制",
+    "openExitAnimation": "打开出场动画控制",
+    "openLoopEmphasis": "打开循环与强调动画控制",
+    "trimStart": "修剪片段起点",
+    "trimEnd": "修剪片段终点",
+    "addText": "添加文本",
+    "scriptLaneAria": "脚本轨道",
+    "flipHorizontal": "水平翻转",
+    "flipVertical": "垂直翻转",
+    "replaceClip": "替换片段",
+    "assetIdPlaceholder": "素材 ID",
+    "scrollHorizontally": "水平滚动时间线"
   }
 }

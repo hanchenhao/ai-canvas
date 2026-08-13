@@ -15,6 +15,7 @@
  */
 
 import React, { memo, useCallback, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -120,6 +121,7 @@ export interface ClipAdjustmentsProps {
  */
 export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
   ({ clip }) => {
+    const { t } = useTranslation("timeline");
     const theme = useTheme();
     const patchClip = useTimelineStore((s) => s.patchClip);
 
@@ -460,7 +462,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
             {isOverlay && !isAudio && (
               <InspectorRow label="Blend">
                 <InspectorSelect
-                  label="Blend mode"
+                  label={t("timeline:clip.blendMode")}
                   value={clip.blendMode ?? "normal"}
                   options={BLEND_MODES}
                   onChange={handleBlendModeChange}
@@ -479,7 +481,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                   display={`${(clip.volumeDb ?? 0).toFixed(1)} dB`}
                   onChange={handleVolumeChange}
                 />
-                <InspectorRow label="Fade in">
+                <InspectorRow label={t("timeline:clip.fadeIn")}>
                   <InspectorPillInput
                     value={((clip.fadeInMs ?? 0) / 1000).toFixed(2)}
                     unit="s"
@@ -488,7 +490,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                     ariaLabel="Fade in (seconds)"
                   />
                 </InspectorRow>
-                <InspectorRow label="Fade out">
+                <InspectorRow label={t("timeline:clip.fadeOut")}>
                   <InspectorPillInput
                     value={((clip.fadeOutMs ?? 0) / 1000).toFixed(2)}
                     unit="s"
@@ -568,7 +570,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                   />
                 </InspectorRow>
                 <InspectorSliderRow
-                  label="Anchor X"
+                  label={t("timeline:clip.anchorX")}
                   min={0}
                   max={1}
                   step={0.01}
@@ -578,7 +580,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                   onChange={handleAnchorXChange}
                 />
                 <InspectorSliderRow
-                  label="Anchor Y"
+                  label={t("timeline:clip.anchorY")}
                   min={0}
                   max={1}
                   step={0.01}
@@ -772,7 +774,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
               <FlexColumn css={sectionContentStyles(theme)}>
                 <InspectorRow label="Type">
                   <InspectorSelect
-                    label="Transition type"
+                    label={t("timeline:clip.transitionType")}
                     value={transitionMode}
                     options={TRANSITION_MODES}
                     onChange={handleTransitionModeChange}

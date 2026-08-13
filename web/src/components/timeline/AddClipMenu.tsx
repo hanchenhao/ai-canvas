@@ -148,6 +148,7 @@ const WorkflowList: React.FC<WorkflowListProps> = memo(
     }
 
     if (filtered.length === 0) {
+      const { t } = useTranslation("timeline");
       return (
         <EmptyState
           title={searchQuery ? t("timeline:addClip.noMatches") : emptyLabel}
@@ -481,6 +482,7 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
       !isAdding;
 
     const handlePromptSubmit = useCallback(async () => {
+      const { t } = useTranslation("timeline");
       if (!canSubmitPrompt) return;
       if (!directGenKind || !mediaTypeForClip) return;
       // Clear any stale failure toast from a prior attempt before we try

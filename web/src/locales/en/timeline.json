@@ -249,20 +249,7 @@
     "untitled": "Untitled sequence"
   },
   "list": {
-    "newTimeline": "New timeline",
-    "searchPlaceholder": "Search timelines...",
-    "loading": "Loading timelines",
-    "loadFailed": "Could not load timelines",
-    "emptyFiltered": "No matching timelines",
-    "empty": "No timelines yet",
-    "emptyFilteredHint": "Try a different search term.",
-    "emptyHint": "Create a new video timeline with the + button above.",
-    "untitledVideo": "Untitled video",
-    "deleteTitle": "Delete timeline",
-    "deleteContent": "Delete \"{{name}}\"? This cannot be undone.",
-    "delete": "Delete",
-    "cancel": "Cancel",
-    "timelineName": "Timeline name"
+    "timelineNameAria": "Timeline name"
   },
   "versionHistory": {
     "history": "History",
@@ -379,5 +366,30 @@
     "compDragShort": "Drag T = threshold · R = ratio · scroll T = knee",
     "keyColor": "Key color",
     "chromaKeyColorAria": "Chroma key color"
+  },
+  "clip": {
+    "blendMode": "Blend mode",
+    "fadeIn": "Fade in",
+    "fadeOut": "Fade out",
+    "anchorX": "Anchor X",
+    "anchorY": "Anchor Y",
+    "transitionType": "Transition type",
+    "staggerWords": "Stagger words",
+    "wordOffset": "Word offset",
+    "newAnimationRole": "New animation role",
+    "newAnimationPreset": "New animation preset",
+    "sourceClip": "Source clip",
+    "openEntranceAnimation": "Open entrance animation controls",
+    "openExitAnimation": "Open exit animation controls",
+    "openLoopEmphasis": "Open loop and emphasis animation controls",
+    "trimStart": "Trim clip start",
+    "trimEnd": "Trim clip end",
+    "addText": "Add text",
+    "scriptLaneAria": "Script lane",
+    "flipHorizontal": "Flip Horizontal",
+    "flipVertical": "Flip Vertical",
+    "replaceClip": "Replace Clip",
+    "assetIdPlaceholder": "Asset ID",
+    "scrollHorizontally": "Scroll timeline horizontally"
   }
 }

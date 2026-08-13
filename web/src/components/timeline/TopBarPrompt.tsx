@@ -138,12 +138,14 @@ export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false
   const canSubmit = prompt.trim().length > 0 && !!selectedModel?.id && !busy;
 
   const handleSubmit = useCallback(async () => {
+    const { t } = useTranslation("timeline");
     if (!canSubmit || !selectedModel) return;
     // Clear any prior failure toast before we attempt again — otherwise a
     // successful retry leaves the previous error visible.
     setError(null);
     const trackId = pickOrCreateVideoTrack();
     if (!trackId) {
+      const { t } = useTranslation("timeline");
       setError(t("timeline:prompt.unlockTrack"));
       return;
     }
@@ -166,6 +168,7 @@ export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false
       await directGen.start(clipId);
       setPrompt("");
     } catch (err) {
+      const { t } = useTranslation("timeline");
       setError(err instanceof Error ? err.message : t("timeline:prompt.generateFailed"));
     } finally {
       setBusy(false);

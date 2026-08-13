@@ -99,6 +99,7 @@ export const TopBar: React.FC<TopBarProps> = memo(
     );
 
     if (isMobile) {
+      const { t } = useTranslation("timeline");
       const hasActions =
         !!onOpenSettings || !!onSave || !!onSaveToAssets || !!onExportVideo;
       return (

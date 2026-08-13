@@ -46,6 +46,7 @@ const COMMANDS: SlashCommand[] = [
   {
     id: "scene",
     run: (doc, playback, t) => {
+      const { t } = useTranslation("timeline");
       const { currentTimeMs } = playback.getState();
       const { addScene, markers } = doc.getState();
       // Marker + split-all-at-playhead in one undo step.
@@ -144,6 +145,7 @@ const SlashCommandMenu: React.FC<{ nodeKey: NodeKey }> = ({ nodeKey }) => {
 
   const labelFor = useCallback(
     (cmd: SlashCommand) => {
+      const { t } = useTranslation("timeline");
       if (cmd.id === "scene") return t("timeline:slashCommand.newScene");
       return cmd.id;
     },
@@ -152,6 +154,7 @@ const SlashCommandMenu: React.FC<{ nodeKey: NodeKey }> = ({ nodeKey }) => {
 
   const hintFor = useCallback(
     (cmd: SlashCommand) => {
+      const { t } = useTranslation("timeline");
       if (cmd.id === "scene") return t("timeline:slashCommand.newSceneHint");
       return "";
     },

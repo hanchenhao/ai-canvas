@@ -115,7 +115,7 @@ const HeaderCell = styled("div")(({ theme }) => ({
 }));
 
 export const ScriptLaneHeader: React.FC = () => (
-  <HeaderCell aria-label="Script lane">
+  <HeaderCell aria-label={t("timeline:clip.scriptLaneAria")}>
     <GraphicEqIcon />
     SCRIPT
   </HeaderCell>

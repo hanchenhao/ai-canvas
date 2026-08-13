@@ -199,6 +199,7 @@ const TimelineListItem = memo(function TimelineListItem({
   onCommitRename,
   onCancelRename
 }: TimelineListItemProps) {
+  const { t } = useTranslation("timeline");
   const setActiveDrag = useDragDropStore((state) => state.setActiveDrag);
   const clearDrag = useDragDropStore((state) => state.clearDrag);
   const handleClick = useCallback(() => onOpen(id, name), [id, name, onOpen]);
@@ -261,6 +262,7 @@ const TimelineListItem = memo(function TimelineListItem({
   }, [clearDrag]);
 
   if (editing) {
+    const { t } = useTranslation("timeline");
     return (
       <div className={`timeline-item ${active ? "active" : ""}`}>
         <FlexRow align="center" gap={1} fullWidth>
@@ -270,7 +272,7 @@ const TimelineListItem = memo(function TimelineListItem({
               className="rename-input"
               type="text"
               defaultValue={name}
-              aria-label="Timeline name"
+              aria-label={t("timeline:list.timelineNameAria")}
               autoFocus
               onFocus={(event) => event.currentTarget.select()}
               onKeyDown={handleRenameKeyDown}
@@ -318,6 +320,7 @@ export const CreateTimelineButton = memo(function CreateTimelineButton() {
   const { t } = useTranslation(["timeline"]);
 
   const handleCreate = useCallback(async () => {
+    const { t } = useTranslation("timeline");
     try {
       const timeline = await createTimeline.mutateAsync({
         id: newDocumentId(),
@@ -403,6 +406,7 @@ const TimelineListPanel = () => {
 
   const handleOpen = useCallback(
     (id: string, name: string) => {
+      const { t } = useTranslation("timeline");
       if (location.pathname.startsWith("/workspace")) {
         openTab({
           type: "timeline",

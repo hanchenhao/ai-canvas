@@ -7,6 +7,7 @@
  */
 
 import React, { memo, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
@@ -45,6 +46,7 @@ const ClipTransformContextMenu: React.FC<ClipTransformContextMenuProps> = ({
   onFlipHorizontal,
   onFlipVertical
 }) => {
+  const { t } = useTranslation("timeline");
   const theme = useTheme();
 
   useEffect(() => {
@@ -127,13 +129,13 @@ const ClipTransformContextMenu: React.FC<ClipTransformContextMenuProps> = ({
       <Divider sx={{ mx: 1, my: 0.5, borderColor: theme.vars.palette.grey[800] }} />
 
       <MenuItemPrimitive
-        label="Flip Horizontal"
+        label={t("timeline:clip.flipHorizontal")}
         icon={<FlipIcon sx={{ fontSize: 16 }} />}
         compact
         onClick={run(onFlipHorizontal)}
       />
       <MenuItemPrimitive
-        label="Flip Vertical"
+        label={t("timeline:clip.flipVertical")}
         icon={<FlipIcon sx={{ fontSize: 16, transform: "rotate(90deg)" }} />}
         compact
         onClick={run(onFlipVertical)}

@@ -175,8 +175,10 @@ function exportPhaseLabel(
   t: (key: string, opts?: Record<string, unknown>) => string,
   progress: { phase: string; frame: number; totalFrames: number } | null
 ): string {
+  const { t } = useTranslation("timeline");
   if (!progress) return t("timeline:export.preparing");
   switch (progress.phase) {
+    const { t } = useTranslation("timeline");
     case "audio":
       return t("timeline:export.mixingAudio");
     case "video":
@@ -700,6 +702,7 @@ const TimelineEditorBody: React.FC<
   }, [refetch]);
 
   const handleCreateNewSequence = useCallback(() => {
+    const { t } = useTranslation("timeline");
     createTimeline.reset();
     createTimeline.mutate(
       { name: t("timeline:sequence.untitled"), projectId: projectIdForNewSequence },

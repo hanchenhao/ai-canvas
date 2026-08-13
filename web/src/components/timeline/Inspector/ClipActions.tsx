@@ -57,6 +57,7 @@ export const ClipActions: React.FC<ClipActionsProps> = memo(
     const [assetIdInput, setAssetIdInput] = useState("");
 
     const handleDuplicate = useCallback(async () => {
+      const { t } = useTranslation("timeline");
       if (duplicateBusyRef.current) {
         return;
       }
@@ -80,6 +81,7 @@ export const ClipActions: React.FC<ClipActionsProps> = memo(
     // (workflow + overrides, or prompt + model) but no rendered asset, so
     // the user can roll a new take without losing the existing one.
     const handleRegenerateAsCopy = useCallback(() => {
+      const { t } = useTranslation("timeline");
       try {
         const newClipId = regenerateAsCopy(clipId, duplicateOffsetMs);
         selectClip(newClipId);

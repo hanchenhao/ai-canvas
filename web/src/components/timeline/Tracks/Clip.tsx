@@ -25,6 +25,7 @@ import React, {
   useState
 } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -1048,6 +1049,7 @@ const ClipBody: React.FC<ClipBodyProps> = memo(
     handleTrimPointerEnd,
     cutMode
   }) => {
+    const { t } = useTranslation("timeline");
     const theme = useTheme();
     const clipId = clip.id;
 
@@ -1236,7 +1238,7 @@ const ClipBody: React.FC<ClipBodyProps> = memo(
             }}
             onPointerDown={(event) => event.stopPropagation()}
             onClick={handleAnimationMarkerClick}
-            aria-label="Open entrance animation controls"
+            aria-label={t("timeline:clip.openEntranceAnimation")}
           />
         )}
 
@@ -1250,7 +1252,7 @@ const ClipBody: React.FC<ClipBodyProps> = memo(
             }}
             onPointerDown={(event) => event.stopPropagation()}
             onClick={handleAnimationMarkerClick}
-            aria-label="Open exit animation controls"
+            aria-label={t("timeline:clip.openExitAnimation")}
           />
         )}
 
@@ -1260,7 +1262,7 @@ const ClipBody: React.FC<ClipBodyProps> = memo(
             css={animationLoopIconStyles(theme)}
             onPointerDown={(event) => event.stopPropagation()}
             onClick={handleAnimationMarkerClick}
-            aria-label="Open loop and emphasis animation controls"
+            aria-label={t("timeline:clip.openLoopEmphasis")}
           >
             <LoopOutlinedIcon />
           </button>
@@ -1281,7 +1283,7 @@ const ClipBody: React.FC<ClipBodyProps> = memo(
           onPointerMove={handleTrimStartPointerMove}
           onPointerUp={handleTrimPointerEnd}
           onPointerCancel={handleTrimPointerEnd}
-          aria-label="Trim clip start"
+          aria-label={t("timeline:clip.trimStart")}
           data-testid={`clip-trim-start-${clipId}`}
         />
 
@@ -1291,7 +1293,7 @@ const ClipBody: React.FC<ClipBodyProps> = memo(
           onPointerMove={handleTrimEndPointerMove}
           onPointerUp={handleTrimPointerEnd}
           onPointerCancel={handleTrimPointerEnd}
-          aria-label="Trim clip end"
+          aria-label={t("timeline:clip.trimEnd")}
           data-testid={`clip-trim-end-${clipId}`}
         />
 

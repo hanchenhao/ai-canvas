@@ -13,6 +13,7 @@
  */
 
 import React, { memo, useCallback, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
@@ -115,6 +116,7 @@ const DEFAULT_VIDEO_ASPECT = "16:9";
 const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
   clipId
 }) => {
+  const { t } = useTranslation("timeline");
   const theme = useTheme();
 
   const clip = useTimelineStore((s) => findClipById(s.clips, clipId));
@@ -441,7 +443,7 @@ const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
                 </Caption>
               ) : (
                 <SelectField
-                  label="Source clip"
+                  label={t("timeline:clip.sourceClip")}
                   value={clip.sourceClipId ?? ""}
                   onChange={handleSourceChange}
                   options={sourceOptions}

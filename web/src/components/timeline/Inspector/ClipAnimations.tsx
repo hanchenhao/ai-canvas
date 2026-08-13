@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import AnimationOutlinedIcon from "@mui/icons-material/AnimationOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import {
@@ -160,6 +161,7 @@ const ClipAnimationEditor: React.FC<ClipAnimationEditorProps> = ({
   onPatch,
   onDelete
 }) => {
+  const { t } = useTranslation("timeline");
   const rolePresets = presetsForRole(animation.role);
   const preset = ANIMATION_PRESETS.find(
     (candidate) => candidate.id === animation.preset
@@ -268,7 +270,7 @@ const ClipAnimationEditor: React.FC<ClipAnimationEditorProps> = ({
       {staggerAvailable && !preset?.fullClip && (
         <>
           <InspectorToggleRow
-            label="Stagger words"
+            label={t("timeline:clip.staggerWords")}
             checked={animation.stagger !== undefined}
             onChange={(on) =>
               onPatch({
@@ -279,7 +281,7 @@ const ClipAnimationEditor: React.FC<ClipAnimationEditorProps> = ({
             }
           />
           {animation.stagger !== undefined && (
-            <InspectorRow label="Word offset">
+            <InspectorRow label={t("timeline:clip.wordOffset")}>
               <InspectorPillInput
                 value={String(animation.stagger.offsetMs)}
                 unit="ms"
@@ -316,6 +318,7 @@ export interface ClipAnimationsProps {
 }
 
 export const ClipAnimations: React.FC<ClipAnimationsProps> = ({ clip }) => {
+  const { t } = useTranslation("timeline");
   const [open, setOpen] = usePersistedFold("animate");
   const setClipAnimations = useTimelineStore(
     (state) => state.setClipAnimations
@@ -384,14 +387,14 @@ export const ClipAnimations: React.FC<ClipAnimationsProps> = ({ clip }) => {
         <FlexColumn gap={SPACING.md} sx={{ py: SPACING.xs }}>
           <FlexRow gap={SPACING.md} align="center">
             <InspectorSelect
-              label="New animation role"
+              label={t("timeline:clip.newAnimationRole")}
               value={newRole}
               options={ROLE_OPTIONS}
               onChange={handleRoleChange}
               grow
             />
             <InspectorSelect
-              label="New animation preset"
+              label={t("timeline:clip.newAnimationPreset")}
               value={newPreset}
               options={rolePresets.map((preset) => ({
                 value: preset.id,
