@@ -123,22 +123,22 @@ describe("S3StorageAdapter", () => {
     ).toThrow(/bucket is required/);
   });
 
-  // Transient-failure retries live in S3Client (see s3-retry.test.ts); the
-  // adapter calls putObject once and wraps failures with bucket/key context.
-  it("surfaces upload errors with the s3:// target and does not add retries", async () => {
-    let attempts = 0;
-    const client: S3Api = {
-      ...fakeClient(new Map()),
-      async putObject() {
-        attempts++;
-        throw new S3Error("AccessDenied", "AccessDenied", 403);
-      }
-    };
-    const storage = new S3StorageAdapter({ bucket: "b", client });
-    await expect(storage.store("k.bin", new Uint8Array([1]))).rejects.toThrow(
-      /S3 upload failed for s3:\/\/b\/k\.bin.*AccessDenied/s
-    );
-    expect(attempts).toBe(1);
+ // Transient-failure retries live in S3Client (see s3-retry.test.ts); the
+ // adapter calls putObject once and wraps failures with bucket/key context.
+ it("surfaces upload errors with the s3:// target and does not add retries", async () => {
+   let attempts = 0;
+   const client: S3Api = {
+     ...fakeClient(new Map()),
+     async putObject() {
+       attempts++;
+       throw new S3Error("AccessDenied", "AccessDenied", 403);
+     }
+   };
+   const storage = new S3StorageAdapter({ bucket: "b", client });
+   await expect(storage.store("k.bin", new Uint8Array([1]))).rejects.toThrow(
+      /s3:store\(k\.bin\).*AccessDenied/s
+   );
+   expect(attempts).toBe(1);
   });
 
   it("lists objects across continuation tokens", async () => {

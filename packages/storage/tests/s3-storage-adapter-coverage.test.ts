@@ -85,17 +85,17 @@ describe("S3StorageAdapter store", () => {
     });
   });
 
-  it("wraps upload failures with the s3 target and cause", async () => {
-    const client = makeClient({
-      putObject: vi.fn(async () => {
-        throw new S3Error("AccessDenied", "denied", 403);
-      })
-    });
-    const adapter = new S3StorageAdapter({ bucket: "b", client });
-    await expect(adapter.store("k.bin", new Uint8Array([1]))).rejects.toThrow(
-      /S3 upload failed for s3:\/\/b\/k\.bin: denied/
-    );
-  });
+ it("wraps upload failures with the s3 target and cause", async () => {
+   const client = makeClient({
+     putObject: vi.fn(async () => {
+       throw new S3Error("AccessDenied", "denied", 403);
+     })
+   });
+   const adapter = new S3StorageAdapter({ bucket: "b", client });
+   await expect(adapter.store("k.bin", new Uint8Array([1]))).rejects.toThrow(
+      /s3:store\(k\.bin\): denied/
+   );
+ });
 
   it("stringifies a non-Error throw in the failure message", async () => {
     const client = makeClient({
