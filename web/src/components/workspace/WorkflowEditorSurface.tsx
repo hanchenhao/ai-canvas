@@ -46,6 +46,7 @@ const WorkflowEditorSurface = ({
   active
 }: WorkflowEditorSurfaceProps) => {
   const nodeStore = useWorkflowManager((state) => state.getNodeStore(workflowId));
+  const workflow = useWorkflowManager((state) => state.getWorkflow(workflowId));
   const fetchWorkflow = useWorkflowManager((state) => state.fetchWorkflow);
   const closeTab = useWorkspaceTabsStore((state) => state.closeTab);
   const { t } = useTranslation(["workspace"]);
@@ -62,7 +63,10 @@ const WorkflowEditorSurface = ({
   );
 
   useEffect(() => {
-    if (nodeStore) {
+    // A freshly created in-memory workflow has no NodeStore yet but is
+    // known to the manager — do not fetch from the server (would 404
+    // and close the tab). Only fetch when neither exists.
+    if (nodeStore || workflow) {
       setMissing(false);
       return;
     }

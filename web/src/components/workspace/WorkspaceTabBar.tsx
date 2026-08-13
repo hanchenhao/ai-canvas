@@ -11,6 +11,9 @@ import { useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import { IconButton, Tooltip } from "@mui/material";
 
 import {
   useWorkspaceTabsStore,
@@ -288,10 +291,11 @@ const styles = (theme: Theme) =>
 
 const WorkspaceTabBar = React.memo(function WorkspaceTabBar() {
   const theme = useTheme();
-  const { t } = useTranslation(["workspace"]);
-  const tabBarStyles = useMemo(() => styles(theme), [theme]);
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const tabs = useWorkspaceTabsStore((state) => state.tabs);
+ const { t } = useTranslation(["workspace"]);
+ const tabBarStyles = useMemo(() => styles(theme), [theme]);
+ const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const navigate = useNavigate();
+ const tabs = useWorkspaceTabsStore((state) => state.tabs);
   const activeTabId = useWorkspaceTabsStore((state) => state.activeTabId);
   const setActiveTab = useWorkspaceTabsStore((state) => state.setActiveTab);
   const closeTab = useWorkspaceTabsStore((state) => state.closeTab);
@@ -598,6 +602,11 @@ const WorkspaceTabBar = React.memo(function WorkspaceTabBar() {
       )}
 
       <div className="right-actions">
+        <Tooltip title={t("common:menu.home")} placement="bottom">
+          <IconButton size="small" onClick={() => navigate("/studio")}>
+            <HomeOutlinedIcon fontSize="small" />
+          </IconButton>
+        </Tooltip>
         <NotificationButton />
       </div>
     </div>

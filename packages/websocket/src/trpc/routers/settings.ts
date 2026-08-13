@@ -318,6 +318,7 @@ export const settingsRouter = router({
     .query(async ({ ctx }) => {
       const DIAGNOSTICS_PROVIDERS = [
         { id: "minimax", name: "MiniMax", secretKey: "MINIMAX_API_KEY" },
+        { id: "volcengine", name: "Volcengine Seedance", secretKey: "VOLCENGINE_API_KEY" },
         { id: "kie", name: "Seedance (KIE)", secretKey: "KIE_API_KEY" },
         {
           id: "atlascloud",
