@@ -43,7 +43,7 @@ describe("Studio curated model pickers", () => {
     const user = userEvent.setup();
     const onChange = jest.fn();
     inStudio(
-      <ImageModelSelect value={STUDIO_STILL_MODELS[0].id} onChange={onChange} />
+      <ImageModelSelect value="" onChange={onChange} />
     );
 
     await user.click(screen.getByRole("combobox"));

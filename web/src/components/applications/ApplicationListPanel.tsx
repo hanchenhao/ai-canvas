@@ -502,7 +502,7 @@ const ApplicationListPanel = () => {
       try {
         const source = await utils.applications.get.fetch({ id: item.id });
         await createApplication.mutateAsync({
-          name: `${source.name}${t("notification.copySuffix")}`.substring(0, 200),
+          name: `${source.name} ${t("notification.copySuffix")}`.substring(0, 200),
           description: source.description,
           projectId: source.projectId,
           document: source.document

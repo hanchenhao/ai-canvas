@@ -58,7 +58,7 @@ describe("StoryboardSidebar delete confirmation", () => {
 
     // The mutation must not fire from the icon click alone.
     expect(deleteMutateMock).not.toHaveBeenCalled();
-    expect(screen.getByText("Delete storyboard?")).toBeInTheDocument();
+    expect(screen.getByText(/Delete "My film"\?/)).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: "Delete" }));
 

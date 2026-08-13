@@ -60,7 +60,7 @@
     "maxInvocations": "Max invocations",
     "save": "Save budget",
     "limitHint": "Enter a number of 0 or more, or leave empty for no limit.",
-    "usageSummary": "Used {{spent}} across {{count}} run(s){{since}}.",
+    "usageSummary": "Used {{spent}} across {{count}} runs{{since}}.",
     "sinceDate": " since {{date}}",
     "periodDay": "Per day",
     "periodMonth": "Per month",
