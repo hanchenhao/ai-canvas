@@ -27,7 +27,7 @@ import {
 } from "../ui_primitives";
 import type { DocsTopic } from "../../config/docsLinks";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { isLocalhost, isElectron } from "../../lib/env";
+import { isLocalhost, isElectron, isProduction } from "../../lib/env";
 import RemoteSettingsMenuComponent from "./RemoteSettingsMenu";
 import useRemoteSettingsStore from "../../stores/RemoteSettingStore";
 import FoldersSettings from "./FoldersSettingsMenu";
