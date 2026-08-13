@@ -53,7 +53,9 @@ web/src/
 | `huggingface`   | HuggingFace 集成 | 手工维护 |
 | `tutorials`     | 教程页 | 手工维护 |
 
-**当前覆盖**:全部 22 个 UI namespace 的 en/zh key 完全对等(`localeParity.test.ts` 守卫)。节点库 `nodes.json` 中文翻译覆盖度 100%(2923 个节点 / 30987 个 leaf key);UI 文案覆盖了设置页、顶栏、左侧栏、删除对话框、悬浮工具栏、工作流列表、Inspector、节点搜索/库/信息面板、Chain 编辑器、画布右键菜单、Timeline / Sketch / Storyboard 三个专业编辑器、版本历史、资产面板、属性编辑器、诊断面板、颜色选择器、PDF 查看器、键盘快捷键帮助等。`identical-allowlist.json` 锁定了仍 en==zh 的合法 key(模型名、单位、占位符),后续误译会被守卫测试拦截。
+**当前覆盖**:全部 22 个 UI namespace 的 en/zh key 完全对等(`localeParity.test.ts` 守卫)。节点库 `nodes.json` 中文翻译覆盖度 100%(2923 个节点 / 30987 个 leaf key);UI 文案覆盖了设置页、顶栏、左侧栏、删除对话框、悬浮工具栏、工作流列表、Inspector、节点搜索/库/信息面板、Chain 编辑器、画布右键菜单、Timeline / Sketch / Storyboard 三个专业编辑器、版本历史、资产面板、属性编辑器、诊断面板、颜色选择器、PDF 查看器、键盘快捷键帮助、portal/dashboard、provider-onboarding 对话框、audio/video 录制器等。`identical-allowlist.json` 锁定了仍 en==zh 的合法 key(模型名、单位、占位符),后续误译会被守卫测试拦截。
+
+**仍未迁移的硬编码英文**(2026-08-13 实测,约 100 文件 / 260+ 字符串):`properties/`(19 文件,主要属性编辑器 tooltip/placeholder)、`sketch/`(15 文件)、`timeline/`(10 文件)、`hugging_face/`(9 文件)、`script/`(6 文件)、`chain_editor/`(6 文件)、`workflows/`(4)、`textEditor/`(4)、`panels/`(4)、`menus/`(4)、`inputs/`(4)、`workspace/`(3)、`entities/`(2)、`common/`(2)、`color_picker/`(2)等。这些目录的 locale JSON keys 大部分已预置(`properties.json` / `sketch.json` / `timeline.json` / `huggingface.json` 已有翻译),只是组件代码尚未改为 `useTranslation` 调用。后续按本指南模式逐目录批量迁移即可。
 
 ## 模式
 
