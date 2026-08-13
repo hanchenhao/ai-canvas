@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 import ViewInArOutlinedIcon from "@mui/icons-material/ViewInArOutlined";
 import ManagerPageLayout from "../../panels/ManagerPageLayout";
 import ModelListIndex from "./ModelListIndex";
@@ -7,7 +8,9 @@ import ModelListIndex from "./ModelListIndex";
  * Full-screen Model Manager page. Reachable from the logo menu; wraps the
  * model list in the shared manager chrome (header + back button).
  */
-const ModelsPage: React.FC = () => (
+const ModelsPage: React.FC = () => {
+  const { t } = useTranslation("huggingface");
+  return (
   <ManagerPageLayout
     icon={<ViewInArOutlinedIcon sx={{ fontSize: 22 }} />}
     title={t("huggingface:modelList.modelManager")}
@@ -17,7 +20,8 @@ const ModelsPage: React.FC = () => (
   >
     <ModelListIndex />
   </ManagerPageLayout>
-);
+  );
+};
 
 ModelsPage.displayName = "ModelsPage";
 

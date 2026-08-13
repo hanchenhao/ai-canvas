@@ -649,7 +649,7 @@ function SettingsPage() {
                         keywords="editor workspace show welcome screen startup"
                       >
                         <LabeledSwitch
-                          label="Show Welcome Screen"
+                          label={t("common:menus.showWelcomeScreen")}
                           checked={!!settings.showWelcomeOnStartup}
                           onChange={handleShowWelcomeChange}
                           description="Start on the dashboard, with the welcome screen and templates, until getting started is finished. When off, the app opens straight into the workspace."
@@ -661,7 +661,7 @@ function SettingsPage() {
                         keywords="editor workspace select nodes on drag selection"
                       >
                         <LabeledSwitch
-                          label="Select Nodes On Drag"
+                          label={t("common:menus.selectNodesOnDrag")}
                           checked={!!settings.selectNodesOnDrag}
                           onChange={handleSelectNodesOnDragChange}
                         />
@@ -680,7 +680,7 @@ function SettingsPage() {
                           keywords="editor workspace sound notifications beep"
                         >
                           <LabeledSwitch
-                            label="Sound Notifications"
+                            label={t("common:menus.soundNotifications")}
                             checked={!!settings.soundNotifications}
                             onChange={handleSoundNotificationsChange}
                             description="Play a system beep sound when workflows complete, exports finish, or other important events occur."
@@ -694,7 +694,7 @@ function SettingsPage() {
                           keywords="editor workspace updates automatic desktop"
                         >
                           <LabeledSwitch
-                            label="Automatic Updates"
+                            label={t("common:menus.automaticUpdates")}
                             checked={autoUpdatesEnabled}
                             onChange={handleAutoUpdatesChange}
                             description="Check for and download desktop app updates from the selected release channel."
@@ -709,7 +709,7 @@ function SettingsPage() {
                           keywords="editor workspace update channel stable nightly"
                         >
                           <SelectField
-                            label="Update Channel"
+                            label={t("common:menus.updateChannel")}
                             value={updateChannel}
                             onChange={handleUpdateChannelChange}
                             options={UPDATE_CHANNEL_OPTIONS}
@@ -727,7 +727,7 @@ function SettingsPage() {
                           keywords="editor workspace on close behavior quit background tray"
                         >
                           <SelectField
-                            label="On Close Behavior"
+                            label={t("common:menus.onCloseBehavior")}
                             value={closeBehavior}
                             onChange={(v) =>
                               handleCloseBehaviorChange(
@@ -739,7 +739,7 @@ function SettingsPage() {
                           <Text className="description">
                             Choose what happens when you close the main window.
                             <br />
-                            <b>Ask Every Time:</b> Shows a dialog with options.
+                            <b>{t("common:menus.askEveryTime")}</b> Shows a dialog with options.
                             <br />
                             <b>Quit:</b> Closes the application completely.
                             <br />
@@ -773,7 +773,7 @@ function SettingsPage() {
                         keywords="execution warn before large runs confirmation"
                       >
                         <LabeledSwitch
-                          label="Warn Before Large Runs"
+                          label={t("common:menus.warnBeforeLargeRuns")}
                           checked={settings.confirmLargeRun ?? true}
                           onChange={(checked) =>
                             updateSettings({ confirmLargeRun: checked })
@@ -847,7 +847,7 @@ function SettingsPage() {
                       >
                         <ServerNumberSetting
                           envVar="MAX_CONCURRENT_JOBS"
-                          label="Max Concurrent Runs"
+                          label={t("common:menus.maxConcurrentRuns")}
                           defaultValue={4}
                           min={1}
                           max={64}
@@ -861,7 +861,7 @@ function SettingsPage() {
                       >
                         <ServerNumberSetting
                           envVar="MAX_CONCURRENT_RUNS_PER_WORKFLOW"
-                          label="Max Concurrent Runs per Workflow"
+                          label={t("common:menus.maxConcurrentRunsPerWorkflow")}
                           defaultValue={4}
                           min={1}
                           max={64}
@@ -894,9 +894,9 @@ function SettingsPage() {
                             empty canvas.
                           </Text>
                           <Text>
-                            <b>Pan canvas:</b> left-drag moves the view.
+                            <b>{t("common:menus.panCanvas")}</b> left-drag moves the view.
                             <br />
-                            <b>Select nodes:</b> left-drag draws a selection box;
+                            <b>{t("common:menus.selectNodes")}</b> left-drag draws a selection box;
                             pan with the right or middle mouse button (and
                             two-finger scroll on a trackpad).
                           </Text>
@@ -908,7 +908,7 @@ function SettingsPage() {
                         keywords="canvas navigation node selection mode full partial"
                       >
                         <SelectField
-                          label="Node Selection Mode"
+                          label={t("common:menus.nodeSelectionMode")}
                           value={settings.selectionMode}
                           onChange={handleSelectionModeChange}
                           options={SELECTION_MODE_OPTIONS}
@@ -931,7 +931,7 @@ function SettingsPage() {
                           autoComplete="off"
                           slotProps={{ htmlInput: { min: 1, max: 100 } }}
                           id="grid-snap-input"
-                          label="Grid Snap Precision"
+                          label={t("common:menus.gridSnapPrecision")}
                           value={settings.gridSnap}
                           onChange={handleGridSnapChange}
                           variant="standard"
@@ -951,7 +951,7 @@ function SettingsPage() {
                           autoComplete="off"
                           slotProps={{ htmlInput: { min: 5, max: 30 } }}
                           id="connection-snap-input"
-                          label="Connection Snap Range"
+                          label={t("common:menus.connectionSnapRange")}
                           value={settings.connectionSnap}
                           onChange={handleConnectionSnapChange}
                           variant="standard"
@@ -980,7 +980,7 @@ function SettingsPage() {
                         keywords="autosave version history enable"
                       >
                         <LabeledSwitch
-                          label="Enable Autosave"
+                          label={t("common:menus.enableAutosave")}
                           checked={settings.autosave?.enabled ?? true}
                           onChange={(checked) =>
                             updateAutosaveSettings({ enabled: checked })
@@ -1012,7 +1012,7 @@ function SettingsPage() {
                         keywords="autosave version history save before running checkpoint"
                       >
                         <LabeledSwitch
-                          label="Save Before Running"
+                          label={t("common:menus.saveBeforeRunning")}
                           checked={settings.autosave?.saveBeforeRun ?? true}
                           onChange={(checked) =>
                             updateAutosaveSettings({
@@ -1028,7 +1028,7 @@ function SettingsPage() {
                         keywords="autosave version history save on window close"
                       >
                         <LabeledSwitch
-                          label="Save on Window Close"
+                          label={t("common:menus.saveOnWindowClose")}
                           checked={settings.autosave?.saveOnClose ?? true}
                           onChange={(checked) =>
                             updateAutosaveSettings({
@@ -1044,7 +1044,7 @@ function SettingsPage() {
                         keywords="autosave version history max versions per workflow"
                       >
                         <SelectField
-                          label="Max Versions per Workflow"
+                          label={t("common:menus.maxVersionsPerWorkflow")}
                           value={
                             settings.autosave?.maxVersionsPerWorkflow ?? 50
                           }
@@ -1072,7 +1072,7 @@ function SettingsPage() {
                         keywords="appearance time format 12h 24h"
                       >
                         <SelectField
-                          label="Time Format"
+                          label={t("common:menus.timeFormat")}
                           value={settings.timeFormat}
                           onChange={handleTimeFormatChange}
                           options={TIME_FORMAT_OPTIONS}
@@ -1196,7 +1196,7 @@ function SettingsPage() {
                             </Text>
                           </div>
                         </div>
-                        <Tooltip title="Copy to clipboard">
+                        <Tooltip title={t("common:panels.copyToClipboard")}>
                           <EditorButton
                             style={{ margin: ".5em 0" }}
                             size="small"

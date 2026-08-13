@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useState, useCallback, useMemo, memo, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
@@ -90,6 +91,7 @@ const GradientBuilder: React.FC<GradientBuilderProps> = React.memo(({
   onChange,
   currentColor
 }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const [selectedStopIndex, setSelectedStopIndex] = useState<number | null>(0);
   const [copied, setCopied] = useState(false);
@@ -364,7 +366,7 @@ const GradientBuilder: React.FC<GradientBuilderProps> = React.memo(({
             }}
             sx={{ width: "80px" }}
           />
-          <Tooltip title="Use current color">
+          <Tooltip title={t("common:colorPicker2.useCurrentColor")}>
             <EditorButton
               variant="outlined"
               data-stop-index={selectedStopIndex}
@@ -376,7 +378,7 @@ const GradientBuilder: React.FC<GradientBuilderProps> = React.memo(({
           </Tooltip>
           <DeleteButton
             onClick={handleRemoveStopButtonClick}
-            tooltip="Remove stop"
+            tooltip={t("common:colorPicker2.removeStop")}
             disabled={gradient.stops.length <= 2}
             nodrag={false}
           />

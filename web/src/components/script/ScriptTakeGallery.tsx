@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -46,6 +47,7 @@ const TakeRow = ({
   take: ScriptTake;
   isCurrent: boolean;
 }) => {
+  const { t } = useTranslation("common");
   const setCurrentTake = useScriptStore((s) => s.setCurrentTake);
   const toggleFavorite = useScriptStore((s) => s.toggleTakeFavorite);
   const removeTake = useScriptStore((s) => s.removeTake);
@@ -110,7 +112,7 @@ const TakeRow = ({
         </Text>
       </FlexColumn>
       <ToolbarIconButton
-        tooltip="Play take"
+        tooltip={t("common:script.playTake")}
         onClick={() => void play()}
         icon={<PlayArrowIcon fontSize="small" />}
       />
@@ -126,7 +128,7 @@ const TakeRow = ({
         }
       />
       <ToolbarIconButton
-        tooltip="Delete take"
+        tooltip={t("common:script.deleteTake")}
         onClick={deleteTake}
         icon={<DeleteOutlineIcon fontSize="small" />}
       />
@@ -141,11 +143,13 @@ const ScriptTakeGallery = ({
   takes,
   currentTakeId
 }: ScriptTakeGalleryProps) => {
+  const { t } = useTranslation("common");
   if (takes.length === 0) {
+    const { t } = useTranslation("common");
     return (
       <Box sx={{ minWidth: 260, padding: SPACING.md }}>
         <EmptyState
-          title="No takes yet"
+          title={t("common:script.noTakesYet")}
           description="Voice this line to create the first take."
         />
       </Box>

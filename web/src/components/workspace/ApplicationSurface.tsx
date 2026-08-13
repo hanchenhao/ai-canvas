@@ -1,5 +1,6 @@
 import { memo, useCallback, useState, type MouseEvent } from "react";
 
+import { useTranslation } from "react-i18next";
 import ApplicationGovernancePanel from "../applications/ApplicationGovernancePanel";
 import ApplicationAppBuilder from "../appbuilder/ApplicationAppBuilder";
 import ApplicationRunView from "../appbuilder/ApplicationRunView";
@@ -31,6 +32,7 @@ type ApplicationView = "design" | "run" | "settings";
  * document, plus its publish and governance controls.
  */
 const ApplicationSurface = ({ refId }: ApplicationSurfaceProps) => {
+  const { t } = useTranslation("common");
   const { data: application, isLoading, isError, error } = useApplication(refId);
   const [view, setView] = useState<ApplicationView>("design");
   // Background tabs stay mounted, so the linked graphs only load once this
@@ -51,10 +53,11 @@ const ApplicationSurface = ({ refId }: ApplicationSurfaceProps) => {
   }
 
   if (isError || !application) {
+    const { t } = useTranslation("common");
     return (
       <EmptyState
         variant="error"
-        title="Could not load app"
+        title={t("common:workspace.couldNotLoadApp")}
         description={error?.message ?? "The app may have been deleted."}
       />
     );
@@ -91,7 +94,7 @@ const ApplicationSurface = ({ refId }: ApplicationSurfaceProps) => {
             exclusive
             value={view}
             onChange={handleViewChange}
-            aria-label="App view"
+            aria-label={t("common:workspace.appViewAria")}
           >
             <ToggleOption value="design">Design</ToggleOption>
             <ToggleOption value="run">Run</ToggleOption>

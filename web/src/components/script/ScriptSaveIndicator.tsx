@@ -1,4 +1,5 @@
 import CloudDoneOutlinedIcon from "@mui/icons-material/CloudDoneOutlined";
+import { useTranslation } from "react-i18next";
 import SyncProblemIcon from "@mui/icons-material/SyncProblem";
 import HistoryIcon from "@mui/icons-material/History";
 import CircleIcon from "@mui/icons-material/Circle";
@@ -22,6 +23,7 @@ interface ScriptSaveIndicatorProps {
  * knows whether their changes are safe.
  */
 const ScriptSaveIndicator = ({ scriptId }: ScriptSaveIndicatorProps) => {
+  const { t } = useTranslation("common");
   const status = useScriptSaveStatus(scriptId);
 
   if (status === "unsaved") {
@@ -75,7 +77,7 @@ const ScriptSaveIndicator = ({ scriptId }: ScriptSaveIndicatorProps) => {
   }
 
   return (
-    <Tooltip title="All changes saved">
+    <Tooltip title={t("common:script.allChangesSaved")}>
       <FlexRow align="center" gap={SPACING.xs} aria-live="polite">
         <CloudDoneOutlinedIcon
           sx={{ fontSize: 16, color: "text.disabled" }}

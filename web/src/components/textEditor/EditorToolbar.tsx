@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import UndoIcon from "@mui/icons-material/Undo";
 import RedoIcon from "@mui/icons-material/Redo";
 import WrapTextIcon from "@mui/icons-material/WrapText";
@@ -96,6 +97,7 @@ const EditorToolbar = ({
   isCodeBlock = false,
   readOnly = false
 }: EditorToolbarProps) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
 
   return (
@@ -134,14 +136,14 @@ const EditorToolbar = ({
       <div className="toolbar-group">
         <ToolbarIconButton
           icon={<WrapTextIcon fontSize="small" />}
-          tooltip="Toggle Word Wrap"
+          tooltip={t("common:textEditor.toggleWordWrap")}
           className={`toolbar-button ${wordWrapEnabled ? "active" : ""}`}
           onClick={onToggleWordWrap}
           size="small"
         />
         <ToolbarIconButton
           icon={<CodeIcon fontSize="small" />}
-          tooltip="Format as Code Block"
+          tooltip={t("common:textEditor.formatCodeBlock")}
           className={`toolbar-button ${isCodeBlock ? "active" : ""}`}
           onClick={onFormatCodeBlock}
           size="small"

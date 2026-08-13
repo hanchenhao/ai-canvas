@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useMemo, useCallback, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { Text, Tooltip, Box, MOTION, BORDER_RADIUS, SPACING, Z_INDEX, getSpacingPx } from "../ui_primitives";
@@ -84,6 +85,7 @@ const HarmonyPicker: React.FC<HarmonyPickerProps> = ({
   selectedHarmony,
   onHarmonyChange
 }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const harmonyInfo = useMemo(() => getHarmonyInfo(), []);
 
@@ -129,7 +131,7 @@ const HarmonyPicker: React.FC<HarmonyPickerProps> = ({
               </Text>
             </div>
             <CopyButton
-              tooltip="Copy all colors"
+              tooltip={t("common:colorPicker2.copyAllColors")}
               value={harmony.colors.join(", ")}
               buttonSize="small"
             />

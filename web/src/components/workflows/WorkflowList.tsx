@@ -236,6 +236,7 @@ const WorkflowList = () => {
 
   const handleRename = useCallback(
     async (workflow: Workflow, newName: string) => {
+      const { t } = useTranslation("common");
       try {
         await trpcClient.workflows.update.mutate({
           id: workflow.id,

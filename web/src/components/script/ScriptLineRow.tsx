@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type {
   ChangeEvent,
   DragEvent,
@@ -124,6 +125,7 @@ const ScriptLineRow = ({
   onDragOver,
   onDrop
 }: ScriptLineRowProps) => {
+  const { t } = useTranslation("common");
   const patchLine = useScriptStore((s) => s.patchLine);
   const removeLine = useScriptStore((s) => s.removeLine);
   const duplicateLine = useScriptStore((s) => s.duplicateLine);
@@ -291,7 +293,7 @@ const ScriptLineRow = ({
         placeholder="Write a line…"
         multiline
         hideLabel
-        label="Line text"
+        label={t("common:script.lineText")}
         compact
         fullWidth
         disabled={readOnly}
@@ -388,7 +390,7 @@ const ScriptLineRow = ({
         />
       )}
       <ToolbarIconButton
-        tooltip="Play current take"
+        tooltip={t("common:script.playCurrentTake")}
         disabled={!hasCurrentTake}
         onClick={() => void playCurrent()}
         icon={<PlayArrowIcon fontSize="small" />}
@@ -402,14 +404,14 @@ const ScriptLineRow = ({
       />
       {!readOnly && (
         <ToolbarIconButton
-          tooltip="Duplicate line"
+          tooltip={t("common:script.duplicateLine")}
           onClick={() => duplicateLine(scriptId, line.id)}
           icon={<ContentCopyIcon fontSize="small" />}
         />
       )}
       {!readOnly && (
         <ToolbarIconButton
-          tooltip="Delete line"
+          tooltip={t("common:script.deleteLine")}
           onClick={() => removeLine(scriptId, line.id)}
           icon={<DeleteOutlineIcon fontSize="small" />}
         />
@@ -494,13 +496,13 @@ const ScriptLineRow = ({
       }}
     >
       {draggable ? (
-        <Tooltip title="Drag to reorder">
+        <Tooltip title={t("common:script.dragToReorder")}>
           <Box
             className="script-line-drag"
             draggable
             onDragStart={handleDragStart}
             onDragEnd={onDragEnd}
-            aria-label="Drag to reorder line"
+            aria-label={t("common:script.dragToReorderLine")}
             sx={{
               flexShrink: 0,
               width: DRAG_RAIL,

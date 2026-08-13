@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import FileBrowserDialog from "../dialogs/FileBrowserDialog";
 
 const hasNativeDialog = (): boolean => {
@@ -14,6 +15,7 @@ export function useFolderPicker(): {
   pickFolder: () => Promise<string | null>;
   dialog: React.JSX.Element;
 } {
+  const { t } = useTranslation("common");
   const [isOpen, setIsOpen] = useState(false);
   const [resolver, setResolver] = useState<
     ((path: string | null) => void) | null
@@ -59,7 +61,7 @@ export function useFolderPicker(): {
       open={isOpen}
       onClose={handleCancel}
       onConfirm={handleConfirm}
-      title="Select Workspace Folder"
+      title={t("common:workspaces2.selectWorkspaceFolder")}
       initialPath="~"
       selectionMode="directory"
     />

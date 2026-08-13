@@ -7,6 +7,7 @@ import {
   FORMAT_TEXT_COMMAND
 } from "lexical";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import FormatSizeIcon from "@mui/icons-material/FormatSize";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import {
@@ -45,6 +46,7 @@ const toolbarStyles = css`
 `;
 
 const ToolbarPlugin = () => {
+  const { t } = useTranslation("common");
   const [editor] = useLexicalComposerContext();
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
@@ -183,7 +185,7 @@ const ToolbarPlugin = () => {
         type="button"
         onClick={handleFormatBold}
         className={isBold ? "active" : ""}
-        aria-label="Format Bold"
+        aria-label={t("common:textEditor.formatBold")}
         title="Bold (Ctrl+B / ⌘+B)"
       >
         <b>B</b>
@@ -192,7 +194,7 @@ const ToolbarPlugin = () => {
         type="button"
         onClick={handleFormatItalic}
         className={isItalic ? "active" : ""}
-        aria-label="Format Italic"
+        aria-label={t("common:textEditor.formatItalic")}
         title="Italic (Ctrl+I / ⌘+I)"
       >
         <i>I</i>
@@ -201,16 +203,16 @@ const ToolbarPlugin = () => {
         type="button"
         onClick={toggleFontSize}
         className={isLargeFont ? "active" : ""}
-        aria-label="Toggle Large Font Size"
-        title="Toggle Large Font Size"
+        aria-label={t("common:textEditor.toggleLargeFont")}
+        title={t("common:textEditor.toggleLargeFont")}
       >
         <FormatSizeIcon sx={{ fontSize: "1em" }} />
       </button>
       <button
         type="button"
         onClick={handleInsertHR}
-        aria-label="Insert Horizontal Rule"
-        title="Insert Horizontal Rule"
+        aria-label={t("common:textEditor.insertHorizontalRule")}
+        title={t("common:textEditor.insertHorizontalRule")}
         style={{ fontSize: "var(--fontSizeNormal)", fontWeight: 600 }}
       >
         ─
@@ -218,8 +220,8 @@ const ToolbarPlugin = () => {
       <button
         type="button"
         onClick={handleCopyAsMarkdown}
-        aria-label="Copy as Markdown"
-        title="Copy as Markdown"
+        aria-label={t("common:textEditor.copyAsMarkdown")}
+        title={t("common:textEditor.copyAsMarkdown")}
         className={copied ? "active" : ""}
       >
         <ContentCopyIcon sx={{ fontSize: "1em" }} />

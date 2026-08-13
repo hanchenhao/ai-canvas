@@ -5,6 +5,7 @@
  */
 
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { useTheme } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
@@ -45,6 +46,7 @@ const AssetPickerDialog: React.FC<{
   onClose: () => void;
   onPick: (assetId: string) => void;
 }> = ({ open, onClose, onPick }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const { data, isLoading } = useQuery({
     queryKey: ["entity-asset-picker"],
@@ -62,7 +64,7 @@ const AssetPickerDialog: React.FC<{
   });
 
   return (
-    <Dialog open={open} onClose={onClose} title="Pick a reference image">
+    <Dialog open={open} onClose={onClose} title={t("common:entities.pickReferenceImage")}>
       {isLoading ? (
         <FlexRow align="center" justify="center" sx={{ p: 3 }}>
           <LoadingSpinner />
@@ -70,7 +72,7 @@ const AssetPickerDialog: React.FC<{
       ) : !data || data.length === 0 ? (
         <EmptyState
           variant="no-data"
-          title="No images"
+          title={t("common:entities.noImages")}
           description="Generate or upload an image first."
           size="small"
         />
@@ -115,6 +117,7 @@ const AssetPickerDialog: React.FC<{
 };
 
 const EntityLibraryInternal: React.FC = () => {
+  const { t } = useTranslation("common");
   const { data: entities, isLoading } = useEntities();
   const deleteEntity = useDeleteEntity();
 
@@ -148,6 +151,7 @@ const EntityLibraryInternal: React.FC = () => {
   );
 
   const content = useMemo(() => {
+    const { t } = useTranslation("common");
     if (isLoading) {
       return (
         <FlexRow align="center" justify="center" sx={{ p: 4 }}>
@@ -156,10 +160,11 @@ const EntityLibraryInternal: React.FC = () => {
       );
     }
     if (!entities || entities.length === 0) {
+      const { t } = useTranslation("common");
       return (
         <EmptyState
           variant="empty"
-          title="No entities yet"
+          title={t("common:entities.noEntitiesYet")}
           description="Tag an image as a character, location, style, or prop to reuse it across shots."
           actionText="Add entity"
           onAction={handleAdd}

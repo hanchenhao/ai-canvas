@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Tooltip, EditorButton, SPACING, getSpacingPx } from "../ui_primitives";
 import FolderIcon from "@mui/icons-material/Folder";
 import {
@@ -9,7 +10,9 @@ import {
 export const ModelShowInExplorerButton: React.FC<{
   onClick: () => void;
   disabled?: boolean;
-}> = ({ onClick, disabled }) => (
+}> = ({ onClick, disabled }) => {
+  const { t } = useTranslation("huggingface");
+  return (
   <Tooltip
     title={t("huggingface:actions.showInFileExplorer")}
     delay={TOOLTIP_ENTER_DELAY * 2}
@@ -27,12 +30,14 @@ export const ModelShowInExplorerButton: React.FC<{
       </EditorButton>
     </span>
   </Tooltip>
-);
+  );
+};
 
 export const HuggingFaceLink: React.FC<{
   modelId: string;
-}> = ({ modelId }) =>
-  !modelId.endsWith("safetensors") && (
+}> = ({ modelId }) => {
+  const { t } = useTranslation("huggingface");
+  return !modelId.endsWith("safetensors") && (
     <Tooltip
       title={t("huggingface:actions.viewOnHuggingface")}
       delay={TOOLTIP_ENTER_DELAY * 2}
@@ -57,10 +62,12 @@ export const HuggingFaceLink: React.FC<{
       </EditorButton>
     </Tooltip>
   );
+};
 
 export const OllamaLink: React.FC<{
   modelId: string;
 }> = ({ modelId }) => {
+  const { t } = useTranslation("huggingface");
   return (
     <Tooltip
       title={t("huggingface:actions.viewOnOllama")}

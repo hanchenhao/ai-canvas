@@ -6,6 +6,7 @@
 
 import { css } from "@emotion/react";
 import React, { useState, useMemo, useCallback, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 
@@ -85,6 +86,7 @@ export const NodePickerDialog: React.FC<NodePickerDialogProps> = ({
   onSelect,
   onClose,
 }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const [searchQuery, setSearchQuery] = useState("");
   const autoFocusEnabled = useAutoFocusEnabled();
@@ -148,7 +150,7 @@ export const NodePickerDialog: React.FC<NodePickerDialogProps> = ({
     <Dialog
       open={open}
       onClose={onClose}
-      title="Add Node"
+      title={t("common:chainEditor.addNodeTitle")}
       minWidth="min(520px, 100vw - 32px)"
     >
       <FlexColumn gap={2} sx={{ minHeight: 400, maxHeight: "70vh" }}>

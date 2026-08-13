@@ -290,5 +290,162 @@
     "cameraPreview": "摄像头预览",
     "systemDefaultCamera": "系统默认摄像头",
     "systemDefaultInput": "系统默认输入"
+  },
+  "script": {
+    "lineText": "台词文本",
+    "playCurrentTake": "播放当前录音",
+    "duplicateLine": "复制台词",
+    "deleteLine": "删除台词",
+    "dragToReorder": "拖拽以重新排序",
+    "dragToReorderLine": "拖拽以重新排序台词",
+    "playTake": "播放录音",
+    "deleteTake": "删除录音",
+    "noTakesYet": "暂无录音",
+    "speakerName": "说话人名称",
+    "removeSpeaker": "移除说话人",
+    "noSpeakers": "暂无说话人",
+    "scriptNameAria": "脚本名称",
+    "newScript": "新建脚本",
+    "deleteScript": "删除脚本",
+    "couldNotLoadScripts": "无法加载脚本",
+    "allChangesSaved": "所有更改已保存",
+    "insertLineHere": "在此插入台词",
+    "untitledSection": "未命名段落",
+    "sectionTitle": "段落标题",
+    "removeSection": "移除段落",
+    "emptyScript": "空脚本"
+  },
+  "chainEditor": {
+    "addNode": "添加节点",
+    "loadingWorkflow": "正在加载工作流…",
+    "workflowName": "工作流名称",
+    "saveWorkflow": "保存工作流",
+    "buildYourWorkflow": "构建你的工作流",
+    "addNodeTitle": "添加节点",
+    "useOutputFromPreviousStep": "使用上一步的输出",
+    "selectOutput": "选择输出"
+  },
+  "workflows": {
+    "filterByTags": "按标签筛选",
+    "clearAllTagFilters": "清除所有标签筛选",
+    "openingSharedWorkflow": "正在打开共享的工作流…",
+    "sharedWithMe": "共享给我的",
+    "workflowNameAria": "工作流名称"
+  },
+  "textEditor": {
+    "formatBold": "加粗",
+    "formatItalic": "斜体",
+    "toggleLargeFont": "切换大字号",
+    "insertHorizontalRule": "插入分割线",
+    "copyAsMarkdown": "复制为 Markdown",
+    "toggleWordWrap": "切换自动换行",
+    "formatCodeBlock": "格式化为代码块",
+    "newVariableName": "新变量名称"
+  },
+  "panels": {
+    "webhookUrl": "Webhook URL",
+    "copyWebhookUrl": "复制 Webhook URL",
+    "webhookSecret": "Webhook 密钥",
+    "copyWebhookSecret": "复制 Webhook 密钥",
+    "sendWebhookHeader": "将此值作为 x-webhook-secret 请求头发送。",
+    "triggerStatus": "触发器状态",
+    "workflowActive": "工作流已激活",
+    "checkingStatus": "正在检查状态…",
+    "copyToClipboard": "复制到剪贴板",
+    "resizeConversationHeight": "调整对话高度",
+    "showThreads": "显示对话列表",
+    "openInWorkspaceTab": "在工作区标签页中打开",
+    "newConversation": "新建对话",
+    "hideConversation": "隐藏对话",
+    "closeThreads": "关闭对话列表"
+  },
+  "menus": {
+    "notAvailable": "不可用",
+    "gitCommit": "Git 提交",
+    "userAgent": "User Agent",
+    "condaEnvironment": "Conda 环境",
+    "npmPackages": "NPM 包",
+    "newVaultName": "新仓库（vault）名称",
+    "showWelcomeScreen": "显示欢迎屏幕",
+    "selectNodesOnDrag": "拖拽时选中节点",
+    "soundNotifications": "声音通知",
+    "automaticUpdates": "自动更新",
+    "updateChannel": "更新通道",
+    "onCloseBehavior": "关闭时的行为",
+    "askEveryTime": "每次询问:",
+    "askEveryTimeHint": "显示一个带选项的对话框。",
+    "warnBeforeLargeRuns": "大规模运行前警告",
+    "maxConcurrentRuns": "最大并发运行数",
+    "maxConcurrentRunsPerWorkflow": "每个工作流的最大并发运行数",
+    "panCanvas": "平移画布:",
+    "panCanvasHint": "左键拖动可移动视图。",
+    "selectNodes": "选择节点:",
+    "selectNodesHint": "左键拖动可绘制选区;",
+    "nodeSelectionMode": "节点选择模式",
+    "gridSnapPrecision": "网格对齐精度",
+    "connectionSnapRange": "连线对齐范围",
+    "enableAutosave": "启用自动保存",
+    "saveBeforeRunning": "运行前保存",
+    "saveOnWindowClose": "关闭窗口时保存",
+    "maxVersionsPerWorkflow": "每个工作流的最大版本数",
+    "timeFormat": "时间格式",
+    "importWorkflowFile": "导入工作流文件",
+    "importWorkflowBundleFile": "导入工作流 bundle 文件",
+    "importAppBundleFile": "导入应用 bundle 文件",
+    "commandMenu": "命令菜单",
+    "commandMenuSearch": "命令菜单搜索",
+    "noResultsFound": "未找到结果。"
+  },
+  "inputs": {
+    "editValue": "编辑值",
+    "setColor": "设置颜色",
+    "chooseColor": "选择颜色",
+    "dateTime": "日期和时间",
+    "searchOptions": "搜索选项"
+  },
+  "workspace": {
+    "couldNotLoadApp": "无法加载应用",
+    "appViewAria": "应用视图",
+    "loadingEditor": "正在加载编辑器…",
+    "couldNotOpenEditor": "无法打开编辑器"
+  },
+  "entities": {
+    "pickReferenceImage": "选择参考图",
+    "noImages": "暂无图片",
+    "noEntitiesYet": "暂无实体",
+    "entitiesCaption": "可复用的角色、场景、风格和道具",
+    "editEntity": "编辑实体",
+    "removeEntity": "移除实体"
+  },
+  "colorPicker2": {
+    "copyAllColors": "复制全部颜色",
+    "useCurrentColor": "使用当前颜色",
+    "removeStop": "移除色标"
+  },
+  "workers2": {
+    "stopAttachedWorker": "停止已连接的 worker"
+  },
+  "logsTable": {
+    "copyLog": "复制日志到剪贴板",
+    "viewLogData": "查看日志数据",
+    "scrollToLatest": "滚动到最新"
+  },
+  "version2": {
+    "selectForComparison": "选择以对比",
+    "restoreVersion": "恢复此版本",
+    "deleteVersion": "删除版本"
+  },
+  "storyboard2": {
+    "storyboardNameAria": "故事板名称"
+  },
+  "workspaces2": {
+    "selectWorkspaceFolder": "选择工作区文件夹"
+  },
+  "search2": {
+    "clearSearch": "清除搜索"
+  },
+  "help": {
+    "openBrainviteWebsite": "打开 BrainVite 网站",
+    "nodetoolDataTypes": "Nodetool 数据类型"
   }
 }

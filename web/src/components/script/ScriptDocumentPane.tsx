@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { DragEvent } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
@@ -104,7 +105,7 @@ const InsertLineGap = ({
       component="button"
       type="button"
       onClick={onInsert}
-      aria-label="Insert line here"
+      aria-label={t("common:script.insertLineHere")}
       className="insert-line-rule"
       sx={{
         display: "flex",
@@ -263,6 +264,7 @@ const SectionBlockInner = ({
   dnd: LineDnd;
   onKeyNav: (lineId: string, nav: LineKeyNav) => void;
 }) => {
+  const { t } = useTranslation("common");
   const cast = useScriptCast(scriptId);
   const setSectionTitle = useScriptStore((s) => s.setSectionTitle);
   const addLine = useScriptStore((s) => s.addLine);
@@ -330,9 +332,9 @@ const SectionBlockInner = ({
           onChange={(e) =>
             setSectionTitle(scriptId, section.id, e.target.value)
           }
-          placeholder="Untitled section"
+          placeholder={t("common:script.untitledSection")}
           hideLabel
-          label="Section title"
+          label={t("common:script.sectionTitle")}
           compact
           fullWidth
           disabled={readOnly}
@@ -349,7 +351,7 @@ const SectionBlockInner = ({
         {!readOnly && (
           <Box className="section-remove">
             <ToolbarIconButton
-              tooltip="Remove section"
+              tooltip={t("common:script.removeSection")}
               onClick={() => removeSection(scriptId, section.id)}
               icon={<CloseIcon fontSize="small" />}
             />
@@ -412,6 +414,7 @@ const ScriptDocumentPane = ({
   scriptId,
   readOnly
 }: ScriptDocumentPaneProps) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { sections, timelineId } = useScript(scriptId);
@@ -714,7 +717,7 @@ const ScriptDocumentPane = ({
       >
         {isEmpty && (
           <EmptyState
-            title="Empty script"
+            title={t("common:script.emptyScript")}
             description="Add a line to start writing. Assign speakers and voices in the Cast panel, then voice each line into a take."
             actionText={readOnly ? undefined : "Add first line"}
             onAction={readOnly ? undefined : () => addLine(scriptId)}

@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import type React from "react";
+import { useTranslation } from "react-i18next";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import DataObjectIcon from "@mui/icons-material/DataObject";
@@ -175,6 +176,7 @@ const EditorVariablesPanel = ({
   addSignal,
   readOnly = false
 }: EditorVariablesPanelProps) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const [editingName, setEditingName] = useState<string | null>(null);
   const [draftValue, setDraftValue] = useState("");
@@ -303,7 +305,7 @@ const EditorVariablesPanel = ({
                 className="add-input"
                 value={addName}
                 placeholder="variable name"
-                aria-label="New variable name"
+                aria-label={t("common:textEditor.newVariableName")}
                 onChange={(e) =>
                   setAddName(e.target.value.replace(/[^\w]/g, ""))
                 }

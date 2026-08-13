@@ -4,6 +4,7 @@
  */
 
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import RestoreIcon from "@mui/icons-material/Restore";
 import CompareIcon from "@mui/icons-material/Compare";
 import { Caption, Chip, DeleteButton, LoadingSpinner, Text, Tooltip, ToolbarIconButton, MOTION, SPACING, getSpacingPx } from "../ui_primitives";
@@ -60,6 +61,7 @@ const VersionListItem = React.memo(function VersionListItem({
   onCompare,
   isRestoring = false
 }: VersionListItemProps) {
+  const { t } = useTranslation("common");
   const handleClick = useCallback(() => {
     if (compareMode) {
       onCompare(version.id);
@@ -202,7 +204,7 @@ const VersionListItem = React.memo(function VersionListItem({
           <ToolbarIconButton
             size="small"
             onClick={handleClick}
-            tooltip="Select for comparison"
+            tooltip={t("common:version2.selectForComparison")}
             icon={<CompareIcon sx={{ fontSize: 14 }} />}
             sx={{ padding: getSpacingPx(SPACING.micro) }}
             nodrag={false}
@@ -214,14 +216,14 @@ const VersionListItem = React.memo(function VersionListItem({
             <ToolbarIconButton
               size="small"
               onClick={handleRestore}
-              tooltip="Restore this version"
+              tooltip={t("common:version2.restoreVersion")}
               icon={<RestoreIcon sx={{ fontSize: 14 }} />}
               sx={{ padding: getSpacingPx(SPACING.micro) }}
               nodrag={false}
             />
             <DeleteButton
               onClick={handleDelete}
-              tooltip="Delete version"
+              tooltip={t("common:version2.deleteVersion")}
               sx={{ padding: getSpacingPx(SPACING.micro), "& .MuiSvgIcon-root": { fontSize: 14 } }}
             />
           </>

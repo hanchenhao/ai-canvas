@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { css } from "@emotion/react";
@@ -53,6 +54,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
   value,
   onChange
 }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const [inputValue, setInputValue] = useState<string>(() =>
     toLocalInputValue(value)
@@ -93,7 +95,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
       onChange={handleInputChange}
       onBlur={commit}
       onKeyDown={handleKeyDown}
-      aria-label="Date and time"
+      aria-label={t("common:inputs.dateTime")}
     />
   );
 };

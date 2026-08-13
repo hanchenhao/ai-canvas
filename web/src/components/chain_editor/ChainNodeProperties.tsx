@@ -8,6 +8,7 @@
  */
 import { css } from "@emotion/react";
 import React, { createElement, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import {
@@ -127,6 +128,7 @@ export const ChainNodeProperties: React.FC<ChainNodePropertiesProps> = ({
   onUpdate,
   onSetInputMapping,
 }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const store = useMemo(() => getEmptyStore(), []);
   const cssStyles = useMemo(() => chainPropertyStyles(theme), [theme]);
@@ -329,7 +331,7 @@ export const ChainNodeProperties: React.FC<ChainNodePropertiesProps> = ({
                     <ToolbarIconButton
                       size="small"
                       ariaLabel={`Connect ${prop.title ?? prop.name} to a previous step`}
-                      tooltip="Use output from a previous step"
+                      tooltip={t("common:chainEditor.useOutputFromPreviousStep")}
                       onClick={(e) => handleOpenPicker(prop.name, e.currentTarget)}
                       icon={
                         <AddLinkIcon

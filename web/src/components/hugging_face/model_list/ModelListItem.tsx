@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useMemo, useState, useCallback, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { Chip, FlexRow, Tooltip, Text, Box, TextLink, SPACING, getSpacingPx, activateOnKey } from "../../ui_primitives";
 import { useTheme } from "@mui/material/styles";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -39,6 +40,7 @@ const ModelListItem: React.FC<
   compatibility,
   isCheckingCache = false
 }) => {
+  const { t } = useTranslation("huggingface");
   const baseId = model.repo_id || model.id;
   const downloadId = model.path ? `${baseId}/${model.path}` : baseId;
   const download = useModelDownloadStore((state) => state.downloads[downloadId]);

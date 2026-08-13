@@ -12,10 +12,13 @@
   ],
   "common": [
     "language.en",
+    "menus.userAgent",
+    "panels.webhookUrl",
     "shortcuts.osMac",
     "shortcuts.osWin"
   ],
   "huggingface": [
+    "actions.huggingFaceAlt",
     "details.filesOfTotal",
     "details.sizeOfTotal",
     "details.speedValue"

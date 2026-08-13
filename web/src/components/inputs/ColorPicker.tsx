@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import React, { useCallback, useState, useRef, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Tooltip,
   MOTION,
@@ -83,6 +84,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   showCustom = false,
   buttonSize = 20
 }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const cssColorMatrix = useMemo(() => colorMatrixStyle(theme), [theme]);
@@ -148,13 +150,13 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   return (
     <div className="color-picker" css={cssStyles}>
       <Tooltip
-        title="Set color"
+        title={t("common:inputs.setColor")}
         placement="bottom"
         delay={TOOLTIP_ENTER_DELAY}
       >
         <Button
           className="open-colors-button"
-          aria-label="Choose color"
+          aria-label={t("common:inputs.chooseColor")}
           aria-haspopup="dialog"
           onClick={handleClick}
           style={{

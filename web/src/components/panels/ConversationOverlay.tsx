@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useCallback, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -223,6 +224,7 @@ interface ConversationOverlayProps {
 const ConversationOverlay: React.FC<ConversationOverlayProps> = ({
   onCollapse
 }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -399,7 +401,7 @@ const ConversationOverlay: React.FC<ConversationOverlayProps> = ({
         className="convo-resize convo-resize-top"
         onMouseDown={startResize("top")}
         role="separator"
-        aria-label="Resize conversation height"
+        aria-label={t("common:panels.resizeConversationHeight")}
       />
       <div
         className="convo-resize convo-resize-left"
@@ -439,43 +441,43 @@ const ConversationOverlay: React.FC<ConversationOverlayProps> = ({
           {title || "Conversation"}
         </Text>
         <FlexRow gap={0.5} align="center" sx={{ ml: "auto" }}>
-          <Tooltip title="Show threads" delay={TOOLTIP_ENTER_DELAY}>
+          <Tooltip title={t("common:panels.showThreads")} delay={TOOLTIP_ENTER_DELAY}>
             <button
               type="button"
               className={`convo-icon-btn${threadsOpen ? " active" : ""}`}
               onClick={() => setThreadsOpen(!threadsOpen)}
-              aria-label="Show threads"
+              aria-label={t("common:panels.showThreads")}
               aria-pressed={threadsOpen}
             >
               <FormatListBulletedIcon />
             </button>
           </Tooltip>
-          <Tooltip title="Open in a workspace tab" delay={TOOLTIP_ENTER_DELAY}>
+          <Tooltip title={t("common:panels.openInWorkspaceTab")} delay={TOOLTIP_ENTER_DELAY}>
             <button
               type="button"
               className="convo-icon-btn"
               onClick={handleExpand}
-              aria-label="Open in a workspace tab"
+              aria-label={t("common:panels.openInWorkspaceTab")}
             >
               <OpenInNewIcon />
             </button>
           </Tooltip>
-          <Tooltip title="New conversation" delay={TOOLTIP_ENTER_DELAY}>
+          <Tooltip title={t("common:panels.newConversation")} delay={TOOLTIP_ENTER_DELAY}>
             <button
               type="button"
               className="convo-icon-btn"
               onClick={() => void handleNewConversation()}
-              aria-label="New conversation"
+              aria-label={t("common:panels.newConversation")}
             >
               <AddCommentOutlinedIcon />
             </button>
           </Tooltip>
-          <Tooltip title="Hide conversation" delay={TOOLTIP_ENTER_DELAY}>
+          <Tooltip title={t("common:panels.hideConversation")} delay={TOOLTIP_ENTER_DELAY}>
             <button
               type="button"
               className="convo-icon-btn"
               onClick={onCollapse}
-              aria-label="Hide conversation"
+              aria-label={t("common:panels.hideConversation")}
             >
               <KeyboardArrowDownIcon />
             </button>
@@ -522,12 +524,12 @@ const ConversationOverlay: React.FC<ConversationOverlayProps> = ({
                 fullWidth
                 showClear={false}
               />
-              <Tooltip title="Close threads" delay={TOOLTIP_ENTER_DELAY}>
+              <Tooltip title={t("common:panels.closeThreads")} delay={TOOLTIP_ENTER_DELAY}>
                 <button
                   type="button"
                   className="convo-icon-btn"
                   onClick={() => setThreadsOpen(false)}
-                  aria-label="Close threads"
+                  aria-label={t("common:panels.closeThreads")}
                 >
                   <CloseIcon />
                 </button>

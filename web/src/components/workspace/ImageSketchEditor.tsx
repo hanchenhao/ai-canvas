@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
+import { useTranslation } from "react-i18next";
 import { EmptyState, FlexColumn, FlexRow, LoadingSpinner } from "../ui_primitives";
 import { EditorButton } from "../editor_ui";
 import StandaloneSketchEditor from "../sketch/StandaloneSketchEditor";
@@ -24,6 +25,7 @@ interface ImageSketchEditorProps {
  * autosaves independently.
  */
 const ImageSketchEditor = ({ asset, onClose }: ImageSketchEditorProps) => {
+  const { t } = useTranslation("common");
   const updateAsset = useAssetStore((state) => state.update);
   const [documentId, setDocumentId] = useState<string | null>(() =>
     readSketchDocumentId(asset)
@@ -76,11 +78,12 @@ const ImageSketchEditor = ({ asset, onClose }: ImageSketchEditorProps) => {
   }, [asset, documentId, updateAsset]);
 
   if (error) {
+    const { t } = useTranslation("common");
     return (
       <FlexColumn fullWidth fullHeight align="center" justify="center">
         <EmptyState
           variant="error"
-          title="Could not open editor"
+          title={t("common:workspace.couldNotOpenEditor")}
           description={error}
         />
       </FlexColumn>

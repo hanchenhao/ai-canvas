@@ -8,6 +8,7 @@ import {
   WorkflowRequest
 } from "../../stores/ApiTypes";
 import { useCallback, useEffect, useState, useRef, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { Dialog } from "../ui_primitives";
 import { getMousePosition } from "../../utils/MousePosition";
 import useAlignNodes from "../../hooks/useAlignNodes";
@@ -170,6 +171,7 @@ const readImportedWorkflow = (
 };
 
 const WorkflowCommands = memo(function WorkflowCommands() {
+  const { t } = useTranslation("common");
   const executeAndClose = useCommandMenu((state) => state.executeAndClose);
   // Optimization: use shallow equality to prevent the CommandMenu from
   // re-rendering 60 times a second on unrelated node position updates
@@ -363,7 +365,7 @@ const WorkflowCommands = memo(function WorkflowCommands() {
         ref={fileInputRef}
         type="file"
         accept=".json"
-        aria-label="Import workflow file"
+        aria-label={t("common:menus.importWorkflowFile")}
         style={{ display: "none" }}
         onChange={handleImportFileChange}
       />
@@ -371,7 +373,7 @@ const WorkflowCommands = memo(function WorkflowCommands() {
         ref={bundleInputRef}
         type="file"
         accept=".nodetool,application/zip"
-        aria-label="Import workflow bundle file"
+        aria-label={t("common:menus.importWorkflowBundleFile")}
         style={{ display: "none" }}
         onChange={handleBundleFileChange}
       />
@@ -641,6 +643,7 @@ const PanelCommands = memo(function PanelCommands() {
  * app, then opens it.
  */
 const AppCommands = memo(function AppCommands() {
+  const { t } = useTranslation("common");
   const executeAndClose = useCommandMenu((state) => state.executeAndClose);
   const addNotification = useNotificationStore(
     (state) => state.addNotification
@@ -706,7 +709,7 @@ const AppCommands = memo(function AppCommands() {
         ref={appBundleInputRef}
         type="file"
         accept=".json,application/json"
-        aria-label="Import app bundle file"
+        aria-label={t("common:menus.importAppBundleFile")}
         style={{ display: "none" }}
         onChange={handleAppBundleFileChange}
       />
@@ -776,6 +779,7 @@ const CommandMenu: React.FC<CommandMenuProps> = ({
   redo,
   reactFlowWrapper
 }) => {
+  const { t } = useTranslation("common");
   const [pastePosition, setPastePosition] = useState({ x: 0, y: 0 });
   const input = useRef<HTMLInputElement>(null);
   const autoFocusEnabled = useAutoFocusEnabled();
@@ -832,16 +836,16 @@ const CommandMenu: React.FC<CommandMenuProps> = ({
       onClose={() => setOpen(false)}
       className="command-menu-dialog"
       css={styles()}
-      aria-label="Command menu"
+      aria-label={t("common:menus.commandMenu")}
     >
       <Command label="Command Menu" className="command-menu">
         <CommandInput
           ref={input}
           placeholder="Type a command or search…"
-          aria-label="Command menu search"
+          aria-label={t("common:menus.commandMenuSearch")}
         />
         <Command.List>
-          <Command.Empty>No results found.</Command.Empty>
+          <Command.Empty>{t("common:menus.noResultsFound")}</Command.Empty>
           <WorkflowCommands />
           <AppCommands />
           <EditCommands undo={undo} redo={redo} />

@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useCallback, useEffect, useMemo, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Workflow } from "../../stores/ApiTypes";
 import isEqual from "../../utils/isEqual";
 import { WorkflowMiniPreview } from "../version/WorkflowMiniPreview";
@@ -47,6 +48,7 @@ const WorkflowListItem: React.FC<WorkflowListItemProps> = ({
   onRename,
   onOpenAsApp
 }: WorkflowListItemProps) => {
+  const { t } = useTranslation("common");
   const openContextMenu = useContextMenuStore((state) => state.openContextMenu);
   const setActions = useWorkflowActionsStore((state) => state.setActions);
   const clearActions = useWorkflowActionsStore((state) => state.clearActions);
@@ -294,7 +296,7 @@ const WorkflowListItem: React.FC<WorkflowListItemProps> = ({
             ref={inputRef}
             type="text"
             defaultValue={workflow.name}
-            aria-label="Workflow name"
+            aria-label={t("common:chainEditor.workflowName")}
             autoFocus
             onFocus={handleInputFocus}
             onBlur={handleNameBlur}

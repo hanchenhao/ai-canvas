@@ -299,6 +299,7 @@ const ColorPickerModal: React.FC<ColorPickerModalProps> = ({
 
   const copyColor = useCallback(
     async (format: string) => {
+      const { t } = useTranslation("common");
       let textToCopy = "";
       const rgb = hexToRgb(color);
 

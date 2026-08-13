@@ -6,6 +6,7 @@
  * actions (rename, delete) are owner-side and deliberately absent here.
  */
 import { memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {
   Chip,
@@ -22,6 +23,7 @@ import { usePanelStore } from "../../stores/PanelStore";
 const ROLE_LABELS = { viewer: "view", editor: "edit" } as const;
 
 const SharedWithMeSection = () => {
+  const { t } = useTranslation("common");
   const navigate = useNavigate();
   const { data } = useSharedWithMe();
   const onOpen = useCallback(
@@ -37,7 +39,7 @@ const SharedWithMeSection = () => {
 
   return (
     <FlexColumn gap={SPACING.xs} sx={{ px: 2, pb: 2 }}>
-      <SectionHeader title="Shared with me" />
+      <SectionHeader title={t("common:workflows.sharedWithMe")} />
       {workflows.map((workflow) => (
         <FlexRow
           key={workflow.id}

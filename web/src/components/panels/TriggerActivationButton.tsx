@@ -15,6 +15,7 @@
  * never been enabled before.
  */
 import React, { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Popover,
   ToolbarIconButton,
@@ -128,6 +129,7 @@ const WebhookDeliveryDetails: React.FC<WebhookDeliveryDetailsProps> = ({
   webhookToken,
   webhookSecret
 }) => {
+  const { t } = useTranslation("common");
   const [revealed, setRevealed] = useState(false);
   const url = webhookDeliveryUrl(webhookToken);
 
@@ -135,18 +137,18 @@ const WebhookDeliveryDetails: React.FC<WebhookDeliveryDetailsProps> = ({
     <FlexColumn gap={SPACING.xs}>
       <FlexRow gap={SPACING.xs} align="center">
         <TextInput
-          label="Webhook URL"
+          label={t("common:panels.webhookUrl")}
           hideLabel
           value={url}
           size="small"
           fullWidth
           slotProps={{ input: { readOnly: true } }}
         />
-        <CopyButton value={url} tooltip="Copy webhook URL" />
+        <CopyButton value={url} tooltip={t("common:panels.copyWebhookUrl")} />
       </FlexRow>
       <FlexRow gap={SPACING.xs} align="center">
         <TextInput
-          label="Webhook secret"
+          label={t("common:panels.webhookSecret")}
           hideLabel
           type={revealed ? "text" : "password"}
           value={webhookSecret}
@@ -166,7 +168,7 @@ const WebhookDeliveryDetails: React.FC<WebhookDeliveryDetailsProps> = ({
           ariaLabel={revealed ? "Hide webhook secret" : "Show webhook secret"}
           onClick={() => setRevealed((r) => !r)}
         />
-        <CopyButton value={webhookSecret} tooltip="Copy webhook secret" />
+        <CopyButton value={webhookSecret} tooltip={t("common:panels.copyWebhookSecret")} />
       </FlexRow>
       <Caption>Send this value as the x-webhook-secret header.</Caption>
     </FlexColumn>
@@ -174,6 +176,7 @@ const WebhookDeliveryDetails: React.FC<WebhookDeliveryDetailsProps> = ({
 };
 
 const TriggerActivationButton: React.FC = () => {
+  const { t } = useTranslation("common");
   const workflowId = useNodes((state) => state.workflow?.id || null);
   // This button sits in the always-mounted floating toolbar, and a node drag
   // pushes a fresh `nodes` array ~60x/s. Collect in one pass rather than
@@ -310,7 +313,7 @@ const TriggerActivationButton: React.FC = () => {
             width: `min(360px, calc(100vw - ${getSpacingPx(SPACING.xxxl)}))`
           }}
           role="region"
-          aria-label="Trigger status"
+          aria-label={t("common:panels.triggerStatus")}
         >
           <FlexRow justify="space-between" align="center">
             <Text size="big">Triggers</Text>
@@ -322,7 +325,7 @@ const TriggerActivationButton: React.FC = () => {
           </FlexRow>
 
           <LabeledSwitch
-            label="Workflow active"
+            label={t("common:panels.workflowActive")}
             description={SWITCH_DESCRIPTIONS[state]}
             checked={state === "active"}
             onChange={(next) => {
@@ -386,7 +389,7 @@ const TriggerActivationButton: React.FC = () => {
                     onChange={(next) => reg && handleRowToggle(reg.id, next)}
                     id={`trigger-enabled-${nodeId}`}
                   />
-                  {isLoading && <Caption>Checking status…</Caption>}
+                  {isLoading && <Caption>{t("common:panels.checkingStatus")}</Caption>}
                   {isError && (
                     <Caption color="error">
                       Could not load trigger status.

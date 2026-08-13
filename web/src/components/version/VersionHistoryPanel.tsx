@@ -259,6 +259,7 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
   }
 
   if (error) {
+    const { t } = useTranslation("common");
     return (
       <FlexColumn
         sx={{

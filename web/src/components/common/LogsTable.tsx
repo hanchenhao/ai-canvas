@@ -5,6 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import DataObjectIcon from "@mui/icons-material/DataObject";
 import { CopyButton } from "../ui_primitives";
@@ -217,6 +218,7 @@ const RowItem = memo(({
   start,
   onToggle
 }: RowItemProps) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const colors = SEVERITY_COLORS(theme)[row.severity];
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -303,7 +305,7 @@ const RowItem = memo(({
         <div className="cell actions" onClick={handleActionsClick}>
           <CopyButton
             value={row.content}
-            tooltip="Copy log to clipboard"
+            tooltip={t("common:logsTable.copyLog")}
             tooltipPlacement="top"
             className="copy-btn"
             sx={{ padding: getSpacingPx(SPACING.micro) }}
@@ -312,7 +314,7 @@ const RowItem = memo(({
             <>
               <ToolbarIconButton
                 icon={<DataObjectIcon fontSize="inherit" />}
-                tooltip="View log data"
+                tooltip={t("common:logsTable.viewLogData")}
               onClick={handleClick}
               size="small"
               sx={{ padding: getSpacingPx(SPACING.micro) }}
@@ -367,6 +369,7 @@ export const LogsTable: React.FC<LogsTableProps> = ({
   autoScroll = true,
   showTimestampColumn = true
 }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const styles = tableStyles(theme);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -539,7 +542,7 @@ export const LogsTable: React.FC<LogsTableProps> = ({
       {showScrollButton && (
         <ToolbarIconButton
           icon={<KeyboardArrowDownIcon />}
-          tooltip="Scroll to latest"
+          tooltip={t("common:logsTable.scrollToLatest")}
           className="scroll-to-bottom"
           onClick={scrollToBottom}
           size="small"

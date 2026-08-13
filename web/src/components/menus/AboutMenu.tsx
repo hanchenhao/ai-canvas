@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect, useCallback, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -107,6 +108,7 @@ const FeatureStatus: React.FC<{
   available: boolean;
   version?: string | null;
 }> = memo(({ label, available, version }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
 
   return (
@@ -139,7 +141,7 @@ const FeatureStatus: React.FC<{
         ) : (
           <Chip
             icon={<CancelIcon />}
-            label="Not Available"
+            label={t("common:menus.notAvailable")}
             size="small"
             color="default"
             variant="outlined"
@@ -152,6 +154,7 @@ const FeatureStatus: React.FC<{
 FeatureStatus.displayName = "FeatureStatus";
 
 const AboutMenu: React.FC = memo(() => {
+  const { t } = useTranslation("common");
   const [systemInfo, setSystemInfo] = useState<SystemInfoData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -281,7 +284,7 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
       <div className="settings-section">
         <InfoRow label="Version" value={VERSION} />
         <InfoRow
-          label="Git Commit"
+          label={t("common:menus.gitCommit")}
           value={GIT_COMMIT_HASH}
           copyable
           onCopy={handleCopy}
@@ -309,7 +312,7 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
         ) : (
           <>
             <InfoRow label="Platform" value={navigator.platform} />
-            <InfoRow label="User Agent" value={navigator.userAgent} />
+            <InfoRow label={t("common:menus.userAgent")} value={navigator.userAgent} />
           </>
         )}
       </div>
@@ -327,7 +330,7 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
               onCopy={handleCopy}
             />
             <InfoRow
-              label="Conda Environment"
+              label={t("common:menus.condaEnvironment")}
               value={systemInfo.condaEnvPath}
               copyable
               onCopy={handleCopy}
@@ -345,7 +348,7 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
               onCopy={handleCopy}
             />
             <InfoRow
-              label="NPM Packages"
+              label={t("common:menus.npmPackages")}
               value={systemInfo.optionalNodePath}
               copyable
               onCopy={handleCopy}

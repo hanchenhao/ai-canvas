@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 
 import {
@@ -30,6 +31,7 @@ function formatType(type: { type: string; type_args: Array<{ type: string }> }):
 }
 
 export const OutputSelector: React.FC<OutputSelectorProps> = React.memo(function OutputSelector({ outputs, selectedOutput, onSelect }) {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const selected = outputs.find((o) => o.name === selectedOutput);
@@ -47,7 +49,7 @@ export const OutputSelector: React.FC<OutputSelectorProps> = React.memo(function
         tabIndex={0}
         aria-haspopup="menu"
         aria-expanded={Boolean(anchorEl)}
-        aria-label="Select output"
+        aria-label={t("common:chainEditor.selectOutput")}
         sx={{
           display: "inline-flex",
           alignItems: "center",

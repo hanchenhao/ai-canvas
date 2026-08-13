@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import type * as monaco from "monaco-editor";
 
 import { useMonacoEditor } from "../../hooks/editor/useMonacoEditor";
@@ -33,6 +34,7 @@ const MonacoPane = ({
   onSave,
   onEditorMount
 }: MonacoPaneProps) => {
+  const { t } = useTranslation("common");
   const {
     MonacoEditor,
     monacoLoadError,
@@ -100,6 +102,7 @@ const MonacoPane = ({
   }
 
   if (!MonacoEditor) {
+    const { t } = useTranslation("common");
     return (
       <FlexColumn
         fullWidth
@@ -107,7 +110,7 @@ const MonacoPane = ({
         sx={{ alignItems: "center", justifyContent: "center" }}
       >
         <LoadingSpinner />
-        {isMonacoLoading && <Caption>Loading editor…</Caption>}
+        {isMonacoLoading && <Caption>{t("common:workspace.loadingEditor")}</Caption>}
       </FlexColumn>
     );
   }

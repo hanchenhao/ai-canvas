@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 
 import React, { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Popover } from "../ui_primitives";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useNotificationStore } from "../../stores/NotificationStore";
@@ -35,6 +36,7 @@ const getNotificationButtonLabel = (unreadCount: number): string => {
 };
 
 const NotificationButton: React.FC = React.memo(() => {
+  const { t } = useTranslation("common");
   const [notificationAnchor, setNotificationAnchor] =
     useState<null | HTMLElement>(null);
   const { notifications, lastDisplayedTimestamp, updateLastDisplayedTimestamp } =
@@ -180,7 +182,7 @@ const NotificationButton: React.FC = React.memo(() => {
                   <CopyButton
                     value={notification.content}
                     className="copy-button"
-                    tooltip="Copy to clipboard"
+                    tooltip={t("common:panels.copyToClipboard")}
                   />
                 </Box>
               ))}

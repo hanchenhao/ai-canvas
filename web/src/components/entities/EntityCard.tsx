@@ -5,6 +5,7 @@
  */
 
 import React, { memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -34,6 +35,7 @@ const EntityCardInternal: React.FC<EntityCardProps> = ({
   onEdit,
   onRemove
 }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const referenceImage = entity.reference_images?.[0];
 
@@ -110,7 +112,7 @@ const EntityCardInternal: React.FC<EntityCardProps> = ({
           {onEdit && (
             <ToolbarIconButton
               size="small"
-              title="Edit entity"
+              title={t("common:entities.editEntity")}
               onClick={handleEdit}
             >
               <EditIcon fontSize="small" />
@@ -119,7 +121,7 @@ const EntityCardInternal: React.FC<EntityCardProps> = ({
           {onRemove && (
             <ToolbarIconButton
               size="small"
-              title="Remove entity"
+              title={t("common:entities.removeEntity")}
               onClick={handleRemove}
             >
               <DeleteOutlineIcon fontSize="small" />

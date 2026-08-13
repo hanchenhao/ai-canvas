@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import PersonAddIcon from "@mui/icons-material/PersonAddAlt";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -61,6 +62,7 @@ const SpeakerRow = ({
   speaker: ScriptSpeaker;
   readOnly: boolean;
 }) => {
+  const { t } = useTranslation("common");
   const updateSpeaker = useScriptStore((s) => s.updateSpeaker);
   const removeSpeaker = useScriptStore((s) => s.removeSpeaker);
 
@@ -91,14 +93,14 @@ const SpeakerRow = ({
             updateSpeaker(scriptId, speaker.id, { name: e.target.value })
           }
           hideLabel
-          label="Speaker name"
+          label={t("common:script.speakerName")}
           compact
           fullWidth
           disabled={readOnly}
         />
         {!readOnly && (
           <ToolbarIconButton
-            tooltip="Remove speaker"
+            tooltip={t("common:script.removeSpeaker")}
             onClick={() => removeSpeaker(scriptId, speaker.id)}
             icon={<DeleteOutlineIcon fontSize="small" />}
           />
@@ -124,6 +126,7 @@ const ScriptCastPanel = ({
   cast,
   readOnly
 }: ScriptCastPanelProps) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const addSpeaker = useScriptStore((s) => s.addSpeaker);
   // Studio hands a new speaker a curated voice, so the beginner shell never
@@ -177,7 +180,7 @@ const ScriptCastPanel = ({
       <Divider />
       {cast.length === 0 ? (
         <EmptyState
-          title="No speakers"
+          title={t("common:script.noSpeakers")}
           description="Add a speaker and assign a voice to start voicing lines."
         />
       ) : (

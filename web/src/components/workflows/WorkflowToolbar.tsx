@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { FC, useCallback, memo, useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { ToolbarIconButton, DeleteButton, Chip, Box, EditorMenu, EditorMenuItem, MOTION, BORDER_RADIUS, SPACING, getSpacingPx } from "../ui_primitives";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import StarIcon from "@mui/icons-material/Star";
@@ -164,6 +165,7 @@ const WorkflowToolbar: FC<WorkflowToolbarProps> = ({
   onToggleFavorites,
   availableTags = []
 }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const showGraphPreview = useShowGraphPreview();
   const setShowGraphPreview = useWorkflowListViewStore((state) => state.actions.setShowGraphPreview);
@@ -229,7 +231,7 @@ const WorkflowToolbar: FC<WorkflowToolbarProps> = ({
             <>
               <ToolbarIconButton
                 icon={<LocalOfferIcon />}
-                tooltip="Filter by tags"
+                tooltip={t("common:workflows.filterByTags")}
                 onClick={handleTagsMenuOpen}
                 active={selectedTags.length > 0}
                 className={`tool-button ${selectedTags.length > 0 ? "active" : ""}`}
@@ -356,7 +358,7 @@ const WorkflowToolbar: FC<WorkflowToolbarProps> = ({
             {selectedTags.length > 1 && (
               <ToolbarIconButton
                 icon={<ClearIcon fontSize="small" />}
-                tooltip="Clear all tag filters"
+                tooltip={t("common:workflows.clearAllTagFilters")}
                 onClick={clearSelectedTags}
                 size="small"
                 className="clear-tags-button"

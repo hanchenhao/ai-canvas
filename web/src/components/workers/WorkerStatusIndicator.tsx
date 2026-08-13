@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   FlexRow,
   StatusIndicator,
@@ -15,6 +16,7 @@ import { useWorkers } from "../../hooks/useWorkers";
  * teardown.
  */
 const WorkerStatusIndicator: React.FC = () => {
+  const { t } = useTranslation("common");
   const { activeWorker, stop } = useWorkers();
   const [stopping, setStopping] = useState(false);
 
@@ -42,7 +44,7 @@ const WorkerStatusIndicator: React.FC = () => {
       />
       <ToolbarIconButton
         ariaLabel="Stop attached worker"
-        tooltip="Stop attached worker"
+        tooltip={t("common:workers2.stopAttachedWorker")}
         onClick={handleStop}
         disabled={stopping}
       >

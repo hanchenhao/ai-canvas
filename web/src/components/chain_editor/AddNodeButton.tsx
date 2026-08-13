@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { EditorButton } from "../editor_ui";
 import { ToolbarIconButton, Box, MOTION, BORDER_RADIUS } from "../ui_primitives";
@@ -12,6 +13,7 @@ interface AddNodeButtonProps {
 }
 
 export const AddNodeButton: React.FC<AddNodeButtonProps> = ({ onClick, isHero = false }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
 
   if (isHero) {
@@ -41,7 +43,7 @@ export const AddNodeButton: React.FC<AddNodeButtonProps> = ({ onClick, isHero = 
       <ToolbarIconButton
         size="small"
         ariaLabel="Add node"
-        tooltip="Add node"
+        tooltip={t("common:chainEditor.addNode")}
         onClick={onClick}
         icon={<AddIcon sx={{ fontSize: 16, color: theme.vars.palette.primary.main }} />}
         sx={{

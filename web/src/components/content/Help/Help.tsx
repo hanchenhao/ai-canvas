@@ -19,6 +19,7 @@ import DataTypesList from "./DataTypesList";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { DATA_TYPES } from "../../../config/data_types";
 import KeyboardShortcutsView from "./KeyboardShortcutsView";
 import { NODE_EDITOR_SHORTCUTS } from "../../../config/shortcuts";
@@ -198,6 +199,7 @@ const Help = ({
   open: boolean;
   handleClose: () => void;
 }) => {
+  const { t } = useTranslation("common");
   const helpIndex = useAppHeaderStore((state) => state.helpIndex);
   const setHelpIndex = useAppHeaderStore((state) => state.setHelpIndex);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -241,7 +243,7 @@ const Help = ({
                 <Tab label="Keyboard" id="help-tab-1" />
                 <Tab label="DataTypes" id="help-tab-2" />
               </Tabs>
-              <Tooltip title="Open BrainVite Website" placement="bottom"
+              <Tooltip title={t("common:help.openBrainviteWebsite")} placement="bottom"
                 delay={TOOLTIP_ENTER_DELAY}
               >
                 <a
@@ -267,7 +269,7 @@ const Help = ({
               </TabPanel>
               <TabPanel value={helpIndex} index={2}>
                 <DataTypesList
-                  title="Nodetool Data Types"
+                  title={t("common:help.nodetoolDataTypes")}
                   dataTypes={nodetoolTypes}
                   expanded={expandedNodetool}
                   onChange={handleAccordionChange("nodetool")}

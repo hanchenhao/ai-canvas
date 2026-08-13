@@ -14,6 +14,7 @@ import {
   useState
 } from "react";
 import type { FocusEvent, KeyboardEvent, MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useCreateScript, useScripts } from "../../hooks/script/useScripts";
@@ -138,6 +139,7 @@ const ScriptListItem = memo(function ScriptListItem({
   onCommitRename,
   onCancelRename
 }: ScriptListItemProps) {
+  const { t } = useTranslation("common");
   const handleClick = useCallback(() => onOpen(id, name), [id, name, onOpen]);
   const handleContextMenu = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => onContextMenu(event, id, name),
@@ -171,6 +173,7 @@ const ScriptListItem = memo(function ScriptListItem({
   );
 
   if (editing) {
+    const { t } = useTranslation("common");
     return (
       <div className={`script-item ${active ? "active" : ""}`}>
         <FlexRow align="center" gap={1} fullWidth>
@@ -180,7 +183,7 @@ const ScriptListItem = memo(function ScriptListItem({
               className="rename-input"
               type="text"
               defaultValue={name}
-              aria-label="Script name"
+              aria-label={t("common:script.scriptNameAria")}
               autoFocus
               onFocus={(event) => event.currentTarget.select()}
               onKeyDown={handleRenameKeyDown}
@@ -217,6 +220,7 @@ const ScriptListItem = memo(function ScriptListItem({
 });
 
 export const CreateScriptButton = memo(function CreateScriptButton() {
+  const { t } = useTranslation("common");
   const createScript = useCreateScript();
   const openTab = useWorkspaceTabsStore((state) => state.openTab);
   const setVisibility = usePanelStore((state) => state.setVisibility);
@@ -245,7 +249,7 @@ export const CreateScriptButton = memo(function CreateScriptButton() {
   }, [createScript, location.pathname, navigate, openTab, setVisibility]);
 
   return (
-    <Tooltip title="New script" placement="right-start">
+    <Tooltip title={t("common:script.newScript")} placement="right-start">
       <ToolbarIconButton
         ariaLabel="New script"
         onClick={() => void handleCreate()}
@@ -258,6 +262,7 @@ export const CreateScriptButton = memo(function CreateScriptButton() {
 });
 
 const ScriptListPanel = () => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const [filterValue, setFilterValue] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
@@ -407,7 +412,7 @@ const ScriptListPanel = () => {
         open={itemToDelete !== null}
         onClose={() => setItemToDelete(null)}
         onConfirm={handleConfirmDelete}
-        title="Delete script"
+        title={t("common:script.deleteScript")}
         content={`Delete "${itemToDelete?.name ?? ""}"? This cannot be undone.`}
         confirmText="Delete"
         cancelText="Cancel"
@@ -434,7 +439,7 @@ const ScriptListPanel = () => {
         >
           <EmptyState
             variant="error"
-            title="Could not load scripts"
+            title={t("common:script.couldNotLoadScripts")}
             description={error?.message ?? "Try again later."}
           />
         </FlexColumn>

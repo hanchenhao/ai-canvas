@@ -290,5 +290,162 @@
     "cameraPreview": "Camera preview",
     "systemDefaultCamera": "System default camera",
     "systemDefaultInput": "System default input"
+  },
+  "script": {
+    "lineText": "Line text",
+    "playCurrentTake": "Play current take",
+    "duplicateLine": "Duplicate line",
+    "deleteLine": "Delete line",
+    "dragToReorder": "Drag to reorder",
+    "dragToReorderLine": "Drag to reorder line",
+    "playTake": "Play take",
+    "deleteTake": "Delete take",
+    "noTakesYet": "No takes yet",
+    "speakerName": "Speaker name",
+    "removeSpeaker": "Remove speaker",
+    "noSpeakers": "No speakers",
+    "scriptNameAria": "Script name",
+    "newScript": "New script",
+    "deleteScript": "Delete script",
+    "couldNotLoadScripts": "Could not load scripts",
+    "allChangesSaved": "All changes saved",
+    "insertLineHere": "Insert line here",
+    "untitledSection": "Untitled section",
+    "sectionTitle": "Section title",
+    "removeSection": "Remove section",
+    "emptyScript": "Empty script"
+  },
+  "chainEditor": {
+    "addNode": "Add node",
+    "loadingWorkflow": "Loading workflow…",
+    "workflowName": "Workflow name",
+    "saveWorkflow": "Save workflow",
+    "buildYourWorkflow": "Build Your Workflow",
+    "addNodeTitle": "Add Node",
+    "useOutputFromPreviousStep": "Use output from a previous step",
+    "selectOutput": "Select output"
+  },
+  "workflows": {
+    "filterByTags": "Filter by tags",
+    "clearAllTagFilters": "Clear all tag filters",
+    "openingSharedWorkflow": "Opening shared workflow…",
+    "sharedWithMe": "Shared with me",
+    "workflowNameAria": "Workflow name"
+  },
+  "textEditor": {
+    "formatBold": "Format Bold",
+    "formatItalic": "Format Italic",
+    "toggleLargeFont": "Toggle Large Font Size",
+    "insertHorizontalRule": "Insert Horizontal Rule",
+    "copyAsMarkdown": "Copy as Markdown",
+    "toggleWordWrap": "Toggle Word Wrap",
+    "formatCodeBlock": "Format as Code Block",
+    "newVariableName": "New variable name"
+  },
+  "panels": {
+    "webhookUrl": "Webhook URL",
+    "copyWebhookUrl": "Copy webhook URL",
+    "webhookSecret": "Webhook secret",
+    "copyWebhookSecret": "Copy webhook secret",
+    "sendWebhookHeader": "Send this value as the x-webhook-secret header.",
+    "triggerStatus": "Trigger status",
+    "workflowActive": "Workflow active",
+    "checkingStatus": "Checking status…",
+    "copyToClipboard": "Copy to clipboard",
+    "resizeConversationHeight": "Resize conversation height",
+    "showThreads": "Show threads",
+    "openInWorkspaceTab": "Open in a workspace tab",
+    "newConversation": "New conversation",
+    "hideConversation": "Hide conversation",
+    "closeThreads": "Close threads"
+  },
+  "menus": {
+    "notAvailable": "Not Available",
+    "gitCommit": "Git Commit",
+    "userAgent": "User Agent",
+    "condaEnvironment": "Conda Environment",
+    "npmPackages": "NPM Packages",
+    "newVaultName": "New vault name",
+    "showWelcomeScreen": "Show Welcome Screen",
+    "selectNodesOnDrag": "Select Nodes On Drag",
+    "soundNotifications": "Sound Notifications",
+    "automaticUpdates": "Automatic Updates",
+    "updateChannel": "Update Channel",
+    "onCloseBehavior": "On Close Behavior",
+    "askEveryTime": "Ask Every Time:",
+    "askEveryTimeHint": "Shows a dialog with options.",
+    "warnBeforeLargeRuns": "Warn Before Large Runs",
+    "maxConcurrentRuns": "Max Concurrent Runs",
+    "maxConcurrentRunsPerWorkflow": "Max Concurrent Runs per Workflow",
+    "panCanvas": "Pan canvas:",
+    "panCanvasHint": "left-drag moves the view.",
+    "selectNodes": "Select nodes:",
+    "selectNodesHint": "left-drag draws a selection box;",
+    "nodeSelectionMode": "Node Selection Mode",
+    "gridSnapPrecision": "Grid Snap Precision",
+    "connectionSnapRange": "Connection Snap Range",
+    "enableAutosave": "Enable Autosave",
+    "saveBeforeRunning": "Save Before Running",
+    "saveOnWindowClose": "Save on Window Close",
+    "maxVersionsPerWorkflow": "Max Versions per Workflow",
+    "timeFormat": "Time Format",
+    "importWorkflowFile": "Import workflow file",
+    "importWorkflowBundleFile": "Import workflow bundle file",
+    "importAppBundleFile": "Import app bundle file",
+    "commandMenu": "Command menu",
+    "commandMenuSearch": "Command menu search",
+    "noResultsFound": "No results found."
+  },
+  "inputs": {
+    "editValue": "Edit value",
+    "setColor": "Set color",
+    "chooseColor": "Choose color",
+    "dateTime": "Date and time",
+    "searchOptions": "Search options"
+  },
+  "workspace": {
+    "couldNotLoadApp": "Could not load app",
+    "appViewAria": "App view",
+    "loadingEditor": "Loading editor…",
+    "couldNotOpenEditor": "Could not open editor"
+  },
+  "entities": {
+    "pickReferenceImage": "Pick a reference image",
+    "noImages": "No images",
+    "noEntitiesYet": "No entities yet",
+    "entitiesCaption": "Reusable characters, locations, styles, and props",
+    "editEntity": "Edit entity",
+    "removeEntity": "Remove entity"
+  },
+  "colorPicker2": {
+    "copyAllColors": "Copy all colors",
+    "useCurrentColor": "Use current color",
+    "removeStop": "Remove stop"
+  },
+  "workers2": {
+    "stopAttachedWorker": "Stop attached worker"
+  },
+  "logsTable": {
+    "copyLog": "Copy log to clipboard",
+    "viewLogData": "View log data",
+    "scrollToLatest": "Scroll to latest"
+  },
+  "version2": {
+    "selectForComparison": "Select for comparison",
+    "restoreVersion": "Restore this version",
+    "deleteVersion": "Delete version"
+  },
+  "storyboard2": {
+    "storyboardNameAria": "Storyboard name"
+  },
+  "workspaces2": {
+    "selectWorkspaceFolder": "Select Workspace Folder"
+  },
+  "search2": {
+    "clearSearch": "Clear search"
+  },
+  "help": {
+    "openBrainviteWebsite": "Open BrainVite Website",
+    "nodetoolDataTypes": "Nodetool Data Types"
   }
 }

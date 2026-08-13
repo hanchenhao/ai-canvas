@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import isEqual from "../../utils/isEqual";
+import { useTranslation } from "react-i18next";
 import React, {
   useCallback,
   useMemo,
@@ -65,6 +66,7 @@ const Select: React.FC<SelectProps> = ({
   tabIndex,
   changed
 }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const selectRef = useRef<HTMLDivElement>(null);
   const optionsRef = useRef<HTMLUListElement>(null);
@@ -307,7 +309,7 @@ const Select: React.FC<SelectProps> = ({
                 setHighlightedIndex(-1);
               }}
               placeholder="Search..."
-              aria-label="Search options"
+              aria-label={t("common:inputs.searchOptions")}
               onClick={(e) => e.stopPropagation()}
             />
           )}

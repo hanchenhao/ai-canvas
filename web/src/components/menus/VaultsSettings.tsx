@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, TextInput, EditorButton, FlexColumn, FlexRow } from "../ui_primitives";
 
 const DEFAULT_VAULT_ID = "default";
@@ -22,6 +23,7 @@ interface VaultListResult {
  * (e.g. the web build running in a plain browser).
  */
 const VaultsSettings: React.FC = () => {
+  const { t } = useTranslation("common");
   const vaultsApi = typeof window !== "undefined" ? window.api?.vaults : undefined;
 
   const [vaults, setVaults] = useState<VaultInfo[]>([]);
@@ -155,7 +157,7 @@ const VaultsSettings: React.FC = () => {
 
       <FlexRow gap={1} align="flex-end" style={{ marginTop: 12 }}>
         <TextInput
-          label="New vault name"
+          label={t("common:menus.newVaultName")}
           value={newName}
           autoComplete="off"
           disabled={busy}
