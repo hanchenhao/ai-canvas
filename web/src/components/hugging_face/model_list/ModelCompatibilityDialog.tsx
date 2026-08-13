@@ -16,6 +16,7 @@ import {
 } from "../../ui_primitives";
 import type { Theme } from "@mui/material/styles";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import type {
   ModelCompatibilityResult,
   NodeCompatibilityInfo
@@ -130,6 +131,7 @@ const NodeList: React.FC<{
   label: string;
   isRecommended?: boolean;
 }> = ({ items, label, isRecommended }) => {
+  const { t } = useTranslation("huggingface");
   const theme = useTheme();
   if (items.length === 0) {
     return (
@@ -155,7 +157,7 @@ const NodeList: React.FC<{
                 </Text>
                 {isRecommended && (
                   <Chip
-                    label="Best Match"
+                    label={t("huggingface:modelList.bestMatch")}
                     size="small"
                     color="primary"
                     variant="outlined"
@@ -192,7 +194,7 @@ const NodeList: React.FC<{
             <div className="copy-button">
               <CopyButton
                 value={node.nodeType}
-                tooltip="Copy node type"
+                tooltip={t("huggingface:actions.copyNodeType")}
                 tooltipPlacement="left"
               />
             </div>

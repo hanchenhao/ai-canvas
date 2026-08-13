@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 
+import { useTranslation } from "react-i18next";
 import {
   Chip,
   Text,
@@ -22,6 +23,7 @@ import { useModelManagerStore } from "../../../stores/ModelManagerStore";
 import { useTheme } from "@mui/material/styles";
 
 const ModelTypeSidebar: React.FC = () => {
+  const { t } = useTranslation("huggingface");
   const scope = useModelManagerStore((state) => state.scope);
   const { modelTypes, availableModelTypes, modelCountsByType } =
     useModels(scope);
@@ -96,7 +98,7 @@ const ModelTypeSidebar: React.FC = () => {
                 href ? (
                   <ToolbarIconButton
                     icon={<OpenInNewIcon fontSize="small" />}
-                    tooltip="View on Hugging Face"
+                    tooltip={t("huggingface:actions.viewOnHuggingfaceShort")}
                     edge="end"
                     component="a"
                     href={href}

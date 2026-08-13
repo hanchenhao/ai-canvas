@@ -11,7 +11,7 @@ export const ModelShowInExplorerButton: React.FC<{
   disabled?: boolean;
 }> = ({ onClick, disabled }) => (
   <Tooltip
-    title="Show in File Explorer"
+    title={t("huggingface:actions.showInFileExplorer")}
     delay={TOOLTIP_ENTER_DELAY * 2}
     nextDelay={TOOLTIP_ENTER_NEXT_DELAY}
   >
@@ -34,7 +34,7 @@ export const HuggingFaceLink: React.FC<{
 }> = ({ modelId }) =>
   !modelId.endsWith("safetensors") && (
     <Tooltip
-      title="View on HuggingFace"
+      title={t("huggingface:actions.viewOnHuggingface")}
       delay={TOOLTIP_ENTER_DELAY * 2}
       nextDelay={TOOLTIP_ENTER_NEXT_DELAY}
     >
@@ -48,7 +48,7 @@ export const HuggingFaceLink: React.FC<{
       >
         <img
           src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg"
-          alt="Hugging Face"
+          alt={t("huggingface:actions.huggingFaceAlt")}
           style={{
             width: "1.25em",
             height: "auto"
@@ -63,7 +63,7 @@ export const OllamaLink: React.FC<{
 }> = ({ modelId }) => {
   return (
     <Tooltip
-      title="View on Ollama"
+      title={t("huggingface:actions.viewOnOllama")}
       delay={TOOLTIP_ENTER_DELAY * 2}
       nextDelay={TOOLTIP_ENTER_NEXT_DELAY}
     >

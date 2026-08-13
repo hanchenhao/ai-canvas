@@ -169,7 +169,7 @@ const ModelListItem: React.FC<
             </div>
 
             <div className="model-details">
-              <Tooltip title="Runs locally on your device" delay={400}>
+              <Tooltip title={t("huggingface:modelList.runsLocally")} delay={400}>
                 <Chip
                   label="Local"
                   size="small"
@@ -205,7 +205,7 @@ const ModelListItem: React.FC<
               ))}
               {model.pipeline_tag && (
                 <Tooltip
-                  title="View trending models with this tag on HuggingFace"
+                  title={t("huggingface:modelList.viewTrendingTag")}
                   delay={TOOLTIP_ENTER_DELAY * 2}
                   nextDelay={TOOLTIP_ENTER_NEXT_DELAY * 2}
                 >

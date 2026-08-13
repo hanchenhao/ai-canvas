@@ -1,4 +1,5 @@
 import React, { memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import Check from "@mui/icons-material/Check";
 import {
   BORDER_RADIUS,
@@ -46,6 +47,7 @@ export const ModelListItemActions: React.FC<ModelListItemActionsProps> = ({
   showFileExplorerButton = true,
   isCheckingCache = false
 }) => {
+  const { t } = useTranslation("huggingface");
   const isHuggingFace = model.type?.startsWith("hf") ?? false;
   const isOllama = model.type === "llama_model";
   const downloaded = model.downloaded ?? false;
@@ -161,7 +163,7 @@ export const ModelListItemActions: React.FC<ModelListItemActionsProps> = ({
         {handleModelDelete && (
           <DeleteButton
             onClick={handleDeleteClick}
-            tooltip="Delete model"
+            tooltip={t("huggingface:actions.deleteModel")}
           />
         )}
       </div>

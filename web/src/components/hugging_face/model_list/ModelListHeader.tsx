@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Text,
   FlexRow,
@@ -60,6 +61,7 @@ const ModelListHeader: React.FC<ModelListHeaderProps> = ({
   workerName,
   workerSupported
 }) => {
+  const { t } = useTranslation("huggingface");
   const {
     modelSearchTerm,
     setModelSearchTerm,
@@ -191,7 +193,7 @@ const ModelListHeader: React.FC<ModelListHeaderProps> = ({
             }}
           >
             <SelectField
-              label="Sort models by"
+              label={t("huggingface:modelList.sortModelsBy")}
               hideLabel
               variant="outlined"
               value={sortField}
@@ -210,7 +212,7 @@ const ModelListHeader: React.FC<ModelListHeaderProps> = ({
             tooltip={`Sort ${sortDirection === "asc" ? "ascending" : "descending"}`}
             onClick={toggleSortDirection}
             size="small"
-            aria-label="Toggle sort direction"
+            aria-label={t("huggingface:modelList.toggleSortDirection")}
             sx={{
               color: theme.vars.palette.text.secondary,
               "&:hover": {
@@ -240,7 +242,7 @@ const ModelListHeader: React.FC<ModelListHeaderProps> = ({
             }}
           >
             <NodeSlider
-              aria-label="Max model size in GB"
+              aria-label={t("huggingface:modelList.maxModelSize")}
               value={maxModelSizeGB}
               onChange={handleSliderChange}
               valueLabelDisplay="auto"

@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import MemoryIcon from "@mui/icons-material/Memory";
 import DeveloperBoardIcon from "@mui/icons-material/DeveloperBoard";
@@ -48,6 +49,7 @@ const budgetNote = (profile: HardwareProfile): string => {
 };
 
 const HardwareCard: React.FC<HardwareCardProps> = ({ profile }) => {
+  const { t } = useTranslation("huggingface");
   const theme = useTheme();
   const setVramOverrideGb = useModelManagerStore(
     (state) => state.setVramOverrideGb
@@ -115,20 +117,20 @@ const HardwareCard: React.FC<HardwareCardProps> = ({ profile }) => {
         <FlexRow gap={SPACING.lg} align="center" sx={{ flexWrap: "wrap" }}>
           <Stat
             icon={<DeveloperBoardIcon sx={{ fontSize: 14 }} />}
-            label="GPU memory"
+            label={t("huggingface:hardware.gpuMemory")}
             value={
               profile.vramGb != null ? `${Math.round(profile.vramGb)} GB` : "—"
             }
           />
           <Stat
             icon={<MemoryIcon sx={{ fontSize: 14 }} />}
-            label="System RAM"
+            label={t("huggingface:hardware.systemRam")}
             value={
               profile.ramGb != null ? `${Math.round(profile.ramGb)} GB` : "—"
             }
           />
           <Stat
-            label="Recommend for"
+            label={t("huggingface:hardware.recommendFor")}
             value={
               profile.budgetGb != null ? `${profile.budgetGb} GB` : "Not set"
             }
@@ -139,7 +141,7 @@ const HardwareCard: React.FC<HardwareCardProps> = ({ profile }) => {
               GPU memory
             </Caption>
             <SelectField
-              label="GPU memory budget"
+              label={t("huggingface:hardware.gpuMemoryBudget")}
               hideLabel
               variant="outlined"
               value={selectValue}

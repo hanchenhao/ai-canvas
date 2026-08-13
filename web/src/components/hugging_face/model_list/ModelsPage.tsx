@@ -10,7 +10,7 @@ import ModelListIndex from "./ModelListIndex";
 const ModelsPage: React.FC = () => (
   <ManagerPageLayout
     icon={<ViewInArOutlinedIcon sx={{ fontSize: 22 }} />}
-    title="Model Manager"
+    title={t("huggingface:modelList.modelManager")}
     subtitle="Browse, download, and manage local AI models."
     docsTopic="modelsManager"
     padded={false}

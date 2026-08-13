@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import ComputerIcon from "@mui/icons-material/Computer";
 import StorageOutlinedIcon from "@mui/icons-material/StorageOutlined";
@@ -34,6 +35,7 @@ interface LocalModelsHeroProps {
 }
 
 const LocalModelsHero: React.FC<LocalModelsHeroProps> = ({ models }) => {
+  const { t } = useTranslation("huggingface");
   const theme = useTheme();
 
   const stats = useMemo(() => {
@@ -110,7 +112,7 @@ const LocalModelsHero: React.FC<LocalModelsHeroProps> = ({ models }) => {
         <FlexRow gap={3} align="center" sx={{ flexShrink: 0 }}>
           <Stat
             value={String(stats.count)}
-            label="Models installed"
+            label={t("huggingface:modelList.modelsInstalled")}
             icon={
               <Caption
                 sx={{
@@ -125,7 +127,7 @@ const LocalModelsHero: React.FC<LocalModelsHeroProps> = ({ models }) => {
           />
           <Stat
             value={stats.size}
-            label="Storage used"
+            label={t("huggingface:modelList.storageUsed")}
             icon={
               <StorageOutlinedIcon
                 sx={{ fontSize: 14, color: theme.vars.palette.text.secondary }}

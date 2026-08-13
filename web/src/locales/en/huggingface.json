@@ -82,5 +82,31 @@
   "aria": {},
   "progress": {
     "pending": "…"
+  },
+  "actions": {
+    "showInFileExplorer": "Show in File Explorer",
+    "viewOnHuggingface": "View on HuggingFace",
+    "viewOnOllama": "View on Ollama",
+    "deleteModel": "Delete model",
+    "copyNodeType": "Copy node type",
+    "viewOnHuggingfaceShort": "View on Hugging Face",
+    "huggingFaceAlt": "Hugging Face"
+  },
+  "modelList": {
+    "modelManager": "Model Manager",
+    "runsLocally": "Runs locally on your device",
+    "viewTrendingTag": "View trending models with this tag on HuggingFace",
+    "bestMatch": "Best Match",
+    "sortModelsBy": "Sort models by",
+    "toggleSortDirection": "Toggle sort direction",
+    "maxModelSize": "Max model size in GB",
+    "modelsInstalled": "Models installed",
+    "storageUsed": "Storage used"
+  },
+  "hardware": {
+    "gpuMemory": "GPU memory",
+    "systemRam": "System RAM",
+    "recommendFor": "Recommend for",
+    "gpuMemoryBudget": "GPU memory budget"
   }
 }

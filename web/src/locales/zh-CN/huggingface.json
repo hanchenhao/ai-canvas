@@ -82,5 +82,31 @@
   "aria": {},
   "progress": {
     "pending": "…"
+  },
+  "actions": {
+    "showInFileExplorer": "在文件管理器中显示",
+    "viewOnHuggingface": "在 HuggingFace 上查看",
+    "viewOnOllama": "在 Ollama 上查看",
+    "deleteModel": "删除模型",
+    "copyNodeType": "复制节点类型",
+    "viewOnHuggingfaceShort": "在 Hugging Face 上查看",
+    "huggingFaceAlt": "Hugging Face"
+  },
+  "modelList": {
+    "modelManager": "模型管理",
+    "runsLocally": "在本机运行",
+    "viewTrendingTag": "在 HuggingFace 上查看此标签下的热门模型",
+    "bestMatch": "最佳匹配",
+    "sortModelsBy": "模型排序方式",
+    "toggleSortDirection": "切换排序方向",
+    "maxModelSize": "模型最大体积 (GB)",
+    "modelsInstalled": "已安装模型",
+    "storageUsed": "已占用空间"
+  },
+  "hardware": {
+    "gpuMemory": "GPU 显存",
+    "systemRam": "系统内存",
+    "recommendFor": "推荐用途",
+    "gpuMemoryBudget": "GPU 显存预算"
   }
 }
