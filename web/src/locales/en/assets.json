@@ -133,5 +133,10 @@
     "hideInfo": "Hide info",
     "showInfo": "Show info",
     "close": "Close"
+  },
+  "renameDialog": {
+    "multipleSelected": "Multiple assets selected:",
+    "appendNumber": "Names will be appended with a number.",
+    "renameButton": "Rename"
   }
 }

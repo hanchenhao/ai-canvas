@@ -133,5 +133,10 @@
     "hideInfo": "隐藏信息",
     "showInfo": "显示信息",
     "close": "关闭"
+  },
+  "renameDialog": {
+    "multipleSelected": "已选中多个素材:",
+    "appendNumber": "名称将附加数字。",
+    "renameButton": "重命名"
   }
 }

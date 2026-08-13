@@ -68,6 +68,7 @@ const frame = (height?: number): React.CSSProperties => ({
 export const SketchWidget: React.FC<
   DocumentWidgetProps & { showDimensions?: boolean }
 > = (props) => {
+  const { t } = useTranslation("applications");
   const { value, designMode } = useReadBinding(props);
   const bound = firstItem(value);
 
@@ -125,10 +126,12 @@ export const SketchWidget: React.FC<
 export const TimelineWidget: React.FC<
   DocumentWidgetProps & { showMetadata?: boolean }
 > = (props) => {
+  const { t } = useTranslation("applications");
   const { value, designMode } = useReadBinding(props);
   const bound = firstItem(value);
 
   const inlineSequence = React.useMemo(
+    () => resolveTimelineSequence(bound),
     () => resolveTimelineSequence(bound),
     [bound]
   );

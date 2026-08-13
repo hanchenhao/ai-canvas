@@ -127,6 +127,7 @@ const OperationRow: React.FC<{
   onPatch: (patch: Partial<OperationBinding>) => void;
   onRemove: () => void;
 }> = ({ operation, workflowOptions, onPatch, onRemove }) => {
+  const { t } = useTranslation("applications");
   // A release pins a workflow this app can no longer list (deleted, or owned
   // elsewhere); keep it selectable rather than silently switching the binding.
   const options = workflowOptions.some((o) => o.value === operation.workflowId)
@@ -181,7 +182,9 @@ const VariableRow: React.FC<{
   variable: VariableDeclaration;
   onPatch: (patch: Partial<VariableDeclaration>) => void;
   onRemove: () => void;
-}> = ({ variable, onPatch, onRemove }) => (
+}> = ({ variable, onPatch, onRemove }) => {
+  const { t } = useTranslation("applications");
+  return (
   <EntryCard
     title={variable.name || variable.id}
     subtitle={`var:${variable.id}`}
@@ -230,7 +233,8 @@ const VariableRow: React.FC<{
       <Caption color="secondary">{t("applications:dataPanel.rememberHint")}</Caption>
     ) : null}
   </EntryCard>
-);
+  );
+};
 
 const ResourceRow: React.FC<{
   resource: ResourceBinding;
@@ -261,6 +265,7 @@ const AddResourceForm: React.FC<{ onAdd: (input: {
   const [name, setName] = useState("");
   const [kind, setKind] = useState<ResourceKind>("asset");
   const [projectId, setProjectId] = useState("");
+  const { t } = useTranslation("applications");
 
   const submit = useCallback(() => {
     if (!projectId.trim()) return;

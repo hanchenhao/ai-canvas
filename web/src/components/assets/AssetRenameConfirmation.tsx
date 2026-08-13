@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { Text, Dialog, AlertBanner, EditorButton, FlexColumn, FlexRow, TextInput, SPACING } from "../ui_primitives";
 import { getMousePosition } from "../../utils/MousePosition";
@@ -17,6 +18,7 @@ const AssetRenameConfirmation: React.FC<AssetRenameConfirmationProps> = (
   props
 ) => {
   const { assets } = props;
+  const { t } = useTranslation("assets");
   const setDialogOpen = useAssetGridStore((state) => state.setRenameDialogOpen);
   const dialogOpen = useAssetGridStore((state) => state.renameDialogOpen);
   const [dialogPosition, setDialogPosition] = useState({ x: 0, y: 0 });
@@ -194,14 +196,14 @@ const AssetRenameConfirmation: React.FC<AssetRenameConfirmationProps> = (
                     className="asset-rename-confirm-button button-confirm"
                     onClick={handleRename}
                   >
-                    Rename
+                    {t("assets:renameDialog.renameButton")}
                   </EditorButton>
                 </FlexRow>
                 {assets && assets.length > 1 && (
                   <FlexColumn className="asset-rename-notice-container" gap={SPACING.none}>
                     <Text className="asset-rename-notice notice" size="small">
-                      <span>Multiple assets selected:</span> <br />
-                      Names will be appended with a number.
+                      <span>{t("assets:renameDialog.multipleSelected")}</span> <br />
+                      {t("assets:renameDialog.appendNumber")}
                     </Text>
                   </FlexColumn>
                 )}

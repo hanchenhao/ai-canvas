@@ -257,6 +257,7 @@ export const ChatComposerWidget: React.FC<ChatComposerWidgetProps> = ({
   events,
   disabled
 }) => {
+  const { t } = useTranslation("applications");
   const { write } = useAppRuntimeContext();
   const { setValue, emit, designMode, runnerState } = useWidgetRuntime({
     id,
