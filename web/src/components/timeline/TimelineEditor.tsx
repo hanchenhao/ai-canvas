@@ -699,9 +699,8 @@ const TimelineEditorBody: React.FC<
     void refetch();
   }, [refetch]);
 
-  const handleCreateNewSequence = useCallback(() => {
-    const { t } = useTranslation("timeline");
-    createTimeline.reset();
+ const handleCreateNewSequence = useCallback(() => {
+   createTimeline.reset();
     createTimeline.mutate(
       { name: t("timeline:sequence.untitled"), projectId: projectIdForNewSequence },
       {

@@ -392,9 +392,8 @@ const SketchCanvasContextMenu: React.FC<SketchCanvasContextMenuProps> = ({
     return () => window.removeEventListener("keydown", handleKeyDown, true);
   }, [open, onClose]);
 
-  const renderColorContext = () => {
-    const { t } = useTranslation("sketch");
-    if (isShapeTool(activeTool)) {
+ const renderColorContext = () => {
+   if (isShapeTool(activeTool)) {
       return (
         <FlexRow gap={1}>
           <ColorPreview label="Stroke" color={shapeSettings.strokeColor} />

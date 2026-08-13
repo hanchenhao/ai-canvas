@@ -53,9 +53,8 @@ const ListProperty = (props: PropertyProps) => {
 
   const containerStyle = useMemo(() => ({ marginBottom: getSpacingPx(SPACING.md) }), []);
 
-  if (props.nodeType === "nodetool.constant.List") {
-    const { t } = useTranslation("properties");
-    return (
+ if (props.nodeType === "nodetool.constant.List") {
+   return (
       <>
         <div style={containerStyle}>
           <PropertyLabel name="Data Type" id={id} />

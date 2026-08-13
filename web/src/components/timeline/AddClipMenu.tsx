@@ -147,9 +147,8 @@ const WorkflowList: React.FC<WorkflowListProps> = memo(
       );
     }
 
-    if (filtered.length === 0) {
-      const { t } = useTranslation("timeline");
-      return (
+   if (filtered.length === 0) {
+     return (
         <EmptyState
           title={searchQuery ? t("timeline:addClip.noMatches") : emptyLabel}
           size="small"
@@ -481,9 +480,8 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
       !!directModel &&
       !isAdding;
 
-    const handlePromptSubmit = useCallback(async () => {
-      const { t } = useTranslation("timeline");
-      if (!canSubmitPrompt) return;
+ const handlePromptSubmit = useCallback(async () => {
+     if (!canSubmitPrompt) return;
       if (!directGenKind || !mediaTypeForClip) return;
       // Clear any stale failure toast from a prior attempt before we try
       // again — the user shouldn't see an error linger after a successful

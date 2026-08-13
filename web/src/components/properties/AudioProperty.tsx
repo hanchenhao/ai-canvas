@@ -88,9 +88,8 @@ const AudioProperty = (props: PropertyProps) => {
   const { isStreaming, toggle, stream, version } =
     useRealtimeAudioStream(inputNodeName, sampleRate);
 
-  if (isRealtime) {
-    const { t } = useTranslation("properties");
-    return (
+ if (isRealtime) {
+   return (
       <div className="audio-property" css={cssStyles}>
         <div className="realtime-audio-controls">
           {isStreaming ? (

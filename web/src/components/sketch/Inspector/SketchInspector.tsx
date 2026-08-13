@@ -41,9 +41,8 @@ const SketchInspectorInner: React.FC = () => {
   }
 
   let body: React.ReactNode;
-  if (selectedLayerIds.length > 1) {
-    const { t } = useTranslation("sketch");
-    body = (
+ if (selectedLayerIds.length > 1) {
+   body = (
       <EmptyState
         variant="empty"
         size="small"
@@ -51,9 +50,8 @@ const SketchInspectorInner: React.FC = () => {
         description={t("sketch:inspector.selectSingleLayer")}
       />
     );
-  } else if (!layer) {
-    const { t } = useTranslation("sketch");
-    body = (
+ } else if (!layer) {
+   body = (
       <EmptyState
         variant="empty"
         size="small"

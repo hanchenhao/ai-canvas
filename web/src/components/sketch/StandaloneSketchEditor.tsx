@@ -218,9 +218,8 @@ const StandaloneSketchEditorBody: React.FC<StandaloneSketchEditorProps> = memo(
     // Show the spinner until we've captured a seed for this documentId.
     // Using `seed` (not the live query state) keeps the canvas mounted across
     // any future background query state changes.
-    if (!seed || seed.id !== documentId) {
-      const { t } = useTranslation("sketch");
-      if (documentQuery.isError) {
+   if (!seed || seed.id !== documentId) {
+     if (documentQuery.isError) {
         return (
           <FlexColumn align="center" justify="center" sx={centered}>
             <EmptyState

@@ -150,18 +150,16 @@ const EntityLibraryInternal: React.FC = () => {
     [deleteEntity]
   );
 
-  const content = useMemo(() => {
-    const { t } = useTranslation("common");
-    if (isLoading) {
+ const content = useMemo(() => {
+   if (isLoading) {
       return (
         <FlexRow align="center" justify="center" sx={{ p: 4 }}>
           <LoadingSpinner />
         </FlexRow>
       );
     }
-    if (!entities || entities.length === 0) {
-      const { t } = useTranslation("common");
-      return (
+   if (!entities || entities.length === 0) {
+     return (
         <EmptyState
           variant="empty"
           title={t("common:entities.noEntitiesYet")}

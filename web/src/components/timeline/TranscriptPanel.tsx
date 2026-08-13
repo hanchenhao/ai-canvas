@@ -66,10 +66,9 @@ export const TranscriptPanel: React.FC = memo(() => {
     return { segments: doc.segments, fillerCount };
   }, [clips]);
 
-  const onImportFile = useCallback(
-    async (file: File) => {
-      const { t } = useTranslation("timeline");
-      setImporting(true);
+ const onImportFile = useCallback(
+   async (file: File) => {
+     setImporting(true);
       try {
         const asset = await createAsset(file);
         await importMedia(asset);
@@ -88,14 +87,12 @@ export const TranscriptPanel: React.FC = memo(() => {
     [createAsset, importMedia, addNotification, t]
   );
 
-  const onExtractScript = useCallback(async () => {
-    const { t } = useTranslation("timeline");
-    if (!sequenceId) return;
+ const onExtractScript = useCallback(async () => {
+   if (!sequenceId) return;
     try {
       await extract(sequenceId);
-    } catch (err) {
-      const { t } = useTranslation("timeline");
-      addNotification({
+   } catch (err) {
+     addNotification({
         content: t("timeline:transcript.extractFailed", {
           message: err instanceof Error ? err.message : String(err)
         }),

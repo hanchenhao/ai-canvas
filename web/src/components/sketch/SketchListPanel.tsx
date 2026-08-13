@@ -260,9 +260,8 @@ const SketchListItem = memo(function SketchListItem({
     clearDrag();
   }, [clearDrag]);
 
-  if (editing) {
-    const { t } = useTranslation("sketch");
-    return (
+ if (editing) {
+   return (
       <div className={`sketch-item ${active ? "active" : ""}`}>
         <FlexRow align="center" gap={1} fullWidth>
           <BrushOutlinedIcon className="sketch-icon" />
@@ -323,9 +322,8 @@ export const CreateSketchButton = memo(function CreateSketchButton() {
   const location = useLocation();
   const { t } = useTranslation(["sketch"]);
 
-  const handleCreate = useCallback(async () => {
-    const { t } = useTranslation("sketch");
-    try {
+ const handleCreate = useCallback(async () => {
+   try {
       const sketch = await createSketch.mutateAsync({
         id: newDocumentId(),
         name: t("sketch:list.untitledSketch"),

@@ -506,9 +506,8 @@ const SketchLayersPanel: React.FC<SketchLayersPanelProps> = ({
   // ─── Direct-generation layers (text-to-image, image-to-image) ─────
   const upsertBinding = useSketchSessionStore((s) => s.upsertBinding);
   const addDirectGenLayer = useCallback(
-    (kind: "text-to-image" | "image-to-image") => {
-      const { t } = useTranslation("sketch");
-      const baseName =
+   (kind: "text-to-image" | "image-to-image") => {
+     const baseName =
         kind === "text-to-image"
           ? t("sketch:layersPanel.textToImageName")
           : t("sketch:layersPanel.imageToImageName");

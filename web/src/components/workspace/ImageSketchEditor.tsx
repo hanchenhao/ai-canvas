@@ -77,9 +77,8 @@ const ImageSketchEditor = ({ asset, onClose }: ImageSketchEditorProps) => {
     };
   }, [asset, documentId, updateAsset]);
 
-  if (error) {
-    const { t } = useTranslation("common");
-    return (
+ if (error) {
+   return (
       <FlexColumn fullWidth fullHeight align="center" justify="center">
         <EmptyState
           variant="error"

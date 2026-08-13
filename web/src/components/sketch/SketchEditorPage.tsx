@@ -17,9 +17,8 @@ const SketchEditorPage: React.FC = memo(function SketchEditorPage() {
   const { t } = useTranslation("sketch");
   const { documentId } = useParams<{ documentId: string }>();
 
-  if (!documentId) {
-    const { t } = useTranslation("sketch");
-    return (
+ if (!documentId) {
+   return (
       <FlexColumn
         align="center"
         justify="center"

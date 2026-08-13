@@ -288,9 +288,8 @@ function SketchEditor({
   // prop-drilling the canvas ref.
   const setCanvasGetters = useSketchCanvasRefStore((s) => s.setGetters);
   const clearCanvasGetters = useSketchCanvasRefStore((s) => s.clearGetters);
-  useEffect(() => {
-    const { t } = useTranslation("sketch");
-    const canvasRef = session.canvasRef;
+ useEffect(() => {
+   const canvasRef = session.canvasRef;
     const pushHistory = session.historyStore.pushHistory;
     setCanvasGetters({
       flattenToDataUrl: () => canvasRef.current?.flattenToDataUrl() ?? "",

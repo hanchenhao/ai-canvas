@@ -258,9 +258,8 @@ export const VersionHistoryPanel: React.FC<VersionHistoryPanelProps> = ({
     );
   }
 
-  if (error) {
-    const { t } = useTranslation("common");
-    return (
+ if (error) {
+   return (
       <FlexColumn
         sx={{
           backgroundColor: "var(--palette-background-default)",

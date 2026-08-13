@@ -35,7 +35,8 @@ const VideoModelSelect: React.FC<VideoModelSelectProps> = ({
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const addRecent = useModelPreferencesStore((s) => s.addRecent);
-  const inStudio = useInStudio();
+ const inStudio = useInStudio();
+  const { t } = useTranslation("properties");
 
   const { data: models } = useQuery({
     queryKey: ["video-models"],
@@ -76,9 +77,8 @@ const VideoModelSelect: React.FC<VideoModelSelectProps> = ({
     [onChange, addRecent]
   );
 
-  if (inStudio) {
-    const { t } = useTranslation("properties");
-    return (
+ if (inStudio) {
+   return (
       <CuratedModelSelect
         label={t("properties:videoModel")}
         options={forTasks(STUDIO_CLIP_MODELS, task)}

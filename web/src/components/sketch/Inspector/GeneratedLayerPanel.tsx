@@ -159,9 +159,8 @@ export const GeneratedLayerPanel: React.FC<GeneratedLayerPanelProps> = memo(
       [layer.id, setParamOverride]
     );
 
-    if (!binding) {
-      const { t } = useTranslation("sketch");
-      return (
+   if (!binding) {
+     return (
         <Panel
           background="default"
           bordered={false}

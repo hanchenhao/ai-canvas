@@ -52,9 +52,8 @@ const ApplicationSurface = ({ refId }: ApplicationSurfaceProps) => {
     return <LoadingSpinner size="large" text="Loading app" />;
   }
 
-  if (isError || !application) {
-    const { t } = useTranslation("common");
-    return (
+ if (isError || !application) {
+   return (
       <EmptyState
         variant="error"
         title={t("common:workspace.couldNotLoadApp")}

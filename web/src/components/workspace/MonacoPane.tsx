@@ -101,9 +101,8 @@ const MonacoPane = ({
     );
   }
 
-  if (!MonacoEditor) {
-    const { t } = useTranslation("common");
-    return (
+ if (!MonacoEditor) {
+   return (
       <FlexColumn
         fullWidth
         fullHeight

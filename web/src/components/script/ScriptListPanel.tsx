@@ -172,9 +172,8 @@ const ScriptListItem = memo(function ScriptListItem({
     [id, name, onOpen]
   );
 
-  if (editing) {
-    const { t } = useTranslation("common");
-    return (
+ if (editing) {
+   return (
       <div className={`script-item ${active ? "active" : ""}`}>
         <FlexRow align="center" gap={1} fullWidth>
           <RecordVoiceOverOutlinedIcon className="script-icon" />

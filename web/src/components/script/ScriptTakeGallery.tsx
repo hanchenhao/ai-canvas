@@ -144,9 +144,8 @@ const ScriptTakeGallery = ({
   currentTakeId
 }: ScriptTakeGalleryProps) => {
   const { t } = useTranslation("common");
-  if (takes.length === 0) {
-    const { t } = useTranslation("common");
-    return (
+ if (takes.length === 0) {
+   return (
       <Box sx={{ minWidth: 260, padding: SPACING.md }}>
         <EmptyState
           title={t("common:script.noTakesYet")}

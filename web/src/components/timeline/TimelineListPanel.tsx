@@ -261,9 +261,8 @@ const TimelineListItem = memo(function TimelineListItem({
     clearDrag();
   }, [clearDrag]);
 
-  if (editing) {
-    const { t } = useTranslation("timeline");
-    return (
+ if (editing) {
+   return (
       <div className={`timeline-item ${active ? "active" : ""}`}>
         <FlexRow align="center" gap={1} fullWidth>
           <MovieOutlinedIcon className="timeline-icon" />
@@ -319,9 +318,8 @@ export const CreateTimelineButton = memo(function CreateTimelineButton() {
   const location = useLocation();
   const { t } = useTranslation(["timeline"]);
 
-  const handleCreate = useCallback(async () => {
-    const { t } = useTranslation("timeline");
-    try {
+ const handleCreate = useCallback(async () => {
+   try {
       const timeline = await createTimeline.mutateAsync({
         id: newDocumentId(),
         name: t("timeline:list.untitledVideo"),
@@ -405,9 +403,8 @@ const TimelineListPanel = () => {
   }, [data, filterValue]);
 
   const handleOpen = useCallback(
-    (id: string, name: string) => {
-      const { t } = useTranslation("timeline");
-      if (location.pathname.startsWith("/workspace")) {
+   (id: string, name: string) => {
+     if (location.pathname.startsWith("/workspace")) {
         openTab({
           type: "timeline",
           ref: id,

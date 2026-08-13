@@ -98,9 +98,8 @@ export const TopBar: React.FC<TopBarProps> = memo(
       [closeOverflow]
     );
 
-    if (isMobile) {
-      const { t } = useTranslation("timeline");
-      const hasActions =
+   if (isMobile) {
+     const hasActions =
         !!onOpenSettings || !!onSave || !!onSaveToAssets || !!onExportVideo;
       return (
         <FlexRow align="flex-start" gap={SPACING.sm} fullWidth css={styles(theme, true)}>

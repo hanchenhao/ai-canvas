@@ -143,18 +143,16 @@ const SlashCommandMenu: React.FC<{ nodeKey: NodeKey }> = ({ nodeKey }) => {
   const [active, setActive] = useState(0);
 
   const labelFor = useCallback(
-    (cmd: SlashCommand) => {
-      const { t } = useTranslation("timeline");
-      if (cmd.id === "scene") return t("timeline:slashCommand.newScene");
+   (cmd: SlashCommand) => {
+     if (cmd.id === "scene") return t("timeline:slashCommand.newScene");
       return cmd.id;
     },
     [t]
   );
 
   const hintFor = useCallback(
-    (cmd: SlashCommand) => {
-      const { t } = useTranslation("timeline");
-      if (cmd.id === "scene") return t("timeline:slashCommand.newSceneHint");
+   (cmd: SlashCommand) => {
+     if (cmd.id === "scene") return t("timeline:slashCommand.newSceneHint");
       return "";
     },
     [t]

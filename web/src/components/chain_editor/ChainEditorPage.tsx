@@ -44,9 +44,8 @@ const ChainEditorPage: React.FC = () => {
     init();
   }, [workflowId, loadWorkflow, newWorkflow]);
 
-  if (loading) {
-    const { t } = useTranslation("common");
-    return (
+ if (loading) {
+   return (
       <FlexColumn align="center" justify="center" fullHeight fullWidth gap={2}>
         <LoadingSpinner size="large" />
         <Text color="secondary">{t("common:chainEditorExtra.loadingWorkflow")}</Text>

@@ -146,9 +146,8 @@ export const TimelineInspector: React.FC = memo(() => {
 
   // ── Empty / multi-selection states ──────────────────────────────────────
 
-  if (selectedCount === 0) {
-    const { t } = useTranslation("timeline");
-    return (
+ if (selectedCount === 0) {
+   return (
       <Panel
         background="default"
         bordered={false}
@@ -166,9 +165,8 @@ export const TimelineInspector: React.FC = memo(() => {
     );
   }
 
-  if (selectedCount > 1) {
-    const { t } = useTranslation("timeline");
-    return (
+ if (selectedCount > 1) {
+   return (
       <Panel
         background="default"
         bordered={false}

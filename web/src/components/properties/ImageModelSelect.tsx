@@ -128,9 +128,8 @@ const ImageModelSelect: React.FC<ImageModelSelectProps> = ({
     [onChange, addRecent]
   );
 
-  if (inStudio) {
-    const { t } = useTranslation("common");
-    return (
+ if (inStudio) {
+   return (
       <CuratedModelSelect
         label={t("common:propertiesExtra.imageModel")}
         options={forTasks(STUDIO_STILL_MODELS, task)}

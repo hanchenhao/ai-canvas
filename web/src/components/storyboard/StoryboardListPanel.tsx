@@ -176,9 +176,8 @@ const StoryboardListItem = memo(function StoryboardListItem({
     [id, name, onOpen]
   );
 
-  if (editing) {
-    const { t } = useTranslation("common");
-    return (
+ if (editing) {
+   return (
       <div className={`storyboard-item ${active ? "active" : ""}`}>
         <FlexRow align="center" gap={1} fullWidth>
           <DashboardOutlinedIcon className="storyboard-icon" />

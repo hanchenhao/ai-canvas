@@ -56,9 +56,8 @@ export const ClipActions: React.FC<ClipActionsProps> = memo(
     const [replaceOpen, setReplaceOpen] = useState(false);
     const [assetIdInput, setAssetIdInput] = useState("");
 
-    const handleDuplicate = useCallback(async () => {
-      const { t } = useTranslation("timeline");
-      if (duplicateBusyRef.current) {
+   const handleDuplicate = useCallback(async () => {
+     if (duplicateBusyRef.current) {
         return;
       }
       duplicateBusyRef.current = true;
@@ -80,9 +79,8 @@ export const ClipActions: React.FC<ClipActionsProps> = memo(
     // Drops a fresh sibling immediately to the right with the same binding
     // (workflow + overrides, or prompt + model) but no rendered asset, so
     // the user can roll a new take without losing the existing one.
-    const handleRegenerateAsCopy = useCallback(() => {
-      const { t } = useTranslation("timeline");
-      try {
+   const handleRegenerateAsCopy = useCallback(() => {
+     try {
         const newClipId = regenerateAsCopy(clipId, duplicateOffsetMs);
         selectClip(newClipId);
       } catch (err) {
