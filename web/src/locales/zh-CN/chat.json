@@ -210,15 +210,15 @@
   },
   "quickStart": {
     "title": "用 AI 撰写提示词",
-    "subtitle": "描述你的需求,或从下列快捷操作开始。草稿会直接填入编辑器。",
+    "subtitle": "描述你的需求，或从下列快捷操作开始。草稿会直接填入编辑器。",
     "quickStarts": "快捷操作",
     "draftFromScratch": "从零起草提示词",
     "addInputVariables": "添加输入变量",
     "makeConcise": "精简内容",
     "addSystemRole": "添加系统角色与分节",
-    "draftFromScratchPrompt": "从零起草{{target}}。必要时请向我了解目标和受众,然后写一段清晰、结构良好的提示词。",
-    "addInputVariablesPrompt": "将{{target}}改写为使用 {{ variable }} 占位符来承载关键输入,使其成为可复用的模板。",
-    "makeConcisePrompt": "在不丢失重要指令或约束的前提下,精简{{target}}。",
-    "addSystemRolePrompt": "用明确的系统角色和分节(背景、任务、约束、输出格式)重构{{target}}。"
+    "draftFromScratchPrompt": "从零起草{{target}}。必要时请向我了解目标和受众，然后写一段清晰、结构良好的提示词。",
+    "addInputVariablesPrompt": "将{{target}}改写为使用 {{ variable }} 占位符来承载关键输入，使其成为可复用的模板。",
+    "makeConcisePrompt": "在不丢失重要指令或约束的前提下，精简{{target}}。",
+    "addSystemRolePrompt": "用明确的系统角色和分节（背景、任务、约束、输出格式）重构{{target}}。"
   }
 }

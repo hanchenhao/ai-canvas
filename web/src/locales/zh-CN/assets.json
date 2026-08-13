@@ -3,7 +3,7 @@
     "dropFilesToUpload": "拖放文件以上传"
   },
   "tree": {
-    "itemsCount": "({{count}} 项)",
+    "itemsCount": "（{{count}} 项）",
     "noAssetsFound": "未找到素材"
   },
   "workflowTree": {
@@ -135,7 +135,7 @@
     "close": "关闭"
   },
   "renameDialog": {
-    "multipleSelected": "已选中多个素材:",
+    "multipleSelected": "已选中多个素材：",
     "appendNumber": "名称将附加数字。",
     "renameButton": "重命名"
   }

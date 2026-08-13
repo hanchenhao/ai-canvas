@@ -37,7 +37,7 @@
     "feature4": "批量处理大量文档",
     "description1": "集合把文本和图像的向量表示整理到本地 SQLite 数据库中。",
     "description2": "创建集合后，工作流就能进行语义搜索，节点可基于概念含义（而非精确关键词匹配）查找并处理数据。",
-    "nodeList": "关键节点包括用于填充数据的 <strong>Index Image</strong> 和 <strong>Index Text Chunk</strong>，以及用于检索的 <strong>Query Image</strong>、<strong>Query Text</strong> 或 <strong>Hybrid Search</strong>。"
+    "nodeList": "关键节点包括用于填充数据的<strong>索引图像</strong>和<strong>索引文本块</strong>，以及用于检索的<strong>查询图像</strong>、<strong>查询文本</strong>或<strong>混合检索</strong>。"
   },
   "item": {
     "deleteTooltip": "删除此集合",

@@ -28,7 +28,7 @@
     "provider": "服务商",
     "gpu": "GPU",
     "vcpu": "vCPU",
-    "disk": "磁盘 (GB)",
+    "disk": "磁盘（GB）",
     "idleTimeout": "空闲超时（分钟）",
     "maxLifetime": "最长存活（分钟）",
     "workerImagePreset": "工作节点镜像预设",
@@ -70,19 +70,19 @@
     "apiKeyMissingDesc": "在开通 {{provider}} 工作节点之前，请先到 设置 → 模型与服务商 中添加它 —— 没有它开通会失败。"
   },
   "helper": {
-    "name": "用于识别这份模板的标签，例如 “A40 图像工作节点”。",
+    "name": "用于识别这份模板的标签，例如 A40 图像工作节点。",
     "provider": "GPU 从哪里租。RunPod 运行一台专用 pod；Vast 在其市场上挑最便宜的匹配报价。",
-    "gpuRunpod": "要租哪种机器。选择 GPU 用于模型推理，或选 “仅 CPU” 获得更便宜的 CPU pod（例如数据/文本节点）。显存越大可运行的模型越大。",
+    "gpuRunpod": "要租哪种机器。选择 GPU 用于模型推理，或选 仅 CPU 获得更便宜的 CPU pod（例如数据/文本节点）。显存越大可运行的模型越大。",
     "gpuVast": "要租哪种 GPU。显存越大可运行的模型越大；选择能装下模型的最小档位以节省费用。",
-    "gpuIdRunpod": "RunPod 的精确 id，例如 “NVIDIA RTX 6000 Ada Generation”。",
-    "gpuIdVast": "Vast 的精确名称，例如 “RTX_6000Ada”。",
+    "gpuIdRunpod": "RunPod 的精确 id（GPU 型号全称）。",
+    "gpuIdVast": "Vast 的精确名称（GPU 型号全称）。",
     "vcpu": "仅 CPU pod 的虚拟 CPU 数量。RunPod 会挑选匹配的 CPU 规格。",
     "disk": "用于模型缓存的持久化存储卷。模型在这里下载一次，停止/恢复后仍然保留。HF 模型体积大 —— 请保持充足容量。",
     "idleTimeout": "空闲达到此时长 → 暂停（释放 GPU，保留存储卷和模型）。这是防止 GPU 账单失控的主要手段。留空 = 永不暂停。",
-    "workerImagePreset": "ComfyUI 工作节点会前置一个同机 ComfyUI 服务，用于 “运行 ComfyUI 工作流（工作节点）” 节点。",
+    "workerImagePreset": "ComfyUI 工作节点会前置一个同机 ComfyUI 服务，用于 运行 ComfyUI 工作流（工作节点）节点。",
     "workerImage": "服务商运行的容器镜像。可在上方选预设，或填写你自己的工作节点构建。",
     "tokenPolicy": "Generate 为每个工作节点签发新的鉴权令牌（推荐）。Fixed 复用你在别处设置的令牌。",
-    "maxLifetime": "硬性上限：达到此时长工作节点会被销毁 —— pod 和存储卷都会删除（模型会丢失）—— 以停止所有计费。留空 = 不设上限。"
+    "maxLifetime": "硬性上限：达到此时长工作节点会被销毁 —— pod 和存储卷都会删除（模型会丢失） —— 以停止所有计费。留空 = 不设上限。"
   },
   "option": {
     "cpuOnly": "仅 CPU（无 GPU）",

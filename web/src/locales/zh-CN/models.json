@@ -13,23 +13,23 @@
     "enable": "启用服务商",
     "openWebsite": "打开服务商网站",
     "badge": {
-      "hfTooltip": "HuggingFace:来自 Hugging Face Hub 的模型。",
-      "localTooltip": "Local:在本地机器上运行。",
-      "apiTooltip": "API:远程服务商,通过 API 调用,无需本地下载。需要 API 密钥。"
+      "hfTooltip": "HuggingFace 平台提供的模型。",
+      "localTooltip": "本地服务商，直接在本机上运行。",
+      "apiTooltip": "远程 API 服务商，通过 API 调用，无需本地下载。需要 API 密钥。"
     }
   },
   "modelList": {
     "localBadgeTooltip": "在本地设备上运行",
-    "hfApiBadgeTooltip": "Hugging Face Inference API(付费)",
-    "apiBadgeTooltip": "付费 API 服务(远程)",
-    "providerLabel": "服务商:{{provider}}",
+    "hfApiBadgeTooltip": "Hugging Face 推理 API（付费）",
+    "apiBadgeTooltip": "付费 API 服务（远程）",
+    "providerLabel": "服务商：{{provider}}",
     "availableToDownload": "可下载",
     "noModelsFound": "未找到模型",
     "noModelsMatch": "没有模型匹配“{{term}}”。请尝试其他关键词或启用更多服务商。",
     "noModelsYet": "还没有模型 — 开始使用吧",
     "noModelsYetDesc": "下载本地模型或添加云端服务商的 API 密钥以开始使用。",
     "noModelsAvailable": "暂无可用模型",
-    "noModelsAvailableDesc": "在左侧栏启用服务商或在以下位置添加 API 密钥:",
+    "noModelsAvailableDesc": "在左侧栏启用服务商或在以下位置添加 API 密钥：",
     "openSettings": "打开设置",
     "settings": "设置",
     "enableProviderKeyHint": "请在设置中启用服务商并添加 API 密钥以使用此模型",
@@ -38,15 +38,15 @@
     "unknownError": "未知错误",
     "providersFailedOne": "{{count}} 个服务商加载失败",
     "providersFailedMany": "{{count}} 个服务商加载失败",
-    "failedToLoadFrom": "无法从以下服务商加载模型:",
-    "loadingModelsProgress": "正在加载模型:{{loaded}}/{{total}} 个服务商...",
+    "failedToLoadFrom": "无法从以下服务商加载模型：",
+    "loadingModelsProgress": "正在加载模型：{{loaded}}/{{total}} 个服务商...",
     "loadingModels": "正在加载模型..."
   },
   "filters": {
     "filterByType": "按类型筛选",
     "filterBySize": "按规模筛选",
-    "typeSelected": "类型:{{types}}",
-    "sizeSelected": "规模:{{size}}",
+    "typeSelected": "类型：{{types}}",
+    "sizeSelected": "规模：{{size}}",
     "anySize": "任意规模"
   },
   "defaultModels": {
@@ -145,14 +145,14 @@
     "multiFieldCaption": "所有字段都将被加密并安全存储。请勿公开分享。",
     "singleFieldCaption": "你的密钥将被加密并安全存储。请勿公开分享。",
     "deleteTitle": "删除 API 密钥",
-    "deleteConfirm": "确定要删除 {{name}} 的 API 密钥吗?",
+    "deleteConfirm": "确定要删除 {{name}} 的 API 密钥吗？",
     "delete": "删除",
     "allFieldsRequired": "所有字段均为必填",
     "secretRequired": "密钥值不能为空",
     "updateSuccess": "{{name}} API 密钥已更新",
     "deleteSuccess": "{{name}} API 密钥已删除",
-    "updateFailed": "更新密钥失败:{{error}}",
-    "deleteFailed": "删除密钥失败:{{error}}",
+    "updateFailed": "更新密钥失败：{{error}}",
+    "deleteFailed": "删除密钥失败：{{error}}",
     "noProvidersFound": "未找到服务商",
     "noProvidersMatch": "没有服务商匹配“{{term}}”",
     "section": {
@@ -167,7 +167,7 @@
     },
     "security": {
       "title": "你的密钥很安全",
-      "description": "所有 API 密钥在数据库中加密存储,永不外泄。",
+      "description": "所有 API 密钥在数据库中加密存储，永不外泄。",
       "learnMore": "了解更多"
     },
     "sidebar": {
@@ -178,7 +178,7 @@
       "apiDocsSubtitle": "服务商指南与链接",
       "troubleshootingTitle": "故障排除",
       "troubleshootingSubtitle": "常见问题与修复方法",
-      "creditsTitle": "需要 API 额度?",
+      "creditsTitle": "需要 API 额度？",
       "creditsDesc": "从我们的合作服务商获取免费额度和优惠。",
       "viewOffers": "查看优惠"
     },
@@ -189,13 +189,13 @@
       "credentialsMissing": "✗ 缺少凭证",
       "configured": "已配置",
       "getCredentialsTooltip": "前往 {{name}} 获取凭证",
-      "freeSuffix": "(免费)",
+      "freeSuffix": "（免费）",
       "setup": {
         "title": "设置网络搜索",
         "confirm": "保存并继续",
         "cancel": "取消",
-        "introWithNodes": "{{nodes}} 使用了网络搜索工具,但尚未配置搜索服务商。",
-        "introGeneric": "此智能体使用了网络搜索工具,但尚未配置搜索服务商。",
+        "introWithNodes": "{{nodes}} 使用了网络搜索工具，但尚未配置搜索服务商。",
+        "introGeneric": "此智能体使用了网络搜索工具，但尚未配置搜索服务商。",
         "addOneBelow": "在下方添加一个以运行工作流。",
         "selectLabel": "搜索服务商",
         "getKeyTooltip": "前往 {{name}} 获取 API 密钥",
@@ -204,11 +204,11 @@
       },
       "providers": {
         "brave": {
-          "description": "注重隐私的搜索引擎,提供免费额度 — 一个不错的默认选择。",
+          "description": "注重隐私的搜索引擎，提供免费额度 — 一个不错的默认选择。",
           "getKeyLabel": "免费获取 Brave API 密钥"
         },
         "serpapi": {
-          "description": "快速可靠的搜索 API,支持 Google、Bing 等搜索引擎。",
+          "description": "快速可靠的搜索 API，支持 Google、Bing 等搜索引擎。",
           "getKeyLabel": "获取 SerpAPI 密钥"
         },
         "dataforseo": {
@@ -226,8 +226,8 @@
       "connected": "已连接",
       "notConnected": "未连接",
       "connectedDetail": "Drive、Gmail、Docs、Sheets 和 Calendar{{account}}",
-      "asAccount": "(账号 {{account}})",
-      "signInPrompt": "使用 Google 登录,授权智能体和节点访问 Drive、Gmail、Docs、Sheets 和 Calendar。",
+      "asAccount": "（账号 {{account}}）",
+      "signInPrompt": "使用 Google 登录，授权智能体和节点访问 Drive、Gmail、Docs、Sheets 和 Calendar。",
       "disconnect": "断开连接",
       "disconnectSuccess": "已断开 Google Workspace 连接。请重新使用 Google 登录以恢复访问。",
       "disconnectFailed": "断开 Google Workspace 连接失败"
@@ -238,7 +238,7 @@
       "description": "GPT 模型、图像、嵌入等。"
     },
     "claudeSubscription": {
-      "description": "使用 Claude Pro 或 Max 订阅,无需 API 额度。",
+      "description": "使用 Claude Pro 或 Max 订阅，无需 API 额度。",
       "note": "通过 Claude Code 登录并共享其凭证。"
     },
     "anthropic": {
@@ -248,7 +248,7 @@
       "description": "通过一个 API 访问多种 AI 模型。"
     },
     "google": {
-      "description": "Google Gemini AI 模型与服务。"
+      "description": "Google Gemini 大模型与配套服务。"
     },
     "groq": {
       "description": "基于 LPU 硬件的超高速 LLM 推理。"
@@ -294,7 +294,7 @@
     },
     "fal": {
       "description": "无服务器 AI 图像与视频生成。",
-      "note": "如需精确成本追踪,请使用管理员密钥(fal.ai 控制台 → Keys → 范围选择“Admin”)。NodeTool 会从 FAL 读取每次请求的实际计费;标准密钥只能得到估算值。"
+      "note": "如需精确成本追踪，请使用管理员密钥（fal.ai 控制台 → Keys → 范围选择“Admin”）。NodeTool 会从 FAL 读取每次请求的实际计费；标准密钥只能得到估算值。"
     },
     "replicate": {
       "description": "在 Replicate 的云基础设施上运行模型。"
@@ -309,13 +309,13 @@
       "description": "一个密钥统一聊天、图像和视频模型。"
     },
     "ideogram": {
-      "description": "图像生成、编辑与混搭,提示词遵循度高。"
+      "description": "图像生成、编辑与混搭，提示词遵循度高。"
     },
     "meshy": {
       "description": "3D 模型生成。"
     },
     "rodin": {
-      "description": "Rodin AI 3D 模型生成。"
+      "description": "Rodin AI 三维模型生成。"
     },
     "kie": {
       "description": "通过一个网关使用 GPT、Claude、Gemini、DeepSeek 等。"

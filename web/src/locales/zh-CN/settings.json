@@ -153,7 +153,7 @@
     "closeBehaviorIntro": "选择关闭主窗口时的行为。",
     "closeBehaviorQuitHint": "完全退出应用。",
     "closeBehaviorBackgroundHint": "将应用保留在系统托盘中运行。",
-    "nodeSelectionModeIntro": "框选节点时:",
+    "nodeSelectionModeIntro": "框选节点时：",
     "nodeSelectionModeFullHint": "节点需完全位于框内才被选中。",
     "nodeSelectionModePartialHint": "与框相交的节点都会被选中。"
   },
@@ -199,9 +199,9 @@
     "notAvailable": "不可用",
     "installed": "已安装",
     "notInstalled": "未安装",
-    "copiedToClipboard": "已复制到剪贴板!",
+    "copiedToClipboard": "已复制到剪贴板！",
     "failedToCopy": "无法复制到剪贴板",
-    "systemInfoCopied": "系统信息已复制到剪贴板!",
+    "systemInfoCopied": "系统信息已复制到剪贴板！",
     "failedToCopySystemInfo": "无法复制系统信息到剪贴板",
     "failedToLoad": "无法加载系统信息"
   },

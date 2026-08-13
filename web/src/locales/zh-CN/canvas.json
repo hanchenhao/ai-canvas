@@ -342,8 +342,8 @@
     "browseNamespace": "在节点菜单中浏览此命名空间",
     "copyNamespace": "复制命名空间",
     "required": "必填",
-    "inputsCount": "输入({{count}})",
-    "outputsCount": "输出({{count}})",
+    "inputsCount": "输入（{{count}}）",
+    "outputsCount": "输出（{{count}}）",
     "noInputs": "无输入。",
     "noOutputs": "无输出。",
     "noDescription": "此节点暂无描述。",
@@ -368,7 +368,7 @@
   "executionTree": {
     "instructions": "指令",
     "duration": "耗时",
-    "toolCalls": "工具调用({{count}})",
+    "toolCalls": "工具调用（{{count}}）",
     "tool": "工具",
     "result": "结果",
     "error": "错误",
@@ -383,11 +383,11 @@
     "findNodes": "查找节点",
     "findNodesPlaceholder": "查找节点…",
     "clearSearch": "清除搜索",
-    "previousMatch": "上一个(Shift+Enter)",
+    "previousMatch": "上一个（Shift+Enter）",
     "previousMatchAria": "上一个匹配",
-    "nextMatch": "下一个(Enter)",
+    "nextMatch": "下一个（Enter）",
     "nextMatchAria": "下一个匹配",
-    "close": "关闭(Esc)",
+    "close": "关闭（Esc）",
     "nodesFound_one": "已找到 {{total}} 个节点中的第 {{index}} 个",
     "nodesFound_other": "已找到 {{total}} 个节点中的第 {{index}} 个",
     "noNodesFound": "未找到节点",
@@ -445,13 +445,13 @@
     "canvasSize": "画布尺寸",
     "width": "宽度",
     "height": "高度",
-    "canvasWidthDesc": "画布宽度(像素)",
-    "canvasHeightDesc": "画布高度(像素)",
+    "canvasWidthDesc": "画布宽度（像素）",
+    "canvasHeightDesc": "画布高度（像素）",
     "selectedLayer": "当前图层",
     "resetTransform": "重置变换",
     "selectLayerToTransform": "选择一个图层进行变换。",
     "layers": "图层",
-    "noLayersYet": "暂无图层,可在下方添加。",
+    "noLayersYet": "暂无图层，可在下方添加。",
     "layer": "图层"
   },
   "tracePanel": {
@@ -461,19 +461,19 @@
     "clearTrace": "清空追踪",
     "noTraceData": "暂无追踪数据",
     "runToSeeTrace": "运行工作流以查看执行追踪",
-    "request": "请求({{count}} 条消息)",
+    "request": "请求（{{count}} 条消息）",
     "response": "响应",
     "toolCalls": "工具调用",
-    "tokensIn": "输入:{{count}}",
-    "tokensOut": "输出:{{count}}",
-    "cost": "费用:${{cost}}",
-    "duration": "耗时:{{ms}}ms",
+    "tokensIn": "输入：{{count}}",
+    "tokensOut": "输出：{{count}}",
+    "cost": "费用：${{cost}}",
+    "duration": "耗时：{{ms}}ms",
     "error": "错误"
   },
   "nodeGroup": {
-    "selectGroupNode": "选中分组节点:",
+    "selectGroupNode": "选中分组节点：",
     "holdCtrlClick": "按住 CTRL 或 ⌘ 键 + 点击",
-    "editGroupTitle": "编辑分组标题:",
+    "editGroupTitle": "编辑分组标题：",
     "editGroupTitleHint": "双击标签",
     "groupHeadline": "分组标题",
     "groupPlaceholder": "分组",
@@ -483,7 +483,7 @@
     "groupColor": "分组颜色",
     "removeNodesFromGroup": "从分组中移除节点",
     "dragOutHint": "按住 CTRL | ⌘ 键拖出",
-    "shakeHint": "快速摇晃,然后拖出"
+    "shakeHint": "快速摇晃，然后拖出"
   },
   "ghostNode": {
     "placeHint": "点击放置 · Esc 取消"
@@ -503,7 +503,7 @@
     "loadComfyWorkflow": "加载 ComfyUI 工作流",
     "workflowJson": "工作流 JSON",
     "chooseFile": "选择文件",
-    "exposeParams": "将额外参数暴露为输入:"
+    "exposeParams": "将额外参数暴露为输入："
   },
   "workflowLoader": {
     "selectWorkflow": "选择工作流"
@@ -520,7 +520,7 @@
     "allOutputTypes": "所有输出类型",
     "local": "本地",
     "api": "API",
-    "outputLabel": "输出:",
+    "outputLabel": "输出：",
     "filterBy": "按 {{label}} 筛选",
     "filters": "筛选",
     "node_one": "个节点",
@@ -610,8 +610,8 @@
     "webgpuDescription": "此浏览器无法渲染合成器预览。节点仍在服务端进行合成。"
   },
   "emailRenderer": {
-    "from": "发件人:",
-    "subject": "主题:"
+    "from": "发件人：",
+    "subject": "主题："
   },
   "realtimeAudio": {
     "restart": "重新开始"
@@ -677,13 +677,13 @@
     "luminanceLabel": "亮度",
     "offsetX": "X 偏移",
     "offsetY": "Y 偏移",
-    "radius": "半径(px)",
+    "radius": "半径（px）",
     "intensity": "强度",
     "amount": "数量",
     "tolerance": "容差",
     "softness": "柔和度",
     "spill": "溢出",
-    "width": "宽度(px)",
+    "width": "宽度（px）",
     "alphaThreshold": "Alpha 阈值",
     "blurGaussian": "高斯",
     "blurBox": "方形",
