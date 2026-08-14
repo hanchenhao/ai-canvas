@@ -48,9 +48,15 @@ const externalModules = ["electron", "electron/common", ...builtins];
 // Electron main bundle that aborts at launch with "Could not dynamically
 // require …/sharp.node". Belt-and-suspenders alongside the lazy imports
 // in the runtime providers and the verify-bundle.mjs static check.
+// `@nodetool-ai/sandbox-compiler` (reached via a dynamic import in
+// nodePackManager.ts) pulls in `@nodetool-ai/config`, whose dist files use
+// top-level await — unsupported in this CJS main bundle. It is a declared
+// electron dependency, so electron-builder ships it in the packaged app and
+// the runtime dynamic import resolves it natively (ESM + TLA is fine there).
 const mainExternalModules = [
   ...externalModules,
   "@nodetool-ai/protocol",
+  "@nodetool-ai/sandbox-compiler",
   "electron-log",
   "electron-updater",
   "zod",
