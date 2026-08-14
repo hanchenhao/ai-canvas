@@ -57,6 +57,9 @@ jobs:
         run: npm run build:packages
 
       - name: Type-check product packages
+        # web tsc peaks above the job-level 4096MB heap (exit 134 OOM).
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
         run: |
           npm run typecheck --workspace=web
           npm run lint --workspace=packages/websocket
