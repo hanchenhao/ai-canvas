@@ -85,6 +85,10 @@ const MINIMAX_VOICES: string[] = [
   "Chinese (Mandarin)_Male_Announcer"
 ];
 
+// Cache for dynamically fetched models (TTL 10 min).
+let _minimaxVideoCache: { models: VideoModel[]; fetchedAt: number } | null = null;
+const MINIMAX_CACHE_TTL_MS = 10 * 60 * 1000;
+
 const SUPPORTED_IMAGE_ASPECTS: readonly string[] = [
   "1:1",
   "16:9",
@@ -268,46 +272,89 @@ export class MinimaxProvider extends OpenAICompatProvider {
     ];
   }
 
+  // Static fallback list — used when the dynamic /v1/models call fails.
+  static readonly FALLBACK_VIDEO_MODELS: VideoModel[] = [
+    { id: "MiniMax-Hailuo-2.3", name: "MiniMax Hailuo 2.3", provider: "minimax", supportedTasks: ["text_to_video", "image_to_video"] },
+    { id: "MiniMax-Hailuo-2.3-Fast", name: "MiniMax Hailuo 2.3 Fast", provider: "minimax", supportedTasks: ["image_to_video"] },
+    { id: "MiniMax-Hailuo-02", name: "MiniMax Hailuo 02", provider: "minimax", supportedTasks: ["text_to_video", "image_to_video"] },
+    { id: "T2V-01-Director", name: "MiniMax Video-01 Director", provider: "minimax", supportedTasks: ["text_to_video"] },
+    { id: "I2V-01-Director", name: "MiniMax Video-01 Director (I2V)", provider: "minimax", supportedTasks: ["image_to_video"] },
+    { id: "S2V-01", name: "MiniMax Video-01 Subject", provider: "minimax", supportedTasks: ["image_to_video"] },
+  ];
+
+  /**
+   * Query MiniMax's OpenAI-compatible /v1/models endpoint for video models,
+   * merging with the static fallback list. Cached for 10 minutes.
+   * The /v1/models endpoint lists LLM and multimodal models by id; video
+   * models (Hailuo, Director, S2V) are identified by naming convention.
+   */
   override async getAvailableVideoModels(): Promise<VideoModel[]> {
-    const both = ["text_to_video", "image_to_video"];
-    return [
-      {
-        id: "MiniMax-Hailuo-2.3",
-        name: "MiniMax Hailuo 2.3",
-        provider: "minimax",
-        supportedTasks: both
-      },
-      {
-        id: "MiniMax-Hailuo-2.3-Fast",
-        name: "MiniMax Hailuo 2.3 Fast",
-        provider: "minimax",
-        supportedTasks: ["image_to_video"]
-      },
-      {
-        id: "MiniMax-Hailuo-02",
-        name: "MiniMax Hailuo 02",
-        provider: "minimax",
-        supportedTasks: both
-      },
-      {
-        id: "T2V-01-Director",
-        name: "MiniMax Video-01 Director",
-        provider: "minimax",
-        supportedTasks: ["text_to_video"]
-      },
-      {
-        id: "I2V-01-Director",
-        name: "MiniMax Video-01 Director (I2V)",
-        provider: "minimax",
-        supportedTasks: ["image_to_video"]
-      },
-      {
-        id: "S2V-01",
-        name: "MiniMax Video-01 Subject",
-        provider: "minimax",
-        supportedTasks: ["image_to_video"]
+    // Return cached list if fresh.
+    if (
+      _minimaxVideoCache &&
+      Date.now() - _minimaxVideoCache.fetchedAt < MINIMAX_CACHE_TTL_MS
+    ) {
+      return _minimaxVideoCache.models;
+    }
+
+    try {
+      const res = await this._minimaxFetch(`${this._baseUrl}/v1/models`, {
+        headers: this.headers(),
+        signal: AbortSignal.timeout(5000),
+      });
+      if (!res.ok) {
+        log.warn("MiniMax /v1/models failed, using static list", {
+          status: res.status,
+        });
+        return MinimaxProvider.FALLBACK_VIDEO_MODELS;
       }
-    ];
+     const data = (await res.json()) as { data?: Array<{ id: string }> };
+
+     log.info("MiniMax /v1/models response", {
+       count: data.data?.length ?? 0,
+       ids: data.data?.map((m) => m.id) ?? [],
+     });
+
+     // Video model naming patterns: Hailuo, Director, S2V, T2V, I2V
+      const VIDEO_PATTERN = /hailuo|director|s2v|t2v|i2v|video/i;
+      const apiIds = (data.data ?? [])
+        .map((m) => m.id)
+        .filter((id) => VIDEO_PATTERN.test(id));
+
+      // Start with the static list (carries task metadata).
+      const result = [...MinimaxProvider.FALLBACK_VIDEO_MODELS];
+      const knownIds = new Set(result.map((m) => m.id));
+
+      for (const id of apiIds) {
+        if (!knownIds.has(id)) {
+          const lower = id.toLowerCase();
+          const isI2V = lower.includes("i2v") || lower.includes("s2v");
+          const isT2V = lower.includes("t2v");
+          result.push({
+            id,
+            name: id.replace(/-/g, " "),
+            provider: "minimax",
+            supportedTasks: isI2V && !isT2V
+              ? ["image_to_video"]
+              : isT2V && !isI2V
+                ? ["text_to_video"]
+                : ["text_to_video", "image_to_video"],
+          });
+        }
+      }
+
+      _minimaxVideoCache = { models: result, fetchedAt: Date.now() };
+      log.debug("MiniMax video models fetched", {
+        count: result.length,
+        apiIds,
+      });
+      return result;
+    } catch (err) {
+      log.warn("MiniMax model fetch failed, using static list", {
+        error: err instanceof Error ? err.message : String(err),
+      });
+      return MinimaxProvider.FALLBACK_VIDEO_MODELS;
+    }
   }
 
   override async getAvailableTTSModels(): Promise<TTSModel[]> {

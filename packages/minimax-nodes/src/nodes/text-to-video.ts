@@ -4,7 +4,6 @@ import {
   generateVideo,
   getMinimaxApiKey,
   getMinimaxBaseUrl,
-  MINIMAX_T2V_MODELS,
   MINIMAX_VIDEO_DURATIONS,
   MINIMAX_VIDEO_RESOLUTIONS,
   videoRefFromBytes,
@@ -30,11 +29,17 @@ export class MinimaxTextToVideoNode extends BaseNode {
   static readonly autoSaveAsset = true;
 
   @prop({
-    type: "enum",
-    default: "MiniMax-Hailuo-02",
+    type: "video_model",
+    default: {
+      type: "video_model",
+      provider: "minimax",
+      id: "MiniMax-Hailuo-02",
+      name: "MiniMax Hailuo 02",
+      path: null,
+      supported_tasks: ["text_to_video", "image_to_video"]
+    },
     title: "Model",
-    description: "The MiniMax video model to use.",
-    values: MINIMAX_T2V_MODELS
+    description: "MiniMax Hailuo video model."
   })
   declare model: any;
 
@@ -73,7 +78,10 @@ export class MinimaxTextToVideoNode extends BaseNode {
     const prompt = String(this.prompt ?? "");
     if (!prompt) throw new Error("Prompt is required");
 
-    const model = String(this.model ?? "MiniMax-Hailuo-02");
+    const model =
+      (this.model && typeof this.model === "object" && this.model.id) ||
+      (typeof this.model === "string" && this.model) ||
+      "MiniMax-Hailuo-02";
     const body: Record<string, unknown> = {
       model,
       prompt,

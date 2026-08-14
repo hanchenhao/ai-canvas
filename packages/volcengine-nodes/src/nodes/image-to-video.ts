@@ -8,7 +8,6 @@ import {
   getVolcengineApiKey,
   inferImageMime,
   SEEDANCE_DURATIONS,
-  SEEDANCE_I2V_MODELS,
   SEEDANCE_RESOLUTIONS,
   videoRefFromBytes
 } from "../volcengine-base.js";
@@ -32,11 +31,17 @@ export class VolcengineImageToVideoNode extends BaseNode {
   static readonly autoSaveAsset = true;
 
   @prop({
-    type: "enum",
-    default: "doubao-seedance-1-0-pro-250528",
+    type: "video_model",
+    default: {
+      type: "video_model",
+      provider: "volcengine",
+      id: "doubao-seedance-1-0-pro-250528",
+      name: "Seedance 1.0 Pro",
+      path: null,
+      supported_tasks: ["text_to_video", "image_to_video"]
+    },
     title: "Model",
-    description: "The Seedance model to use.",
-    values: SEEDANCE_I2V_MODELS
+    description: "Seedance video model from the Ark platform."
   })
   declare model: any;
 
@@ -84,7 +89,10 @@ export class VolcengineImageToVideoNode extends BaseNode {
     const mime = inferImageMime(imageBytes);
     const dataUrl = `data:${mime};base64,${bytesToBase64(imageBytes)}`;
 
-    const model = String(this.model ?? "doubao-seedance-1-0-pro-250528");
+    const model =
+      (this.model && typeof this.model === "object" && this.model.id) ||
+      (typeof this.model === "string" && this.model) ||
+      "doubao-seedance-1-0-pro-250528";
     const duration = Number(this.duration ?? 5);
     const resolution = String(this.resolution ?? "1080p");
 

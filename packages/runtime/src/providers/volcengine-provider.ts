@@ -56,8 +56,20 @@ const VOLCENGINE_VIDEO_MODELS: VideoModel[] = [
     supportedTasks: ["image_to_video"],
     resolutions: ["480p", "720p", "1080p"],
     durations: [5]
+  },
+  {
+    id: "doubao-seedance-1-0-pro-i2v-250428",
+    name: "Seedance 1.0 Pro (I2V)",
+    provider: "volcengine",
+    supportedTasks: ["image_to_video"],
+    resolutions: ["480p", "720p", "1080p"],
+    durations: [5, 10]
   }
 ];
+
+// Cache for dynamically fetched models (TTL 10 min).
+let _dynamicModelsCache: { models: VideoModel[]; fetchedAt: number } | null = null;
+const DYNAMIC_CACHE_TTL_MS = 10 * 60 * 1000;
 
 function bytesToBase64(bytes: Uint8Array): string {
   return Buffer.from(bytes).toString("base64");
@@ -130,9 +142,73 @@ export class VolcengineProvider extends BaseProvider {
     throw new Error("volcengine does not support chat generation");
   }
 
+  /**
+   * Query the Ark API for seedance models, merging with the static list.
+   * Dynamic fetch is cached for 10 minutes to avoid repeated API calls.
+   * Falls back to the static list on any error.
+   */
   override async getAvailableVideoModels(): Promise<VideoModel[]> {
     if (!this.apiKey) return [];
-    return VOLCENGINE_VIDEO_MODELS;
+
+    // Return cached dynamic list if fresh.
+    if (
+      _dynamicModelsCache &&
+      Date.now() - _dynamicModelsCache.fetchedAt < DYNAMIC_CACHE_TTL_MS
+    ) {
+      return _dynamicModelsCache.models;
+    }
+
+    try {
+      const res = await this._fetch(`${ARK_BASE_URL}/api/v3/models`, {
+        headers: this.headers(),
+        signal: AbortSignal.timeout(5000),
+      });
+      if (!res.ok) {
+        log.warn("Ark /api/v3/models failed, using static list", {
+          status: res.status,
+        });
+        return VOLCENGINE_VIDEO_MODELS;
+      }
+      const data = (await res.json()) as { data?: Array<{ id: string }> };
+      const apiIds = new Set(
+        (data.data ?? [])
+          .map((m) => m.id)
+          .filter((id) => id.toLowerCase().includes("seedance"))
+      );
+
+      // Start with the static list (carries metadata like resolutions).
+      const result = [...VOLCENGINE_VIDEO_MODELS];
+      const knownIds = new Set(result.map((m) => m.id));
+
+      // Add any API-discovered models we don't already know about.
+      for (const id of apiIds) {
+        if (!knownIds.has(id)) {
+          const isI2V = id.includes("i2v");
+          const isT2V = id.includes("t2v");
+          result.push({
+            id,
+            name: id.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+            provider: "volcengine",
+            supportedTasks: isI2V
+              ? ["image_to_video"]
+              : isT2V
+                ? ["text_to_video"]
+                : ["text_to_video", "image_to_video"],
+            resolutions: ["480p", "720p", "1080p"],
+            durations: [5, 10],
+          });
+        }
+      }
+
+      _dynamicModelsCache = { models: result, fetchedAt: Date.now() };
+      log.debug("Ark models fetched", { count: result.length, apiIds: [...apiIds] });
+      return result;
+    } catch (err) {
+      log.warn("Ark model fetch failed, using static list", {
+        error: err instanceof Error ? err.message : String(err),
+      });
+      return VOLCENGINE_VIDEO_MODELS;
+    }
   }
 
   // ---------------------------------------------------------------------------
