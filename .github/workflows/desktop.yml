@@ -30,10 +30,6 @@ jobs:
             os: windows-2022
             target: --win nsis --x64
             artifact: windows-x64
-          - name: Linux x64
-            os: ubuntu-latest
-            target: --linux AppImage tar.gz --x64
-            artifact: linux-x64
     runs-on: ${{ matrix.os }}
     timeout-minutes: 90
     permissions:
@@ -69,10 +65,6 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.11"
-
-      - name: Install Linux native libraries
-        if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y libsecret-1-dev
 
       - name: Install dependencies
         shell: bash
