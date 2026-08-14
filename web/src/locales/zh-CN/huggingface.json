@@ -151,13 +151,19 @@
     "noModelsAvailableHint": "试试调整大小筛选或选择其他分类",
     "viewDocumentation": "查看文档",
     "ollamaRestartHint": "Ollama 应该会自动运行。请尝试重启应用。",
-    "downloadOllama": "下载 Ollama →"
+    "downloadOllama": "下载 Ollama →",
+    "supportedFormats": "支持的格式",
+    "searchHubEmpty": "搜索 Hugging Face Hub",
+    "modelCategories": "模型分类",
+    "maxSize": "最大尺寸",
+    "localModelsTitle": "本地模型"
   },
   "hardware": {
     "gpuMemory": "GPU 显存",
     "systemRam": "系统内存",
     "recommendFor": "推荐用途",
-    "gpuMemoryBudget": "GPU 显存预算"
+    "gpuMemoryBudget": "GPU 显存预算",
+    "yourMachine": "你的机器"
   },
   "onboarding": {
     "localEngines": "本地引擎",

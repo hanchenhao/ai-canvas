@@ -2,6 +2,7 @@
 /** Generate Layer + Re-generate Stale Layers toolbar. */
 
 import React, { memo, useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
@@ -21,6 +22,7 @@ import { CreateGeneratedLayerDialog } from "./CreateGeneratedLayerDialog";
 
 const SketchAIToolbarInner: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation("sketch");
   // Derive the counts directly via Zustand selectors so we don't iterate
   // every binding on every render of the toolbar.
   const staleCount = useSketchSessionStore((s) =>
@@ -48,10 +50,13 @@ const SketchAIToolbarInner: React.FC = () => {
     const summary = await regenerateStaleLayers();
     if (summary.failed > 0) {
       setError(
-        `Regenerated ${summary.started}, failed at ${summary.failed} layer(s).`
+        t("sketch:aiToolbar.regenFailedToast", {
+          started: summary.started,
+          failed: summary.failed
+        })
       );
     }
-  }, [regenerateStaleLayers]);
+  }, [regenerateStaleLayers, t]);
 
   return (
     <>
@@ -65,7 +70,7 @@ const SketchAIToolbarInner: React.FC = () => {
         }}
       >
         <Tooltip
-          title="Generate Layer — bind a new layer to any workflow with an image output."
+          title={t("sketch:aiToolbar.generateLayerTooltip")}
           delay={TOOLTIP_ENTER_DELAY}
           placement="bottom"
         >
@@ -76,7 +81,7 @@ const SketchAIToolbarInner: React.FC = () => {
               startIcon={<AddPhotoAlternateIcon fontSize="small" />}
               data-testid="sketch-action-generate-layer"
             >
-              Generate Layer
+              {t("sketch:aiToolbar.generateLayer")}
             </EditorButton>
           </span>
         </Tooltip>
@@ -84,8 +89,8 @@ const SketchAIToolbarInner: React.FC = () => {
         <Tooltip
           title={
             staleCount === 0
-              ? "No stale layers."
-              : `Re-generate ${staleCount} stale layer${staleCount === 1 ? "" : "s"} in dependency order.`
+              ? t("sketch:aiToolbar.noStaleLayers")
+              : t("sketch:aiToolbar.regenStaleTooltip", { count: staleCount })
           }
           delay={TOOLTIP_ENTER_DELAY}
           placement="bottom"
@@ -98,7 +103,7 @@ const SketchAIToolbarInner: React.FC = () => {
               startIcon={<RefreshIcon fontSize="small" />}
               data-testid="sketch-action-regenerate-stale"
             >
-              Re-generate Stale ({staleCount})
+              {t("sketch:aiToolbar.regenerateStale", { count: staleCount })}
             </EditorButton>
           </span>
         </Tooltip>
@@ -112,25 +117,19 @@ const SketchAIToolbarInner: React.FC = () => {
       <Dialog
         open={confirmRegenOpen}
         onClose={() => setConfirmRegenOpen(false)}
-        title="Re-generate stale layers?"
+        title={t("sketch:aiToolbar.regenTitle")}
         onConfirm={() => void handleConfirmRegen()}
         onCancel={() => setConfirmRegenOpen(false)}
-        confirmText="Re-generate"
-        cancelText="Cancel"
+        confirmText={t("sketch:aiToolbar.regenerate")}
+        cancelText={t("common:button.cancel")}
         showActions
       >
         <Text size="small" sx={{ mb: 1 }}>
-          {staleCount} stale layer{staleCount === 1 ? " is" : "s are"} ready to
-          run.
+          {t("sketch:aiToolbar.staleReady", { count: staleCount })}
           {lockedCount > 0 && (
-            <>
-              {" "}
-              {lockedCount} locked layer
-              {lockedCount === 1 ? " is" : "s are"} skipped.
-            </>
+            <> {t("sketch:aiToolbar.lockedSkipped", { count: lockedCount })}</>
           )}{" "}
-          Layers run sequentially; the queue stops at the first failure so you
-          can address it before continuing.
+          {t("sketch:aiToolbar.sequentialNote")}
         </Text>
       </Dialog>
 

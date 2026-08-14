@@ -45,6 +45,13 @@ import {
 } from "./trackVisuals";
 import ConfirmDialog from "../../dialogs/ConfirmDialog";
 
+const TRACK_TYPE_LABEL_KEYS: Readonly<Record<string, string>> = {
+  video: "tracks.video",
+  audio: "tracks.audio",
+  overlay: "tracks.overlay",
+  subtitle: "tracks.subtitle"
+};
+
 export const TRACK_HEADER_WIDTH_PX = 192;
 /**
  * Phone header width. 192px is half a 390px viewport — the lanes get less room
@@ -298,6 +305,7 @@ export const TrackHeader: React.FC<TrackHeaderProps> = memo(({ track, typedIndex
   const meta = trackTypeMeta(track.type);
   const accent = trackTypeAccent(theme, track.type);
   const TypeIcon = meta.Icon;
+  const typeLabel = t(TRACK_TYPE_LABEL_KEYS[track.type] ?? TRACK_TYPE_LABEL_KEYS.video);
 
   const [editingName, setEditingName] = useState(false);
   const [localName, setLocalName] = useState(track.name);

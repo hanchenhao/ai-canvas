@@ -17,6 +17,7 @@ import React, {
   useState
 } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useColorScheme, useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 
@@ -154,6 +155,7 @@ const MarkerOverlayInner: React.FC<MarkerOverlayProps> = ({
   onSeek,
   onRemove
 }) => {
+  const { t } = useTranslation("timeline");
   const theme = useTheme();
   return (
     <div
@@ -173,12 +175,15 @@ const MarkerOverlayInner: React.FC<MarkerOverlayProps> = ({
         ) {
           return null;
         }
+        const markerLabel = m.label || t("timeline:tracks.markerFallback");
         return (
           <div
             key={m.id}
             css={markerFlagStyles(theme)}
             style={{ left: contentPx, backgroundColor: m.color || undefined }}
-            title={`${m.label || "Marker"} — click to seek`}
+            title={t("timeline:tracks.markerSeekTitle", {
+              label: markerLabel
+            })}
             data-testid="timeline-marker"
             onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => {
@@ -186,12 +191,14 @@ const MarkerOverlayInner: React.FC<MarkerOverlayProps> = ({
               onSeek(m.timeMs);
             }}
           >
-            <span className="marker-label">{m.label || "Marker"}</span>
+            <span className="marker-label">{markerLabel}</span>
             <button
               type="button"
               className="marker-delete"
               data-testid="marker-delete"
-              aria-label={`Delete marker ${m.label || ""}`.trim()}
+              aria-label={t("timeline:tracks.deleteMarker", {
+                label: markerLabel
+              })}
               onPointerDown={(e) => e.stopPropagation()}
               onClick={(e) => {
                 e.stopPropagation();
@@ -263,6 +270,7 @@ export interface TimeRulerProps {
 
 export const TimeRuler: React.FC<TimeRulerProps> = memo(
   ({ totalWidthPx, headerWidthPx = 0 }) => {
+    const { t } = useTranslation("timeline");
     const theme = useTheme();
     const { mode, systemMode } = useColorScheme();
     const activeMode = mode === "system" ? systemMode : mode;
@@ -510,7 +518,7 @@ export const TimeRuler: React.FC<TimeRulerProps> = memo(
           style={{ width: "100%", height: "100%" }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
-          aria-label="Time ruler — click or drag to set playhead"
+          aria-label={t("timeline:tracks.timeRulerAria")}
           role="slider"
           aria-valuemin={0}
         />

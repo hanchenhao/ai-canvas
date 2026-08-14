@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type { WorkspaceTabMode } from "../../stores/WorkspaceTabsStore";
 import { useAssetById } from "../../serverState/useAssetById";
 import { FlexColumn, LoadingSpinner, Text } from "../ui_primitives";
@@ -20,6 +21,7 @@ interface TextSurfaceProps {
  *   asset update API.
  */
 const TextSurface = ({ refId, mode }: TextSurfaceProps) => {
+  const { t } = useTranslation("workspace");
   const { data: asset, isLoading, error } = useAssetById(refId);
 
   if (isLoading) {
@@ -42,7 +44,7 @@ const TextSurface = ({ refId, mode }: TextSurfaceProps) => {
         sx={{ alignItems: "center", justifyContent: "center" }}
       >
         <Text size="normal" weight={600}>
-          Failed to load text asset
+          {t("workspace:text.loadFailed")}
         </Text>
       </FlexColumn>
     );

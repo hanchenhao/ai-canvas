@@ -9,6 +9,7 @@
  */
 
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -128,6 +129,7 @@ const PasteBodyInner: React.FC<PasteBodyProps> = ({
   status,
   isOutputNode
 }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -211,7 +213,7 @@ const PasteBodyInner: React.FC<PasteBodyProps> = ({
       <div className="preview-area">
         <PreviewImage
           value={previewValue ?? baseValue}
-          placeholder="Connect Image and Paste, then run"
+          placeholder={t("canvas:imageEditing.connectImageAndPaste")}
         />
         {overlayRect && (
           <div

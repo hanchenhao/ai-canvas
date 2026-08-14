@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import React, { memo, useMemo } from "react";
+import { useTranslation, Trans } from "react-i18next";
 import { Text, EditorButton, BORDER_RADIUS, Box, ListGroup, MOTION, SPACING, getSpacingPx } from "../ui_primitives";
 import { NodeMetadata } from "../../stores/ApiTypes";
 import NamespacePanel from "./NamespacePanel";
@@ -320,6 +321,7 @@ const NoSelectionContent = memo(function NoSelectionContent({
   minSearchTermLength: number;
 }) {
   const openPacksPanel = useOpenPackageManager();
+  const { t } = useTranslation("canvas");
 
   return (
     <div className="no-selection">
@@ -327,32 +329,30 @@ const NoSelectionContent = memo(function NoSelectionContent({
         <>
           <p>
             {selectedPathString ? (
-              <>
-                Nothing found in this namespace for
-                <strong className="highlighted-text">
-                  {" "}
-                  &quot;{searchTerm}&quot;
-                </strong>
-              </>
+              <Trans
+                i18nKey="canvas:namespaceList.nothingFoundInNamespace"
+                values={{ term: searchTerm }}
+                components={{ strong: <strong className="highlighted-text" /> }}
+              />
             ) : (
-              <>
-                Nothing found for
-                <strong className="highlighted-text">
-                  {" "}
-                  &quot;{searchTerm}&quot;
-                </strong>
-              </>
+              <Trans
+                i18nKey="canvas:namespaceList.nothingFoundFor"
+                values={{ term: searchTerm }}
+                components={{ strong: <strong className="highlighted-text" /> }}
+              />
             )}
           </p>
           <ul className="no-results">
             {selectedPathString && (
               <li>
-                click on <span className="highlighted">highlighted </span>
-                namespaces to find results.
+                <Trans
+                  i18nKey="canvas:namespaceList.clickHighlighted"
+                  components={{ 1: <span className="highlighted" /> }}
+                />
               </li>
             )}
-            <li>just start typing to enter a new search term</li>
-            <li>clear search by clicking the clear button</li>
+            <li>{t("canvas:namespaceList.startTyping")}</li>
+            <li>{t("canvas:namespaceList.clearSearchHint")}</li>
           </ul>
         </>
       ) : null}
@@ -370,7 +370,7 @@ const NoSelectionContent = memo(function NoSelectionContent({
             padding: getSpacingPx(SPACING.xl)
           }}
         >
-          Install additional node packs
+          {t("canvas:namespaceList.installAdditionalPacks")}
         </EditorButton>
       </div>
     </div>

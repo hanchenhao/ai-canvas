@@ -23,6 +23,7 @@
 
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 
@@ -115,6 +116,7 @@ export interface PlayheadProps {
 
 export const Playhead: React.FC<PlayheadProps> = memo(
   ({ trackAreaOffsetPx = 0, heightPx }) => {
+    const { t } = useTranslation("timeline");
     const theme = useTheme();
 
     // Geometry inputs that DO change reactively (zoom/scroll). We keep them in
@@ -267,7 +269,7 @@ export const Playhead: React.FC<PlayheadProps> = memo(
         data-testid="playhead"
         role="slider"
         tabIndex={0}
-        aria-label="Playhead"
+        aria-label={t("timeline:tracks.playhead")}
         aria-valuemin={0}
         aria-valuemax={Math.round(durationMs)}
         onPointerEnter={() => setHovered(true)}

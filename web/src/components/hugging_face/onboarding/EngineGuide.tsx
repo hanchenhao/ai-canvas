@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useCallback, useEffect, useMemo } from "react";
 import { useTheme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ExtensionOutlinedIcon from "@mui/icons-material/ExtensionOutlined";
@@ -29,11 +30,12 @@ import {
 } from "./onboardingCatalog";
 
 const EngineCard: React.FC<{ engine: OnboardingEngine }> = ({ engine }) => {
+  const { t } = useTranslation("huggingface");
   const theme = useTheme();
   const statusChip = engine.bundled ? (
-    <Chip label="Bundled" compact color="success" variant="outlined" />
+    <Chip label={t("huggingface:modelList.bundled")} compact color="success" variant="outlined" />
   ) : engine.runtimeId ? (
-    <Chip label="Runtime" compact variant="outlined" />
+    <Chip label={t("huggingface:modelList.runtime")} compact variant="outlined" />
   ) : null;
 
   return (
@@ -155,6 +157,7 @@ const NodePackRow: React.FC<{ pack: OnboardingNodePack }> = ({ pack }) => {
 
 const EngineGuide: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation("huggingface");
   const { available, refresh } = useNodePacksStore(
     useShallow((state) => ({
       available: state.available,
@@ -176,7 +179,7 @@ const EngineGuide: React.FC = () => {
       <FlexColumn gap={SPACING.sm}>
         <FlexColumn gap={SPACING.micro}>
           <Text size="big" weight={600}>
-            Local engines
+            {t("onboarding.localEngines")}
           </Text>
           <Caption sx={{ opacity: 0.7 }}>
             BrainVite-AI-Canvas runs models through these engines. Ollama is the easiest
@@ -200,7 +203,7 @@ const EngineGuide: React.FC = () => {
         <FlexRow gap={SPACING.xs} align="center" justify="space-between">
           <FlexColumn gap={SPACING.micro}>
             <Text size="big" weight={600}>
-              Node packs
+              {t("onboarding.nodePacks")}
             </Text>
             <Caption sx={{ opacity: 0.7 }}>
               {available
@@ -215,7 +218,7 @@ const EngineGuide: React.FC = () => {
             endIcon={<OpenInNewIcon sx={{ fontSize: 13 }} />}
             onClick={openPackageManager}
           >
-            Package Manager
+            {t("onboarding.packageManager")}
           </EditorButton>
         </FlexRow>
         <FlexColumn gap={SPACING.xs}>

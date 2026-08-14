@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import React, { useState, useCallback, useMemo, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { FlexColumn, FlexRow, Box, MOTION, BORDER_RADIUS, SPACING, getSpacingPx, Z_INDEX } from "../../ui_primitives";
 import { LoadingSpinner, Text } from "../../ui_primitives";
 import SearchOffIcon from "@mui/icons-material/SearchOff";
@@ -165,6 +166,7 @@ type ListItem =
 
 const ModelListIndex: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation("huggingface");
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const [modelToDelete, setModelToDelete] = useState<string | null>(null);
   const {
@@ -446,7 +448,7 @@ const ModelListIndex: React.FC = () => {
         sx={{ textAlign: "center" }}
       >
         <Text size="big" color="error">
-          Could not load models
+          {t("modelList.couldNotLoad")}
         </Text>
         <Text
           size="normal"
@@ -459,8 +461,7 @@ const ModelListIndex: React.FC = () => {
           <FlexColumn gap={1} sx={{ mt: 1 }}>
             {isElectron ? (
               <Text size="small" color="warning">
-                Ollama should be running automatically. Please try restarting
-                the application.
+                {t("modelList.ollamaRestartHint")}
               </Text>
             ) : (
               <Text
@@ -472,7 +473,7 @@ const ModelListIndex: React.FC = () => {
                 sx={{ textDecoration: "underline" }}
                 color="primary"
               >
-                Download Ollama →
+                {t("modelList.downloadOllama")}
               </Text>
             )}
           </FlexColumn>
@@ -665,17 +666,17 @@ const ModelListIndex: React.FC = () => {
                 <>
                   <SearchOffIcon sx={{ fontSize: 48, opacity: 0.5 }} />
                   <Text size="normal" weight={600} color="secondary" sx={{ display: "block" }}>
-                    No models found for &quot;{modelSearchTerm}&quot;
+                    {t("modelList.noModelsForTerm", { term: modelSearchTerm })}
                   </Text>
                   <Text size="small" color="secondary" sx={{ display: "block" }}>
-                    Try a different search term or adjust your filters
+                    {t("modelList.tryDifferentSearch")}
                   </Text>
                 </>
               ) : source === "hub" ? (
                 <>
                   <DownloadIcon sx={{ fontSize: 48, opacity: 0.5 }} />
                   <Text size="normal" weight={600} color="secondary">
-                    Search the HuggingFace Hub
+                    {t("modelList.searchHubEmpty")}
                   </Text>
                   <Text size="small" color="secondary">
                     Type a name above, or pick a category, to browse and download
@@ -686,33 +687,30 @@ const ModelListIndex: React.FC = () => {
                 <>
                   <DownloadIcon sx={{ fontSize: 48, opacity: 0.5 }} />
                   <Text size="normal" weight={600} color="secondary">
-                    No recommended models
+                    {t("modelList.noRecommended")}
                   </Text>
                   <Text size="small" color="secondary">
-                    Recommended models are gathered from the nodes you have
-                    installed. Add nodes that run models to see suggestions here.
+                    {t("modelList.recommendedHint")}
                   </Text>
                 </>
               ) : scope === "worker" ? (
                 <>
                   <DownloadIcon sx={{ fontSize: 48, opacity: 0.5 }} />
                   <Text size="normal" weight={600} color="secondary">
-                    No models cached on this worker yet
+                    {t("modelList.noWorkerModels")}
                   </Text>
                   <Text size="small" color="secondary">
-                    While this worker is attached, any model you download lands
-                    on its volume.
+                    {t("modelList.workerModelsHint")}
                   </Text>
                 </>
               ) : (
                 <>
                   <SearchOffIcon sx={{ fontSize: 48, opacity: 0.5 }} />
                   <Text size="normal" weight={600} color="secondary" sx={{ display: "block" }}>
-                    No models available
+                    {t("modelList.noModelsAvailable")}
                   </Text>
                   <Text size="small" color="secondary" sx={{ display: "block" }}>
-                    Try adjusting the size filter or selecting a different
-                    category
+                    {t("modelList.noModelsAvailableHint")}
                   </Text>
                 </>
               )}

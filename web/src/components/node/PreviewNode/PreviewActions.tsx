@@ -93,11 +93,11 @@ const PreviewActions: React.FC<PreviewActionsProps> = memo(({
         margin: "0 0 .25em 0"
       }}
     >
-      <Tooltip title="Download">
+      <Tooltip title={t("canvas:node.download")}>
         <EditorButton
           onClick={onDownload}
           className="action-button download"
-          aria-label="Download"
+          aria-label={t("canvas:node.download")}
         >
           <FileDownloadIcon />
         </EditorButton>

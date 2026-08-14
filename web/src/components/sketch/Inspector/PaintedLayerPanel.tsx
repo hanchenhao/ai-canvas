@@ -9,6 +9,7 @@
  */
 
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 import type { Layer } from "../types";
 import {
   Caption,
@@ -24,14 +25,15 @@ export interface PaintedLayerPanelProps {
   layer: Layer;
 }
 
-function describeKind(layer: Layer): string {
-  if (layer.type === "mask") return "Mask layer";
-  if (layer.type === "group") return "Group";
-  return "Painted layer";
+function describeKind(layer: Layer, t: (key: string) => string): string {
+  if (layer.type === "mask") {return t("sketch:paintedLayerPanel.maskLayer");}
+  if (layer.type === "group") {return t("sketch:paintedLayerPanel.group");}
+  return t("sketch:paintedLayerPanel.paintedLayer");
 }
 
 export const PaintedLayerPanel: React.FC<PaintedLayerPanelProps> = memo(
   ({ layer }) => {
+    const { t } = useTranslation("sketch");
     return (
       <Panel
         background="default"
@@ -45,22 +47,35 @@ export const PaintedLayerPanel: React.FC<PaintedLayerPanelProps> = memo(
                 {layer.name}
               </Label>
             </FlexRow>
-            <Caption color="secondary">{describeKind(layer)}</Caption>
+            <Caption color="secondary">{describeKind(layer, t)}</Caption>
           </FlexColumn>
 
-          <CollapsibleSection title="Layer" defaultOpen>
+          <CollapsibleSection title={t("sketch:paintedLayerPanel.sectionTitle")} defaultOpen>
             <FlexColumn gap={0.5}>
               <Text size="small">
-                Opacity: {Math.round(layer.opacity * 100)}%
-              </Text>
-              <Text size="small">Blend mode: {layer.blendMode}</Text>
-              <Text size="small">
-                Bounds: {layer.contentBounds.width}×
-                {layer.contentBounds.height} @ ({layer.contentBounds.x},{" "}
-                {layer.contentBounds.y})
+                {t("sketch:paintedLayerPanel.opacity", {
+                  value: Math.round(layer.opacity * 100)
+                })}
               </Text>
               <Text size="small">
-                Effects: {layer.effects.length === 0 ? "none" : layer.effects.length}
+                {t("sketch:paintedLayerPanel.blendMode", {
+                  mode: layer.blendMode
+                })}
+              </Text>
+              <Text size="small">
+                {t("sketch:paintedLayerPanel.bounds", {
+                  width: layer.contentBounds.width,
+                  height: layer.contentBounds.height,
+                  x: layer.contentBounds.x,
+                  y: layer.contentBounds.y
+                })}
+              </Text>
+              <Text size="small">
+                {layer.effects.length === 0
+                  ? t("sketch:paintedLayerPanel.effectsNone")
+                  : t("sketch:paintedLayerPanel.effects", {
+                      count: layer.effects.length
+                    })}
               </Text>
             </FlexColumn>
           </CollapsibleSection>

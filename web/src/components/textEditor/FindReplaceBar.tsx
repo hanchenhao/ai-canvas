@@ -201,14 +201,14 @@ const FindReplaceBar = ({
       <div className="search-group">
         <NodeTextField
           className="search-input"
-          placeholder="Find..."
+          placeholder={t("common:textEditor.findPlaceholder")}
           value={searchTerm}
           onChange={handleSearchChange}
           onKeyDown={handleKeyDown}
           autoFocus
           slotProps={{
             htmlInput: {
-              "aria-label": "Search text",
+              "aria-label": t("common:textEditor.searchTextAria"),
               maxLength: MAX_SEARCH_LENGTH
             }
           }}
@@ -225,7 +225,7 @@ const FindReplaceBar = ({
 
         <ToolbarIconButton
           icon={<KeyboardArrowUpIcon fontSize="small" />}
-          tooltip="Previous"
+          tooltip={t("common:textEditor.previous")}
           onClick={onPrevious}
           disabled={totalMatches === 0}
           className="toolbar-button"
@@ -233,7 +233,7 @@ const FindReplaceBar = ({
 
         <ToolbarIconButton
           icon={<KeyboardArrowDownIcon fontSize="small" />}
-          tooltip="Next"
+          tooltip={t("common:textEditor.next")}
           onClick={onNext}
           disabled={totalMatches === 0}
           className="toolbar-button"
@@ -251,13 +251,13 @@ const FindReplaceBar = ({
         <div className="search-group">
           <NodeTextField
             className="replace-input"
-            placeholder="Replace with..."
+            placeholder={t("common:textEditor.replacePlaceholder")}
             value={replaceTerm}
             onChange={handleReplaceChange}
             onKeyDown={handleKeyDown}
             slotProps={{
               htmlInput: {
-                "aria-label": "Replace text",
+                "aria-label": t("common:textEditor.replaceTextAria"),
                 maxLength: MAX_SEARCH_LENGTH
               }
             }}
@@ -266,7 +266,7 @@ const FindReplaceBar = ({
           <span>
             <ToolbarIconButton
               icon={<span style={{ fontSize: 'var(--fontSizeSmaller)', fontWeight: 600 }}>Replace</span>}
-              tooltip="Replace"
+              tooltip={t("common:textEditor.replace")}
               onClick={handleReplace}
               disabled={!isValidSearch || totalMatches === 0}
               className="toolbar-button"
@@ -285,7 +285,7 @@ const FindReplaceBar = ({
         </div>
       )}
 
-      <CloseButton onClick={handleClose} buttonSize="small" tooltip="Close Find/Replace" className="toolbar-button" />
+      <CloseButton onClick={handleClose} buttonSize="small" tooltip={t("common:textEditor.closeFindReplace")} className="toolbar-button" />
     </Box>
   );
 };

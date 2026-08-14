@@ -224,12 +224,12 @@ const Help = ({
       onClose={handleClose}
       fullWidth
       maxWidth="lg"
-      aria-label="Help"
+      aria-label={t("common:help.ariaHelp")}
     >
         <div css={helpStyles(theme)}>
           <div className="help">
             <div className="top">
-              <Text size="big" >Help</Text>
+              <Text size="big">{t("common:help.title")}</Text>
               <CloseButton onClick={handleClose} />
             </div>
             <div className="tabs-row">
@@ -237,11 +237,11 @@ const Help = ({
                 className="help-tabs"
                 value={helpIndex}
                 onChange={handleChange}
-                aria-label="help tabs"
+                aria-label={t("common:help.tabsAria")}
               >
-                <Tab label="Shortcuts" id="help-tab-0" />
-                <Tab label="Keyboard" id="help-tab-1" />
-                <Tab label="DataTypes" id="help-tab-2" />
+                <Tab label={t("common:help.tabShortcuts")} id="help-tab-0" />
+                <Tab label={t("common:help.tabKeyboard")} id="help-tab-1" />
+                <Tab label={t("common:help.tabDataTypes")} id="help-tab-2" />
               </Tabs>
               <Tooltip title={t("common:help.openBrainviteWebsite")} placement="bottom"
                 delay={TOOLTIP_ENTER_DELAY}

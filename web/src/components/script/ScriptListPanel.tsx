@@ -250,7 +250,7 @@ export const CreateScriptButton = memo(function CreateScriptButton() {
   return (
     <Tooltip title={t("common:script.newScript")} placement="right-start">
       <ToolbarIconButton
-        ariaLabel="New script"
+        ariaLabel={t("common:script.newScript")}
         onClick={() => void handleCreate()}
         disabled={createScript.isPending}
         tabIndex={-1}
@@ -413,15 +413,15 @@ const ScriptListPanel = () => {
         onConfirm={handleConfirmDelete}
         title={t("common:script.deleteScript")}
         content={`Delete "${itemToDelete?.name ?? ""}"? This cannot be undone.`}
-        confirmText="Delete"
-        cancelText="Cancel"
+        confirmText={t("common:button.delete")}
+        cancelText={t("common:button.cancel")}
       />
       <div className="script-search">
         <CategorySearchBar
           ref={searchRef}
           value={filterValue}
           onChange={setFilterValue}
-          placeholder="Search scripts..."
+          placeholder={t("common:script.searchPlaceholder")}
         />
       </div>
 

@@ -1248,26 +1248,26 @@ const TextEditorModal = ({
                   </button>
                 </Tooltip>
               )}
-              <Tooltip delay={TOOLTIP_ENTER_DELAY} title="Download">
+              <Tooltip delay={TOOLTIP_ENTER_DELAY} title={t("common:button.download")}>
                 <button
                   type="button"
                   className="button"
                   onClick={handleDownload}
-                  aria-label="Download"
+                  aria-label={t("common:button.download")}
                 >
                   <DownloadIcon />
                 </button>
               </Tooltip>
               <Tooltip
                 delay={TOOLTIP_ENTER_DELAY}
-                title={assistantVisible ? "Hide Assistant" : "Show Assistant"}
+                title={assistantVisible ? t("common:propertiesExtra.hideAssistant") : t("properties:showAssistant")}
               >
                 <button
                   type="button"
                   className={`button ${assistantVisible ? "active" : ""}`}
                   onClick={toggleAssistantVisible}
                   aria-label={
-                    assistantVisible ? "Hide Assistant" : "Show Assistant"
+                    assistantVisible ? t("common:propertiesExtra.hideAssistant") : t("properties:showAssistant")
                   }
                 >
                   {assistantVisible ? (
@@ -1279,31 +1279,31 @@ const TextEditorModal = ({
               </Tooltip>
               <Tooltip
                 delay={TOOLTIP_ENTER_DELAY}
-                title={focusMode ? "Exit focus mode" : "Focus mode (hide panels)"}
+                title={focusMode ? t("properties:exitFocusMode") : t("properties:focusModeHidePanels")}
               >
                 <button
                   type="button"
                   className={`button ${focusMode ? "active" : ""}`}
                   onClick={() => setFocusMode((v) => !v)}
-                  aria-label={focusMode ? "Exit focus mode" : "Focus mode"}
+                  aria-label={focusMode ? t("properties:exitFocusMode") : t("properties:focusMode")}
                 >
                   {focusMode ? <OpenInFullIcon /> : <CloseFullscreenIcon />}
                 </button>
               </Tooltip>
               <Tooltip
                 delay={TOOLTIP_ENTER_DELAY}
-                title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+                title={isFullscreen ? t("properties:exitFullscreen") : t("properties:fullscreen")}
               >
                 <button
                   type="button"
                   className="button"
                   onClick={toggleFullscreen}
-                  aria-label={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+                  aria-label={isFullscreen ? t("properties:exitFullscreen") : t("properties:fullscreen")}
                 >
                   {isFullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
                 </button>
               </Tooltip>
-              <Tooltip delay={TOOLTIP_ENTER_DELAY} title="Close Editor | Esc">
+              <Tooltip delay={TOOLTIP_ENTER_DELAY} title={t("properties:closeEditorEsc")}>
                 <button
                   type="button"
                   className="button button-close"
@@ -1324,8 +1324,8 @@ const TextEditorModal = ({
                     delay={TOOLTIP_ENTER_DELAY}
                     title={
                       isCodeEditor
-                        ? "Switch to Rich Text"
-                        : "Switch to Code Editor"
+                        ? t("properties:switchToRichText")
+                        : t("properties:switchToCodeEditor")
                     }
                   >
                     <button
@@ -1334,8 +1334,8 @@ const TextEditorModal = ({
                       onClick={handleToggleEditorMode}
                       aria-label={
                         isCodeEditor
-                          ? "Switch to Rich Text"
-                          : "Switch to Code Editor"
+                          ? t("properties:switchToRichText")
+                          : t("properties:switchToCodeEditor")
                       }
                     >
                       {isCodeEditor ? <TextFieldsIcon /> : <CodeIcon />}
@@ -1346,7 +1346,7 @@ const TextEditorModal = ({
                   className="lang-select"
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
-                  aria-label="Language"
+                  aria-label={t("common:language.label")}
                 >
                   {LANGUAGES.map((lang) => (
                     <option key={lang} value={lang}>
@@ -1361,7 +1361,7 @@ const TextEditorModal = ({
                   onClick={handleFindClick}
                 >
                   <SearchIcon />
-                  Find
+                  {t("properties:find")}
                 </button>
                 {!readOnly && (
                   <button
@@ -1370,7 +1370,7 @@ const TextEditorModal = ({
                     onClick={handleFormatClick}
                   >
                     <FormatAlignLeftIcon />
-                    Format
+                    {t("properties:format")}
                   </button>
                 )}
                 <button
@@ -1379,7 +1379,7 @@ const TextEditorModal = ({
                   onClick={handleToggleWordWrap}
                 >
                   <WrapTextIcon />
-                  Wrap
+                  {t("properties:wordWrap")}
                 </button>
                 <span className="toolbar-divider" />
                 <button
@@ -1388,7 +1388,7 @@ const TextEditorModal = ({
                   onClick={toggleVariables}
                 >
                   <DataObjectIcon />
-                  Variables
+                  {t("properties:variables")}
                 </button>
                 {!readOnly && (
                   <button
@@ -1397,7 +1397,7 @@ const TextEditorModal = ({
                     onClick={handleInsertVarClick}
                   >
                     <AddIcon />
-                    Insert var
+                    {t("properties:insertVar")}
                   </button>
                 )}
               </div>
@@ -1563,9 +1563,9 @@ const TextEditorModal = ({
                           <AutoAwesomeIcon />
                         </span>
                         <div className="assistant-meta">
-                          <span className="assistant-name">Assistant</span>
+                          <span className="assistant-name">{t("properties:assistant")}</span>
                           <span className="assistant-sub">
-                            writes &amp; edits this prompt
+                            {t("properties:assistantSubtitle")}
                           </span>
                         </div>
                       </div>

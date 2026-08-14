@@ -802,7 +802,7 @@ const NodeHistoryViewerInternal: React.FC<NodeHistoryViewerProps> = ({
             className="grid nodrag nopan nowheel"
             role="listbox"
             aria-multiselectable={hasDownstream || undefined}
-            aria-label="Generations"
+            aria-label={t("canvas:node.generations")}
             onPointerDown={stopNodeSelection}
             onClick={handleGridClick}
             onKeyDown={handleGridKeyDown}
@@ -860,7 +860,7 @@ const NodeHistoryViewerInternal: React.FC<NodeHistoryViewerProps> = ({
           {showPagination ? (
             <>
               <ToolbarIconButton
-                title="Previous"
+                title={t("canvas:node.previous")}
                 size="small"
                 onClick={handlePrev}
                 className="overlay-icon-btn"
@@ -872,7 +872,7 @@ const NodeHistoryViewerInternal: React.FC<NodeHistoryViewerProps> = ({
                 {`${currentIndex + 1} / ${generations.length}`}
               </span>
               <ToolbarIconButton
-                title="Next"
+                title={t("canvas:node.next")}
                 size="small"
                 onClick={handleNext}
                 className="overlay-icon-btn"
@@ -894,12 +894,12 @@ const NodeHistoryViewerInternal: React.FC<NodeHistoryViewerProps> = ({
             onClick={handleOpenViewer}
             disabled={!canOpen}
             className="overlay-icon-btn"
-            aria-label={hasTextToOpen ? "Open full text" : "Open in viewer"}
+            aria-label={hasTextToOpen ? t("canvas:node.openFullText") : t("canvas:node.openInViewerTitle")}
           >
             <OpenInFullIcon />
           </ToolbarIconButton>
           <ToolbarIconButton
-            title="Download"
+            title={t("canvas:node.download")}
             size="small"
             onClick={handleDownload}
             disabled={!currentAsset || showingLive}

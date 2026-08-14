@@ -207,7 +207,7 @@ const RunningCard = memo(function RunningCard({
           >
             <VisibilityIcon sx={{ fontSize: 12 }} />
             <Text size="smaller" sx={{ color: "primary.main" }}>
-              On canvas
+              {t("canvas:queue.onCanvas")}
             </Text>
           </FlexRow>
         )}

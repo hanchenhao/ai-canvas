@@ -698,7 +698,7 @@ function FileBrowserDialog({
             <SearchInput
               value={searchQuery}
               onChange={handleSearchQueryChange}
-              placeholder="Search in current folder..."
+              placeholder={t("common:dialogs.searchInFolder")}
               fullWidth
             />
           </div>
@@ -706,9 +706,9 @@ function FileBrowserDialog({
           <RefreshButton
             onClick={handleRefresh}
             buttonSize="small"
-            tooltip="Refresh"
+            tooltip={t("common:dialogs.refresh")}
           />
-          <CloseButton onClick={onClose} buttonSize="small" tooltip="Close" />
+          <CloseButton onClick={onClose} buttonSize="small" tooltip={t("common:button.close")} />
         </FlexRow>
 
         <FlexRow

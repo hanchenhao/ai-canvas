@@ -1,4 +1,5 @@
 import React, { useCallback, memo } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   Caption,
@@ -26,6 +27,7 @@ export interface ConnectionMatchMenuPayload {
 }
 
 const ConnectionMatchMenu: React.FC = () => {
+  const { t } = useTranslation("canvas");
   const { openMenuType, menuPosition, payload, closeContextMenu } =
     useContextMenu((state) => ({
       openMenuType: state.openMenuType,
@@ -70,7 +72,7 @@ const ConnectionMatchMenu: React.FC = () => {
     >
       <MenuItem disabled>
         <Text size="small" weight={600}>
-          Select Connection
+          {t("canvas:contextMenu.selectConnection")}
         </Text>
       </MenuItem>
       {options.map((option) => [

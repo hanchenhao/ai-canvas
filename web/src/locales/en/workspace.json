@@ -183,7 +183,8 @@
     "diffNodeFallback": "Node",
     "diffIdPrefix": "ID: {{id}}",
     "diffNullValue": "null",
-    "noChangesToDisplay": "No changes to display"
+    "noChangesToDisplay": "No changes to display",
+    "emptyWorkflow": "Empty workflow"
   },
   "share": {
     "roleViewer": "Can view",

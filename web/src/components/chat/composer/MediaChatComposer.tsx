@@ -546,37 +546,37 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
     if (mode === "chat")
       return {
         model: chatModel,
-        label: "language",
+        label: t("chat:composer.modelKind.language"),
         open: () => setLanguageModelOpen(true)
       };
     if (mode === "image")
       return {
         model: imageParams.model,
-        label: "image",
+        label: t("chat:composer.modelKind.image"),
         open: () => setImageModelOpen(true)
       };
     if (mode === "image_edit")
       return {
         model: imageEditParams.model,
-        label: "image edit",
+        label: t("chat:composer.modelKind.imageEdit"),
         open: () => setImageModelOpen(true)
       };
     if (mode === "video")
       return {
         model: videoParams.model,
-        label: "video",
+        label: t("chat:composer.modelKind.video"),
         open: () => setVideoModelOpen(true)
       };
     if (mode === "image_to_video")
       return {
         model: imageToVideoParams.model,
-        label: "image to video",
+        label: t("chat:composer.modelKind.imageToVideo"),
         open: () => setVideoModelOpen(true)
       };
     if (mode === "audio")
       return {
         model: audioParams.model,
-        label: "speech",
+        label: t("chat:composer.modelKind.speech"),
         open: () => setTtsModelOpen(true)
       };
     return null;
@@ -588,7 +588,8 @@ const MediaChatComposer: React.FC<MediaChatComposerProps> = ({
     imageEditParams.model,
     videoParams.model,
     imageToVideoParams.model,
-    audioParams.model
+    audioParams.model,
+    t
   ]);
 
   // A send with no model picked can only fail on the server, so the composer

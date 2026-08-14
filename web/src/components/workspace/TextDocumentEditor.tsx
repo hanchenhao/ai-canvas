@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import SaveIcon from "@mui/icons-material/Save";
@@ -87,6 +88,7 @@ const styles = (theme: Theme) =>
  * toolbar Save button).
  */
 const TextDocumentEditor = ({ asset }: TextDocumentEditorProps) => {
+  const { t } = useTranslation(["workspace", "common"]);
   const theme = useTheme();
   const editorStyles = useMemo(() => styles(theme), [theme]);
   const queryClient = useQueryClient();
@@ -244,7 +246,7 @@ const TextDocumentEditor = ({ asset }: TextDocumentEditorProps) => {
           sx={{ alignItems: "center", justifyContent: "center" }}
         >
           <Caption sx={{ color: "error.main" }}>
-            Failed to load text content
+            {t("workspace:textEditor.loadFailed")}
           </Caption>
         </FlexColumn>
       );
@@ -271,7 +273,7 @@ const TextDocumentEditor = ({ asset }: TextDocumentEditorProps) => {
             toolbarEnd={
               <>
                 {isDirty && (
-                  <span className="dirty-dot" aria-label="Unsaved changes" />
+                  <span className="dirty-dot" aria-label={t("workspace:textEditor.unsavedChanges")} />
                 )}
                 <EditorButton
                   variant="contained"
@@ -280,7 +282,7 @@ const TextDocumentEditor = ({ asset }: TextDocumentEditorProps) => {
                   disabled={!isDirty || isSaving}
                   onClick={handleSave}
                 >
-                  {isSaving ? "Saving…" : "Save"}
+                  {isSaving ? t("workspace:textEditor.saving") : t("common:button.save")}
                 </EditorButton>
               </>
             }
@@ -320,7 +322,7 @@ const TextDocumentEditor = ({ asset }: TextDocumentEditorProps) => {
           />
           <FlexRow align="center" gap={0.5} sx={{ px: 1 }}>
             {isDirty && (
-              <span className="dirty-dot" aria-label="Unsaved changes" />
+              <span className="dirty-dot" aria-label={t("workspace:textEditor.unsavedChanges")} />
             )}
             <EditorButton
               variant="contained"
@@ -329,7 +331,7 @@ const TextDocumentEditor = ({ asset }: TextDocumentEditorProps) => {
               disabled={!isDirty || isSaving}
               onClick={handleSave}
             >
-              {isSaving ? "Saving…" : "Save"}
+              {isSaving ? t("workspace:textEditor.saving") : t("common:button.save")}
             </EditorButton>
           </FlexRow>
         </FlexRow>

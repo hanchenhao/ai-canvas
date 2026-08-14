@@ -8,6 +8,7 @@
  */
 
 import React, { memo, useCallback, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -86,6 +87,7 @@ const GetVariableBodyInner: React.FC<GetVariableBodyProps> = ({
   status,
   isOutputNode
 }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -162,7 +164,7 @@ const GetVariableBodyInner: React.FC<GetVariableBodyProps> = ({
       {options.length > 0 ? (
         <div className="picker">
           <SelectField
-            label="Variable"
+            label={t("canvas:node.variable")}
             value={currentName}
             onChange={handleChange}
             options={options}

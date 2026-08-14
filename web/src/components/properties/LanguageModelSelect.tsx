@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import LanguageModelMenuDialog from "../model_menu/LanguageModelMenuDialog";
 import useModelPreferencesStore from "../../stores/ModelPreferencesStore";
@@ -20,7 +21,7 @@ interface LanguageModelSelectProps {
    * contexts that need function calling.
    */
   requireToolSupport?: boolean;
-  /** Button label when nothing is selected. Defaults to "Select Model". */
+  /** Button label when nothing is selected. Defaults to the localized "Select Model". */
   placeholder?: string;
   recommendedModels?: UnifiedModel[];
   modelPacks?: ModelPack[];
@@ -31,10 +32,12 @@ const LanguageModelSelect: React.FC<LanguageModelSelectProps> = ({
   value,
   allowedProviders,
   requireToolSupport,
-  placeholder = "Select Model",
+  placeholder,
   recommendedModels,
   modelPacks
 }) => {
+  const { t } = useTranslation("properties");
+  const placeholderText = placeholder ?? t("properties:modelSelect.selectModel");
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const addRecent = useModelPreferencesStore((s) => s.addRecent);
@@ -80,9 +83,9 @@ const LanguageModelSelect: React.FC<LanguageModelSelectProps> = ({
       <ModelSelectButton
         ref={buttonRef}
         active={!!value}
-        label={currentSelectedModelDetails?.name || value || placeholder}
+        label={currentSelectedModelDetails?.name || value || placeholderText}
         secondaryLabel={currentSelectedModelDetails?.provider}
-        subLabel={placeholder}
+        subLabel={placeholderText}
         onClick={handleClick}
       />
       <LanguageModelMenuDialog

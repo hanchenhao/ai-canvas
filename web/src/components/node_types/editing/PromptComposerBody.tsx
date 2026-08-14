@@ -20,6 +20,7 @@ import React, {
   useRef,
   useState
 } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -236,6 +237,7 @@ const PromptComposerBodyInner: React.FC<PromptComposerBodyProps> = ({
   status,
   isOutputNode
 }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -381,14 +383,14 @@ const PromptComposerBodyInner: React.FC<PromptComposerBodyProps> = ({
               contentEditable={
                 <ContentEditable
                   className="composer-input"
-                  aria-label="Prompt"
+                  aria-label={t("canvas:promptComposer.prompt")}
                   spellCheck={false}
                   onClick={(e) => e.stopPropagation()}
                 />
               }
               placeholder={
                 <div className="composer-placeholder">
-                  Write a prompt… @ to mention an asset
+                  {t("canvas:promptComposer.placeholder")}
                 </div>
               }
               ErrorBoundary={LexicalErrorBoundary}

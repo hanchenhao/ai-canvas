@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -75,6 +76,7 @@ const CodeAssistantChatPanel = ({
   nodeId,
   workflowId
 }: CodeAssistantChatPanelProps) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -160,16 +162,14 @@ const CodeAssistantChatPanel = ({
       >
         <AutoAwesomeIcon sx={{ fontSize: 40, mb: 1.5, opacity: 0.5 }} />
         <Text size="normal" weight={600} sx={{ mb: 1 }}>
-          Code Assistant
+          {t("canvas:codeAssistant.title")}
         </Text>
         <Text size="small" color="secondary" sx={{ maxWidth: 280 }}>
-          Ask me to write or change this node&apos;s code — e.g. &quot;merge the
-          two lists on id&quot;, &quot;add an error output&quot;, or &quot;test
-          this with a sample list&quot;.
+          {t("canvas:codeAssistant.welcomeHint")}
         </Text>
       </FlexColumn>
     ),
-    []
+    [t]
   );
 
   return (

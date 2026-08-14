@@ -40,7 +40,8 @@
     "providersFailedMany": "{{count}} providers failed to load",
     "failedToLoadFrom": "Failed to load models from:",
     "loadingModelsProgress": "Loading models: {{loaded}}/{{total}} providers...",
-    "loadingModels": "Loading models..."
+    "loadingModels": "Loading models...",
+    "hfApiBadge": "HF API"
   },
   "filters": {
     "filterByType": "Filter by Type",

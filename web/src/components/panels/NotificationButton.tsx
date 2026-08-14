@@ -72,7 +72,7 @@ const NotificationButton: React.FC = React.memo(() => {
         count={unreadCount}
         color="secondary"
         dot
-        tooltip="Notifications"
+        tooltip={t("common:panels.notifications")}
         ariaLabel={getNotificationButtonLabel(unreadCount)}
       >
         <ToolbarIconButton
@@ -100,7 +100,7 @@ const NotificationButton: React.FC = React.memo(() => {
         <Box
           className="notification-container"
           role="region"
-          aria-label="Notifications"
+          aria-label={t("common:panels.notifications")}
           sx={{
             p: 3,
             width: "600px",
@@ -124,7 +124,7 @@ const NotificationButton: React.FC = React.memo(() => {
               sx={{ fontSize: "var(--fontSizeNormal)" }}
               weight={400}
             >
-              No notifications
+              {t("common:panels.noNotifications")}
             </Text>
           ) : (
             <Box role="list" aria-label={`Notification list, ${notifications.length} item${notifications.length > 1 ? "s" : ""}`}>

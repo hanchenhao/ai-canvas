@@ -9,6 +9,7 @@ import React, {
   useRef,
   useState
 } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -212,6 +213,7 @@ function isClipUpcoming(clip: TimelineClip, currentTimeMs: number): boolean {
 
 export const PreviewCompositor: React.FC = memo(() => {
   const theme = useTheme();
+  const { t } = useTranslation("timeline");
 
   // Reactive position — now updated only on discrete events (seek/scrub/
   // pause/stop), never per playback frame. Drives the scene at rest.
@@ -1309,7 +1311,7 @@ export const PreviewCompositor: React.FC = memo(() => {
             style={{ zIndex: Z_INDEX.raised, color: "#c08000" }}
           >
             <span style={{ fontSize: theme.fontSizeSmall }}>
-              Preview rendering unavailable
+              {t("preview.renderingUnavailable")}
             </span>
           </div>
         )}

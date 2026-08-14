@@ -586,7 +586,7 @@ export const TrackLane: React.FC<TrackLaneProps> = memo(({ track }) => {
           />
         )}
         <MenuItemPrimitive
-          label="Add generated clip here…"
+          label={t("timeline:clip.addGeneratedHere")}
           icon={<AddIcon fontSize="small" />}
           onClick={handleAddClipFromMenu}
           compact

@@ -144,18 +144,20 @@ export const WorkflowLoader: React.FC<WorkflowLoaderProps> = memo(
             getWorkflow(option.id) ??
             (await fetchWorkflow(option.id, { makeCurrent: false }));
           if (!workflow) {
-            throw new Error("Failed to load workflow");
+            throw new Error(t("canvas:node.loadWorkflowFailed"));
           }
           applyWorkflowSelection(workflow);
         } catch (err) {
           setError(
-            err instanceof Error ? err.message : "Failed to load workflow"
+            err instanceof Error
+              ? err.message
+              : t("canvas:node.loadWorkflowFailed")
           );
         } finally {
           setLoading(false);
         }
       },
-      [nodeId, updateNodeData, data.properties, getWorkflow, fetchWorkflow, applyWorkflowSelection]
+      [nodeId, updateNodeData, data.properties, getWorkflow, fetchWorkflow, applyWorkflowSelection, t]
     );
 
     useEffect(() => {

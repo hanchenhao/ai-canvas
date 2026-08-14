@@ -208,7 +208,7 @@ export const ChainNodeProperties: React.FC<ChainNodePropertiesProps> = ({
     return (
       <Box sx={{ py: 1.5, textAlign: "center" }}>
         <Text size="smaller" color="secondary" sx={{ fontStyle: "italic" }}>
-          No configurable properties
+          {t("common:chainEditor.noConfigurableProperties")}
         </Text>
       </Box>
     );
@@ -299,7 +299,7 @@ export const ChainNodeProperties: React.FC<ChainNodePropertiesProps> = ({
                     <ToolbarIconButton
                       size="small"
                       ariaLabel={`Disconnect ${prop.title ?? prop.name}`}
-                      tooltip="Disconnect — edit the value instead"
+                      tooltip={t("common:chainEditor.disconnectToEdit")}
                       onClick={(e) => {
                         e.stopPropagation();
                         onSetInputMapping(prop.name, null);

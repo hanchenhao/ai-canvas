@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import ASRModelMenuDialog from "../model_menu/ASRModelMenuDialog";
 import useModelPreferencesStore from "../../stores/ModelPreferencesStore";
@@ -26,6 +27,7 @@ const ASRModelSelect: React.FC<ASRModelSelectProps> = ({
   recommendedModels,
   modelPacks
 }) => {
+  const { t } = useTranslation("properties");
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const addRecent = useModelPreferencesStore((s) => s.addRecent);
@@ -73,8 +75,8 @@ const ASRModelSelect: React.FC<ASRModelSelectProps> = ({
       <ModelSelectButton
         ref={buttonRef}
         active={!!value}
-        label={currentSelectedModelDetails?.name || value || "Select Model"}
-        subLabel="Select ASR Model"
+        label={currentSelectedModelDetails?.name || value || t("properties:modelSelect.selectModel")}
+        subLabel={t("properties:modelSelect.selectASRModel")}
         onClick={handleClick}
       />
       <ASRModelMenuDialog

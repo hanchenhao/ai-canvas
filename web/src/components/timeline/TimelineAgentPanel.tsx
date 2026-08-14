@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -46,6 +47,7 @@ const styles = (_theme: Theme) =>
  * bridge — cutting, generating, and tweaking clips like a real editor.
  */
 const TimelineAgentPanel = () => {
+  const { t } = useTranslation("timeline");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const inStudio = useInStudio();
@@ -132,16 +134,14 @@ const TimelineAgentPanel = () => {
       >
         <AutoAwesomeIcon sx={{ fontSize: 40, mb: 1.5, opacity: 0.5 }} />
         <Text size="normal" weight={600} sx={{ mb: 1 }}>
-          Editor Assistant
+          {t("timeline:agentPanel.title")}
         </Text>
         <Text size="small" color="secondary" sx={{ maxWidth: 280 }}>
-          Ask me to edit the timeline — e.g. &quot;generate a 5-second clip of a
-          city at night&quot;, &quot;split the selected clip at the
-          playhead&quot;, or &quot;fade out the last clip&quot;.
+          {t("timeline:agentPanel.welcomeHint")}
         </Text>
       </FlexColumn>
     ),
-    []
+    [t]
   );
 
   return (

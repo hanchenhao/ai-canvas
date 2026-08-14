@@ -1,4 +1,5 @@
 import { memo, useCallback, useMemo, type Ref } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import {
   Tooltip,
@@ -57,6 +58,7 @@ const NodeItem = memo(function NodeItem({
   showDescriptionTooltip = false,
   ref
 }: NodeItemProps) {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const translated = useTranslatedNodeMetadata(node.node_type);
   const displayNode = translated ?? node;
@@ -125,7 +127,7 @@ const NodeItem = memo(function NodeItem({
               weight={FONT_WEIGHT.semibold}
               sx={{ color: "grey.400", textTransform: "uppercase", mb: 0.5 }}
             >
-              Use cases
+              {t("canvas:nodeInfoPanel.useCases")}
             </Text>
             <Box
               component="ul"
@@ -146,7 +148,7 @@ const NodeItem = memo(function NodeItem({
         )}
       </Box>
     );
-  }, [parsedDescription, displayNode.title]);
+  }, [parsedDescription, displayNode.title, t]);
 
   const onMouseEnter = useCallback(() => {
     setHoveredNode(node);

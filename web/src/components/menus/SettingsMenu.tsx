@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 // Full-page settings (formerly a Dialog).
 import React, { memo, useMemo } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import {
   useMediaQuery
@@ -756,8 +756,7 @@ function SettingsPage() {
                             options={UPDATE_CHANNEL_OPTIONS.map(o => ({ ...o, label: t(UPDATE_CHANNEL_LABELS[o.value]) }))}
                           />
                           <Text className="description">
-                            Stable follows full releases. Nightly follows prerelease nightly builds.
-                            Nightly builds default to the Nightly channel.
+                            {t("settings:descriptions.updateChannel")}
                           </Text>
                         </SearchItem>
                       )}
@@ -846,8 +845,7 @@ function SettingsPage() {
                           disabled={!(settings.confirmLargeRun ?? true)}
                         />
                         <Text className="description">
-                          Warn when a run would execute more than this many
-                          model/provider nodes (LLM, image, audio, API, etc.).
+                          {t("settings:descriptions.confirmLargeRunThreshold")}
                         </Text>
                       </SearchItem>
 
@@ -930,15 +928,20 @@ function SettingsPage() {
                         />
                         <div className="description">
                           <Text>
-                            What dragging with the left mouse button does on
-                            empty canvas.
+                            {t("settings:descriptions.leftClickDragIntro")}
                           </Text>
                           <Text>
-                            <b>{t("common:menus.panCanvas")}</b> left-drag moves the view.
+                            <Trans
+                              i18nKey="settings:descriptions.leftClickDragPanHint"
+                              values={{ label: t("common:menus.panCanvas") }}
+                              components={{ b: <b /> }}
+                            />
                             <br />
-                            <b>{t("common:menus.selectNodes")}</b> left-drag draws a selection box;
-                            pan with the right or middle mouse button (and
-                            two-finger scroll on a trackpad).
+                            <Trans
+                              i18nKey="settings:descriptions.leftClickDragSelectHint"
+                              values={{ label: t("common:menus.selectNodes") }}
+                              components={{ b: <b /> }}
+                            />
                           </Text>
                         </div>
                       </SearchItem>
@@ -978,7 +981,7 @@ function SettingsPage() {
                           size="small"
                         />
                         <Text className="description">
-                          Snap precision for moving nodes on the canvas.
+                          {t("settings:descriptions.snapMovePrecision")}
                         </Text>
                       </SearchItem>
 
@@ -998,7 +1001,7 @@ function SettingsPage() {
                           size="small"
                         />
                         <Text className="description">
-                          Snap distance for connecting nodes.
+                          {t("settings:descriptions.snapConnectDistance")}
                         </Text>
                       </SearchItem>
                     </div>
@@ -1160,7 +1163,7 @@ function SettingsPage() {
                         id="mcp-integration"
                         className="settings-heading"
                       >
-                        MCP Integration
+                        {t("settings:section.mcpIntegration")}
                       </Text>
                       <MCPSettingsMenu />
 
@@ -1169,7 +1172,7 @@ function SettingsPage() {
                         id="browser-extension"
                         className="settings-heading"
                       >
-                        Browser Extension
+                        {t("settings:sidebarItem.browserExtension")}
                       </Text>
                       <BrowserExtensionSettingsMenu />
                     </>
@@ -1183,14 +1186,13 @@ function SettingsPage() {
                         id="nodetool-api-token"
                         className="settings-heading"
                       >
-                        BrainVite API
+                        {t("settings:section.brainviteApi")}
                       </Text>
                       <Text
                         className="explanation"
                         sx={{ margin: "0 0 1em 0" }}
                       >
-                        Use the BrainVite API to execute workflows
-                        programmatically.
+                        {t("settings:descriptions.brainviteApi")}
                         <br />
                         <br />
                         <a
@@ -1216,12 +1218,11 @@ function SettingsPage() {
                             color: theme.palette.text.primary
                           }}
                         >
-                          Nodetool API Token
+                          {t("settings:sidebarItem.nodetoolApiToken")}
                         </Text>
                         <div className="description">
                           <Text>
-                            This token is used to authenticate your account
-                            with the Nodetool API.
+                            {t("settings:descriptions.apiToken")}
                           </Text>
                           <div className="secrets">
                             <WarningIcon
@@ -1231,8 +1232,7 @@ function SettingsPage() {
                               }}
                             />
                             <Text component="span">
-                              Keep this token secure and do not share it
-                              publicly
+                              {t("settings:descriptions.apiTokenSecurity")}
                             </Text>
                           </div>
                         </div>
@@ -1244,7 +1244,7 @@ function SettingsPage() {
                             startIcon={<ContentCopyIcon />}
                             onClick={copyAuthToken}
                           >
-                            Copy Token
+                            {t("settings:labels.copyToken")}
                           </EditorButton>
                         </Tooltip>
                       </div>

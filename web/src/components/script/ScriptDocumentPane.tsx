@@ -401,7 +401,7 @@ const SectionBlockInner = ({
             startIcon={<AddIcon fontSize="small" />}
             onClick={() => addLine(scriptId, section.id)}
           >
-            Add line
+            {t("common:script.addLine")}
           </EditorButton>
         </FlexRow>
       )}
@@ -632,7 +632,7 @@ const ScriptDocumentPane = ({
               startIcon={<GraphicEqIcon fontSize="small" />}
               onClick={() => void onVoiceAll()}
             >
-              Voice all
+              {t("common:script.voiceAll")}
             </EditorButton>
           ))}
         {playing ? (
@@ -651,7 +651,7 @@ const ScriptDocumentPane = ({
             startIcon={<PlayArrowIcon fontSize="small" />}
             onClick={play}
           >
-            Play through
+            {t("common:script.playThrough")}
           </EditorButton>
         )}
         <Box sx={{ flex: 1 }} />
@@ -695,7 +695,7 @@ const ScriptDocumentPane = ({
                 : "Voice at least one line to export subtitles"
             }
           >
-            Export SRT
+            {t("common:script.exportSrt")}
           </EditorButton>
         )}
       </FlexRow>
@@ -749,7 +749,7 @@ const ScriptDocumentPane = ({
               startIcon={<AddIcon fontSize="small" />}
               onClick={() => addSection(scriptId)}
             >
-              Add section
+              {t("common:script.addSection")}
             </EditorButton>
           </FlexRow>
         )}

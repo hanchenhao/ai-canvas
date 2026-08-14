@@ -230,7 +230,7 @@ const ModelListHeader: React.FC<ModelListHeaderProps> = ({
             color="secondary"
             sx={{ whiteSpace: "nowrap" }}
           >
-            Max size
+            {t("huggingface:modelList.maxSize")}
           </Text>
           <Box
             sx={{

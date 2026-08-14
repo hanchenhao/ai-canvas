@@ -32,7 +32,7 @@ export const AddNodeButton: React.FC<AddNodeButtonProps> = ({ onClick, isHero = 
           textTransform: "none",
         }}
       >
-        Add First Node
+        {t("common:chainEditor.addFirstNode")}
       </EditorButton>
     );
   }
@@ -42,7 +42,7 @@ export const AddNodeButton: React.FC<AddNodeButtonProps> = ({ onClick, isHero = 
       <Box sx={{ width: 2, height: 14, backgroundColor: theme.vars.palette.divider }} />
       <ToolbarIconButton
         size="small"
-        ariaLabel="Add node"
+        ariaLabel={t("common:chainEditor.addNode")}
         tooltip={t("common:chainEditor.addNode")}
         onClick={onClick}
         icon={<AddIcon sx={{ fontSize: 16, color: theme.vars.palette.primary.main }} />}

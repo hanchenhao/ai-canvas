@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Text, ContextMenu, MenuItem } from "../ui_primitives";
 import ContextMenuItem from "./ContextMenuItem";
@@ -17,6 +18,7 @@ import EditIcon from "@mui/icons-material/Edit";
  * documents: rename, duplicate, delete.
  */
 const SidebarDocumentContextMenu: React.FC = () => {
+  const { t } = useTranslation("canvas");
   const menuPosition = useContextMenuStore((state) => state.menuPosition);
   const closeContextMenu = useContextMenuStore(
     (state) => state.closeContextMenu
@@ -66,17 +68,17 @@ const SidebarDocumentContextMenu: React.FC = () => {
       </MenuItem>
       <ContextMenuItem
         onClick={handleRename}
-        label="Rename"
+        label={t("canvas:contextMenu.rename")}
         IconComponent={<EditIcon />}
       />
       <ContextMenuItem
         onClick={handleDuplicate}
-        label="Duplicate"
+        label={t("canvas:contextMenu.duplicate")}
         IconComponent={<ContentCopyIcon />}
       />
       <ContextMenuItem
         onClick={handleDelete}
-        label="Delete"
+        label={t("canvas:contextMenu.delete")}
         addButtonClassName="delete"
         IconComponent={<DeleteIcon />}
       />

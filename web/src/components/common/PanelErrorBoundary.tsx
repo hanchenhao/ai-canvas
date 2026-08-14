@@ -1,5 +1,26 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Text, FlexRow } from "../ui_primitives";
+
+const PanelErrorFallback: React.FC = () => {
+  const { t } = useTranslation("common");
+  return (
+    <FlexRow
+      align="center"
+      justify="center"
+      sx={{
+        padding: 3,
+        minHeight: 200,
+        bgcolor: "error.dark",
+        color: "error.contrastText"
+      }}
+    >
+      <Text size="small" component="div">
+        {t("errorBoundary.panelFailedToRender")}
+      </Text>
+    </FlexRow>
+  );
+};
 
 interface PanelErrorBoundaryProps {
   fallback?: React.ReactNode;
@@ -33,22 +54,7 @@ export default class PanelErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        this.props.fallback ?? (
-          <FlexRow
-            align="center"
-            justify="center"
-            sx={{
-              padding: 3,
-              minHeight: 200,
-              bgcolor: "error.dark",
-              color: "error.contrastText"
-            }}
-          >
-            <Text size="small" component="div">
-              Panel failed to render.
-            </Text>
-          </FlexRow>
-        )
+        this.props.fallback ?? <PanelErrorFallback />
       );
     }
     return this.props.children;

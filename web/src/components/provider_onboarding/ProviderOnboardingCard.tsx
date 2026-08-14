@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import LoginIcon from "@mui/icons-material/Login";
@@ -47,6 +48,7 @@ const ProviderOnboardingCard: React.FC<ProviderOnboardingCardProps> = ({
   defaultExpanded = false
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("common");
   const oauth = useOAuthConnection(provider.oauth ?? null);
   const updateSecret = useSecretsStore((s) => s.updateSecret);
   const validateSecret = useSecretsStore((s) => s.validateSecret);
@@ -338,7 +340,7 @@ const ProviderOnboardingCard: React.FC<ProviderOnboardingCardProps> = ({
                   onClick={handleSaveAnyway}
                   disabled={saving}
                 >
-                  Save anyway
+                  {t("common:providerOnboarding.saveAnyway")}
                 </EditorButton>
               </FlexRow>
             )}

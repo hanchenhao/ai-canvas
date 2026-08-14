@@ -332,13 +332,13 @@ const WorkflowToolbar: FC<WorkflowToolbarProps> = ({
               onClick={handleSortByDate}
               selected={sortBy === "date"}
             >
-              Sort by Date
+              {t("common:workflows.sortByDate")}
             </EditorMenuItem>
             <EditorMenuItem
               onClick={handleSortByName}
               selected={sortBy === "name"}
             >
-              Sort by Name
+              {t("common:workflows.sortByName")}
             </EditorMenuItem>
           </EditorMenu>
 

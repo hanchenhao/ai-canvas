@@ -193,7 +193,7 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
 
   const chipLabel = pricing
     ? formatKieUnitPricingShort(pricing)
-    : "KIE credits";
+    : t("canvas:node.kieCredits");
 
   return (
     <>
@@ -208,7 +208,7 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
         {pricing?.source === "live" && (
           <span
             style={{ marginRight: 4, fontSize: "var(--fontSizeSmaller)", opacity: 0.85 }}
-            aria-label="live price"
+            aria-label={t("canvas:node.livePrice")}
           >
             ●
           </span>
@@ -237,7 +237,7 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
                   letterSpacing: "0.05em",
                 }}
               >
-                KIE pricing
+                {t("canvas:node.kiePricing")}
               </Caption>
               <Text
                 sx={{
@@ -272,8 +272,7 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
                   color: theme.vars.palette.text.secondary,
                 }}
               >
-                No bundled list price for this node. Check kie.ai pricing or run
-                with your API key to see account credits.
+                {t("canvas:node.kieNoListPrice")}
               </Text>
             </FlexColumn>
             <Divider />
@@ -289,7 +288,7 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
               letterSpacing: "0.05em",
             }}
           >
-            Account credits
+            {t("canvas:node.accountCredits")}
           </Caption>
           {creditsLoading ? (
             <FlexRow gap={1} align="center" sx={{ mt: 0.5 }}>
@@ -300,7 +299,7 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
                   color: theme.vars.palette.text.secondary,
                 }}
               >
-                Loading…
+                {t("canvas:node.loading")}
               </Text>
             </FlexRow>
           ) : creditsData === "error" || creditsData === null ? (
@@ -311,7 +310,7 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
                 mt: 0.5,
               }}
             >
-              {creditsData === "error" ? "Could not load credits" : "—"}
+              {creditsData === "error" ? t("canvas:node.couldNotLoadCredits") : "—"}
             </Text>
           ) : creditsData.unavailable ? (
             <FlexColumn gap={0.5} sx={{ mt: 0.5 }}>
@@ -323,7 +322,7 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
                   wordBreak: "break-word",
                 }}
               >
-                {creditsData.detail ?? "Credits unavailable"}
+                {creditsData.detail ?? t("canvas:node.creditsUnavailable")}
               </Text>
               {kieCreditsDetailSuggestsKeysLink(creditsData.detail) && (
                 <ExternalLink
@@ -331,7 +330,7 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
                   iconVariant="launch"
                   size="small"
                 >
-                  kie.ai API keys
+                  {t("canvas:node.kieApiKeys")}
                 </ExternalLink>
               )}
             </FlexColumn>
@@ -344,7 +343,9 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
                 mt: 0.5,
               }}
             >
-              {formatKieCredits(creditsData)} remaining
+              {t("canvas:node.creditsRemaining", {
+                credits: formatKieCredits(creditsData)
+              })}
             </Text>
           )}
         </FlexColumn>
@@ -361,7 +362,7 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
                   letterSpacing: "0.05em",
                 }}
               >
-                Last run
+                {t("canvas:node.lastRun")}
               </Caption>
               <Text
                 sx={{
@@ -380,7 +381,7 @@ const KieCreditsFooterInternal: React.FC<KieCreditsFooterProps> = ({
         <Divider />
 
         <MenuItemPrimitive
-          label="View pricing on kie.ai"
+          label={t("canvas:node.viewPricingOnKie")}
           icon={<LaunchIcon sx={{ fontSize: 14 }} />}
           compact
           onClick={() => {

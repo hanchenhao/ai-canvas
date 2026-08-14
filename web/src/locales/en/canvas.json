@@ -26,7 +26,8 @@
     "processingNodes": "Processing Nodes",
     "groupNodes": "Group Nodes",
     "commentNodes": "Comment Nodes",
-    "outputNodes": "Output Nodes"
+    "outputNodes": "Output Nodes",
+    "nodeTypes": "Node Types"
   },
   "queue": {
     "stopRun": "Stop run",
@@ -35,7 +36,8 @@
     "expand": "Expand queue",
     "collapse": "Collapse queue",
     "queue": "Queue",
-    "queued": "{{count}} queued"
+    "queued": "{{count}} queued",
+    "onCanvas": "On canvas"
   },
   "node": {
     "agentTask": "Agent Task",
@@ -177,7 +179,23 @@
     "previewHint": "Displays any data from connected nodes",
     "imageAria": "Image {{index}}",
     "downloadImageAria": "Download image {{index}}",
-    "openImageInViewerAria": "Open image {{index}} in viewer"
+    "openImageInViewerAria": "Open image {{index}} in viewer",
+    "connectProvider": "Connect provider",
+    "falPricing": "FAL pricing",
+    "loadingEstimate": "Loading estimate…",
+    "accountCredits": "Account credits",
+    "loading": "Loading…",
+    "couldNotLoadCredits": "Could not load credits",
+    "creditsUnavailable": "Credits unavailable",
+    "falApiKeys": "fal.ai API keys",
+    "kiePricing": "KIE pricing",
+    "kieCredits": "KIE credits",
+    "kieNoListPrice": "No bundled list price for this node. Check kie.ai pricing or run with your API key to see account credits.",
+    "kieApiKeys": "kie.ai API keys",
+    "lastRun": "Last run",
+    "configureInSettings": "Configure in Settings",
+    "exposesDataToAppMode": "Exposes data to App Mode",
+    "openDocument": "Open document"
   },
   "typeFilter": {
     "allInputTypes": "All input types",
@@ -392,7 +410,8 @@
     },
     "edit": "Edit",
     "rename": "Rename",
-    "delete": "Delete"
+    "delete": "Delete",
+    "selectConnection": "Select Connection"
   },
   "inspector": {
     "closeInspector": "Close inspector",
@@ -563,7 +582,8 @@
     "packages": "Packages",
     "inputs": "Inputs",
     "outputs": "Outputs",
-    "apply": "Apply"
+    "apply": "Apply",
+    "welcomeHint": "Ask me to write or change this node's code — e.g. \"merge the two lists on id\", \"add an error output\", or \"test this with a sample list\"."
   },
   "schemaLoader": {
     "reloadSchema": "Reload Schema",
@@ -571,7 +591,9 @@
     "loadComfyWorkflow": "Load ComfyUI Workflow",
     "workflowJson": "Workflow JSON",
     "chooseFile": "Choose file",
-    "exposeParams": "Expose additional parameters as inputs:"
+    "exposeParams": "Expose additional parameters as inputs:",
+    "runHint": "Run a ComfyUI workflow on any ComfyUI server.",
+    "uploadHint": "Click the upload icon to load a workflow (paste API JSON or drop a .json/.png)."
   },
   "workflowLoader": {
     "selectWorkflow": "Select Workflow",
@@ -615,7 +637,9 @@
     "packageName": "Package Name"
   },
   "runtimeInstall": {
-    "title": "Install required runtimes"
+    "title": "Install required runtimes",
+    "openPackageManager": "Open Package Manager instead",
+    "allInstalled": "All runtimes installed. You can run this workflow now."
   },
   "nodeInfo": {
     "inputs": "Inputs",

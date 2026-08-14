@@ -308,7 +308,7 @@ const Select: React.FC<SelectProps> = ({
                 setSearchQuery(e.target.value);
                 setHighlightedIndex(-1);
               }}
-              placeholder="Search..."
+              placeholder={t("common:inputs.searchPlaceholder")}
               aria-label={t("common:inputs.searchOptions")}
               onClick={(e) => e.stopPropagation()}
             />

@@ -37,6 +37,7 @@ import jinaIcon from "../../icons/providers/jina.svg";
 import voyageColorIcon from "../../icons/providers/voyage-color.svg";
 import evolinkIcon from "../../icons/evolink.svg";
 import gmiIcon from "../../icons/gmi.svg";
+import doubaoColorIcon from "../../icons/providers/doubao-color.svg";
 
 
 export interface ProviderMeta {
@@ -193,10 +194,15 @@ export const PROVIDER_META: ProviderMeta[] = [
   {
     key: "MINIMAX_API_KEY",
     name: "MiniMax",
-    description: "MiniMax AI models.",
+    description: "MiniMax AI models, Hailuo video generation.",
     section: "language",
     docsUrl: "https://platform.minimax.chat/",
-    icon: minimaxColorIcon
+    icon: minimaxColorIcon,
+    note: "For China domestic keys, set Base URL to https://api.minimax.chat.",
+    fields: [
+      { key: "MINIMAX_API_KEY", label: "API Key", secret: true },
+      { key: "MINIMAX_BASE_URL", label: "Base URL" }
+    ]
   },
   {
     key: "DASHSCOPE_API_KEY",
@@ -275,6 +281,15 @@ export const PROVIDER_META: ProviderMeta[] = [
     docsUrl: "https://developer.topazlabs.com/",
     icon: topazlabsIcon,
     mono: true
+  },
+  {
+    key: "VOLCENGINE_API_KEY",
+    name: "Volcengine",
+    description: "Seedance video generation via the Ark platform.",
+    section: "media",
+    docsUrl: "https://console.volcengine.com/ark/region:ark+cn-beijing/apiKey",
+    icon: doubaoColorIcon,
+    note: "Get your API key at the Volcengine Ark console."
   },
   {
     key: "ATLASCLOUD_API_KEY",

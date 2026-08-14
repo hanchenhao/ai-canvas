@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from "@emotion/react";
 import { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -70,6 +71,7 @@ interface ModelSetupCalloutProps {
  * - A provider exists → tell the user to pick a model in the selector above.
  */
 const ModelSetupCallout: React.FC<ModelSetupCalloutProps> = ({ onDismiss }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const { providers, isLoading, error } = useProviders();
@@ -88,8 +90,8 @@ const ModelSetupCallout: React.FC<ModelSetupCalloutProps> = ({ onDismiss }) => {
       <ToolbarIconButton
         className="callout-close"
         size="small"
-        aria-label="Dismiss"
-        tooltip="Dismiss"
+        aria-label={t("canvas:node.dismiss")}
+        tooltip={t("canvas:node.dismiss")}
         onClick={onDismiss}
         icon={<CloseRoundedIcon sx={{ fontSize: 14 }} />}
       />
@@ -101,8 +103,8 @@ const ModelSetupCallout: React.FC<ModelSetupCalloutProps> = ({ onDismiss }) => {
         )}
         <Text size="small" sx={{ pr: 2 }}>
           {noProvider
-            ? "Connect an AI provider to use models — add an API key to get started."
-            : "Pick a model here before running this workflow."}
+            ? t("canvas:node.setupNoProvider")
+            : t("canvas:node.setupPickModel")}
         </Text>
       </div>
       {noProvider && (
@@ -114,7 +116,7 @@ const ModelSetupCallout: React.FC<ModelSetupCalloutProps> = ({ onDismiss }) => {
           onClick={handleAddKeys}
           sx={{ alignSelf: "flex-start" }}
         >
-          Add API keys
+          {t("canvas:node.addApiKeys")}
         </EditorButton>
       )}
     </div>

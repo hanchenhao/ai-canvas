@@ -43,7 +43,7 @@ const DashboardTutorials: React.FC = () => {
       <div css={wrapStyles(theme)}>
         <SectionHeader title={t("common:dashboard.learnBasics")} count="new here? start here">
           <SectionLink onClick={() => navigate("/tutorials")}>
-            All tutorials
+            {t("common:dashboard.allTutorials")}
           </SectionLink>
         </SectionHeader>
         <div className="tut-grid">

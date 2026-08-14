@@ -183,7 +183,7 @@ export const GeneratedClipPanel: React.FC<GeneratedClipPanelProps> = memo(
             <CollapsibleSection
               title={
                 <InspectorSectionTitle
-                  title="Inputs"
+                  title={t("timeline:clip.inputs")}
                   icon={<TuneOutlinedIcon />}
                 />
               }
@@ -241,7 +241,7 @@ export const GeneratedClipPanel: React.FC<GeneratedClipPanelProps> = memo(
               </EditorButton>
               {isFailed && (
                 <Caption sx={{ color: "error.main", textAlign: "center" }}>
-                  Generation failed.
+                  {t("timeline:clip.generationFailed")}
                 </Caption>
               )}
             </FlexColumn>

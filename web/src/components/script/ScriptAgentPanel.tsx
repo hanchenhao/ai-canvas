@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -49,6 +50,7 @@ interface ScriptAgentPanelProps {
  * bridge — writing, casting, and voicing lines like a co-writer.
  */
 const ScriptAgentPanel = ({ scriptId }: ScriptAgentPanelProps) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const inStudio = useInStudio();
@@ -136,16 +138,14 @@ const ScriptAgentPanel = ({ scriptId }: ScriptAgentPanelProps) => {
       >
         <AutoAwesomeIcon sx={{ fontSize: 40, mb: 1.5, opacity: 0.5 }} />
         <Text size="normal" weight={600} sx={{ mb: 1 }}>
-          Script Assistant
+          {t("common:script.assistantTitle")}
         </Text>
         <Text size="small" color="secondary" sx={{ maxWidth: 280 }}>
-          Ask me to write and voice the script — e.g. &quot;draft a 30-second
-          intro for two hosts&quot;, &quot;add a line for Narrator&quot;, or
-          &quot;voice every line and send it to a timeline&quot;.
+          {t("common:script.assistantWelcome")}
         </Text>
       </FlexColumn>
     ),
-    []
+    [t]
   );
 
   return (

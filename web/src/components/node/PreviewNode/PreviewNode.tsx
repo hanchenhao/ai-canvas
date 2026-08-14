@@ -465,9 +465,7 @@ const PreviewNode: React.FC<PreviewNodeProps> = (props) => {
             hideLogs={true}
           />
           {!displayResult && (
-            <Text className="hint">
-              Displays any data from connected nodes
-            </Text>
+            <Text className="hint">{t("canvas:node.previewHint")}</Text>
           )}
           <PreviewActions
             onDownload={handleDownload}

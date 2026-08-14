@@ -25,6 +25,7 @@ import React, {
   useRef,
   useState
 } from "react";
+import { useTranslation } from "react-i18next";
 import { styled } from "@mui/material/styles";
 
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
@@ -712,6 +713,7 @@ const EditorBody: React.FC<{
   mode: EditorMode;
   setMode: (mode: EditorMode) => void;
 }> = ({ mode, setMode }) => {
+  const { t } = useTranslation("timeline");
   const [editor] = useLexicalComposerContext();
   const writing = mode === "write";
 
@@ -906,14 +908,14 @@ const EditorBody: React.FC<{
           contentEditable={
             <ContentEditable
               className="transcript-content"
-              aria-label="Transcript"
+              aria-label={t("timeline:transcript.editorAria")}
               spellCheck={false}
               data-testid="transcript-editor"
             />
           }
           placeholder={
             <div className="transcript-placeholder">
-              Click Write to start, or import audio to edit it as text…
+              {t("timeline:transcript.editorPlaceholder")}
             </div>
           }
           ErrorBoundary={LexicalErrorBoundary}

@@ -37,8 +37,8 @@ export const ReplaceOutputDialog: React.FC<ReplaceOutputDialogProps> = memo(
         title={t("timeline:clip.replaceClip")}
         onConfirm={handleConfirm}
         onCancel={onClose}
-        confirmText="Replace"
-        cancelText="Cancel"
+        confirmText={t("timeline:clipActions.replace")}
+        cancelText={t("common:button.cancel")}
         showActions
       >
         <Text size="small" sx={{ mb: 1 }}>

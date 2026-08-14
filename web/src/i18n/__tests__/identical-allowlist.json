@@ -31,6 +31,7 @@
   ],
   "models": [
     "apiKey.googleWorkspace.name",
+    "modelList.hfApiBadge",
     "provider.api",
     "provider.hf",
     "providerCatalog.github.clientIdLabel",
@@ -1408,6 +1409,7 @@
     "about.python",
     "googleWorkspace.title",
     "mcp.claudeDesktop",
+    "section.brainviteApi",
     "sidebar.category.ai"
   ],
   "sketch": [

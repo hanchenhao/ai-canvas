@@ -10,6 +10,7 @@
  */
 import React, { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import { useQuery } from "@tanstack/react-query";
 import AddIcon from "@mui/icons-material/Add";
 import {
@@ -57,36 +58,38 @@ export interface AppDataPanelProps {
   workflowName?: string;
 }
 
-const POLICY_OPTIONS = [
-  { label: "Replace running", value: "replace" },
-  { label: "Queue behind", value: "queue" },
-  { label: "Run in parallel", value: "parallel" }
+const policyOptions = (t: TFunction) => [
+  { label: t("applications:dataPanel.policyReplace"), value: "replace" },
+  { label: t("applications:dataPanel.policyQueue"), value: "queue" },
+  { label: t("applications:dataPanel.policyParallel"), value: "parallel" }
 ];
 
-const SCOPE_OPTIONS = [
-  { label: "This session", value: "instance" },
-  { label: "Per user", value: "user" }
+const scopeOptions = (t: TFunction) => [
+  { label: t("applications:dataPanel.scopeSession"), value: "instance" },
+  { label: t("applications:dataPanel.scopeUser"), value: "user" }
 ];
 
 /**
  * The node-SDK type names a variable may declare. A variable is a typed slot,
  * not a free-form bag, so the list is closed — anything richer is a node.
  */
-const TYPE_OPTIONS = [
-  { label: "Any", value: "" },
-  { label: "Text", value: "str" },
-  { label: "Number", value: "float" },
-  { label: "Integer", value: "int" },
-  { label: "True/false", value: "bool" },
-  { label: "List", value: "list" },
-  { label: "Record", value: "dict" }
+const typeOptions = (t: TFunction) => [
+  { label: t("applications:dataPanel.typeAny"), value: "" },
+  { label: t("applications:dataPanel.typeText"), value: "str" },
+  { label: t("applications:dataPanel.typeNumber"), value: "float" },
+  { label: t("applications:dataPanel.typeInteger"), value: "int" },
+  { label: t("applications:dataPanel.typeBoolean"), value: "bool" },
+  { label: t("applications:dataPanel.typeList"), value: "list" },
+  { label: t("applications:dataPanel.typeRecord"), value: "dict" }
 ];
 
-const RESOURCE_KIND_OPTIONS: { label: string; value: ResourceKind }[] = [
-  { label: "Asset", value: "asset" },
-  { label: "Timeline", value: "timeline" },
-  { label: "Storyboard", value: "storyboard" },
-  { label: "Sketch", value: "sketch" }
+const resourceKindOptions = (
+  t: TFunction
+): { label: string; value: ResourceKind }[] => [
+  { label: t("applications:dataPanel.kindAsset"), value: "asset" },
+  { label: t("applications:dataPanel.kindTimeline"), value: "timeline" },
+  { label: t("applications:dataPanel.kindStoryboard"), value: "storyboard" },
+  { label: t("applications:dataPanel.kindSketch"), value: "sketch" }
 ];
 
 /** A row in one of the three lists: a bordered card with a delete affordance. */
@@ -141,17 +144,19 @@ const OperationRow: React.FC<{
       title={operation.name || operation.id}
       subtitle={`id: ${operation.id}`}
       onDelete={onRemove}
-      deleteLabel={`Remove operation ${operation.name || operation.id}`}
+      deleteLabel={t("applications:dataPanel.removeOperation", {
+        name: operation.name || operation.id
+      })}
     >
       <TextInput
-        label="Name"
+        label={t("applications:dataPanel.name")}
         value={operation.name}
         size="small"
         fullWidth
         onChange={(e) => onPatch({ name: e.target.value })}
       />
       <SelectField
-        label="Workflow"
+        label={t("applications:dataPanel.workflow")}
         value={operation.workflowId}
         options={options}
         onChange={(value) => onPatch({ workflowId: value })}
@@ -159,11 +164,11 @@ const OperationRow: React.FC<{
       <SelectField
         label={t("applications:dataPanel.whileRunning")}
         value={operation.policy}
-        options={POLICY_OPTIONS}
+        options={policyOptions(t)}
         onChange={(value) => onPatch({ policy: value as OperationPolicy })}
       />
       <TextInput
-        label="Timeout (ms)"
+        label={t("applications:dataPanel.timeoutMs")}
         type="number"
         value={operation.timeoutMs == null ? "" : String(operation.timeoutMs)}
         size="small"
@@ -189,23 +194,25 @@ const VariableRow: React.FC<{
     title={variable.name || variable.id}
     subtitle={`var:${variable.id}`}
     onDelete={onRemove}
-    deleteLabel={`Remove variable ${variable.name || variable.id}`}
+    deleteLabel={t("applications:dataPanel.removeVariable", {
+      name: variable.name || variable.id
+    })}
   >
     <TextInput
-      label="Name"
+      label={t("applications:dataPanel.name")}
       value={variable.name}
       size="small"
       fullWidth
       onChange={(e) => onPatch({ name: e.target.value })}
     />
     <SelectField
-      label="Type"
+      label={t("applications:dataPanel.type")}
       value={variable.type?.type ?? ""}
-      options={TYPE_OPTIONS}
+      options={typeOptions(t)}
       onChange={(value) => onPatch({ type: value ? { type: value } : null })}
     />
     <TextInput
-      label="Default"
+      label={t("applications:dataPanel.default")}
       value={variable.default == null ? "" : String(variable.default)}
       size="small"
       fullWidth
@@ -214,9 +221,9 @@ const VariableRow: React.FC<{
       }
     />
     <SelectField
-      label="Scope"
+      label={t("applications:dataPanel.scope")}
       value={variable.scope}
-      options={SCOPE_OPTIONS}
+      options={scopeOptions(t)}
       onChange={(value) => onPatch({ scope: value as "instance" | "user" })}
     />
     <LabeledSwitch
@@ -239,7 +246,9 @@ const VariableRow: React.FC<{
 const ResourceRow: React.FC<{
   resource: ResourceBinding;
   onRemove: () => void;
-}> = ({ resource, onRemove }) => (
+}> = ({ resource, onRemove }) => {
+  const { t } = useTranslation("applications");
+  return (
   <EntryCard
     title={resource.name || resource.id}
     subtitle={`${resource.kind} · ${
@@ -248,13 +257,18 @@ const ResourceRow: React.FC<{
         : `project ${resource.scope.projectId}`
     }`}
     onDelete={onRemove}
-    deleteLabel={`Remove resource ${resource.name || resource.id}`}
+    deleteLabel={t("applications:dataPanel.removeResource", {
+      name: resource.name || resource.id
+    })}
   >
     <Caption color="secondary">
-      Allows: {resource.operations.join(", ")}
+      {t("applications:dataPanel.allows", {
+        operations: resource.operations.join(", ")
+      })}
     </Caption>
   </EntryCard>
-);
+  );
+};
 
 /** The "add a resource binding" form — the one entry that needs a scope up front. */
 const AddResourceForm: React.FC<{ onAdd: (input: {
@@ -277,16 +291,16 @@ const AddResourceForm: React.FC<{ onAdd: (input: {
   return (
     <FlexColumn gap={SPACING.sm} fullWidth>
       <TextInput
-        label="Name"
+        label={t("applications:dataPanel.name")}
         value={name}
         size="small"
         fullWidth
         onChange={(e) => setName(e.target.value)}
       />
       <SelectField
-        label="Kind"
+        label={t("applications:dataPanel.kind")}
         value={kind}
-        options={RESOURCE_KIND_OPTIONS}
+        options={resourceKindOptions(t)}
         onChange={(value) => setKind(value as ResourceKind)}
       />
       <TextInput
@@ -303,7 +317,7 @@ const AddResourceForm: React.FC<{ onAdd: (input: {
         disabled={!projectId.trim()}
         onClick={submit}
       >
-        Add resource
+        {t("applications:dataPanel.addResource")}
       </EditorButton>
     </FlexColumn>
   );
@@ -366,10 +380,10 @@ const AppDataPanel: React.FC<AppDataPanelProps> = ({
   return (
     <ScrollArea fullHeight>
       <FlexColumn gap={SPACING.lg} padding={SPACING.lg} fullWidth>
-        <CollapsibleSection title="Operations" defaultOpen compact>
+        <CollapsibleSection title={t("applications:dataPanel.operations")} defaultOpen compact>
           <FlexColumn gap={SPACING.md} fullWidth>
             <Caption color="secondary">
-              The workflows this app runs. A Run action names one of these.
+              {t("applications:dataPanel.operationsHint")}
             </Caption>
             {meta.operations.map((operation) => (
               <OperationRow
@@ -391,15 +405,15 @@ const AppDataPanel: React.FC<AppDataPanelProps> = ({
               disabled={!workflowId}
               onClick={addOp}
             >
-              Add operation
+              {t("applications:dataPanel.addOperation")}
             </EditorButton>
           </FlexColumn>
         </CollapsibleSection>
 
-        <CollapsibleSection title="Variables" defaultOpen compact>
+        <CollapsibleSection title={t("applications:dataPanel.variables")} defaultOpen compact>
           <FlexColumn gap={SPACING.md} fullWidth>
             <Caption color="secondary">
-              App state widgets read and write, and operation outputs can land in.
+              {t("applications:dataPanel.variablesHint")}
             </Caption>
             {meta.variables.map((variable) => (
               <VariableRow
@@ -417,15 +431,15 @@ const AppDataPanel: React.FC<AppDataPanelProps> = ({
               startIcon={<AddIcon sx={{ fontSize: 16 }} />}
               onClick={addVar}
             >
-              Add variable
+              {t("applications:dataPanel.addVariable")}
             </EditorButton>
           </FlexColumn>
         </CollapsibleSection>
 
-        <CollapsibleSection title="Resources" compact>
+        <CollapsibleSection title={t("applications:dataPanel.resources")} compact>
           <FlexColumn gap={SPACING.md} fullWidth>
             <Caption color="secondary">
-              Document collections a picker or gallery widget can browse.
+              {t("applications:dataPanel.resourcesHint")}
             </Caption>
             {meta.resources.map((resource) => (
               <ResourceRow

@@ -221,6 +221,9 @@
     "generate": "Generate",
     "replaceTitle": "Replace app layout?",
     "replaceContent": "Generating from the workflow replaces the current layout with widgets for every workflow input and output. You can undo afterwards.",
-    "replaceConfirm": "Replace"
+    "replaceConfirm": "Replace",
+    "agentTitle": "App Builder Agent",
+    "appData": "App Data",
+    "askAgent": "Ask Agent"
   }
 }

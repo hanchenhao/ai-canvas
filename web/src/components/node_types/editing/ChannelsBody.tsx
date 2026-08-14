@@ -29,15 +29,16 @@ import type { NodeData } from "../../../stores/NodeData";
 import { useBespokePropertyWriter } from "../../../hooks/nodes/useBespokePropertyWriter";
 import { useNodeOutput } from "../../../hooks/nodes/useNodeIO";
 import { CHANNELS_NODE_TYPE } from "../../../constants/nodeTypes";
+import { useTranslation } from "react-i18next";
 
 type Channel = "red" | "green" | "blue" | "alpha" | "luminance";
 
-const CHANNELS: ReadonlyArray<{ value: Channel; short: string; label: string }> = [
-  { value: "red", short: "R", label: "Red" },
-  { value: "green", short: "G", label: "Green" },
-  { value: "blue", short: "B", label: "Blue" },
-  { value: "alpha", short: "A", label: "Alpha" },
-  { value: "luminance", short: "L", label: "Luminance" }
+const CHANNELS: ReadonlyArray<{ value: Channel; short: string; labelKey: string }> = [
+  { value: "red", short: "R", labelKey: "red" },
+  { value: "green", short: "G", labelKey: "green" },
+  { value: "blue", short: "B", labelKey: "blue" },
+  { value: "alpha", short: "A", labelKey: "alpha" },
+  { value: "luminance", short: "L", labelKey: "luminanceLabel" }
 ];
 
 const CHANNEL_VALUES = new Set<Channel>(CHANNELS.map((c) => c.value));
@@ -116,6 +117,7 @@ const ChannelsBodyInner: React.FC<ChannelsBodyProps> = ({
   status,
   isOutputNode
 }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -167,7 +169,7 @@ const ChannelsBodyInner: React.FC<ChannelsBodyProps> = ({
             value={channel}
             exclusive
             onChange={handleChannelChange}
-            aria-label="Channel"
+            aria-label={t("canvas:imageEditing.channel")}
             fullWidth
             compact
           >
@@ -175,8 +177,8 @@ const ChannelsBodyInner: React.FC<ChannelsBodyProps> = ({
               <ToggleOption
                 key={c.value}
                 value={c.value}
-                aria-label={c.label}
-                title={c.label}
+                aria-label={t(`canvas:imageEditing.${c.labelKey}`)}
+                title={t(`canvas:imageEditing.${c.labelKey}`)}
               >
                 {c.short}
               </ToggleOption>

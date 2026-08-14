@@ -8,6 +8,7 @@
  */
 
 import React, { memo, useCallback, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import AddIcon from "@mui/icons-material/Add";
 import type { Entity } from "@nodetool-ai/protocol";
 
@@ -65,6 +66,7 @@ const StoryboardEntitiesFieldInner: React.FC<StoryboardEntitiesFieldProps> = ({
   entityIds
 }) => {
   const { data: allEntities } = useEntities();
+  const { t } = useTranslation("storyboard");
   const setEntityIds = useStoryboardStore((state) => state.setEntityIds);
   const [pickerOpen, setPickerOpen] = useState(false);
   const addButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -117,7 +119,9 @@ const StoryboardEntitiesFieldInner: React.FC<StoryboardEntitiesFieldProps> = ({
         startIcon={<AddIcon />}
         onClick={() => setPickerOpen(true)}
       >
-        {selected.length === 0 ? "Add entities" : "Add"}
+        {selected.length === 0
+          ? t("storyboard:entities.addEntities")
+          : t("storyboard:entities.add")}
       </EditorButton>
 
       <Popover

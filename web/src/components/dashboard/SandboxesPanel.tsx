@@ -184,12 +184,12 @@ const SandboxesPanel: React.FC = () => {
 
   return (
     <FlexColumn gap={0} fullHeight css={panelStyles}>
-      <PanelToolbar title="Sandboxes" count={sandboxes.length}>
+      <PanelToolbar title={t("common:dashboard.sandboxesTitle")} count={sandboxes.length}>
         {sandboxesQuery.isLoading && <LoadingSpinner size="small" inline />}
       </PanelToolbar>
       {sandboxesQuery.isError && (
         <AlertBanner severity="error" sx={{ mx: 1.5, mt: 1 }}>
-          Failed to load sandbox status
+          {t("common:dashboard.sandboxLoadFailed")}
         </AlertBanner>
       )}
       <FlexColumn className="scrollable-content">
@@ -294,7 +294,7 @@ const SandboxesPanel: React.FC = () => {
                             )
                           }
                         >
-                          Open VNC
+                          {t("common:dashboard.openVnc")}
                         </EditorButton>
                       )}
                     </FlexRow>
@@ -307,7 +307,7 @@ const SandboxesPanel: React.FC = () => {
                 <FlexColumn gap={2}>
                   <FlexRow gap={1} align="center" justify="space-between">
                     <Text size="normal" weight={600}>
-                      Sandbox Live View
+                      {t("common:dashboard.liveView")}
                     </Text>
                     {vncIframeUrl && (
                       <EditorButton
@@ -343,12 +343,12 @@ const SandboxesPanel: React.FC = () => {
                     />
                   ) : (
                     <Caption size="small">
-                      VNC is not available for this sandbox.
+                      {t("common:dashboard.vncUnavailable")}
                     </Caption>
                   )}
                   <FlexColumn gap={1}>
                     <Text size="normal" weight={600}>
-                      Tool Calls
+                      {t("common:dashboard.toolCalls")}
                     </Text>
                     {toolCallsQuery.isLoading ? (
                       <LoadingSpinner size="small" />
@@ -392,8 +392,8 @@ const SandboxesPanel: React.FC = () => {
         }}
         title={t("common:dashboard.killSandbox")}
         content={`Kill "${sandboxToKill?.name ?? ""}"? The container is destroyed and cannot be resumed.`}
-        confirmText="Kill"
-        cancelText="Cancel"
+        confirmText={t("common:dashboard.killSandboxButton")}
+        cancelText={t("common:button.cancel")}
       />
     </FlexColumn>
   );

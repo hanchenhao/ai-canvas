@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -194,6 +195,7 @@ export const AssetMentionMenu: React.FC<AssetMentionMenuProps> = ({
   onLoadMore,
   className
 }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const menuStyles = useMemo(() => assetMentionMenuStyles(theme), [theme]);
   const entityCount = entities.length;
@@ -222,8 +224,8 @@ export const AssetMentionMenu: React.FC<AssetMentionMenuProps> = ({
       className={`asset-mention-menu nowheel${className ? ` ${className}` : ""}`}
     >
       {entityCount > 0 && (
-        <div className="mention-entities" role="listbox" aria-label="Entities">
-          <span className="mention-entities-label">Entities</span>
+        <div className="mention-entities" role="listbox" aria-label={t("canvas:promptComposer.entities")}>
+          <span className="mention-entities-label">{t("canvas:promptComposer.entities")}</span>
           {entities.map((entity, index) => (
             <EntityRow
               key={entity.id}

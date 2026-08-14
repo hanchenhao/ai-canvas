@@ -178,7 +178,7 @@ export const ComfyWorkflowLoader: React.FC<ComfyWorkflowLoaderProps> = memo(
           maxWidth="sm"
           fullWidth
           showActions
-          confirmText="Apply"
+          confirmText={t("common:button.apply")}
           confirmDisabled={!schema}
           onConfirm={handleApply}
           onCancel={() => setOpen(false)}

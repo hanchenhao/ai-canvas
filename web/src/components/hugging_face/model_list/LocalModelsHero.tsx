@@ -79,7 +79,7 @@ const LocalModelsHero: React.FC<LocalModelsHeroProps> = ({ models }) => {
           </FlexRow>
           <FlexColumn sx={{ minWidth: 0 }}>
             <Text size="normal" weight={600}>
-              Local Models
+              {t("huggingface:modelList.localModelsTitle")}
             </Text>
             <Caption sx={{ opacity: 0.6, lineHeight: 1.4 }}>
               Run models locally for privacy, speed, and offline access.
@@ -104,7 +104,7 @@ const LocalModelsHero: React.FC<LocalModelsHeroProps> = ({ models }) => {
                 fontSize: "var(--fontSizeSmaller)"
               }}
             >
-              Learn more
+              {t("huggingface:onboarding.learnMore")}
             </EditorButton>
           </FlexColumn>
         </FlexRow>

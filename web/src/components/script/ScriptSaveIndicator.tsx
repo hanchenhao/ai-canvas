@@ -28,11 +28,11 @@ const ScriptSaveIndicator = ({ scriptId }: ScriptSaveIndicatorProps) => {
 
   if (status === "unsaved") {
     return (
-      <Tooltip title="Unsaved changes — saving shortly">
+      <Tooltip title={t("common:script.unsavedTooltip")}>
         <FlexRow align="center" gap={SPACING.xs}>
           <CircleIcon sx={{ fontSize: 10, color: "text.disabled" }} />
           <Text size="smaller" sx={{ color: "text.secondary" }}>
-            Unsaved changes
+            {t("common:script.unsavedChanges")}
           </Text>
         </FlexRow>
       </Tooltip>
@@ -52,11 +52,11 @@ const ScriptSaveIndicator = ({ scriptId }: ScriptSaveIndicatorProps) => {
 
   if (status === "error") {
     return (
-      <Tooltip title="Couldn't sync with the server. Your changes are kept locally.">
+      <Tooltip title={t("common:script.saveFailedTooltip")}>
         <FlexRow align="center" gap={SPACING.xs} aria-live="polite">
           <SyncProblemIcon color="warning" sx={{ fontSize: 16 }} />
           <Text size="smaller" color="warning">
-            Save failed
+            {t("common:script.saveFailed")}
           </Text>
         </FlexRow>
       </Tooltip>
@@ -65,11 +65,11 @@ const ScriptSaveIndicator = ({ scriptId }: ScriptSaveIndicatorProps) => {
 
   if (status === "reloaded") {
     return (
-      <Tooltip title="This script was edited elsewhere, so the newer server version was loaded.">
+      <Tooltip title={t("common:script.reloadedTooltip")}>
         <FlexRow align="center" gap={SPACING.xs} aria-live="polite">
           <HistoryIcon color="warning" sx={{ fontSize: 16 }} />
           <Text size="smaller" color="warning">
-            Reloaded newer version
+            {t("common:script.reloadedNewerVersion")}
           </Text>
         </FlexRow>
       </Tooltip>

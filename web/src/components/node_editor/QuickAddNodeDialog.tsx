@@ -282,20 +282,22 @@ const QuickAddNodeDialog: React.FC<QuickAddNodeDialogProps> = ({
       aria-label={t("canvas:quickAddDialog.ariaLabel")}
     >
       <div css={cssStyles}>
-        <Command label="Quick Add Node" className="command-menu" shouldFilter={false}>
+        <Command label={t("canvas:quickAddDialog.commandLabel")} className="command-menu" shouldFilter={false}>
           <div className="command-input">
             <CommandInput
               ref={inputRef}
               value={searchTerm}
               onValueChange={handleValueChange}
-              placeholder="Search nodes by name, type, or namespace..."
+              placeholder={t("canvas:quickAddDialog.searchPlaceholder")}
             />
           </div>
 
           <Command.List className="command-list">
             <Command.Empty className="empty-state">
               <Text size="small">
-                {searchTerm ? "No matching nodes found" : "Type to search for nodes..."}
+                {searchTerm
+                  ? t("canvas:quickAddDialog.noMatchingNodes")
+                  : t("canvas:quickAddDialog.typeToSearch")}
               </Text>
             </Command.Empty>
 

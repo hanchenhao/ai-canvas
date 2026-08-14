@@ -101,7 +101,15 @@
     "setupImageEdit": "Editing images needs an image provider. Connect one to continue.",
     "setupVideo": "Generating videos needs a video provider. Connect one to continue.",
     "setupImageToVideo": "Animating images needs a video provider. Connect one to continue.",
-    "setupAudio": "Generating speech needs a text-to-speech provider. Connect one to continue."
+    "setupAudio": "Generating speech needs a text-to-speech provider. Connect one to continue.",
+    "modelKind": {
+      "language": "language",
+      "image": "image",
+      "imageEdit": "image edit",
+      "video": "video",
+      "imageToVideo": "image to video",
+      "speech": "speech"
+    }
   },
   "thread": {
     "responding": "Responding…",

@@ -676,7 +676,7 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
           return (
             <div className="output value" style={DOCUMENT_LINK_STYLE}>
               <a href={uri} target="_blank" rel="noreferrer">
-                Open document
+                {t("canvas:node.openDocument")}
               </a>
             </div>
           );
@@ -726,7 +726,7 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
           return (
             <SketchRenderer
               document={sketchDocument}
-              ariaLabel="Sketch output preview"
+              ariaLabel={t("canvas:node.sketchOutputPreview")}
               showDimensions
             />
           );
@@ -756,7 +756,7 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
             <React.Suspense fallback={<LoadingSpinner size="small" text="Loading timeline preview" />}>
               <LazyTimelineRenderer
                 sequence={timelineSequence}
-                ariaLabel="Timeline output preview"
+                ariaLabel={t("canvas:node.timelineOutputPreview")}
                 showMetadata
               />
             </React.Suspense>
@@ -961,9 +961,10 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
                         <div key={`text:${idx}:${hashStringBounded(text)}`}>
                           {truncated && (
                             <div style={TRUNCATION_STYLE}>
-                              Output truncated (showing first{" "}
-                              {MAX_RENDERED_TEXT_CHARS.toLocaleString()} chars
-                              of {totalChunks.toLocaleString()} chunks).
+                              {t("canvas:node.outputTruncated", {
+                                shown: MAX_RENDERED_TEXT_CHARS.toLocaleString(),
+                                total: totalChunks.toLocaleString()
+                              })}
                             </div>
                           )}
                           <TextRenderer
@@ -1127,7 +1128,8 @@ const OutputRenderer: React.FC<OutputRendererProps> = ({
     shouldLoadTimeline,
     timelineQuery.error,
     timelineQuery.isError,
-    timelineQuery.isLoading
+    timelineQuery.isLoading,
+    t
   ]);
 
   const handleCloseAsset = useCallback(() => {

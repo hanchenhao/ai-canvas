@@ -400,7 +400,7 @@ const WorkflowCommands = memo(function WorkflowCommands() {
         <FolderZipRoundedIcon /> Export Workflow as Bundle (.nodetool)
       </Command.Item>
       <Command.Item onSelect={() => executeAndClose(shareWorkflow)}>
-        Share Workflow…
+        {t("common:commands.shareWorkflow")}
       </Command.Item>
       <Command.Item onSelect={() => executeAndClose(handleImportBundle)}>
         <FolderZipRoundedIcon /> Import Workflow from Bundle (.nodetool)
@@ -838,10 +838,10 @@ const CommandMenu: React.FC<CommandMenuProps> = ({
       css={styles()}
       aria-label={t("common:menus.commandMenu")}
     >
-      <Command label="Command Menu" className="command-menu">
+      <Command label={t("common:menus.commandMenuLabel")} className="command-menu">
         <CommandInput
           ref={input}
-          placeholder="Type a command or search…"
+          placeholder={t("common:menus.commandMenuPlaceholder")}
           aria-label={t("common:menus.commandMenuSearch")}
         />
         <Command.List>

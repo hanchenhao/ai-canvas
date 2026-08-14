@@ -494,5 +494,9 @@
     "noBinding": "此片段未绑定工作流。",
     "loadInputsFailed": "无法加载工作流输入。",
     "noEditableInputs": "此工作流没有可编辑的输入参数。"
+  },
+  "agentPanel": {
+    "title": "编辑器助手",
+    "welcomeHint": "可以让我来剪辑时间线，例如「生成一段 5 秒的夜晚城市片段」「在播放头处拆分选中的片段」或「让最后一个片段淡出」。"
   }
 }

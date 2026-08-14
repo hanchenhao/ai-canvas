@@ -10,6 +10,8 @@ import mistralColorIcon from "../../icons/providers/mistral-color.svg";
 import falColorIcon from "../../icons/providers/fal-color.svg";
 import replicateIcon from "../../icons/providers/replicate.svg";
 import elevenlabsIcon from "../../icons/providers/elevenlabs.svg";
+import minimaxColorIcon from "../../icons/providers/minimax-color.svg";
+import doubaoColorIcon from "../../icons/providers/doubao-color.svg";
 
 export interface OnboardingProvider {
   id: string;
@@ -210,6 +212,34 @@ export const ONBOARDING_PROVIDERS: OnboardingProvider[] = [
     pricingUrl: "https://elevenlabs.io/pricing",
     costHint: "Pay per character of speech generated.",
     freeTier: "Free tier available"
+  },
+  {
+    id: "minimax",
+    name: "MiniMax",
+    secretKey: "MINIMAX_API_KEY",
+    icon: minimaxColorIcon,
+    tagline: "Hailuo video, image generation, music, speech, and chat.",
+    capabilities: [
+      "text_to_image",
+      "text_to_video",
+      "text_to_speech",
+      "text_to_music",
+      "generate_message"
+    ],
+    keyUrl: "https://platform.minimax.chat/user-center/basic-information/interface-key",
+    pricingUrl: "https://platform.minimax.chat/",
+    costHint: "Pay per generation. China domestic keys need Base URL set to https://api.minimax.chat."
+  },
+  {
+    id: "volcengine",
+    name: "Volcengine",
+    secretKey: "VOLCENGINE_API_KEY",
+    icon: doubaoColorIcon,
+    tagline: "Seedance video generation via the Ark platform.",
+    capabilities: ["text_to_video"],
+    keyUrl: "https://console.volcengine.com/ark/region:ark+cn-beijing/apiKey",
+    pricingUrl: "https://www.volcengine.com/product/ark",
+    costHint: "Pay per second of video generated."
   }
 ];
 

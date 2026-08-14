@@ -116,7 +116,7 @@ export const ChainEditor: React.FC<ChainEditorProps> = ({ onSave }) => {
         />
         <ToolbarIconButton
           size="small"
-          ariaLabel="Save workflow"
+          ariaLabel={t("common:chainEditor.saveWorkflow")}
           tooltip={t("common:chainEditor.saveWorkflow")}
           onClick={handleSave}
           disabled={saving}

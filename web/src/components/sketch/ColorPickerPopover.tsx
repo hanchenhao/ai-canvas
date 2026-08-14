@@ -45,13 +45,6 @@ import { SKETCH_FONT, SKETCH_SPACING, SKETCH_Z_INDEX, SKETCH_COLORS, SKETCH_TOOL
 const SV_SIZE = 160;
 const HUE_HEIGHT = 12;
 
-const RGB_LABELS = { r: "Red", g: "Green", b: "Blue" } as const;
-const HSL_LABELS = {
-  h: "Hue (degrees)",
-  s: "Saturation (percent)",
-  l: "Lightness (percent)"
-} as const;
-
 interface ColorPickerPopoverProps {
   anchorEl: HTMLElement | null;
   color: string;
@@ -70,6 +63,17 @@ const ColorPickerPopover: React.FC<ColorPickerPopoverProps> = ({
   const { t } = useTranslation("sketch");
   const open = Boolean(anchorEl);
   const [mode, setMode] = useState<ColorMode>("hex");
+
+  const rgbLabels = {
+    r: t("sketch:colorPicker.redAria"),
+    g: t("sketch:colorPicker.greenAria"),
+    b: t("sketch:colorPicker.blueAria")
+  } as const;
+  const hslLabels = {
+    h: t("sketch:colorPicker.hueAria"),
+    s: t("sketch:colorPicker.saturationAria"),
+    l: t("sketch:colorPicker.lightnessAria")
+  } as const;
 
   const { r, g, b, a } = parseColorToRgba(color);
   const fgHex6 = colorToHex6(color);
@@ -206,7 +210,7 @@ const ColorPickerPopover: React.FC<ColorPickerPopoverProps> = ({
       }}
     >
       <FlexRow className="color-picker__header" align="center" justify="flex-end" sx={{ minHeight: "22px", mt: `-${SKETCH_SPACING.md}`, mr: `-${SKETCH_SPACING.md}`, mb: SKETCH_SPACING.xs }}>
-        <Tooltip title="Cancel — keep previous color" enterDelay={SKETCH_TOOLTIP_DELAY_MS} enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}>
+        <Tooltip title={t("sketch:colorPicker.cancelTooltip")} enterDelay={SKETCH_TOOLTIP_DELAY_MS} enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}>
           <IconButton
             size="small"
             onClick={handleCancel}
@@ -348,7 +352,7 @@ const ColorPickerPopover: React.FC<ColorPickerPopoverProps> = ({
           size="small"
           value={fgHex6}
           onChange={(e) => handleHex(e.target.value)}
-          inputProps={{ maxLength: 7, "aria-label": "Hex color" }}
+          inputProps={{ maxLength: 7, "aria-label": t("sketch:colorPicker.hexAria") }}
           sx={{
             "& .MuiInputBase-root": { fontSize: SKETCH_FONT.sm, height: "22px" },
             "& .MuiInputBase-input": { padding: `${getSpacingPx(SPACING.micro)} ${getSpacingPx(SPACING.xs)}`, textAlign: "center" }
@@ -369,7 +373,7 @@ const ColorPickerPopover: React.FC<ColorPickerPopoverProps> = ({
                 inputProps={{
                   min: 0,
                   max: 255,
-                  "aria-label": RGB_LABELS[ch]
+                  "aria-label": rgbLabels[ch]
                 }}
                 sx={numSx}
               />
@@ -393,7 +397,7 @@ const ColorPickerPopover: React.FC<ColorPickerPopoverProps> = ({
                 inputProps={{
                   min: 0,
                   max: ch === "h" ? 360 : 100,
-                  "aria-label": HSL_LABELS[ch]
+                  "aria-label": hslLabels[ch]
                 }}
                 sx={numSx}
               />

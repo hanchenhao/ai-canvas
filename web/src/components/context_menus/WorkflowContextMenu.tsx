@@ -87,13 +87,13 @@ const WorkflowContextMenu: React.FC = () => {
       </MenuItem>
       <ContextMenuItem
         onClick={handleToggleFavorite}
-        label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+        label={isFavorite ? t("canvas:favorites.removeFromFavorites") : t("canvas:favorites.addToFavorites")}
         IconComponent={isFavorite ? <StarIcon /> : <StarBorderIcon />}
       />
-      <ContextMenuItem onClick={handleEdit} label="Edit" IconComponent={<EditIcon />} />
+      <ContextMenuItem onClick={handleEdit} label={t("canvas:contextMenu.edit")} IconComponent={<EditIcon />} />
       <ContextMenuItem
         onClick={handleDuplicate}
-        label="Duplicate"
+        label={t("canvas:contextMenu.duplicate")}
         IconComponent={<ContentCopyIcon />}
       />
       {onOpenAsApp && (
@@ -105,7 +105,7 @@ const WorkflowContextMenu: React.FC = () => {
       )}
       <ContextMenuItem
         onClick={handleDelete}
-        label="Delete"
+        label={t("canvas:contextMenu.delete")}
         addButtonClassName="delete"
         IconComponent={<DeleteIcon />}
       />

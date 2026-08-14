@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
 import GroupsIcon from "@mui/icons-material/Groups";
@@ -50,6 +51,7 @@ type DockTab = "cast" | "assistant";
 const ScriptSurface = ({ refId, mode, active }: ScriptSurfaceProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { t } = useTranslation("common");
   const ensureScript = useScriptStore((state) => state.ensureScript);
   const undo = useScriptStore((state) => state.undo);
   const redo = useScriptStore((state) => state.redo);
@@ -156,7 +158,7 @@ const ScriptSurface = ({ refId, mode, active }: ScriptSurfaceProps) => {
               maxHeight="85dvh"
               title={dockTab === "cast" ? "Cast" : "Assistant"}
               headerExtras={dockTabGroup}
-              ariaLabel="Script cast and assistant"
+              ariaLabel={t("common:script.castAndAssistant")}
             >
               <FlexColumn
                 fullWidth

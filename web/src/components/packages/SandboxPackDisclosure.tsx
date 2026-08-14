@@ -7,6 +7,7 @@
  * the module list, because it is text a third party wrote.
  */
 import { memo, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 
 import {
@@ -33,6 +34,7 @@ interface SandboxModuleEntry {
 }
 
 const SandboxPackDisclosure = ({ packName }: { packName: string }) => {
+  const { t } = useTranslation("packages");
   const [showDocs, setShowDocs] = useState(false);
 
   const modulesQuery = useQuery({
@@ -88,7 +90,7 @@ const SandboxPackDisclosure = ({ packName }: { packName: string }) => {
       </FlexRow>
       {showDocs && docsQuery.data === null && (
         <Text size="small" color="secondary">
-          This package publishes no documentation.
+          {t("packs.noDocumentation")}
         </Text>
       )}
       {showDocs && docsQuery.data && (

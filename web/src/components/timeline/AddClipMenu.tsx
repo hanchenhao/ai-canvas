@@ -165,7 +165,7 @@ const WorkflowList: React.FC<WorkflowListProps> = memo(
             css={workflowItemStyles(theme)}
             role="button"
             tabIndex={0}
-            aria-label={`Add clip from "${wf.name}"`}
+            aria-label={t("timeline:addClip.addFromWorkflow", { name: wf.name })}
             onClick={() => onSelect(wf.id)}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
@@ -244,7 +244,9 @@ const OutputSelectPanel: React.FC<OutputSelectPanelProps> = memo(
               css={workflowItemStyles(theme)}
               role="button"
               tabIndex={0}
-              aria-label={`Use ${out.name || out.type} output`}
+              aria-label={t("timeline:addClip.useOutput", {
+                name: out.name || out.type
+              })}
               onClick={() => onSelect(out.id)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
@@ -527,7 +529,8 @@ export const AddClipMenu: React.FC<AddClipMenuProps> = memo(
       directVoice,
       selectClip,
       directGen,
-      onClose
+      onClose,
+      t
     ]);
 
     const handlePromptKeyDown = useCallback(

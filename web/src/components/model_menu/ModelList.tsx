@@ -361,7 +361,7 @@ function ModelList<TModel extends ModelSelectorModel>({
                             className="badge-hf-api"
                             style={badgeWithIconStyle}
                           >
-                            HF API
+                            {t("modelList.hfApiBadge")}
                             <span style={BADGE_PRICE_STYLE}>
                               $
                             </span>

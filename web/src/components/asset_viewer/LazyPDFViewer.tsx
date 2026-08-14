@@ -2,6 +2,7 @@
 // it out of the initial bundle.
 
 import React, { Suspense, lazy } from "react";
+import { useTranslation } from "react-i18next";
 import { FlexColumn, Text, LoadingSpinner, SPACING } from "../ui_primitives";
 import type { Asset } from "../../stores/ApiTypes";
 
@@ -16,19 +17,22 @@ interface LazyPDFViewerProps {
   url?: string;
 }
 
-const PDFViewerLoadingFallback: React.FC = () => (
-  <FlexColumn
-    align="center"
-    justify="center"
-    gap={SPACING.md}
-    sx={{ height: "300px" }}
-  >
-    <LoadingSpinner size="medium" />
-    <Text size="small" color="secondary">
-      Loading PDF viewer…
-    </Text>
-  </FlexColumn>
-);
+const PDFViewerLoadingFallback: React.FC = () => {
+  const { t } = useTranslation("common");
+  return (
+    <FlexColumn
+      align="center"
+      justify="center"
+      gap={SPACING.md}
+      sx={{ height: "300px" }}
+    >
+      <LoadingSpinner size="medium" />
+      <Text size="small" color="secondary">
+        {t("common:pdfViewer.loadingViewer")}
+      </Text>
+    </FlexColumn>
+  );
+};
 
 const LazyPDFViewer: React.FC<LazyPDFViewerProps> = ({ asset, url }) => {
   return (

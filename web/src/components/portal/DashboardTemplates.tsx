@@ -202,13 +202,13 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
             ref={searchRef}
             value={query}
             onChange={setQuery}
-            placeholder="Search templates by name, tag…"
+            placeholder={t("common:dashboard.searchTemplatesPlaceholder")}
             kbd="/"
             aria-label={t("common:dashboard.searchTemplates")}
           />
           {!fullPage && (
             <SectionLink onClick={handleViewAllTemplates}>
-              Browse all
+              {t("common:dashboard.browseAll")}
             </SectionLink>
           )}
         </SectionHeader>
@@ -259,15 +259,15 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
 
         {isLoading ? (
           <div className="tpl-loading">
-            <LoadingSpinner size="medium" text="Loading templates" />
+            <LoadingSpinner size="medium" text={t("common:dashboard.loadingTemplates")} />
           </div>
         ) : isError ? (
           <div className="tpl-empty">
             <EmptyState
               variant="error"
-              title="Couldn't load templates"
+              title={t("common:dashboard.loadTemplatesFailed")}
               description={t("common:dashboard.tryAgainLater")}
-              actionText="Retry"
+              actionText={t("common:button.retry")}
               onAction={() => refetch()}
             />
           </div>

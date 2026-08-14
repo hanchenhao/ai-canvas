@@ -153,9 +153,7 @@ export const StoryboardSceneListWidget: React.FC<StoryboardSceneListProps> = ({
     return (
       <FlexColumn gap={SPACING.xs} fullWidth>
         <Label>{title}</Label>
-        <Caption color="secondary">
-          Scenes appear when the app runs against a storyboard.
-        </Caption>
+        <Caption color="secondary">{t("widget.scenesAppearHint")}</Caption>
       </FlexColumn>
     );
   }

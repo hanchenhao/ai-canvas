@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
@@ -22,6 +23,7 @@ const SUPPORTED_FORMATS = [
 ];
 
 const ModelsRightSidebar: React.FC = () => {
+  const { t } = useTranslation("huggingface");
   const theme = useTheme();
 
   return (
@@ -44,7 +46,7 @@ const ModelsRightSidebar: React.FC = () => {
         }}
       >
         <Text size="small" weight={600} sx={{ marginBottom: "0.75rem" }}>
-          Supported Formats
+          {t("modelList.supportedFormats")}
         </Text>
         <FlexRow gap={0.5} sx={{ flexWrap: "wrap" }}>
           {SUPPORTED_FORMATS.map((fmt) => (
@@ -87,11 +89,11 @@ const ModelsRightSidebar: React.FC = () => {
             sx={{ color: theme.vars.palette.primary.main, fontSize: 18 }}
           />
           <Text size="small" weight={600}>
-            Need help?
+            {t("modelList.needHelp")}
           </Text>
         </FlexRow>
         <Caption sx={{ opacity: 0.6, lineHeight: 1.5, marginBottom: "0.75rem" }}>
-          Learn how to add and run models locally.
+          {t("modelList.learnHowLocal")}
         </Caption>
         <EditorButton
           density="compact"
@@ -107,7 +109,7 @@ const ModelsRightSidebar: React.FC = () => {
             )
           }
         >
-          View Documentation
+          {t("modelList.viewDocumentation")}
         </EditorButton>
       </Card>
     </FlexColumn>

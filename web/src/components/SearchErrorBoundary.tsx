@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Component } from "react";
-import type { ReactNode, ErrorInfo } from "react";
+import type { ReactNode, ErrorInfo, FC } from "react";
+import { useTranslation } from "react-i18next";
 import { EditorButton, Text, Box, BORDER_RADIUS } from "./ui_primitives";
 import { ThemeContext } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
@@ -45,6 +46,39 @@ const searchErrorBoundaryStyles = (theme: Theme) =>
     }
   });
 
+interface SearchErrorFallbackProps {
+  theme: Theme;
+  fallbackTitle?: string;
+  onRetry: () => void;
+}
+
+const SearchErrorFallback: FC<SearchErrorFallbackProps> = ({
+  theme,
+  fallbackTitle,
+  onRetry
+}) => {
+  const { t } = useTranslation("common");
+  return (
+    <Box css={searchErrorBoundaryStyles(theme)}>
+      <Text size="normal" weight={600} className="error-title">
+        {fallbackTitle || "Search Error"}
+      </Text>
+      <Text size="small" className="error-message">
+        Something went wrong with the search functionality. Please try
+        again.
+      </Text>
+      <EditorButton
+        variant="contained"
+        onClick={onRetry}
+        className="retry-button"
+        density="normal"
+      >
+        {t("common:errorBoundary.tryAgain")}
+      </EditorButton>
+    </Box>
+  );
+};
+
 interface SearchErrorBoundaryState {
   hasError: boolean;
   error?: Error;
@@ -84,27 +118,14 @@ class SearchErrorBoundary extends Component<
 
   render() {
     const theme = this.context as Theme;
-    const boundaryStyles = searchErrorBoundaryStyles(theme);
 
     if (this.state.hasError) {
       return (
-        <Box css={boundaryStyles}>
-          <Text size="normal" weight={600} className="error-title">
-            {this.props.fallbackTitle || "Search Error"}
-          </Text>
-          <Text size="small" className="error-message">
-            Something went wrong with the search functionality. Please try
-            again.
-          </Text>
-          <EditorButton
-            variant="contained"
-            onClick={this.handleRetry}
-            className="retry-button"
-            density="normal"
-          >
-            Try Again
-          </EditorButton>
-        </Box>
+        <SearchErrorFallback
+          theme={theme}
+          fallbackTitle={this.props.fallbackTitle}
+          onRetry={this.handleRetry}
+        />
       );
     }
 

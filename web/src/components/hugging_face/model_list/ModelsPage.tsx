@@ -14,7 +14,7 @@ const ModelsPage: React.FC = () => {
   <ManagerPageLayout
     icon={<ViewInArOutlinedIcon sx={{ fontSize: 22 }} />}
     title={t("huggingface:modelList.modelManager")}
-    subtitle="Browse, download, and manage local AI models."
+    subtitle={t("huggingface:modelList.pageSubtitle")}
     docsTopic="modelsManager"
     padded={false}
   >

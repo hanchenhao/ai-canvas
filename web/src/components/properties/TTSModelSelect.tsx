@@ -159,7 +159,7 @@ const TTSModelSelect: React.FC<TTSModelSelectProps> = ({
   if (inStudio) {
     return (
       <CuratedModelSelect
-        label="Voice"
+        label={t("properties:voice")}
         options={STUDIO_VOICES}
         value={selectedVoice}
         onChange={onChange}
@@ -173,9 +173,9 @@ const TTSModelSelect: React.FC<TTSModelSelectProps> = ({
         ref={buttonRef}
         active={!!modelId}
         label={
-          currentSelectedModelDetails?.name || modelId || "Select TTS Model"
+          currentSelectedModelDetails?.name || modelId || t("properties:modelSelect.selectTTSModel")
         }
-        subLabel="Select Text-to-Speech Model"
+        subLabel={t("properties:modelSelect.selectTTSSub")}
         onClick={handleClick}
       />
 
@@ -185,7 +185,7 @@ const TTSModelSelect: React.FC<TTSModelSelectProps> = ({
           value={selectedVoice || availableVoices[0] || ""}
           onChange={handleVoiceChange}
           placeholder={t("properties:selectVoice")}
-          label="Voice"
+          label={t("properties:voice")}
         />
       )}
 

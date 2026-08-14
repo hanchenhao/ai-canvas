@@ -159,7 +159,7 @@ const StoryboardSidebarInner: React.FC<StoryboardSidebarProps> = ({
       {isLoading ? (
         <LoadingSpinner size={20} />
       ) : (
-        <FlexColumn gap={0.5} role="listbox" aria-label="Storyboards">
+        <FlexColumn gap={0.5} role="listbox" aria-label={t("storyboard:list.storyboardsAria")}>
           {(boards ?? []).map((board) => (
             <FlexRow
               key={board.id}

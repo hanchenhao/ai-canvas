@@ -266,8 +266,8 @@ const NodeEditor: React.FC<NodeEditorProps> = ({ workflowId, active }) => {
         title={t("canvas:nodeEditor.saveExample")}
         onConfirm={handleSaveExampleConfirm}
         onCancel={handleSaveExampleCancel}
-        confirmText="Save"
-        cancelText="Cancel"
+        confirmText={t("common:button.save")}
+        cancelText={t("common:button.cancel")}
       >
         <TextInput
           autoFocus

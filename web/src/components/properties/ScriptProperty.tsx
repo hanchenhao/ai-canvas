@@ -80,7 +80,7 @@ const ScriptProperty = (props: PropertyProps) => {
         </NodeSelect>
         <ToolbarIconButton
           size="small"
-          ariaLabel="Open in script editor"
+          ariaLabel={t("properties:openScriptEditor")}
           tooltip={t("properties:openScriptEditor")}
           disabled={!selectedId}
           onClick={handleOpenEditor}

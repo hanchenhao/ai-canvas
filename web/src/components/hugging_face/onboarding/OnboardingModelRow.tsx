@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useCallback } from "react";
 import { useTheme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import DownloadIcon from "@mui/icons-material/Download";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {
@@ -48,6 +49,7 @@ const OnboardingModelRow: React.FC<OnboardingModelRowProps> = ({
   downloaded,
   onDownload
 }) => {
+  const { t } = useTranslation("huggingface");
   const theme = useTheme();
   const downloadId = entry.model.repo_id || entry.model.id;
   const download = useModelDownloadStore((state) => state.downloads[downloadId]);
@@ -74,7 +76,7 @@ const OnboardingModelRow: React.FC<OnboardingModelRowProps> = ({
               {entry.name}
             </Text>
             {entry.featured && (
-              <Chip label="Popular" compact color="primary" variant="outlined" />
+              <Chip label={t("huggingface:modelList.popular")} compact color="primary" variant="outlined" />
             )}
             {engine && (
               <Tooltip title={engine.description} delay={400}>

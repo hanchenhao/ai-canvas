@@ -189,17 +189,17 @@ const MaskBodyInner: React.FC<MaskBodyProps> = ({
             onChange={handleTabChange}
             aria-label={t("canvas:imageEditing.previewTab")}
           >
-            <ToggleOption value="image1" aria-label="Image 1">
-              Img 1
+            <ToggleOption value="image1" aria-label={t("canvas:imageEditing.image1")}>
+              {t("canvas:imageEditing.image1")}
             </ToggleOption>
-            <ToggleOption value="image2" aria-label="Image 2">
-              Img 2
+            <ToggleOption value="image2" aria-label={t("canvas:imageEditing.image2")}>
+              {t("canvas:imageEditing.image2")}
             </ToggleOption>
-            <ToggleOption value="mask" aria-label="Mask">
-              Mask
+            <ToggleOption value="mask" aria-label={t("canvas:imageEditing.mask")}>
+              {t("canvas:imageEditing.mask")}
             </ToggleOption>
-            <ToggleOption value="result" aria-label="Result">
-              Result
+            <ToggleOption value="result" aria-label={t("canvas:imageEditing.result")}>
+              {t("canvas:imageEditing.result")}
             </ToggleOption>
           </ToggleGroup>
         </FlexRow>

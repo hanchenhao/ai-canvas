@@ -159,7 +159,7 @@ export const NodePickerDialog: React.FC<NodePickerDialogProps> = ({
         <TextInput
           fullWidth
           size="small"
-          placeholder="Search nodes..."
+          placeholder={t("common:chainEditor.searchNodesPlaceholder")}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           autoFocus={autoFocusEnabled}
@@ -183,7 +183,7 @@ export const NodePickerDialog: React.FC<NodePickerDialogProps> = ({
           {!hasSearch ? (
             <FlexColumn gap={2}>
               <Text size="small" weight={600} color="secondary">
-                Quick Actions
+                {t("common:chainEditor.quickActions")}
               </Text>
               <div css={tileStyles}>
                 {QUICK_ACTION_BUTTONS.map((action) => (
@@ -209,13 +209,14 @@ export const NodePickerDialog: React.FC<NodePickerDialogProps> = ({
           ) : searchResults.length === 0 ? (
             <FlexColumn align="center" justify="center" sx={{ py: 6 }}>
               <Text size="small" color="secondary">
-                No nodes found
+                {t("common:chainEditor.noNodesFound")}
               </Text>
             </FlexColumn>
           ) : (
             <FlexColumn gap={0}>
-              <Text size="smaller" color="secondary" sx={{ mb: 0.5, px: 0.5, opacity: 0.5 }}>{searchResults.length}{" "}
-              {searchResults.length === 1 ? "result" : "results"}</Text>
+              <Text size="smaller" color="secondary" sx={{ mb: 0.5, px: 0.5, opacity: 0.5 }}>
+                {t("common:chainEditor.searchResultCount", { count: searchResults.length })}
+              </Text>
               <div
                 ref={listScrollRef}
                 style={{

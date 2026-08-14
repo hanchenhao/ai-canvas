@@ -183,7 +183,8 @@
     "diffNodeFallback": "节点",
     "diffIdPrefix": "ID：{{id}}",
     "diffNullValue": "空",
-    "noChangesToDisplay": "没有可显示的更改"
+    "noChangesToDisplay": "没有可显示的更改",
+    "emptyWorkflow": "空工作流"
   },
   "share": {
     "roleViewer": "可查看",

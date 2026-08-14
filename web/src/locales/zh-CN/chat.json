@@ -101,7 +101,15 @@
     "setupImageEdit": "编辑图片需要图片服务商。请连接一个以继续。",
     "setupVideo": "生成视频需要视频服务商。请连接一个以继续。",
     "setupImageToVideo": "让图片动起来需要视频服务商。请连接一个以继续。",
-    "setupAudio": "生成语音需要语音合成（TTS）服务商。请连接一个以继续。"
+    "setupAudio": "生成语音需要语音合成（TTS）服务商。请连接一个以继续。",
+    "modelKind": {
+      "language": "语言",
+      "image": "图像",
+      "imageEdit": "图像编辑",
+      "video": "视频",
+      "imageToVideo": "图生视频",
+      "speech": "语音"
+    }
   },
   "thread": {
     "responding": "回复中…",

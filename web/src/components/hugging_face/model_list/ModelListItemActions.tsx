@@ -99,7 +99,7 @@ export const ModelListItemActions: React.FC<ModelListItemActionsProps> = ({
           }}
         >
           <LoadingSpinner inline size={12} thickness={5} color="inherit" />
-          Checking cache…
+          {t("huggingface:modelList.checkingCache")}
         </Box>
       )}
       {onDownload && !downloaded && !isCheckingCache && (
@@ -133,7 +133,7 @@ export const ModelListItemActions: React.FC<ModelListItemActionsProps> = ({
           nextDelay={TOOLTIP_ENTER_NEXT_DELAY}
         >
           <Chip
-            label="Downloaded"
+            label={t("huggingface:modelList.downloaded")}
             color="success"
             variant="outlined"
             size="small"

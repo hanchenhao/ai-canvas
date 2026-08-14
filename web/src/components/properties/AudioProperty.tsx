@@ -111,7 +111,7 @@ const AudioProperty = (props: PropertyProps) => {
               onClick={toggle}
               onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } }}
             >
-              Click to start microphone
+              {t("properties:clickToStartMicrophone")}
             </div>
           )}
           <div className="controls-row">
@@ -135,7 +135,7 @@ const AudioProperty = (props: PropertyProps) => {
               onClick={toggle}
               sx={{ flex: 1, minHeight: 36 }}
             >
-              {isStreaming ? "Stop" : "Start Mic"}
+              {isStreaming ? t("common:button.stop") : t("properties:startMic")}
             </EditorButton>
           </div>
         </div>

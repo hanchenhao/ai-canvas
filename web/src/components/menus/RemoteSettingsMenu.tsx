@@ -503,7 +503,7 @@ const RemoteSettings = () => {
     <>
       {isLoading && (
         <Text sx={{ textAlign: "center", padding: "2em" }}>
-          Loading settings…
+          {t("settings:remoteSettings.loading")}
         </Text>
       )}
       {isSuccess && hasVisibleSettings && (
@@ -559,7 +559,7 @@ const RemoteSettings = () => {
                   startIcon={<SaveIcon />}
                   disabled={updateSettingsMutation.isPending}
                 >
-                  SAVE SETTINGS
+                  {t("settings:remoteSettings.saveButton")}
                 </EditorButton>
               </div>
             )}
@@ -568,7 +568,7 @@ const RemoteSettings = () => {
       )}
       {isSuccess && !hasVisibleSettings && (
         <Text sx={{ textAlign: "center", padding: "2em" }}>
-          No settings available
+          {t("settings:remoteSettings.noAvailable")}
         </Text>
       )}
     </>

@@ -97,8 +97,8 @@ const ImageModelSelect: React.FC<ImageModelSelectProps> = ({
       return { label: value, secondaryLabel: undefined };
     }
 
-    return { label: "Select Image Model", secondaryLabel: undefined };
-  }, [currentSelectedModelDetails, value]);
+    return { label: t("properties:modelSelect.selectImageModel"), secondaryLabel: undefined };
+  }, [currentSelectedModelDetails, value, t]);
 
   const handleClick = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -146,7 +146,7 @@ const ImageModelSelect: React.FC<ImageModelSelectProps> = ({
         active={!!value}
         label={displayInfo.label}
         secondaryLabel={displayInfo.secondaryLabel}
-        subLabel="Select Image Generation Model"
+        subLabel={t("properties:modelSelect.selectImageGenModel")}
         onClick={handleClick}
       />
       <ImageModelMenuDialog

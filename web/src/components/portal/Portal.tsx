@@ -20,6 +20,7 @@ import DashboardTutorials from "./DashboardTutorials";
 import DashboardWorkflows from "./DashboardWorkflows";
 import DashboardFooter from "./DashboardFooter";
 import { useStartTrackChat } from "../../hooks/useStartTrackChat";
+import { useTranslation } from "react-i18next";
 import { WELCOME_TRACKS, type WelcomeTrackId } from "./welcomeTracks";
 import { Box, SPACING, getSpacingPx } from "../ui_primitives";
 
@@ -46,6 +47,7 @@ const styles = (theme: Theme) =>
 const Portal: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const { t } = useTranslation("workspace");
   const [pendingTrack, setPendingTrack] = useState<WelcomeTrackId | null>(null);
 
   // The dashboard wants the full width; collapse the left panel on entry.
@@ -65,12 +67,14 @@ const Portal: React.FC = () => {
       // provider onboarding first so that send doesn't fail.
       if (!hasConfiguredProvider) {
         setPendingTrack(trackId);
-        const track = WELCOME_TRACKS.find((t) => t.id === trackId);
+        const track = WELCOME_TRACKS.find((track) => track.id === trackId);
         openProviderOnboarding({
           ...(track ? { capability: track.capability } : {}),
           ...(track
             ? {
-                reason: `Almost there — your ${track.label} starter needs a model to run.`
+                reason: t("workspace:welcome.onboardingReason", {
+                  label: t(`workspace:welcome.tracks.${track.id}.label`)
+                })
               }
             : {})
         });
@@ -78,7 +82,7 @@ const Portal: React.FC = () => {
       }
       void startTrackChat(trackId);
     },
-    [hasConfiguredProvider, startTrackChat]
+    [hasConfiguredProvider, startTrackChat, t]
   );
 
   // Picking a track without a provider parks it here; once one is connected the

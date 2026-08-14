@@ -120,46 +120,46 @@ const useGraphCounts = (
 
 interface ViewSpec {
   id: BottomPanelView;
-  label: string;
+  labelKey: string;
   icon: React.ReactNode;
   enabled: boolean;
 }
 
 const VIEW_SPECS: Record<BottomPanelView, ViewSpec> = {
-  logs: { id: "logs", label: "Logs", icon: <ArticleIcon />, enabled: true },
+  logs: { id: "logs", labelKey: "common:panels.logs", icon: <ArticleIcon />, enabled: true },
   queue: {
     id: "queue",
-    label: "Queue",
+    labelKey: "common:panels.tabQueue",
     icon: <PlaylistPlayIcon />,
     enabled: true
   },
   sandboxes: {
     id: "sandboxes",
-    label: "Sandboxes",
+    labelKey: "common:dashboard.sandboxesTitle",
     icon: <DesktopWindowsIcon />,
     enabled: sandboxesEnabled
   },
   workers: {
     id: "workers",
-    label: "Workers",
+    labelKey: "workers:title.workers",
     icon: <MemoryIcon />,
     enabled: true
   },
   versions: {
     id: "versions",
-    label: "Versions",
+    labelKey: "workspace:version.versions",
     icon: <HistoryIcon />,
     enabled: true
   },
   workspace: {
     id: "workspace",
-    label: "Workspace",
+    labelKey: "common:panels.tabWorkspace",
     icon: <FolderIcon />,
     enabled: workspacesEnabled
   },
   trace: {
     id: "trace",
-    label: "Trace",
+    labelKey: "common:panels.tabTrace",
     icon: <TimelineIcon />,
     enabled: true
   }
@@ -384,8 +384,10 @@ const TabButton = memo(function TabButton({
   count,
   onClick
 }: TabButtonProps) {
+  const { t } = useTranslation();
+  const label = t(spec.labelKey);
   return (
-    <Tooltip title={spec.label} placement="top" delay={TOOLTIP_ENTER_DELAY}>
+    <Tooltip title={label} placement="top" delay={TOOLTIP_ENTER_DELAY}>
       <button
         type="button"
         role="tab"
@@ -394,7 +396,7 @@ const TabButton = memo(function TabButton({
         onClick={onClick}
       >
         {spec.icon}
-        <span>{spec.label}</span>
+        <span>{label}</span>
         {count !== undefined && count > 0 && (
           <span className="tab-count">{count}</span>
         )}

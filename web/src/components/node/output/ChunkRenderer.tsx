@@ -70,7 +70,7 @@ export const ChunkRenderer: React.FC<Props> = memo(({ chunk }) => {
       return (
         <div className="output value" css={memoizedStyles}>
           <a href={chunk.content as string} target="_blank" rel="noreferrer">
-            Open document
+            {t("canvas:node.openDocument")}
           </a>
         </div>
       );

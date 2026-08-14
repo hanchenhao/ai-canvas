@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import useGlobalChatStore from "../stores/GlobalChatStore";
 import useMediaGenerationStore from "../stores/MediaGenerationStore";
@@ -21,6 +22,7 @@ export const useStartTrackChat = (): ((
   trackId: WelcomeTrackId
 ) => Promise<void>) => {
   const navigate = useNavigate();
+  const { t } = useTranslation("workspace");
 
   return useCallback(
     async (trackId: WelcomeTrackId) => {
@@ -40,13 +42,15 @@ export const useStartTrackChat = (): ((
           .getState()
           // Explicit null: a dashboard starter is a plain conversation, not
           // one bound to whatever workflow happens to be open.
-          .createNewThread(track.threadTitle, null);
-        useChatDraftStore.getState().setDraft(threadId, track.samplePrompt);
+          .createNewThread(t(`welcome.tracks.${track.id}.threadTitle`), null);
+        useChatDraftStore
+          .getState()
+          .setDraft(threadId, t(`welcome.tracks.${track.id}.samplePrompt`));
         useWorkspaceTabsStore.getState().openTab({
           type: "chat",
           ref: threadId,
           mode: "view",
-          title: track.threadTitle
+          title: t(`welcome.tracks.${track.id}.threadTitle`)
         });
         navigate("/workspace");
       } catch (error) {
@@ -54,10 +58,12 @@ export const useStartTrackChat = (): ((
         useNotificationStore.getState().addNotification({
           type: "warning",
           alert: true,
-          content: `Could not open the ${track.label} chat. Try again from the workspace.`
+          content: t("welcome.couldNotOpenChat", {
+            label: t(`welcome.tracks.${track.id}.label`)
+          })
         });
       }
     },
-    [navigate]
+    [navigate, t]
   );
 };

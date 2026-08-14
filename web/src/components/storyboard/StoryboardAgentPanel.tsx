@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -51,6 +52,7 @@ interface StoryboardAgentPanelProps {
  * generating keyframes and clips like a co-director.
  */
 const StoryboardAgentPanel = ({ boardId }: StoryboardAgentPanelProps) => {
+  const { t } = useTranslation("storyboard");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const inStudio = useInStudio();
@@ -138,17 +140,14 @@ const StoryboardAgentPanel = ({ boardId }: StoryboardAgentPanelProps) => {
       >
         <AutoAwesomeIcon sx={{ fontSize: 40, mb: 1.5, opacity: 0.5 }} />
         <Text size="normal" weight={600} sx={{ mb: 1 }}>
-          Storyboard Assistant
+          {t("storyboard:agentPanel.title")}
         </Text>
         <Text size="small" color="secondary" sx={{ maxWidth: 280 }}>
-          Ask me to direct the board — e.g. &quot;break this brief into six
-          shots&quot;, &quot;add a close-up after shot 3&quot;, &quot;generate
-          keyframes for every planned shot&quot;, or &quot;assemble the shots
-          into a timeline&quot;.
+          {t("storyboard:agentPanel.welcomeHint")}
         </Text>
       </FlexColumn>
     ),
-    []
+    [t]
   );
 
   return (

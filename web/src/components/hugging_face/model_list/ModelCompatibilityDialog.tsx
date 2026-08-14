@@ -219,6 +219,7 @@ const ModelCompatibilityDialog: React.FC<ModelCompatibilityDialogProps> = ({
   compatibility
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("huggingface");
 
   return (
     <Dialog
@@ -232,7 +233,7 @@ const ModelCompatibilityDialog: React.FC<ModelCompatibilityDialogProps> = ({
             <FlexRow gap={1} align="center">
               <AutoAwesomeRoundedIcon sx={{ color: "primary.main", fontSize: 20 }} />
               <Text size="normal" weight={600} component="span" sx={{ letterSpacing: -0.2 }}>
-                Node Compatibility
+                {t("modelList.nodeCompatibility")}
               </Text>
             </FlexRow>
             <Caption
@@ -276,14 +277,14 @@ const ModelCompatibilityDialog: React.FC<ModelCompatibilityDialogProps> = ({
               <FlexRow gap={1} align="center">
                 <VerifiedRoundedIcon sx={{ color: "primary.main", fontSize: 18 }} />
                 <Text size="small" weight={600} sx={{ color: "primary.main" }}>
-                  Recommended Nodes
+                  {t("modelList.recommendedNodes")}
                 </Text>
               </FlexRow>
               <Caption sx={{ color: "text.disabled", fontWeight: 500 }}>
-                {compatibility.recommended.length} matches
+                {t("modelList.matches", { count: compatibility.recommended.length })}
               </Caption>
             </FlexRow>
-            <NodeList items={compatibility.recommended} label="recommended" isRecommended />
+            <NodeList items={compatibility.recommended} label={t("huggingface:modelList.recommendedLabel")} isRecommended />
           </FlexColumn>
 
           <FlexColumn className="compatibility-section" gap={1} sx={{ mb: 0 }}>
@@ -291,19 +292,19 @@ const ModelCompatibilityDialog: React.FC<ModelCompatibilityDialogProps> = ({
               <FlexRow gap={1} align="center">
                 <CheckCircleOutlineRoundedIcon sx={{ color: "text.secondary", fontSize: 18 }} />
                 <Text size="small" weight={600}>
-                  Compatible Nodes
+                  {t("modelList.compatibleNodes")}
                 </Text>
               </FlexRow>
               <Caption sx={{ color: "text.disabled", fontWeight: 500 }}>
-                {compatibility.compatible.length} matches
+                {t("modelList.matches", { count: compatibility.compatible.length })}
               </Caption>
             </FlexRow>
-            <NodeList items={compatibility.compatible} label="compatible" />
+            <NodeList items={compatibility.compatible} label={t("huggingface:modelList.compatibleLabel")} />
           </FlexColumn>
 
           <FlexRow justify="flex-end" sx={{ pt: 1.5, borderTop: `1px solid ${theme.vars.palette.grey[900]}` }}>
             <EditorButton onClick={onClose} variant="contained" density="compact" sx={{ borderRadius: BORDER_RADIUS.sm, fontWeight: 600, px: 3 }}>
-              Got it
+              {t("modelList.gotIt")}
             </EditorButton>
           </FlexRow>
         </FlexColumn>

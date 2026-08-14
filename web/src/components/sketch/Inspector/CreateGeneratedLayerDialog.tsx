@@ -247,7 +247,7 @@ const CreateGeneratedLayerDialogBody: React.FC<{
         >
           <FlexColumn gap={1.5}>
             <Caption color="secondary">
-              Pick any workflow whose graph has an image output node.
+              {t("generatedLayer.pickWorkflowHint")}
             </Caption>
 
             {/* autoFocus is skipped on touch, where the virtual keyboard
@@ -256,7 +256,7 @@ const CreateGeneratedLayerDialogBody: React.FC<{
               autoFocus={autoFocusEnabled}
               compact
               size="small"
-              placeholder="Search workflows…"
+              placeholder={t("sketch:generatedLayer.searchPlaceholder")}
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
               fullWidth

@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import MusicModelMenuDialog from "../model_menu/MusicModelMenuDialog";
 import useModelPreferencesStore from "../../stores/ModelPreferencesStore";
@@ -25,6 +26,7 @@ const MusicModelSelect: React.FC<MusicModelSelectProps> = ({
   recommendedModels,
   modelPacks
 }) => {
+  const { t } = useTranslation("properties");
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const addRecent = useModelPreferencesStore((s) => s.addRecent);
@@ -87,9 +89,9 @@ const MusicModelSelect: React.FC<MusicModelSelectProps> = ({
         ref={buttonRef}
         active={!!modelId}
         label={
-          currentSelectedModelDetails?.name || modelId || "Select Music Model"
+          currentSelectedModelDetails?.name || modelId || t("properties:modelSelect.selectMusicModel")
         }
-        subLabel="Select Text-to-Music Model"
+        subLabel={t("properties:modelSelect.selectMusicSub")}
         onClick={handleClick}
       />
       <MusicModelMenuDialog

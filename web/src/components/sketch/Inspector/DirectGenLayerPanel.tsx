@@ -10,6 +10,7 @@
  */
 
 import React, { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import TvIcon from "@mui/icons-material/Tv";
 import TuneIcon from "@mui/icons-material/Tune";
@@ -61,6 +62,7 @@ const DirectGenLayerPanelInner: React.FC<DirectGenLayerPanelProps> = ({
   binding
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("sketch");
   const patchBinding = useSketchSessionStore((s) => s.patchBinding);
   const layers = useSketchStore((s) => s.document.layers);
   const { start, cancel } = useDirectGenJob();
@@ -150,7 +152,7 @@ const DirectGenLayerPanelInner: React.FC<DirectGenLayerPanelProps> = ({
         <TextInput
           value={binding.prompt ?? ""}
           onChange={(e) => patchBinding(layer.id, { prompt: e.target.value })}
-          placeholder="Describe the image…"
+          placeholder={t("sketch:directGenPanel.promptPlaceholder")}
           multiline
           minRows={3}
           maxRows={8}
@@ -160,7 +162,7 @@ const DirectGenLayerPanelInner: React.FC<DirectGenLayerPanelProps> = ({
         <FlexRow gap={0.5} align="center" sx={{ flexWrap: "wrap" }}>
           <MediaOptionChip
             icon={<TvIcon fontSize="small" />}
-            header="Resolution"
+            header={t("sketch:canvasSize.resolution")}
             value={resolution}
             options={resolutionOptions}
             onChange={(r) => applySize(r, aspectRatio)}
@@ -174,16 +176,20 @@ const DirectGenLayerPanelInner: React.FC<DirectGenLayerPanelProps> = ({
             <>
               <MediaOptionChip
                 icon={<TuneIcon fontSize="small" />}
-                label={`Strength ${(binding.strength ?? DEFAULT_STRENGTH).toFixed(2)}`}
-                header="Edit Strength"
+                label={t("sketch:directGenPanel.strengthLabel", {
+                  value: (binding.strength ?? DEFAULT_STRENGTH).toFixed(2)
+                })}
+                header={t("sketch:directGenPanel.editStrengthHeader")}
                 value={binding.strength ?? DEFAULT_STRENGTH}
                 options={strengthOptions}
                 onChange={(s) => patchBinding(layer.id, { strength: s })}
               />
               <MediaOptionChip
                 icon={<LayersIcon fontSize="small" />}
-                label={`${binding.numInferenceSteps ?? DEFAULT_STEPS} steps`}
-                header="Inference Steps"
+                label={t("sketch:directGenPanel.stepsLabel", {
+                  count: binding.numInferenceSteps ?? DEFAULT_STEPS
+                })}
+                header={t("sketch:directGenPanel.inferenceStepsHeader")}
                 value={binding.numInferenceSteps ?? DEFAULT_STEPS}
                 options={stepsOptions}
                 onChange={(n) =>
@@ -197,11 +203,11 @@ const DirectGenLayerPanelInner: React.FC<DirectGenLayerPanelProps> = ({
         {isImageToImage &&
           (sourceLayerOptions.length === 0 ? (
             <Caption color="secondary">
-              No source layers available - paint something on a layer first.
+              {t("sketch:directGenPanel.noSourceLayers")}
             </Caption>
           ) : (
             <SelectField
-              label="Source"
+              label={t("sketch:directGenPanel.sourceLabel")}
               value={binding.sourceLayerId ?? ""}
               onChange={(v) =>
                 patchBinding(layer.id, { sourceLayerId: v ? v : null })
@@ -218,7 +224,7 @@ const DirectGenLayerPanelInner: React.FC<DirectGenLayerPanelProps> = ({
             color="warning"
             onClick={() => cancel(layer.id)}
           >
-            Cancel
+            {t("common:button.cancel")}
           </EditorButton>
         ) : (
           <EditorButton
@@ -228,17 +234,21 @@ const DirectGenLayerPanelInner: React.FC<DirectGenLayerPanelProps> = ({
             onClick={() => void start(layer.id)}
             data-testid="direct-gen-generate"
           >
-            {binding.currentAssetId ? "Regenerate" : "Generate"}
+            {binding.currentAssetId
+              ? t("sketch:directGenPanel.regenerate")
+              : t("sketch:editorActions.generate")}
           </EditorButton>
         )}
         {binding.status === "failed" && (
           <Text size="small" sx={{ color: theme.vars.palette.error.main }}>
-            Generation failed.
+            {t("sketch:selection.generateFailed")}
           </Text>
         )}
         {binding.status === "generated" && binding.currentAssetId && (
           <Caption color="secondary">
-            Done. Asset {binding.currentAssetId.slice(0, 8)}.
+            {t("sketch:directGenPanel.doneAsset", {
+              id: binding.currentAssetId.slice(0, 8)
+            })}
           </Caption>
         )}
       </FlexColumn>

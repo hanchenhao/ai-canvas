@@ -48,11 +48,10 @@ const AcceptSharePage = () => {
       {accept.isError ? (
         <>
           <AlertBanner severity="error">
-            This share link is invalid or has been revoked. Ask the workflow
-            owner for a new one.
+            {t("workspace:share.invalidLink")}
           </AlertBanner>
           <EditorButton variant="outlined" onClick={() => navigate("/editor")}>
-            Go to editor
+            {t("workspace:share.goToEditor")}
           </EditorButton>
         </>
       ) : (

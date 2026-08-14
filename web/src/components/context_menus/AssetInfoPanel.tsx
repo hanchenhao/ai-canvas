@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, Box, BORDER_RADIUS, SPACING, getSpacingPx } from "../ui_primitives";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -59,6 +60,7 @@ interface AssetInfoPanelProps {
 
 const AssetInfoPanel: React.FC<AssetInfoPanelProps> = ({ asset }) => {
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const currentFolder = useAssetGridStore((state) => state.currentFolder);
   const getWorkflow = useWorkflowManager((state) => state.getWorkflow);
 
@@ -90,23 +92,23 @@ const AssetInfoPanel: React.FC<AssetInfoPanelProps> = ({ asset }) => {
         <img className="info-thumb" src={thumbSrc} alt="" loading="eager" />
       )}
 
-      <InfoRow label="Name" value={asset.name} />
+      <InfoRow label={t("assets:list.name")} value={asset.name} />
       <InfoRow
-        label="Type"
+        label={t("assets:list.type")}
         value={asset.content_type ? formatContentType(asset.content_type) : null}
       />
       {asset.size != null && asset.size > 0 && (
-        <InfoRow label="Size" value={formatFileSize(asset.size)} />
+        <InfoRow label={t("assets:list.size")} value={formatFileSize(asset.size)} />
       )}
       {asset.duration != null && asset.duration > 0 && (
-        <InfoRow label="Duration" value={secondsToHMS(asset.duration)} />
+        <InfoRow label={t("assets:list.duration")} value={secondsToHMS(asset.duration)} />
       )}
-      <InfoRow label="Created" value={formatDateTime(asset.created_at)} />
+      <InfoRow label={t("assets:list.created")} value={formatDateTime(asset.created_at)} />
 
       {(folderName || workflowName) && (
         <div className="info-section">
-          {folderName && <InfoRow label="Folder" value={folderName} />}
-          {workflowName && <InfoRow label="Workflow" value={workflowName} />}
+          {folderName && <InfoRow label={t("assets:list.folder")} value={folderName} />}
+          {workflowName && <InfoRow label={t("assets:list.workflow")} value={workflowName} />}
         </div>
       )}
 

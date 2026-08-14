@@ -390,11 +390,11 @@ const FavoritesTiles = memo(function FavoritesTiles({
         open={clearConfirmOpen}
         onClose={() => setClearConfirmOpen(false)}
         onConfirm={handleClearFavorites}
-        title="Clear all favorites?"
-        content={`This removes all ${favorites.length} favorite nodes. This cannot be undone.`}
-        confirmText="Clear favorites"
-        cancelText="Cancel"
-        notificationMessage="Favorites cleared"
+        title={t("canvas:favorites.clearConfirmTitle")}
+        content={t("canvas:favorites.clearConfirmContent", { count: favorites.length })}
+        confirmText={t("canvas:favorites.clearConfirmButton")}
+        cancelText={t("common:button.cancel")}
+        notificationMessage={t("canvas:favorites.clearedNotification")}
         notificationType="success"
       />
     </Box>

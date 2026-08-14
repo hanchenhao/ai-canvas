@@ -226,7 +226,7 @@ const AudioControls: React.FC<AudioControlsProps> = memo(({
               className="play-button"
             />
             <ToolbarIconButton
-              tooltip="Loop"
+              tooltip={t("common:audio.loop")}
               delay={TOOLTIP_ENTER_DELAY}
               className={`loop-button${loop ? "" : " disabled"}`}
               size="small"
@@ -235,7 +235,7 @@ const AudioControls: React.FC<AudioControlsProps> = memo(({
               nodrag={false}
             />
             <ToolbarIconButton
-              tooltip="Mute"
+              tooltip={t("common:audio.mute")}
               delay={TOOLTIP_ENTER_DELAY}
               className={`mute-button${mute ? "" : " disabled"}`}
               size="small"
@@ -244,7 +244,7 @@ const AudioControls: React.FC<AudioControlsProps> = memo(({
               nodrag={false}
             />
             <ToolbarIconButton
-              tooltip="Download"
+              tooltip={t("common:button.download")}
               delay={TOOLTIP_ENTER_DELAY}
               className={`download-audio-button${filename !== "" ? "" : " disabled"}`}
               size="small"

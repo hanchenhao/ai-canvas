@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 
 import React, { memo, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Handle, NodeProps, Position } from "@xyflow/react";
 import { Text, Box, Z_INDEX } from "../../ui_primitives";
 import { useTheme } from "@mui/material/styles";
@@ -108,6 +109,7 @@ interface CompareImagesNodeProps extends NodeProps {
 }
 
 const CompareImagesNode: React.FC<CompareImagesNodeProps> = (props) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const hasParent = props.parentId !== undefined;
@@ -243,7 +245,7 @@ const CompareImagesNode: React.FC<CompareImagesNodeProps> = (props) => {
             />
           ) : (
             <Text className="hint">
-              Connect two images and run workflow to compare
+              {t("canvas:node.connectTwoImagesHint")}
             </Text>
           )}
         </div>

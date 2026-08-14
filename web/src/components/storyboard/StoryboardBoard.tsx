@@ -81,7 +81,7 @@ const ASPECT_OPTIONS = [
 
 const SHOT_COUNT_OPTIONS = [3, 4, 5, 6, 8, 10, 12].map((n) => ({
   value: n,
-  label: `${n} shots`
+  count: n
 }));
 
 // Stills can come from a plain generator or an editing model; the latter can
@@ -215,6 +215,14 @@ const StoryboardBoardInner: React.FC<StoryboardBoardProps> = ({
   const boardStyles = useMemo(() => styles(theme), [theme]);
   const aspectOptions = useMemo(
     () => ASPECT_OPTIONS.map((o) => ({ value: o.value, label: t(o.labelKey) })),
+    [t]
+  );
+  const shotCountOptions = useMemo(
+    () =>
+      SHOT_COUNT_OPTIONS.map((o) => ({
+        value: o.value,
+        label: t("storyboard:shot.count", { count: o.count })
+      })),
     [t]
   );
   const {
@@ -396,7 +404,7 @@ const StoryboardBoardInner: React.FC<StoryboardBoardProps> = ({
                     label={t("storyboard:board.shots")}
                     value={shotCount}
                     onChange={(value) => setShotCount(Number(value))}
-                    options={SHOT_COUNT_OPTIONS}
+                    options={shotCountOptions}
                   />
                 </FormField>
               </FormSection>

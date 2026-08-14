@@ -23,6 +23,7 @@ import React, {
   useRef,
   useState
 } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import AspectRatioIcon from "@mui/icons-material/CropOriginal";
@@ -89,6 +90,7 @@ const ConnectedGeneratePopoverInner: React.FC<ConnectedGeneratePopoverProps> = (
   onClose
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("sketch");
 
   const docW = useSketchStore((s) => s.document.canvas.width);
   const docH = useSketchStore((s) => s.document.canvas.height);
@@ -252,14 +254,14 @@ const ConnectedGeneratePopoverInner: React.FC<ConnectedGeneratePopoverProps> = (
           <TextInput
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Describe the image…"
+            placeholder={t("sketch:generatePopover.promptPlaceholder")}
             autoFocus
             multiline
             minRows={2}
             maxRows={6}
             fullWidth
             inputProps={{
-              "aria-label": "Generation prompt",
+              "aria-label": t("sketch:generatePopover.promptAria"),
               "data-testid": "sketch-gen-prompt"
             }}
             onKeyDown={(e) => {
@@ -281,7 +283,7 @@ const ConnectedGeneratePopoverInner: React.FC<ConnectedGeneratePopoverProps> = (
             <MediaControlChip
               ref={imageModelAnchorRef}
               icon={<ImageIcon fontSize="small" />}
-              label={modelName || "Select Model"}
+              label={modelName || t("sketch:generatePopover.selectModel")}
               active={imageModelOpen}
               onClick={() => setImageModelOpen(true)}
               truncate

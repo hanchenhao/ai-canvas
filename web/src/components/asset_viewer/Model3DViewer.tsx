@@ -674,7 +674,7 @@ const Model3DViewer: React.FC<Model3DViewerProps> = ({
               <LoadingSpinner size={compact ? "small" : "medium"} />
               {!compact && (
                 <Text size="small" color="secondary">
-                  Loading model…
+                  {t("model3d:status.loading")}
                 </Text>
               )}
             </FlexColumn>
@@ -772,7 +772,7 @@ const Model3DViewer: React.FC<Model3DViewerProps> = ({
         {isFullscreen && (
           <ToolbarIconButton
             icon={<CloseIcon />}
-            tooltip="Exit Fullscreen (Esc)"
+            tooltip={t("model3d:tooltip.exitFullscreen")}
             className="fullscreen-close-button"
             onClick={exitFullscreen}
             size="medium"

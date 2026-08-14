@@ -161,7 +161,7 @@ function createSketchDragImage(name: string): HTMLElement {
   container.appendChild(icon);
 
   const label = document.createElement("div");
-  label.textContent = name || "Untitled sketch";
+  label.textContent = name;
   label.style.cssText = `
     min-width: 0;
     overflow: hidden;
@@ -239,22 +239,22 @@ const SketchListItem = memo(function SketchListItem({
         {
           type: "sketch",
           payload,
-          metadata: { sourceId: id, sourceName: name || "Untitled sketch" }
+          metadata: { sourceId: id, sourceName: name || t("sketch:list.untitledSketch") }
         },
         event.dataTransfer
       );
       event.dataTransfer.effectAllowed = "copyMove";
-      const dragImage = createSketchDragImage(name);
+      const dragImage = createSketchDragImage(name || t("sketch:list.untitledSketch"));
       document.body.appendChild(dragImage);
       event.dataTransfer.setDragImage(dragImage, 10, 10);
       window.setTimeout(() => document.body.removeChild(dragImage), 0);
       setActiveDrag({
         type: "sketch",
         payload,
-        metadata: { sourceId: id, sourceName: name || "Untitled sketch" }
+        metadata: { sourceId: id, sourceName: name || t("sketch:list.untitledSketch") }
       });
     },
-    [id, name, updatedAt, setActiveDrag]
+    [id, name, updatedAt, setActiveDrag, t]
   );
   const handleDragEnd = useCallback(() => {
     clearDrag();
@@ -301,7 +301,7 @@ const SketchListItem = memo(function SketchListItem({
             component="span"
             sx={{ fontSize: "var(--fontSizeSmall)", fontWeight: 600 }}
           >
-            {name || "Untitled sketch"}
+            {name || t("sketch:list.untitledSketch")}
           </TruncatedText>
         </FlexColumn>
       </FlexRow>
@@ -406,14 +406,14 @@ const SketchListPanel = () => {
           type: "sketch",
           ref: id,
           mode: "edit",
-          title: name || "Untitled sketch"
+          title: name || t("sketch:list.untitledSketch")
         });
       } else {
         navigate(`/sketch/${id}`);
       }
       setVisibility(false);
     },
-    [location.pathname, navigate, openTab, setVisibility]
+    [location.pathname, navigate, openTab, setVisibility, t]
   );
 
   const [editingId, setEditingId] = useState<string | null>(null);

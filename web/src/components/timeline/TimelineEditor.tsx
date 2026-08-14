@@ -714,7 +714,7 @@ const TimelineEditorBody: React.FC<
         }
       }
     );
-  }, [createTimeline, navigate, projectIdForNewSequence, searchParams]);
+  }, [createTimeline, navigate, projectIdForNewSequence, searchParams, t]);
 
   const createErrorMessage =
     createTimeline.error != null

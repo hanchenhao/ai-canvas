@@ -170,14 +170,13 @@ export const LayerVersionRow: React.FC<LayerVersionRowProps> = memo(
         <Dialog
           open={deleteDialogOpen}
           onClose={handleDeleteCancel}
-          title="Delete version?"
+          title={t("sketch:layerVersion.deleteTitle")}
           onConfirm={handleDeleteConfirm}
-          confirmText="Delete"
-          cancelText="Cancel"
+          confirmText={t("common:button.delete")}
+          cancelText={t("common:button.cancel")}
           destructive
         >
-          This version will be permanently removed. The underlying job and asset
-          are not deleted.
+          {t("sketch:layerVersion.deleteBody")}
         </Dialog>
       </>
     );

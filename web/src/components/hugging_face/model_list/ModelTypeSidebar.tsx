@@ -76,9 +76,8 @@ const ModelTypeSidebar: React.FC = () => {
           opacity: 0.7
         }}
       >
-        Model Categories
-      </Text>
-    <List className="model-type-list" sx={{ padding: 0 }}>
+        {t("huggingface:modelList.modelCategories")}
+      </Text><List className="model-type-list" sx={{ padding: 0 }}>
       {modelTypes
         .filter((type) => availableModelTypes.has(type))
         .map((type) => {

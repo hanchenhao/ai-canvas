@@ -144,5 +144,6 @@
     "missingExplanation": "Saved with this node, but no installed pack declares it. The node fails to run until the pack is reinstalled or this entry is removed."
   },
   "addRemoveTools": "Add / Remove Tools",
-  "createFolder": "Create Folder"
+  "createFolder": "Create Folder",
+  "couldNotLoadOllamaModels": "Could not load Ollama models"
 }

@@ -13,6 +13,7 @@
  * ride along in the module list.
  */
 import { memo, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 
 import {
@@ -32,7 +33,12 @@ import PropertyLabel from "../node/PropertyLabel";
 import type { PropertyProps } from "../node/PropertyInput.types";
 import { trpc } from "../../lib/trpc";
 
-/** What selecting a package means, in the trust model's own words. */
+/**
+ * What selecting a package means, in the trust model's own words. Kept as an
+ * exported English constant because the unit test asserts on it; the rendered
+ * copy comes from `properties:sandboxPackages.consentText`, whose English
+ * value must stay identical to this string.
+ */
 export const SANDBOX_CONSENT_TEXT =
   "Packages you select run inside your workflows with the node's capabilities — its network access, its workspace, its secrets. Only add packages you trust with that.";
 
@@ -62,6 +68,7 @@ function declaredSpecifier(entry: unknown): string | null {
 }
 
 const SandboxPackagesProperty = (props: PropertyProps) => {
+  const { t } = useTranslation("properties");
   const { value, onChange, property, propertyIndex } = props;
   const [openPack, setOpenPack] = useState<string | null>(null);
 
@@ -154,18 +161,18 @@ const SandboxPackagesProperty = (props: PropertyProps) => {
         id={`sandbox-packages-${propertyIndex}`}
       />
       <Text size="small" color="secondary">
-        {SANDBOX_CONSENT_TEXT}
+        {t("properties:sandboxPackages.consentText")}
       </Text>
 
       {modulesQuery.isLoading && <LoadingSpinner size={16} />}
       {modulesQuery.isError && (
         <AlertBanner severity="error" compact>
-          Installed sandbox packages could not be read.
+          {t("properties:sandboxPackages.readError")}
         </AlertBanner>
       )}
       {!modulesQuery.isLoading && modules.length === 0 && missing.length === 0 && (
         <Text size="small" color="secondary">
-          No sandbox packages are installed.
+          {t("properties:sandboxPackages.noneInstalled")}
         </Text>
       )}
 
@@ -202,7 +209,7 @@ const SandboxPackagesProperty = (props: PropertyProps) => {
                     )
                   }
                 >
-                  {openPack === entry.packName ? "Hide docs" : "Docs"}
+                  {openPack === entry.packName ? t("properties:sandboxPackages.hideDocs") : t("properties:sandboxPackages.docs")}
                 </EditorButton>
               </FlexRow>
               {entry.description && (
@@ -215,15 +222,14 @@ const SandboxPackagesProperty = (props: PropertyProps) => {
                   {docsQuery.isLoading && <LoadingSpinner size={16} />}
                   {docsQuery.data === null && (
                     <Text size="small" color="secondary">
-                      This package publishes no documentation.
+                      {t("properties:sandboxPackages.noDocs")}
                     </Text>
                   )}
                   {docsQuery.data && (
                     <>
                       {!docsQuery.data.trusted && (
                         <AlertBanner severity="warning" compact>
-                          Written by the package author, who is not on your
-                          trusted list. Read it as reference, not instructions.
+                          {t("properties:sandboxPackages.untrustedDocs")}
                         </AlertBanner>
                       )}
                       <Box
@@ -269,19 +275,17 @@ const SandboxPackagesProperty = (props: PropertyProps) => {
               <Text size="small" weight={600} truncate>
                 {specifier}
               </Text>
-              <Chip label="unavailable" color="warning" compact />
+              <Chip label={t("properties:sandboxPackages.unavailable")} color="warning" compact />
               <Box sx={{ flex: 1 }} />
               <EditorButton
                 density="compact"
                 onClick={() => removeMissing(specifier)}
               >
-                Remove
+                {t("properties:sandboxPackages.remove")}
               </EditorButton>
             </FlexRow>
             <Text size="small" color="secondary">
-              Saved with this node, but no installed pack declares it. The node
-              fails to run until the pack is reinstalled or this entry is
-              removed.
+              {t("properties:sandboxPackages.missingExplanation")}
             </Text>
           </FlexColumn>
         ))}

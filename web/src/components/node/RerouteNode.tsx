@@ -228,7 +228,7 @@ const RerouteNode: React.FC<RerouteNodeProps> = (props) => {
 
   return (
     <Tooltip
-      title="Double-click to add a label"
+      title={t("canvas:node.doubleClickToAddLabel")}
       delay={TOOLTIP_ENTER_DELAY * 2}
       placement="top"
     >

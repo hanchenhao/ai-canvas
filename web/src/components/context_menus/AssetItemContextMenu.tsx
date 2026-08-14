@@ -212,16 +212,16 @@ const AssetItemContextMenu = () => {
         <MenuItem disabled>
           <Text className="title">
             {isFolder
-              ? "Folder"
-              : `${selectedAssetIds.length} item${
-                  selectedAssetIds.length > 1 ? "s" : ""
-                }`}
+              ? t("canvas:assetItemContextMenu.folder")
+              : t("canvas:assetItemContextMenu.itemCount", {
+                  count: selectedAssetIds.length
+                })}
           </Text>
         </MenuItem>
         <Divider />
         <ContextMenuItem
           onClick={openRenameDialog}
-          label="Rename"
+          label={t("canvas:contextMenu.rename")}
           IconComponent={<DriveFileRenameOutlineIcon />}
           tooltip={t("canvas:assetItemContextMenu.renameSelected")}
         />
@@ -236,12 +236,12 @@ const AssetItemContextMenu = () => {
         {singleVideo && (
           <ContextMenuItem
             onClick={handleEditVideo}
-            label={singleVideo.timeline_id ? "Edit Timeline" : "Create Timeline from Video"}
+            label={singleVideo.timeline_id ? t("canvas:assetItemContextMenu.editTimeline") : t("canvas:assetItemContextMenu.createTimelineFromVideo")}
             IconComponent={<MovieEditIcon />}
             tooltip={
               singleVideo.timeline_id
-                ? "Open the timeline this video was rendered from"
-                : "Create a timeline from this video and open it for editing"
+                ? t("canvas:assetItemContextMenu.editTimelineTooltip")
+                : t("canvas:assetItemContextMenu.createTimelineTooltip")
             }
           />
         )}
@@ -254,12 +254,12 @@ const AssetItemContextMenu = () => {
         />
         <ContextMenuItem
           onClick={openCreateFolderDialog}
-          label={hasSelectedAssets ? "Move to new folder" : "Create new folder"}
+          label={hasSelectedAssets ? t("canvas:assetItemContextMenu.moveToNewFolder") : t("canvas:assetItemContextMenu.createNewFolder")}
           IconComponent={<CreateNewFolderIcon />}
           tooltip={
             hasSelectedAssets
-              ? "Create a new folder and move selected assets into it"
-              : "Create a new folder in the current location"
+              ? t("canvas:assetItemContextMenu.moveToNewFolderTooltip")
+              : t("canvas:assetItemContextMenu.createNewFolderTooltip")
           }
         />
         <Divider />
@@ -274,22 +274,22 @@ const AssetItemContextMenu = () => {
             onClick={copyToClipboard}
             label={
               selectedAssets[0]?.content_type?.startsWith("image/")
-                ? "Copy Image"
+                ? t("canvas:assetItemContextMenu.copyImage")
                 : selectedAssets[0]?.content_type?.startsWith("video/")
-                ? "Copy Video Info"
+                ? t("canvas:assetItemContextMenu.copyVideoInfo")
                 : selectedAssets[0]?.content_type?.startsWith("audio/")
-                ? "Copy Audio Info"
-                : "Copy Content"
+                ? t("canvas:assetItemContextMenu.copyAudioInfo")
+                : t("canvas:assetItemContextMenu.copyContent")
             }
             IconComponent={<ContentCopyIcon />}
             tooltip={
               selectedAssets[0]?.content_type?.startsWith("image/")
-                ? "Copy image to clipboard"
+                ? t("canvas:assetItemContextMenu.copyImageTooltip")
                 : selectedAssets[0]?.content_type?.startsWith("video/")
-                ? "Copy video URL and metadata to clipboard"
+                ? t("canvas:assetItemContextMenu.copyVideoInfoTooltip")
                 : selectedAssets[0]?.content_type?.startsWith("audio/")
-                ? "Copy audio URL and metadata to clipboard"
-                : "Copy content to clipboard"
+                ? t("canvas:assetItemContextMenu.copyAudioInfoTooltip")
+                : t("canvas:assetItemContextMenu.copyContentTooltip")
             }
           />
         )}
@@ -298,14 +298,14 @@ const AssetItemContextMenu = () => {
             onClick={handleCompareImages}
             label={t("canvas:assetItemContextMenu.compareImages")}
             IconComponent={<CompareIcon />}
-            tooltip="Compare the two selected images side-by-side"
+            tooltip={t("canvas:assetItemContextMenu.compareImagesTooltip")}
           />
         )}
         <Divider />
         <div style={{ height: ".5em" }} />
         <ContextMenuItem
           onClick={openDeleteDialog}
-          label="Delete"
+          label={t("canvas:contextMenu.delete")}
           addButtonClassName="delete"
           IconComponent={<RemoveCircleIcon />}
           tooltip={t("canvas:assetItemContextMenu.deleteSelected")}

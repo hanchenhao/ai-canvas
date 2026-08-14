@@ -82,7 +82,7 @@ const SketchProperty = (props: PropertyProps) => {
         </NodeSelect>
         <ToolbarIconButton
           size="small"
-          ariaLabel="Open in sketch editor"
+          ariaLabel={t("properties:openSketchEditor")}
           tooltip={t("properties:openSketchEditor")}
           disabled={!selectedId}
           onClick={handleOpenEditor}

@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { ToggleGroup, ToggleOption } from "../../ui_primitives";
 import type { ModelSource } from "../../../stores/ModelManagerStore";
 
@@ -18,6 +19,7 @@ const SourceToggleInternal: React.FC<SourceToggleProps> = ({
   source,
   onChange
 }) => {
+  const { t } = useTranslation("huggingface");
   const handleChange = useCallback(
     (_e: React.MouseEvent<HTMLElement>, value: ModelSource | null) => {
       if (value) {
@@ -33,18 +35,18 @@ const SourceToggleInternal: React.FC<SourceToggleProps> = ({
       exclusive
       segmented
       onChange={handleChange}
-      aria-label="model source"
+      aria-label={t("huggingface:aria.modelSource")}
     >
-      <ToggleOption value="onboarding" aria-label="get started">
-        Get Started
+      <ToggleOption value="onboarding" aria-label={t("huggingface:aria.getStarted")}>
+        {t("huggingface:modelList.getStartedTab")}
       </ToggleOption>
-      <ToggleOption value="installed" aria-label="installed models">
+      <ToggleOption value="installed" aria-label={t("huggingface:aria.installedModels")}>
         Installed
       </ToggleOption>
-      <ToggleOption value="recommended" aria-label="recommended models">
+      <ToggleOption value="recommended" aria-label={t("huggingface:aria.recommendedModels")}>
         Recommended
       </ToggleOption>
-      <ToggleOption value="hub" aria-label="search hugging face hub">
+      <ToggleOption value="hub" aria-label={t("huggingface:aria.searchHub")}>
         Hub
       </ToggleOption>
     </ToggleGroup>

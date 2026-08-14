@@ -106,7 +106,7 @@ const EditorToolbar = ({
         <div className="toolbar-group">
           <ToolbarIconButton
             icon={<UndoIcon fontSize="small" />}
-            tooltip="Undo"
+            tooltip={t("common:textEditor.undo")}
             className={`toolbar-button ${!canUndo ? "disabled" : ""}`}
             onClick={onUndo}
             disabled={!canUndo}
@@ -114,7 +114,7 @@ const EditorToolbar = ({
           />
           <ToolbarIconButton
             icon={<RedoIcon fontSize="small" />}
-            tooltip="Redo"
+            tooltip={t("common:textEditor.redo")}
             className={`toolbar-button ${!canRedo ? "disabled" : ""}`}
             onClick={onRedo}
             disabled={!canRedo}
@@ -126,7 +126,7 @@ const EditorToolbar = ({
       <div className="toolbar-group">
         <ToolbarIconButton
           icon={<SearchIcon fontSize="small" />}
-          tooltip="Find & Replace"
+          tooltip={t("common:textEditor.findReplace")}
           className="toolbar-button"
           onClick={onToggleFind}
           size="small"

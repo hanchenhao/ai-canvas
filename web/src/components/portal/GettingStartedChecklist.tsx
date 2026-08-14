@@ -133,26 +133,26 @@ const GettingStartedChecklist: React.FC<GettingStartedChecklistProps> = ({
   const steps: ChecklistStep[] = [
     {
       id: "connect-provider",
-      label: "Connect an AI provider",
+      label: t("common:dashboard.stepConnectProvider"),
       done: hasConfiguredProvider,
       onClick: onConnectProvider
     },
     {
       id: "open-template",
-      label: "Open a starter or template",
+      label: t("common:dashboard.stepOpenTemplate"),
       done: completedSteps.includes("open-template"),
       onClick: onOpenTemplates
     },
     {
       id: "run-workflow",
-      label: "Run a workflow",
+      label: t("common:dashboard.stepRunWorkflow"),
       done: completedSteps.includes("run-workflow"),
       // Running happens in the editor; opening a template is the way there.
       onClick: onOpenTemplates
     },
     {
       id: "create-workflow",
-      label: "Build your own",
+      label: t("common:dashboard.stepBuildYourOwn"),
       done: completedSteps.includes("create-workflow"),
       onClick: onCreateWorkflow
     }
@@ -173,7 +173,7 @@ const GettingStartedChecklist: React.FC<GettingStartedChecklistProps> = ({
       <div css={inline ? undefined : wrapStyles(theme)}>
         <div className="checklist-inner">
           <span className="checklist-label">
-            Getting started · {doneCount}/{steps.length}
+            {t("common:dashboard.gettingStartedProgress", { done: doneCount, total: steps.length })}
           </span>
           {steps.map((step) => (
             <button
@@ -206,7 +206,7 @@ const GettingStartedChecklist: React.FC<GettingStartedChecklistProps> = ({
             onClick={dismiss}
             aria-label={t("common:dashboard.dismissGettingStartedChecklist")}
           >
-            Dismiss
+            {t("common:dashboard.dismiss")}
           </button>
         </div>
       </div>

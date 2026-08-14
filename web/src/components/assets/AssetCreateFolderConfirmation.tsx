@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, FlexRow, AlertBanner, Surface, TextInput, BORDER_RADIUS, FONT_WEIGHT, SPACING, getSpacingPx } from "../ui_primitives";
 import { EditorButton } from "../editor_ui";
 import { getMousePosition } from "../../utils/MousePosition";
@@ -31,6 +32,7 @@ const AssetCreateFolderConfirmation: React.FC = () => {
   }, [setDialogOpen]);
   const inputRef = useRef<HTMLInputElement>(null);
   const theme = useTheme();
+  const { t } = useTranslation("assets");
   const createFolder = useAssetStore((state) => state.createFolder);
   const updateAsset = useAssetStore((state) => state.update);
   const { refetchAssetsAndFolders, folderFilesFiltered } = useAssets();
@@ -299,10 +301,10 @@ const AssetCreateFolderConfirmation: React.FC = () => {
               }}
             >
               <span className="asset-create-folder-selected-count">
-                {selectedAssets.length} assets selected:
+                {t("saveToFolder.assetsSelected", { count: selectedAssets.length })}
               </span>{" "}
               <br />
-              They will be moved to the new folder.
+              {t("saveToFolder.willBeMoved")}
             </Text>
           </div>
         )}

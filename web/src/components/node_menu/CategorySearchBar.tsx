@@ -102,7 +102,7 @@ const CategorySearchBar = memo(function CategorySearchBar({
         <ToolbarIconButton
           tabIndex={-1}
           tooltip={t("canvas:categorySearch.clearFilter")}
-          ariaLabel="Clear filter"
+          ariaLabel={t("canvas:categorySearch.clearFilter")}
           onClick={handleClear}
           icon={<ClearIcon />}
         />

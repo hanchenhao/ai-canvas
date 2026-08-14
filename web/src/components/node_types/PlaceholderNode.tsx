@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { memo, useMemo, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Node, NodeProps } from "@xyflow/react";
 import isEqual from "../../utils/isEqual";
 import { NodeData } from "../../stores/NodeData";
@@ -149,6 +150,7 @@ const typeForValue = (value: unknown) => {
 
 const PlaceholderNode = (props: NodeProps<PlaceholderNodeData>) => {
   const theme = useTheme();
+  const { t } = useTranslation("canvas");
   const nodeType = props.type;
   const nodeData = props.data;
   const nodeTitle = humanizeType(nodeType?.split(".").pop() || "");
@@ -319,22 +321,22 @@ const PlaceholderNode = (props: NodeProps<PlaceholderNodeData>) => {
     >
       <NodeHeader
         id={props.id}
-        metadataTitle={computedHeaderTitle || nodeTitle || "Missing Node!"}
+        metadataTitle={computedHeaderTitle || nodeTitle || t("canvas:node.missingNode")}
         data={nodeData || {}}
         showMenu={false}
         selected={props.selected}
         workflowId={nodeData?.workflow_id}
       />
-      <Tooltip title="This node type is missing. Search the node menu for a replacement or install the package that provides it.">
+      <Tooltip title={t("canvas:node.missingNodeTooltip")}>
         <Text size="big" className="missing-node-text">
-          Missing Node
+          {t("canvas:node.missingNode")}
         </Text>
       </Tooltip>
 
       <FlexColumn gap={1} align="center" className="node-actions" sx={{ margin: `${getSpacingPx(SPACING.md)} 0` }}>
         {disabledPack ? (
           <Tooltip
-            title={`This node is part of the ${disabledPack.name} pack, which is currently disabled. Enable it to load the node.`}
+            title={t("canvas:node.missingNodePack", { pack: disabledPack.name })}
           >
             <EditorButton
               variant="contained"
@@ -345,12 +347,12 @@ const PlaceholderNode = (props: NodeProps<PlaceholderNodeData>) => {
               startIcon={<ExtensionIcon />}
             >
               {enabling
-                ? "Enabling…"
-                : `Enable ${disabledPack.name} Nodes`}
+                ? t("canvas:node.enabling")
+                : t("canvas:node.enablePackNodes", { pack: disabledPack.name })}
             </EditorButton>
           </Tooltip>
         ) : (
-          <Tooltip title={`Search for ${resolvedType} in Package Manager`}>
+          <Tooltip title={t("canvas:node.searchInPackageManager", { type: resolvedType })}>
             <EditorButton
               variant="contained"
               density="compact"
@@ -358,7 +360,7 @@ const PlaceholderNode = (props: NodeProps<PlaceholderNodeData>) => {
               onClick={openPackageManager}
               startIcon={<CloudDownloadIcon />}
             >
-              Search Package Manager
+              {t("canvas:node.searchPackageManager")}
             </EditorButton>
           </Tooltip>
         )}

@@ -210,11 +210,11 @@ const MasksExtractorBodyInner: React.FC<MasksExtractorBodyProps> = ({
             onChange={handleTabChange}
             aria-label={t("canvas:imageEditing.previewTab")}
           >
-            <ToggleOption value="image" aria-label="Image">
-              Image
+            <ToggleOption value="image" aria-label={t("canvas:imageEditing.image")}>
+              {t("canvas:imageEditing.image")}
             </ToggleOption>
-            <ToggleOption value="mask" aria-label="Mask">
-              Mask
+            <ToggleOption value="mask" aria-label={t("canvas:imageEditing.mask")}>
+              {t("canvas:imageEditing.mask")}
             </ToggleOption>
           </ToggleGroup>
         </FlexRow>

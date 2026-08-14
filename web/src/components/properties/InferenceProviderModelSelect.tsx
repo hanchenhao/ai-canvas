@@ -127,7 +127,7 @@ const InferenceProviderModelSelect = ({
         <FlexColumn gap={2}>
             <div>
                 <Text size="small" sx={{ mb: 1 }}>
-                    Provider
+                    {t("properties:provider")}
                 </Text>
                 <Select
                     options={providerOptions}
@@ -140,7 +140,7 @@ const InferenceProviderModelSelect = ({
             {value.provider && (
                 <div>
                     <Text size="small" sx={{ mb: 1 }}>
-                        Model
+                        {t("properties:model")}
                     </Text>
                     <Select
                         options={modelOptions}
@@ -148,10 +148,10 @@ const InferenceProviderModelSelect = ({
                         onChange={handleChangeModel}
                         placeholder={
                             isLoadingModels
-                                ? "Loading models..."
+                                ? t("properties:loadingModels")
                                 : modelsError
-                                    ? "Error loading models"
-                                    : "Select a model"
+                                    ? t("properties:errorLoadingModels")
+                                    : t("properties:selectAModel")
                         }
                     />
                 </div>

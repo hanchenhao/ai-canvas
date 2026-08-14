@@ -3,6 +3,7 @@ import { css, keyframes } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import { memo, type CSSProperties } from "react";
+import { useTranslation } from "react-i18next";
 import { MOTION, BORDER_RADIUS, SPACING, getSpacingPx } from "../ui_primitives";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
@@ -189,19 +190,16 @@ const WelcomeFlow: React.FC<WelcomeFlowProps> = ({
   hideFooter = false
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("workspace");
 
   return (
     <div css={styles(theme, fullWidth)}>
       <div className="welcome-eyebrow">
         {statusDot && <span className="welcome-eyebrow-dot" />}
-        Welcome to BrainVite-AI-Canvas
+        {t("welcome.eyebrow")}
       </div>
-      <h1 className="welcome-heading">What do you want to make today?</h1>
-      <p className="welcome-sub">
-        Pick one. We&apos;ll open a chat in that mode with an example prompt ready
-        to go — press send, or write your own. You can always change your mind,
-        or skip and explore.
-      </p>
+      <h1 className="welcome-heading">{t("welcome.heading")}</h1>
+      <p className="welcome-sub">{t("welcome.sub")}</p>
 
       <div className="welcome-grid">
         {WELCOME_TRACKS.map((track) => {
@@ -212,7 +210,10 @@ const WelcomeFlow: React.FC<WelcomeFlowProps> = ({
               type="button"
               className="welcome-card"
               onClick={() => onPick(track.id)}
-              aria-label={`Start with ${track.label}: ${track.blurb}`}
+              aria-label={t("welcome.startWithAria", {
+                label: t(`welcome.tracks.${track.id}.label`),
+                blurb: t(`welcome.tracks.${track.id}.blurb`)
+              })}
               style={{ "--card-accent": track.accent } as CSSProperties}
             >
               <div
@@ -224,8 +225,12 @@ const WelcomeFlow: React.FC<WelcomeFlowProps> = ({
               >
                 <Icon />
               </div>
-              <div className="welcome-card-title">{track.label}</div>
-              <div className="welcome-card-blurb">{track.blurb}</div>
+              <div className="welcome-card-title">
+                {t(`welcome.tracks.${track.id}.label`)}
+              </div>
+              <div className="welcome-card-blurb">
+                {t(`welcome.tracks.${track.id}.blurb`)}
+              </div>
               <span className="welcome-card-node">{track.modeLabel}</span>
             </button>
           );
@@ -235,12 +240,10 @@ const WelcomeFlow: React.FC<WelcomeFlowProps> = ({
       {!hideFooter && (
         <div className="welcome-footer">
           <button type="button" className="welcome-skip" onClick={onSkip}>
-            Skip - explore on my own
+            {t("welcome.skip")}
           </button>
           <span className="welcome-footer-divider" />
-          <span className="welcome-footer-hint">
-            Each pick opens a chat with the prompt already written.
-          </span>
+          <span className="welcome-footer-hint">{t("welcome.footerHint")}</span>
         </div>
       )}
     </div>

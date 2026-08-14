@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import type { Theme } from "@mui/material/styles";
 import { memo, useMemo, useEffect, useState, useCallback } from "react";
 
@@ -136,6 +137,7 @@ type NodeMenuProps = {
 };
 
 const NodeMenu = ({ focusSearchInput = false }: NodeMenuProps) => {
+  const { t } = useTranslation("canvas");
   const [bounds, setBounds] = useState({
     left: 0,
     right: 0,
@@ -344,7 +346,7 @@ const NodeMenu = ({ focusSearchInput = false }: NodeMenuProps) => {
               <SearchInput
                 focusSearchInput={focusSearchInput}
                 focusOnTyping={false}
-                placeholder="Search for nodes..."
+                placeholder={t("canvas:nodeMenu.library.searchPlaceholder")}
                 debounceTime={80}
                 width={300}
                 maxWidth={"300px"}

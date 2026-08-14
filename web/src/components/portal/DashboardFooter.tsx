@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { wrapStyles } from "./dashboardChrome";
 import { SPACING, getSpacingPx } from "../ui_primitives";
 
@@ -50,12 +51,13 @@ const DashboardFooter: React.FC<DashboardFooterProps> = ({
   onGettingStarted
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("workspace");
   return (
     <footer css={styles(theme)}>
       <div css={wrapStyles(theme)} className="foot-wrap">
         <span className="foot-links">
           <button type="button" onClick={onGettingStarted}>
-            Getting started
+            {t("workspace:dashboard.gettingStarted")}
           </button>
         </span>
         <span className="foot-stat">

@@ -225,16 +225,16 @@ const SimpleFilterBodyInner: React.FC<SimpleFilterBodyProps> = ({
             <ToggleOption
               className="tab-option tab-option-before"
               value="before"
-              aria-label="Before"
+              aria-label={t("canvas:imageEditing.before")}
             >
-              Before
+              {t("canvas:imageEditing.before")}
             </ToggleOption>
             <ToggleOption
               className="tab-option tab-option-after"
               value="after"
-              aria-label="After"
+              aria-label={t("canvas:imageEditing.after")}
             >
-              After
+              {t("canvas:imageEditing.after")}
             </ToggleOption>
           </ToggleGroup>
         </FlexRow>

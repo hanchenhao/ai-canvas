@@ -9,6 +9,7 @@
 
 import React, { useEffect, useMemo } from "react";
 import { useTheme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import { generateCSS } from "../themes/GenerateCSS";
 // Editor node styles — same set NodeEditor.tsx imports, so the preview
 // renders identically even if the editor itself was never mounted.
@@ -168,6 +169,7 @@ export const WorkflowGraphPreview: React.FC<WorkflowGraphPreviewProps> = ({
   width = "100%",
   height = 320
 }) => {
+  const { t } = useTranslation("workspace");
   const data = useMemo(() => {
     const graphNodes = graph?.nodes || [];
     const graphEdges = graph?.edges || [];
@@ -196,7 +198,7 @@ export const WorkflowGraphPreview: React.FC<WorkflowGraphPreviewProps> = ({
           fontSize: "var(--fontSizeSmaller)"
         }}
       >
-        Empty workflow
+        {t("workspace:version.emptyWorkflow")}
       </Box>
     );
   }

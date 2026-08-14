@@ -154,7 +154,7 @@ const ColorSwatchPair: React.FC<ColorSwatchPairProps> = ({
         sx={{ width: `${STACK}px` }}
       >
         <Tooltip
-          title="Swap Colors (X)"
+          title={t("sketch:colorSwatch.swapColors")}
           placement="right"
           enterDelay={SKETCH_TOOLTIP_DELAY_MS}
           enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}
@@ -162,14 +162,14 @@ const ColorSwatchPair: React.FC<ColorSwatchPairProps> = ({
           <EditorButton
             density="compact"
             onClick={onSwapColors}
-            aria-label="Swap Colors (X)"
+            aria-label={t("sketch:colorSwatch.swapColors")}
             sx={{ flex: 1, minWidth: 0, padding: 0, borderRadius: BORDER_RADIUS.sm }}
           >
             <SwapHorizIcon sx={{ fontSize: "var(--fontSizeSmall)" }} />
           </EditorButton>
         </Tooltip>
         <Tooltip
-          title="Reset to B/W (D)"
+          title={t("sketch:colorSwatch.resetToBlackWhite")}
           placement="right"
           enterDelay={SKETCH_TOOLTIP_DELAY_MS}
           enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}
@@ -177,7 +177,7 @@ const ColorSwatchPair: React.FC<ColorSwatchPairProps> = ({
           <EditorButton
             density="compact"
             onClick={onResetColors}
-            aria-label="Reset to black and white (D)"
+            aria-label={t("sketch:colorSwatch.resetToBlackWhiteAria")}
             sx={{ flex: 1, minWidth: 0, padding: 0, borderRadius: BORDER_RADIUS.sm }}
           >
             <Text

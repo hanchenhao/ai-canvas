@@ -197,7 +197,7 @@ const EntityLibraryInternal: React.FC = () => {
           startIcon={<AddIcon />}
           onClick={handleAdd}
         >
-          Add entity
+          {t("common:entities.addEntity")}
         </EditorButton>
       </FlexRow>
 

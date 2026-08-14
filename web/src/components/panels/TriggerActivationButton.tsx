@@ -16,6 +16,7 @@
  */
 import React, { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import {
   Popover,
   ToolbarIconButton,
@@ -71,40 +72,40 @@ type ActivationState =
   | "mixed"
   | "active";
 
-const KIND_LABELS: Readonly<Record<string, string>> = {
-  webhook: "Webhook",
-  schedule: "Schedule",
-  file_watch: "File watch",
-  manual: "Manual"
+const TRIGGER_KIND_KEYS: Readonly<Record<string, string>> = {
+  webhook: "kindWebhook",
+  schedule: "kindSchedule",
+  file_watch: "kindFileWatch",
+  manual: "kindManual"
 };
 
-const kindLabel = (kind: string): string => KIND_LABELS[kind] ?? kind;
+const kindLabel = (t: TFunction, kind: string): string =>
+  TRIGGER_KIND_KEYS[kind] ? t(`common:panels.${TRIGGER_KIND_KEYS[kind]}`) : kind;
 
-const formatLastFired = (iso: string | null): string => {
-  if (!iso) return "Never";
+const formatLastFired = (t: TFunction, iso: string | null): string => {
+  if (!iso) return t("common:panels.never");
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return iso;
   return date.toLocaleString();
 };
 
 /** Text on the workflow-level switch — honest about what we actually know. */
-const SWITCH_DESCRIPTIONS: Readonly<Record<ActivationState, string>> = {
-  loading: "Checking trigger status…",
-  error: "Could not load trigger status. Check your connection and retry.",
-  unregistered:
-    "Save the workflow first — activation needs a saved trigger registration.",
-  inactive: "Listens for events and starts a run per event.",
-  mixed: "Some triggers are armed. Turn this on to arm the rest.",
-  active: "Listens for events and starts a run per event."
+const SWITCH_DESCRIPTION_KEYS: Readonly<Record<ActivationState, string>> = {
+  loading: "switchChecking",
+  error: "switchLoadError",
+  unregistered: "switchUnregistered",
+  inactive: "switchListens",
+  mixed: "switchMixed",
+  active: "switchListens"
 };
 
-const STATUS_LABELS: Readonly<Record<ActivationState, string>> = {
-  loading: "Loading",
-  error: "Unavailable",
-  unregistered: "Not registered",
-  inactive: "Inactive",
-  mixed: "Partly active",
-  active: "Active"
+const STATUS_LABEL_KEYS: Readonly<Record<ActivationState, string>> = {
+  loading: "stateLoading",
+  error: "stateUnavailable",
+  unregistered: "stateNotRegistered",
+  inactive: "stateInactive",
+  mixed: "stateMixed",
+  active: "stateActive"
 };
 
 const STATUS_KINDS: Readonly<
@@ -164,8 +165,8 @@ const WebhookDeliveryDetails: React.FC<WebhookDeliveryDetailsProps> = ({
               <VisibilityIcon fontSize="small" />
             )
           }
-          tooltip={revealed ? "Hide secret" : "Show secret"}
-          ariaLabel={revealed ? "Hide webhook secret" : "Show webhook secret"}
+          tooltip={revealed ? t("common:panels.hideSecret") : t("common:panels.showSecret")}
+          ariaLabel={revealed ? t("common:panels.hideWebhookSecret") : t("common:panels.showWebhookSecret")}
           onClick={() => setRevealed((r) => !r)}
         />
         <CopyButton value={webhookSecret} tooltip={t("common:panels.copyWebhookSecret")} />
@@ -280,12 +281,13 @@ const TriggerActivationButton: React.FC = () => {
     return null;
   }
 
-  const buttonState = rows.some((r) => r.disabled_reason)
-    ? `${STATUS_LABELS[state].toLowerCase()}, disabled automatically`
+  // Lowercase matches the pre-i18n label ("Triggers: active"); no-op for CJK.
+  const stateLabel = t(`common:panels.${STATUS_LABEL_KEYS[state]}`).toLowerCase();
+  const buttonLabel = rows.some((r) => r.disabled_reason)
+    ? t("common:panels.triggersButtonStateDisabled", { state: stateLabel })
     : hasError && (state === "active" || state === "mixed")
-      ? `${STATUS_LABELS[state].toLowerCase()}, last run failed`
-      : STATUS_LABELS[state].toLowerCase();
-  const buttonLabel = `Triggers: ${buttonState}`;
+      ? t("common:panels.triggersButtonStateFailed", { state: stateLabel })
+      : t("common:panels.triggersButtonState", { state: stateLabel });
 
   return (
     <>
@@ -316,17 +318,17 @@ const TriggerActivationButton: React.FC = () => {
           aria-label={t("common:panels.triggerStatus")}
         >
           <FlexRow justify="space-between" align="center">
-            <Text size="big">Triggers</Text>
+            <Text size="big">{t("common:panels.triggers")}</Text>
             <StatusIndicator
               status={STATUS_KINDS[state]}
-              label={STATUS_LABELS[state]}
+              label={t(`common:panels.${STATUS_LABEL_KEYS[state]}`)}
               size="small"
             />
           </FlexRow>
 
           <LabeledSwitch
             label={t("common:panels.workflowActive")}
-            description={SWITCH_DESCRIPTIONS[state]}
+            description={t(`common:panels.${SWITCH_DESCRIPTION_KEYS[state]}`)}
             checked={state === "active"}
             onChange={(next) => {
               void handleToggle(next);
@@ -355,14 +357,14 @@ const TriggerActivationButton: React.FC = () => {
                   key={nodeId}
                   gap={SPACING.xs}
                   role="group"
-                  aria-label={`${kindLabel(kind)} trigger ${nodeId}`}
+                  aria-label={t("common:panels.triggerGroupAria", { kind: kindLabel(t, kind), id: nodeId })}
                   sx={{
                     borderRadius: BORDER_RADIUS.md,
                     padding: SPACING.md
                   }}
                 >
                   <FlexRow justify="space-between" align="center">
-                    <Label>{kindLabel(kind)}</Label>
+                    <Label>{kindLabel(t, kind)}</Label>
                     <StatusIndicator
                       status={
                         reg?.enabled
@@ -373,17 +375,17 @@ const TriggerActivationButton: React.FC = () => {
                       }
                       label={
                         reg?.enabled
-                          ? "Active"
+                          ? t("common:panels.triggerActive")
                           : stoppedBecause
-                            ? "Stopped"
-                            : "Inactive"
+                            ? t("common:panels.triggerStopped")
+                            : t("common:panels.triggerInactive")
                       }
                       size="small"
                     />
                   </FlexRow>
                   <LabeledSwitch
                     size="small"
-                    label="Enabled"
+                    label={t("common:panels.triggerEnabled")}
                     checked={Boolean(reg?.enabled)}
                     disabled={!reg}
                     onChange={(next) => reg && handleRowToggle(reg.id, next)}
@@ -392,22 +394,22 @@ const TriggerActivationButton: React.FC = () => {
                   {isLoading && <Caption>{t("common:panels.checkingStatus")}</Caption>}
                   {isError && (
                     <Caption color="error">
-                      Could not load trigger status.
+                      {t("common:panels.triggerLoadError")}
                     </Caption>
                   )}
                   {schedule && <Caption>{schedule}</Caption>}
                   {!isLoading && !isError && (
                     <Caption>
-                      Last fired: {formatLastFired(reg?.last_fired_at ?? null)}
+                      {t("common:panels.lastFired", { time: formatLastFired(t, reg?.last_fired_at ?? null) })}
                     </Caption>
                   )}
                   {stoppedBecause && (
                     <Caption color="error">
-                      {stoppedBecause} Turn it back on to retry.
+                      {stoppedBecause} {t("common:panels.triggerRetryHint")}
                     </Caption>
                   )}
                   {reg?.last_error && (
-                    <Caption color="error">Last error: {reg.last_error}</Caption>
+                    <Caption color="error">{t("common:panels.lastError", { message: reg.last_error })}</Caption>
                   )}
                   {kind === "webhook" &&
                     reg?.webhook_token &&
@@ -423,7 +425,7 @@ const TriggerActivationButton: React.FC = () => {
                       disabled={!reg?.enabled || fireTrigger.isPending}
                       onClick={() => reg && handleFire(reg.id)}
                     >
-                      Fire now
+                      {t("common:panels.fireNow")}
                     </EditorButton>
                   </FlexRow>
                 </FlexColumn>

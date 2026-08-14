@@ -102,7 +102,7 @@ const HardwareCard: React.FC<HardwareCardProps> = ({ profile }) => {
           <FlexColumn sx={{ minWidth: 0 }}>
             <FlexRow gap={SPACING.xs} align="center" sx={{ flexWrap: "wrap" }}>
               <Text size="normal" weight={600}>
-                Your machine
+                {t("huggingface:hardware.yourMachine")}
               </Text>
               {profile.tier && (
                 <Chip label={TIER_LABELS[profile.tier]} compact variant="outlined" />
@@ -138,7 +138,7 @@ const HardwareCard: React.FC<HardwareCardProps> = ({ profile }) => {
           />
           <FlexColumn gap={SPACING.micro} sx={{ minWidth: 128 }}>
             <Caption sx={{ opacity: 0.55, whiteSpace: "nowrap" }}>
-              GPU memory
+              {t("huggingface:hardware.gpuMemory")}
             </Caption>
             <SelectField
               label={t("huggingface:hardware.gpuMemoryBudget")}

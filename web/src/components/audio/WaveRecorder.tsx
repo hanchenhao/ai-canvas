@@ -145,7 +145,7 @@ const WaveRecorder = (props: WaveRecorderProps) => {
                   color: "var(--palette-grey-100)"
                 }}
               >
-                Input Device
+                {t("common:audio.inputDevice")}
               </Text>
               <div
                 className={`device-select${
@@ -176,7 +176,7 @@ const WaveRecorder = (props: WaveRecorderProps) => {
                 left: "0.5em"
               }}
             >
-              No audio input devices found.
+              {t("common:audio.noAudioInputDevices")}
             </Text>
           )}
         </div>

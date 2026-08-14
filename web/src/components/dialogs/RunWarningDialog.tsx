@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useCallback, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { useRunWarningStore } from "../../stores/RunWarningStore";
 import { Dialog, Checkbox, Text, FlexColumn } from "../ui_primitives";
 
@@ -9,6 +10,7 @@ import { Dialog, Checkbox, Text, FlexColumn } from "../ui_primitives";
  * by {@link useRunWarningStore}.
  */
 const RunWarningDialog: React.FC = () => {
+  const { t } = useTranslation("common");
   const open = useRunWarningStore((s) => s.open);
   const kind = useRunWarningStore((s) => s.kind);
   const heavyCount = useRunWarningStore((s) => s.heavyCount);
@@ -36,31 +38,41 @@ const RunWarningDialog: React.FC = () => {
     <Dialog
       open={open}
       onClose={handleCancel}
-      title={isConcurrent ? "Start another run?" : "Run this workflow?"}
+      title={
+        isConcurrent
+          ? t("common:dialogs.runWarningConcurrentTitle")
+          : t("common:dialogs.runWarningHeavyTitle")
+      }
       onConfirm={handleConfirm}
       onCancel={handleCancel}
-      confirmText={isConcurrent ? "Start second run" : "Run anyway"}
-      cancelText="Cancel"
+      confirmText={
+        isConcurrent
+          ? t("common:dialogs.runWarningConcurrentConfirm")
+          : t("common:dialogs.runWarningHeavyConfirm")
+      }
+      cancelText={t("common:button.cancel")}
       content={
         <FlexColumn gap={1.5}>
           {isConcurrent ? (
             <Text>
-              This workflow is <strong>already running</strong>. Starting
-              another run will execute both at the same time — for realtime
-              audio patches that means overlapping sound. Stop the current run
-              first if you meant to restart it.
+              <Trans
+                ns="common"
+                i18nKey="dialogs.runWarningConcurrentContent"
+                components={{ strong: <strong /> }}
+              />
             </Text>
           ) : (
             <>
               <Text>
-                This run will execute{" "}
-                <strong>{heavyCount} model/provider nodes</strong> — above the
-                warning threshold of {threshold}. Each may call an external API
-                or run a model, so running them all at once can be slow or hit
-                provider rate limits.
+                <Trans
+                  ns="common"
+                  i18nKey="dialogs.runWarningHeavyContent"
+                  values={{ count: heavyCount, threshold }}
+                  components={{ strong: <strong /> }}
+                />
               </Text>
               <Checkbox
-                label="Don't ask again for this session"
+                label={t("common:dialogs.dontAskAgainSession")}
                 checked={dontAskAgain}
                 onChange={(_event, checked) => setDontAskAgain(checked)}
               />

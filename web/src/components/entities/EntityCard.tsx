@@ -69,7 +69,7 @@ const EntityCardInternal: React.FC<EntityCardProps> = ({
               sx={{ width: "100%", height: "100%" }}
             >
               <Caption sx={{ color: theme.vars.palette.text.disabled }}>
-                No image
+                {t("common:entities.noImage")}
               </Caption>
             </FlexRow>
           }

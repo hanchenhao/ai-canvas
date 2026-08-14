@@ -222,7 +222,7 @@ const LayerItem: React.FC<LayerItemProps> = ({
         {isGroup ? (
           <IconButton
             size="small"
-            aria-label={layer.collapsed ? "Expand group" : "Collapse group"}
+            aria-label={layer.collapsed ? t("sketch:layerItem.expandGroup") : t("sketch:layerItem.collapseGroup")}
             onClick={(e) => {
               e.stopPropagation();
               onToggleGroupCollapsed?.(layer.id);
@@ -303,14 +303,14 @@ const LayerItem: React.FC<LayerItemProps> = ({
 
         {!isGroup && (
           <Tooltip
-            title={isIsolated ? "Show all layers" : "Solo this layer"}
+            title={isIsolated ? t("sketch:layerItem.showAllLayers") : t("sketch:layerItem.soloLayer")}
             placement="top"
             enterDelay={SKETCH_TOOLTIP_DELAY_MS}
             enterNextDelay={SKETCH_TOOLTIP_DELAY_MS}
           >
             <IconButton
               size="small"
-              aria-label={isIsolated ? "Show all layers" : "Solo this layer"}
+              aria-label={isIsolated ? t("sketch:layerItem.showAllLayers") : t("sketch:layerItem.soloLayer")}
               onClick={(e) => {
                 e.stopPropagation();
                 onToggleIsolateLayer(layer.id);
@@ -448,7 +448,7 @@ const LayerItem: React.FC<LayerItemProps> = ({
             }}
           >
             <Tooltip
-              title={layer.exposedAsInput === false ? "Input hidden" : ""}
+              title={layer.exposedAsInput === false ? t("sketch:layerItem.inputHidden") : ""}
               placement="left"
               disableHoverListener={layer.exposedAsInput !== false}
               enterDelay={SKETCH_TOOLTIP_DELAY_MS}
@@ -468,7 +468,7 @@ const LayerItem: React.FC<LayerItemProps> = ({
               />
             </Tooltip>
             <Tooltip
-              title={layer.exposedAsOutput === false ? "Output hidden" : ""}
+              title={layer.exposedAsOutput === false ? t("sketch:layerItem.outputHidden") : ""}
               placement="left"
               disableHoverListener={layer.exposedAsOutput !== false}
               enterDelay={SKETCH_TOOLTIP_DELAY_MS}
@@ -495,7 +495,7 @@ const LayerItem: React.FC<LayerItemProps> = ({
           <IconButton
             size="small"
             disableRipple
-            aria-label={`${layer.visible ? "Hide" : "Show"} ${layer.name}`}
+            aria-label={t(layer.visible ? "sketch:layerItem.hideLayerAria" : "sketch:layerItem.showLayerAria", { name: layer.name })}
             onPointerDown={(e) =>
               onVisibilityButtonMouseDown(e, layer.id)
             }

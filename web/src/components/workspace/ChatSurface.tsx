@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
 
 import { FlexColumn, Text } from "../ui_primitives";
@@ -29,6 +30,7 @@ const NO_MESSAGES: Message[] = [];
  * the focused tab.
  */
 const ChatSurface = ({ refId, active }: ChatSurfaceProps) => {
+  const { t } = useTranslation("workspace");
   const [notFound, setNotFound] = useState(false);
 
   const runtime = useThreadRuntime(refId);
@@ -192,7 +194,7 @@ const ChatSurface = ({ refId, active }: ChatSurfaceProps) => {
     return (
       <FlexColumn fullWidth fullHeight align="center" justify="center">
         <Text size="normal" weight={600}>
-          Conversation not found
+          {t("workspace:chat.conversationNotFound")}
         </Text>
       </FlexColumn>
     );

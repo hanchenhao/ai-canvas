@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo, useRef, memo } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 
 import {
@@ -24,6 +25,7 @@ interface LlamaModelSelectProps {
 }
 
 const LlamaModelSelect = ({ onChange, value }: LlamaModelSelectProps) => {
+  const { t } = useTranslation("properties");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const open = Boolean(anchorEl);
@@ -79,8 +81,8 @@ const LlamaModelSelect = ({ onChange, value }: LlamaModelSelectProps) => {
       <ModelSelectButton
         ref={buttonRef}
         active={!!value}
-        label={currentSelectedModelDetails?.name || value || "Select Model"}
-        subLabel="Select Model"
+        label={currentSelectedModelDetails?.name || value || t("properties:modelSelect.selectModel")}
+        subLabel={t("properties:modelSelect.selectModel")}
         onClick={handleClick}
       />
       <EditorMenu
@@ -110,7 +112,7 @@ const LlamaModelSelect = ({ onChange, value }: LlamaModelSelectProps) => {
         ) : ollamaError ? (
           <div style={{ padding: getSpacingPx(SPACING.md), maxWidth: 300 }}>
             <Text size="small" color="error" sx={{ mb: 1 }}>
-              Could not load Ollama models
+              {t("properties:couldNotLoadOllamaModels")}
             </Text>
             <Caption
               color="secondary"
@@ -142,7 +144,7 @@ const LlamaModelSelect = ({ onChange, value }: LlamaModelSelectProps) => {
           </div>
         ) : sortedModels.length === 0 ? (
           <EditorMenuItem disabled>
-            <ListItemText primary="No models available" />
+            <ListItemText primary={t("properties:noModelsAvailable")} />
           </EditorMenuItem>
         ) : (
           sortedModels.map((model) => (

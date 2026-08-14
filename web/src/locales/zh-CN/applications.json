@@ -221,6 +221,9 @@
     "generate": "生成",
     "replaceTitle": "替换应用布局？",
     "replaceContent": "根据工作流生成会用对应每个输入和输出的组件替换当前布局，之后可以撤销。",
-    "replaceConfirm": "替换"
+    "replaceConfirm": "替换",
+    "agentTitle": "应用构建助手",
+    "appData": "应用数据",
+    "askAgent": "询问智能体"
   }
 }

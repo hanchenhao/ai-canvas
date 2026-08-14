@@ -290,7 +290,7 @@ const ScriptLineRow = ({
         value={line.text}
         onChange={onTextChange}
         onKeyDown={onTextKeyDown}
-        placeholder="Write a line…"
+        placeholder={t("common:script.writeLinePlaceholder")}
         multiline
         hideLabel
         label={t("common:script.lineText")}
@@ -308,9 +308,9 @@ const ScriptLineRow = ({
           autoFocus={!hasDirection}
           value={line.direction ?? ""}
           onChange={onDirectionChange}
-          placeholder="Direction (e.g. whispering, tired)…"
+          placeholder={t("common:script.directionPlaceholder")}
           hideLabel
-          label="Direction"
+          label={t("common:script.direction")}
           compact
           fullWidth
           disabled={readOnly}
@@ -373,7 +373,7 @@ const ScriptLineRow = ({
           <span>
             <ToolbarIconButton
               tooltip=""
-              ariaLabel="Voice line"
+              ariaLabel={t("common:script.voiceLine")}
               disabled={readOnly || !voice}
               onClick={() => void onVoice()}
               icon={<GraphicEqIcon fontSize="small" />}

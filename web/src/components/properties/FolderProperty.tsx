@@ -175,7 +175,7 @@ const FolderProperty = (props: PropertyProps) => {
         <DialogActionButtons
           onCancel={handleCloseMenu}
           onConfirm={handleCreateFolder}
-          confirmText="Create Folder"
+          confirmText={t("properties:createFolder")}
         />
       </Popover>
     </>

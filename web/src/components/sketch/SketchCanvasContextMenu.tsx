@@ -396,8 +396,8 @@ const SketchCanvasContextMenu: React.FC<SketchCanvasContextMenuProps> = ({
    if (isShapeTool(activeTool)) {
       return (
         <FlexRow gap={1}>
-          <ColorPreview label="Stroke" color={shapeSettings.strokeColor} />
-          <ColorPreview label="Fill" color={shapeSettings.fillColor} />
+          <ColorPreview label={t("sketch:shapePanel.stroke")} color={shapeSettings.strokeColor} />
+          <ColorPreview label={t("sketch:shapePanel.fill")} color={shapeSettings.fillColor} />
         </FlexRow>
       );
     }
@@ -405,16 +405,16 @@ const SketchCanvasContextMenu: React.FC<SketchCanvasContextMenuProps> = ({
     if (activeTool === "gradient") {
       return (
         <FlexRow gap={1}>
-          <ColorPreview label="Start" color={gradientSettings.startColor} />
-          <ColorPreview label="End" color={gradientSettings.endColor} />
+          <ColorPreview label={t("sketch:gradientPanel.start")} color={gradientSettings.startColor} />
+          <ColorPreview label={t("sketch:gradientPanel.end")} color={gradientSettings.endColor} />
         </FlexRow>
       );
     }
 
     return (
       <FlexRow gap={1} align="center">
-        <ColorPreview label="FG" color={foregroundColor} />
-        <ColorPreview label="BG" color={backgroundColor} />
+        <ColorPreview label={t("sketch:canvasContextMenu.fg")} color={foregroundColor} />
+        <ColorPreview label={t("sketch:canvasContextMenu.bg")} color={backgroundColor} />
         <ToolbarIconButton
           icon={<SwapHorizIcon sx={{ fontSize: 18 }} />}
           onClick={onSwapColors}
@@ -636,18 +636,18 @@ const SketchCanvasContextMenu: React.FC<SketchCanvasContextMenuProps> = ({
                   px: 0
                 }}
               >
-                <SectionLabel>Selection</SectionLabel>
+                <SectionLabel>{t("sketch:canvasContextMenu.selectionSection")}</SectionLabel>
                 <FlexColumn gap={0.3}>
                   <SelectionMenuItem
                     icon={<DeselectIcon sx={{ fontSize: 16 }} />}
-                    label="Deselect"
+                    label={t("sketch:canvasContextMenu.deselect")}
                     shortcut={displayCombo("deselect")}
                     disabled={!hasActiveSelection}
                     onClick={() => { onDeselectSelection(); onClose(); }}
                   />
                   <SelectionMenuItem
                     icon={<RestoreIcon sx={{ fontSize: 16 }} />}
-                    label="Reselect"
+                    label={t("sketch:canvasContextMenu.reselect")}
                     shortcut={displayCombo("reselect")}
                     onClick={() => { onReselectSelection(); onClose(); }}
                   />
@@ -675,13 +675,13 @@ const SketchCanvasContextMenu: React.FC<SketchCanvasContextMenuProps> = ({
                   <Divider sx={{ my: 0.5, borderColor: surfaceSoft }} />
                   <SelectionMenuItem
                     icon={<FormatColorFillIcon sx={{ fontSize: 16 }} />}
-                    label="Fill"
+                    label={t("sketch:shapePanel.fill")}
                     disabled={!hasActiveSelection}
                     onClick={() => { onFillSelectionWithForeground(); onClose(); }}
                   />
                   <SelectionMenuItem
                     icon={<HighlightAltIcon sx={{ fontSize: 16 }} />}
-                    label="Stroke"
+                    label={t("sketch:shapePanel.stroke")}
                     disabled={!hasActiveSelection}
                     onClick={() => { onStrokeSelectionWithForeground(); onClose(); }}
                   />
@@ -700,7 +700,7 @@ const SketchCanvasContextMenu: React.FC<SketchCanvasContextMenuProps> = ({
               py: 1
             }}
           >
-            <SectionLabel>Tools</SectionLabel>
+            <SectionLabel>{t("sketch:canvasContextMenu.toolsSection")}</SectionLabel>
             <FlexColumn
               gap={0.75}
               className="sketch-context-menu__tools-groups"

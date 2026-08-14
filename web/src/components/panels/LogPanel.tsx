@@ -108,7 +108,7 @@ const LogPanel: React.FC = memo(function LogPanel() {
       className={isFullscreen ? "fullscreen" : undefined}
     >
       <PanelToolbar
-        title="Logs"
+        title={t("common:panels.logs")}
         count={filteredRows.length}
         actions={
           <ToolbarIconButton
@@ -119,9 +119,9 @@ const LogPanel: React.FC = memo(function LogPanel() {
                 <FullscreenIcon fontSize="small" />
               )
             }
-            tooltip={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+            tooltip={isFullscreen ? t("common:panels.exitFullscreen") : t("common:panels.fullscreen")}
             onClick={handleFullscreenToggle}
-            ariaLabel="Toggle fullscreen"
+            ariaLabel={t("common:panels.toggleFullscreen")}
           />
         }
       >

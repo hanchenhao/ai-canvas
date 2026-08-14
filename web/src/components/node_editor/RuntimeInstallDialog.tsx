@@ -188,7 +188,7 @@ const RuntimeInstallDialog: React.FC<RuntimeInstallDialogProps> = ({
       onConfirm={allInstalled ? onClose : handleInstall}
       onCancel={onClose}
       confirmText={confirmText}
-      cancelText="Later"
+      cancelText={t("common:button.later")}
       isLoading={installing}
     >
       <FlexColumn gap={2}>
@@ -230,7 +230,7 @@ const RuntimeInstallDialog: React.FC<RuntimeInstallDialogProps> = ({
               }}
             />
             <Text size="smaller" color="success">
-              All runtimes installed. You can run this workflow now.
+              {t("canvas:runtimeInstall.allInstalled")}
             </Text>
           </FlexRow>
         )}
@@ -251,7 +251,7 @@ const RuntimeInstallDialog: React.FC<RuntimeInstallDialogProps> = ({
               opacity: installing ? 0.5 : 1,
             }}
           >
-            Open Package Manager instead
+            {t("canvas:runtimeInstall.openPackageManager")}
           </Text>
         )}
       </FlexColumn>

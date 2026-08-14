@@ -3,6 +3,7 @@
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 import { memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import useAuth from "../../stores/useAuth";
 
 const styles = (_theme: Theme) => ({
@@ -14,6 +15,7 @@ const styles = (_theme: Theme) => ({
 const GoogleAuthButton = memo(function GoogleAuthButton() {
   const signInWithProvider = useAuth((state) => state.signInWithProvider);
   const state = useAuth((state) => state.state);
+  const { t } = useTranslation("common");
   const handleClick = useCallback(async () => {
     if (state === "loading" || state === "logged_in") {return;}
     await signInWithProvider("google");
@@ -51,7 +53,7 @@ const GoogleAuthButton = memo(function GoogleAuthButton() {
             </svg>
           </div>
           <span className="gsi-material-button-contents">
-            Sign in with Google
+            {t("common:menus.signInWithGoogle")}
           </span>
         </div>
       </button>

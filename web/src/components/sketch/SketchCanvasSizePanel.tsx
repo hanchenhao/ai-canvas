@@ -232,7 +232,7 @@ const SketchCanvasSizePanel: React.FC<SketchCanvasSizePanelProps> = ({
     <FlexColumn className="sketch-canvas-size-panel" padding={1} gap={1}>
       <FlexRow align="center" justify="space-between" sx={{ minHeight: 32 }}>
         <Text sx={{ fontSize: SKETCH_FONT.sm, color: SKETCH_COLORS.textMuted }}>
-          Resize handles
+          {t("sketch:canvasSize.resizeHandles")}
         </Text>
         <Tooltip
           title={
@@ -305,7 +305,7 @@ const SketchCanvasSizePanel: React.FC<SketchCanvasSizePanelProps> = ({
 
       <FlexColumn gap={0.5} sx={{ mt: 2 }}>
         <Text sx={{ fontSize: SKETCH_FONT.sm, color: SKETCH_COLORS.textMuted }}>
-          Aspect &amp; resolution
+          {t("sketch:canvasSize.aspectAndResolution")}
         </Text>
         <FlexRow align="center" gap={0.5}>
           <MediaControlChip
@@ -345,7 +345,7 @@ const SketchCanvasSizePanel: React.FC<SketchCanvasSizePanelProps> = ({
       <FlexRow align="center" gap={0.5} sx={{ mt: 4 }}>
         <TextField
           size="small"
-          label="W"
+          label={t("sketch:canvasSize.width")}
           type="number"
           value={customWidth}
           onChange={(e) => setCustomWidth(e.target.value)}
@@ -357,7 +357,7 @@ const SketchCanvasSizePanel: React.FC<SketchCanvasSizePanelProps> = ({
         </Text>
         <TextField
           size="small"
-          label="H"
+          label={t("sketch:canvasSize.height")}
           type="number"
           value={customHeight}
           onChange={(e) => setCustomHeight(e.target.value)}

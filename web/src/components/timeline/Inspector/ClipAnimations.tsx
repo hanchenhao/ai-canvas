@@ -46,20 +46,16 @@ const EASINGS: EasingId[] = [
 ];
 const EMPTY_ANIMATIONS: ClipAnimation[] = [];
 
-const ROLE_LABELS: Record<AnimationRole, string> = {
-  in: "In",
-  out: "Out",
-  emphasis: "Emphasis",
-  loop: "Loop"
+const ROLE_LABEL_KEYS: Record<AnimationRole, string> = {
+  in: "timeline:clip.roleIn",
+  out: "timeline:clip.roleOut",
+  emphasis: "timeline:clip.roleEmphasis",
+  loop: "timeline:clip.roleLoop"
 };
 
 const EASING_OPTIONS = EASINGS.map((easing) => ({
   value: easing,
   label: easing
-}));
-const ROLE_OPTIONS = ROLES.map((role) => ({
-  value: role,
-  label: ROLE_LABELS[role]
 }));
 
 function presetsForRole(role: AnimationRole): readonly AnimationPreset[] {
@@ -166,6 +162,7 @@ const ClipAnimationEditor: React.FC<ClipAnimationEditorProps> = ({
   const preset = ANIMATION_PRESETS.find(
     (candidate) => candidate.id === animation.preset
   );
+  const roleLabel = t(ROLE_LABEL_KEYS[animation.role]);
   const handlePresetChange = useCallback(
     (value: string) => {
       const next = presetsForRole(animation.role).find(
@@ -197,25 +194,25 @@ const ClipAnimationEditor: React.FC<ClipAnimationEditorProps> = ({
       }}
     >
       <FlexRow align="center" justify="space-between" gap={SPACING.md}>
-        <Text size="small">{ROLE_LABELS[animation.role]}</Text>
+        <Text size="small">{roleLabel}</Text>
         <DeleteButton
           onClick={onDelete}
-          tooltip={`Remove ${ROLE_LABELS[animation.role]} animation`}
-          ariaLabel={`Remove ${ROLE_LABELS[animation.role]} animation`}
+          tooltip={t("timeline:clip.removeAnimation", { role: roleLabel })}
+          ariaLabel={t("timeline:clip.removeAnimation", { role: roleLabel })}
           iconVariant="clear"
           sx={{ width: 24, height: 24 }}
         />
       </FlexRow>
 
       <InspectorToggleRow
-        label="Enabled"
+        label={t("timeline:clip.enabled")}
         checked={animation.enabled !== false}
         onChange={(enabled) => onPatch({ enabled })}
       />
 
-      <InspectorRow label="Preset">
+      <InspectorRow label={t("timeline:clip.preset")}>
         <InspectorSelect
-          label={`${animation.role} animation preset`}
+          label={t("timeline:clip.animationPresetAria", { role: roleLabel })}
           value={animation.preset}
           options={rolePresets.map((candidate) => ({
             value: candidate.id,
@@ -228,7 +225,11 @@ const ClipAnimationEditor: React.FC<ClipAnimationEditorProps> = ({
       {!preset?.fullClip && (
         <>
           <InspectorRow
-            label={animation.role === "loop" ? "Period" : "Duration"}
+            label={
+              animation.role === "loop"
+                ? t("timeline:clip.period")
+                : t("timeline:inspector.duration")
+            }
           >
             <InspectorPillInput
               value={String(animation.durationMs)}
@@ -239,10 +240,12 @@ const ClipAnimationEditor: React.FC<ClipAnimationEditorProps> = ({
                   onPatch({ durationMs });
                 }
               }}
-              ariaLabel={`${animation.role} animation duration`}
+              ariaLabel={t("timeline:clip.animationDurationAria", {
+                role: roleLabel
+              })}
             />
           </InspectorRow>
-          <InspectorRow label="Delay">
+          <InspectorRow label={t("timeline:clip.delay")}>
             <InspectorPillInput
               value={String(animation.delayMs ?? 0)}
               unit="ms"
@@ -252,15 +255,17 @@ const ClipAnimationEditor: React.FC<ClipAnimationEditorProps> = ({
                   onPatch({ delayMs });
                 }
               }}
-              ariaLabel={`${animation.role} animation delay`}
+              ariaLabel={t("timeline:clip.animationDelayAria", {
+                role: roleLabel
+              })}
             />
           </InspectorRow>
         </>
       )}
 
-      <InspectorRow label="Easing">
+      <InspectorRow label={t("timeline:clip.easing")}>
         <InspectorSelect
-          label={`${animation.role} animation easing`}
+          label={t("timeline:clip.animationEasingAria", { role: roleLabel })}
           value={animation.easing ?? preset?.defaultEasing ?? "linear"}
           options={EASING_OPTIONS}
           onChange={(value) => onPatch({ easing: value as EasingId })}
@@ -293,7 +298,9 @@ const ClipAnimationEditor: React.FC<ClipAnimationEditorProps> = ({
                     });
                   }
                 }}
-                ariaLabel={`${animation.role} animation word stagger offset`}
+                ariaLabel={t("timeline:clip.staggerOffsetAria", {
+                  role: roleLabel
+                })}
               />
             </InspectorRow>
           )}
@@ -376,7 +383,7 @@ export const ClipAnimations: React.FC<ClipAnimationsProps> = ({ clip }) => {
       <CollapsibleSection
         title={
           <InspectorSectionTitle
-            title="Animate"
+            title={t("timeline:clip.sectionAnimate")}
             icon={<AnimationOutlinedIcon />}
           />
         }
@@ -389,7 +396,10 @@ export const ClipAnimations: React.FC<ClipAnimationsProps> = ({ clip }) => {
             <InspectorSelect
               label={t("timeline:clip.newAnimationRole")}
               value={newRole}
-              options={ROLE_OPTIONS}
+              options={ROLES.map((role) => ({
+                value: role,
+                label: t(ROLE_LABEL_KEYS[role])
+              }))}
               onChange={handleRoleChange}
               grow
             />
@@ -411,13 +421,13 @@ export const ClipAnimations: React.FC<ClipAnimationsProps> = ({ clip }) => {
               startIcon={<AddOutlinedIcon />}
               onClick={handleAdd}
             >
-              Add
+              {t("timeline:clip.addAnimation")}
             </Button>
           </FlexRow>
 
           {animations.length === 0 ? (
             <Caption color="muted">
-              Add an entrance, exit, emphasis, or loop preset.
+              {t("timeline:clip.addAnimationHint")}
             </Caption>
           ) : (
             groupedAnimations.map((animation) => (

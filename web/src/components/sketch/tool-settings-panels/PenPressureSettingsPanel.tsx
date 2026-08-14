@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   FlexRow,
@@ -40,6 +41,7 @@ export const PenPressureSettingsPanel = memo(function PenPressureSettingsPanel({
   omitSensitivitySwitch = false,
   inlineRow = false
 }: PenPressureSettingsPanelProps) {
+  const { t } = useTranslation("sketch");
   const affectsGroup = (
     <SketchModeToggle
       value={settings.pressureAffects || "both"}
@@ -51,9 +53,9 @@ export const PenPressureSettingsPanel = memo(function PenPressureSettingsPanel({
         }
       }}
     >
-      <SketchModeOption value="size">Size</SketchModeOption>
-      <SketchModeOption value="opacity">Opacity</SketchModeOption>
-      <SketchModeOption value="both">Both</SketchModeOption>
+      <SketchModeOption value="size">{t("sketch:penPressure.affectsSize")}</SketchModeOption>
+      <SketchModeOption value="opacity">{t("sketch:penPressure.affectsOpacity")}</SketchModeOption>
+      <SketchModeOption value="both">{t("sketch:penPressure.affectsBoth")}</SketchModeOption>
     </SketchModeToggle>
   );
 
@@ -66,9 +68,9 @@ export const PenPressureSettingsPanel = memo(function PenPressureSettingsPanel({
     <Box className="setting-row">
       <Text
         className="setting-label"
-        title="Size/opacity at minimum pressure. Slider uses eased mapping so the upper range is easier to dial in."
+        title={t("sketch:penPressure.lightEndTooltip")}
       >
-        Light end
+        {t("sketch:penPressure.lightEnd")}
       </Text>
       <Slider
         sx={sketchSliderSx}
@@ -95,9 +97,9 @@ export const PenPressureSettingsPanel = memo(function PenPressureSettingsPanel({
     <Box className="setting-row">
       <Text
         className="setting-label"
-        title="Pressure exponent before mapping: 1 = linear; higher = need firmer pressure for full size"
+        title={t("sketch:penPressure.curveTooltip")}
       >
-        Curve
+        {t("sketch:penPressure.curve")}
       </Text>
       <Slider
         sx={sketchSliderSx}
@@ -142,7 +144,7 @@ export const PenPressureSettingsPanel = memo(function PenPressureSettingsPanel({
     <>
       {!omitSensitivitySwitch ? (
         <Box className="setting-row" sx={{ alignItems: "center" }}>
-          <Text className="setting-label">Pressure</Text>
+          <Text className="setting-label">{t("sketch:penPressure.pressure")}</Text>
           <Switch
             size="small"
             checked={settings.pressureSensitivity ?? true}

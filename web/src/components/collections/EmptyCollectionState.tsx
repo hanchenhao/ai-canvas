@@ -40,7 +40,6 @@ const EmptyCollectionState = () => {
           <Trans
             i18nKey="collections:empty.nodeList"
             components={{ strong: <strong /> }}
-            defaults="Key nodes include <strong>Index Image</strong> and <strong>Index Text Chunk</strong> for populating data, and <strong>Query Image</strong>, <strong>Query Text</strong>, or <strong>Hybrid Search</strong> for retrieval."
           />
         </Text>
       </FlexColumn>

@@ -110,14 +110,14 @@ const TransformContextMenu: React.FC<TransformContextMenuProps> = ({
             color: "text.primary"
           }}
         >
-          Free Transform
+          {t("sketch:transformMenu.freeTransform")}
         </Text>
       </FlexRow>
 
       <Divider sx={{ mx: 1, borderColor: theme.vars.palette.grey[800] }} />
 
       <MenuItemPrimitive
-        label="Commit"
+        label={t("sketch:transformMenu.commit")}
         icon={<CheckIcon sx={{ fontSize: 16, color: "success.main" }} />}
         shortcut="Enter"
         compact
@@ -127,7 +127,7 @@ const TransformContextMenu: React.FC<TransformContextMenuProps> = ({
         }}
       />
       <MenuItemPrimitive
-        label="Cancel"
+        label={t("sketch:transformMenu.cancel")}
         icon={<CloseIcon sx={{ fontSize: 16, color: "error.main" }} />}
         shortcut="Esc"
         compact
@@ -137,7 +137,7 @@ const TransformContextMenu: React.FC<TransformContextMenuProps> = ({
         }}
       />
       <MenuItemPrimitive
-        label="Reset"
+        label={t("sketch:transformMenu.reset")}
         icon={<RestartAltIcon sx={{ fontSize: 16 }} />}
         compact
         onClick={() => {
@@ -149,7 +149,7 @@ const TransformContextMenu: React.FC<TransformContextMenuProps> = ({
       <Divider sx={{ mx: 1, my: 0.5, borderColor: theme.vars.palette.grey[800] }} />
 
       <MenuItemPrimitive
-        label="Rotate 180°"
+        label={t("sketch:layerOps.rotate180")}
         icon={<Rotate90DegreesCwIcon sx={{ fontSize: 16 }} />}
         compact
         onClick={() => {
@@ -158,7 +158,7 @@ const TransformContextMenu: React.FC<TransformContextMenuProps> = ({
         }}
       />
       <MenuItemPrimitive
-        label="Rotate 90° CW"
+        label={t("sketch:transformMenu.rotate90Cw")}
         icon={<RotateRightIcon sx={{ fontSize: 16 }} />}
         compact
         onClick={() => {
@@ -167,7 +167,7 @@ const TransformContextMenu: React.FC<TransformContextMenuProps> = ({
         }}
       />
       <MenuItemPrimitive
-        label="Rotate 90° CCW"
+        label={t("sketch:transformMenu.rotate90Ccw")}
         icon={<RotateLeftIcon sx={{ fontSize: 16 }} />}
         compact
         onClick={() => {

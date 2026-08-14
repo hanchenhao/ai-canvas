@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo, useCallback, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -46,6 +47,7 @@ const styles = (_theme: Theme) =>
  * real editor.
  */
 const SketchAgentPanel = () => {
+  const { t } = useTranslation("sketch");
   const theme = useTheme();
   const cssStyles = useMemo(() => styles(theme), [theme]);
 
@@ -131,16 +133,14 @@ const SketchAgentPanel = () => {
       >
         <AutoAwesomeIcon sx={{ fontSize: 40, mb: 1.5, opacity: 0.5 }} />
         <Text size="normal" weight={600} sx={{ mb: 1 }}>
-          Editor Assistant
+          {t("sketch:agentPanel.title")}
         </Text>
         <Text size="small" color="secondary" sx={{ maxWidth: 280 }}>
-          Ask me to edit the image — e.g. &quot;generate a mountain landscape on
-          a new layer&quot;, &quot;add a blank layer filled with black&quot;, or
-          &quot;set the background layer to 50% opacity&quot;.
+          {t("sketch:agentPanel.welcome")}
         </Text>
       </FlexColumn>
     ),
-    []
+    [t]
   );
 
   return (
@@ -148,7 +148,7 @@ const SketchAgentPanel = () => {
       <ChatPanelHeader
         onNewChat={handleNewChat}
         docsTopic="sketches"
-        docsLabel="Sketch editor"
+        docsLabel={t("sketch:agentPanel.docsLabel")}
       />
       <div style={{ flex: 1, minHeight: 0 }}>
         <ChatView

@@ -494,5 +494,9 @@
     "noBinding": "No workflow is bound to this clip.",
     "loadInputsFailed": "Failed to load workflow inputs.",
     "noEditableInputs": "This workflow has no editable input parameters."
+  },
+  "agentPanel": {
+    "title": "Editor Assistant",
+    "welcomeHint": "Ask me to edit the timeline — e.g. \"generate a 5-second clip of a city at night\", \"split the selected clip at the playhead\", or \"fade out the last clip\"."
   }
 }

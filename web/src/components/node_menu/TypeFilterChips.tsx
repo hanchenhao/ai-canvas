@@ -18,6 +18,7 @@ import {
   MuiAutocomplete as Autocomplete
 } from "../ui_primitives";
 import { useTheme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import type { Theme } from "@mui/material/styles";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import useMetadataStore from "../../stores/MetadataStore";
@@ -32,11 +33,11 @@ interface TypeFilterChipsProps {
 }
 
 const TYPE_CATEGORIES = [
-  { value: "image", label: "Image", icon: "image" },
-  { value: "text", label: "Text", icon: "text" },
-  { value: "audio", label: "Audio", icon: "audio" },
-  { value: "video", label: "Video", icon: "video" },
-  { value: "float", label: "Number", icon: "float" }
+  { value: "image", labelKey: "categoryImage", icon: "image" },
+  { value: "text", labelKey: "categoryText", icon: "text" },
+  { value: "audio", labelKey: "categoryAudio", icon: "audio" },
+  { value: "video", labelKey: "categoryVideo", icon: "video" },
+  { value: "float", labelKey: "categoryNumber", icon: "float" }
 ];
 
 const TYPE_CHIP_ICON_CONTAINER_STYLE = { width: 16, height: 16 } as const;
@@ -235,6 +236,7 @@ const TypeFilterChips: React.FC<TypeFilterChipsProps> = memo(
     setSelectedOutputType
   }) => {
     const theme = useTheme();
+    const { t } = useTranslation("canvas");
     const { selectedProviderType, setSelectedProviderType } = useNodeMenuStore(
       useShallow((state) => ({
         selectedProviderType: state.selectedProviderType,
@@ -362,22 +364,24 @@ const TypeFilterChips: React.FC<TypeFilterChipsProps> = memo(
             <Chip
               className={`provider-quick-chip ${selectedProviderType === "local" ? "selected" : ""}`}
               size="small"
-              label="Local"
+              label={t("canvas:typeFilter.local")}
               onClick={handleLocalProviderClick}
             />
             <Chip
               className={`provider-quick-chip ${selectedProviderType === "api" ? "selected" : ""}`}
               size="small"
-              label="API"
+              label={t("canvas:typeFilter.api")}
               onClick={handleApiProviderClick}
             />
           </Box>
-          <span className="quick-label">Output:</span>
+          <span className="quick-label">{t("canvas:typeFilter.outputLabel")}</span>
           <Box className="type-chips filter-section">
             {TYPE_CATEGORIES.map((type) => (
               <Tooltip
                 key={type.value}
-                title={`Filter by ${type.label}`}
+                title={t("canvas:typeFilter.filterByType", {
+                  label: t(`canvas:typeFilter.${type.labelKey}`)
+                })}
                 placement="top"
               >
                 <Chip
@@ -394,7 +398,7 @@ const TypeFilterChips: React.FC<TypeFilterChipsProps> = memo(
                       containerStyle={TYPE_CHIP_ICON_CONTAINER_STYLE}
                     />
                   }
-                  label={type.label}
+                  label={t(`canvas:typeFilter.${type.labelKey}`)}
                   data-type={type.value}
                   onClick={handleTypeChipClick}
                 />
@@ -445,7 +449,7 @@ const TypeFilterChips: React.FC<TypeFilterChipsProps> = memo(
                   marginBottom: "1em"
                 }}
               >
-                Filter nodes by input and output data types
+                {t("canvas:typeFilter.filterHint")}
               </Text>
             </Box>
 
@@ -454,7 +458,7 @@ const TypeFilterChips: React.FC<TypeFilterChipsProps> = memo(
                 marginBottom: "0.25em"
               }}
             >
-              Input Type
+              {t("canvas:typeFilter.inputType")}
             </Text>
             <Autocomplete<TypeOption, false, false, false>
               className="filter-select"
@@ -475,10 +479,10 @@ const TypeFilterChips: React.FC<TypeFilterChipsProps> = memo(
                 <TextField
                   {...params}
                   size="small"
-                  placeholder="Search input type..."
+                  placeholder={t("canvas:typeFilter.searchInputType")}
                   inputProps={{
                     ...params.inputProps,
-                    "aria-label": "Search input type"
+                    "aria-label": t("canvas:typeFilter.searchInputType")
                   }}
                 />
               )}
@@ -505,7 +509,7 @@ const TypeFilterChips: React.FC<TypeFilterChipsProps> = memo(
                 marginBottom: "0.25em"
               }}
             >
-              Output Type
+              {t("canvas:typeFilter.outputType")}
             </Text>
             <Autocomplete<TypeOption, false, false, false>
               className="filter-select"
@@ -526,10 +530,10 @@ const TypeFilterChips: React.FC<TypeFilterChipsProps> = memo(
                 <TextField
                   {...params}
                   size="small"
-                  placeholder="Search output type..."
+                  placeholder={t("canvas:typeFilter.searchOutputType")}
                   inputProps={{
                     ...params.inputProps,
-                    "aria-label": "Search output type"
+                    "aria-label": t("canvas:typeFilter.searchOutputType")
                   }}
                 />
               )}

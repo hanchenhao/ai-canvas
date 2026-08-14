@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, EditorButton } from "../ui_primitives";
 import { useApiKeyValidation } from "../../hooks/useApiKeyValidation";
 import { getRequiredSecretKeyForNamespace } from "../../utils/nodeProvider";
@@ -10,6 +11,7 @@ interface ApiKeyValidationProps {
 
 const ApiKeyValidation: React.FC<ApiKeyValidationProps> = React.memo(
   ({ nodeNamespace }) => {
+    const { t } = useTranslation("canvas");
     const missingAPIKey = useApiKeyValidation(nodeNamespace);
 
     const handleConnectProvider = useCallback(() => {
@@ -55,11 +57,11 @@ const ApiKeyValidation: React.FC<ApiKeyValidationProps> = React.memo(
               borderRadius: ".1em"
             }}
           >
-            Connect provider
+            {t("canvas:node.connectProvider")}
           </EditorButton>
         </>
       );
-    }, [missingAPIKey, handleConnectProvider]);
+    }, [missingAPIKey, handleConnectProvider, t]);
 
     return content;
   }

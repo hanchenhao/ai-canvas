@@ -158,10 +158,10 @@ const AudioEditorToolbar = memo(function AudioEditorToolbar({
         tooltip={isPlaying ? "Pause" : "Play"}
         onClick={onTogglePlay}
       />
-      <ToolbarIconButton icon={<StopIcon />} tooltip="Stop" onClick={onStop} />
+      <ToolbarIconButton icon={<StopIcon />} tooltip={t("common:button.stop")} onClick={onStop} />
       <ToolbarIconButton
         icon={<RepeatIcon />}
-        tooltip="Loop"
+        tooltip={t("common:audio.loop")}
         active={loop}
         onClick={onToggleLoop}
       />
@@ -212,10 +212,10 @@ const AudioEditorToolbar = memo(function AudioEditorToolbar({
         Silence
       </EditorButton>
       <EditorButton size="small" onClick={onFadeIn} disabled={!hasSelection}>
-        Fade in
+        {t("timeline:clip.fadeIn")}
       </EditorButton>
       <EditorButton size="small" onClick={onFadeOut} disabled={!hasSelection}>
-        Fade out
+        {t("timeline:clip.fadeOut")}
       </EditorButton>
       <EditorButton size="small" onClick={onNormalize}>
         Normalize
@@ -234,13 +234,13 @@ const AudioEditorToolbar = memo(function AudioEditorToolbar({
 
       <ToolbarIconButton
         icon={<UndoIcon />}
-        tooltip="Undo"
+        tooltip={t("common:button.undo")}
         onClick={onUndo}
         disabled={!canUndo}
       />
       <ToolbarIconButton
         icon={<RedoIcon />}
-        tooltip="Redo"
+        tooltip={t("common:button.redo")}
         onClick={onRedo}
         disabled={!canRedo}
       />

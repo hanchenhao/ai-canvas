@@ -295,7 +295,7 @@ export const LayerActions: React.FC<LayerActionsProps> = memo(
 
           <ToolbarIconButton
             icon={<ContentCopyIcon fontSize="small" />}
-            tooltip="Duplicate — copies overrides; tweak params for a variation"
+            tooltip={t("sketch:layerActions.duplicateTooltip")}
             onClick={() => void handleDuplicate()}
             disabled={duplicateBusy || !documentId}
             aria-label={t("sketch:layerItem.duplicateLayer")}
@@ -323,7 +323,7 @@ export const LayerActions: React.FC<LayerActionsProps> = memo(
 
           <ToolbarIconButton
             icon={<RestartAltIcon fontSize="small" />}
-            tooltip="Revert — clear the current generation back to draft"
+            tooltip={t("sketch:layerActions.revertTooltip")}
             onClick={handleRevert}
             disabled={!binding.lastGeneratedHash}
             aria-label={t("sketch:layerItem.revertLayerToDraft")}

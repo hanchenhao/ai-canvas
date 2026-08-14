@@ -43,7 +43,7 @@ const WorkerStatusIndicator: React.FC = () => {
         tooltip={`Attached to ${activeWorker.id} (${activeWorker.ws_url})`}
       />
       <ToolbarIconButton
-        ariaLabel="Stop attached worker"
+        ariaLabel={t("common:workers2.stopAttachedWorker")}
         tooltip={t("common:workers2.stopAttachedWorker")}
         onClick={handleStop}
         disabled={stopping}

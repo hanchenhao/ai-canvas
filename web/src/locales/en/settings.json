@@ -25,7 +25,9 @@
     "execution": "Execution",
     "canvasNavigation": "Canvas & Navigation",
     "autosave": "Autosave & Version History",
-    "appearance": "Appearance"
+    "appearance": "Appearance",
+    "mcpIntegration": "MCP Integration",
+    "brainviteApi": "BrainVite API"
   },
   "folders": {
     "title": "Folder Settings",
@@ -163,13 +165,16 @@
     "snapMovePrecision": "Snap precision for moving nodes on the canvas.",
     "snapConnectDistance": "Snap distance for connecting nodes.",
     "apiToken": "This token is used to authenticate your account with the Nodetool API.",
-    "apiTokenSecurity": "Keep this token secure and do not share it publicly"
+    "apiTokenSecurity": "Keep this token secure and do not share it publicly",
+    "updateChannel": "Stable follows full releases. Nightly follows prerelease nightly builds. Nightly builds default to the Nightly channel.",
+    "brainviteApi": "Use the BrainVite API to execute workflows programmatically."
   },
   "labels": {
     "largeRunThreshold": "Large-Run Threshold",
     "audioBuffer": "Audio Buffer (ms)",
     "leftClickDrag": "Left-Click Drag",
-    "autosaveInterval": "Autosave Interval (minutes)"
+    "autosaveInterval": "Autosave Interval (minutes)",
+    "copyToken": "Copy Token"
   },
   "sidebarCategory": {
     "configuration": "Configuration",
@@ -211,7 +216,8 @@
     "failedToCopy": "Failed to copy to clipboard",
     "systemInfoCopied": "System information copied to clipboard!",
     "failedToCopySystemInfo": "Failed to copy system information to clipboard",
-    "failedToLoad": "Failed to load system information"
+    "failedToLoad": "Failed to load system information",
+    "githubRepository": "GitHub Repository"
   },
   "tabDescription": {
     "general": "Editor and workspace preferences.",
@@ -245,6 +251,8 @@
   "searchProvider": "Search Provider",
   "getYourApiKey": "GET YOUR API KEY",
   "remoteSettings": {
-    "noAvailable": "No settings available"
+    "noAvailable": "No settings available",
+    "loading": "Loading settings…",
+    "saveButton": "SAVE SETTINGS"
   }
 }

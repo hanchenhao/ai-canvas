@@ -532,7 +532,7 @@ const ExtractVideoFrameBodyInner: React.FC<ExtractVideoFrameBodyProps> = ({
           <ToolbarIconButton
             icon={<SkipPreviousIcon />}
             tooltip={t("canvas:imageEditing.previousFrame")}
-            ariaLabel="Previous frame"
+            ariaLabel={t("canvas:imageEditing.previousFrame")}
             disabled={!videoSrc}
             onClick={() => stepFrame(-1)}
           />
@@ -546,7 +546,7 @@ const ExtractVideoFrameBodyInner: React.FC<ExtractVideoFrameBodyProps> = ({
           <ToolbarIconButton
             icon={<SkipNextIcon />}
             tooltip={t("canvas:imageEditing.nextFrame")}
-            ariaLabel="Next frame"
+            ariaLabel={t("canvas:imageEditing.nextFrame")}
             disabled={!videoSrc}
             onClick={() => stepFrame(1)}
           />
@@ -562,7 +562,7 @@ const ExtractVideoFrameBodyInner: React.FC<ExtractVideoFrameBodyProps> = ({
           <ToolbarIconButton
             icon={<DownloadIcon />}
             tooltip={t("canvas:imageEditing.downloadFrame")}
-            ariaLabel="Download frame"
+            ariaLabel={t("canvas:imageEditing.downloadFrame")}
             disabled={!videoSrc}
             onClick={handleDownloadFrame}
           />

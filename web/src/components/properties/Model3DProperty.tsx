@@ -6,6 +6,7 @@ import { useAsset } from "../../serverState/useAsset";
 import PropertyLabel from "../node/PropertyLabel";
 import { PropertyProps } from "../node/PropertyInput";
 import { memo, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import { useNodes } from "../../contexts/NodeContext";
 import { useIsConnectedSelector } from "../../hooks/nodes/useIsConnected";
@@ -135,6 +136,7 @@ const styles = (theme: Theme) =>
   });
 
 const Model3DProperty = (props: PropertyProps) => {
+  const { t } = useTranslation("properties");
   const id = `model3d-${props.property.name}-${props.propertyIndex}`;
   const { asset, uri } = useAsset({ model3d: props.value });
   const theme = useTheme();
@@ -225,12 +227,12 @@ const Model3DProperty = (props: PropertyProps) => {
               autoCapitalize="off"
               spellCheck="false"
               onChange={handleUrlChange}
-              placeholder="Enter 3D model URL"
+              placeholder={t("properties:enter3DModelUrl")}
             />
           )}
 
           <Tooltip
-            title={showUrlInput ? "Hide URL input" : "Show input to enter a URL"}
+            title={showUrlInput ? t("properties:hideUrlInput") : t("properties:showUrlInput")}
           >
             <EditorButton
               className="toggle-url-button"

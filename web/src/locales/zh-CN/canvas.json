@@ -26,7 +26,8 @@
     "processingNodes": "处理节点",
     "groupNodes": "分组节点",
     "commentNodes": "评论节点",
-    "outputNodes": "输出节点"
+    "outputNodes": "输出节点",
+    "nodeTypes": "节点类型"
   },
   "queue": {
     "stopRun": "停止运行",
@@ -35,7 +36,8 @@
     "expand": "展开队列",
     "collapse": "折叠队列",
     "queue": "队列",
-    "queued": "{{count}} 个已排队"
+    "queued": "{{count}} 个已排队",
+    "onCanvas": "在画布上"
   },
   "node": {
     "agentTask": "智能体任务",
@@ -177,7 +179,23 @@
     "previewHint": "显示来自已连接节点的任意数据",
     "imageAria": "图像 {{index}}",
     "downloadImageAria": "下载图像 {{index}}",
-    "openImageInViewerAria": "在查看器中打开图像 {{index}}"
+    "openImageInViewerAria": "在查看器中打开图像 {{index}}",
+    "connectProvider": "连接服务商",
+    "falPricing": "FAL 定价",
+    "loadingEstimate": "正在加载估算…",
+    "accountCredits": "账户额度",
+    "loading": "正在加载…",
+    "couldNotLoadCredits": "无法加载额度",
+    "creditsUnavailable": "额度不可用",
+    "falApiKeys": "fal.ai API 密钥",
+    "kiePricing": "KIE 定价",
+    "kieCredits": "KIE 额度",
+    "kieNoListPrice": "此节点没有内置标价。请查看 kie.ai 定价，或使用您的 API 密钥运行以查看账户额度。",
+    "kieApiKeys": "kie.ai API 密钥",
+    "lastRun": "上次运行",
+    "configureInSettings": "前往设置进行配置",
+    "exposesDataToAppMode": "将数据暴露给应用模式",
+    "openDocument": "打开文档"
   },
   "typeFilter": {
     "allInputTypes": "所有输入类型",
@@ -392,7 +410,8 @@
     },
     "edit": "编辑",
     "rename": "重命名",
-    "delete": "删除"
+    "delete": "删除",
+    "selectConnection": "选择连接"
   },
   "inspector": {
     "closeInspector": "关闭检查器",
@@ -563,7 +582,8 @@
     "packages": "依赖包",
     "inputs": "输入",
     "outputs": "输出",
-    "apply": "应用"
+    "apply": "应用",
+    "welcomeHint": "可以让我编写或修改此节点的代码，例如「按 id 合并两个列表」「添加一个错误输出」或「用示例列表测试一下」。"
   },
   "schemaLoader": {
     "reloadSchema": "重新加载 Schema",
@@ -571,7 +591,9 @@
     "loadComfyWorkflow": "加载 ComfyUI 工作流",
     "workflowJson": "工作流 JSON",
     "chooseFile": "选择文件",
-    "exposeParams": "将额外参数暴露为输入："
+    "exposeParams": "将额外参数暴露为输入：",
+    "runHint": "在任意 ComfyUI 服务器上运行 ComfyUI 工作流。",
+    "uploadHint": "点击上传图标加载工作流（粘贴 API JSON 或拖入 .json/.png 文件）。"
   },
   "workflowLoader": {
     "selectWorkflow": "选择工作流",
@@ -615,7 +637,9 @@
     "packageName": "包名"
   },
   "runtimeInstall": {
-    "title": "安装所需运行时"
+    "title": "安装所需运行时",
+    "openPackageManager": "改为打开包管理器",
+    "allInstalled": "所有运行时已安装，现在可以运行此工作流。"
   },
   "nodeInfo": {
     "inputs": "输入",

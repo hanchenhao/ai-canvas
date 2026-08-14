@@ -325,16 +325,16 @@ const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
     const action = isActive ? cancelClipGeneration() : generateClip();
     action.catch((err: unknown) => {
       addNotification({
-        content: `Clip generation failed: ${
-          err instanceof Error ? err.message : String(err)
-        }`,
+        content: t("timeline:clip.generationFailedWithReason", {
+          message: err instanceof Error ? err.message : String(err)
+        }),
         type: "error",
         alert: true,
         dedupeKey: "timeline-clip-generate-failed",
         replaceExisting: true
       });
     });
-  }, [isActive, cancelClipGeneration, generateClip, addNotification]);
+  }, [isActive, cancelClipGeneration, generateClip, addNotification, t]);
 
   if (!clip) {
     return null;
@@ -342,12 +342,14 @@ const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
 
   const promptPlaceholder =
     kind === "video"
-      ? "Describe the video…"
+      ? t("timeline:clip.promptPlaceholderVideo")
       : kind === "audio"
-        ? "Type text to speak…"
-        : "Describe the image…";
+        ? t("timeline:clip.promptPlaceholderAudio")
+        : t("timeline:clip.promptPlaceholderImage");
 
-  const generateLabel = clip.currentAssetId ? "Regenerate" : "Generate";
+  const generateLabel = clip.currentAssetId
+    ? t("timeline:clip.regenerate")
+    : t("timeline:prompt.generate");
 
   return (
     <Panel background="default" bordered={false} sx={panelSx}>
@@ -357,7 +359,7 @@ const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
         <CollapsibleSection
           title={
             <InspectorSectionTitle
-              title="Prompt"
+              title={t("timeline:clip.promptSection")}
               icon={<AutoAwesomeOutlinedIcon />}
             />
           }
@@ -376,7 +378,7 @@ const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
                   onClick={() => handleKindToggle("text-to-image")}
                   data-testid="direct-gen-mode-t2i"
                 >
-                  Text → Image
+                  {t("timeline:clip.textToImage")}
                 </EditorButton>
                 <EditorButton
                   size="small"
@@ -384,7 +386,7 @@ const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
                   onClick={() => handleKindToggle("image-to-image")}
                   data-testid="direct-gen-mode-i2i"
                 >
-                  Image → Image
+                  {t("timeline:clip.imageToImage")}
                 </EditorButton>
               </FlexRow>
             )}
@@ -431,7 +433,7 @@ const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
               compact
               fullWidth
               inputProps={{
-                "aria-label": "Prompt",
+                "aria-label": t("timeline:clip.promptSection"),
                 "data-testid": "direct-gen-prompt"
               }}
             />
@@ -439,7 +441,7 @@ const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
             {isImageToImage && (
               sourceOptions.length === 0 ? (
                 <Caption color="secondary">
-                  No source clips with a rendered asset are available.
+                  {t("timeline:clip.noSourceClips")}
                 </Caption>
               ) : (
                 <SelectField
@@ -458,7 +460,7 @@ const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
               <FlexRow gap={0.5} align="center" sx={{ flexWrap: "wrap" }}>
                 <MediaOptionChip
                   icon={<TvIcon fontSize="small" />}
-                  header="Resolution"
+                  header={t("timeline:clip.resolution")}
                   value={imageResolution}
                   options={resolutionOptions}
                   onChange={(r) => applyImageSize(r, imageAspect)}
@@ -472,8 +474,10 @@ const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
                   <>
                     <MediaOptionChip
                       icon={<TuneIcon fontSize="small" />}
-                      label={`Strength ${(clip.strength ?? DEFAULT_STRENGTH).toFixed(2)}`}
-                      header="Edit Strength"
+                      label={t("timeline:clip.strengthLabel", {
+                        value: (clip.strength ?? DEFAULT_STRENGTH).toFixed(2)
+                      })}
+                      header={t("timeline:clip.editStrength")}
                       value={clip.strength ?? DEFAULT_STRENGTH}
                       options={strengthOptions}
                       onChange={(s) =>
@@ -482,8 +486,10 @@ const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
                     />
                     <MediaOptionChip
                       icon={<LayersIcon fontSize="small" />}
-                      label={`${clip.numInferenceSteps ?? DEFAULT_STEPS} steps`}
-                      header="Inference Steps"
+                      label={t("timeline:clip.stepsLabel", {
+                        count: clip.numInferenceSteps ?? DEFAULT_STEPS
+                      })}
+                      header={t("timeline:clip.inferenceSteps")}
                       value={clip.numInferenceSteps ?? DEFAULT_STEPS}
                       options={stepsOptions}
                       onChange={(n) =>
@@ -498,15 +504,17 @@ const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
               <FlexRow gap={0.5} align="center" sx={{ flexWrap: "wrap" }}>
                 <MediaOptionChip
                   icon={<AccessTimeIcon fontSize="small" />}
-                  label={`${videoDuration} Sec`}
-                  header="Duration"
+                  label={t("timeline:clip.durationSec", {
+                    duration: videoDuration
+                  })}
+                  header={t("timeline:inspector.duration")}
                   value={videoDuration}
                   options={durationOptions}
                   onChange={handleDurationChange}
                 />
                 <MediaOptionChip
                   icon={<TvIcon fontSize="small" />}
-                  header="Video Resolution"
+                  header={t("timeline:prompt.resolution")}
                   value={
                     (clip.resolution as VideoResolution | undefined) ??
                     DEFAULT_VIDEO_RESOLUTION
@@ -537,11 +545,11 @@ const DirectGenClipPanelInner: React.FC<DirectGenClipPanelProps> = ({
               onClick={handleGenerateClick}
               data-testid="direct-gen-generate"
             >
-              {isActive ? "Cancel" : generateLabel}
+              {isActive ? t("common:button.cancel") : generateLabel}
             </EditorButton>
             {isFailed && (
               <Caption sx={{ color: "error.main", textAlign: "center" }}>
-                Generation failed.
+                {t("timeline:clip.generationFailed")}
               </Caption>
             )}
           </FlexColumn>

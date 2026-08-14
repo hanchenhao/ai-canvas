@@ -174,7 +174,7 @@ const AppBuilderAgentPanel: React.FC<AppBuilderAgentPanelProps> = ({
         }}
       >
         <Text size="small" weight={500}>
-          App Builder Agent
+          {t("applications:editor.agentTitle")}
         </Text>
         <Caption color="secondary" sx={{ display: "block", mt: 0.5 }}>
           Build the app layout and bind widgets to workflow inputs and outputs.

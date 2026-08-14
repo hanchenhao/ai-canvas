@@ -46,7 +46,9 @@ const SketchInspectorInner: React.FC = () => {
       <EmptyState
         variant="empty"
         size="small"
-        title={`${selectedLayerIds.length} layers selected`}
+        title={t("sketch:inspector.layersSelected", {
+          count: selectedLayerIds.length
+        })}
         description={t("sketch:inspector.selectSingleLayer")}
       />
     );
@@ -55,7 +57,7 @@ const SketchInspectorInner: React.FC = () => {
       <EmptyState
         variant="empty"
         size="small"
-        title="Inspector"
+        title={t("sketch:inspector.title")}
         description={t("sketch:inspector.selectLayer")}
       />
     );

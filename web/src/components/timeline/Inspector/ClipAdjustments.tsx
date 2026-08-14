@@ -103,11 +103,13 @@ const sectionContentStyles = (theme: Theme) =>
     padding: theme.spacing(0.5, 0, 2)
   });
 
-const TRANSITION_MODES = [
-  { value: "auto", label: "Auto" },
-  { value: "crossfade", label: "Crossfade" },
-  { value: "none", label: "None" }
-] as const;
+const TRANSITION_MODE_VALUES = ["auto", "crossfade", "none"] as const;
+
+const TRANSITION_MODE_LABEL_KEYS = {
+  auto: "timeline:clip.transitionAuto",
+  crossfade: "timeline:clip.transitionCrossfade",
+  none: "timeline:clip.transitionNone"
+} as const;
 
 // ── Component ──────────────────────────────────────────────────────────────
 
@@ -439,7 +441,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
         <CollapsibleSection
           title={
             <InspectorSectionTitle
-              title="Render"
+              title={t("timeline:clip.sectionRender")}
               icon={<LayersOutlinedIcon />}
             />
           }
@@ -450,7 +452,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
           <FlexColumn css={sectionContentStyles(theme)}>
             {!isAudio && (
               <InspectorSliderRow
-                label="Opacity"
+                label={t("timeline:clip.opacity")}
                 min={0}
                 max={1}
                 step={0.01}
@@ -460,7 +462,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
               />
             )}
             {isOverlay && !isAudio && (
-              <InspectorRow label="Blend">
+              <InspectorRow label={t("timeline:clip.blend")}>
                 <InspectorSelect
                   label={t("timeline:clip.blendMode")}
                   value={clip.blendMode ?? "normal"}
@@ -472,7 +474,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
             {isAudio && (
               <>
                 <InspectorSliderRow
-                  label="Volume"
+                  label={t("timeline:clip.volume")}
                   min={-60}
                   max={12}
                   step={0.5}
@@ -487,7 +489,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                     unit="s"
                     scrub={{ step: 0.02, min: 0 }}
                     onCommit={handleFadeInCommit}
-                    ariaLabel="Fade in (seconds)"
+                    ariaLabel={t("timeline:clip.fadeInSeconds")}
                   />
                 </InspectorRow>
                 <InspectorRow label={t("timeline:clip.fadeOut")}>
@@ -496,7 +498,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                     unit="s"
                     scrub={{ step: 0.02, min: 0 }}
                     onCommit={handleFadeOutCommit}
-                    ariaLabel="Fade out (seconds)"
+                    ariaLabel={t("timeline:clip.fadeOutSeconds")}
                   />
                 </InspectorRow>
               </>
@@ -510,11 +512,11 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
             <CollapsibleSection
               title={
                 <InspectorSectionTitle
-                  title="Transform"
+                  title={t("timeline:clip.sectionTransform")}
                   icon={<OpenWithOutlinedIcon />}
                   action={{
                     icon: <RestartAltOutlinedIcon />,
-                    label: "Reset transform",
+                    label: t("timeline:clip.resetTransform"),
                     onClick: handleResetTransform
                   }}
                 />
@@ -524,14 +526,14 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
               unmountOnExit
             >
               <FlexColumn css={sectionContentStyles(theme)}>
-                <InspectorRow label="Position">
+                <InspectorRow label={t("timeline:clip.position")}>
                   <InspectorPillInput
                     value={transform.position.x.toFixed(0)}
                     unit="px"
                     minWidth={64}
                     scrub={{ step: 1 }}
                     onCommit={handlePositionXCommit}
-                    ariaLabel="Position X"
+                    ariaLabel={t("timeline:clip.positionX")}
                   />
                   <InspectorPillInput
                     value={transform.position.y.toFixed(0)}
@@ -539,17 +541,17 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                     minWidth={64}
                     scrub={{ step: 1 }}
                     onCommit={handlePositionYCommit}
-                    ariaLabel="Position Y"
+                    ariaLabel={t("timeline:clip.positionY")}
                   />
                 </InspectorRow>
-                <InspectorRow label="Scale">
+                <InspectorRow label={t("timeline:clip.scale")}>
                   <InspectorPillInput
                     value={transform.scale.x.toFixed(2)}
                     unit="×"
                     minWidth={64}
                     scrub={{ step: 0.01 }}
                     onCommit={handleScaleXCommit}
-                    ariaLabel="Scale X"
+                    ariaLabel={t("timeline:clip.scaleX")}
                   />
                   <InspectorPillInput
                     value={transform.scale.y.toFixed(2)}
@@ -557,16 +559,16 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                     minWidth={64}
                     scrub={{ step: 0.01 }}
                     onCommit={handleScaleYCommit}
-                    ariaLabel="Scale Y"
+                    ariaLabel={t("timeline:clip.scaleY")}
                   />
                 </InspectorRow>
-                <InspectorRow label="Rotation">
+                <InspectorRow label={t("timeline:clip.rotation")}>
                   <InspectorPillInput
                     value={((transform.rotation * 180) / Math.PI).toFixed(1)}
                     unit="°"
                     scrub={{ step: 0.5 }}
                     onCommit={handleRotationCommit}
-                    ariaLabel="Rotation in degrees"
+                    ariaLabel={t("timeline:clip.rotationDegrees")}
                   />
                 </InspectorRow>
                 <InspectorSliderRow
@@ -590,7 +592,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                   onChange={handleAnchorYChange}
                 />
                 <InspectorSliderRow
-                  label="Radius"
+                  label={t("timeline:clip.radius")}
                   min={0}
                   max={500}
                   step={1}
@@ -609,13 +611,13 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
             <CollapsibleSection
               title={
                 <InspectorSectionTitle
-                  title="Color"
+                  title={t("timeline:clip.sectionColor")}
                   icon={<WbSunnyOutlinedIcon />}
                   checked={colorEnabled}
                   onCheckedChange={handleColorEnabledChange}
                   action={{
                     icon: <RestartAltOutlinedIcon />,
-                    label: "Reset color",
+                    label: t("timeline:clip.resetColor"),
                     onClick: handleClearColor,
                     disabled: !color
                   }}
@@ -627,7 +629,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
             >
               <FlexColumn css={sectionContentStyles(theme)}>
                 <InspectorSliderRow
-                  label="Brightness"
+                  label={t("timeline:clip.brightness")}
                   min={-1}
                   max={1}
                   step={0.01}
@@ -638,7 +640,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                   onChange={handleBrightnessChange}
                 />
                 <InspectorSliderRow
-                  label="Contrast"
+                  label={t("timeline:clip.contrast")}
                   min={0}
                   max={4}
                   step={0.01}
@@ -649,7 +651,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                   onChange={handleContrastChange}
                 />
                 <InspectorSliderRow
-                  label="Saturation"
+                  label={t("timeline:clip.saturation")}
                   min={0}
                   max={4}
                   step={0.01}
@@ -660,7 +662,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                   onChange={handleSaturationChange}
                 />
                 <InspectorSliderRow
-                  label="Hue"
+                  label={t("timeline:clip.hue")}
                   min={-180}
                   max={180}
                   step={1}
@@ -671,7 +673,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                   onChange={handleHueChange}
                 />
                 <InspectorSliderRow
-                  label="Temperature"
+                  label={t("timeline:clip.temperature")}
                   min={-1}
                   max={1}
                   step={0.01}
@@ -682,7 +684,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                   onChange={handleTemperatureChange}
                 />
                 <InspectorSliderRow
-                  label="Tint"
+                  label={t("timeline:clip.tint")}
                   min={-1}
                   max={1}
                   step={0.01}
@@ -693,7 +695,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                   onChange={handleTintChange}
                 />
                 <InspectorSliderRow
-                  label="Shadows"
+                  label={t("timeline:clip.shadows")}
                   min={-1}
                   max={1}
                   step={0.01}
@@ -704,7 +706,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                   onChange={handleShadowsChange}
                 />
                 <InspectorSliderRow
-                  label="Highlights"
+                  label={t("timeline:clip.highlights")}
                   min={-1}
                   max={1}
                   step={0.01}
@@ -725,13 +727,13 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
             <CollapsibleSection
               title={
                 <InspectorSectionTitle
-                  title="Blur"
+                  title={t("timeline:clip.sectionBlur")}
                   icon={<BlurOnOutlinedIcon />}
                   checked={blurEnabled}
                   onCheckedChange={handleBlurEnabledChange}
                   action={{
                     icon: <RestartAltOutlinedIcon />,
-                    label: "Reset blur",
+                    label: t("timeline:clip.resetBlur"),
                     onClick: handleClearBlur,
                     disabled: !blur
                   }}
@@ -743,7 +745,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
             >
               <FlexColumn css={sectionContentStyles(theme)}>
                 <InspectorSliderRow
-                  label="Radius"
+                  label={t("timeline:clip.radius")}
                   min={0}
                   max={20}
                   step={0.5}
@@ -763,7 +765,7 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
             <CollapsibleSection
               title={
                 <InspectorSectionTitle
-                  title="Transition"
+                  title={t("timeline:clip.sectionTransition")}
                   icon={<CompareArrowsOutlinedIcon />}
                 />
               }
@@ -772,22 +774,25 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
               unmountOnExit
             >
               <FlexColumn css={sectionContentStyles(theme)}>
-                <InspectorRow label="Type">
+                <InspectorRow label={t("timeline:inspector.type")}>
                   <InspectorSelect
                     label={t("timeline:clip.transitionType")}
                     value={transitionMode}
-                    options={TRANSITION_MODES}
+                    options={TRANSITION_MODE_VALUES.map((value) => ({
+                      value,
+                      label: t(TRANSITION_MODE_LABEL_KEYS[value])
+                    }))}
                     onChange={handleTransitionModeChange}
                   />
                 </InspectorRow>
                 {transitionMode === "crossfade" && (
-                  <InspectorRow label="Duration">
+                  <InspectorRow label={t("timeline:inspector.duration")}>
                     <InspectorPillInput
                       value={(transitionDuration / 1000).toFixed(2)}
                       unit="s"
                       scrub={{ step: 0.02, min: 0 }}
                       onCommit={handleTransitionDurationCommit}
-                      ariaLabel="Transition duration"
+                      ariaLabel={t("timeline:clip.transitionDurationAria")}
                     />
                   </InspectorRow>
                 )}
@@ -796,10 +801,10 @@ export const ClipAdjustments: React.FC<ClipAdjustmentsProps> = memo(
                   sx={{ px: 0.5, color: "text.secondary" }}
                 >
                   {transitionMode === "auto"
-                    ? "Overlap this clip with the previous one on the same track to cross-fade."
+                    ? t("timeline:clip.transitionHintAuto")
                     : transitionMode === "crossfade"
-                      ? "Fixed cross-fade length, measured from this clip's start."
-                      : "Always a hard cut, even when clips overlap."}
+                      ? t("timeline:clip.transitionHintCrossfade")
+                      : t("timeline:clip.transitionHintNone")}
                 </Text>
               </FlexColumn>
             </CollapsibleSection>

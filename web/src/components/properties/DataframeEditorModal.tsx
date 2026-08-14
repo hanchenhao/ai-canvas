@@ -550,20 +550,20 @@ const DataframeEditorModal = ({
               <div className="toolbar-group">
                 <Tooltip
                   delay={TOOLTIP_ENTER_DELAY}
-                  title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+                  title={isFullscreen ? t("properties:exitFullscreen") : t("properties:fullscreen")}
                 >
                   <button
                     type="button"
                     className="button"
                     onClick={toggleFullscreen}
-                    aria-label={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+                    aria-label={isFullscreen ? t("properties:exitFullscreen") : t("properties:fullscreen")}
                   >
                     {isFullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
                   </button>
                 </Tooltip>
                 <Tooltip
                   delay={TOOLTIP_ENTER_DELAY}
-                  title="Close Editor | Esc"
+                  title={t("properties:closeEditorEsc")}
                 >
                   <button
                     type="button"
@@ -600,7 +600,7 @@ const DataframeEditorModal = ({
               <div className="table-section">
                 <div className="search-bar">
                   <NodeTextField
-                    placeholder="Search in table..."
+                    placeholder={t("properties:searchInTable")}
                     value={searchFilter}
                     onChange={handleSearchChange}
                     InputProps={{

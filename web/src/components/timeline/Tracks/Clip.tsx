@@ -1299,7 +1299,7 @@ const ClipBody: React.FC<ClipBodyProps> = memo(
 
         {clip.locked && (
           <div css={lockIconStyles}>
-            <LockOutlinedIcon sx={{ fontSize: 12 }} aria-label="Clip locked" />
+            <LockOutlinedIcon sx={{ fontSize: 12 }} aria-label={t("timeline:clip.clipLocked")} />
           </div>
         )}
 

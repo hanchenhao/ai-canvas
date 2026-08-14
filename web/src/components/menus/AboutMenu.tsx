@@ -300,7 +300,7 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
       </div>
 
       <Text size="big" id="operating-system">
-        Operating System
+        {t("settings:sidebarItem.operatingSystem")}
       </Text>
       <div className="settings-section">
         {systemInfo ? (
@@ -336,13 +336,13 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
               onCopy={handleCopy}
             />
             <InfoRow
-              label="Data"
+              label={t("common:menus.data")}
               value={systemInfo.dataPath}
               copyable
               onCopy={handleCopy}
             />
             <InfoRow
-              label="Logs"
+              label={t("common:menus.logs")}
               value={systemInfo.logsPath}
               copyable
               onCopy={handleCopy}
@@ -400,7 +400,7 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
             }}
           >
             <ContentCopyIcon sx={{ fontSize: "1.2em" }} />
-            Copy all system information
+            {t("common:menus.copyAllSystemInfo")}
           </Text>
         </Box>
       )}
@@ -424,7 +424,7 @@ Ollama: ${systemInfo.ollamaInstalled ? systemInfo.ollamaVersion || "Installed" :
               textDecoration: "none"
             }}
           >
-            GitHub Repository
+            {t("settings:about.githubRepository")}
           </a>
           <a
             href="https://www.brainvite.com"

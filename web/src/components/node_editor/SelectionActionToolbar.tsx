@@ -276,8 +276,8 @@ const SelectionActionToolbar: React.FC<SelectionActionToolbarProps> = memo(
               <ArrowDropDown fontSize="small" />
             </>
           }
-          tooltip="Arrange — align & distribute"
-          ariaLabel="Arrange"
+          tooltip={t("canvas:contextMenu.selection.arrangeTooltip")}
+          ariaLabel={t("canvas:contextMenu.selection.arrange")}
           onClick={openArrange}
           active={arrangeOpen}
           variant={arrangeOpen ? "primary" : "default"}

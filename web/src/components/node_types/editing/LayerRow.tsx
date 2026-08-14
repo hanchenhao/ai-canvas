@@ -211,7 +211,7 @@ const LayerRowImpl: React.FC<LayerRowProps> = ({
         className="del-btn"
         icon={<DeleteOutlineIcon fontSize="small" />}
         onClick={handleDelete}
-        ariaLabel="Delete layer"
+        ariaLabel={t("canvas:imageEditing.deleteLayer")}
         tooltip={t("canvas:imageEditing.deleteLayer")}
       />
     </div>

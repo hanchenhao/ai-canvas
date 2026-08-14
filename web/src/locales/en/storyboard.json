@@ -86,7 +86,8 @@
     "takes": "Takes — {{count}}",
     "stillsCount": "{{count}} stills",
     "clipsCount": "{{count}} clips",
-    "useStill": "Use still {{number}}"
+    "useStill": "Use still {{number}}",
+    "count": "{{count}} shots"
   },
   "queue": {
     "still": "Still",
@@ -115,5 +116,13 @@
     "deleteConfirm": "Delete \"{{name}}\"? This cannot be undone.",
     "storyboardName": "Storyboard name",
     "storyboardsAria": "Storyboards"
+  },
+  "agentPanel": {
+    "title": "Storyboard Assistant",
+    "welcomeHint": "Ask me to direct the board — e.g. \"break this brief into six shots\", \"add a close-up after shot 3\", \"generate keyframes for every planned shot\", or \"assemble the shots into a timeline\"."
+  },
+  "entities": {
+    "add": "Add",
+    "addEntities": "Add entities"
   }
 }

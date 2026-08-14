@@ -502,7 +502,7 @@ const LevelsBodyInner: React.FC<LevelsBodyProps> = ({
             value={channel}
             exclusive
             onChange={handleChannelChange}
-            aria-label="Channel"
+            aria-label={t("canvas:imageEditing.channel")}
           >
             {CHANNEL_OPTIONS.map((o) => (
               <ToggleOption key={o.value} value={o.value} aria-label={o.label}>
@@ -534,7 +534,7 @@ const LevelsBodyInner: React.FC<LevelsBodyProps> = ({
             value={channelProps.gamma}
             onChange={handleGammaChange}
             onChangeCommitted={commit}
-            aria-label="Gamma"
+            aria-label={t("canvas:imageEditing.gamma")}
           />
           <span className="slider-readout">{channelProps.gamma.toFixed(2)}</span>
         </FlexRow>
@@ -557,7 +557,7 @@ const LevelsBodyInner: React.FC<LevelsBodyProps> = ({
             size="small"
             icon={<RestartAltIcon fontSize="small" />}
             tooltip={t("canvas:imageEditing.resetLevels")}
-            ariaLabel="Reset levels"
+            ariaLabel={t("canvas:imageEditing.resetLevels")}
             onClick={handleReset}
           />
         </div>

@@ -3,6 +3,7 @@ import { trpcClient, type RouterOutputs } from "../../trpc/client";
 import PropertyLabel from "../node/PropertyLabel";
 import { PropertyProps } from "../node/PropertyInput";
 import { memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import { useNodes } from "../../contexts/NodeContext";
 import Select from "../inputs/Select";
@@ -10,6 +11,7 @@ import { useIsConnectedSelector } from "../../hooks/nodes/useIsConnected";
 import ConnectedBadge from "./ConnectedBadge";
 
 const CollectionProperty = (props: PropertyProps) => {
+  const { t } = useTranslation("properties");
   const id = `collection-${props.property.name}-${props.propertyIndex}`;
   const isConnectedSelector = useIsConnectedSelector(
     props.nodeId,
@@ -53,15 +55,15 @@ const CollectionProperty = (props: PropertyProps) => {
         description={props.property.description}
         id={id}
       />
-      {isLoading && <p>Loading…</p>}
-      {error && <p>Error: {error.message}</p>}
+      {isLoading && <p>{t("properties:loading")}</p>}
+      {error && <p>{t("properties:errorWithMessage", { message: error.message })}</p>}
       <Select
         value={selectValue}
         options={options}
         onChange={(newValue) =>
           props.onChange({ type: "collection", name: newValue })
         }
-        placeholder="Select collection..."
+        placeholder={t("properties:selectCollection")}
         label={props.property.name}
       />
     </>

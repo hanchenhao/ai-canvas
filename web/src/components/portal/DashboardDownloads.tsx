@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import { memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
 import DownloadingIcon from "@mui/icons-material/Downloading";
 import { useModelDownloadStore } from "../../stores/ModelDownloadStore";
@@ -60,6 +61,7 @@ const styles = (theme: Theme) =>
  */
 const DashboardDownloads: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation("common");
   const { downloads, openDialog } = useModelDownloadStore(
     useShallow((state) => ({
       downloads: state.downloads,
@@ -84,14 +86,15 @@ const DashboardDownloads: React.FC = () => {
   }
 
   return (
-    <section css={styles(theme)} aria-label="Model downloads in progress">
+    <section
+      css={styles(theme)}
+      aria-label={t("common:dashboard.downloadsInProgress")}
+    >
       <div css={wrapStyles(theme)}>
         <div className="downloads-inner">
           <DownloadingIcon />
           <span>
-            {activeCount === 1
-              ? "Downloading 1 model in the background"
-              : `Downloading ${activeCount} models in the background`}
+            {t("common:dashboard.downloadingModels", { count: activeCount })}
             {progress !== null && ` — ${progress.toFixed(0)}%`}
           </span>
           {progress !== null && (
@@ -103,7 +106,7 @@ const DashboardDownloads: React.FC = () => {
             </span>
           )}
           <button type="button" className="downloads-view" onClick={openDialog}>
-            View details
+            {t("common:dashboard.viewDownloadDetails")}
           </button>
         </div>
       </div>

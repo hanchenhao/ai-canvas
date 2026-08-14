@@ -311,7 +311,7 @@ const WorkflowListItem: React.FC<WorkflowListItemProps> = ({
             weight={600}
             sx={{ lineHeight: 1.35 }}
             onDoubleClick={handleNameDoubleClick}
-            title="Double-click to rename"
+            title={t("common:workflows.doubleClickRename")}
           >
             {workflow.name}
           </Text>
@@ -320,8 +320,8 @@ const WorkflowListItem: React.FC<WorkflowListItemProps> = ({
           <FavoriteButton
             isFavorite={isFavorite}
             onToggle={handleToggleFavorite}
-            addTooltip="Add to favorites"
-            removeTooltip="Remove from favorites"
+            addTooltip={t("common:workflows.addToFavorites")}
+            removeTooltip={t("common:workflows.removeFromFavorites")}
             buttonSize="small"
             className="favorite-button"
             stopPropagation

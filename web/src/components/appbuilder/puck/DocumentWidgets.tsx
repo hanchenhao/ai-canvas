@@ -93,14 +93,14 @@ export const SketchWidget: React.FC<
       <Box sx={frame(props.height)}>
         <SketchRenderer
           document={document}
-          ariaLabel="Sketch"
+          ariaLabel={t("applications:widget.sketch")}
           showDimensions={props.showDimensions ?? false}
         />
       </Box>
     );
   }
   if (shouldLoad && query.isLoading) {
-    return <LoadingSpinner size="small" text="Loading sketch" />;
+    return <LoadingSpinner size="small" text={t("widget.loadingSketch")} />;
   }
   if (query.isError) {
     return (
@@ -113,13 +113,13 @@ export const SketchWidget: React.FC<
   }
   if (designMode) {
     return (
-      <Caption color="secondary">
-        Bind this to a sketch output to preview it.
-      </Caption>
+      <Caption color="secondary">{t("widget.bindSketchHint")}</Caption>
     );
   }
   return (
-    <Caption color="secondary">{props.placeholder ?? "No sketch yet"}</Caption>
+    <Caption color="secondary">
+        {props.placeholder ?? t("widget.noSketchYet")}
+      </Caption>
   );
 };
 
@@ -150,11 +150,11 @@ export const TimelineWidget: React.FC<
     return (
       <Box sx={frame(props.height)}>
         <React.Suspense
-          fallback={<LoadingSpinner size="small" text="Loading preview" />}
+          fallback={<LoadingSpinner size="small" text={t("widget.loadingPreview")} />}
         >
           <LazyTimelineRenderer
             sequence={sequence}
-            ariaLabel="Timeline"
+            ariaLabel={t("applications:widget.timeline")}
             showMetadata={props.showMetadata ?? true}
           />
         </React.Suspense>
@@ -162,7 +162,7 @@ export const TimelineWidget: React.FC<
     );
   }
   if (shouldLoad && query.isLoading) {
-    return <LoadingSpinner size="small" text="Loading timeline" />;
+    return <LoadingSpinner size="small" text={t("widget.loadingTimeline")} />;
   }
   if (query.isError) {
     return (
@@ -175,14 +175,12 @@ export const TimelineWidget: React.FC<
   }
   if (designMode) {
     return (
-      <Caption color="secondary">
-        Bind this to a timeline output to preview it.
-      </Caption>
+      <Caption color="secondary">{t("widget.bindTimelineHint")}</Caption>
     );
   }
   return (
     <Caption color="secondary">
-      {props.placeholder ?? "No timeline yet"}
+      {props.placeholder ?? t("widget.noTimelineYet")}
     </Caption>
   );
 };

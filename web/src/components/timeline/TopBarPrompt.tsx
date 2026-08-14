@@ -321,7 +321,7 @@ export const TopBarPrompt: React.FC<TopBarPromptProps> = memo(({ compact = false
 
         <MediaControlChip
           icon={<AccessTimeIcon fontSize="small" />}
-          label={`${duration} Sec`}
+          label={t("timeline:clip.durationSec", { duration })}
           active={!!durationAnchor}
           onClick={(e) => setDurationAnchor(e.currentTarget)}
           showChevron={false}

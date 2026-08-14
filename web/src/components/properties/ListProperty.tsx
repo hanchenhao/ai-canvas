@@ -57,13 +57,13 @@ const ListProperty = (props: PropertyProps) => {
    return (
       <>
         <div style={containerStyle}>
-          <PropertyLabel name="Data Type" id={id} />
+          <PropertyLabel name={t("properties:dataType")} id={id} />
           <Select
             value={dataType}
             onChange={handleDataTypeChange}
             options={options}
             label={t("properties:dataType")}
-            placeholder="Select type..."
+            placeholder={t("properties:selectTypePlaceholder")}
           />
         </div>
         <ListTable

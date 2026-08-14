@@ -304,11 +304,11 @@ const CodeAssistantDialogInner = ({
         <FlexColumn gap={SPACING.sm} sx={{ flex: 1, minWidth: 0 }}>
           <FlexRow gap={SPACING.md} align="center" sx={{ flexWrap: "wrap" }}>
             <Text weight={600}>{nodeTitle}</Text>
-            <PortChips label="Inputs" ports={draftInputs} />
-            <PortChips label="Outputs" ports={draftOutputs} />
+            <PortChips label={t("canvas:codeAssistant.inputs")} ports={draftInputs} />
+            <PortChips label={t("canvas:codeAssistant.outputs")} ports={draftOutputs} />
             {draftPackages.length > 0 && (
               <FlexRow gap={SPACING.xs} align="center" sx={{ flexWrap: "wrap" }}>
-                <Label>Packages</Label>
+                <Label>{t("canvas:codeAssistant.packages")}</Label>
                 {draftPackages.map((specifier) => (
                   <Chip key={specifier} compact label={specifier} />
                 ))}

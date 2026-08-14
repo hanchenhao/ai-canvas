@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import isEqual from "../../utils/isEqual";
 import EmbeddingModelMenuDialog from "../model_menu/EmbeddingModelMenuDialog";
 import useModelPreferencesStore from "../../stores/ModelPreferencesStore";
@@ -28,6 +29,7 @@ const EmbeddingModelSelect: React.FC<EmbeddingModelSelectProps> = ({
   recommendedModels,
   modelPacks
 }) => {
+  const { t } = useTranslation("properties");
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const addRecent = useModelPreferencesStore((s) => s.addRecent);
@@ -72,9 +74,9 @@ const EmbeddingModelSelect: React.FC<EmbeddingModelSelectProps> = ({
       <ModelSelectButton
         ref={buttonRef}
         active={!!value}
-        label={currentSelectedModelDetails?.name || value || "Select Model"}
+        label={currentSelectedModelDetails?.name || value || t("properties:modelSelect.selectModel")}
         secondaryLabel={currentSelectedModelDetails?.provider}
-        subLabel="Select Embedding Model"
+        subLabel={t("properties:modelSelect.selectEmbeddingModel")}
         onClick={handleClick}
       />
       <EmbeddingModelMenuDialog

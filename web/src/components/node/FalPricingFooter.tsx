@@ -20,6 +20,7 @@ import React, {
   useRef,
   useState
 } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import LaunchIcon from "@mui/icons-material/Launch";
 import {
@@ -77,6 +78,7 @@ const FalPricingFooterInternal: React.FC<FalPricingFooterProps> = ({
   variant = "nodeFooter",
   popoverResetDep
 }) => {
+  const { t } = useTranslation("canvas");
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [creditsLoading, setCreditsLoading] = useState(false);
@@ -202,7 +204,7 @@ const FalPricingFooterInternal: React.FC<FalPricingFooterProps> = ({
         {pricing.source === "live" && (
           <span
             style={{ marginRight: 3, fontSize: "var(--fontSizeSmaller)", opacity: 0.85 }}
-            aria-label="live price"
+            aria-label={t("canvas:node.livePrice")}
           >
             ●
           </span>
@@ -229,7 +231,7 @@ const FalPricingFooterInternal: React.FC<FalPricingFooterProps> = ({
               letterSpacing: "0.05em"
             }}
           >
-            FAL pricing
+            {t("canvas:node.falPricing")}
           </Caption>
           <Text
             sx={{
@@ -250,7 +252,7 @@ const FalPricingFooterInternal: React.FC<FalPricingFooterProps> = ({
                   color: theme.vars.palette.text.secondary
                 }}
               >
-                Loading estimate…
+                {t("canvas:node.loadingEstimate")}
               </Text>
             </FlexRow>
           ) : estimateData != null ? (
@@ -281,7 +283,7 @@ const FalPricingFooterInternal: React.FC<FalPricingFooterProps> = ({
               letterSpacing: "0.05em"
             }}
           >
-            Account credits
+            {t("canvas:node.accountCredits")}
           </Caption>
           {creditsLoading ? (
             <FlexRow gap={1} align="center" sx={{ mt: 0.5 }}>
@@ -292,7 +294,7 @@ const FalPricingFooterInternal: React.FC<FalPricingFooterProps> = ({
                   color: theme.vars.palette.text.secondary
                 }}
               >
-                Loading…
+                {t("canvas:node.loading")}
               </Text>
             </FlexRow>
           ) : creditsData === "error" || creditsData === null ? (
@@ -303,7 +305,7 @@ const FalPricingFooterInternal: React.FC<FalPricingFooterProps> = ({
                 mt: 0.5
               }}
             >
-              {creditsData === "error" ? "Could not load credits" : "—"}
+              {creditsData === "error" ? t("canvas:node.couldNotLoadCredits") : "—"}
             </Text>
           ) : creditsData.unavailable ? (
             <FlexColumn gap={0.5} sx={{ mt: 0.5 }}>
@@ -315,7 +317,7 @@ const FalPricingFooterInternal: React.FC<FalPricingFooterProps> = ({
                   wordBreak: "break-word"
                 }}
               >
-                {creditsData.detail ?? "Credits unavailable"}
+                {creditsData.detail ?? t("canvas:node.creditsUnavailable")}
               </Text>
               {falCreditsDetailSuggestsKeysLink(creditsData.detail) && (
                 <ExternalLink
@@ -323,7 +325,7 @@ const FalPricingFooterInternal: React.FC<FalPricingFooterProps> = ({
                   iconVariant="launch"
                   size="small"
                 >
-                  fal.ai API keys
+                  {t("canvas:node.falApiKeys")}
                 </ExternalLink>
               )}
             </FlexColumn>
@@ -336,7 +338,9 @@ const FalPricingFooterInternal: React.FC<FalPricingFooterProps> = ({
                 mt: 0.5
               }}
             >
-              {formatCredits(creditsData)} remaining
+              {t("canvas:node.creditsRemaining", {
+                credits: formatCredits(creditsData)
+              })}
             </Text>
           )}
         </FlexColumn>
@@ -344,7 +348,7 @@ const FalPricingFooterInternal: React.FC<FalPricingFooterProps> = ({
         <Divider />
 
         <MenuItemPrimitive
-          label="View on fal.ai"
+          label={t("canvas:node.viewOnFal")}
           icon={<LaunchIcon sx={{ fontSize: 14 }} />}
           compact
           onClick={() => {

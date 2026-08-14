@@ -6,6 +6,7 @@
  */
 
 import React, { memo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import type { Theme } from "@mui/material/styles";
 
@@ -63,6 +64,7 @@ const WaveformSelectorInner: React.FC<WaveformSelectorProps> = ({
   accentColor,
   onChange
 }) => {
+  const { t } = useTranslation("canvas");
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       onChange(e.currentTarget.value);
@@ -71,7 +73,7 @@ const WaveformSelectorInner: React.FC<WaveformSelectorProps> = ({
   );
 
   return (
-    <div className="waveform-row nodrag" role="group" aria-label="Waveform">
+    <div className="waveform-row nodrag" role="group" aria-label={t("canvas:node.waveform")}>
       {options.map((w) => {
         const active = w === value;
         return (

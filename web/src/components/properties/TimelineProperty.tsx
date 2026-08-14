@@ -79,7 +79,7 @@ const TimelineProperty = (props: PropertyProps) => {
         </NodeSelect>
         <ToolbarIconButton
           size="small"
-          ariaLabel="Open in timeline editor"
+          ariaLabel={t("properties:openTimelineEditor")}
           tooltip={t("properties:openTimelineEditor")}
           disabled={!selectedId}
           onClick={handleOpenEditor}

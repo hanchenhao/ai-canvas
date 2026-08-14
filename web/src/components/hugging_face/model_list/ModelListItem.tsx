@@ -173,7 +173,7 @@ const ModelListItem: React.FC<
             <div className="model-details">
               <Tooltip title={t("huggingface:modelList.runsLocally")} delay={400}>
                 <Chip
-                  label="Local"
+                  label={t("huggingface:modelList.local")}
                   size="small"
                   component="span"
                   sx={{

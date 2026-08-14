@@ -420,7 +420,7 @@ const OutputNode: React.FC<OutputNodeProps> = (props) => {
 
           {result === null || result === undefined && (
             <Text className="hint">
-              Exposes data to App Mode
+              {t("canvas:node.exposesDataToAppMode")}
             </Text>
           )}
           <PreviewActions

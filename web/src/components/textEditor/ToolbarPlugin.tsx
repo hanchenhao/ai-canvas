@@ -186,7 +186,7 @@ const ToolbarPlugin = () => {
         onClick={handleFormatBold}
         className={isBold ? "active" : ""}
         aria-label={t("common:textEditor.formatBold")}
-        title="Bold (Ctrl+B / ⌘+B)"
+        title={t("common:textEditor.formatBoldShortcut")}
       >
         <b>B</b>
       </button>
@@ -195,7 +195,7 @@ const ToolbarPlugin = () => {
         onClick={handleFormatItalic}
         className={isItalic ? "active" : ""}
         aria-label={t("common:textEditor.formatItalic")}
-        title="Italic (Ctrl+I / ⌘+I)"
+        title={t("common:textEditor.formatItalicShortcut")}
       >
         <i>I</i>
       </button>

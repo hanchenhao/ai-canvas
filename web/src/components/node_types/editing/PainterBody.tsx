@@ -1054,10 +1054,10 @@ const PainterBodyInner: React.FC<PainterBodyProps> = ({
             size="small"
             aria-label={t("canvas:imageEditing.paintTool")}
           >
-            <ToggleOption value="brush" aria-label="Brush">
+            <ToggleOption value="brush" aria-label={t("canvas:imageEditing.brush")}>
               <BrushIcon />
             </ToggleOption>
-            <ToggleOption value="eraser" aria-label="Eraser">
+            <ToggleOption value="eraser" aria-label={t("canvas:imageEditing.eraser")}>
               <EraserIcon />
             </ToggleOption>
           </ToggleGroup>
@@ -1075,7 +1075,7 @@ const PainterBodyInner: React.FC<PainterBodyProps> = ({
             size="small"
             onClick={onUndo}
             disabled={undoDisabled}
-            tooltip="Undo"
+            tooltip={t("common:button.undo")}
             icon={<UndoIcon fontSize="small" />}
           />
           <ToolbarIconButton
@@ -1083,7 +1083,7 @@ const PainterBodyInner: React.FC<PainterBodyProps> = ({
             size="small"
             onClick={onRedo}
             disabled={redoDisabled}
-            tooltip="Redo"
+            tooltip={t("common:button.redo")}
             icon={<RedoIcon fontSize="small" />}
           />
           <ToolbarIconButton

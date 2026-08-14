@@ -25,7 +25,9 @@
     "execution": "执行",
     "canvasNavigation": "画布与导航",
     "autosave": "自动保存与版本历史",
-    "appearance": "外观"
+    "appearance": "外观",
+    "mcpIntegration": "MCP 集成",
+    "brainviteApi": "BrainVite API"
   },
   "folders": {
     "title": "文件夹设置",
@@ -163,13 +165,16 @@
     "snapMovePrecision": "在画布上移动节点时的吸附精度。",
     "snapConnectDistance": "连接节点时的吸附距离。",
     "apiToken": "此令牌用于通过 Nodetool API 验证你的账号。",
-    "apiTokenSecurity": "请妥善保管此令牌，不要公开分享。"
+    "apiTokenSecurity": "请妥善保管此令牌，不要公开分享。",
+    "updateChannel": "Stable 跟随正式版本发布，Nightly 跟随每日预发布构建。Nightly 构建默认使用 Nightly 频道。",
+    "brainviteApi": "使用 BrainVite API 以编程方式执行工作流。"
   },
   "labels": {
     "largeRunThreshold": "大规模运行阈值",
     "audioBuffer": "音频缓冲 (ms)",
     "leftClickDrag": "左键拖动",
-    "autosaveInterval": "自动保存间隔（分钟）"
+    "autosaveInterval": "自动保存间隔（分钟）",
+    "copyToken": "复制令牌"
   },
   "sidebarCategory": {
     "configuration": "配置",
@@ -211,7 +216,8 @@
     "failedToCopy": "无法复制到剪贴板",
     "systemInfoCopied": "系统信息已复制到剪贴板！",
     "failedToCopySystemInfo": "无法复制系统信息到剪贴板",
-    "failedToLoad": "无法加载系统信息"
+    "failedToLoad": "无法加载系统信息",
+    "githubRepository": "GitHub 仓库"
   },
   "tabDescription": {
     "general": "编辑器与工作区偏好设置。",
@@ -245,6 +251,8 @@
   "searchProvider": "搜索提供商",
   "getYourApiKey": "获取你的 API 密钥",
   "remoteSettings": {
-    "noAvailable": "没有可用设置"
+    "noAvailable": "没有可用设置",
+    "loading": "正在加载设置…",
+    "saveButton": "保存设置"
   }
 }

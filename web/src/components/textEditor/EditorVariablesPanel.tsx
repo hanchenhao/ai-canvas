@@ -304,7 +304,7 @@ const EditorVariablesPanel = ({
                 ref={addInputRef}
                 className="add-input"
                 value={addName}
-                placeholder="variable name"
+                placeholder={t("common:textEditor.variableNamePlaceholder")}
                 aria-label={t("common:textEditor.newVariableName")}
                 onChange={(e) =>
                   setAddName(e.target.value.replace(/[^\w]/g, ""))

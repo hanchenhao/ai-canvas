@@ -151,13 +151,19 @@
     "noModelsAvailableHint": "Try adjusting the size filter or selecting a different category",
     "viewDocumentation": "View Documentation",
     "ollamaRestartHint": "Ollama should be running automatically. Please try restarting the application.",
-    "downloadOllama": "Download Ollama →"
+    "downloadOllama": "Download Ollama →",
+    "supportedFormats": "Supported Formats",
+    "searchHubEmpty": "Search the HuggingFace Hub",
+    "modelCategories": "Model Categories",
+    "maxSize": "Max size",
+    "localModelsTitle": "Local Models"
   },
   "hardware": {
     "gpuMemory": "GPU memory",
     "systemRam": "System RAM",
     "recommendFor": "Recommend for",
-    "gpuMemoryBudget": "GPU memory budget"
+    "gpuMemoryBudget": "GPU memory budget",
+    "yourMachine": "Your machine"
   },
   "onboarding": {
     "localEngines": "Local engines",

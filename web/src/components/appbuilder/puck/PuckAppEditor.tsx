@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Puck, useGetPuck, type Data, type Overrides } from "@puckeditor/core";
 import "@puckeditor/core/puck.css";
 import "./puckTheme.css";
@@ -70,6 +71,7 @@ interface PuckAppEditorProps {
  * the current editor data via Puck's store and forwards it to onPublish.
  */
 const SaveButton: React.FC<{ onSave: (data: Data) => void }> = ({ onSave }) => {
+  const { t } = useTranslation("applications");
   const getPuck = useGetPuck();
   const handleClick = useCallback(() => {
     const { appState } = getPuck();
@@ -83,7 +85,7 @@ const SaveButton: React.FC<{ onSave: (data: Data) => void }> = ({ onSave }) => {
       startIcon={<SaveIcon sx={{ fontSize: 16 }} />}
       onClick={handleClick}
     >
-      Save
+      {t("applications:editor.save")}
     </EditorButton>
   );
 };
@@ -96,6 +98,7 @@ const SaveButton: React.FC<{ onSave: (data: Data) => void }> = ({ onSave }) => {
 const GenerateFromWorkflowButton: React.FC<{ workflow: Workflow }> = ({
   workflow
 }) => {
+  const { t } = useTranslation("applications");
   const getPuck = useGetPuck();
   const [confirmOpen, setConfirmOpen] = useState(false);
 
@@ -122,15 +125,15 @@ const GenerateFromWorkflowButton: React.FC<{ workflow: Workflow }> = ({
         startIcon={<AutoFixHighIcon sx={{ fontSize: 16 }} />}
         onClick={handleClick}
       >
-        Generate
+        {t("applications:editor.generate")}
       </EditorButton>
       <Dialog
         open={confirmOpen}
         onClose={() => setConfirmOpen(false)}
-        title="Replace app layout?"
-        content="Generating from the workflow replaces the current layout with widgets for every workflow input and output. You can undo afterwards."
+        title={t("applications:editor.replaceTitle")}
+        content={t("applications:editor.replaceContent")}
         onConfirm={applyGenerated}
-        confirmText="Replace"
+        confirmText={t("applications:editor.replaceConfirm")}
       />
     </>
   );
@@ -182,6 +185,7 @@ const PuckAppEditor: React.FC<PuckAppEditorProps> = ({
   onToggleData,
   operationWorkflows
 }) => {
+  const { t } = useTranslation("applications");
   const workflowState = useMemo(
     () => extractWorkflowState(workflow, meta.resources),
     [workflow, meta.resources]
@@ -250,7 +254,7 @@ const PuckAppEditor: React.FC<PuckAppEditorProps> = ({
               onClick={onToggleData}
               aria-pressed={dataOpen}
             >
-              App Data
+              {t("applications:editor.appData")}
             </EditorButton>
           )}
           {onToggleAgent && (
@@ -262,7 +266,7 @@ const PuckAppEditor: React.FC<PuckAppEditorProps> = ({
               onClick={onToggleAgent}
               aria-pressed={agentOpen}
             >
-              Ask Agent
+              {t("applications:editor.askAgent")}
             </EditorButton>
           )}
           {onClose && (
@@ -280,6 +284,7 @@ const PuckAppEditor: React.FC<PuckAppEditorProps> = ({
       )
     }),
     [
+      t,
       applicationId,
       onClose,
       onPublish,

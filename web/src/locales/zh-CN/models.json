@@ -40,7 +40,8 @@
     "providersFailedMany": "{{count}} 个服务商加载失败",
     "failedToLoadFrom": "无法从以下服务商加载模型：",
     "loadingModelsProgress": "正在加载模型：{{loaded}}/{{total}} 个服务商...",
-    "loadingModels": "正在加载模型..."
+    "loadingModels": "正在加载模型...",
+    "hfApiBadge": "HF API"
   },
   "filters": {
     "filterByType": "按类型筛选",

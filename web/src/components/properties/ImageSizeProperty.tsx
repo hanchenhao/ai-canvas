@@ -192,7 +192,7 @@ const ImageSizeProperty = (props: PropertyProps<ImageSizeValue>) => {
           />
 
           <ToolbarIconButton
-            tooltip="Presets"
+            tooltip={t("properties:sizePresets.presets")}
             icon={<MoreVert sx={{ fontSize: "var(--fontSizeBig)" }} />}
             className="presets-menu-button"
             onClick={handlePresetClick}

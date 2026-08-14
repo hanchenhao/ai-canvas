@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import PaymentsOutlinedIcon from "@mui/icons-material/PaymentsOutlined";
 import DataUsageOutlinedIcon from "@mui/icons-material/DataUsageOutlined";
@@ -18,30 +19,30 @@ import {
 
 interface CostPoint {
   icon: React.ReactNode;
-  title: string;
-  body: string;
+  titleKey: string;
+  bodyKey: string;
 }
 
 const COST_POINTS: CostPoint[] = [
   {
     icon: <DataUsageOutlinedIcon sx={{ fontSize: 18 }} />,
-    title: "Chat is billed in tokens",
-    body: "A token is roughly ¾ of a word. Providers charge for the tokens you send (your prompt) and the tokens the model writes back. A short chat costs a fraction of a cent; long documents cost more."
+    titleKey: "point1Title",
+    bodyKey: "point1Body"
   },
   {
     icon: <ImageOutlinedIcon sx={{ fontSize: 18 }} />,
-    title: "Images, audio, and video are billed per result",
-    body: "Instead of tokens, these are usually priced per image, per second of audio or video, or per second of compute the model runs. A single image is typically a few cents."
+    titleKey: "point2Title",
+    bodyKey: "point2Body"
   },
   {
     icon: <PaymentsOutlinedIcon sx={{ fontSize: 18 }} />,
-    title: "You pay the provider, not BrainVite-AI-Canvas",
-    body: "Your API key bills your own account with each provider directly. BrainVite-AI-Canvas never adds a markup and never sees your card — set spending limits in the provider's dashboard to stay in control."
+    titleKey: "point3Title",
+    bodyKey: "point3Body"
   },
   {
     icon: <SavingsOutlinedIcon sx={{ fontSize: 18 }} />,
-    title: "Start cheap or free",
-    body: "Several providers give free credits or a free tier to experiment. Smaller and faster models cost much less than the largest ones — a great way to try things before scaling up."
+    titleKey: "point4Title",
+    bodyKey: "point4Body"
   }
 ];
 
@@ -52,6 +53,7 @@ const COST_POINTS: CostPoint[] = [
  */
 const CostGuide: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation("common");
 
   return (
     <CollapsibleSection
@@ -62,7 +64,7 @@ const CostGuide: React.FC = () => {
             sx={{ fontSize: 18, color: theme.vars.palette.primary.main }}
           />
           <Text size="small" weight={600}>
-            How do costs work?
+            {t("providerOnboarding.costsGuideTitle")}
           </Text>
         </FlexRow>
       }
@@ -70,7 +72,7 @@ const CostGuide: React.FC = () => {
       <FlexColumn gap={SPACING.sm} sx={{ mt: SPACING.sm }}>
         {COST_POINTS.map((point) => (
           <Card
-            key={point.title}
+            key={point.titleKey}
             variant="outlined"
             padding="compact"
             sx={{
@@ -96,10 +98,10 @@ const CostGuide: React.FC = () => {
               </FlexRow>
               <FlexColumn gap={SPACING.micro}>
                 <Text size="small" weight={600}>
-                  {point.title}
+                  {t(`providerOnboarding.costPoints.${point.titleKey}`)}
                 </Text>
                 <Caption sx={{ opacity: 0.7, lineHeight: 1.5 }}>
-                  {point.body}
+                  {t(`providerOnboarding.costPoints.${point.bodyKey}`)}
                 </Caption>
               </FlexColumn>
             </FlexRow>

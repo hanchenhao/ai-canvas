@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import RocketLaunchOutlinedIcon from "@mui/icons-material/RocketLaunchOutlined";
 import {
@@ -54,6 +55,7 @@ const CAPABILITY_ORDER: OnboardingCapability[] = [
 
 const ModelOnboarding: React.FC<ModelOnboardingProps> = ({ onDownload }) => {
   const theme = useTheme();
+  const { t } = useTranslation("huggingface");
   const profile = useHardwareProfile();
   const [filter, setFilter] = useState<Filter>("all");
 
@@ -169,7 +171,7 @@ const ModelOnboarding: React.FC<ModelOnboardingProps> = ({ onDownload }) => {
         </FlexRow>
         <FlexColumn gap={SPACING.micro}>
           <Text size="big" weight={600}>
-            Get started with local models
+            {t("onboarding.getStartedLocal")}
           </Text>
           <Caption sx={{ opacity: 0.7 }}>
             Run AI on your own machine — private, offline, and free. We match
@@ -185,7 +187,7 @@ const ModelOnboarding: React.FC<ModelOnboardingProps> = ({ onDownload }) => {
       <FlexColumn gap={SPACING.sm}>
         <FlexColumn gap={SPACING.micro}>
           <Text size="big" weight={600}>
-            Recommended models
+            {t("onboarding.recommendedModelsTitle")}
           </Text>
           <Caption sx={{ opacity: 0.7 }}>
             Current models sized for a single consumer GPU, sorted to show what
@@ -198,9 +200,9 @@ const ModelOnboarding: React.FC<ModelOnboardingProps> = ({ onDownload }) => {
           exclusive
           segmented
           onChange={(_e, value) => value && setFilter(value as Filter)}
-          aria-label="filter recommended models by capability"
+          aria-label={t("huggingface:aria.filterByCapability")}
         >
-          <ToggleOption value="all" aria-label="all capabilities">
+          <ToggleOption value="all" aria-label={t("huggingface:aria.allCapabilities")}>
             All
           </ToggleOption>
           {availableCapabilities.map((capability) => (

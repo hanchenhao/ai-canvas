@@ -6,6 +6,7 @@
  */
 
 import React, { memo, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { Entity, EntityKind } from "@nodetool-ai/protocol";
 import {
   Dialog,
@@ -37,6 +38,7 @@ const EntityEditorDialogInternal: React.FC<EntityEditorDialogProps> = ({
   entity,
   onSaved
 }) => {
+  const { t } = useTranslation("common");
   const saveEntity = useSaveEntity();
   const [kind, setKind] = useState<EntityKind>("character");
   const [name, setName] = useState("");
@@ -96,16 +98,22 @@ const EntityEditorDialogInternal: React.FC<EntityEditorDialogProps> = ({
     <Dialog
       open={open}
       onClose={onClose}
-      title={entity ? "Edit entity" : "New entity"}
+      title={
+        entity
+          ? t("common:entities.editEntity")
+          : t("common:entities.newEntity")
+      }
       showActions
       onConfirm={handleConfirm}
-      confirmText={entity ? "Save" : "Create"}
+      confirmText={
+        entity ? t("common:button.save") : t("common:button.create")
+      }
       confirmDisabled={!canSave}
       isLoading={saveEntity.isPending}
     >
       <FlexColumn gap={SPACING.md} sx={{ pt: 1, minWidth: 360 }}>
         <FlexColumn gap={SPACING.xs}>
-          <Label>Kind</Label>
+          <Label>{t("common:entities.kind")}</Label>
           <ToggleGroup
             value={kind}
             exclusive
@@ -115,14 +123,14 @@ const EntityEditorDialogInternal: React.FC<EntityEditorDialogProps> = ({
           >
             {KINDS.map((k) => (
               <ToggleOption key={k} value={k}>
-                {k}
+                {t(`common:entities.kindLabels.${k}`)}
               </ToggleOption>
             ))}
           </ToggleGroup>
         </FlexColumn>
 
         <TextInput
-          label="Name"
+          label={t("common:entities.name")}
           value={name}
           onChange={(e) => setName(e.target.value)}
           size="small"
@@ -130,8 +138,8 @@ const EntityEditorDialogInternal: React.FC<EntityEditorDialogProps> = ({
         />
 
         <TextInput
-          label="Descriptor"
-          helperText="Pasted verbatim into every prompt that uses this entity."
+          label={t("common:entities.descriptor")}
+          helperText={t("common:entities.descriptorHint")}
           value={descriptor}
           onChange={(e) => setDescriptor(e.target.value)}
           multiline
@@ -142,7 +150,7 @@ const EntityEditorDialogInternal: React.FC<EntityEditorDialogProps> = ({
 
         {kind === "character" && (
           <TextInput
-            label="Voice id (optional)"
+            label={t("common:entities.voiceIdOptional")}
             value={voiceId}
             onChange={(e) => setVoiceId(e.target.value)}
             size="small"
@@ -151,7 +159,7 @@ const EntityEditorDialogInternal: React.FC<EntityEditorDialogProps> = ({
         )}
 
         <TextInput
-          label="Tags (comma-separated)"
+          label={t("common:entities.tagsCommaSeparated")}
           value={tags}
           onChange={(e) => setTags(e.target.value)}
           size="small"

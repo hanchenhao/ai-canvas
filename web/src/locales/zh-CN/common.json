@@ -239,7 +239,8 @@
     "foregroundTitle": "前景色：{{color}}",
     "backgroundTitle": "背景色：{{color}}",
     "gradientColor": "颜色",
-    "gradientPosition": "位置"
+    "gradientPosition": "位置",
+    "customColor": "自定义颜色…"
   },
   "pdfViewer": {
     "failedToLoad": "PDF 加载失败",
@@ -250,7 +251,8 @@
     "zoomIn": "放大",
     "zoomOut": "缩小",
     "resetZoom": "重置缩放",
-    "pageNavigationSliderAriaLabel": "页面导航滑块"
+    "pageNavigationSliderAriaLabel": "页面导航滑块",
+    "loadingViewer": "正在加载 PDF 查看器…"
   },
   "shortcuts": {
     "osMac": "macOS",
@@ -317,7 +319,11 @@
     "templatesWillAppear": "模板可用时会显示在这里。",
     "downloadingModels_one": "正在后台下载 {{count}} 个模型",
     "downloadingModels_other": "正在后台下载 {{count}} 个模型",
-    "viewDownloadDetails": "查看详情"
+    "viewDownloadDetails": "查看详情",
+    "stepConnectProvider": "连接 AI 提供商",
+    "stepOpenTemplate": "打开一个起始模板",
+    "stepRunWorkflow": "运行一个工作流",
+    "stepBuildYourOwn": "自己搭建一个"
   },
   "providerOnboarding": {
     "fastestWayToStart": "最快的上手方式",
@@ -343,7 +349,8 @@
       "point3Body": "你的 API 密钥直接从你在各服务商的账户扣费。BrainVite-AI-Canvas 不加价，也接触不到你的银行卡——在服务商的控制台设置消费上限即可掌控开支。",
       "point4Title": "从低价或免费开始",
       "point4Body": "许多服务商提供免费额度或免费套餐供试用。更小更快的模型比最大的模型便宜得多——是先试用再扩大规模的好办法。"
-    }
+    },
+    "saveAnyway": "仍然保存"
   },
   "audio": {
     "playbackControls": "播放控制",
@@ -365,7 +372,8 @@
     "systemDefaultCamera": "系统默认摄像头",
     "systemDefaultInput": "系统默认输入",
     "camera": "摄像头",
-    "noVideoInputDevices": "未找到视频输入设备。"
+    "noVideoInputDevices": "未找到视频输入设备。",
+    "startCamera": "启动相机"
   },
   "script": {
     "lineText": "台词文本",
@@ -443,7 +451,11 @@
     "exportSrtHint": "从已配音的版本下载 SRT 字幕",
     "exportSrtNeedsVoice": "至少为一句台词配音后才能导出字幕",
     "castAndAssistant": "脚本配音与助手",
-    "reloadedNewerVersion": "已重新加载新版本"
+    "reloadedNewerVersion": "已重新加载新版本",
+    "addLine": "添加台词",
+    "addSection": "添加段落",
+    "assistantTitle": "脚本助手",
+    "assistantWelcome": "可以让我来撰写剧本并配音，例如「起草一段 30 秒的双人主持开场白」「为旁白添加一句台词」或「为所有台词配音并发送到时间线」。"
   },
   "chainEditor": {
     "addNode": "添加节点",
@@ -461,7 +473,11 @@
     "removeNode": "移除节点",
     "disconnectToEdit": "断开连接 — 改为直接编辑值",
     "noNodesFound": "未找到节点",
-    "noConfigurableProperties": "没有可配置的属性"
+    "noConfigurableProperties": "没有可配置的属性",
+    "addFirstNode": "添加第一个节点",
+    "quickActions": "快捷操作",
+    "searchResultCount_one": "{{count}} 个结果",
+    "searchResultCount_other": "{{count}} 个结果"
   },
   "workflows": {
     "filterByTags": "按标签筛选",
@@ -579,7 +595,12 @@
     "triggerGroupAria": "{{kind}} 触发器 {{id}}",
     "triggersButtonState": "触发器：{{state}}",
     "triggersButtonStateDisabled": "触发器：{{state}}，已自动停用",
-    "triggersButtonStateFailed": "触发器：{{state}}，上次运行失败"
+    "triggersButtonStateFailed": "触发器：{{state}}，上次运行失败",
+    "fireNow": "立即触发",
+    "noNotifications": "暂无通知",
+    "tabQueue": "队列",
+    "tabWorkspace": "工作区",
+    "tabTrace": "追踪"
   },
   "menus": {
     "notAvailable": "不可用",
@@ -626,7 +647,8 @@
     "featuresAndVersions": "功能与版本",
     "commandMenuLabel": "命令菜单",
     "commandMenuPlaceholder": "输入命令或搜索…",
-    "copyAllSystemInfo": "复制全部系统信息"
+    "copyAllSystemInfo": "复制全部系统信息",
+    "signInWithGoogle": "使用 Google 登录"
   },
   "inputs": {
     "editValue": "编辑值",
@@ -671,14 +693,18 @@
       "location": "场景",
       "style": "风格",
       "prop": "道具"
-    }
+    },
+    "addEntity": "添加实体",
+    "noImage": "无图像"
   },
   "colorPicker2": {
     "copyAllColors": "复制全部颜色",
     "useCurrentColor": "使用当前颜色",
     "removeStop": "移除色标",
     "color": "颜色",
-    "position": "位置"
+    "position": "位置",
+    "colorStops": "色标",
+    "addStop": "添加色标"
   },
   "workers2": {
     "stopAttachedWorker": "停止已连接的 worker"
@@ -711,7 +737,9 @@
     "tabShortcuts": "快捷键",
     "tabKeyboard": "键盘",
     "tabDataTypes": "数据类型",
-    "searchSimilarNodes": "搜索相似节点"
+    "searchSimilarNodes": "搜索相似节点",
+    "addNode": "添加节点",
+    "nodeDoesNotExist": "抱歉，此节点不存在。"
   },
   "storyboard": {
     "storyboardNameAria": "故事板名称"
@@ -828,6 +856,7 @@
     "importAppBundleFailed": "导入应用 bundle 失败：{{message}}"
   },
   "errorBoundary": {
-    "panelFailedToRender": "面板渲染失败。"
+    "panelFailedToRender": "面板渲染失败。",
+    "tryAgain": "重试"
   }
 }

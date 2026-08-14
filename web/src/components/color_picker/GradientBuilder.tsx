@@ -324,7 +324,7 @@ const GradientBuilder: React.FC<GradientBuilderProps> = React.memo(({
 
       <div>
         <Caption color="secondary">
-          Color Stops
+          {t("common:colorPicker2.colorStops")}
         </Caption>
         <div className="stops-container" style={{ background: cssOutput }}>
           {gradient.stops.map((stop, index) => (
@@ -350,14 +350,14 @@ const GradientBuilder: React.FC<GradientBuilderProps> = React.memo(({
         <FlexRow align="center" gap={1} wrap>
           <TextInput
             size="small"
-            label="Color"
+            label={t("common:colorPicker2.color")}
             value={selectedStop.color}
             onChange={handleStopColorInputChange}
             sx={{ width: "100px" }}
           />
           <TextInput
             size="small"
-            label="Position"
+            label={t("common:colorPicker2.position")}
             type="number"
             value={selectedStop.position}
             onChange={handleStopPositionInputChange}
@@ -391,7 +391,7 @@ const GradientBuilder: React.FC<GradientBuilderProps> = React.memo(({
           onClick={addStop}
           variant="outlined"
         >
-          Add Stop
+          {t("common:colorPicker2.addStop")}
         </EditorButton>
         <EditorButton
           startIcon={copied ? <CheckIcon /> : <ContentCopyIcon />}

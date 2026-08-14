@@ -239,7 +239,8 @@
     "foregroundTitle": "Foreground: {{color}}",
     "backgroundTitle": "Background: {{color}}",
     "gradientColor": "Color",
-    "gradientPosition": "Position"
+    "gradientPosition": "Position",
+    "customColor": "Custom Color…"
   },
   "pdfViewer": {
     "failedToLoad": "Failed to load PDF",
@@ -250,7 +251,8 @@
     "zoomIn": "Zoom in",
     "zoomOut": "Zoom out",
     "resetZoom": "Reset zoom",
-    "pageNavigationSliderAriaLabel": "Page navigation slider"
+    "pageNavigationSliderAriaLabel": "Page navigation slider",
+    "loadingViewer": "Loading PDF viewer…"
   },
   "shortcuts": {
     "osMac": "macOS",
@@ -317,7 +319,11 @@
     "couldNotKillSandbox": "Could not kill sandbox: {{message}}",
     "downloadingModels_one": "Downloading {{count}} model in the background",
     "downloadingModels_other": "Downloading {{count}} models in the background",
-    "viewDownloadDetails": "View details"
+    "viewDownloadDetails": "View details",
+    "stepConnectProvider": "Connect an AI provider",
+    "stepOpenTemplate": "Open a starter or template",
+    "stepRunWorkflow": "Run a workflow",
+    "stepBuildYourOwn": "Build your own"
   },
   "providerOnboarding": {
     "fastestWayToStart": "Fastest way to start",
@@ -343,7 +349,8 @@
       "point3Body": "Your API key bills your own account with each provider directly. BrainVite-AI-Canvas never adds a markup and never sees your card — set spending limits in the provider's dashboard to stay in control.",
       "point4Title": "Start cheap or free",
       "point4Body": "Several providers give free credits or a free tier to experiment. Smaller and faster models cost much less than the largest ones — a great way to try things before scaling up."
-    }
+    },
+    "saveAnyway": "Save anyway"
   },
   "audio": {
     "playbackControls": "Playback controls",
@@ -365,7 +372,8 @@
     "systemDefaultCamera": "System default camera",
     "systemDefaultInput": "System default input",
     "camera": "Camera",
-    "noVideoInputDevices": "No video input devices found."
+    "noVideoInputDevices": "No video input devices found.",
+    "startCamera": "START CAMERA"
   },
   "script": {
     "lineText": "Line text",
@@ -443,7 +451,11 @@
     "exportSrtHint": "Download SRT subtitles from the voiced takes",
     "exportSrtNeedsVoice": "Voice at least one line to export subtitles",
     "castAndAssistant": "Script cast and assistant",
-    "reloadedNewerVersion": "Reloaded newer version"
+    "reloadedNewerVersion": "Reloaded newer version",
+    "addLine": "Add line",
+    "addSection": "Add section",
+    "assistantTitle": "Script Assistant",
+    "assistantWelcome": "Ask me to write and voice the script — e.g. \"draft a 30-second intro for two hosts\", \"add a line for Narrator\", or \"voice every line and send it to a timeline\"."
   },
   "chainEditor": {
     "addNode": "Add node",
@@ -461,7 +473,11 @@
     "removeNode": "Remove node",
     "disconnectToEdit": "Disconnect — edit the value instead",
     "noNodesFound": "No nodes found",
-    "noConfigurableProperties": "No configurable properties"
+    "noConfigurableProperties": "No configurable properties",
+    "addFirstNode": "Add First Node",
+    "quickActions": "Quick Actions",
+    "searchResultCount_one": "{{count}} result",
+    "searchResultCount_other": "{{count}} results"
   },
   "workflows": {
     "filterByTags": "Filter by tags",
@@ -579,7 +595,12 @@
     "triggerGroupAria": "{{kind}} trigger {{id}}",
     "triggersButtonState": "Triggers: {{state}}",
     "triggersButtonStateDisabled": "Triggers: {{state}}, disabled automatically",
-    "triggersButtonStateFailed": "Triggers: {{state}}, last run failed"
+    "triggersButtonStateFailed": "Triggers: {{state}}, last run failed",
+    "fireNow": "Fire now",
+    "noNotifications": "No notifications",
+    "tabQueue": "Queue",
+    "tabWorkspace": "Workspace",
+    "tabTrace": "Trace"
   },
   "menus": {
     "notAvailable": "Not Available",
@@ -626,7 +647,8 @@
     "featuresAndVersions": "Features & Versions",
     "commandMenuLabel": "Command Menu",
     "commandMenuPlaceholder": "Type a command or search…",
-    "copyAllSystemInfo": "Copy all system information"
+    "copyAllSystemInfo": "Copy all system information",
+    "signInWithGoogle": "Sign in with Google"
   },
   "inputs": {
     "editValue": "Edit value",
@@ -671,14 +693,18 @@
       "location": "location",
       "style": "style",
       "prop": "prop"
-    }
+    },
+    "addEntity": "Add entity",
+    "noImage": "No image"
   },
   "colorPicker2": {
     "copyAllColors": "Copy all colors",
     "useCurrentColor": "Use current color",
     "removeStop": "Remove stop",
     "color": "Color",
-    "position": "Position"
+    "position": "Position",
+    "colorStops": "Color Stops",
+    "addStop": "Add Stop"
   },
   "workers2": {
     "stopAttachedWorker": "Stop attached worker"
@@ -711,7 +737,9 @@
     "tabShortcuts": "Shortcuts",
     "tabKeyboard": "Keyboard",
     "tabDataTypes": "DataTypes",
-    "searchSimilarNodes": "Search for similar nodes"
+    "searchSimilarNodes": "Search for similar nodes",
+    "addNode": "Add Node",
+    "nodeDoesNotExist": "Sorry, this node does not exist."
   },
   "storyboard": {
     "storyboardNameAria": "Storyboard name"
@@ -828,6 +856,7 @@
     "importAppBundleFailed": "Failed to import app bundle: {{message}}"
   },
   "errorBoundary": {
-    "panelFailedToRender": "Panel failed to render."
+    "panelFailedToRender": "Panel failed to render.",
+    "tryAgain": "Try Again"
   }
 }

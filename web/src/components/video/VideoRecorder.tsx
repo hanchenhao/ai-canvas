@@ -141,7 +141,7 @@ const VideoRecorder = (props: VideoRecorderProps) => {
           density="compact"
           disabled={isLoading}
         >
-          START CAMERA
+          {t("common:video.startCamera")}
           {isLoading && <LoadingSpinner size="small" />}
         </EditorButton>
       ) : (
@@ -203,7 +203,7 @@ const VideoRecorder = (props: VideoRecorderProps) => {
                 margin: "0 0 .5em 0",
                 color: "var(--palette-grey-100)"
               }}>
-                Camera
+                {t("common:video.camera")}
               </Text>
               <div
                 className={`device-select${
@@ -215,7 +215,7 @@ const VideoRecorder = (props: VideoRecorderProps) => {
                   value={selectedVideoDeviceId}
                   onChange={handleVideoDeviceChange}
                   placeholder={t("common:video.systemDefaultCamera")}
-                  label="Camera"
+                  label={t("common:video.camera")}
                   tabIndex={isRecording || isLoading ? -1 : 0}
                 />
               </div>
@@ -235,7 +235,7 @@ const VideoRecorder = (props: VideoRecorderProps) => {
                 left: "0.5em"
               }}
             >
-              No video input devices found.
+              {t("common:video.noVideoInputDevices")}
             </Text>
           )}
 
@@ -245,7 +245,7 @@ const VideoRecorder = (props: VideoRecorderProps) => {
                 margin: "1em 0 .5em 0",
                 color: "var(--palette-grey-100)"
               }}>
-                Microphone
+                {t("common:audio.microphone")}
               </Text>
               <div
                 className={`device-select${
@@ -257,7 +257,7 @@ const VideoRecorder = (props: VideoRecorderProps) => {
                   value={selectedAudioDeviceId}
                   onChange={handleAudioDeviceChange}
                   placeholder={t("common:audio.systemDefaultInput")}
-                  label="Microphone"
+                  label={t("common:audio.microphone")}
                   tabIndex={isRecording || isLoading ? -1 : 0}
                 />
               </div>

@@ -212,7 +212,7 @@ const RotateAndFlipBodyInner: React.FC<RotateAndFlipBodyProps> = ({
               icon={<FlipIcon fontSize="small" />}
               activeIcon={<FlipIcon fontSize="small" />}
               tooltip={t("canvas:imageEditing.flipHorizontally")}
-              ariaLabel="Flip horizontally"
+              ariaLabel={t("canvas:imageEditing.flipHorizontally")}
               onClick={toggleFlipH}
             />
             <StateIconButton
@@ -231,7 +231,7 @@ const RotateAndFlipBodyInner: React.FC<RotateAndFlipBodyProps> = ({
                 />
               }
               tooltip={t("canvas:imageEditing.flipVertically")}
-              ariaLabel="Flip vertically"
+              ariaLabel={t("canvas:imageEditing.flipVertically")}
               onClick={toggleFlipV}
             />
           </FlexRow>
@@ -239,7 +239,7 @@ const RotateAndFlipBodyInner: React.FC<RotateAndFlipBodyProps> = ({
             size="small"
             icon={<RestartAltIcon fontSize="small" />}
             tooltip={t("canvas:imageEditing.resetRotationFlips")}
-            ariaLabel="Reset rotation and flips"
+            ariaLabel={t("canvas:imageEditing.resetRotationFlips")}
             onClick={handleReset}
           />
         </FlexRow>

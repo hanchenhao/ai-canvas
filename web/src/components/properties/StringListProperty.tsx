@@ -1,4 +1,5 @@
 import { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { Autocomplete, Chip, Box, MOTION, BORDER_RADIUS, SPACING, getSpacingPx } from "../ui_primitives";
 import PropertyLabel from "../node/PropertyLabel";
@@ -7,6 +8,7 @@ import isEqual from "../../utils/isEqual";
 import { NodeTextField } from "../ui_primitives";
 
 const StringListProperty = (props: PropertyProps) => {
+  const { t } = useTranslation("properties");
   const theme = useTheme();
   const id = `string-list-${props.property.name}-${props.propertyIndex}`;
   const strings = props.value || [];
@@ -112,7 +114,7 @@ const StringListProperty = (props: PropertyProps) => {
           <NodeTextField
             {...params}
             fullWidth
-            placeholder={strings.length === 0 ? "Enter values..." : ""}
+            placeholder={strings.length === 0 ? t("properties:enterValues") : ""}
             sx={textFieldSx}
           />
         )}

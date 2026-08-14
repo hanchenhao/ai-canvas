@@ -494,10 +494,10 @@ const ConversationOverlay: React.FC<ConversationOverlayProps> = ({
               size="small"
               sx={{ color: theme.vars.palette.grey[200], fontWeight: 600 }}
             >
-              Start a conversation
+              {t("common:panels.startConversation")}
             </Text>
             <Text size="small" sx={{ color: "inherit" }}>
-              Ask about this workflow, or type @ to reference an asset.
+              {t("common:panels.askAboutWorkflow")}
             </Text>
           </div>
         ) : (
@@ -518,7 +518,7 @@ const ConversationOverlay: React.FC<ConversationOverlayProps> = ({
           <div className="convo-threads-panel">
             <div className="convo-threads-head">
               <SearchInput
-                placeholder="Search threads…"
+                placeholder={t("common:panels.searchThreads")}
                 value={searchQuery}
                 onChange={setSearchQuery}
                 fullWidth

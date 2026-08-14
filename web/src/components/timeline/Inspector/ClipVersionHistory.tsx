@@ -11,6 +11,7 @@
  */
 
 import React, { memo, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
@@ -197,6 +198,7 @@ export interface ClipVersionHistoryProps {
 export const ClipVersionHistory: React.FC<ClipVersionHistoryProps> = memo(
   ({ clipId }) => {
     const theme = useTheme();
+    const { t } = useTranslation("timeline");
     const clip = useTimelineStore((s) => findClipById(s.clips, clipId));
     const restoreVersion = useTimelineStore((s) => s.restoreVersion);
 
@@ -229,7 +231,7 @@ export const ClipVersionHistory: React.FC<ClipVersionHistoryProps> = memo(
       >
         {clip.locked && (
           <Caption color="secondary" sx={{ px: 1, pt: 0.5 }}>
-            Unlock the clip to swap generations.
+            {t("versionHistory.unlockToSwap")}
           </Caption>
         )}
         <div css={stripStyles(theme)}>

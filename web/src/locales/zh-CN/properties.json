@@ -144,5 +144,6 @@
     "missingExplanation": "此项随节点保存，但没有任何已安装的软件包声明它。在重新安装该软件包或移除此项之前，节点将无法运行。"
   },
   "addRemoveTools": "添加/移除工具",
-  "createFolder": "新建文件夹"
+  "createFolder": "新建文件夹",
+  "couldNotLoadOllamaModels": "无法加载 Ollama 模型"
 }

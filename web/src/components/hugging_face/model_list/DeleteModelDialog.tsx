@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import {
   Dialog,
@@ -34,6 +35,7 @@ const DeleteModelDialog: React.FC<DeleteModelDialogProps> = ({
   scope = "local"
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("huggingface");
   const { allModels } = useModels(scope);
   const queryClient = useQueryClient();
   const addNotification = useNotificationStore(
@@ -198,7 +200,7 @@ const DeleteModelDialog: React.FC<DeleteModelDialogProps> = ({
           onClick={handleShowInExplorerClick}
           disabled={isExplorerDisabled || isDeleting}
         >
-          Show in Explorer
+          {t("huggingface:modelList.showInExplorer")}
         </EditorButton>
         <EditorButton density="compact" variant="text" onClick={onClose} disabled={isDeleting}>
           Cancel

@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useMemo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import NodeInfo from "../../node_menu/NodeInfo";
 import { css } from "@emotion/react";
 import { useDraggable } from "../../../hooks/useDraggable";
@@ -103,6 +104,7 @@ const DraggableNodeDocumentation: React.FC<DraggableNodeDocumentationProps> = ({
   const openNodeMenu = useNodeMenuStore((state) => state.openNodeMenu);
   const panelSize = usePanelStore((state) => state.panel.panelSize);
   const theme = useTheme();
+  const { t } = useTranslation("common");
   const cssStyles = useMemo(() => styles(theme), [theme]);
   const handleAddNode = useCallback(() => {
     if (nodeMetadata && nodeRef.current) {
@@ -134,7 +136,7 @@ const DraggableNodeDocumentation: React.FC<DraggableNodeDocumentationProps> = ({
         <div className="warning">
           {nodeType} <br />
           <span style={{ color: theme.vars.palette.grey[100] }}>
-            Sorry, this node does not exist.
+            {t("common:help.nodeDoesNotExist")}
           </span>
           <EditorButton
             variant="outlined"
@@ -143,7 +145,7 @@ const DraggableNodeDocumentation: React.FC<DraggableNodeDocumentationProps> = ({
             onClick={handleOpenNodeMenu}
             sx={{ marginTop: getSpacingPx(SPACING.lg) }}
           >
-            Search for similar nodes
+            {t("common:help.searchSimilarNodes")}
           </EditorButton>
         </div>
       );}
@@ -156,7 +158,7 @@ const DraggableNodeDocumentation: React.FC<DraggableNodeDocumentationProps> = ({
           onClick={handleAddNode}
           sx={{ marginTop: getSpacingPx(SPACING.lg), marginRight: getSpacingPx(SPACING.lg) }}
         >
-          Add Node
+          {t("common:help.addNode")}
         </EditorButton>
       </>
     );
@@ -165,7 +167,8 @@ const DraggableNodeDocumentation: React.FC<DraggableNodeDocumentationProps> = ({
     nodeType,
     handleAddNode,
     handleOpenNodeMenu,
-    theme.vars.palette.grey
+    theme.vars.palette.grey,
+    t
   ]);
 
   return (

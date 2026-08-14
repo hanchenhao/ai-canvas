@@ -91,14 +91,14 @@ const ClipTransformContextMenu: React.FC<ClipTransformContextMenuProps> = ({
       <FlexRow align="center" gap={1} sx={{ px: 2, py: 1, mb: 0.5 }}>
         <TransformIcon sx={{ fontSize: 16, color: "primary.light" }} />
         <Text size="small" weight={600} sx={{ color: "text.primary" }}>
-          Transform
+          {t("timeline:clip.sectionTransform")}
         </Text>
       </FlexRow>
 
       <Divider sx={{ mx: 1, borderColor: theme.vars.palette.grey[800] }} />
 
       <MenuItemPrimitive
-        label="Reset"
+        label={t("timeline:clip.reset")}
         icon={<RestartAltIcon sx={{ fontSize: 16 }} />}
         shortcut="."
         compact
@@ -108,19 +108,19 @@ const ClipTransformContextMenu: React.FC<ClipTransformContextMenuProps> = ({
       <Divider sx={{ mx: 1, my: 0.5, borderColor: theme.vars.palette.grey[800] }} />
 
       <MenuItemPrimitive
-        label="Rotate 180°"
+        label={t("timeline:clip.rotate180")}
         icon={<Rotate90DegreesCwIcon sx={{ fontSize: 16 }} />}
         compact
         onClick={run(onRotate180)}
       />
       <MenuItemPrimitive
-        label="Rotate 90° CW"
+        label={t("timeline:clip.rotate90Cw")}
         icon={<RotateRightIcon sx={{ fontSize: 16 }} />}
         compact
         onClick={run(onRotate90CW)}
       />
       <MenuItemPrimitive
-        label="Rotate 90° CCW"
+        label={t("timeline:clip.rotate90Ccw")}
         icon={<RotateLeftIcon sx={{ fontSize: 16 }} />}
         compact
         onClick={run(onRotate90CCW)}

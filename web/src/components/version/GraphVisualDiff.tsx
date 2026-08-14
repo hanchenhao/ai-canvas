@@ -4,6 +4,7 @@
  */
 
 import React, { useMemo, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { GraphDiff } from "../../utils/graphDiff";
 import { Graph, Node } from "../../stores/ApiTypes";
@@ -106,6 +107,7 @@ export const GraphVisualDiff: React.FC<GraphVisualDiffProps> = ({
   height = 180
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("workspace");
 
   const nodePositions = useMemo(() => {
     if (!newGraph?.nodes && !oldGraph?.nodes) {
@@ -229,7 +231,7 @@ export const GraphVisualDiff: React.FC<GraphVisualDiffProps> = ({
           justify="center"
         >
           <Caption color="secondary">
-            No changes to display
+            {t("workspace:version.noChangesToDisplay")}
           </Caption>
         </FlexColumn>
       </Surface>

@@ -124,7 +124,7 @@ const ProviderOnboardingDialog: React.FC = () => {
       title={
         <FlexColumn gap={SPACING.micro}>
           <Text size="big" weight={600}>
-            Connect an AI provider
+            {t("common:providerOnboarding.connectProvider")}
           </Text>
           <Caption sx={{ opacity: 0.7, lineHeight: 1.4 }}>
             {reason ?? subtitle}
@@ -134,9 +134,7 @@ const ProviderOnboardingDialog: React.FC = () => {
     >
       <FlexColumn gap={SPACING.lg} sx={{ mt: SPACING.xs }}>
         <Caption sx={{ opacity: 0.75, lineHeight: 1.55 }}>
-          BrainVite-AI-Canvas connects to AI providers with your own account. Pick one
-          below — your credentials are encrypted and stored locally, and you can
-          add more or switch anytime.
+          {t("common:providerOnboarding.intro")}
         </Caption>
 
         {oauthProviders.length > 0 && (
@@ -144,7 +142,7 @@ const ProviderOnboardingDialog: React.FC = () => {
             <SectionHeading
               icon={<BoltRoundedIcon sx={{ fontSize: 18 }} />}
               title={t("common:providerOnboarding.fastestWayToStart")}
-              subtitle="Sign in with one click — no key to copy."
+              subtitle={t("common:providerOnboarding.oneClickSubtitle")}
             />
             {oauthProviders.map((provider) => (
               <ProviderOnboardingCard
@@ -162,7 +160,7 @@ const ProviderOnboardingDialog: React.FC = () => {
             <SectionHeading
               icon={<KeyRoundedIcon sx={{ fontSize: 18 }} />}
               title={t("common:providerOnboarding.connectWithApiKey")}
-              subtitle="Create a key on the provider's site and paste it here."
+              subtitle={t("common:providerOnboarding.apiKeySubtitle")}
             />
             {keyProviders.map((provider) => (
               <ProviderOnboardingCard
@@ -179,8 +177,8 @@ const ProviderOnboardingDialog: React.FC = () => {
         <FlexColumn gap={SPACING.sm}>
           <SectionHeading
             icon={<ComputerRoundedIcon sx={{ fontSize: 18 }} />}
-            title="Run locally, free"
-            subtitle="No API key or internet needed."
+            title={t("common:providerOnboarding.runLocallyFree")}
+            subtitle={t("common:providerOnboarding.noKeyNeeded")}
           />
           <Card
             variant="outlined"
@@ -237,7 +235,7 @@ const ProviderOnboardingDialog: React.FC = () => {
                   )
                 }
               >
-                Get Ollama
+                {t("common:providerOnboarding.getOllama")}
               </EditorButton>
             </FlexRow>
           </Card>
@@ -253,7 +251,7 @@ const ProviderOnboardingDialog: React.FC = () => {
             startIcon={<SettingsOutlinedIcon sx={{ fontSize: 15 }} />}
             onClick={handleOpenSettings}
           >
-            See all providers in Settings
+            {t("common:providerOnboarding.seeAllProviders")}
           </EditorButton>
         </FlexRow>
       </FlexColumn>

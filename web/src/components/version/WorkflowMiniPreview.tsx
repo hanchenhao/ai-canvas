@@ -13,6 +13,7 @@
 
 import React, { useMemo } from "react";
 import { useTheme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import { Caption, FlexColumn, Surface, MOTION, BORDER_RADIUS, SPACING, getSpacingPx } from "../ui_primitives";
 import { Graph } from "../../stores/ApiTypes";
 
@@ -193,6 +194,7 @@ export const WorkflowMiniPreview: React.FC<WorkflowMiniPreviewProps> = ({
   height = 120
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation("workspace");
 
   const graph = useMemo(() => {
     if (!workflow.graph) {
@@ -260,7 +262,7 @@ export const WorkflowMiniPreview: React.FC<WorkflowMiniPreviewProps> = ({
               letterSpacing: "0.08em"
             }}
           >
-            Empty workflow
+            {t("workspace:version.emptyWorkflow")}
           </Caption>
         </FlexColumn>
       </Surface>

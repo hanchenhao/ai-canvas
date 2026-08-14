@@ -44,6 +44,7 @@ const ImageTile = memo<ImageTileProps>(({
   onOpenInViewer,
   onToggleSelect
 }) => {
+  const { t } = useTranslation("canvas");
   const handleDownloadClick = useCallback((e: React.MouseEvent) => onDownload(idx, e), [onDownload, idx]);
   const handleOpenClick = useCallback((e: React.MouseEvent) => onOpenInViewer(idx, e), [onOpenInViewer, idx]);
   const handleCheckboxClick = useCallback((e: React.MouseEvent) => onToggleSelect(idx, e), [onToggleSelect, idx]);
@@ -52,7 +53,7 @@ const ImageTile = memo<ImageTileProps>(({
     <div
       role="button"
       tabIndex={0}
-      aria-label={`Image ${idx + 1}`}
+      aria-label={t("node.imageAria", { index: idx + 1 })}
       className={`tile ${isSelected ? "selected" : ""}`}
       onDoubleClick={() => {
         if (selectionMode) return;
@@ -100,22 +101,22 @@ const ImageTile = memo<ImageTileProps>(({
             className="tile-action-btn"
           />
           <ToolbarIconButton
-            tooltip="Download"
+            tooltip={t("common:button.download")}
             tooltipPlacement="top"
             icon={<DownloadIcon />}
             className="tile-action-btn"
             size="small"
             onClick={handleDownloadClick}
-            ariaLabel={`Download image ${idx + 1}`}
+            ariaLabel={t("node.downloadImageAria", { index: idx + 1 })}
           />
           <ToolbarIconButton
-            tooltip="Open in Viewer (double-click)"
+            tooltip={t("canvas:node.openInViewer")}
             tooltipPlacement="top"
             icon={<OpenInNewIcon />}
             className="tile-action-btn"
             size="small"
             onClick={handleOpenClick}
-            ariaLabel={`Open image ${idx + 1} in viewer`}
+            ariaLabel={t("node.openImageInViewerAria", { index: idx + 1 })}
           />
         </div>
       )}

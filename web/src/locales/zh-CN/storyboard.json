@@ -86,7 +86,8 @@
     "takes": "版本 — {{count}}",
     "stillsCount": "{{count}} 张静帧",
     "clipsCount": "{{count}} 个片段",
-    "useStill": "使用第 {{number}} 张静帧"
+    "useStill": "使用第 {{number}} 张静帧",
+    "count": "{{count}} 个镜头"
   },
   "queue": {
     "still": "静帧",
@@ -115,5 +116,13 @@
     "deleteConfirm": "删除\"{{name}}\"？此操作无法撤销。",
     "storyboardName": "故事板名称",
     "storyboardsAria": "分镜列表"
+  },
+  "agentPanel": {
+    "title": "分镜助手",
+    "welcomeHint": "可以让我来执导这个分镜，例如「把这段简介拆成六个镜头」「在第 3 个镜头后加一个特写」「为每个规划好的镜头生成关键帧」或「把镜头组装成时间线」。"
+  },
+  "entities": {
+    "add": "添加",
+    "addEntities": "添加实体"
   }
 }
