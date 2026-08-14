@@ -113,6 +113,7 @@
     "delete": "Delete",
     "cancel": "Cancel",
     "deleteConfirm": "Delete \"{{name}}\"? This cannot be undone.",
-    "storyboardName": "Storyboard name"
+    "storyboardName": "Storyboard name",
+    "storyboardsAria": "Storyboards"
   }
 }

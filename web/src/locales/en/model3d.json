@@ -80,7 +80,8 @@
     "showAssistant": "Show assistant",
     "hideAssistant": "Hide assistant",
     "saveToAsset": "Save to asset",
-    "closeEditor": "Close editor"
+    "closeEditor": "Close editor",
+    "exitFullscreen": "Exit Fullscreen (Esc)"
   },
   "empty": {
     "selectObject": "Select an object to edit its properties",

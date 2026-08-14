@@ -2,7 +2,8 @@
   "canvas": [
     "contextMenu.pane.type.json",
     "imageEditing.alpha",
-    "typeFilter.api"
+    "typeFilter.api",
+    "assetInfo.id"
   ],
   "chat": [
     "progress.percent"
@@ -15,13 +16,15 @@
     "menus.userAgent",
     "panels.webhookUrl",
     "shortcuts.osMac",
-    "shortcuts.osWin"
+    "shortcuts.osWin",
+    "panels.kindWebhook"
   ],
   "huggingface": [
     "actions.huggingFaceAlt",
     "details.filesOfTotal",
     "details.sizeOfTotal",
-    "details.speedValue"
+    "details.speedValue",
+    "modelList.hubTab"
   ],
   "jobs": [
     "job.assetCountOne"
@@ -1422,5 +1425,8 @@
     "template.markdown",
     "template.tsv",
     "template.yaml"
+  ],
+  "timeline": [
+    "tracks.trackIndexTitle"
   ]
 }

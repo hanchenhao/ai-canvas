@@ -139,7 +139,63 @@
     "copyItem": "复制项",
     "reportButton": "反馈",
     "chooseSketchHint": "选择一个草图文档以在此预览。",
-    "chooseTimelineHint": "选择一个时间线序列以在此预览。"
+    "chooseTimelineHint": "选择一个时间线序列以在此预览。",
+    "missingNode": "缺失节点",
+    "missingNodeTooltip": "此节点类型缺失。请在节点菜单中搜索替代节点，或安装提供该节点类型的包。",
+    "missingNodePack": "此节点属于 {{pack}} 包，该包当前已停用。启用后即可加载此节点。",
+    "enabling": "启用中…",
+    "enablePackNodes": "启用 {{pack}} 节点",
+    "searchInPackageManager": "在包管理器中搜索 {{type}}",
+    "searchPackageManager": "搜索包管理器",
+    "inputNameRequiredTitle": "输入节点需要名称，工作流才能运行。请为此输入设置唯一名称。",
+    "inputNameRequired": "需要名称",
+    "resizeKeepAspect": "调整节点大小，保持图像宽高比",
+    "dismiss": "关闭",
+    "doubleClickToAddLabel": "双击添加标签",
+    "rerouteLabelPlaceholder": "标签",
+    "generations": "生成记录",
+    "openInViewerTitle": "在查看器中打开",
+    "undoShortcut": "撤销（Ctrl+Z）",
+    "redoShortcut": "重做（Ctrl+Y）",
+    "enableAllNodes": "启用所有节点",
+    "bypassAllNodes": "绕过所有节点",
+    "variable": "变量",
+    "livePrice": "实时价格",
+    "viewPricingOnKie": "在 kie.ai 查看定价",
+    "viewOnFal": "在 fal.ai 查看",
+    "creditsRemaining": "剩余 {{credits}}",
+    "waveform": "波形",
+    "setupNoProvider": "连接 AI 服务商后即可使用模型——添加 API 密钥开始。",
+    "setupPickModel": "运行此工作流前，请先在此处选择模型。",
+    "addApiKeys": "添加 API 密钥",
+    "setupProviderReason": "此节点需要 AI 模型。请连接服务商后再运行。",
+    "sketchOutputPreview": "草图输出预览",
+    "timelineOutputPreview": "时间线输出预览",
+    "loadWorkflowFailed": "加载工作流失败",
+    "outputTruncated": "输出已截断（共 {{total}} 段，仅显示前 {{shown}} 个字符）。",
+    "connectTwoImagesHint": "连接两张图像并运行工作流以进行对比",
+    "previewHint": "显示来自已连接节点的任意数据",
+    "imageAria": "图像 {{index}}",
+    "downloadImageAria": "下载图像 {{index}}",
+    "openImageInViewerAria": "在查看器中打开图像 {{index}}"
+  },
+  "typeFilter": {
+    "allInputTypes": "所有输入类型",
+    "allOutputTypes": "所有输出类型",
+    "local": "本地",
+    "api": "API",
+    "outputLabel": "输出：",
+    "filterBy": "按 {{label}} 筛选",
+    "filters": "筛选",
+    "node_one": "个节点",
+    "node_other": "个节点",
+    "filterHint": "按输入和输出数据类型筛选节点",
+    "inputType": "输入类型",
+    "outputType": "输出类型",
+    "searchInputType": "搜索输入类型…",
+    "searchOutputType": "搜索输出类型…",
+    "searchInputTypeAria": "搜索输入类型",
+    "searchOutputTypeAria": "搜索输出类型"
   },
   "nodeMenu": {
     "library": {
@@ -189,7 +245,12 @@
       "createTitle": "创建节点",
       "createHintClick": "点击节点",
       "createHintDrag": "将节点拖拽到画布上"
-    }
+    },
+    "showAllResults": "显示全部结果",
+    "allResults": "全部结果",
+    "home": "首页",
+    "addToFavoritesNamed": "将 {{name}} 加入收藏",
+    "removeFromFavoritesNamed": "从收藏中移除 {{name}}"
   },
   "contextMenu": {
     "copy": "复制",
@@ -326,8 +387,12 @@
       "selectAllConnected": "选中所有相连节点",
       "selectInputs": "选中输入节点",
       "selectOutputs": "选中输出节点",
-      "rightClick": "右键"
-    }
+      "rightClick": "右键",
+      "arrangeTooltip": "排列 — 对齐与分布"
+    },
+    "edit": "编辑",
+    "rename": "重命名",
+    "delete": "删除"
   },
   "inspector": {
     "closeInspector": "关闭检查器",
@@ -495,7 +560,10 @@
     "title": "代码助手",
     "codeDraft": "代码草稿",
     "cancel": "取消",
-    "packages": "依赖包"
+    "packages": "依赖包",
+    "inputs": "输入",
+    "outputs": "输出",
+    "apply": "应用"
   },
   "schemaLoader": {
     "reloadSchema": "重新加载 Schema",
@@ -506,7 +574,8 @@
     "exposeParams": "将额外参数暴露为输入："
   },
   "workflowLoader": {
-    "selectWorkflow": "选择工作流"
+    "selectWorkflow": "选择工作流",
+    "loadFailed": "加载工作流失败"
   },
   "quickActions": {
     "aiNodes": "AI 节点",
@@ -514,24 +583,6 @@
     "clickToPlaceHint": "点击放置 · Shift+点击自动添加",
     "clickToPlace": "点击放置",
     "constantSuffix": "常量"
-  },
-  "typeFilter": {
-    "allInputTypes": "所有输入类型",
-    "allOutputTypes": "所有输出类型",
-    "local": "本地",
-    "api": "API",
-    "outputLabel": "输出：",
-    "filterBy": "按 {{label}} 筛选",
-    "filters": "筛选",
-    "node_one": "个节点",
-    "node_other": "个节点",
-    "filterHint": "按输入和输出数据类型筛选节点",
-    "inputType": "输入类型",
-    "outputType": "输出类型",
-    "searchInputType": "搜索输入类型…",
-    "searchOutputType": "搜索输出类型…",
-    "searchInputTypeAria": "搜索输入类型",
-    "searchOutputTypeAria": "搜索输出类型"
   },
   "selectionToolbar": {
     "alignLeft": "左对齐",
@@ -552,7 +603,11 @@
   "quickAddDialog": {
     "ariaLabel": "快速添加节点",
     "enterSelect": "选择",
-    "escClose": "关闭"
+    "escClose": "关闭",
+    "commandLabel": "快速添加节点",
+    "searchPlaceholder": "按名称、类型或命名空间搜索节点…",
+    "noMatchingNodes": "未找到匹配的节点",
+    "typeToSearch": "输入以搜索节点…"
   },
   "nodeEditor": {
     "keyboardShortcuts": "键盘快捷键",
@@ -568,7 +623,13 @@
   },
   "favorites": {
     "noFavoritesYet": "暂无收藏",
-    "clearAllFavorites": "清除所有收藏"
+    "clearAllFavorites": "清除所有收藏",
+    "addToFavorites": "加入收藏",
+    "removeFromFavorites": "从收藏中移除",
+    "clearConfirmTitle": "清除所有收藏？",
+    "clearConfirmContent": "将移除全部 {{count}} 个收藏节点，此操作无法撤销。",
+    "clearConfirmButton": "清除收藏",
+    "clearedNotification": "收藏已清除"
   },
   "historyPanel": {
     "noRecentNodesYet": "暂无最近使用的节点",
@@ -600,7 +661,27 @@
     "downloadSelected": "下载选中素材",
     "downloadSelectedTooltip": "下载选中素材到下载文件夹",
     "compareImages": "对比图片",
-    "deleteSelected": "删除选中素材"
+    "deleteSelected": "删除选中素材",
+    "folder": "文件夹",
+    "itemCount_one": "{{count}} 个项目",
+    "itemCount_other": "{{count}} 个项目",
+    "compareImagesTooltip": "并排比较两张选中的图像",
+    "editTimeline": "编辑时间线",
+    "editTimelineTooltip": "打开此视频渲染来源的时间线",
+    "createTimelineFromVideo": "从视频创建时间线",
+    "createTimelineTooltip": "从此视频创建时间线并打开进行编辑",
+    "moveToNewFolder": "移至新文件夹",
+    "createNewFolder": "新建文件夹",
+    "moveToNewFolderTooltip": "新建文件夹并将选中素材移入其中",
+    "createNewFolderTooltip": "在当前位置新建文件夹",
+    "copyImage": "复制图片",
+    "copyVideoInfo": "复制视频信息",
+    "copyAudioInfo": "复制音频信息",
+    "copyContent": "复制内容",
+    "copyImageTooltip": "复制图片到剪贴板",
+    "copyVideoInfoTooltip": "复制视频链接和元数据到剪贴板",
+    "copyAudioInfoTooltip": "复制音频链接和元数据到剪贴板",
+    "copyContentTooltip": "复制内容到剪贴板"
   },
   "compositorEditor": {
     "webGpuUnavailable": "WebGPU 不可用",
@@ -706,7 +787,23 @@
     "canvasWidthPx": "画布宽度（像素）",
     "canvasHeightPx": "画布高度（像素）",
     "bgImageOpacity": "背景图不透明度（0 = 隐藏，1 = 完全显示）",
-    "layerOpacity": "图层不透明度 (0 - 1)"
+    "layerOpacity": "图层不透明度 (0 - 1)",
+    "connectImageThenRun": "连接一张图像，然后运行",
+    "addLayersThenRun": "添加图层，然后运行",
+    "channel": "通道",
+    "gamma": "伽马",
+    "black": "黑场",
+    "white": "白场",
+    "image": "图像",
+    "mask": "蒙版",
+    "image1": "图像 1",
+    "image2": "图像 2",
+    "result": "结果",
+    "before": "调整前",
+    "after": "调整后",
+    "brush": "画笔",
+    "eraser": "橡皮擦",
+    "connectImageAndPaste": "连接图像和粘贴节点，然后运行"
   },
   "mentionAsset": {
     "assetName": "素材名称"
@@ -729,5 +826,41 @@
     "severityInfo": "信息",
     "severityWarnings": "警告",
     "severityErrors": "错误"
+  },
+  "assetInfo": {
+    "name": "名称",
+    "type": "类型",
+    "size": "大小",
+    "duration": "时长",
+    "created": "创建时间",
+    "folder": "文件夹",
+    "workflow": "工作流",
+    "id": "ID"
+  },
+  "promptComposer": {
+    "prompt": "提示词",
+    "variables": "变量",
+    "insertVariable": "插入变量 {{name}}",
+    "insertGraphVariable": "插入由 Set Variable 节点设置的变量 {{name}}",
+    "setBySetVariable": "由 Set Variable 节点设置",
+    "placeholder": "编写提示词…输入 @ 提及素材",
+    "entities": "实体",
+    "noRecentMatch": "没有匹配的最近素材。",
+    "noAssetsUsed": "还没有使用过的素材。请生成或拖入一个素材。",
+    "noAssetsMatch": "没有匹配的素材。",
+    "noSavedAssets": "还没有保存的素材。",
+    "nameAlreadyInUse": "该名称已被使用"
+  },
+  "getVariable": {
+    "explanation": "读取由本工作流中任意 Set Variable 节点发布的变量。先等待第一个值，然后持续输出后续每个值——无需排序连线。",
+    "emptyHint": "尚未定义变量。请先在工作流中添加 Set Variable 节点。"
+  },
+  "namespaceList": {
+    "nothingFoundInNamespace": "在此命名空间中未找到 <strong>“{{term}}”</strong>",
+    "nothingFoundFor": "未找到 <strong>“{{term}}”</strong>",
+    "installAdditionalPacks": "安装更多节点包",
+    "clickHighlighted": "点击<1>高亮</1>的命名空间以查找结果。",
+    "startTyping": "直接输入即可开始新的搜索",
+    "clearSearchHint": "点击清除按钮可清空搜索"
   }
 }

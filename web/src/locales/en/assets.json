@@ -40,6 +40,9 @@
     "type": "Type",
     "modified": "Modified",
     "folder": "Folder",
+    "duration": "Duration",
+    "created": "Created",
+    "workflow": "Workflow",
     "unknown": "Unknown",
     "noAssetsToDisplay": "No assets to display",
     "typeAll": "All",
@@ -82,7 +85,10 @@
     "assets": "Assets",
     "newFolder": "New folder…",
     "folderNamePlaceholder": "Folder name…",
-    "newFolderAriaLabel": "New folder name"
+    "newFolderAriaLabel": "New folder name",
+    "assetsSelected_one": "{{count}} asset selected:",
+    "assetsSelected_other": "{{count}} assets selected:",
+    "willBeMoved": "They will be moved to the new folder."
   },
   "menu": {
     "hideFolders": "Hide folders",
@@ -132,7 +138,8 @@
     "compareWithAnother": "Compare with another image",
     "hideInfo": "Hide info",
     "showInfo": "Show info",
-    "close": "Close"
+    "close": "Close",
+    "videoUnsupported": "Your browser does not support the video element."
   },
   "renameDialog": {
     "multipleSelected": "Multiple assets selected:",

@@ -139,7 +139,63 @@
     "copyItem": "Copy item",
     "reportButton": "Report",
     "chooseSketchHint": "Choose a sketch document to preview it here.",
-    "chooseTimelineHint": "Choose a timeline sequence to preview it here."
+    "chooseTimelineHint": "Choose a timeline sequence to preview it here.",
+    "missingNode": "Missing Node",
+    "missingNodeTooltip": "This node type is missing. Search the node menu for a replacement or install the package that provides it.",
+    "missingNodePack": "This node is part of the {{pack}} pack, which is currently disabled. Enable it to load the node.",
+    "enabling": "Enabling…",
+    "enablePackNodes": "Enable {{pack}} Nodes",
+    "searchInPackageManager": "Search for {{type}} in Package Manager",
+    "searchPackageManager": "Search Package Manager",
+    "inputNameRequiredTitle": "Input nodes require a name for the workflow to run. Please set a unique name for this input.",
+    "inputNameRequired": "Name required",
+    "resizeKeepAspect": "Resize node, keeping image aspect ratio",
+    "dismiss": "Dismiss",
+    "doubleClickToAddLabel": "Double-click to add a label",
+    "rerouteLabelPlaceholder": "label",
+    "generations": "Generations",
+    "openInViewerTitle": "Open in viewer",
+    "undoShortcut": "Undo (Ctrl+Z)",
+    "redoShortcut": "Redo (Ctrl+Y)",
+    "enableAllNodes": "Enable All Nodes",
+    "bypassAllNodes": "Bypass All Nodes",
+    "variable": "Variable",
+    "livePrice": "live price",
+    "viewPricingOnKie": "View pricing on kie.ai",
+    "viewOnFal": "View on fal.ai",
+    "creditsRemaining": "{{credits}} remaining",
+    "waveform": "Waveform",
+    "setupNoProvider": "Connect an AI provider to use models — add an API key to get started.",
+    "setupPickModel": "Pick a model here before running this workflow.",
+    "addApiKeys": "Add API keys",
+    "setupProviderReason": "This node needs an AI model. Connect a provider to run it.",
+    "sketchOutputPreview": "Sketch output preview",
+    "timelineOutputPreview": "Timeline output preview",
+    "loadWorkflowFailed": "Failed to load workflow",
+    "outputTruncated": "Output truncated (showing first {{shown}} chars of {{total}} chunks).",
+    "connectTwoImagesHint": "Connect two images and run workflow to compare",
+    "previewHint": "Displays any data from connected nodes",
+    "imageAria": "Image {{index}}",
+    "downloadImageAria": "Download image {{index}}",
+    "openImageInViewerAria": "Open image {{index}} in viewer"
+  },
+  "typeFilter": {
+    "allInputTypes": "All input types",
+    "allOutputTypes": "All output types",
+    "local": "Local",
+    "api": "API",
+    "outputLabel": "Output:",
+    "filterBy": "Filter by {{label}}",
+    "filters": "Filters",
+    "node_one": "node",
+    "node_other": "nodes",
+    "filterHint": "Filter nodes by input and output data types",
+    "inputType": "Input Type",
+    "outputType": "Output Type",
+    "searchInputType": "Search input type…",
+    "searchOutputType": "Search output type…",
+    "searchInputTypeAria": "Search input type",
+    "searchOutputTypeAria": "Search output type"
   },
   "nodeMenu": {
     "library": {
@@ -189,7 +245,12 @@
       "createTitle": "Create Nodes",
       "createHintClick": "Click on a node",
       "createHintDrag": "Drag a node onto the canvas"
-    }
+    },
+    "showAllResults": "Show all results",
+    "allResults": "All results",
+    "home": "Home",
+    "addToFavoritesNamed": "Add {{name}} to favorites",
+    "removeFromFavoritesNamed": "Remove {{name}} from favorites"
   },
   "contextMenu": {
     "copy": "Copy",
@@ -326,8 +387,12 @@
       "selectAllConnected": "Select All Connected",
       "selectInputs": "Select Inputs",
       "selectOutputs": "Select Outputs",
-      "rightClick": "Right-Click"
-    }
+      "rightClick": "Right-Click",
+      "arrangeTooltip": "Arrange — align & distribute"
+    },
+    "edit": "Edit",
+    "rename": "Rename",
+    "delete": "Delete"
   },
   "inspector": {
     "closeInspector": "Close inspector",
@@ -495,7 +560,10 @@
     "title": "Code assistant",
     "codeDraft": "Code draft",
     "cancel": "Cancel",
-    "packages": "Packages"
+    "packages": "Packages",
+    "inputs": "Inputs",
+    "outputs": "Outputs",
+    "apply": "Apply"
   },
   "schemaLoader": {
     "reloadSchema": "Reload Schema",
@@ -506,7 +574,8 @@
     "exposeParams": "Expose additional parameters as inputs:"
   },
   "workflowLoader": {
-    "selectWorkflow": "Select Workflow"
+    "selectWorkflow": "Select Workflow",
+    "loadFailed": "Failed to load workflow"
   },
   "quickActions": {
     "aiNodes": "AI Nodes",
@@ -514,24 +583,6 @@
     "clickToPlaceHint": "Click to place · Shift-click to auto add",
     "clickToPlace": "Click to place",
     "constantSuffix": "Constant"
-  },
-  "typeFilter": {
-    "allInputTypes": "All input types",
-    "allOutputTypes": "All output types",
-    "local": "Local",
-    "api": "API",
-    "outputLabel": "Output:",
-    "filterBy": "Filter by {{label}}",
-    "filters": "Filters",
-    "node_one": "node",
-    "node_other": "nodes",
-    "filterHint": "Filter nodes by input and output data types",
-    "inputType": "Input Type",
-    "outputType": "Output Type",
-    "searchInputType": "Search input type…",
-    "searchOutputType": "Search output type…",
-    "searchInputTypeAria": "Search input type",
-    "searchOutputTypeAria": "Search output type"
   },
   "selectionToolbar": {
     "alignLeft": "Align Left",
@@ -552,7 +603,11 @@
   "quickAddDialog": {
     "ariaLabel": "Quick add node",
     "enterSelect": "Select",
-    "escClose": "Close"
+    "escClose": "Close",
+    "commandLabel": "Quick Add Node",
+    "searchPlaceholder": "Search nodes by name, type, or namespace...",
+    "noMatchingNodes": "No matching nodes found",
+    "typeToSearch": "Type to search for nodes..."
   },
   "nodeEditor": {
     "keyboardShortcuts": "Keyboard shortcuts",
@@ -568,7 +623,13 @@
   },
   "favorites": {
     "noFavoritesYet": "No favorites yet",
-    "clearAllFavorites": "Clear all favorites"
+    "clearAllFavorites": "Clear all favorites",
+    "addToFavorites": "Add to favorites",
+    "removeFromFavorites": "Remove from favorites",
+    "clearConfirmTitle": "Clear all favorites?",
+    "clearConfirmContent": "This removes all {{count}} favorite nodes. This cannot be undone.",
+    "clearConfirmButton": "Clear favorites",
+    "clearedNotification": "Favorites cleared"
   },
   "historyPanel": {
     "noRecentNodesYet": "No recent nodes yet",
@@ -600,7 +661,27 @@
     "downloadSelected": "Download Selected Assets",
     "downloadSelectedTooltip": "Download selected assets to your Downloads folder",
     "compareImages": "Compare Images",
-    "deleteSelected": "Delete selected assets"
+    "deleteSelected": "Delete selected assets",
+    "folder": "Folder",
+    "itemCount_one": "{{count}} item",
+    "itemCount_other": "{{count}} items",
+    "compareImagesTooltip": "Compare the two selected images side-by-side",
+    "editTimeline": "Edit Timeline",
+    "editTimelineTooltip": "Open the timeline this video was rendered from",
+    "createTimelineFromVideo": "Create Timeline from Video",
+    "createTimelineTooltip": "Create a timeline from this video and open it for editing",
+    "moveToNewFolder": "Move to new folder",
+    "createNewFolder": "Create new folder",
+    "moveToNewFolderTooltip": "Create a new folder and move selected assets into it",
+    "createNewFolderTooltip": "Create a new folder in the current location",
+    "copyImage": "Copy Image",
+    "copyVideoInfo": "Copy Video Info",
+    "copyAudioInfo": "Copy Audio Info",
+    "copyContent": "Copy Content",
+    "copyImageTooltip": "Copy image to clipboard",
+    "copyVideoInfoTooltip": "Copy video URL and metadata to clipboard",
+    "copyAudioInfoTooltip": "Copy audio URL and metadata to clipboard",
+    "copyContentTooltip": "Copy content to clipboard"
   },
   "compositorEditor": {
     "webGpuUnavailable": "WebGPU unavailable",
@@ -706,7 +787,23 @@
     "canvasWidthPx": "Canvas width in pixels",
     "canvasHeightPx": "Canvas height in pixels",
     "bgImageOpacity": "Background image opacity (0 = hide, 1 = full)",
-    "layerOpacity": "Layer opacity (0 - 1)"
+    "layerOpacity": "Layer opacity (0 - 1)",
+    "connectImageThenRun": "Connect an image, then run",
+    "addLayersThenRun": "Add layers, then run",
+    "channel": "Channel",
+    "gamma": "Gamma",
+    "black": "Black",
+    "white": "White",
+    "image": "Image",
+    "mask": "Mask",
+    "image1": "Image 1",
+    "image2": "Image 2",
+    "result": "Result",
+    "before": "Before",
+    "after": "After",
+    "brush": "Brush",
+    "eraser": "Eraser",
+    "connectImageAndPaste": "Connect Image and Paste, then run"
   },
   "mentionAsset": {
     "assetName": "Asset name"
@@ -729,5 +826,41 @@
     "severityInfo": "Info",
     "severityWarnings": "Warnings",
     "severityErrors": "Errors"
+  },
+  "assetInfo": {
+    "name": "Name",
+    "type": "Type",
+    "size": "Size",
+    "duration": "Duration",
+    "created": "Created",
+    "folder": "Folder",
+    "workflow": "Workflow",
+    "id": "ID"
+  },
+  "promptComposer": {
+    "prompt": "Prompt",
+    "variables": "Variables",
+    "insertVariable": "Insert variable {{name}}",
+    "insertGraphVariable": "Insert variable {{name}} set by a Set Variable node",
+    "setBySetVariable": "Set by a Set Variable node",
+    "placeholder": "Write a prompt… @ to mention an asset",
+    "entities": "Entities",
+    "noRecentMatch": "No recent assets match.",
+    "noAssetsUsed": "No assets used yet. Generate or drag one in.",
+    "noAssetsMatch": "No assets match.",
+    "noSavedAssets": "No saved assets yet.",
+    "nameAlreadyInUse": "Name already in use"
+  },
+  "getVariable": {
+    "explanation": "Reads a variable published by any Set Variable node in this workflow. It waits for the first value, then streams every value the setter publishes — no ordering wire needed.",
+    "emptyHint": "No variables defined yet. Add a Set Variable node to this workflow to choose one."
+  },
+  "namespaceList": {
+    "nothingFoundInNamespace": "Nothing found in this namespace for <strong>\"{{term}}\"</strong>",
+    "nothingFoundFor": "Nothing found for <strong>\"{{term}}\"</strong>",
+    "installAdditionalPacks": "Install additional node packs",
+    "clickHighlighted": "click on <1>highlighted</1> namespaces to find results.",
+    "startTyping": "just start typing to enter a new search term",
+    "clearSearchHint": "clear search by clicking the clear button"
   }
 }

@@ -155,7 +155,15 @@
     "closeBehaviorBackgroundHint": "将应用保留在系统托盘中运行。",
     "nodeSelectionModeIntro": "框选节点时：",
     "nodeSelectionModeFullHint": "节点需完全位于框内才被选中。",
-    "nodeSelectionModePartialHint": "与框相交的节点都会被选中。"
+    "nodeSelectionModePartialHint": "与框相交的节点都会被选中。",
+    "confirmLargeRunThreshold": "当一次运行将执行超过此数量的模型/服务商节点（LLM、图像、音频、API 等）时发出警告。",
+    "leftClickDragIntro": "在空白画布上按住鼠标左键拖拽时的行为。",
+    "leftClickDragPanHint": "<b>{{label}}</b>：按住左键拖拽可移动视图。",
+    "leftClickDragSelectHint": "<b>{{label}}</b>：按住左键拖拽可绘制选框；用鼠标右键或中键（触控板上用双指滚动）平移视图。",
+    "snapMovePrecision": "在画布上移动节点时的吸附精度。",
+    "snapConnectDistance": "连接节点时的吸附距离。",
+    "apiToken": "此令牌用于通过 Nodetool API 验证你的账号。",
+    "apiTokenSecurity": "请妥善保管此令牌，不要公开分享。"
   },
   "labels": {
     "largeRunThreshold": "大规模运行阈值",
@@ -235,5 +243,8 @@
     "other": "其他"
   },
   "searchProvider": "搜索提供商",
-  "getYourApiKey": "获取你的 API 密钥"
+  "getYourApiKey": "获取你的 API 密钥",
+  "remoteSettings": {
+    "noAvailable": "没有可用设置"
+  }
 }

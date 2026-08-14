@@ -80,7 +80,8 @@
     "showAssistant": "显示助手",
     "hideAssistant": "隐藏助手",
     "saveToAsset": "保存为素材",
-    "closeEditor": "关闭编辑器"
+    "closeEditor": "关闭编辑器",
+    "exitFullscreen": "退出全屏 (Esc)"
   },
   "empty": {
     "selectObject": "选择一个对象以编辑其属性",

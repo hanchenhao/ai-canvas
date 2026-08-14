@@ -100,7 +100,9 @@
     "removeTitle": "Remove this workspace?",
     "removeContent": "The workspace will be removed from BrainVite-AI-Canvas. The folder itself will not be deleted.",
     "removeConfirm": "Remove",
-    "removeCancel": "Cancel"
+    "removeCancel": "Cancel",
+    "pageTitle": "Workspaces",
+    "pageSubtitle": "Sandboxed folders that agents and workflows can read, write, and organize files in."
   },
   "select": {
     "loading": "Loading…",
@@ -139,7 +141,8 @@
     "noWorkflowId": "No workflow ID or data provided"
   },
   "canvas": {
-    "loadingWorkflow": "Loading workflow…"
+    "loadingWorkflow": "Loading workflow…",
+    "saveFailed": "Failed to save workflow"
   },
   "version": {
     "historyTitle": "Version History",
@@ -179,7 +182,8 @@
     "diffChangeCount": "{{count}} change(s)",
     "diffNodeFallback": "Node",
     "diffIdPrefix": "ID: {{id}}",
-    "diffNullValue": "null"
+    "diffNullValue": "null",
+    "noChangesToDisplay": "No changes to display"
   },
   "share": {
     "roleViewer": "Can view",
@@ -197,7 +201,9 @@
     "removeAccess": "Remove access",
     "createFailed": "Failed to create share link",
     "linkCopied": "{{role}} link copied to clipboard",
-    "linkCreated": "Share link created — copy it from the Active links list below"
+    "linkCreated": "Share link created — copy it from the Active links list below",
+    "invalidLink": "This share link is invalid or has been revoked. Ask the workflow owner for a new one.",
+    "goToEditor": "Go to editor"
   },
   "dashboard": {
     "recentWorkflows": "Recent workflows",
@@ -214,11 +220,92 @@
     "emptyTitle": "No workflows yet",
     "emptyDescription": "Create your first workflow to get started.",
     "duplicateFailed": "Failed to duplicate \"{{name}}\".",
-    "renameFailed": "Failed to rename \"{{name}}\"."
+    "renameFailed": "Failed to rename \"{{name}}\".",
+    "modelDownloadsAria": "Model downloads in progress",
+    "downloadingModels_one": "Downloading 1 model in the background",
+    "downloadingModels_other": "Downloading {{count}} models in the background",
+    "viewDetails": "View details",
+    "editedToday": "Edited today",
+    "editedYesterday": "Edited yesterday",
+    "editedDaysAgo": "Edited {{count}} days ago",
+    "editedLastWeek": "Edited last week",
+    "editedWeeksAgo": "Edited {{count}} weeks ago",
+    "editedLastMonth": "Edited last month",
+    "editedMonthsAgo": "Edited {{count}} months ago",
+    "nodesCount_one": "{{count}} node",
+    "nodesCount_other": "{{count}} nodes",
+    "gettingStarted": "Getting started",
+    "workflowsCount_one": "{{count}} workflow",
+    "workflowsCount_other": "{{count}} workflows"
   },
   "textPreview": {
     "emptyTable": "Empty table",
     "rowsTruncated": "Showing first {{count}} rows.",
     "loadFailed": "Failed to load text content"
+  },
+  "examples": {
+    "title": "Examples",
+    "subtitle": "Browse example workflows and start from one."
+  },
+  "welcome": {
+    "eyebrow": "Welcome to BrainVite-AI-Canvas",
+    "heading": "What do you want to make today?",
+    "sub": "Pick one. We'll open a chat in that mode with an example prompt ready to go — press send, or write your own. You can always change your mind, or skip and explore.",
+    "startWithAria": "Start with {{label}}: {{blurb}}",
+    "skip": "Skip - explore on my own",
+    "footerHint": "Each pick opens a chat with the prompt already written.",
+    "heroSkip": "Skip, open an empty canvas",
+    "localModelHint": "local model?",
+    "openSettings": "open settings",
+    "onboardingReason": "Almost there — your {{label}} starter needs a model to run.",
+    "couldNotOpenChat": "Could not open the {{label}} chat. Try again from the workspace.",
+    "tracks": {
+      "image": {
+        "label": "Image",
+        "blurb": "A still frame from a prompt.",
+        "threadTitle": "Image",
+        "samplePrompt": "a brutalist concrete pavilion at dusk, fog rolling in low, single warm light from inside, photograph, medium format"
+      },
+      "video": {
+        "label": "Video",
+        "blurb": "A short clip from a prompt.",
+        "threadTitle": "Video",
+        "samplePrompt": "slow dolly through an empty library at golden hour, dust in the air, 24fps, cinematic"
+      },
+      "audio": {
+        "label": "Audio",
+        "blurb": "A spoken line or sound texture.",
+        "threadTitle": "Audio",
+        "samplePrompt": "a calm narrator: you are listening to nodetool. every model, your keys, your canvas."
+      },
+      "agent": {
+        "label": "Text · Agent",
+        "blurb": "A reasoning step or written output.",
+        "threadTitle": "Chat",
+        "samplePrompt": "draft a 4-line tagline for a creative tool that runs every AI model locally or in the cloud, no hype words"
+      }
+    }
+  },
+  "textEditor": {
+    "unsavedChanges": "Unsaved changes",
+    "saving": "Saving…",
+    "savedNotification": "Saved {{name}}",
+    "saveFailedNotification": "Failed to save {{name}}: {{message}}",
+    "loadFailed": "Failed to load text content"
+  },
+  "image": {
+    "loadFailed": "Failed to load image",
+    "notFound": "Image not found"
+  },
+  "script": {
+    "cast": "Cast",
+    "assistant": "Assistant",
+    "dockAria": "Script cast and assistant"
+  },
+  "chat": {
+    "conversationNotFound": "Conversation not found"
+  },
+  "text": {
+    "loadFailed": "Failed to load text asset"
   }
 }

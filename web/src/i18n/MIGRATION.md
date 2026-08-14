@@ -53,9 +53,16 @@ web/src/
 | `huggingface`   | HuggingFace 集成 | 手工维护 |
 | `tutorials`     | 教程页 | 手工维护 |
 
-**当前覆盖**:全部 22 个 UI namespace 的 en/zh key 完全对等(`localeParity.test.ts` 守卫)。节点库 `nodes.json` 中文翻译覆盖度 100%(2923 个节点 / 30987 个 leaf key);UI 文案覆盖了设置页、顶栏、左侧栏、删除对话框、悬浮工具栏、工作流列表、Inspector、节点搜索/库/信息面板、Chain 编辑器、画布右键菜单、Timeline / Sketch / Storyboard 三个专业编辑器、版本历史、资产面板、属性编辑器、诊断面板、颜色选择器、PDF 查看器、键盘快捷键帮助、portal/dashboard、provider-onboarding 对话框、audio/video 录制器等。`identical-allowlist.json` 锁定了仍 en==zh 的合法 key(模型名、单位、占位符),后续误译会被守卫测试拦截。
+**当前覆盖**:全部 22 个 UI namespace 的 en/zh key 完全对等(`localeParity.test.ts` 守卫)。节点库 `nodes.json` 中文翻译覆盖度 100%(2923 个节点 / 30987 个 leaf key);UI 文案覆盖了设置页、顶栏、左侧栏、删除对话框、悬浮工具栏、工作流列表、Inspector、节点搜索/库/信息面板、Chain 编辑器、画布右键菜单、Timeline / Sketch / Storyboard 三个专业编辑器、版本历史、资产面板、属性编辑器、诊断面板、颜色选择器、PDF 查看器、键盘快捷键帮助、portal/dashboard、provider-onboarding 对话框、audio/video 录制器等,以及全部组件级 `title=` / `placeholder=` / `aria-label=` / `tooltip=` 属性文案。`identical-allowlist.json` 锁定了仍 en==zh 的合法 key(模型名、单位、占位符),后续误译会被守卫测试拦截。
 
-**仍未迁移的硬编码英文**(2026-08-13 实测,约 100 文件 / 260+ 字符串):`properties/`(19 文件,主要属性编辑器 tooltip/placeholder)、`sketch/`(15 文件)、`timeline/`(10 文件)、`hugging_face/`(9 文件)、`script/`(6 文件)、`chain_editor/`(6 文件)、`workflows/`(4)、`textEditor/`(4)、`panels/`(4)、`menus/`(4)、`inputs/`(4)、`workspace/`(3)、`entities/`(2)、`common/`(2)、`color_picker/`(2)等。这些目录的 locale JSON keys 大部分已预置(`properties.json` / `sketch.json` / `timeline.json` / `huggingface.json` 已有翻译),只是组件代码尚未改为 `useTranslation` 调用。后续按本指南模式逐目录批量迁移即可。
+**仍未迁移的硬编码英文**(2026-08-14 复扫):组件级 `title=` / `placeholder=` / `aria-label=` / `tooltip=` / `label=` 等属性已全部接入 `useTranslation`,此前「keys 已预置、组件未接线」的约 100 文件 / 260+ 字符串 backlog 已清零;同日复扫补上了单行正则漏掉的多行 JSX 句子(WelcomeFlow 欢迎卡片、ModelListIndex 空态、SettingsMenu 设置描述、NamespaceList 无结果提示、CostGuide 计费说明等约 40 处)。剩余的有意保留项:
+
+- `color_picker/ColorInputs.tsx` 的单字母通道标签(R/G/B/H/S/L/A/C/M/Y/K)与十六进制占位符 `FFFFFF`——国际通用记号。
+- `LayoutTest.tsx` 与 `preview/ComponentPreview.tsx`——开发用组件陈列页,不对终端用户暴露。
+- 单位与格式示例(`Hz`、`my_workflow_tool` 占位符、`ID`)。
+- `throw new Error(...)` 内部不变式与 agent 工具错误串(约 100 处)——不渲染为 UI 文案,面向开发者/模型,保留英文利于 grep 与模型理解。
+- `ui_primitives/` 与 `editor_ui/` 内部的默认文案。
+- 欢迎流程的示例提示词以外的模式标签(`image` / `video` / `audio` / `agent` 单字 chip)——技术模式名,保留英文。
 
 ## 模式
 
@@ -233,9 +240,11 @@ i18n 主迁移已完成。后续维护关注:
 1. **新增节点流程**:新增节点源码后跑 `npm run extract:nodes` 重新生成 `en/nodes.json`,再跑 `scripts/translate-nodes-batch2.mjs` 得到首版 zh-CN 翻译,最后人工审校。`localeParity.test.ts` 会拦截漏译。
 2. **新错误码**:当前 16 个 `ApiErrorCode` 都已有翻译。新增码时记得同步 `errors.json`。
 3. **节点描述润色**:`zh-CN/nodes.json` 已 100% key 覆盖,但 `fal.*` / `replicate.*` 中部分长描述因模型名括注保留了英文片段。深度润色需要语义级翻译,优先级低于新功能开发。
-4. **新 UI 表面**:任何新增组件都必须用 `useTranslation`,并在同一 PR 内补 en + zh-CN 两份 key。硬编码英文 JSX 文本的快速复扫命令:
+4. **新 UI 表面**:任何新增组件都必须用 `useTranslation`,并在同一 PR 内补 en + zh-CN 两份 key。硬编码英文 JSX 文本的快速复扫命令(单行 + 多行两条都跑):
 
    ```bash
    cd web/src && grep -rl --include="*.tsx" -E ">[A-Z][a-z]+( [A-Za-z']+){1,6}<" components/ \
+     | grep -v __tests__ | grep -v ui_primitives | grep -v editor_ui
+   grep -rn --include="*.tsx" -E '^\s{6,}[A-Z][a-z]+( [a-z'\'']+){2,9}[.!?]?\s*$' components/ \
      | grep -v __tests__ | grep -v ui_primitives | grep -v editor_ui
    ```

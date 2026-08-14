@@ -64,7 +64,15 @@
     "duplicateLayer": "Duplicate layer",
     "revertLayerToDraft": "Revert layer to draft",
     "openInNodeEditor": "Open in Node Editor",
-    "openLayerWorkflow": "Open layer workflow in node editor"
+    "openLayerWorkflow": "Open layer workflow in node editor",
+    "expandGroup": "Expand group",
+    "collapseGroup": "Collapse group",
+    "showAllLayers": "Show all layers",
+    "soloLayer": "Solo this layer",
+    "inputHidden": "Input hidden",
+    "outputHidden": "Output hidden",
+    "hideLayerAria": "Hide {{name}}",
+    "showLayerAria": "Show {{name}}"
   },
   "selection": {
     "edit": "Edit",
@@ -97,7 +105,9 @@
     "showResizeHandles": "Show resize handles on canvas",
     "hideResizeHandles": "Hide resize handles on canvas",
     "toggleResizeHandles": "Toggle canvas resize handles",
-    "preset": "Canvas size preset"
+    "preset": "Canvas size preset",
+    "resizeHandles": "Resize handles",
+    "aspectAndResolution": "Aspect & resolution"
   },
   "list": {
     "newSketch": "New sketch",
@@ -323,7 +333,15 @@
     "notFoundDescription": "The image document you requested does not exist or you do not have access to it."
   },
   "colorPicker": {
-    "cancelChange": "Cancel color change"
+    "cancelChange": "Cancel color change",
+    "cancelTooltip": "Cancel — keep previous color",
+    "hexAria": "Hex color",
+    "redAria": "Red",
+    "greenAria": "Green",
+    "blueAria": "Blue",
+    "hueAria": "Hue (degrees)",
+    "saturationAria": "Saturation (percent)",
+    "lightnessAria": "Lightness (percent)"
   },
   "sketchName": {
     "ariaLabel": "Sketch name"
@@ -339,7 +357,32 @@
     "closeKeyboardShortcuts": "Close keyboard shortcuts",
     "imageEditorShortcuts": "Image editor shortcuts",
     "noDocumentId": "No document id",
-    "routeMissingDocId": "The sketch route requires a documentId path parameter."
+    "routeMissingDocId": "The sketch route requires a documentId path parameter.",
+    "undo": "Undo",
+    "redo": "Redo",
+    "undoWithCombo": "Undo ({{combo}})",
+    "redoWithCombo": "Redo ({{combo}})",
+    "discardChanges": "Discard changes",
+    "saveAndClose": "Save & Close",
+    "saveAndCloseAria": "Save and close",
+    "close": "Close",
+    "defaultTitle": "Image Editor",
+    "penPressureOff": "Turn off pen pressure",
+    "penPressureOn": "Turn on pen pressure",
+    "hideKeyboardShortcuts": "Hide keyboard shortcuts",
+    "showKeyboardShortcuts": "Show keyboard shortcuts",
+    "symmetryTooltip": "Symmetry: {{label}}",
+    "symmetryOff": "Off",
+    "symmetryHorizontal": "Horizontal",
+    "symmetryVertical": "Vertical",
+    "symmetryDual": "Dual Axis",
+    "symmetryRadial": "Radial ({{count}})",
+    "symmetryMandala": "Mandala ({{count}})",
+    "symmetryRays": "Rays: {{count}}",
+    "discardChangesQuestion": "Discard changes?",
+    "tabShortcuts": "Shortcuts",
+    "tabKeyboard": "Keyboard",
+    "searchShortcutsPlaceholder": "Search shortcuts"
   },
   "canvasContextMenu": {
     "swapFgBgColors": "Swap foreground and background colors",
@@ -347,13 +390,22 @@
     "layerViaCopy": "Layer via Copy",
     "layerViaCut": "Layer via Cut",
     "flipHorizontal": "Flip Horizontal",
-    "flipVertical": "Flip Vertical"
+    "flipVertical": "Flip Vertical",
+    "fg": "FG",
+    "bg": "BG",
+    "deselect": "Deselect",
+    "reselect": "Reselect",
+    "selectionSection": "Selection",
+    "toolsSection": "Tools"
   },
   "colorSwatch": {
     "background": "Background Color",
     "foreground": "Foreground Color",
     "backgroundAria": "Background color",
-    "foregroundAria": "Foreground color"
+    "foregroundAria": "Foreground color",
+    "swapColors": "Swap Colors (X)",
+    "resetToBlackWhite": "Reset to B/W (D)",
+    "resetToBlackWhiteAria": "Reset to black and white (D)"
   },
   "layerVersion": {
     "restoreThisVersion": "Restore this version",
@@ -361,7 +413,15 @@
     "deleteVersion": "Delete version",
     "failedToLoad": "Failed to load versions",
     "noVersionsYet": "No versions yet",
-    "successfulGenerations": "Successful generations will appear here"
+    "successfulGenerations": "Successful generations will appear here",
+    "markFavorite": "Mark as favorite (prevents pruning)",
+    "removeFavorite": "Remove from favorites",
+    "deleteTitle": "Delete version?",
+    "deleteBody": "This version will be permanently removed. The underlying job and asset are not deleted.",
+    "versions": "Versions",
+    "versionsWithCount": "Versions ({{count}})",
+    "collapseVersions": "Collapse versions",
+    "expandVersions": "Expand versions"
   },
   "generatedLayer": {
     "createTitle": "Create generated layer",
@@ -370,13 +430,161 @@
     "generationFailed": "Generation failed",
     "couldNotLoadWorkflows": "Could not load workflows.",
     "noImageOutput": "None of your workflows have an image output. Add an ImageOutput, MaskOutput, or Output node to a workflow to use it here.",
-    "noBinding": "This layer does not have a generated-layer binding yet."
+    "noBinding": "This layer does not have a generated-layer binding yet.",
+    "searchPlaceholder": "Search workflows…",
+    "untitledWorkflow": "Untitled workflow",
+    "pickWorkflowHint": "Pick any workflow whose graph has an image output node.",
+    "creating": "Creating…",
+    "createLayer": "Create layer",
+    "createFailed": "Failed to create layer.",
+    "outputsCount_one": "{{count}} output",
+    "outputsCount_other": "{{count}} outputs",
+    "noMatchFilter": "No workflows match “{{filter}}”.",
+    "multipleOutputs": "This workflow has multiple image outputs. Pick one:",
+    "promptTitle": "Prompt"
   },
   "favorites": {
     "clickStarHint": "Click the star next to any node to add it here."
   },
   "inspector": {
     "selectSingleLayer": "Select a single layer to inspect.",
-    "selectLayer": "Select a layer to inspect."
+    "selectLayer": "Select a layer to inspect.",
+    "title": "Inspector",
+    "layersSelected_one": "{{count}} layer selected",
+    "layersSelected_other": "{{count}} layers selected"
+  },
+  "transformMenu": {
+    "freeTransform": "Free Transform",
+    "commit": "Commit",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "rotate90Cw": "Rotate 90° CW",
+    "rotate90Ccw": "Rotate 90° CCW"
+  },
+  "aiToolbar": {
+    "generateLayer": "Generate Layer",
+    "generateLayerTooltip": "Generate Layer — bind a new layer to any workflow with an image output.",
+    "noStaleLayers": "No stale layers.",
+    "regenStaleTooltip_one": "Re-generate {{count}} stale layer in dependency order.",
+    "regenStaleTooltip_other": "Re-generate {{count}} stale layers in dependency order.",
+    "regenerateStale": "Re-generate Stale ({{count}})",
+    "regenTitle": "Re-generate stale layers?",
+    "regenerate": "Re-generate",
+    "staleReady_one": "{{count}} stale layer is ready to run.",
+    "staleReady_other": "{{count}} stale layers are ready to run.",
+    "lockedSkipped_one": "{{count}} locked layer is skipped.",
+    "lockedSkipped_other": "{{count}} locked layers are skipped.",
+    "sequentialNote": "Layers run sequentially; the queue stops at the first failure so you can address it before continuing.",
+    "regenFailedToast": "Regenerated {{started}}, failed at {{failed}} layer(s)."
+  },
+  "directGenPanel": {
+    "promptPlaceholder": "Describe the image…",
+    "editStrengthHeader": "Edit Strength",
+    "strengthLabel": "Strength {{value}}",
+    "inferenceStepsHeader": "Inference Steps",
+    "stepsLabel": "{{count}} steps",
+    "noSourceLayers": "No source layers available - paint something on a layer first.",
+    "sourceLabel": "Source",
+    "regenerate": "Regenerate",
+    "doneAsset": "Done. Asset {{id}}."
+  },
+  "paintedLayerPanel": {
+    "maskLayer": "Mask layer",
+    "group": "Group",
+    "paintedLayer": "Painted layer",
+    "opacity": "Opacity: {{value}}%",
+    "blendMode": "Blend mode: {{mode}}",
+    "bounds": "Bounds: {{width}}×{{height}} @ ({{x}}, {{y}})",
+    "effects": "Effects: {{count}}",
+    "effectsNone": "Effects: none",
+    "sectionTitle": "Layer"
+  },
+  "layerActions": {
+    "layer": "Layer",
+    "cancelGeneration": "Cancel generation",
+    "starting": "Starting…",
+    "generateTooltip": "Generate layer from the bound workflow and overrides",
+    "cancelGenerationAria": "Cancel layer generation",
+    "generateLayerAria": "Generate layer",
+    "duplicateTooltip": "Duplicate — copies overrides; tweak params for a variation",
+    "lockedTooltip": "Locked — successful generations do not replace current output",
+    "unlockedTooltip": "Unlocked — successful generations replace current output",
+    "unlockAria": "Unlock layer",
+    "lockAria": "Lock layer",
+    "revertTooltip": "Revert — clear the current generation back to draft",
+    "duplicateFailed": "Failed to duplicate layer",
+    "startGenerationFailed": "Failed to start layer generation",
+    "cancelGenerationFailed": "Failed to cancel generation"
+  },
+  "penPressure": {
+    "pressure": "Pressure",
+    "affectsSize": "Size",
+    "affectsOpacity": "Opacity",
+    "affectsBoth": "Both",
+    "lightEnd": "Light end",
+    "lightEndTooltip": "Size/opacity at minimum pressure. Slider uses eased mapping so the upper range is easier to dial in.",
+    "curve": "Curve",
+    "curveTooltip": "Pressure exponent before mapping: 1 = linear; higher = need firmer pressure for full size"
+  },
+  "refineSelection": {
+    "modify": "Modify",
+    "feather": "Feather",
+    "smooth": "Smooth",
+    "border": "Border",
+    "grow": "Grow",
+    "shrink": "Shrink"
+  },
+  "toolSettings": {
+    "advanced": "Advanced",
+    "assistOff": "Off",
+    "assistOffTooltip": "No stroke assist. Tip follows the raw pointer.",
+    "assistCustom": "Custom",
+    "assistCustomTooltip": "Tune algorithm, strength and angle snap manually.",
+    "presetSmooth": "Smooth",
+    "presetSmoothTooltip": "Rolling-average stabilizer. Filters jitter while the tip keeps following the cursor — good for general drawing.",
+    "presetLazy": "Lazy",
+    "presetLazyTooltip": "Rope/leash. Tip stays still until the cursor exceeds a dead-zone radius, then trails behind in a straight line. Best for slow, deliberate inking.",
+    "presetInk": "Ink",
+    "presetInkTooltip": "Lazy leash + 45° angle snap. Long strokes lock to nearest 45° direction — for clean axis-aligned linework.",
+    "strength": "Strength",
+    "modeStabilizer": "Stabilizer",
+    "modeStabilizerTooltip": "Rolling-average smoothing — tip follows the cursor along a low-pass-filtered path.",
+    "modeDrag": "Drag",
+    "modeDragTooltip": "Leash drag — tip stays put inside a dead-zone, then trails the cursor along a straight line.",
+    "snapFree": "Free",
+    "snapFreeTooltip": "No angle snap.",
+    "snapAngleTooltip": "Snap stroke direction to nearest {{angle}}°.",
+    "snap": "Snap",
+    "brushRound": "Round",
+    "brushSoft": "Soft",
+    "brushAir": "Air",
+    "brushSpray": "Spray",
+    "size": "Size",
+    "opacity": "Opacity",
+    "hardness": "Hard",
+    "roundness": "Round",
+    "angle": "Angle",
+    "pixel": "Pixel",
+    "pixelTooltip": "Pixel-art mode. Each dab is a crisp N×N square centered on the pixel under the cursor.",
+    "pencilSoft": "Soft",
+    "pencilSoftTooltip": "Soft mode. Antialiased circular dabs — feels like a small brush.",
+    "eraserBrush": "Brush",
+    "eraserBrushTooltip": "Erase with the current brush stamp (soft / hard / spray follow brush settings).",
+    "eraserPencil": "Pencil",
+    "eraserPencilTooltip": "Erase with crisp pencil dabs — follows the pencil tool's Pixel/Soft toggle.",
+    "stabilize": "Stabilize"
+  },
+  "generatePopover": {
+    "promptAria": "Generation prompt",
+    "promptPlaceholder": "Describe the image…",
+    "selectModel": "Select Model"
+  },
+  "agentPanel": {
+    "title": "Editor Assistant",
+    "welcome": "Ask me to edit the image — e.g. \"generate a mountain landscape on a new layer\", \"add a blank layer filled with black\", or \"set the background layer to 50% opacity\".",
+    "docsLabel": "Sketch editor"
+  },
+  "renderer": {
+    "sketchPreview": "Sketch preview"
   }
 }

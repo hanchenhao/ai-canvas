@@ -40,6 +40,9 @@
     "type": "类型",
     "modified": "修改时间",
     "folder": "文件夹",
+    "duration": "时长",
+    "created": "创建时间",
+    "workflow": "工作流",
     "unknown": "未知",
     "noAssetsToDisplay": "暂无素材",
     "typeAll": "全部",
@@ -82,7 +85,10 @@
     "assets": "素材库",
     "newFolder": "新建文件夹…",
     "folderNamePlaceholder": "文件夹名称…",
-    "newFolderAriaLabel": "新文件夹名称"
+    "newFolderAriaLabel": "新文件夹名称",
+    "assetsSelected_one": "已选择 {{count}} 个资产：",
+    "assetsSelected_other": "已选择 {{count}} 个资产：",
+    "willBeMoved": "它们将被移动到新文件夹。"
   },
   "menu": {
     "hideFolders": "隐藏文件夹",
@@ -132,7 +138,8 @@
     "compareWithAnother": "与另一张图片对比",
     "hideInfo": "隐藏信息",
     "showInfo": "显示信息",
-    "close": "关闭"
+    "close": "关闭",
+    "videoUnsupported": "你的浏览器不支持 video 元素。"
   },
   "renameDialog": {
     "multipleSelected": "已选中多个素材：",

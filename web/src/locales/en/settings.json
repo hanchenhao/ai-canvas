@@ -155,7 +155,15 @@
     "closeBehaviorBackgroundHint": "Keeps the app running in the system tray.",
     "nodeSelectionModeIntro": "When drawing a selection box for node selections:",
     "nodeSelectionModeFullHint": "nodes have to be fully enclosed.",
-    "nodeSelectionModePartialHint": "intersecting nodes will be selected."
+    "nodeSelectionModePartialHint": "intersecting nodes will be selected.",
+    "confirmLargeRunThreshold": "Warn when a run would execute more than this many model/provider nodes (LLM, image, audio, API, etc.).",
+    "leftClickDragIntro": "What dragging with the left mouse button does on empty canvas.",
+    "leftClickDragPanHint": "<b>{{label}}</b> left-drag moves the view.",
+    "leftClickDragSelectHint": "<b>{{label}}</b> left-drag draws a selection box; pan with the right or middle mouse button (and two-finger scroll on a trackpad).",
+    "snapMovePrecision": "Snap precision for moving nodes on the canvas.",
+    "snapConnectDistance": "Snap distance for connecting nodes.",
+    "apiToken": "This token is used to authenticate your account with the Nodetool API.",
+    "apiTokenSecurity": "Keep this token secure and do not share it publicly"
   },
   "labels": {
     "largeRunThreshold": "Large-Run Threshold",
@@ -235,5 +243,8 @@
     "other": "Other"
   },
   "searchProvider": "Search Provider",
-  "getYourApiKey": "GET YOUR API KEY"
+  "getYourApiKey": "GET YOUR API KEY",
+  "remoteSettings": {
+    "noAvailable": "No settings available"
+  }
 }

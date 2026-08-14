@@ -100,7 +100,9 @@
     "removeTitle": "移除此工作区？",
     "removeContent": "该工作区将从 BrainVite-AI-Canvas 中移除，文件夹本身不会被删除。",
     "removeConfirm": "移除",
-    "removeCancel": "取消"
+    "removeCancel": "取消",
+    "pageTitle": "工作区",
+    "pageSubtitle": "供智能体和工作流读取、写入和整理文件的沙箱文件夹。"
   },
   "select": {
     "loading": "加载中…",
@@ -139,7 +141,8 @@
     "noWorkflowId": "未提供工作流 ID 或数据"
   },
   "canvas": {
-    "loadingWorkflow": "正在加载工作流…"
+    "loadingWorkflow": "正在加载工作流…",
+    "saveFailed": "保存工作流失败"
   },
   "version": {
     "historyTitle": "版本历史",
@@ -179,7 +182,8 @@
     "diffChangeCount": "{{count}} 处更改",
     "diffNodeFallback": "节点",
     "diffIdPrefix": "ID：{{id}}",
-    "diffNullValue": "空"
+    "diffNullValue": "空",
+    "noChangesToDisplay": "没有可显示的更改"
   },
   "share": {
     "roleViewer": "可查看",
@@ -197,7 +201,9 @@
     "removeAccess": "移除访问权限",
     "createFailed": "创建分享链接失败",
     "linkCopied": "{{role}} 链接已复制到剪贴板",
-    "linkCreated": "分享链接已创建——请从下方的“有效链接”列表中复制"
+    "linkCreated": "分享链接已创建——请从下方的“有效链接”列表中复制",
+    "invalidLink": "此分享链接无效或已被撤销。请向工作流所有者索取新链接。",
+    "goToEditor": "前往编辑器"
   },
   "dashboard": {
     "recentWorkflows": "最近的工作流",
@@ -214,11 +220,92 @@
     "emptyTitle": "暂无工作流",
     "emptyDescription": "创建你的第一个工作流以开始使用。",
     "duplicateFailed": "复制“{{name}}”失败。",
-    "renameFailed": "重命名“{{name}}”失败。"
+    "renameFailed": "重命名“{{name}}”失败。",
+    "modelDownloadsAria": "模型下载进行中",
+    "downloadingModels_one": "正在后台下载 1 个模型",
+    "downloadingModels_other": "正在后台下载 {{count}} 个模型",
+    "viewDetails": "查看详情",
+    "editedToday": "今天编辑过",
+    "editedYesterday": "昨天编辑过",
+    "editedDaysAgo": "{{count}} 天前编辑过",
+    "editedLastWeek": "上周编辑过",
+    "editedWeeksAgo": "{{count}} 周前编辑过",
+    "editedLastMonth": "上个月编辑过",
+    "editedMonthsAgo": "{{count}} 个月前编辑过",
+    "nodesCount_one": "{{count}} 个节点",
+    "nodesCount_other": "{{count}} 个节点",
+    "gettingStarted": "新手引导",
+    "workflowsCount_one": "{{count}} 个工作流",
+    "workflowsCount_other": "{{count}} 个工作流"
   },
   "textPreview": {
     "emptyTable": "空表格",
     "rowsTruncated": "仅显示前 {{count}} 行。",
     "loadFailed": "加载文本内容失败"
+  },
+  "examples": {
+    "title": "示例",
+    "subtitle": "浏览示例工作流，任选一个开始使用。"
+  },
+  "welcome": {
+    "eyebrow": "欢迎使用 BrainVite-AI-Canvas",
+    "heading": "今天想做点什么？",
+    "sub": "任选一个，我们会以对应的模式打开一个对话，并预填好示例提示词——直接发送，或改写成你自己的。随时可以改变主意，也可以跳过后自行探索。",
+    "startWithAria": "从{{label}}开始：{{blurb}}",
+    "skip": "跳过——自己探索",
+    "footerHint": "每个选项都会打开一个已写好提示词的对话。",
+    "heroSkip": "跳过，打开空白画布",
+    "localModelHint": "想用本地模型？",
+    "openSettings": "打开设置",
+    "onboardingReason": "就差一步——你的{{label}}入门还需要一个模型来运行。",
+    "couldNotOpenChat": "无法打开{{label}}对话，请从工作区重试。",
+    "tracks": {
+      "image": {
+        "label": "图像",
+        "blurb": "根据提示词生成一张静态图像。",
+        "threadTitle": "图像",
+        "samplePrompt": "黄昏时分的粗野主义混凝土亭，低雾缭绕，室内透出一盏暖光，摄影，中画幅"
+      },
+      "video": {
+        "label": "视频",
+        "blurb": "根据提示词生成一段短视频。",
+        "threadTitle": "视频",
+        "samplePrompt": "黄金时刻缓慢推镜穿过空无一人的图书馆，空气中浮尘飞舞，24fps，电影感"
+      },
+      "audio": {
+        "label": "音频",
+        "blurb": "一句人声台词或一种声音质感。",
+        "threadTitle": "音频",
+        "samplePrompt": "沉静的旁白：你正在收听 nodetool。每一个模型，你的密钥，你的画布。"
+      },
+      "agent": {
+        "label": "文本 · 智能体",
+        "blurb": "一步推理或一段文字产出。",
+        "threadTitle": "对话",
+        "samplePrompt": "为一款能在本地或云端运行各种 AI 模型的创作工具写一句四行的标语，不要用夸张的宣传词"
+      }
+    }
+  },
+  "textEditor": {
+    "unsavedChanges": "未保存的更改",
+    "saving": "保存中…",
+    "savedNotification": "已保存 {{name}}",
+    "saveFailedNotification": "保存 {{name}} 失败：{{message}}",
+    "loadFailed": "加载文本内容失败"
+  },
+  "image": {
+    "loadFailed": "加载图像失败",
+    "notFound": "未找到图像"
+  },
+  "script": {
+    "cast": "演员",
+    "assistant": "助手",
+    "dockAria": "脚本演员与助手"
+  },
+  "chat": {
+    "conversationNotFound": "未找到对话"
+  },
+  "text": {
+    "loadFailed": "加载文本资产失败"
   }
 }

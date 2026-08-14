@@ -64,7 +64,15 @@
     "duplicateLayer": "复制图层",
     "revertLayerToDraft": "将图层恢复为草稿",
     "openInNodeEditor": "在节点编辑器中打开",
-    "openLayerWorkflow": "在节点编辑器中打开图层工作流"
+    "openLayerWorkflow": "在节点编辑器中打开图层工作流",
+    "expandGroup": "展开图层组",
+    "collapseGroup": "收起图层组",
+    "showAllLayers": "显示所有图层",
+    "soloLayer": "单独显示此图层",
+    "inputHidden": "输入已隐藏",
+    "outputHidden": "输出已隐藏",
+    "hideLayerAria": "隐藏 {{name}}",
+    "showLayerAria": "显示 {{name}}"
   },
   "selection": {
     "edit": "编辑",
@@ -97,7 +105,9 @@
     "showResizeHandles": "在画布上显示调整大小手柄",
     "hideResizeHandles": "隐藏画布上的调整大小手柄",
     "toggleResizeHandles": "切换画布调整大小手柄",
-    "preset": "画布尺寸预设"
+    "preset": "画布尺寸预设",
+    "resizeHandles": "调整大小手柄",
+    "aspectAndResolution": "宽高比与分辨率"
   },
   "list": {
     "newSketch": "新建草图",
@@ -323,7 +333,15 @@
     "notFoundDescription": "您请求的图像文档不存在，或您没有访问权限。"
   },
   "colorPicker": {
-    "cancelChange": "取消颜色更改"
+    "cancelChange": "取消颜色更改",
+    "cancelTooltip": "取消 — 保留之前的颜色",
+    "hexAria": "十六进制颜色",
+    "redAria": "红色",
+    "greenAria": "绿色",
+    "blueAria": "蓝色",
+    "hueAria": "色相（度）",
+    "saturationAria": "饱和度（百分比）",
+    "lightnessAria": "明度（百分比）"
   },
   "sketchName": {
     "ariaLabel": "草图名称"
@@ -339,7 +357,32 @@
     "closeKeyboardShortcuts": "关闭键盘快捷键",
     "imageEditorShortcuts": "图像编辑器快捷键",
     "noDocumentId": "没有文档 ID",
-    "routeMissingDocId": "草图路由需要 documentId 路径参数。"
+    "routeMissingDocId": "草图路由需要 documentId 路径参数。",
+    "undo": "撤销",
+    "redo": "重做",
+    "undoWithCombo": "撤销（{{combo}}）",
+    "redoWithCombo": "重做（{{combo}}）",
+    "discardChanges": "放弃修改",
+    "saveAndClose": "保存并关闭",
+    "saveAndCloseAria": "保存并关闭",
+    "close": "关闭",
+    "defaultTitle": "图像编辑器",
+    "penPressureOff": "关闭画笔压感",
+    "penPressureOn": "开启画笔压感",
+    "hideKeyboardShortcuts": "隐藏键盘快捷键",
+    "showKeyboardShortcuts": "显示键盘快捷键",
+    "symmetryTooltip": "对称：{{label}}",
+    "symmetryOff": "关闭",
+    "symmetryHorizontal": "水平",
+    "symmetryVertical": "垂直",
+    "symmetryDual": "双轴",
+    "symmetryRadial": "径向（{{count}}）",
+    "symmetryMandala": "曼陀罗（{{count}}）",
+    "symmetryRays": "射线数：{{count}}",
+    "discardChangesQuestion": "放弃修改？",
+    "tabShortcuts": "快捷键",
+    "tabKeyboard": "键盘",
+    "searchShortcutsPlaceholder": "搜索快捷键"
   },
   "canvasContextMenu": {
     "swapFgBgColors": "交换前景色和背景色",
@@ -347,13 +390,22 @@
     "layerViaCopy": "通过复制新建图层",
     "layerViaCut": "通过剪切新建图层",
     "flipHorizontal": "水平翻转",
-    "flipVertical": "垂直翻转"
+    "flipVertical": "垂直翻转",
+    "fg": "前景",
+    "bg": "背景",
+    "deselect": "取消选择",
+    "reselect": "重新选择",
+    "selectionSection": "选区",
+    "toolsSection": "工具"
   },
   "colorSwatch": {
     "background": "背景色",
     "foreground": "前景色",
     "backgroundAria": "背景色",
-    "foregroundAria": "前景色"
+    "foregroundAria": "前景色",
+    "swapColors": "交换颜色（X）",
+    "resetToBlackWhite": "重置为黑/白（D）",
+    "resetToBlackWhiteAria": "重置为黑白（D）"
   },
   "layerVersion": {
     "restoreThisVersion": "恢复此版本",
@@ -361,7 +413,15 @@
     "deleteVersion": "删除版本",
     "failedToLoad": "加载版本失败",
     "noVersionsYet": "暂无版本",
-    "successfulGenerations": "生成成功的结果会显示在这里"
+    "successfulGenerations": "生成成功的结果会显示在这里",
+    "markFavorite": "标记为收藏（防止被清理）",
+    "removeFavorite": "取消收藏",
+    "deleteTitle": "删除版本？",
+    "deleteBody": "此版本将被永久移除，对应的任务和资产不会被删除。",
+    "versions": "版本",
+    "versionsWithCount": "版本（{{count}}）",
+    "collapseVersions": "收起版本",
+    "expandVersions": "展开版本"
   },
   "generatedLayer": {
     "createTitle": "创建生成图层",
@@ -370,13 +430,161 @@
     "generationFailed": "生成失败",
     "couldNotLoadWorkflows": "无法加载工作流。",
     "noImageOutput": "你的工作流都没有图像输出。在工作流中加入 ImageOutput、MaskOutput 或 Output 节点才能在此使用。",
-    "noBinding": "此图层尚未绑定生成图层。"
+    "noBinding": "此图层尚未绑定生成图层。",
+    "searchPlaceholder": "搜索工作流…",
+    "untitledWorkflow": "未命名工作流",
+    "pickWorkflowHint": "选择任意一个图中包含图像输出节点的工作流。",
+    "creating": "创建中…",
+    "createLayer": "创建图层",
+    "createFailed": "创建图层失败。",
+    "outputsCount_one": "{{count}} 个输出",
+    "outputsCount_other": "{{count}} 个输出",
+    "noMatchFilter": "没有匹配“{{filter}}”的工作流。",
+    "multipleOutputs": "此工作流有多个图像输出，请选择一个：",
+    "promptTitle": "提示词"
   },
   "favorites": {
     "clickStarHint": "点击任意节点旁的星标即可加入收藏。"
   },
   "inspector": {
     "selectSingleLayer": "选择单个图层以检查。",
-    "selectLayer": "选择一个图层以检查。"
+    "selectLayer": "选择一个图层以检查。",
+    "title": "检查器",
+    "layersSelected_one": "已选择 {{count}} 个图层",
+    "layersSelected_other": "已选择 {{count}} 个图层"
+  },
+  "transformMenu": {
+    "freeTransform": "自由变换",
+    "commit": "确认",
+    "cancel": "取消",
+    "reset": "重置",
+    "rotate90Cw": "顺时针旋转 90°",
+    "rotate90Ccw": "逆时针旋转 90°"
+  },
+  "aiToolbar": {
+    "generateLayer": "生成图层",
+    "generateLayerTooltip": "生成图层 — 将新图层绑定到任意带图像输出的工作流。",
+    "noStaleLayers": "没有过时的图层。",
+    "regenStaleTooltip_one": "按依赖顺序重新生成 {{count}} 个过时图层。",
+    "regenStaleTooltip_other": "按依赖顺序重新生成 {{count}} 个过时图层。",
+    "regenerateStale": "重新生成过时图层（{{count}}）",
+    "regenTitle": "重新生成过时的图层？",
+    "regenerate": "重新生成",
+    "staleReady_one": "{{count}} 个过时图层可以运行。",
+    "staleReady_other": "{{count}} 个过时图层可以运行。",
+    "lockedSkipped_one": "已跳过 {{count}} 个锁定图层。",
+    "lockedSkipped_other": "已跳过 {{count}} 个锁定图层。",
+    "sequentialNote": "图层按顺序运行；队列会在第一个失败处停止，你可以先解决问题再继续。",
+    "regenFailedToast": "已重新生成 {{started}} 个，{{failed}} 个图层失败。"
+  },
+  "directGenPanel": {
+    "promptPlaceholder": "描述想要的图像…",
+    "editStrengthHeader": "编辑强度",
+    "strengthLabel": "强度 {{value}}",
+    "inferenceStepsHeader": "推理步数",
+    "stepsLabel": "{{count}} 步",
+    "noSourceLayers": "没有可用的源图层 — 请先在图层上绘制内容。",
+    "sourceLabel": "源图层",
+    "regenerate": "重新生成",
+    "doneAsset": "完成。资产 {{id}}。"
+  },
+  "paintedLayerPanel": {
+    "maskLayer": "蒙版图层",
+    "group": "图层组",
+    "paintedLayer": "绘制图层",
+    "opacity": "不透明度：{{value}}%",
+    "blendMode": "混合模式：{{mode}}",
+    "bounds": "范围：{{width}}×{{height}} @（{{x}}, {{y}}）",
+    "effects": "效果：{{count}} 个",
+    "effectsNone": "效果：无",
+    "sectionTitle": "图层"
+  },
+  "layerActions": {
+    "layer": "图层",
+    "cancelGeneration": "取消生成",
+    "starting": "正在启动…",
+    "generateTooltip": "按绑定的工作流和覆盖参数生成图层",
+    "cancelGenerationAria": "取消图层生成",
+    "generateLayerAria": "生成图层",
+    "duplicateTooltip": "复制 — 复制覆盖参数；调整参数可得到一个变体",
+    "lockedTooltip": "已锁定 — 生成成功也不会替换当前输出",
+    "unlockedTooltip": "未锁定 — 生成成功后会替换当前输出",
+    "unlockAria": "解锁图层",
+    "lockAria": "锁定图层",
+    "revertTooltip": "还原 — 清除当前生成结果，回到草稿",
+    "duplicateFailed": "复制图层失败",
+    "startGenerationFailed": "启动图层生成失败",
+    "cancelGenerationFailed": "取消生成失败"
+  },
+  "penPressure": {
+    "pressure": "压感",
+    "affectsSize": "大小",
+    "affectsOpacity": "不透明度",
+    "affectsBoth": "两者",
+    "lightEnd": "轻压端",
+    "lightEndTooltip": "最小压力时的大小/不透明度。滑块使用缓动映射，上半段更容易精细调节。",
+    "curve": "曲线",
+    "curveTooltip": "映射前的压力指数：1 为线性；数值越大，需要更大的压力才能达到完整大小"
+  },
+  "refineSelection": {
+    "modify": "修改",
+    "feather": "羽化",
+    "smooth": "平滑",
+    "border": "描边",
+    "grow": "扩展",
+    "shrink": "收缩"
+  },
+  "toolSettings": {
+    "advanced": "高级",
+    "assistOff": "关闭",
+    "assistOffTooltip": "关闭描边辅助，笔尖直接跟随指针。",
+    "assistCustom": "自定义",
+    "assistCustomTooltip": "手动调节算法、强度和角度吸附。",
+    "presetSmooth": "平滑",
+    "presetSmoothTooltip": "滚动平均稳定器。过滤抖动的同时笔尖持续跟随光标，适合一般绘画。",
+    "presetLazy": "惰性",
+    "presetLazyTooltip": "绳索/牵引。光标超出死区半径前笔尖保持不动，随后沿直线跟随，适合缓慢、精确地勾线。",
+    "presetInk": "描线",
+    "presetInkTooltip": "惰性牵引 + 45° 角度吸附。长线条锁定到最近的 45° 方向，适合干净的轴对齐线条。",
+    "strength": "强度",
+    "modeStabilizer": "稳定器",
+    "modeStabilizerTooltip": "滚动平均平滑 — 笔尖沿低通滤波后的路径跟随光标。",
+    "modeDrag": "牵引",
+    "modeDragTooltip": "牵引拖动 — 笔尖在死区内保持不动，随后沿直线跟随光标。",
+    "snapFree": "自由",
+    "snapFreeTooltip": "不吸附角度。",
+    "snapAngleTooltip": "将描边方向吸附到最近的 {{angle}}°。",
+    "snap": "吸附",
+    "brushRound": "圆形",
+    "brushSoft": "柔边",
+    "brushAir": "喷枪",
+    "brushSpray": "喷雾",
+    "size": "大小",
+    "opacity": "不透明度",
+    "hardness": "硬度",
+    "roundness": "圆度",
+    "angle": "角度",
+    "pixel": "像素",
+    "pixelTooltip": "像素画模式。每个点都是锐利的 N×N 方块，以光标下的像素为中心。",
+    "pencilSoft": "柔边",
+    "pencilSoftTooltip": "柔边模式。抗锯齿的圆形点，手感像小画笔。",
+    "eraserBrush": "画笔",
+    "eraserBrushTooltip": "用当前画笔印章擦除（柔边/硬边/喷雾跟随画笔设置）。",
+    "eraserPencil": "铅笔",
+    "eraserPencilTooltip": "用锐利的铅笔点擦除 — 跟随铅笔工具的像素/柔边开关。",
+    "stabilize": "稳定"
+  },
+  "generatePopover": {
+    "promptAria": "生成提示词",
+    "promptPlaceholder": "描述想要的图像…",
+    "selectModel": "选择模型"
+  },
+  "agentPanel": {
+    "title": "编辑器助手",
+    "welcome": "可以让我编辑图像 — 例如“新建一个图层并生成山间风景”、“添加一个黑色填充的空白图层”，或“把背景图层不透明度设为 50%”。",
+    "docsLabel": "草图编辑器"
+  },
+  "renderer": {
+    "sketchPreview": "草图预览"
   }
 }
