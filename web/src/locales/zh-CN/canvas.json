@@ -268,7 +268,20 @@
     "allResults": "全部结果",
     "home": "首页",
     "addToFavoritesNamed": "将 {{name}} 加入收藏",
-    "removeFromFavoritesNamed": "从收藏中移除 {{name}}"
+    "removeFromFavoritesNamed": "从收藏中移除 {{name}}",
+    "categories": {
+      "all": "全部",
+      "io": "输入输出",
+      "image": "图像",
+      "imageAi": "图像 AI",
+      "video": "视频",
+      "videoAi": "视频 AI",
+      "audio": "音频",
+      "audioAi": "音频 AI",
+      "models3d": "3D",
+      "agents": "智能体",
+      "controlFlow": "控制"
+    }
   },
   "contextMenu": {
     "copy": "复制",

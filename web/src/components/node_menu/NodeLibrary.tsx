@@ -464,7 +464,7 @@ const NodeLibrary = memo<NodeLibraryProps>(
                   onClick={() => onSubcategoryChange(sub.id)}
                 >
                   <span className="nl-cat-icon">{sub.icon}</span>
-                  <span className="nl-cat-label">{sub.label}</span>
+                  <span className="nl-cat-label">{t(sub.labelKey)}</span>
                   <span className="nl-cat-count">{counts[sub.id] ?? 0}</span>
                 </button>
               ))}
@@ -527,7 +527,7 @@ const NodeLibrary = memo<NodeLibraryProps>(
         </div>
 
         <div className="nl-footer">
-          <span>{category.label}</span>
+          <span>{t(category.labelKey)}</span>
           {!isMobile && (
             <span className="nl-footer-hint">
               <span className="nl-kbd">{t("nodeMenu.library.dragKbd")}</span> {t("nodeMenu.library.dragToAdd")}

@@ -1,9 +1,10 @@
 {
   "canvas": [
+    "assetInfo.id",
     "contextMenu.pane.type.json",
     "imageEditing.alpha",
-    "typeFilter.api",
-    "assetInfo.id"
+    "nodeMenu.categories.models3d",
+    "typeFilter.api"
   ],
   "chat": [
     "progress.percent"

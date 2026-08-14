@@ -81,9 +81,9 @@ describe("quickAccessCategories", () => {
   });
 
   it("lookup helpers return the right entries", () => {
-    expect(getTopLevelCategory("nodes")?.label).toBe("Nodes");
-    expect(getNodeSubcategory("image")?.label).toBe("Image");
-    expect(getNodeSubcategory("image-ai")?.label).toBe("Image AI");
+    expect(getTopLevelCategory("nodes")?.labelKey).toBe("common:sidebar.nodes");
+    expect(getNodeSubcategory("image")?.labelKey).toBe("canvas:nodeMenu.categories.image");
+    expect(getNodeSubcategory("image-ai")?.labelKey).toBe("canvas:nodeMenu.categories.imageAi");
   });
 
   it("splits image outputs into non-AI processing and AI models", () => {

@@ -44,13 +44,13 @@ import type { LeftPanelView, NodeCategoryId } from "../stores/PanelStore";
 
 export interface LeftPanelTopLevelCategory {
   id: LeftPanelView;
-  label: string;
+  labelKey: string;
   icon: ReactNode;
 }
 
 export interface NodeSubcategory {
   id: NodeCategoryId;
-  label: string;
+  labelKey: string;
   icon: ReactNode;
   filter: (m: NodeMetadata) => boolean;
 }
@@ -84,23 +84,23 @@ const isAiNode = (m: NodeMetadata): boolean =>
  * tile-grids under a single "Nodes" entry with sub-tabs.
  */
 export const LEFT_PANEL_TOP_LEVEL: readonly LeftPanelTopLevelCategory[] = [
-  { id: "nodes", label: "Nodes", icon: <HubIcon /> },
-  { id: "workflows", label: "Workflows", icon: <GridViewIcon /> },
-  { id: "chats", label: "Chats", icon: <ForumOutlinedIcon /> },
-  { id: "sketches", label: "Sketches", icon: <BrushOutlinedIcon /> },
-  { id: "timelines", label: "Timelines", icon: <MovieIcon /> },
-  { id: "storyboards", label: "Storyboards", icon: <DashboardOutlinedIcon /> },
-  { id: "scripts", label: "Scripts", icon: <RecordVoiceOverOutlinedIcon /> },
+  { id: "nodes", labelKey: "common:sidebar.nodes", icon: <HubIcon /> },
+  { id: "workflows", labelKey: "common:sidebar.workflows", icon: <GridViewIcon /> },
+  { id: "chats", labelKey: "common:sidebar.chats", icon: <ForumOutlinedIcon /> },
+  { id: "sketches", labelKey: "common:sidebar.sketches", icon: <BrushOutlinedIcon /> },
+  { id: "timelines", labelKey: "common:sidebar.timelines", icon: <MovieIcon /> },
+  { id: "storyboards", labelKey: "common:sidebar.storyboards", icon: <DashboardOutlinedIcon /> },
+  { id: "scripts", labelKey: "common:sidebar.scripts", icon: <RecordVoiceOverOutlinedIcon /> },
   {
     id: "apps",
-    label: "Apps",
+    labelKey: "common:sidebar.apps",
     icon: <DashboardCustomizeOutlinedIcon />
   },
-  { id: "settings", label: "Settings", icon: <SettingsIcon /> },
-  { id: "history", label: "History", icon: <HistoryIcon /> },
-  { id: "favorites", label: "Favorites", icon: <StarIcon /> },
-  { id: "assets", label: "Assets", icon: <PermMediaOutlinedIcon /> },
-  { id: "library", label: "Library", icon: <CollectionsOutlinedIcon /> }
+  { id: "settings", labelKey: "common:sidebar.settings", icon: <SettingsIcon /> },
+  { id: "history", labelKey: "common:sidebar.history", icon: <HistoryIcon /> },
+  { id: "favorites", labelKey: "common:sidebar.favorites", icon: <StarIcon /> },
+  { id: "assets", labelKey: "common:sidebar.assets", icon: <PermMediaOutlinedIcon /> },
+  { id: "library", labelKey: "common:sidebar.library", icon: <CollectionsOutlinedIcon /> }
 ];
 
 /**
@@ -110,13 +110,13 @@ export const LEFT_PANEL_TOP_LEVEL: readonly LeftPanelTopLevelCategory[] = [
 export const NODE_SUBCATEGORIES: readonly NodeSubcategory[] = [
   {
     id: "all",
-    label: "All",
+    labelKey: "canvas:nodeMenu.categories.all",
     icon: <AppsIcon />,
     filter: () => true
   },
   {
     id: "io",
-    label: "I/O",
+    labelKey: "canvas:nodeMenu.categories.io",
     icon: <LoginIcon />,
     filter: (m) =>
       m.node_type.startsWith("nodetool.input.") ||
@@ -124,55 +124,55 @@ export const NODE_SUBCATEGORIES: readonly NodeSubcategory[] = [
   },
   {
     id: "image",
-    label: "Image",
+    labelKey: "canvas:nodeMenu.categories.image",
     icon: <ImageIcon />,
     filter: (m) => isImageOutput(m) && !isAiNode(m)
   },
   {
     id: "image-ai",
-    label: "Image AI",
+    labelKey: "canvas:nodeMenu.categories.imageAi",
     icon: <AutoAwesomeIcon />,
     filter: (m) => isImageOutput(m) && isAiNode(m)
   },
   {
     id: "video",
-    label: "Video",
+    labelKey: "canvas:nodeMenu.categories.video",
     icon: <MovieIcon />,
     filter: (m) => isVideoOutput(m) && !isAiNode(m)
   },
   {
     id: "video-ai",
-    label: "Video AI",
+    labelKey: "canvas:nodeMenu.categories.videoAi",
     icon: <AutoAwesomeIcon />,
     filter: (m) => isVideoOutput(m) && isAiNode(m)
   },
   {
     id: "audio",
-    label: "Audio",
+    labelKey: "canvas:nodeMenu.categories.audio",
     icon: <AudiotrackIcon />,
     filter: (m) => isAudioOutput(m) && !isAiNode(m)
   },
   {
     id: "audio-ai",
-    label: "Audio AI",
+    labelKey: "canvas:nodeMenu.categories.audioAi",
     icon: <AutoAwesomeIcon />,
     filter: (m) => isAudioOutput(m) && isAiNode(m)
   },
   {
     id: "3d-models",
-    label: "3D",
+    labelKey: "canvas:nodeMenu.categories.models3d",
     icon: <ViewInArIcon />,
     filter: is3dOutput
   },
   {
     id: "agents",
-    label: "Agents",
+    labelKey: "canvas:nodeMenu.categories.agents",
     icon: <SmartToyIcon />,
     filter: (m) => /(^|\.)agents\./.test(m.node_type)
   },
   {
     id: "control-flow",
-    label: "Control",
+    labelKey: "canvas:nodeMenu.categories.controlFlow",
     icon: <CallSplitIcon />,
     filter: (m) => m.node_type.startsWith("nodetool.control.")
   }

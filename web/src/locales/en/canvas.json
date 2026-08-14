@@ -268,7 +268,20 @@
     "allResults": "All results",
     "home": "Home",
     "addToFavoritesNamed": "Add {{name}} to favorites",
-    "removeFromFavoritesNamed": "Remove {{name}} from favorites"
+    "removeFromFavoritesNamed": "Remove {{name}} from favorites",
+    "categories": {
+      "all": "All",
+      "io": "I/O",
+      "image": "Image",
+      "imageAi": "Image AI",
+      "video": "Video",
+      "videoAi": "Video AI",
+      "audio": "Audio",
+      "audioAi": "Audio AI",
+      "models3d": "3D",
+      "agents": "Agents",
+      "controlFlow": "Control"
+    }
   },
   "contextMenu": {
     "copy": "Copy",

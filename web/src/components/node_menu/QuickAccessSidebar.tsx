@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Tooltip, ToolbarIconButton } from "../ui_primitives";
 import { TOOLTIP_ENTER_DELAY } from "../../config/constants";
@@ -19,12 +20,14 @@ interface QuickAccessSidebarProps {
  * buttons — the parent provides container styling via `.vertical-toolbar`.
  */
 const QuickAccessSidebar = memo<QuickAccessSidebarProps>(
-  ({ activeCategory, onCategoryClick, hiddenViews, labelOverrides }) => (
+  ({ activeCategory, onCategoryClick, hiddenViews, labelOverrides }) => {
+    const { t } = useTranslation();
+    return (
     <>
       {LEFT_PANEL_TOP_LEVEL.filter(
         (cat) => !hiddenViews?.includes(cat.id)
       ).map((cat) => {
-        const label = labelOverrides?.[cat.id] ?? cat.label;
+        const label = labelOverrides?.[cat.id] ?? t(cat.labelKey);
         return (
           <Tooltip
             key={cat.id}
@@ -43,7 +46,8 @@ const QuickAccessSidebar = memo<QuickAccessSidebarProps>(
         );
       })}
     </>
-  )
+    );
+  }
 );
 
 QuickAccessSidebar.displayName = "QuickAccessSidebar";
