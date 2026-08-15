@@ -140,7 +140,7 @@ const RecentWorkflowCard: React.FC<RecentWorkflowCardProps> = ({
       </div>
       <div className="rmeta">
         <div className="rname">{workflow.name}</div>
-        <div className="redit">{lastEdited(workflow.updated_at)}</div>
+        <div className="redit">{lastEdited(workflow.updated_at ?? undefined)}</div>
       </div>
     </button>
   );

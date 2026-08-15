@@ -338,7 +338,7 @@ const WorkflowListItem: React.FC<WorkflowListItemProps> = ({
             color="secondary"
             sx={{ lineHeight: 2.4, textTransform: "uppercase" }}
           >
-            {relativeTime(workflow.updated_at)}
+            {relativeTime(workflow.updated_at ?? workflow.created_at)}
           </Text>
         )}
       </Box>

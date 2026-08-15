@@ -434,7 +434,9 @@ export interface Workflow {
   receive_clipboard?: boolean | null;
   access: string;
   created_at: string;
-  updated_at: string;
+  /** Server revision token (CAS). Undefined until the row is persisted —
+   *  a client must not invent one for a workflow that only exists in memory. */
+  updated_at?: string | null;
   etag?: string | null;
 }
 

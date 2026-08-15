@@ -628,17 +628,21 @@ export const workflowsRouter = router({
     .input(updateInput)
     .output(workflowResponse)
     .mutation(async ({ ctx, input }) => {
+      // A graph is only required when the update would create the row
+      // (upsert). For an existing workflow an omitted graph means "leave the
+      // stored graph alone" — e.g. a rename-only update.
       if (
-        !input.graph ||
-        !Array.isArray(input.graph.nodes) ||
-        !Array.isArray(input.graph.edges)
+        input.graph !== undefined &&
+        input.graph !== null &&
+        (!Array.isArray(input.graph.nodes) ||
+          !Array.isArray(input.graph.edges))
       ) {
         throwApiError(
           ApiErrorCode.INVALID_INPUT,
-          "graph is required and must have nodes and edges arrays"
+          "graph must have nodes and edges arrays"
         );
       }
-      const graph = input.graph;
+      const graph = input.graph ?? undefined;
       const existing = (await Workflow.get(input.id)) as WorkflowModel | null;
 
       let existingRole: WorkflowRole | null = null;
@@ -655,9 +659,9 @@ export const workflowsRouter = router({
           tool_name: input.tool_name ?? null,
           description: input.description ?? "",
           tags: input.tags ?? [],
-          package_name: input.package_name ?? null,
-          graph
+          package_name: input.package_name ?? null
         };
+        if (graph) fields.graph = graph;
         if (input.thumbnail !== undefined) fields.thumbnail = input.thumbnail;
         // Only the owner can change visibility; editors keep it as-is.
         if (existingRole === "owner") {
@@ -691,6 +695,13 @@ export const workflowsRouter = router({
 
       if (input.expected_updated_at) {
         throwApiError(ApiErrorCode.WORKFLOW_NOT_FOUND, "Workflow not found");
+      }
+
+      if (!graph) {
+        throwApiError(
+          ApiErrorCode.INVALID_INPUT,
+          "graph is required and must have nodes and edges arrays"
+        );
       }
 
       // Upsert: create if doesn't exist

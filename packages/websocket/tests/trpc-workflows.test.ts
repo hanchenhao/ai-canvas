@@ -640,6 +640,46 @@ describe("workflows router", () => {
       ).rejects.toMatchObject({ code: "NOT_FOUND" });
     });
 
+    it("renames an existing workflow without sending a graph", async () => {
+      const wf = makeWorkflow({
+        id: "wf-1",
+        user_id: "user-1",
+        graph: { nodes: [{ id: "n1" }], edges: [] }
+      });
+      (Workflow.get as ReturnType<typeof vi.fn>).mockResolvedValue(wf);
+      (
+        Workflow.updateFieldsIfUnchanged as ReturnType<typeof vi.fn>
+      ).mockResolvedValue(wf);
+
+      const caller = createCaller(makeCtx());
+      const result = await caller.workflows.update({
+        id: "wf-1",
+        name: "Renamed",
+        access: "private"
+      });
+      expect(result.id).toBe("wf-1");
+      // A partial update must not clobber the stored graph.
+      expect(Workflow.updateFieldsIfUnchanged).toHaveBeenCalledWith(
+        "wf-1",
+        wf.updated_at,
+        expect.not.objectContaining({ graph: expect.anything() })
+      );
+    });
+
+    it("requires a graph when upserting a workflow that does not exist", async () => {
+      (Workflow.get as ReturnType<typeof vi.fn>).mockResolvedValue(null);
+
+      const caller = createCaller(makeCtx());
+      await expect(
+        caller.workflows.update({
+          id: "wf-new",
+          name: "New",
+          access: "private"
+        })
+      ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+      expect(Workflow.create).not.toHaveBeenCalled();
+    });
+
     it("upserts when workflow does not exist", async () => {
       (Workflow.get as ReturnType<typeof vi.fn>).mockResolvedValue(null);
       const wf = makeWorkflow({ id: "wf-new" });

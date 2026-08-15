@@ -263,9 +263,11 @@ export const createWorkflowManagerStore = (queryClient: QueryClient) => {
       queryClient: queryClient,
 
       /**
-       * Creates a new workflow with default properties.
-       * Uses a local ID (with "local-" prefix) to avoid immediate database save.
-       * The workflow is only saved when saveWorkflow() is called for the first time.
+       * Creates a new workflow with default properties, in memory only.
+       * The workflow is saved when saveWorkflow() is called for the first time.
+       * `updated_at` stays undefined until then: it is the server's revision
+       * token, and sending a fabricated one would make the first save fail the
+       * upsert's concurrency guard.
        * @returns {Workflow} A new workflow object with default values
        */
       newWorkflow: () => {
@@ -277,7 +279,6 @@ export const createWorkflowManagerStore = (queryClient: QueryClient) => {
           description: "",
           access: "private",
           thumbnail: "",
-          updated_at: new Date().toISOString(),
           created_at: new Date().toISOString(),
           graph: {
             nodes: [],
@@ -294,8 +295,9 @@ export const createWorkflowManagerStore = (queryClient: QueryClient) => {
 
       /**
        * Saves the workflow and creates a version entry.
-       * If the workflow has a local ID (starts with "local-"), it will be created
-       * in the database first, then updated with the real ID.
+       * A workflow that was never persisted (from newWorkflow/copy) carries no
+       * `updated_at`, so no concurrency token is sent and the server upsert
+       * creates the row; later saves send the server's revision token.
        * @param {Workflow} workflow - The workflow to save
        * @returns {Promise<void>}
        * @throws {Error} If the save operation fails
@@ -528,7 +530,6 @@ export const createWorkflowManagerStore = (queryClient: QueryClient) => {
           access: "private",
           graph: structuredClone(workflow.graph),
           created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
           settings: workflow.settings
         };
         return copiedWorkflow;

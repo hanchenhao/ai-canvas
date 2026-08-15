@@ -238,14 +238,16 @@ const WorkflowListView: React.FC<WorkflowListViewProps> = ({
         return a.name.localeCompare(b.name);
       }
       // Default: sort by date (most recent first)
-      return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
+      const timeOf = (w: Workflow) =>
+        new Date(w.updated_at ?? w.created_at).getTime();
+      return timeOf(b) - timeOf(a);
     });
 
     // Only show date headers when sorting by date
     if (sortBy === "date") {
       let currentGroup = "";
       for (const workflow of sortedWorkflows) {
-        const group = groupByDate(workflow.updated_at);
+        const group = groupByDate(workflow.updated_at ?? workflow.created_at);
         if (group !== currentGroup) {
           currentGroup = group;
           items.push({ type: "header", label: group });
