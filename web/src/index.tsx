@@ -48,6 +48,7 @@ import { TRPCProvider } from "./trpc/Provider";
 import { useAssetStore } from "./stores/AssetStore";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import BackablePage from "./components/BackablePage";
 import useAuth from "./stores/useAuth";
 import { isLocalhost } from "./lib/env";
 import { loadRuntimeConfig, isAuthRequired } from "./lib/runtimeConfig";
@@ -232,16 +233,9 @@ function getRoutes() {
       path: "/settings",
       element: (
         <ProtectedRoute>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-              height: "100%"
-            }}
-          >
+          <BackablePage>
             <SettingsPage />
-          </div>
+          </BackablePage>
         </ProtectedRoute>
       )
     },
@@ -249,18 +243,11 @@ function getRoutes() {
       path: "/costs",
       element: (
         <ProtectedRoute>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-              height: "100%"
-            }}
-          >
+          <BackablePage>
             <React.Suspense fallback={<LoadingSpinner />}>
               <CostsDashboard />
             </React.Suspense>
-          </div>
+          </BackablePage>
         </ProtectedRoute>
       )
     },
@@ -298,7 +285,9 @@ function getRoutes() {
       path: "assets",
       element: (
         <ProtectedRoute>
-          <AssetExplorer />
+          <BackablePage>
+            <AssetExplorer />
+          </BackablePage>
         </ProtectedRoute>
       )
     },
@@ -306,7 +295,9 @@ function getRoutes() {
       path: "collections",
       element: (
         <ProtectedRoute>
-          <CollectionsExplorer />
+          <BackablePage>
+            <CollectionsExplorer />
+          </BackablePage>
         </ProtectedRoute>
       )
     },
@@ -314,7 +305,9 @@ function getRoutes() {
       path: "examples",
       element: (
         <ProtectedRoute>
-          <ExamplesPage />
+          <BackablePage>
+            <ExamplesPage />
+          </BackablePage>
         </ProtectedRoute>
       )
     },
@@ -349,7 +342,9 @@ function getRoutes() {
       path: "models",
       element: (
         <ProtectedRoute>
-          <ModelsPage />
+          <BackablePage>
+            <ModelsPage />
+          </BackablePage>
         </ProtectedRoute>
       )
     },
@@ -357,7 +352,9 @@ function getRoutes() {
       path: "packages",
       element: (
         <ProtectedRoute>
-          <PackagesPage />
+          <BackablePage>
+            <PackagesPage />
+          </BackablePage>
         </ProtectedRoute>
       )
     },
@@ -365,30 +362,28 @@ function getRoutes() {
       path: "workspaces",
       element: (
         <ProtectedRoute>
-          <WorkspacesPage />
+          <BackablePage>
+            <WorkspacesPage />
+          </BackablePage>
         </ProtectedRoute>
       )
     },
     {
       path: "graph/:workflowId",
-      element: <WorkflowGraphView />
+      element: (
+        <BackablePage>
+          <WorkflowGraphView />
+        </BackablePage>
+      )
     },
     {
       path: "chain/:workflowId?",
       element: (
         <ProtectedRoute>
-          <div
-            className="page-enter"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-              height: "100%"
-            }}
-          >
+          <BackablePage className="page-enter">
             <SkipLinks />
             <ChainEditorPage />
-          </div>
+          </BackablePage>
         </ProtectedRoute>
       )
     },
@@ -396,19 +391,12 @@ function getRoutes() {
       path: "/timeline/:sequenceId",
       element: (
         <ProtectedRoute>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-              height: "100%"
-            }}
-          >
+          <BackablePage>
             <SkipLinks />
             <React.Suspense fallback={<LoadingSpinner />}>
               <TimelineEditor />
             </React.Suspense>
-          </div>
+          </BackablePage>
         </ProtectedRoute>
       )
     },
@@ -416,19 +404,12 @@ function getRoutes() {
       path: "/sketch/:documentId",
       element: (
         <ProtectedRoute>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-              height: "100%"
-            }}
-          >
+          <BackablePage>
             <SkipLinks />
             <React.Suspense fallback={<LoadingSpinner />}>
               <SketchEditorPage />
             </React.Suspense>
-          </div>
+          </BackablePage>
         </ProtectedRoute>
       )
     },
