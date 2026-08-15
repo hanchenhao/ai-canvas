@@ -35,6 +35,7 @@ export default {
   modulePathIgnorePatterns: [
     '<rootDir>/backend-bundle/',
     '<rootDir>/dist/',
+    '<rootDir>/.node-runtime/',
   ],
   collectCoverageFrom: [
     'src/**/*.{js,ts}',
@@ -54,5 +55,6 @@ export default {
     '/dist-electron/',
     '/dist-web/',
     '/tests/e2e/',
+    '/.node-runtime/',
   ],
 }
