@@ -323,7 +323,15 @@
     "stepConnectProvider": "Connect an AI provider",
     "stepOpenTemplate": "Open a starter or template",
     "stepRunWorkflow": "Run a workflow",
-    "stepBuildYourOwn": "Build your own"
+    "stepBuildYourOwn": "Build your own",
+    "categories": {
+      "image": "Image",
+      "video": "Video",
+      "audio": "Audio",
+      "multimodal": "Multimodal",
+      "agents": "Agents",
+      "dataWeb": "Data & Web"
+    }
   },
   "providerOnboarding": {
     "fastestWayToStart": "Fastest way to start",

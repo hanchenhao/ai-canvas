@@ -41,6 +41,11 @@ interface WorkflowCardProps {
   maxChips?: number;
   /** Description line clamp (default 3). */
   descriptionLines?: number;
+  /** Localized title to show instead of `workflow.name` (e.g. shipped
+   *  examples). Thumbnails and click identity keep using `workflow.name`. */
+  displayName?: string;
+  /** Localized description to show instead of `workflow.description`. */
+  displayDescription?: string;
 }
 
 const HIDDEN_TAGS = new Set([
@@ -260,7 +265,9 @@ const WorkflowCard = ({
   categoryLabel,
   hideTags,
   maxChips = 3,
-  descriptionLines = 3
+  descriptionLines = 3,
+  displayName,
+  displayDescription
 }: WorkflowCardProps) => {
   const theme = useTheme();
 
@@ -300,7 +307,7 @@ const WorkflowCard = ({
 
   return (
     <Tooltip
-      title={workflow.description || ""}
+      title={displayDescription ?? workflow.description ?? ""}
       placement="top"
       arrow
       delay={500}
@@ -329,7 +336,7 @@ const WorkflowCard = ({
         className={isLoading ? "loading" : ""}
         role="button"
         tabIndex={0}
-        aria-label={workflow.name}
+        aria-label={displayName ?? workflow.name}
         onClick={handleClick}
         onKeyDown={activateOnKey(handleClick)}
       >
@@ -389,7 +396,7 @@ const WorkflowCard = ({
 
         <Box className="card-content">
           <Text component="h3" className="card-title">
-            {workflow.name}
+            {displayName ?? workflow.name}
           </Text>
           {workflow.description && (
             <Text
@@ -399,7 +406,7 @@ const WorkflowCard = ({
                 maxHeight: `calc(1.4em * ${descriptionLines})`
               }}
             >
-              {workflow.description}
+              {displayDescription ?? workflow.description}
             </Text>
           )}
           {(categoryLabel && tint) || chips.length > 0 ? (

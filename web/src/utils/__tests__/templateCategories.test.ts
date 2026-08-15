@@ -25,10 +25,10 @@ describe("TOP_CATEGORIES", () => {
     expect(TOP_CATEGORIES.length).toBeGreaterThan(0);
   });
 
-  it("each category has id, label, and tags", () => {
+  it("each category has id, labelKey, and tags", () => {
     for (const cat of TOP_CATEGORIES) {
       expect(cat.id).toBeTruthy();
-      expect(cat.label).toBeTruthy();
+      expect(cat.labelKey).toBeTruthy();
       expect(cat.tags.length).toBeGreaterThan(0);
     }
   });

@@ -15,6 +15,7 @@ import {
   getCategoryForWorkflow
 } from "../../utils/templateCategories";
 import WorkflowCard from "../workflows/WorkflowCard";
+import { translateExample, translateExampleDescription } from "../../utils/exampleI18n";
 import {
   EmptyState,
   LoadingSpinner,
@@ -186,10 +187,12 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
 
   const visible = fullPage ? filtered : filtered.slice(0, MAX_VISIBLE);
   const countLabel = fullPage
-    ? `${filtered.length} example${filtered.length === 1 ? "" : "s"}`
+    ? t("common:dashboard.examplesCount", { count: filtered.length })
     : query.trim() || category !== "all"
-      ? `${filtered.length} match${filtered.length === 1 ? "" : "es"}`
-      : `hand-picked · ${Math.min(filtered.length, MAX_VISIBLE)}`;
+      ? t("common:dashboard.matchesCount", { count: filtered.length })
+      : t("common:dashboard.handPickedCount", {
+          count: Math.min(filtered.length, MAX_VISIBLE)
+        });
 
   return (
     <section
@@ -220,7 +223,7 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
             aria-pressed={category === "all"}
             onClick={() => setCategory("all")}
           >
-            All
+            {t("common:dashboard.allCategories")}
           </button>
           {TOP_CATEGORIES.map((cat) => {
             const active = category === cat.id;
@@ -242,7 +245,7 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
                 }
               >
                 <span className="cat-dot" style={{ background: cat.color }} />
-                {cat.label}
+                {t(cat.labelKey)}
               </button>
             );
           })}
@@ -252,7 +255,7 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
               className="cat"
               onClick={handleViewAllTemplates}
             >
-              More…
+              {t("common:dashboard.moreCategories")}
             </button>
           )}
         </div>
@@ -278,14 +281,14 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
                 variant="no-results"
                 title={t("common:dashboard.noTemplatesMatch")}
                 description={t("common:dashboard.tryDifferentSearch")}
-                actionText="Clear search"
+                actionText={t("common:dashboard.clearSearch")}
                 onAction={() => setQuery("")}
               />
             ) : category !== "all" ? (
               <EmptyState
                 variant="no-results"
                 title={t("common:dashboard.noTemplatesInCategory")}
-                actionText="Show all templates"
+                actionText={t("common:dashboard.showAllTemplates")}
                 onAction={() => setCategory("all")}
               />
             ) : (
@@ -309,7 +312,12 @@ const DashboardTemplates: React.FC<DashboardTemplatesProps> = ({
                   isLoading={loadingExampleId === workflow.id}
                   onClick={handleExampleClick}
                   tint={cat?.color}
-                  categoryLabel={cat?.label}
+                  categoryLabel={cat ? t(cat.labelKey) : undefined}
+                  displayName={translateExample(workflow.name)}
+                  displayDescription={translateExampleDescription(
+                    workflow.name,
+                    workflow.description ?? ""
+                  )}
                   hideTags={cat?.tags}
                   maxChips={1}
                   descriptionLines={2}

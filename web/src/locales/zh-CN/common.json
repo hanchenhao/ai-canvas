@@ -323,7 +323,15 @@
     "stepConnectProvider": "连接 AI 提供商",
     "stepOpenTemplate": "打开一个起始模板",
     "stepRunWorkflow": "运行一个工作流",
-    "stepBuildYourOwn": "自己搭建一个"
+    "stepBuildYourOwn": "自己搭建一个",
+    "categories": {
+      "image": "图像",
+      "video": "视频",
+      "audio": "音频",
+      "multimodal": "多模态",
+      "agents": "智能体",
+      "dataWeb": "数据与网络"
+    }
   },
   "providerOnboarding": {
     "fastestWayToStart": "最快的上手方式",

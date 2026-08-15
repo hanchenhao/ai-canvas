@@ -1,0 +1,826 @@
+{
+  "A Boolean Constant": {
+    "name": "布尔常量",
+    "description": "最小的真实图:一个固定的布尔值喂给分支节点,让开关活在流程里,而不是某个人的脑子里。"
+  },
+  "A Campaign Concept from a Brief": {
+    "name": "从需求简报生成营销活动创意",
+    "description": "把需求简报变成一个完整创意:一句口号、一个视觉概念、三个渠道执行版本。要求给出执行版本,才能逼出经得起媒介投放检验的创意。"
+  },
+  "A Constant Dictionary": {
+    "name": "常量字典",
+    "description": "输出一个固定的键值映射。图的多个位置都要读同一份配置时用它,值只在一个节点里维护,不用在三个地方重复输入。"
+  },
+  "A Fixed Date": {
+    "name": "固定日期",
+    "description": "输出一个固定的日历日期。看起来微不足道,也确实如此——它存在的意义是让定时流程能对着已知日期测试,而不是碰运气用今天。"
+  },
+  "A Fixed Point in Time": {
+    "name": "固定时间点",
+    "description": "一个带显式时区的固定时间戳。任何需要可复现的流程,都得把日期钉在图里,而不是运行时从时钟上读。"
+  },
+  "A Gradient Card as PNG": {
+    "name": "生成 PNG 渐变卡片",
+    "description": "先做矢量图,再栅格化。SVGToImage 是桥梁:以分辨率无关的方式创作,再把 PNG 交给任何需要像素的环节。"
+  },
+  "A Poster in Portrait": {
+    "name": "竖版海报",
+    "description": "3:4 的竖版印刷画幅。直接按最终宽高比生成,避免事后裁切丢掉构图需要的边缘。"
+  },
+  "A Repeating Texture Tile": {
+    "name": "无缝平铺纹理",
+    "description": "用于背景的无缝贴图。提示词里明确要求平铺很关键——有接缝的纹理一重复就露馅。"
+  },
+  "A Run Button for Any Job": {
+    "name": "为任意任务添加运行按钮",
+    "description": "当不该由外部事件决定时机、而应由人来触发时用的触发器。它一直等待,你传入的数据从 `data` 输出,调用方在 `source` 里,两个来源可区分。适合放在想手动、用脚本或从另一个流程触发的管线开头。"
+  },
+  "A Webhook That Answers": {
+    "name": "会应答的 Webhook",
+    "description": "HTTP POST 到达,图用文字回复。触发器给你请求体、请求头和方法;这个示例读取请求体并写出一行人可以据此行动的摘要。注册流程可获得投递 URL,也可以用 CLI 的 `--trigger-event '{\"node_id\":\"hook\",\"payload\":{\"body\":{...}}}'` 驱动。"
+  },
+  "Action Items from a Meeting Recording": {
+    "name": "从会议录音提取待办事项",
+    "description": "把录音变成一份带负责人的行动清单。没有明确负责人的事项单独列出,而不是硬安给模型猜出来的人。"
+  },
+  "Ad Copy in Three Registers": {
+    "name": "三种语气的广告文案",
+    "description": "同一个卖点,写出平实、俏皮、高端三种语气。语气通常是团队争论的焦点,所以三种都产出,让作品自己说话。"
+  },
+  "Ad Loop from a Product Photo": {
+    "name": "产品图生成循环广告",
+    "description": "把一张产品照片变成循环播放的短广告。提示词节点写运动简报,Kie 上的 Kling 2.6 让静帧动起来,再做一次变速放慢成主视觉循环。需要 KIE_API_KEY;视频步骤按生成次数计费。"
+  },
+  "Add Reverb to a Voice": {
+    "name": "给人声加混响",
+    "description": "把干声放进一个房间。湿声电平是发送量,干声电平是原始信号——两者都保留,听起来才像空间而不是一锅糊。"
+  },
+  "AI Spokesperson": {
+    "name": "AI 数字人口播",
+    "description": "给一段口播视频换个新稿子。语音合成先读出稿子,唇形同步模型再驱动原画面里的嘴型,让口型对上。可用于本地化一条视频、补救说错的台词,或把一次录制变成多个版本。语音和唇形同步两步都按次计费。"
+  },
+  "Album Art from a Mood": {
+    "name": "按情绪生成专辑封面",
+    "description": "方形封面图。这里宽高比就是硬需求——每个平台都裁成方形,生成别的比例只会给自己找事。"
+  },
+  "Ask Your Documents": {
+    "name": "文档问答",
+    "description": "带引用的检索增强问答;另有完全本地的备选模式,直接读取一篇粘贴的文档,不依赖向量库。"
+  },
+  "Audio To Image": {
+    "name": "音频转图像",
+    "description": "一句话说出一张图,不用碰键盘:Whisper 把你的语音转成文字,FLUX 再把描述渲染成图——整条管线从一段语音便签跑完。"
+  },
+  "B-Roll Reel from a Brief": {
+    "name": "按简报生成 B-Roll 素材集",
+    "description": "一行导演阐述变成两条空镜组成的 B-roll。提示词节点把简报展开成一个广角定场镜头和一个配套的细节镜头,文生视频分别渲染,再用叠化剪在一起。每次运行产生两次付费视频生成。"
+  },
+  "Batch a List": {
+    "name": "列表批量处理",
+    "description": "把一条流按固定大小分批。凡是被限流或按次计费的东西都用这个形状:分批、发送、重复,而不是每项一个请求。"
+  },
+  "Black and White, Hard": {
+    "name": "高对比黑白",
+    "description": "先转灰度,再做软边阈值。直接对彩色图做阈值,得到的只是占主导通道的亮度,通常不是你要的。"
+  },
+  "Blog Post to Social Thread": {
+    "name": "博客文章转社交媒体帖",
+    "description": "一篇长文变成一条编号推文串。要求每条都能独立成立,才能阻止模型把摘要切成几段充数。"
+  },
+  "Blur a Channel": {
+    "name": "模糊某个通道",
+    "description": "抽出一个颜色通道再模糊。一条故意别扭的链路:它用来验证单通道输出对下一个节点仍是合法图像,而不是悄悄丢了颜色模式。"
+  },
+  "Blur an Image": {
+    "name": "模糊图像",
+    "description": "柔化一张图。适合做文字背后的衬底,或发布前把背景匿名化。本地像素处理——不需要模型、密钥,也没有费用。"
+  },
+  "Boost Saturation": {
+    "name": "增强饱和度",
+    "description": "提升色彩强度。大于 1 增强饱和,小于 1 趋向灰度。与 Color Boost 模板不同,这个跑在 ffmpeg 上,不需要 GPU。本地 ffmpeg 运行——无需 API 密钥,没有按次费用。"
+  },
+  "Brand & Social": {
+    "name": "品牌与社媒",
+    "description": "品牌信息只填一次——素材套件和缩略图工厂读取的是同一份数值。"
+  },
+  "Brand Asset Generator": {
+    "name": "品牌素材生成器",
+    "description": "输入品牌名和调性,一次运行产出一整套社交物料:图同时分叉到两条支路——四张带品牌调性、叠加文字的社交图(Instagram、LinkedIn、X、产品发布)和一页品牌简报(语气、配色、标语候选)。亮点:单次分叉图产出结构化的多资产结果。图像用 fal-ai flux/schnell(付费),文本用 gpt-5-mini。"
+  },
+  "Bring a Still to Life": {
+    "name": "让静态图动起来",
+    "description": "把一张图变成一小段运动镜头。简报禁止改变风格,模型只能运镜和加氛围,不能重绘主体——产品类模板都依赖这个约束。"
+  },
+  "Bullet Points to Press Release": {
+    "name": "要点列表转新闻稿",
+    "description": "事实要点进,结构完整的新闻稿出——标题、电头、正文、机构简介。要求引语挂在具名职务上,防止模型编造发言人。"
+  },
+  "Chapter Markers for a Long Recording": {
+    "name": "为长录音生成章节标记",
+    "description": "长录音没有章节就没法导航。模型提出话题边界,你保留与对话实际走向吻合的那些。"
+  },
+  "Chat With Your Documents": {
+    "name": "与你的文档对话",
+    "description": "对你自己的文档做检索增强问答。把一个小知识库索引进向量集合,按搜索词取出匹配段落,得到注明出处、文档里没有就拒绝乱猜的 Markdown 回答。NodeTool 的第一个 RAG 示例。回答步骤用 gpt-5-mini(OpenAI 密钥);向量集合配置为 Ollama 的 nomic-embed-text 嵌入。"
+  },
+  "Chunk a Transcript for Indexing": {
+    "name": "将转写文本切块以便索引",
+    "description": "像 RAG 入库那样把长文切成重叠窗口,再数一数。`length` 和 `overlap` 按词计,不是字符——这里填 90 会把整段吞进一个块。重叠是重点:切在句子中间会丢失跨边界的信息,所以相邻块共享一段尾巴。计数需要先过 Collection,因为 Count 消费的是流,直接喂列表会被当成单个元素。"
+  },
+  "Circles and Lines": {
+    "name": "圆圈与线条",
+    "description": "把剩下的 SVG 基元——圆、椭圆、线——放进一个文档,让形状词汇表一目了然。"
+  },
+  "Clean Up a Rough Voice Recording": {
+    "name": "净化粗糙的人声录音",
+    "description": "在真实房间录的音的修复链:噪声门压掉底噪,切除语音以下的低频轰鸣,拉平电平,最后防爆音。每一步都便宜且本地——不涉及模型。"
+  },
+  "Clip on Kie": {
+    "name": "用 Kie 生成视频片段",
+    "description": "通过 Kie 的 Kling 2.6 生成短片。与 Single Shot from a Line 对应的 Kie 版本——方便在选定模板前对比同一段阐述在不同供应商下的效果。"
+  },
+  "Cold Outreach Co-Pilot": {
+    "name": "冷启动外联助手",
+    "description": "一个自主智能体在网上调研潜在客户,并起草个性化冷启动邮件——以真实具体的细节开场——输出为结构化字段(主题、正文、跟进邮件)而不是一大段文字,可以直接粘进 CRM 或邮件工具。"
+  },
+  "Color Boost Video": {
+    "name": "视频色彩增强",
+    "description": "把视频拆成帧,对每帧做曝光/对比度和饱和度/自然饱和度调整,再重新组装。亮点:带上你自己的素材,一个\"调色强度\"滑杆实时驱动饱和度,不用逐节点调。"
+  },
+  "Concept Art Iteration Board": {
+    "name": "概念设计迭代板",
+    "description": "把一份创意简报展开成一组概念图变体。美术指导智能体把你的简报、风格和情绪写成详细方向,列表生成器再写出 N 条不同的图像提示词,全部渲染进一个追加式变体画廊。亮点:一次运行得到多张扣题的变体,可并排比较、重新生成。文本用 gpt-5-mini,图像用 fal-ai/flux/schnell。"
+  },
+  "Concept Art, Then a Moving Version": {
+    "name": "概念图,再生成动态版",
+    "description": "先设计画面,再把你留下的那张做成动画。先定静帧再为视频付费是最省钱的做法——视频调用的价格是图像的好几倍。"
+  },
+  "Concept Studio": {
+    "name": "概念工作室",
+    "description": "创意迭代闭环:把一个简报发散成概念图,把动物混成奇幻生物,再把选中的图送进一条无需密钥的滤镜链。"
+  },
+  "Conditional Logic Engine": {
+    "name": "条件逻辑引擎",
+    "description": "控制流教学示例:一个数字驱动两个完全由 If 节点搭成的独立判断结构——NodeTool 没有专门的数值比较或布尔逻辑节点,所以这个示例展示真正的写法:PadText + Compare + Equals 把数字变成布尔值,然后成对的 If 节点共享一个条件(各自持有一个值、走相反分支),扮演你本来要用的三元选择和或逻辑。不调用 LLM。"
+  },
+  "Count a List": {
+    "name": "列表计数",
+    "description": "数出流经一条流的元素个数。计数器作用于流而不是存储的数组,所以元素来自常量、文件夹扫描还是生成器都一样工作。全程进程内运行:没有模型、密钥和费用。"
+  },
+  "Count and Measure": {
+    "name": "计数与测量",
+    "description": "一个整型常量和一个浮点常量并排——流程当作设置读取的两个固定数字:多少,和多大量。"
+  },
+  "Crop an Image": {
+    "name": "裁剪图像",
+    "description": "按像素边界从图里切出一块矩形。这是个粗工具——想把整幅图换尺寸时用 Fit。本地像素处理——不需要模型、密钥,也没有费用。"
+  },
+  "Crop then Fit": {
+    "name": "裁剪后适配",
+    "description": "两个图像步骤的组合:先切到目标区域,再把该区域缩放进缩略图画框。按这个顺序,裁剪决定主体,缩放只决定尺寸。"
+  },
+  "Crush It to 8 Bits": {
+    "name": "压成 8 位像素风",
+    "description": "量化到更低的位深并抽取采样率。两个独立控制:位深是纵向分辨率,采样率削减是横向。"
+  },
+  "Cut a Landscape Clip for Vertical": {
+    "name": "横屏视频改竖屏",
+    "description": "素材是 16:9 来的,渠道要 9:16。改成竖版画幅,是\"有片子\"和\"能发布\"之间那个不光彩但必须的步骤。"
+  },
+  "Cut a Product Out of Its Background": {
+    "name": "产品图抠图去背景",
+    "description": "每个商品目录管线的第一步:把产品分离出来,好让它落在渠道要求的任何背景上。Bria 返回真正的 alpha 通道而不是白底蒙版,边缘经得住合成。"
+  },
+  "Cut Out the Subject": {
+    "name": "抠出主体",
+    "description": "把图剥成透明背景上的主体,随时可以合成到任何背景上。产品抠图或一组角色要落在品牌色上时,这通常是第一步。"
+  },
+  "Data Generator": {
+    "name": "数据生成器",
+    "description": "把一行主题变成结构化数据集——列定义一次,返回的是校验过的数据行,而不是一段段散文。"
+  },
+  "Dataset Builder": {
+    "name": "数据集构建器",
+    "description": "整套示例里最小的应用,也是 Table 组件的参考范例:数据框用行来呈现,比 Preview 节点更直观。"
+  },
+  "Denoise Footage": {
+    "name": "视频降噪",
+    "description": "降低高 ISO 拍摄素材的传感器颗粒。强度越高越平滑,细节也跟着变软。本地 ffmpeg 运行——无需 API 密钥,没有按次费用。"
+  },
+  "Direct a Short Film": {
+    "name": "执导一部短片",
+    "description": "输入一段简报,得到一部剪好的短片。语言模型当导演——写剧本、分镜表和旁白——然后逐个镜头拍摄,再把片段组进时间线渲染出来。\n\n用两个视频模型而非一个,是刻意的:第一个镜头没有可参考的种子画面,所以是文生视频;之后的每个镜头都用上一个片段的最后一帧做种子保证连贯,是图生视频。Kie 把这两种发布为不同的模型 id,所以第二个由 Continuation Model 承载。在一个 id 通吃的供应商(Gemini/Veo)上,可以留空。\n\n成本随镜头数伸缩——用 Kling 2.6 拍三个镜头大约是一美元的视频加几分钱的文本。"
+  },
+  "Directed Film to Timeline": {
+    "name": "执导影片送入时间线",
+    "description": "把一行简报变成可以接着剪的粗剪版。导演智能体写出镜头剧本,每个镜头展开成关键帧提示词,渲染成静帧,再动画化成片段,最后所有片段收进一条时间线序列,渲染成单个视频,你可以继续编辑。"
+  },
+  "Does This Text Mention the Deadline": {
+    "name": "检查文本是否提到截止日期",
+    "description": "返回布尔值的包含检查——按文档内容分流的工作流的分支条件。"
+  },
+  "Draft Answers for an FAQ": {
+    "name": "为常见问题起草回答",
+    "description": "问题进,答案出,每条都短到可以直接粘进帮助中心而不用编辑。"
+  },
+  "Draw a Badge in SVG": {
+    "name": "用 SVG 画徽章",
+    "description": "用图元拼一枚徽章,而不是生成一枚。每个形状都是之后可以移动、换色的元素——不用重新生成,不用重采样。"
+  },
+  "Drop Duplicates": {
+    "name": "去除重复项",
+    "description": "每个不同的值只放行一次,重复的吞掉。设置 `key` 可以按对象的某个字段去重,而不是按整个值。全程进程内运行:没有模型、密钥和费用。"
+  },
+  "Drop the First Few": {
+    "name": "丢弃前几项",
+    "description": "跳过流开头的固定个数元素——比如数据源的表头行,或不想花钱处理的预热部分。"
+  },
+  "Edit a Still with Words": {
+    "name": "用文字编辑静态图",
+    "description": "用描述来改图。Nano Banana 是原地编辑而不是重新生成,所以构图和主体都会保留——指令只说要改什么,其余的别提。"
+  },
+  "Editorial Still from a Line": {
+    "name": "一句话生成 editorial 风格图片",
+    "description": "一行主体文字变成一张成品编辑类照片。Template 节点持有统一的风格,调用方只需提供主体。按张计费,但六步的 FLUX.2 [klein] 是拿到可用画面最便宜的方式之一。"
+  },
+  "Emboss a Still": {
+    "name": "图像浮雕效果",
+    "description": "把图变成浮雕。浮雕读的是梯度而不是颜色,所以平坦区域变灰,只有边缘留下来。"
+  },
+  "Every Combination": {
+    "name": "全组合",
+    "description": "两条流的笛卡尔积——每个左侧元素对上每个右侧元素。一批付费渲染之前先搭这个扫描,好在付钱之前看到总数。"
+  },
+  "Every Hour, On the Hour": {
+    "name": "每小时整点运行",
+    "description": "一个时钟,以及调度真正需要的两个数字:这是第几次触发,什么时候触发的。设好 `interval_seconds`,触发器就自行发事件——不需要输入,不需要调用方。它下游的一切都变成定时任务。`max_events` 留 0 表示永远运行,设为 N 则触发 N 次后停止。"
+  },
+  "Executive Summary of a Long Document": {
+    "name": "长文档生成高管摘要",
+    "description": "给不会读十二页的人准备的一页。把需要的决策放在最前,才是简报而不是摘要。"
+  },
+  "Explainer Clip from a Paragraph": {
+    "name": "一段文字生成解说视频",
+    "description": "一段解释文字变成旁白和配套画面。镜头描述由智能体写,所以画面跟着文字走,而不是另外写提示词、跟文字脱节。"
+  },
+  "Extract the Claims Worth Checking": {
+    "name": "提取值得核查的论断",
+    "description": "把事实性断言和观点分开,并评估每条的可核查程度——一切核实工作之前的分诊步骤。"
+  },
+  "Fade Audio In and Out": {
+    "name": "音频淡入淡出",
+    "description": "让音轨从静音中淡入,不会生硬地开场。会先从视频里抽出音频,所以对素材和纯音轨都适用。本地 ffmpeg——没有 API 费用。"
+  },
+  "Fade Audio Out": {
+    "name": "音频淡出",
+    "description": "让音轨在最后几秒渐弱到静音,剪辑不会在突兀的截断中结束。时长设得比直觉长一些——听起来是刻意设计的淡出的,通常比剪辑时感觉到的更慢。"
+  },
+  "Fill a Template": {
+    "name": "填充模板",
+    "description": "把值代进文本模板。这是流程输入和模型提示词之间的接缝——措辞集中放在一个 Template 节点里,别散落在好几个提示词字段中。"
+  },
+  "Film Studio": {
+    "name": "电影工作室",
+    "description": "压轴演示:一份简报驱动一部有导演脚本的短片、一个可编辑的粗剪,以及那张卖座的海报。"
+  },
+  "Find and Replace": {
+    "name": "查找替换",
+    "description": "在一段文本里把一个子串换成另一个。查找和替换词是输入而不是写死在节点里,所以同一张图可以从 API 直接复用,不用编辑。"
+  },
+  "Find Every Number in a Sentence": {
+    "name": "找出句子里的所有数字",
+    "description": "FindAllRegex 返回所有匹配而不是第一个——从报告里抓数字时你要的正是这个。"
+  },
+  "Find the Edges": {
+    "name": "边缘检测",
+    "description": "Canny 边缘检测,以及它真正依赖的两个阈值:低阈值决定什么算弱边缘,高阈值决定什么算确定边缘。"
+  },
+  "Fit an Image": {
+    "name": "适配图像尺寸",
+    "description": "保持宽高比把图缩放进一个画框。缩略图就该这么做,硬拉伸会变形。本地像素处理——不需要模型、密钥,也没有费用。"
+  },
+  "Five Headlines for a Landing Page": {
+    "name": "为落地页写五个标题",
+    "description": "为测试准备的标题变体。要求每条标明切入角度,得到的集合才真正互不相同,而不是第一个点子的五种说法。"
+  },
+  "Flashcard Generator": {
+    "name": "记忆卡片生成器",
+    "description": "把学习闪卡生成为结构化的正/反面卡片对象,再据此算出学习计划:问题不重复、类别交错、每张卡有复习安排。"
+  },
+  "Gate Out the Room Noise": {
+    "name": "噪声门消除房间噪音",
+    "description": "把低于阈值的声音全部静音,让词句之间的嘶嘶底噪消失,词句本身原样保留。"
+  },
+  "Generate a Silent Bed": {
+    "name": "生成无声底轨",
+    "description": "生成一条固定长度的静音音轨。用作拼接配音之间的间隔,或正式旁白没写好时的占位。"
+  },
+  "Generate then Upscale a Poster": {
+    "name": "生成海报再放大",
+    "description": "先小尺寸低成本生成,只给最终留下的那张花钱买分辨率。用 1K 迭代、最后放大一次,成本只是每张草稿都全尺寸生成的零头。"
+  },
+  "Hacker News Agent": {
+    "name": "Hacker News 智能体",
+    "description": "抓取 Hacker News 首页,拿到按话题过滤的摘要,直接写成 Markdown——不需要单独的排版步骤。"
+  },
+  "Hook & Thumbnail Factory": {
+    "name": "钩子与封面图工厂",
+    "description": "一个视频选题进,一整套缩略图包出:抓人的开场钩子文案,外加每条钩子配一张调好色的、可直接发布的缩略图。亮点是扇出——一条钩子流在一次运行里驱动整个配套图库。使用 fal-ai/flux/schnell(便宜、快)。"
+  },
+  "How Long Is This String": {
+    "name": "字符串长度",
+    "description": "把字符长度变成一等值,下游节点不用代码节点也能按长度分支。"
+  },
+  "How Long Is This Transcript": {
+    "name": "转写文本长度",
+    "description": "转写一段音频并数出 token 数。在把转写文本喂给按 token 计费或有上下文上限的模型之前,值得先知道。"
+  },
+  "Image Enhance": {
+    "name": "图像增强",
+    "description": "一个实时照片编辑器:五个 GPU 滤镜串成一条管线,每个都暴露数值属性,绑定到应用的滑杆上。拖动降噪、亮度、对比度、饱和度、锐化,预览就地更新——滤镜在浏览器里跑,所以没有模型、没有 API 密钥、没有按次费用。"
+  },
+  "Image To Audio Story": {
+    "name": "图像转音频故事",
+    "description": "上传任意照片,视觉智能体为它讲一段有声故事——一张图进,一段音频出。"
+  },
+  "Image to Video Animation": {
+    "name": "图生视频动画",
+    "description": "先用文字生成高质量静帧,再把它动画化成一小段电影感片段。动画步骤用 Veo 3.1,按次成本高于纯图像模板。"
+  },
+  "Inspect a Clip": {
+    "name": "检查视频片段",
+    "description": "直接从文件头读出片段的时长、尺寸、帧率和编码。昂贵的生成步骤之前的廉价预检——先弄清手里到底有什么,再花钱转换。"
+  },
+  "Inspect a Clip's Audio": {
+    "name": "检查视频片段的音频",
+    "description": "读出片段音轨的采样率、声道数、时长和格式。在唇形同步或转写之前值得先跑,这两个步骤对喂给它们的东西都很挑剔。"
+  },
+  "Invert a Still": {
+    "name": "图像反色",
+    "description": "直接的负片——每个通道翻转。验证一条滤镜链是否作用在你以为的像素上,这是最便宜的办法。"
+  },
+  "Keep Only the Long Lines": {
+    "name": "只保留长行",
+    "description": "把列表扇成流,丢掉不满足条件的元素,再把幸存的收拢回列表。两个节点承载要点:Collection 是扇出——直接喂给流操作符的列表会作为单个元素到达;Collect 是反向,没有它,流上的输出只显示最后通过的值。"
+  },
+  "Keep Only the Matches": {
+    "name": "只保留匹配项",
+    "description": "流上的相等过滤。`invert` 不用加节点就能把它变成排除列表。"
+  },
+  "Key Out a Green Screen": {
+    "name": "绿幕抠像",
+    "description": "色度抠像,两个关键旋钮:similarity 决定多宽的颜色范围变透明,blend 柔化边缘。"
+  },
+  "Last One Wins": {
+    "name": "取最后一项",
+    "description": "把一条流折叠成最后一个元素。持续打磨一个值(而不是累积)的循环,自然以此为终点。"
+  },
+  "Localise a Product Listing": {
+    "name": "本地化商品 listing",
+    "description": "货币、单位和地址格式才是商品 listing 进入新市场时真正出岔子的地方——比文案更常出问题。"
+  },
+  "Localise a Script and Revoice It": {
+    "name": "本地化脚本并重新配音",
+    "description": "翻译和配音一次完成。输出是目标语言的音频——这才是本地化成片真正需要的;光翻译文档,录音还是得重做。"
+  },
+  "Master a Voice Track": {
+    "name": "人声母带处理",
+    "description": "人声发布前的三段链:压缩拉平峰值,提升电平,再限制防爆音。顺序很重要——先限制的话,压缩器就没东西可压了。"
+  },
+  "Meeting Room": {
+    "name": "会议室",
+    "description": "转写一段录音,总结成纪要和待办事项,然后用本地模型对转写文本追问。"
+  },
+  "Meeting Transcript Summarizer": {
+    "name": "会议转写摘要器",
+    "description": "从录音或粘贴的文字记录总结一场会议——两种输入都行,行动项以结构化行返回,不用再去扫大段文字。"
+  },
+  "Model Arena": {
+    "name": "模型竞技场",
+    "description": "三个模型三栏作答,各自独立流式输出。某个供应商缺密钥只会失败一栏,不会让整个运行失败。"
+  },
+  "Moodboard Frame from a Theme": {
+    "name": "按主题生成情绪板画框",
+    "description": "情绪板的一格,从一段方向描述生成。便宜到可以跑十几次再挑——情绪板本来就是这么做出来的。"
+  },
+  "Movie Posters": {
+    "name": "电影海报",
+    "description": "把片名、类型和视觉风格变成正式的影院海报。美术指导智能体先写主视觉简报(定位、配色、字体),驱动之后生成的每一张海报——亮点是智能体撰写的创意策略,而不是裸提示词。"
+  },
+  "Movie Trailer Generator": {
+    "name": "电影预告片生成器",
+    "description": "输入一句故事梗概,拿回一支电影感预告片。Director 节点写分镜——带镜头调度和统一风格圣经的剧本——Screenplay Shots 把每个镜头变成图像提示词,然后逐帧渲染、动画化、剪在一起。成本说明:每个镜头走 Veo 3.1 图生视频,按生成视频的秒数计费,是管线里最贵的一步——6 个镜头的预告片就是 6 次 Veo 调用。"
+  },
+  "Music Video Visualizer": {
+    "name": "音乐可视化视频",
+    "description": "把任意歌曲变成情绪匹配的 MV。Whisper 转写歌词,LLM 创意总监读出情感弧线,为每帧写一条图像提示词,FLUX 渲染每一帧,再拼回你的原始音频。亮点:一张图里完成 转写→分析→扇出→渲染→重组 的完整媒体管线——聊天框做不到。成本说明:每帧生成一张图(默认 8 帧)外加一次 Whisper 转写,一次运行要花好几次 fal-ai 调用。"
+  },
+  "Name a File from Its Narration": {
+    "name": "按旁白给文件命名",
+    "description": "转写一段音频,把开头几个字变成 URL 安全的 slug。展示语音变成文件名而非文档的小链路。"
+  },
+  "Narrate a Script": {
+    "name": "为脚本配旁白",
+    "description": "用 fal 上的 ElevenLabs multilingual v2 把文稿变成配音轨。配合 Score a Silent Clip,可以只靠文字拼出一部带旁白的成片。按字符计费。"
+  },
+  "Narration with a Music Bed": {
+    "name": "旁白配背景乐",
+    "description": "人声满电平,音乐垫在 0.35 之下,是混音而不是替换。这个比例就是这件事的全部手艺。"
+  },
+  "Normalize a Clip's Audio": {
+    "name": "视频片段音量标准化",
+    "description": "把录得太轻或太爆的音轨响度拉匀。会先从视频里抽出音频,所以对素材和纯音轨都适用。本地 ffmpeg——没有 API 费用。"
+  },
+  "One Tagline, Six Markets": {
+    "name": "一句标语,六个市场",
+    "description": "一句标语译成六种语言,每种附回译,让一种也看不懂的人也能看到实际说了什么。"
+  },
+  "Pad a Canvas": {
+    "name": "画布填充扩展",
+    "description": "把图放到更大的画布上而不缩放——把横版镜头装进方形帖子而不裁掉主体的做法。本地像素处理——不需要模型、密钥,也没有费用。"
+  },
+  "Photo Enhancement Suite": {
+    "name": "照片增强套件",
+    "description": "用固定修图链批量增强一组照片——自动对比度、色彩、锐化,再加一道 AI 电影感调色——不需要文件夹路径,把图拖进来就行。"
+  },
+  "Photo Studio": {
+    "name": "照片工作室",
+    "description": "同一个界面背后是实时照片编辑器和批量修图器。单张调色纯靠 GPU 滤镜,完全不需要 API 密钥。"
+  },
+  "Picture in Picture": {
+    "name": "画中画",
+    "description": "把一个片段叠进另一个——屏幕录制角落里的摄像头画面,或反应视频里被反应素材上的小窗。小窗音频默认静音,主音轨保持干净。"
+  },
+  "Pitch a Voice Up": {
+    "name": "人声升调",
+    "description": "按半音移调而时长不变——与时间拉伸对应的那一半。"
+  },
+  "Pixelate a Still": {
+    "name": "图像像素化",
+    "description": "格子大小就是全部控制。适合打码,也是唯一一个数字越大越保护隐私、而不是效果越强的滤镜。"
+  },
+  "Podcast Episode to Show Notes": {
+    "name": "播客剧集转节目笔记",
+    "description": "每档播客都有、没人爱做的活儿。先转写,再写 shownotes——摘要、带大致时间点的话题,以及提到的链接。"
+  },
+  "Podcast Repurposing Studio": {
+    "name": "播客内容再创作工作室",
+    "description": "丢进一期播客,产出整套内容包:节目标题和 shownotes、一期 newsletter、五条社交帖子,以及渲染成方形图的引言卡。Whisper 只转写一次;四个写作分支从同一份文字记录扇出。"
+  },
+  "Pokemon Maker": {
+    "name": "宝可梦生成器",
+    "description": "把任意真实动物的组合变成一批原创收藏宠物。风格下拉框会整体换肤,一次运行得到四只成套的变体设计,而不是一张孤立的图。"
+  },
+  "Poster on Kie": {
+    "name": "用 Kie 生成海报",
+    "description": "通过 Kie 的 Seedream 4.5 生成海报风图像。Kie 用一个密钥代理多个模型家族,所以这是验证 Kie 凭证是否可用的最短路径。"
+  },
+  "Posterize to Four Bits": {
+    "name": "色调分离至 4 位色",
+    "description": "降低每通道位深,图像塌成色带——丝网印刷的效果,也是在色带咬到你之前先看到它的快捷方式。"
+  },
+  "Private Assistant": {
+    "name": "私人助理",
+    "description": "围绕你自己的笔记和文档提问——完全本地,不需要 API 密钥。全程跑在本地 Ollama 模型上,文本不出你的机器。需要 Ollama 已运行并拉取模型(默认 llama3.2——执行 `ollama pull llama3.2`)。"
+  },
+  "Product Launch Kit": {
+    "name": "产品发布套件",
+    "description": "把产品图放进生活方式场景图里,再——这是有意为之,因为这一步真花钱——把同一张图变成发布视频。"
+  },
+  "Product Mockup Generator": {
+    "name": "产品样机生成器",
+    "description": "把一张产品照片变成一整套精修场景图。LLM 美术指导根据你的产品描述设计多样化的镜头清单,每个场景用 FLUX 渲染,再做亮度/对比度收尾。亮点:场景由模型构思,单个输入扇出成一套协调的样机图——不是一个提示词一张图。"
+  },
+  "Product Spot from Text": {
+    "name": "文字生成产品广告",
+    "description": "把产品描述变成一小段广告片——不需要照片。提示词拼出影棚主镜头简报,FLUX.2 [klein] 渲染静帧,LTX-2.3 再严格按运镜说明让那一帧动起来。成本说明:动画步骤按输出秒数计费,所以单次成本高于纯图像模板。"
+  },
+  "Product Video Generator": {
+    "name": "产品视频生成器",
+    "description": "把营销简报、受众、卖点和一张产品照片变成真实的 16:9 发布视频——智能体写运动提示词,Veo 负责让镜头动起来。成本说明:Veo 是按秒计费的视频模型,这次运行的成本明显高于纯图像模板。"
+  },
+  "Prompt Template": {
+    "name": "提示词模板",
+    "description": "几乎所有 NodeTool 流程背后的起步模式:带类型的输入填进可复用的提示词模板,LLM 作答,输出渲染。这个示例为任意受众解释一个主题——换掉提示词,就能把这套模式复用到任何事上。"
+  },
+  "Pull a Field out of JSON Text": {
+    "name": "从 JSON 文本提取字段",
+    "description": "模型输出常常是包在字符串里的 JSON。ExtractJSON 按路径进去取值,下游就不用自己解析。"
+  },
+  "Pull a Still from a Clip": {
+    "name": "从视频抽取静帧",
+    "description": "在给定时间戳抓一帧——从已有素材里拿缩略图或参考静帧的快捷方式。本地 ffmpeg 运行。"
+  },
+  "Pull the Quotable Lines Out of an Interview": {
+    "name": "从采访中提取金句",
+    "description": "五条逐字引语,按能否独立成立来挑。坚持逐字才让输出可用——转述的引语不如没有。"
+  },
+  "Put a Product on a Studio Backdrop": {
+    "name": "给产品换摄影棚背景",
+    "description": "先把产品抠出来,再放进描述出来的场景。分两步而不是一句提示词,是因为围绕现有产品生成才能保证产品本身不变——那才是顾客真正要买的东西。"
+  },
+  "Put a Voice Over a Music Bed": {
+    "name": "人声叠加背景乐",
+    "description": "生成一条配乐,合成一个人声,把一个叠在另一个上面。Overlay 是混合两路信号,而不是一路替换另一路。"
+  },
+  "Re-delimit a List": {
+    "name": "重新分隔列表",
+    "description": "按一种分隔符切开文本,再按另一种拼回去——逗号列表变竖线列表,或类 CSV 文本变换行记录。纯字符串处理:没有模型、密钥和费用。"
+  },
+  "Read a Clip's Frame Rate": {
+    "name": "读取视频帧率",
+    "description": "Fps 不解码视频,直接从文件头读帧率。便宜到可以在决定片段是否需要转格式之前先跑一下。"
+  },
+  "Redact and Tidy a Log Line": {
+    "name": "打码并整理日志行",
+    "description": "两遍正则加一次空白折叠,顺序很关键:先脱敏再规范化,否则你要匹配的模式可能已经被改了形。"
+  },
+  "Redact Email Addresses": {
+    "name": "打码邮箱地址",
+    "description": "用正则替换充当日常清理步骤——在文本到达模型或日志之前剥掉个人数据。"
+  },
+  "Relight a Portrait": {
+    "name": "人像重新打光",
+    "description": "拍完之后改变光的方向。主体和构图不动,光照按描述重新渲染。"
+  },
+  "Relight a Product for a Seasonal Campaign": {
+    "name": "为季节 campaign 给产品重新打光",
+    "description": "同一个产品,换一个季节,不用重拍。重打光保留几何和材质,只改变光从哪里来。"
+  },
+  "Research Agent": {
+    "name": "研究智能体",
+    "description": "给它一个主题和受众;智能体做真正的网络搜索,打开最好的来源,流式返回带引用的 markdown 简报。亮点:真实的多步工具调用(搜索+浏览)和行内引用——不是一次提示词调用。"
+  },
+  "Research Desk": {
+    "name": "研究台",
+    "description": "研究智能体和 Hacker News 阅读器接收同一个主题,各自流式输出到独立面板。"
+  },
+  "Resize for Vertical": {
+    "name": "改为竖屏尺寸",
+    "description": "把素材缩放到竖版 1080x1920 画幅,用于 stories 和短视频。这是拉伸而不是裁切,所以要用构图留有冗余的镜头。本地 ffmpeg 运行——无需 API 密钥,没有按次费用。"
+  },
+  "Restyle a Photo as an Illustration": {
+    "name": "照片转插画风格",
+    "description": "保留构图,更换媒介。强度是旋钮:低则保留照片质感,高则重绘成新的东西。"
+  },
+  "Restyle a Still with FLUX Dev": {
+    "name": "用 FLUX Dev 重绘图片",
+    "description": "中等强度的图生图:保留构图,更换媒介。强度是旋钮——低保留原图,高重新绘制。"
+  },
+  "Reverse a Clip": {
+    "name": "视频倒放",
+    "description": "把片段倒放。适合往返式转场:回程就是同一段素材的倒放。本地 ffmpeg 运行——无需 API 密钥,没有按次费用。"
+  },
+  "Reverse Audio": {
+    "name": "音频倒放",
+    "description": "把音轨倒放——倒钹上升音和预回声效果的基础。会先从视频里抽出音频,所以对素材和纯音轨都适用。本地 ffmpeg——没有 API 费用。"
+  },
+  "Rewrite This So a Customer Understands It": {
+    "name": "改写成客户能看懂的说法",
+    "description": "行话进,白话出,指定阅读水平。这是最常见的编辑工作,也是最值得做成可复用流程的一个。"
+  },
+  "Rotate Footage": {
+    "name": "旋转视频画面",
+    "description": "按固定角度旋转片段——修复横躺着的手机素材。本地 ffmpeg 运行——无需 API 密钥,没有按次费用。"
+  },
+  "Score a Clip from Its Own Mood": {
+    "name": "按视频自身情绪配乐",
+    "description": "智能体什么也不看——它读你对情绪的描述,写出音乐提示词。这样拆开的意义是:你可以用文字调整情绪,而不是重新描述音乐。"
+  },
+  "Score a Silent Clip": {
+    "name": "为无声视频配乐",
+    "description": "给片段配一条音轨。描述情绪,fal.ai 上的 Stable Audio 按片段长度写配乐,混在原始音频下面。比视频模板便宜——每次运行只生成一段音频。"
+  },
+  "Script to Narrated Clip": {
+    "name": "脚本转旁白视频",
+    "description": "最小的完整视频管线:一行文稿变成人声,一段场景描述变成画面,再把两者合在一起。声音和画面分开生成,才能重录其一而不为另一个掏钱。"
+  },
+  "Script to Screen": {
+    "name": "从脚本到成片",
+    "description": "完整制作主轴:导演智能体把你的简报变成导演文档(角色、风格圣经、分镜表、旁白、音乐)。一张风格帧锚定所有关键帧保证一致性,关键帧组成低成本的storyboard,在花视频的钱之前可以先确认,然后逐镜头动画化、剪辑,并混入旁白和音乐。"
+  },
+  "SEO Content Engine": {
+    "name": "SEO 内容引擎",
+    "description": "一个主题进,一批针对关键词的文章出——每篇都落成带类型的字段(标题、meta 描述、关键词、正文)而不是一整块 markdown,可以直接粘进 CMS。策略智能体规划主题簇,列表生成器拆成简报,每份简报变成一篇带编辑级头图的完整文章。"
+  },
+  "SEO Title and Meta Description": {
+    "name": "SEO 标题与 Meta 描述",
+    "description": "每个 CMS 都要的两个字段,按真实限制写——60 和 155 字符——搜索结果页里不会被截断。"
+  },
+  "Sharpen Footage": {
+    "name": "视频锐化",
+    "description": "降噪或降采样之后把表观细节加回来。亮度承担大部分感知锐度;色度保持低位以避免彩色镶边。本地 ffmpeg 运行——无需 API 密钥,没有按次费用。"
+  },
+  "Shot List from a Synopsis": {
+    "name": "从剧情梗概生成分镜表",
+    "description": "剧情梗概变成带景别和时长的编号镜头表——生成管线可以迭代处理的文档形式,散文不行。"
+  },
+  "Single Shot from a Line": {
+    "name": "一句话生成单镜头",
+    "description": "最小的文生视频图:一行导演阐述,一个叠加统一风格的模板,一次渲染。适合当作视频凭证的冒烟测试,先跑它,再跑每次运行要付好几次生成费用的模板。"
+  },
+  "Slice Text": {
+    "name": "文本切片",
+    "description": "按下标从字符串里取固定区间,可选步长。把说明文字截到长度上限、或每隔 n 个字符采样,都用这个直接的办法。"
+  },
+  "Slow a Clip Without Dropping Pitch": {
+    "name": "视频变速不变调",
+    "description": "时间拉伸改变时长、不动音高——这正是重点。改用变速播放,音高会跟着一起降。"
+  },
+  "Soften a Plate": {
+    "name": "柔化画面底板",
+    "description": "模糊一个片段,让它能待在标题或画中画小窗后面而不抢戏。本地 ffmpeg 运行——无需 API 密钥,没有按次费用。"
+  },
+  "Solarize a Still": {
+    "name": "图像曝光反转效果",
+    "description": "只反转阈值以上的影调——暗房事故变成的风格。"
+  },
+  "Speak a Line, Then Trim the Silence": {
+    "name": "朗读一句并剪掉静音",
+    "description": "合成语音,再把两头的空白削掉。TTS 常常留有余量;RemoveSilence 给你一条可以直接放进时间线的紧凑片段。"
+  },
+  "Spin a Packshot into a Turntable Clip": {
+    "name": "产品图生成旋转展示视频",
+    "description": "让静帧为产品页动起来。图生视频保持产品完全不变、只加运镜——文生视频模型做不到这一点。"
+  },
+  "Split a Channel": {
+    "name": "分离通道",
+    "description": "把一个颜色通道抽成单独的图。快速定位瑕疵藏在哪里的办法,或从单通道构建蒙版。本地像素处理——不需要模型、密钥,也没有费用。"
+  },
+  "Split a Log into Records": {
+    "name": "日志拆分成记录",
+    "description": "正则切分把一大团文本变成列表。模式就是记录边界,常常比固定分隔符更可靠。"
+  },
+  "Stabilize Handheld": {
+    "name": "手持画面防抖",
+    "description": "抚平手持拍摄的抖动。稳定处理会移动画面,所以 `crop_black` 用来裁掉露出来的黑边。本地 ffmpeg 运行——无需 API 密钥,没有按次费用。"
+  },
+  "Still on Replicate": {
+    "name": "用 Replicate 生成图片",
+    "description": "通过 Replicate 而不是 fal 生成图像。图的形状和 fal、Kie 版本一样——换供应商只是改模型字段,不是重写,这正是值得演示的地方。"
+  },
+  "Strip Accents for a Search Key": {
+    "name": "去除重音符号生成搜索键",
+    "description": "把带重音的字符折叠成 ASCII,不管名字当初怎么输入,检索键都能对上。"
+  },
+  "Study Buddy": {
+    "name": "学习伙伴",
+    "description": "结构化数据用应用呈现比用图更清楚:卡片落在表格里,讲解就在旁边。"
+  },
+  "Subject Lines Worth Testing": {
+    "name": "值得测试的邮件主题行",
+    "description": "八条邮件主题行,在好奇心和清晰两种策略之间分配——这两种策略的差异大到值得 A/B,不像同一策略的八种说法。"
+  },
+  "Subtitle Text from a Recording": {
+    "name": "录音转字幕文本",
+    "description": "先转写,再折成字幕长度的行。行长规则,正是字幕文件和一堵文字墙之间的区别。"
+  },
+  "Summarise a Recorded Call": {
+    "name": "通话录音摘要",
+    "description": "那份让人不必重听录音的摘要:决定了什么,什么还悬着,接下来做什么。"
+  },
+  "Swirl and Echo": {
+    "name": "漩涡与回声",
+    "description": "在反馈延迟下面扫一个相位器。两者都是混合式的,所以干信号在下面活着,而不是被替换掉。"
+  },
+  "Take a Product Shot to Print Resolution": {
+    "name": "产品图放大到印刷分辨率",
+    "description": "网络素材很少够印刷尺寸。在管线末端放大只花一次调用的钱;而全部按印刷尺寸拍摄或生成,每张草稿都要付这个钱。"
+  },
+  "Take the First Few": {
+    "name": "取前几个",
+    "description": "一条流取前 n 个元素就停。迭代流程时给昂贵的下游步骤封顶的便宜办法——调参时取 3 个,发布时删掉。全程进程内运行:没有模型、密钥和费用。"
+  },
+  "Take the First Few Seconds of a Bed": {
+    "name": "截取底轨前几秒",
+    "description": "生成音乐并从中切一小段。只需要一个短音效而不是完整配乐时,比重新生成便宜。"
+  },
+  "Take While the Numbers Are Small": {
+    "name": "取数值较小的前缀项",
+    "description": "TakeWhile 在第一个不满足条件的元素处停下,而过滤器会继续测剩下的。这个差别就是用它而不是过滤器的理由:它限制工作量,而不是从结果里挑选。表达式把每个元素绑定为 `item`。"
+  },
+  "Telephone Voice": {
+    "name": "电话音效",
+    "description": "带限到狭窄的中频再加激励。砍掉两端才是这个效果成立的关键——光有失真只会显得吵。"
+  },
+  "Themes Across Customer Feedback": {
+    "name": "客户反馈主题归纳",
+    "description": "原始反馈变成带计数和代表性原文的具名主题。有原文,主题才有据可依,而不是空口断言。"
+  },
+  "Tidy Up Messy Text": {
+    "name": "整理杂乱文本",
+    "description": "三连清理——折叠连续空白、去标点、转小写。顺序很关键,所以才做成链条而不是一个节点。"
+  },
+  "Title Case a Heading": {
+    "name": "标题转 Title Case",
+    "description": "大小写 helpers 应用于一个标题。事小,但给模型输出排版时,这些是你最常伸手去拿的节点。"
+  },
+  "Trailer Beats from a Premise": {
+    "name": "从故事前提生成预告片节奏点",
+    "description": "预告片需要的节拍结构——钩子、升级、转折、片名卡——在为任何素材付费之前先写好。"
+  },
+  "Transcribe a Clip": {
+    "name": "视频片段转写",
+    "description": "把视频里的语音变成文字。音频在本地抽取,然后转写。注意供应商选择:fal 和 Replicate 的清单里都列了语音转文字模型,但两家都没有实现转写能力,那些条目无法执行。OpenAI、Gemini、HuggingFace、MiniMax 和 Together 实现了。"
+  },
+  "Transcribe Audio": {
+    "name": "音频转写",
+    "description": "即时 Whisper 转写:丢进一段音频,拿回干净的文字稿——只有一步,上传即自动运行。"
+  },
+  "Translate Marketing Copy to German": {
+    "name": "营销文案翻译成德语",
+    "description": "营销文案按效果而不是逐字翻译,并明确说明正式/非正式称谓的选择。这个决定,正是译文最常被驳回的原因。"
+  },
+  "Trim a Blurb to Length": {
+    "name": "简介裁剪到指定长度",
+    "description": "按字符预算截断文本并加省略号。卡片或预览绝不能溢出时,日常的修法。"
+  },
+  "Trim a Clip": {
+    "name": "裁剪视频片段",
+    "description": "把片段切到入点和出点。`accurate` 会重新编码,让切点落在精确的帧上,而不是最近的关键帧。本地 ffmpeg 运行——无需 API 密钥,没有按次费用。"
+  },
+  "Trim Audio to a Range": {
+    "name": "音频裁剪到指定区间",
+    "description": "把音轨切到起止点。需要先知道时长再决定切哪里时,配合 Inspect a Clip's Audio 使用。"
+  },
+  "Turn a Changelog into Release Notes": {
+    "name": "变更日志转发布说明",
+    "description": "提交信息是写给工程师的;发布说明是读给客户看的。按\"对用户而言什么变了\"分组,就是整个翻译过程。"
+  },
+  "Turn a Logo into Print-Ready Vector": {
+    "name": "Logo 转印刷级矢量图",
+    "description": "位图 logo 没法上广告牌也没法刺绣。描摹成 SVG 路径,得到的标志可以缩放到供应商要求的任何尺寸。"
+  },
+  "Turn a Support Thread into a Bug Report": {
+    "name": "客服对话转缺陷报告",
+    "description": "一条充满怨气的支持对话,变成工程师可以行动的东西:复现步骤、预期、实际、环境——缺失的部分明确标为缺失。"
+  },
+  "Turn a Talk into a Blog Post": {
+    "name": "演讲转博客文章",
+    "description": "口头表达和书面文字是两种语体。要求重构而不是转写,才能避免产出读起来像加了段落的录音稿。"
+  },
+  "Turn Research Notes into a Comparison Table": {
+    "name": "研究笔记转对比表格",
+    "description": "杂乱的笔记变成每个选项一行的 markdown 表格。不知道的格子标为未知而不是填满,这正是这件事的全部价值。"
+  },
+  "Turn Specs into Product Copy": {
+    "name": "规格参数转产品文案",
+    "description": "粘贴规格表,得到文案。系统提示词禁止编造输入里没有的东西——这是可用产品文案和法律风险之间的差别。"
+  },
+  "Upscale a Still": {
+    "name": "图像无损放大",
+    "description": "放大图像而没有普通缩放的发虚。fal 上的 ESRGAN 重建细节而不是插值,4 倍放大在印刷品上也撑得住,差别就在这里。按张计费。"
+  },
+  "Validate a Postcode Shape": {
+    "name": "校验邮编格式",
+    "description": "RegexValidate 回答文本是否匹配某个模式——把用户输入或模型输出当结构化数据信任之前,先跑这道守卫。"
+  },
+  "Vectorize a Generated Logo": {
+    "name": "生成的 Logo 矢量化",
+    "description": "生成一个扁平标志,再描摹成真正的矢量图。位图生成器产不出干净的矢量,所以分两步:FLUX 画形状,Recraft 转成不重采样也能缩放的 SVG 路径。"
+  },
+  "Vectorize a Photo You Provide": {
+    "name": "你提供的照片矢量化",
+    "description": "把你提供的图描摹成 SVG 路径。适合把扫描的手稿或扁平渲染图变成可以重新上色、任意缩放的素材。"
+  },
+  "Video Restyle Studio": {
+    "name": "视频风格重绘工作室",
+    "description": "在保持运动不变的前提下,把已有片段重绘成新的视觉风格。提示词节点把一句风格备注扩成完整的重绘简报,再由视频到视频模型应用。强度是旋钮:低则保留原本的观感,高则彻底投入新风格。"
+  },
+  "Vignette a Portrait": {
+    "name": "人像暗角",
+    "description": "压暗四角,把视线拉向中心。radius 决定暗角从哪里开始,softness 决定它来得有多陡。"
+  },
+  "Voice a Script in Two Voices": {
+    "name": "双声部朗读脚本",
+    "description": "双人对手戏需要两个声音。分角色单独合成再拼接,才能重录一句台词而不用重渲整场对话。"
+  },
+  "Warm Up a Cold Clip": {
+    "name": "冷画面调暖",
+    "description": "分通道色彩平衡——抬红、压蓝。不用 GPU 也能做的调色,因为它走 ffmpeg 而不是着色器。"
+  },
+  "Watch a Folder, Act on What Lands": {
+    "name": "监听文件夹并处理新文件",
+    "description": "把投递文件夹当接口用。把 `path` 指向一个目录,用 `patterns` 收窄范围,每当匹配的文件出现或变化,图就被唤醒——你能拿到事件类型和完整路径。这里的智能体只是说出到达了什么;把它换成你真正想对文件做的工作。`debounce_seconds` 存在是因为编辑器保存文件不止一次。"
+  },
+  "Widen a Mono Voice": {
+    "name": "单声道人声加宽",
+    "description": "合成单声道人声并摆进立体声声场。多数 TTS 只返回单声道;任何为立体声播放混音的东西都需要两个声道。"
+  },
+  "Workflow As A Tool": {
+    "name": "把工作流当作工具",
+    "description": "组合示例:编排智能体把两个专家子智能体当作可调用工具,通过控制边接入——Research(Gemini)收集事实,Copy Editor(Claude)打磨文稿,经理(GPT-5 mini)决定何时调用谁。展示一个自包含的工作单元如何变成另一个智能体可调用的工具,全在一张图里。"
+  },
+  "Wrap a Value in Quotes": {
+    "name": "给值加引号",
+    "description": "SurroundWith 把一个值包成片段——模型的答案和期待分隔符的模板之间的小小装配步骤。"
+  },
+  "Write a Listing from the Product Photo": {
+    "name": "从产品图生成 listing 文案",
+    "description": "把照片直接交给模型,而不是一段对照片的描述。从真实图像写出的电商文案能抓住规格表漏掉的细节——质感、比例、旁边放着什么。"
+  },
+  "Write the Prompt, Then Make the Image": {
+    "name": "先写提示词,再生成图",
+    "description": "模型根据大白话描述自己写图像提示词。适合有想法但不想学提示词技巧的人——而且中间产出的提示词可见,可以纠正,不用靠猜。"
+  }
+}

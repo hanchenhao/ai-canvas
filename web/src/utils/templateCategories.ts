@@ -2,7 +2,8 @@ import { Workflow } from "../stores/ApiTypes";
 
 interface TemplateCategory {
   id: string;
-  label: string;
+  /** i18n key under `common:dashboard.categories.*` for the pill label. */
+  labelKey: string;
   tags: string[];
   /** Accent used to tint thumbnails and pills for this category. */
   color: string;
@@ -12,24 +13,24 @@ interface TemplateCategory {
 // priority order for resolving a single category from a workflow's tags.
 // Each category aggregates the listed raw tags from workflow metadata.
 export const TOP_CATEGORIES: TemplateCategory[] = [
-  { id: "image", label: "Image", tags: ["image", "design"], color: "#8b8ce8" },
-  { id: "video", label: "Video", tags: ["video", "youtube"], color: "#E879F9" },
-  { id: "audio", label: "Audio", tags: ["audio"], color: "#FFB86C" },
+  { id: "image", labelKey: "common:dashboard.categories.image", tags: ["image", "design"], color: "#8b8ce8" },
+  { id: "video", labelKey: "common:dashboard.categories.video", tags: ["video", "youtube"], color: "#E879F9" },
+  { id: "audio", labelKey: "common:dashboard.categories.audio", tags: ["audio"], color: "#FFB86C" },
   {
     id: "multimodal",
-    label: "Multimodal",
+    labelKey: "common:dashboard.categories.multimodal",
     tags: ["multimodal"],
     color: "#22D3EE"
   },
   {
     id: "agents",
-    label: "Agents",
+    labelKey: "common:dashboard.categories.agents",
     tags: ["agent", "agents", "ai", "claude", "huggingface"],
     color: "#6690d4"
   },
   {
     id: "data-web",
-    label: "Data & Web",
+    labelKey: "common:dashboard.categories.dataWeb",
     tags: [
       "data",
       "web",

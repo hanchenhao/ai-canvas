@@ -24,6 +24,7 @@ import enHuggingface from "../locales/en/huggingface.json";
 import enCollections from "../locales/en/collections.json";
 import enProperties from "../locales/en/properties.json";
 import enAssets from "../locales/en/assets.json";
+import enExamples from "../locales/en/examples.json";
 import zhCommon from "../locales/zh-CN/common.json";
 import zhSettings from "../locales/zh-CN/settings.json";
 import zhNodes from "../locales/zh-CN/nodes.json";
@@ -46,6 +47,7 @@ import zhHuggingface from "../locales/zh-CN/huggingface.json";
 import zhCollections from "../locales/zh-CN/collections.json";
 import zhProperties from "../locales/zh-CN/properties.json";
 import zhAssets from "../locales/zh-CN/assets.json";
+import zhExamples from "../locales/zh-CN/examples.json";
 
 export const SUPPORTED_LANGUAGES = ["auto", "en", "zh-CN"] as const;
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
@@ -79,7 +81,8 @@ void i18n
         huggingface: enHuggingface,
         collections: enCollections,
         properties: enProperties,
-        assets: enAssets
+        assets: enAssets,
+        examples: enExamples
       },
       "zh-CN": {
         common: zhCommon,
@@ -103,7 +106,8 @@ void i18n
         huggingface: zhHuggingface,
         collections: zhCollections,
         properties: zhProperties,
-        assets: zhAssets
+        assets: zhAssets,
+        examples: zhExamples
       }
     },
     fallbackLng: FALLBACK_LANGUAGE,
